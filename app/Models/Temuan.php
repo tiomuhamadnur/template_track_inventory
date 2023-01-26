@@ -13,6 +13,7 @@ class Temuan extends Model
     protected $guarded = [];
 
     protected $with = ['mainline', 'part', 'detail_part', 'defect'];
+    
     public function mainline()
     {
         return $this->belongsTo(Mainline::class, 'mainline_id', 'id');

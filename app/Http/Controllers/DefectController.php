@@ -11,13 +11,15 @@ class DefectController extends Controller
     public function index()
     {
         $defect = Defect::all();
-        return view('defect.index', compact(['defect']));
+        return view('mainline.mainline_defect.index', compact(['defect']));
+        // return view('defect.index', compact(['defect']));
     }
 
     public function create()
     {
-        $detail_part = DetailPart::all();
-        return view('defect.create', compact(['detail_part']));
+        // $detail_part = DetailPart::all();
+        return view('mainline.mainline_defect.create');
+        // return view('defect.create', compact(['detail_part']));
     }
 
     public function store(Request $request)

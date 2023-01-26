@@ -10,12 +10,12 @@ class AreaController extends Controller
     public function index()
     {
         $area = Area::all();
-        return view('area.index', compact(['area']));
+        return view('mainline.mainline_area.index', compact(['area']));
     }
 
     public function create()
     {
-        return view('area.create');
+        return view('mainline.mainline_area.create');
     }
 
     public function store(Request $request)

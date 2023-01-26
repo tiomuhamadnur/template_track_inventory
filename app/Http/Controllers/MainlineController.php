@@ -25,10 +25,12 @@ class MainlineController extends Controller
         // ->join('area', 'area.id', '=', 'mainline.area_id')
         // ->join('line', 'line.id', '=', 'mainline.line_id')
         // ->get();
+        $mainline = Mainline::all();
 
         // return view('mainline.report.report', compact(['mainline']));
         // return view('mainline.index', compact(['mainline']));
-        return view('mainline.mainline');
+        // return view('mainline.mainline');
+        return view('mainline.mainline.index', compact(['mainline']));
     }
 
     public function getJson()
@@ -49,7 +51,7 @@ class MainlineController extends Controller
     {
         $area = Area::all();
         $line = Line::all();
-        return view('mainline.create', compact(['area', 'line']));
+        return view('mainline.mainline.create', compact(['area', 'line']));
     }
 
     public function store(Request $request)
@@ -74,7 +76,7 @@ class MainlineController extends Controller
 		$this->validate($request, [
 			'file_excel' => 'required|mimes:csv,xls,xlsx'
 		]);
-        
+
         if ($request->hasFile('file_excel')){
             Excel::import(new MainlineImport, request()->file('file_excel'));
             return redirect()->route('mainline.index');

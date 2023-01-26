@@ -8,33 +8,41 @@
     <h2 class="intro-y text-lg font-medium mt-10">Data Summary Temuan</h2>
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
-            <a href="{{ route('temuan.create') }}" class="btn btn-primary shadow-md mr-2">Add New Data</a>
-            <div class="dropdown">
-                <button class="dropdown-toggle btn px-2 box" aria-expanded="false" data-tw-toggle="dropdown">
+            <a href="{{ route('temuan.index') }}" class="btn btn-outline-primary mr-2 tooltip" title="Refresh Data">
+                <span class="w-5 h-5 flex items-center justify-center">
+                    <i class="w-4 h-4" data-lucide="refresh-cw"></i>
+                </span>
+            </a>
+            <a href="{{ route('temuan.create') }}" class="btn btn-primary mr-2 tooltip" title="Tambah Data">Add New
+                Data</a>
+            <a href="javascript:;" data-tw-toggle="modal" data-tw-target="#filter-modal"
+                class="btn btn-warning mr-2 tooltip" title="Filter">
+                <span class="w-5 h-5 flex items-center justify-center">
+                    <i class="w-4 h-4" data-lucide="filter"></i>
+                </span>
+                Filter
+            </a>
+            <form action="{{ route('temuan.export') }}" method="GET">
+                @csrf
+                @method('get')
+                <input type="text" name="area_id" value="{{ $area_id ?? '' }}" hidden>
+                <input type="text" name="line_id" value="{{ $line_id ?? '' }}" hidden>
+                <input type="text" name="part_id" value="{{ $part_id ?? '' }}" hidden>
+                <input type="text" name="status" value="{{ $status ?? '' }}" hidden>
+                <button type="submit" class="btn btn-success mr-2 tooltip" title="Export to Excel">
                     <span class="w-5 h-5 flex items-center justify-center">
-                        <i class="w-4 h-4" data-lucide="plus"></i>
+                        <i class="w-4 h-4" data-lucide="send"></i>
                     </span>
+                    Export
                 </button>
-                <div class="dropdown-menu w-40">
-                    <ul class="dropdown-content">
-                        <li>
-                            <a href="" class="dropdown-item">
-                                <i data-lucide="printer" class="w-4 h-4 mr-2"></i> Print
-                            </a>
-                        </li>
-                        <li>
-                            <a href="" class="dropdown-item">
-                                <i data-lucide="file-text" class="w-4 h-4 mr-2"></i> Export to Excel
-                            </a>
-                        </li>
-                        <li>
-                            <a href="" class="dropdown-item">
-                                <i data-lucide="file-text" class="w-4 h-4 mr-2"></i> Export to PDF
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            </form>
+            <a href="javascript:;" data-tw-toggle="modal" data-tw-target="#report-modal" class="btn btn-danger mr-2 tooltip"
+                title="Generate Report">
+                <span class="w-5 h-5 flex items-center justify-center">
+                    <i class="w-4 h-4" data-lucide="file-text"></i>
+                </span>
+                Report
+            </a>
         </div>
         <!-- BEGIN: Data List -->
         <div class="intro-y col-span-12 overflow-auto">
@@ -42,7 +50,7 @@
                 <thead>
                     <tr>
                         <th>NO</th>
-                        <th>DETAIL</th>
+                        {{-- <th>DETAIL</th> --}}
                         <th>DATE</th>
                         <th>AREA</th>
                         <th>LINE</th>
@@ -68,12 +76,12 @@
                                     {{ $loop->iteration }}
                                 </div>
                             </td>
-                            <td>
+                            {{-- <td>
                                 <a href="javascript:;" data-tw-toggle="modal" data-tw-target="#show-detail-modal"
                                     class="btn btn-lg btn-success">
                                     Detail
                                 </a>
-                            </td>
+                            </td> --}}
                             <td>
                                 <div>
                                     {{ $item->tanggal }}
@@ -198,14 +206,77 @@
     </div>
     <!-- END: Delete Confirmation Modal -->
 
+    <!-- BEGIN: Filter Modal -->
+    <div id="filter-modal" class="modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <div class="p-5 text-center">
+                        <div class="text-2xl mb-2">FILTER DATA</div>
+                        <hr>
+                    </div>
+                    <div class="px-5 pb-8">
+                        <form action="{{ route('temuan.filter') }}" method="GET">
+                            @csrf
+                            @method('get')
+                            <div class="input-group mt-2">
+                                <div class="input-group-text">Area</div>
+                                <select data-placeholder="Select location area" class="tom-select w-full" name="area_id"
+                                    id="crud-form-2">
+                                    <option disabled selected>- Pilih Area -</option>
+                                    @foreach ($area as $item)
+                                        <option value="{{ $item->id }}">{{ $item->code }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="input-group mt-2">
+                                <div class="input-group-text">Line</div>
+                                <select data-placeholder="Select line name" class="tom-select w-full" name="line_id"
+                                    id="crud-form-2">
+                                    <option disabled selected>- Pilih Line -</option>
+                                    @foreach ($line as $item)
+                                        <option value="{{ $item->id }}">{{ $item->code }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="input-group mt-2">
+                                <div class="input-group-text">Part</div>
+                                <select data-placeholder="Select part name" class="tom-select w-full" name="part_id"
+                                    id="crud-form-2">
+                                    <option disabled selected>- Pilih Part -</option>
+                                    @foreach ($part as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="input-group mt-2">
+                                <div class="input-group-text">Status</div>
+                                <select data-placeholder="Select status" class="tom-select w-full" name="status"
+                                    id="crud-form-2">
+                                    <option disabled selected>- Status -</option>
+                                    <option value="open">Open</option>
+                                    <option value="close">Close</option>
+                                </select>
+                            </div>
+                            <div class="text-center mt-8">
+                                <button type="submit" class="btn btn-warning w-24 mx-3">Filter</button>
+                                <button type="button" data-tw-dismiss="modal"
+                                    class="btn btn-danger w-24 mr-1">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: Filter Modal -->
+
     <!-- BEGIN: Show Photo Modal -->
     <div id="show-photo-modal" class="modal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body p-0">
-                    <div class="p-5 text-center">
-                        Dokumentasi Temuan
-                    </div>
+                    <div class="text-2xl mt-2 fw-bolder text-center mb-8">Dokumentasi Temuan</div>
                     <div class="px-5 pb-8 text-center">
                         <div class="items-center align-center" id="photo"></div>
                     </div>
@@ -226,6 +297,37 @@
         </div>
     </div>
     <!-- END: Show Detail Modal -->
+
+    <!-- BEGIN: Report Modal -->
+    <div id="report-modal" class="modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <div class="p-5 text-center">
+                        <div class="text-2xl mb-2">GENERATE REPORT</div>
+                        <hr>
+                    </div>
+                    <div class="px-5 pb-8">
+                        <form action="{{ route('temuan.report') }}" method="GET">
+                            @csrf
+                            @method('get')
+                            <div class="input-group mt-2">
+                                <div class="input-group-text">Pilih Tanggal Kegiatan</div>
+                                <input type="date" class="form-control" name="tanggal">
+                            </div>
+                            <div class="text-center mt-8">
+                                <button type="submit" formtarget="_blank"
+                                    class="btn btn-warning w-24 mx-3">Generate</button>
+                                <button type="button" data-tw-dismiss="modal"
+                                    class="btn btn-danger w-24 mr-1">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: Report Modal -->
 @endsection
 
 @section('script')
@@ -241,7 +343,7 @@
         }
 
         $(document).ready(function() {
-            $('#temuanx').DataTable({
+            $('#temuan').DataTable({
                 processing: true,
                 paging: true,
                 dom: 'Bfrtip',

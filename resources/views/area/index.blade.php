@@ -38,7 +38,7 @@
         </div>
         <!-- BEGIN: Data List -->
         <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
-            <table id="areas" class="table table-report mt-2">
+            <table id="area" class="table table-report mt-2">
                 <thead>
                     <tr>
                         <th class="whitespace-nowrap">NO</th>

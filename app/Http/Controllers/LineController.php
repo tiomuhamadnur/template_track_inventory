@@ -10,12 +10,13 @@ class LineController extends Controller
     public function index()
     {
         $line = Line::all();
-        return view('line.index', compact(['line']));
+        return view('mainline.mainline_line.index', compact(['line']));
+        // return view('line.index', compact(['line']));
     }
 
     public function create()
     {
-        return view('line.create');
+        return view('mainline.mainline_line.create');
     }
 
     public function store(Request $request)

@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\TemuanExport;
+use App\Exports\TemuanMainlineExport;
+use App\Exports\TemuanMainlineFilterExport;
 use App\Models\Area;
 use App\Models\Defect;
-use App\Models\DetailPart;
 use App\Models\Line;
 use App\Models\Mainline;
 use App\Models\Part;
 use App\Models\Temuan;
 use App\Models\TransDefect;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Excel;
 
@@ -18,19 +19,59 @@ class TemuanController extends Controller
 {
     public function index()
     {
-        $temuan = Temuan::all();
-        return view('temuan.index', compact(['temuan']));
+        $temuan = Temuan::orderBy('created_at', 'DESC')->get();
+        $area = Area::all();
+        $line = Line::all();
+        $part = Part::all();
+
+        $area_id = "";
+        $line_id = "";
+        $part_id = "";
+        $status = "";
+
+        return view('temuan.index', compact(['temuan', 'area', 'line', 'part', 'area_id', 'line_id', 'part_id', 'status']));
     }
 
-    public function export()
+    public function export(Request $request)
     {
-        return Excel::download(new TemuanExport, 'temuan.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+        $area_id = $request->area_id;
+        $line_id = $request->line_id;
+        $part_id = $request->part_id;
+        $status = $request->status;
+
+        $waktu = Carbon::now();
+
+        if ($area_id == null and $line_id == null and $part_id == null and $status == null) {
+            return Excel::download(new TemuanMainlineExport(), $waktu.'_temuan_mainline_all.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+        } else {
+            return Excel::download(new TemuanMainlineFilterExport($area_id, $line_id, $part_id, $status), $waktu.'_temuan_mainline_filtered.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+        }
     }
 
-    public function coba()
+    public function filter(Request $request)
     {
-        $temuan = Temuan::all();
-        return view('admin.temuan.index', compact(['temuan']));
+        $area_id = $request->area_id;
+        $line_id = $request->line_id;
+        $part_id = $request->part_id;
+        $status = $request->status;
+
+        $temuan = Temuan::select(
+            'summary_temuan.*',
+            'mainline.area_id as area_id',
+        )
+        ->join('mainline', 'mainline.id', '=', 'summary_temuan.mainline_id')
+        ->orWhere('area_id', $area_id)
+        ->orWhere('line_id', $line_id)
+        ->orWhere('part_id', $part_id)
+        ->orWhere('status', $status)
+        ->orderBy('mainline_id', 'asc')
+        ->get();
+
+        $area = Area::all();
+        $line = Line::all();
+        $part = Part::all();
+
+        return view('temuan.index', compact(['temuan', 'area', 'line', 'part', 'area_id', 'line_id', 'part_id', 'status']));
     }
 
     public function create()
@@ -52,7 +93,7 @@ class TemuanController extends Controller
 
 
         if ($request->hasFile('photo') && $request->photo != '') {
-            
+
             $photo_temuan = $request->file('photo')->store('temuan/mainline');
             Temuan::create([
                 "mainline_id" => $request->mainline_id,
@@ -84,6 +125,14 @@ class TemuanController extends Controller
             ]);
             return redirect()->route('temuan.index');
         }
+    }
+
+    public function report(Request $request)
+    {
+        $tanggal = $request->tanggal;
+        $area = Temuan::where('tanggal', $tanggal)->orderBy('mainline_id', 'asc')->distinct()->get();
+        $temuan = Temuan::where('tanggal', $tanggal)->orderBy('mainline_id', 'asc')->get();
+        return view('temuan.report.report', compact(['tanggal', 'temuan', 'area']));
     }
 
     public function show($id)
@@ -146,6 +195,7 @@ class TemuanController extends Controller
         ->join('detail_part', 'detail_part.id', '=', 'trans_defect.detail_part_id')
         ->where('trans_defect.part_id', $part_id)
         ->orderBy('detail_part_name', 'asc')
+        ->distinct()
         ->get();
 
         if (count($detail_part) > 0) {

@@ -207,6 +207,12 @@ Route::middleware('auth')->group(function() {
         Route::get('/getSpan', 'getSpan')->name('getSpan');
         Route::get('/getDetailPart', 'getDetailPart')->name('getDetailPart');
         Route::get('/getDefect', 'getDefect')->name('getDefect');
+
+        // FILTER DATA
+        Route::get('/temuan/filter', 'filter')->name('temuan.filter');
+
+        // REPORT GENERATOR
+        Route::get('/temuan/report', 'report')->name('temuan.report');
     });
 
     Route::controller(AccelerometerController::class)->group(function() {

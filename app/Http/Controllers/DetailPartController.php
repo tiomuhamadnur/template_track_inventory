@@ -11,13 +11,15 @@ class DetailPartController extends Controller
     public function index()
     {
         $detail_part = DetailPart::all();
-        return view('part.detail_part.index', compact(['detail_part']));
+        return view('mainline.mainline_detailpart.index', compact(['detail_part']));
+        // return view('part.detail_part.index', compact(['detail_part']));
     }
 
     public function create()
     {
-        $part = Part::all();
-        return view('part.detail_part.create', compact(['part']));
+        // $part = Part::all();
+        return view('mainline.mainline_detailpart.create');
+        // return view('part.detail_part.create', compact(['part']));
     }
 
     public function store(Request $request)

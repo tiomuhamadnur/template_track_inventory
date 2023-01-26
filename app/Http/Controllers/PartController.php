@@ -13,12 +13,13 @@ class PartController extends Controller
     public function index()
     {
         $part = Part::all();
-        return view('part.index', compact(['part']));
+        // return view('part.index', compact(['part']));
+        return view('mainline.mainline_part.index', compact(['part']));
     }
 
     public function create()
     {
-        return view('part.create');
+        return view('mainline.mainline_part.create');
     }
 
     public function import(Request $request)
@@ -26,7 +27,7 @@ class PartController extends Controller
 		$this->validate($request, [
 			'file_excel' => 'required|mimes:csv,xls,xlsx'
 		]);
-        
+
         if ($request->hasFile('file_excel')){
             Excel::import(new TransDefectImport, request()->file('file_excel'));
             return redirect()->route('part.index');

@@ -15,7 +15,8 @@ class TransDefectController extends Controller
     public function index()
     {
         $part = TransDefect::all();
-        return view('trans_defect.index', compact(['part']));
+        return view('mainline.mainline_relasidefect.index', compact(['part']));
+        // return view('trans_defect.index', compact(['part']));
     }
 
     public function import(Request $request)
@@ -23,7 +24,7 @@ class TransDefectController extends Controller
 		$this->validate($request, [
 			'file_excel' => 'required|mimes:csv,xls,xlsx'
 		]);
-        
+
         if ($request->hasFile('file_excel')){
             Excel::import(new TransDefectImport, request()->file('file_excel'));
             return redirect()->route('transDefect.index');
@@ -37,7 +38,8 @@ class TransDefectController extends Controller
         $part = Part::all();
         $detail_part = DetailPart::all();
         $defect = Defect::all();
-        return view('trans_defect.create', compact(['part', 'detail_part', 'defect']));
+        return view('mainline.mainline_relasidefect.create', compact(['part', 'detail_part', 'defect']));
+        // return view('trans_defect.create', compact(['part', 'detail_part', 'defect']));
     }
 
     public function store(Request $request)
@@ -52,7 +54,7 @@ class TransDefectController extends Controller
 
     public function show($id)
     {
-        // 
+        //
     }
 
     public function edit($id)
