@@ -116,6 +116,7 @@ Route::middleware('auth')->group(function() {
 
 Route::middleware('auth')->group(function() {
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('transisi', [AuthController::class, 'transisi'])->name('transisi');
 
     Route::controller(DashboardController::class)->group(function() {
         // Route::get('/home', 'index')->name('home');

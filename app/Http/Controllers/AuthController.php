@@ -23,7 +23,7 @@ class AuthController extends Controller
         ])) {
             throw new \Exception('Wrong email or password.');
         } else {
-            return redirect()->route('home');
+            return redirect()->route('transisi');
         }
     }
 
@@ -31,5 +31,10 @@ class AuthController extends Controller
     {
         \Auth::logout();
         return redirect('login');
+    }
+
+    public function transisi()
+    {
+        return view('transisi.transisi');
     }
 }
