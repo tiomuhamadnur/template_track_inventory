@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Transisi Option</title>
+    <title>Dashboard Option</title>
 </head>
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/transisi/style.css') }}">
 <script type="text/javascript" href='{{ asset('assets/transisi/style.js') }}'></script>
