@@ -1,34 +1,35 @@
-@extends('layout.form.form')
+@extends('mainline.mainline_layout.form')
 
-@section('head')
+@section('sub-head')
     <title>Form Data Temuan</title>
 @endsection
 
 @section('body')
-    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+    <div class="content-wrapper bg-gra-03 p-t-45 p-b-50">
         <div class="wrapper wrapper--w790">
-            <div class="card card-5">
+            <div class="card">
                 <div class="card-heading">
-                    <h2 class="title">Form Data Temuan Baru Mainline</h2>
+                    <h2 class="title mt-4 mr-1">Form Data Temuan Baru</h2>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('temuan_mainline.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="#" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('post')
-                        <div class="form-row">
+                        <div class="form-group">
                             <div class="name">Area</div>
                             <div class="value">
                                 <div class="input-group">
                                     <select id="area" class="form-select">
                                         <option disabled="disabled" selected="selected">- Pilih Nama Area -</option>
                                         <option value="Mainline">Mainline</option>
+                                        <option value="Depo">Depo</option>
                                         <option value="DAL">DAL</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="form-row">
+                        <div class="form-group">
                             <div class="name">Location</div>
                             <div class="value">
                                 <div class="input-group">
@@ -41,7 +42,7 @@
                             </div>
                         </div>
 
-                        <div class="form-row">
+                        <div class="form-group">
                             <div class="name">Line</div>
                             <div class="value">
                                 <div class="input-group">
@@ -53,7 +54,7 @@
                             </div>
                         </div>
 
-                        <div class="form-row">
+                        <div class="form-group">
                             <div class="name">No Span</div>
                             <div class="value">
                                 <div class="input-group">
@@ -65,22 +66,21 @@
                             </div>
                         </div>
 
-                        <div class="form-row">
+                        <div class="form-group">
                             <div class="name">Parts</div>
                             <div class="value">
                                 <div class="input-group">
                                     <select id="part_id" name="part_id" class="form-select">
                                         <option disabled="disabled" selected="selected">- Pilih Nama Part -</option>
-                                        @foreach ($part as $item)
-                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                        @endforeach
+                                            <option value=""></option>
+
                                     </select>
                                     <div class="select-dropdown"></div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="form-row">
+                        <div class="form-group">
                             <div class="name">Detail Part</div>
                             <div class="value">
                                 <div class="input-group">
@@ -92,7 +92,7 @@
                             </div>
                         </div>
 
-                        <div class="form-row">
+                        <div class="form-group">
                             <div class="name">Defect</div>
                             <div class="value">
                                 <div class="input-group">
@@ -105,7 +105,7 @@
                             </div>
                         </div>
 
-                        <div class="form-row">
+                        <div class="form-group">
                             <div class="name">No Sleeper</div>
                             <div class="value">
                                 <div class="input-group">
@@ -114,7 +114,7 @@
                             </div>
                         </div>
 
-                        <div class="form-row">
+                        <div class="form-group">
                             <div class="name">Direction</div>
                             <div class="value">
                                 <div class="input-group">
@@ -144,7 +144,7 @@
                             </div>
                         </div> --}}
 
-                        <div class="form-row">
+                        <div class="form-group">
                             <div class="name">Remark</div>
                             <div class="value">
                                 <div class="input-group">
@@ -153,7 +153,7 @@
                             </div>
                         </div>
 
-                        <div class="form-row">
+                        <div class="form-group">
                             <div class="name">Classification of Defect</div>
                             <div class="value">
                                 <div class="input-group">
@@ -169,7 +169,7 @@
                             </div>
                         </div>
 
-                        <div class="form-row">
+                        <div class="form-group">
                             <div class="name">Staff</div>
                             <div class="value">
                                 <div class="input-group">
@@ -179,7 +179,7 @@
                         </div>
 
 
-                        <div class="form-row">
+                        <div class="form-group">
                             <div class="name">Tanggal</div>
                             <div class="value">
                                 <div class="input-group">
@@ -188,7 +188,7 @@
                             </div>
                         </div>
 
-                        <div class="form-row">
+                        <div class="form-group">
                             <div class="name">Foto Dokumentasi</div>
                             <div class="value">
                                 <div class="input-group">
@@ -232,7 +232,7 @@
                         </div> --}}
 
                         <div>
-                            <a href="{{ route('temuan_mainline.index') }}" class="btn btn-danger rounded">Cancel</a>
+                            <a href="" class="btn btn-danger rounded">Cancel</a>
                             <button class="btn btn-success ms-2" type="submit">Save</button>
                         </div>
                     </form>

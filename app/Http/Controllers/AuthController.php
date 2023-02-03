@@ -21,7 +21,7 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => $request->password
         ])) {
-            throw new \Exception('Wrong email or password.');
+            return back()->withStatus('Wrong email or password.');
         } else {
             return redirect()->route('transisi');
         }

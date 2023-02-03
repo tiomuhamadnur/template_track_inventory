@@ -203,18 +203,18 @@ Route::middleware('auth')->group(function () {
         Route::delete('/temuan', 'destroy')->name('temuan.delete');
         Route::get('/temuan/export', 'export')->name('temuan.export');
 
-        // GET DATA
-        Route::get('/getLocation', 'getLocation')->name('getLocation');
-        Route::get('/getLine', 'getLine')->name('getLine');
-        Route::get('/getSpan', 'getSpan')->name('getSpan');
-        Route::get('/getDetailPart', 'getDetailPart')->name('getDetailPart');
-        Route::get('/getDefect', 'getDefect')->name('getDefect');
+        // // GET DATA
+        // Route::get('/getLocation', 'getLocation')->name('getLocation');
+        // Route::get('/getLine', 'getLine')->name('getLine');
+        // Route::get('/getSpan', 'getSpan')->name('getSpan');
+        // Route::get('/getDetailPart', 'getDetailPart')->name('getDetailPart');
+        // Route::get('/getDefect', 'getDefect')->name('getDefect');
 
         // FILTER DATA
-        Route::get('/temuan/filter', 'filter')->name('temuan.filter');
+        // Route::get('/temuan/filter', 'filter')->name('temuan.filter');
 
         // REPORT GENERATOR
-        Route::get('/temuan/report', 'report')->name('temuan.report');
+        // Route::get('/temuan/report', 'report')->name('temuan.report');
     });
 
 
@@ -226,7 +226,21 @@ Route::middleware('auth')->group(function () {
         Route::put('/temuan_mainline', 'update')->name('temuan_mainline.update');
         Route::delete('/temuan_mainline', 'destroy')->name('temuan_mainline.delete');
         Route::get('/temuan/export_mainline', 'export')->name('temuan_mainline.export');
+
+        // GET DATA
+        Route::get('/getLocation', 'getLocation')->name('getLocation');
+        Route::get('/getLine', 'getLine')->name('getLine');
+        Route::get('/getSpan', 'getSpan')->name('getSpan');
+        Route::get('/getDetailPart', 'getDetailPart')->name('getDetailPart');
+        Route::get('/getDefect', 'getDefect')->name('getDefect');
+
+        // FILTER DATA
+        Route::get('/temuan-mainline/filter', 'filter')->name('temuan_mainline.filter');
+
+        // REPORT GENERATOR
+        Route::get('/temuan-mainline/report', 'report')->name('temuan_mainline.report');
     });
+
 
     Route::controller(AccelerometerController::class)->group(function () {
         Route::get('/accelerometer', 'index')->name('accelerometer.index');
