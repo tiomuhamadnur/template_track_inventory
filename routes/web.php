@@ -1,20 +1,21 @@
 <?php
 
-use App\Http\Controllers\AccelerometerController;
-use App\Http\Controllers\AreaController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\PageController;
-use App\Http\Controllers\DarkModeController;
-use App\Http\Controllers\ColorSchemeController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DefectController;
-use App\Http\Controllers\DetailPartController;
 use App\Http\Controllers\LineController;
-use App\Http\Controllers\MainlineController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\PartController;
+use App\Http\Controllers\DefectController;
 use App\Http\Controllers\TemuanController;
+use App\Http\Controllers\DarkModeController;
+use App\Http\Controllers\MainlineController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DetailPartController;
+use App\Http\Controllers\ColorSchemeController;
 use App\Http\Controllers\TransDefectController;
+use App\Http\Controllers\AccelerometerController;
+use App\Http\Controllers\TemuanMainlineController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,14 +31,14 @@ use App\Http\Controllers\TransDefectController;
 Route::get('dark-mode-switcher', [DarkModeController::class, 'switch'])->name('dark-mode-switcher');
 Route::get('color-scheme-switcher/{color_scheme}', [ColorSchemeController::class, 'switch'])->name('color-scheme-switcher');
 
-Route::controller(AuthController::class)->middleware('loggedin')->group(function() {
+Route::controller(AuthController::class)->middleware('loggedin')->group(function () {
     Route::get('login', 'loginView')->name('login.index');
     Route::post('login', 'login')->name('login.check');
 });
 
-Route::middleware('auth')->group(function() {
+Route::middleware('auth')->group(function () {
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
-    Route::controller(PageController::class)->group(function() {
+    Route::controller(PageController::class)->group(function () {
         Route::get('dashboardOverview-1-page', 'dashboardOverview1')->name('dashboard-overview-1');
         Route::get('dashboard-overview-2-page', 'dashboardOverview2')->name('dashboard-overview-2');
         Route::get('dashboard-overview-3-page', 'dashboardOverview3')->name('dashboard-overview-3');
@@ -114,16 +115,16 @@ Route::middleware('auth')->group(function() {
     });
 });
 
-Route::middleware('auth')->group(function() {
+Route::middleware('auth')->group(function () {
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('transisi', [AuthController::class, 'transisi'])->name('transisi');
 
-    Route::controller(DashboardController::class)->group(function() {
+    Route::controller(DashboardController::class)->group(function () {
         // Route::get('/home', 'index')->name('home');
         Route::get('/', 'index')->name('home');
     });
 
-    Route::controller(AreaController::class)->group(function() {
+    Route::controller(AreaController::class)->group(function () {
         Route::get('/area', 'index')->name('area.index');
         Route::get('/area-create', 'create')->name('area.create');
         Route::post('/area', 'store')->name('area.store');
@@ -132,7 +133,7 @@ Route::middleware('auth')->group(function() {
         Route::get('/area/{id}/delete', 'destroy')->name('area.delete');
     });
 
-    Route::controller(LineController::class)->group(function() {
+    Route::controller(LineController::class)->group(function () {
         Route::get('/line', 'index')->name('line.index');
         Route::get('/line-create', 'create')->name('line.create');
         Route::post('/line', 'store')->name('line.store');
@@ -141,7 +142,7 @@ Route::middleware('auth')->group(function() {
         Route::get('/line/{id}/delete', 'destroy')->name('line.delete');
     });
 
-    Route::controller(MainlineController::class)->group(function() {
+    Route::controller(MainlineController::class)->group(function () {
         Route::get('/mainline', 'index')->name('mainline.index');
         Route::get('/mainline-create', 'create')->name('mainline.create');
         Route::post('/mainline', 'store')->name('mainline.store');
@@ -155,7 +156,7 @@ Route::middleware('auth')->group(function() {
         Route::get('/mainline/json', 'getJson')->name('mainline.json');
     });
 
-    Route::controller(PartController::class)->group(function() {
+    Route::controller(PartController::class)->group(function () {
         Route::get('/part', 'index')->name('part.index');
         Route::get('/part-create', 'create')->name('part.create');
         Route::post('/part', 'store')->name('part.store');
@@ -164,7 +165,7 @@ Route::middleware('auth')->group(function() {
         Route::get('/part/{id}/delete', 'destroy')->name('part.delete');
     });
 
-    Route::controller(DetailPartController::class)->group(function() {
+    Route::controller(DetailPartController::class)->group(function () {
         Route::get('/detail-part', 'index')->name('detail-part.index');
         Route::get('/detail-part-create', 'create')->name('detail-part.create');
         Route::post('/detail-part', 'store')->name('detail-part.store');
@@ -173,7 +174,7 @@ Route::middleware('auth')->group(function() {
         Route::get('/detail-part/{id}/delete', 'destroy')->name('detail-part.delete');
     });
 
-    Route::controller(TransDefectController::class)->group(function() {
+    Route::controller(TransDefectController::class)->group(function () {
         Route::get('/TransDefect', 'index')->name('transDefect.index');
         Route::get('/TransDefect-create', 'create')->name('transDefect.create');
         Route::post('/TransDefect', 'store')->name('transDefect.store');
@@ -184,7 +185,7 @@ Route::middleware('auth')->group(function() {
         Route::post('/TransDefect/import', 'import')->name('transDefect.import');
     });
 
-    Route::controller(DefectController::class)->group(function() {
+    Route::controller(DefectController::class)->group(function () {
         Route::get('/defect', 'index')->name('defect.index');
         Route::get('/defect-create', 'create')->name('defect.create');
         Route::post('/defect', 'store')->name('defect.store');
@@ -193,7 +194,7 @@ Route::middleware('auth')->group(function() {
         Route::get('/defect/{id}/delete', 'destroy')->name('defect.delete');
     });
 
-    Route::controller(TemuanController::class)->group(function() {
+    Route::controller(TemuanController::class)->group(function () {
         Route::get('/temuan', 'index')->name('temuan.index');
         Route::get('/temuan-create', 'create')->name('temuan.create');
         Route::post('/temuan', 'store')->name('temuan.store');
@@ -216,7 +217,18 @@ Route::middleware('auth')->group(function() {
         Route::get('/temuan/report', 'report')->name('temuan.report');
     });
 
-    Route::controller(AccelerometerController::class)->group(function() {
+
+    Route::controller(TemuanMainlineController::class)->group(function () {
+        Route::get('/temuan_mainline', 'index')->name('temuan_mainline.index');
+        Route::get('/temuan_mainline-create', 'create')->name('temuan_mainline.create');
+        Route::post('/temuan_mainline', 'store')->name('temuan_mainline.store');
+        Route::get('/temuan_mainline/{id}/edit', 'edit')->name('temuan_mainline.edit');
+        Route::put('/temuan_mainline', 'update')->name('temuan_mainline.update');
+        Route::delete('/temuan_mainline', 'destroy')->name('temuan_mainline.delete');
+        Route::get('/temuan/export_mainline', 'export')->name('temuan_mainline.export');
+    });
+
+    Route::controller(AccelerometerController::class)->group(function () {
         Route::get('/accelerometer', 'index')->name('accelerometer.index');
         Route::get('/summary/{id}/accelerometer', 'index_summary')->name('accelerometer.summary.index');
         Route::get('/accelerometer-create', 'create')->name('accelerometer.create');

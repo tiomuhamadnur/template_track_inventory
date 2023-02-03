@@ -32,12 +32,12 @@
                 aria-controls="form-elements">
                 <i class="menu-icon mdi mdi-briefcase"></i>
                 <span class="menu-title">Activity</span>
-                <i class="menu-arrow"></i>
+                {{-- <i class="menu-arrow"></i> --}}
             </a>
             <div class="collapse" id="form-elements">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item animate__animated animate__fadeInLeft"><a class="nav-link"
-                            href="pages/forms/basic_elements.html">List Temuan</a></li>
+                    <li class="nav-item"><a class="nav-link"
+                            href="/temuan_mainline">List Temuan</a></li>
                 </ul>
             </div>
         </li>
@@ -49,7 +49,7 @@
             </a>
             <div class="collapse" id="charts">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item animate__animated animate__fadeInLeft"> <a class="nav-link"
+                    <li class="nav-item"> <a class="nav-link"
                             href="pages/charts/chartjs.html">ChartJs</a></li>
                 </ul>
             </div>
@@ -62,7 +62,7 @@
             </a>
             <div class="collapse" id="tables">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item animate__animated animate__fadeInLeft"> <a class="nav-link"
+                    <li class="nav-item"> <a class="nav-link"
                             href="pages/tables/basic-table.html">Basic table</a></li>
                 </ul>
             </div>
