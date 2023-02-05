@@ -25,6 +25,7 @@ use App\Http\Controllers\DepoDashboardController;
 use App\Http\Controllers\DepoDetailPartController;
 use App\Http\Controllers\TemuanMainlineController;
 use App\Http\Controllers\DepoTransDefectController;
+use App\Http\Controllers\PICController;
 
 /*
 |--------------------------------------------------------------------------
@@ -384,4 +385,8 @@ Route::middleware('auth')->group(function () {
 
 Route::controller(DepoDashboardController::class)->group(function () {
     Route::get('/depodashboard', 'index')->name('depodashboard.index');
+});
+
+Route::controller(PICController::class)->group(function () {
+    Route::get('/pic', 'index')->name('pic.index');
 });
