@@ -300,7 +300,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/getPICAccelerometer', 'getPIC')->name('accelerometer.getPIC');
     });
 
-    Route::controller(PegawaiController::class)->group(function () {
-        Route::get('/dummy_user', 'dummy_user');
-    });
+    // Route::controller(PegawaiController::class)->group(function () {
+    //     Route::get('/dummy_user', 'dummy_user');
+    // });
 });
