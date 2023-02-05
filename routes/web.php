@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PICController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DepoController;
@@ -23,9 +24,18 @@ use App\Http\Controllers\TransDefectController;
 use App\Http\Controllers\AccelerometerController;
 use App\Http\Controllers\DepoDashboardController;
 use App\Http\Controllers\DepoDetailPartController;
+use App\Http\Controllers\MasterdataAreaController;
+use App\Http\Controllers\MasterdataLineDepoController;
+use App\Http\Controllers\MasterdataLineMainlineController;
+use App\Http\Controllers\MasterdataPartController;
 use App\Http\Controllers\TemuanMainlineController;
 use App\Http\Controllers\DepoTransDefectController;
-use App\Http\Controllers\PICController;
+use App\Http\Controllers\MasterdataDefectController;
+use App\Http\Controllers\MasterdataMainlineController;
+use App\Http\Controllers\MasterdataDetailPartController;
+use App\Http\Controllers\MasterdataTransDefectController;
+use App\Http\Controllers\MasterdataDashboardController;
+use App\Http\Controllers\MasterdataTrackbedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -239,6 +249,109 @@ Route::middleware('auth')->group(function () {
     });
 
 
+    // MASTERDATA //
+    Route::controller(MasterdataAreaController::class)->group(function () {
+        Route::get('/masterdata_area', 'index')->name('masterdata_area.index');
+        Route::get('/masterdata_area-create', 'create')->name('masterdata_area.create');
+        Route::post('/masterdata_area', 'store')->name('masterdata_area.store');
+        Route::get('/masterdata_area/{id}/edit', 'edit')->name('masterdata_area.edit');
+        Route::put('/masterdata_area', 'update')->name('masterdata_area.update');
+        Route::get('/masterdata_area/{id}/delete', 'destroy')->name('masterdata_area.delete');
+    });
+
+    Route::controller(MasterdataLineDepoController::class)->group(function () {
+        Route::get('/masterdata_linedepo', 'index')->name('masterdata_linedepo.index');
+        Route::get('/masterdata_linedepo-create', 'create')->name('masterdata_linedepo.create');
+        Route::post('/masterdata_linedepo', 'store')->name('masterdata_linedepo.store');
+        Route::get('/masterdata_linedepo/{id}/edit', 'edit')->name('masterdata_linedepo.edit');
+        Route::put('/masterdata_linedepo', 'update')->name('masterdata_linedepo.update');
+        Route::get('/masterdata_linedepo/{id}/delete', 'destroy')->name('masterdata_linedepo.delete');
+    });
+
+    Route::controller(MasterdataLineMainlineController::class)->group(function () {
+        Route::get('/masterdata_linemainline', 'index')->name('masterdata_linemainline.index');
+        Route::get('/masterdata_linemainline-create', 'create')->name('masterdata_linemainline.create');
+        Route::post('/masterdata_linemainline', 'store')->name('masterdata_linemainline.store');
+        Route::get('/masterdata_linemainline/{id}/edit', 'edit')->name('masterdata_linemainline.edit');
+        Route::put('/masterdata_linemainline', 'update')->name('masterdata_linemainline.update');
+        Route::get('/masterdata_linemainline/{id}/delete', 'destroy')->name('masterdata_linemainline.delete');
+    });
+
+    Route::controller(MasterdataMainlineController::class)->group(function () {
+        Route::get('/masterdata_mainline', 'index')->name('masterdata_mainline.index');
+        Route::get('/masterdata_mainline-create', 'create')->name('masterdata_mainline.create');
+        Route::post('/masterdata_mainline', 'store')->name('masterdata_mainline.store');
+        Route::get('/masterdata_mainline/{id}/edit', 'edit')->name('masterdata_mainline.edit');
+        Route::put('/masterdata_mainline', 'update')->name('masterdata_mainline.update');
+        Route::get('/masterdata_mainline/{id}/delete', 'destroy')->name('masterdata_mainline.delete');
+
+        // SPAN atau TRACK BED
+        Route::post('/masterdata_mainline/import', 'import')->name('masterdata_mainline.import');
+        Route::get('/masterdata_mainline/export', 'export')->name('masterdata_mainline.export');
+        Route::get('/masterdata_mainline/json', 'getJson')->name('masterdata_mainline.json');
+    });
+
+    Route::controller(MasterdataTrackbedController::class)->group(function () {
+        Route::get('/masterdata_trackbed', 'index')->name('masterdata_trackbed.index');
+        Route::get('/masterdata_trackbed-create', 'create')->name('masterdata_trackbed.create');
+        Route::post('/masterdata_trackbed', 'store')->name('masterdata_trackbed.store');
+        Route::get('/masterdata_trackbed/{id}/edit', 'edit')->name('masterdata_trackbed.edit');
+        Route::put('/masterdata_trackbed', 'update')->name('masterdata_trackbed.update');
+        Route::get('/masterdata_trackbed/{id}/delete', 'destroy')->name('masterdata_trackbed.delete');
+
+        Route::post('/masterdata_trackbed/import', 'import')->name('masterdata_trackbed.import');
+        Route::get('/masterdata_trackbed/export', 'export')->name('masterdata_trackbed.export');
+        Route::get('/masterdata_trackbed/json', 'getJson')->name('masterdata_trackbed.json');
+    });
+
+
+    Route::controller(MasterdataPartController::class)->group(function () {
+        Route::get('/masterdata_part', 'index')->name('masterdata_part.index');
+        Route::get('/masterdata_part-create', 'create')->name('masterdata_part.create');
+        Route::post('/masterdata_part', 'store')->name('masterdata_part.store');
+        Route::get('/masterdata_part/{id}/edit', 'edit')->name('masterdata_part.edit');
+        Route::put('/masterdata_part', 'update')->name('masterdata_part.update');
+        Route::get('/masterdata_part/{id}/delete', 'destroy')->name('masterdata_part.delete');
+    });
+
+    Route::controller(MasterdataDetailPartController::class)->group(function () {
+        Route::get('/masterdata_detail-part', 'index')->name('masterdata_detail-part.index');
+        Route::get('/masterdata_detail-part-create', 'create')->name('masterdata_detail-part.create');
+        Route::post('/masterdata_detail-part', 'store')->name('masterdata_detail-part.store');
+        Route::get('/masterdata_detail-part/{id}/edit', 'edit')->name('masterdata_detail-part.edit');
+        Route::put('/masterdata_detail-part', 'update')->name('masterdata_detail-part.update');
+        Route::get('/masterdata_detail-part/{id}/delete', 'destroy')->name('masterdata_detail-part.delete');
+    });
+
+    Route::controller(MasterdataDefectController::class)->group(function () {
+        Route::get('/masterdata_defect', 'index')->name('masterdata_defect.index');
+        Route::get('/masterdata_defect-create', 'create')->name('masterdata_defect.create');
+        Route::post('/masterdata_defect', 'store')->name('masterdata_defect.store');
+        Route::get('/masterdata_defect/{id}/edit', 'edit')->name('masterdata_defect.edit');
+        Route::put('/masterdata_defect', 'update')->name('masterdata_defect.update');
+        Route::get('/masterdata_defect/{id}/delete', 'destroy')->name('masterdata_defect.delete');
+    });
+
+    Route::controller(MasterdataTransDefectController::class)->group(function () {
+        Route::get('/masterdata_TransDefect', 'index')->name('masterdata_transDefect.index');
+        Route::get('/masterdata_TransDefect-create', 'create')->name('masterdata_transDefect.create');
+        Route::post('/masterdata_TransDefect', 'store')->name('masterdata_transDefect.store');
+        Route::get('/masterdata_TransDefect/{id}/edit', 'edit')->name('masterdata_transDefect.edit');
+        Route::put('/masterdata_TransDefect', 'update')->name('masterdata_transDefect.update');
+
+        // Import Trans Part & Defect
+        Route::post('/masterdata_TransDefect/import', 'import')->name('masterdata_transDefect.import');
+    });
+
+    Route::controller(MasterdataTemuanController::class)->group(function () {
+        Route::get('/temuan', 'index')->name('temuan.index');
+        Route::get('/temuan-create', 'create')->name('temuan.create');
+        Route::post('/temuan', 'store')->name('temuan.store');
+        Route::get('/temuan/{id}/edit', 'edit')->name('temuan.edit');
+        Route::put('/temuan', 'update')->name('temuan.update');
+        Route::delete('/temuan', 'destroy')->name('temuan.delete');
+        Route::get('/temuan/export', 'export')->name('temuan.export');
+    });
 
 
     // DEPO AREA
@@ -364,6 +477,10 @@ Route::middleware('auth')->group(function () {
 
 Route::controller(DepoDashboardController::class)->group(function () {
     Route::get('/depodashboard', 'index')->name('depodashboard.index');
+});
+
+Route::controller(MasterdataDashboardController::class)->group(function () {
+    Route::get('/masterdatadashboard', 'index')->name('masterdatadashboard.index');
 });
 
 Route::controller(PICController::class)->group(function () {
