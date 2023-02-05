@@ -1,11 +1,11 @@
-@extends('mainline.mainline_layout.base')
+@extends('masterdata.masterdata_layout.base')
 
 @section('sub-title')
     <title>Add Data Mainline | TCSM</title>
 @endsection
 
 @section('sub-content')
-    <h5>Master Data Mainline > Part > Create Data</h5>
+    <h5>Master Data Mainline > Track Bed > Create Data</h5>
     <div class="row">
         <div class="col-sm-12">
             <div class="home-tab">
@@ -16,7 +16,7 @@
                 <div class="col-lg-12 grid-margin stretch-card mt-3">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Form Data Part</h4>
+                            <h4 class="card-title">Form Data Track Bed</h4>
                             <form class="forms-sample" action="{{ route('mainline.store') }}" method="POST">
                                 @csrf
                                 @method('post')

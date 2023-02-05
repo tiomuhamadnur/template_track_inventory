@@ -1,4 +1,4 @@
-@extends('mainline.mainline_layout.base')
+@extends('masterdata.masterdata_layout.base')
 
 @section('sub-title')
     <title>Data Area | TCSM</title>

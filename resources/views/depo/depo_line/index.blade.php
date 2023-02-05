@@ -1,7 +1,7 @@
-@extends('depo.depo_layout.base')
+@extends('masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title>Data Line | TCSM</title>
+    <title>Data Line Depo | TCSM</title>
 @endsection
 
 @section('sub-content')
@@ -51,26 +51,26 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{-- @foreach ($line as $item) --}}
+                                        @foreach ($line_depo as $item)
                                             <tr>
                                                 <td class="text-center">
-                                                    {{-- {{ $loop->iteration }} --}}
+                                                    {{ $loop->iteration }}
                                                 </td>
                                                 <td class="text-center">
-                                                    {{-- {{ $item->name }} --}}
+                                                    {{ $item->name }}
                                                 </td>
                                                 <td class="text-center">
-                                                    {{-- {{ $item->code }} --}}
+                                                    {{ $item->code }}
                                                 </td>
                                                 <td class="text-center">
-                                                    {{-- {{ $item->area }} --}}
+                                                    {{ $item->area }}
                                                 </td>
                                                 <td class="text-center">
                                                     <button type="button" class="btn btn-outline-warning">Edit</button>
                                                     <button type="button" class="btn btn-outline-danger">Delete</button>
                                                 </td>
                                             </tr>
-                                        {{-- @endforeach --}}
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

@@ -1,4 +1,4 @@
-@extends('mainline.mainline_layout.base')
+@extends('masterdata.masterdata_layout.base')
 
 @section('sub-title')
     <title>Add Data Line | TCSM</title>
@@ -34,9 +34,8 @@
                                     <label class="form-label">Line Area</label>
                                     <select class="form-control" name="area">
                                         <option disable selected>-Pilih Line-</option>
-                                        <option value="">Mainline</option>
-                                        <option value="">Depo</option>
-                                        <option value="">DAL</option>
+                                        <option value="Mainline">Mainline</option>
+                                        <option value="DAL">DAL</option>
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-outline-primary me-2">Submit</button>

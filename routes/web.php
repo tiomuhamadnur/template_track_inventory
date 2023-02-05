@@ -4,38 +4,25 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PICController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DepoController;
 use App\Http\Controllers\LineController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PartController;
 use App\Http\Controllers\DefectController;
 use App\Http\Controllers\TemuanController;
 use App\Http\Controllers\DarkModeController;
-use App\Http\Controllers\DepoAreaController;
 use App\Http\Controllers\DepoLineController;
-use App\Http\Controllers\DepoPartController;
 use App\Http\Controllers\MainlineController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DepoDefectController;
 use App\Http\Controllers\DetailPartController;
 use App\Http\Controllers\TemuanDepoController;
 use App\Http\Controllers\ColorSchemeController;
 use App\Http\Controllers\TransDefectController;
 use App\Http\Controllers\AccelerometerController;
 use App\Http\Controllers\DepoDashboardController;
-use App\Http\Controllers\DepoDetailPartController;
-use App\Http\Controllers\MasterdataAreaController;
-use App\Http\Controllers\MasterdataLineDepoController;
-use App\Http\Controllers\MasterdataLineMainlineController;
-use App\Http\Controllers\MasterdataPartController;
 use App\Http\Controllers\TemuanMainlineController;
-use App\Http\Controllers\DepoTransDefectController;
-use App\Http\Controllers\MasterdataDefectController;
-use App\Http\Controllers\MasterdataMainlineController;
-use App\Http\Controllers\MasterdataDetailPartController;
-use App\Http\Controllers\MasterdataTransDefectController;
 use App\Http\Controllers\MasterdataDashboardController;
-use App\Http\Controllers\MasterdataTrackbedController;
+use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,84 +43,84 @@ Route::controller(AuthController::class)->middleware('loggedin')->group(function
     Route::post('login', 'login')->name('login.check');
 });
 
-Route::middleware('auth')->group(function () {
-    Route::get('logout', [AuthController::class, 'logout'])->name('logout');
-    Route::controller(PageController::class)->group(function () {
-        Route::get('dashboardOverview-1-page', 'dashboardOverview1')->name('dashboard-overview-1');
-        Route::get('dashboard-overview-2-page', 'dashboardOverview2')->name('dashboard-overview-2');
-        Route::get('dashboard-overview-3-page', 'dashboardOverview3')->name('dashboard-overview-3');
-        Route::get('dashboard-overview-4-page', 'dashboardOverview4')->name('dashboard-overview-4');
-        Route::get('categories-page', 'categories')->name('categories');
-        Route::get('add-product-page', 'addProduct')->name('add-product');
-        Route::get('product-list-page', 'productList')->name('product-list');
-        Route::get('product-grid-page', 'productGrid')->name('product-grid');
-        Route::get('transaction-list-page', 'transactionList')->name('transaction-list');
-        Route::get('transaction-detail-page', 'transactionDetail')->name('transaction-detail');
-        Route::get('seller-list-page', 'sellerList')->name('seller-list');
-        Route::get('seller-detail-page', 'sellerDetail')->name('seller-detail');
-        Route::get('reviews-page', 'reviews')->name('reviews');
-        Route::get('inbox-page', 'inbox')->name('inbox');
-        Route::get('file-manager-page', 'fileManager')->name('file-manager');
-        Route::get('point-of-sale-page', 'pointOfSale')->name('point-of-sale');
-        Route::get('chat-page', 'chat')->name('chat');
-        Route::get('post-page', 'post')->name('post');
-        Route::get('calendar-page', 'calendar')->name('calendar');
-        Route::get('crud-data-list-page', 'crudDataList')->name('crud-data-list');
-        Route::get('crud-form-page', 'crudForm')->name('crud-form');
-        Route::get('users-layout-1-page', 'usersLayout1')->name('users-layout-1');
-        Route::get('users-layout-2-page', 'usersLayout2')->name('users-layout-2');
-        Route::get('users-layout-3-page', 'usersLayout3')->name('users-layout-3');
-        Route::get('profile-overview-1-page', 'profileOverview1')->name('profile-overview-1');
-        Route::get('profile-overview-2-page', 'profileOverview2')->name('profile-overview-2');
-        Route::get('profile-overview-3-page', 'profileOverview3')->name('profile-overview-3');
-        Route::get('wizard-layout-1-page', 'wizardLayout1')->name('wizard-layout-1');
-        Route::get('wizard-layout-2-page', 'wizardLayout2')->name('wizard-layout-2');
-        Route::get('wizard-layout-3-page', 'wizardLayout3')->name('wizard-layout-3');
-        Route::get('blog-layout-1-page', 'blogLayout1')->name('blog-layout-1');
-        Route::get('blog-layout-2-page', 'blogLayout2')->name('blog-layout-2');
-        Route::get('blog-layout-3-page', 'blogLayout3')->name('blog-layout-3');
-        Route::get('pricing-layout-1-page', 'pricingLayout1')->name('pricing-layout-1');
-        Route::get('pricing-layout-2-page', 'pricingLayout2')->name('pricing-layout-2');
-        Route::get('invoice-layout-1-page', 'invoiceLayout1')->name('invoice-layout-1');
-        Route::get('invoice-layout-2-page', 'invoiceLayout2')->name('invoice-layout-2');
-        Route::get('faq-layout-1-page', 'faqLayout1')->name('faq-layout-1');
-        Route::get('faq-layout-2-page', 'faqLayout2')->name('faq-layout-2');
-        Route::get('faq-layout-3-page', 'faqLayout3')->name('faq-layout-3');
-        Route::get('login-page', 'login')->name('login');
-        Route::get('register-page', 'register')->name('register');
-        Route::get('error-page-page', 'errorPage')->name('error-page');
-        Route::get('update-profile-page', 'updateProfile')->name('update-profile');
-        Route::get('change-password-page', 'changePassword')->name('change-password');
-        Route::get('regular-table-page', 'regularTable')->name('regular-table');
-        Route::get('tabulator-page', 'tabulator')->name('tabulator');
-        Route::get('modal-page', 'modal')->name('modal');
-        Route::get('slide-over-page', 'slideOver')->name('slide-over');
-        Route::get('notification-page', 'notification')->name('notification');
-        Route::get('tab-page', 'tab')->name('tab');
-        Route::get('accordion-page', 'accordion')->name('accordion');
-        Route::get('button-page', 'button')->name('button');
-        Route::get('alert-page', 'alert')->name('alert');
-        Route::get('progress-bar-page', 'progressBar')->name('progress-bar');
-        Route::get('tooltip-page', 'tooltip')->name('tooltip');
-        Route::get('dropdown-page', 'dropdown')->name('dropdown');
-        Route::get('typography-page', 'typography')->name('typography');
-        Route::get('icon-page', 'icon')->name('icon');
-        Route::get('loading-icon-page', 'loadingIcon')->name('loading-icon');
-        Route::get('regular-form-page', 'regularForm')->name('regular-form');
-        Route::get('datepicker-page', 'datepicker')->name('datepicker');
-        Route::get('tom-select-page', 'tomSelect')->name('tom-select');
-        Route::get('file-upload-page', 'fileUpload')->name('file-upload');
-        Route::get('wysiwyg-editor-classic', 'wysiwygEditorClassic')->name('wysiwyg-editor-classic');
-        Route::get('wysiwyg-editor-inline', 'wysiwygEditorInline')->name('wysiwyg-editor-inline');
-        Route::get('wysiwyg-editor-balloon', 'wysiwygEditorBalloon')->name('wysiwyg-editor-balloon');
-        Route::get('wysiwyg-editor-balloon-block', 'wysiwygEditorBalloonBlock')->name('wysiwyg-editor-balloon-block');
-        Route::get('wysiwyg-editor-document', 'wysiwygEditorDocument')->name('wysiwyg-editor-document');
-        Route::get('validation-page', 'validation')->name('validation');
-        Route::get('chart-page', 'chart')->name('chart');
-        Route::get('slider-page', 'slider')->name('slider');
-        Route::get('image-zoom-page', 'imageZoom')->name('image-zoom');
-    });
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+//     Route::controller(PageController::class)->group(function () {
+//         Route::get('dashboardOverview-1-page', 'dashboardOverview1')->name('dashboard-overview-1');
+//         Route::get('dashboard-overview-2-page', 'dashboardOverview2')->name('dashboard-overview-2');
+//         Route::get('dashboard-overview-3-page', 'dashboardOverview3')->name('dashboard-overview-3');
+//         Route::get('dashboard-overview-4-page', 'dashboardOverview4')->name('dashboard-overview-4');
+//         Route::get('categories-page', 'categories')->name('categories');
+//         Route::get('add-product-page', 'addProduct')->name('add-product');
+//         Route::get('product-list-page', 'productList')->name('product-list');
+//         Route::get('product-grid-page', 'productGrid')->name('product-grid');
+//         Route::get('transaction-list-page', 'transactionList')->name('transaction-list');
+//         Route::get('transaction-detail-page', 'transactionDetail')->name('transaction-detail');
+//         Route::get('seller-list-page', 'sellerList')->name('seller-list');
+//         Route::get('seller-detail-page', 'sellerDetail')->name('seller-detail');
+//         Route::get('reviews-page', 'reviews')->name('reviews');
+//         Route::get('inbox-page', 'inbox')->name('inbox');
+//         Route::get('file-manager-page', 'fileManager')->name('file-manager');
+//         Route::get('point-of-sale-page', 'pointOfSale')->name('point-of-sale');
+//         Route::get('chat-page', 'chat')->name('chat');
+//         Route::get('post-page', 'post')->name('post');
+//         Route::get('calendar-page', 'calendar')->name('calendar');
+//         Route::get('crud-data-list-page', 'crudDataList')->name('crud-data-list');
+//         Route::get('crud-form-page', 'crudForm')->name('crud-form');
+//         Route::get('users-layout-1-page', 'usersLayout1')->name('users-layout-1');
+//         Route::get('users-layout-2-page', 'usersLayout2')->name('users-layout-2');
+//         Route::get('users-layout-3-page', 'usersLayout3')->name('users-layout-3');
+//         Route::get('profile-overview-1-page', 'profileOverview1')->name('profile-overview-1');
+//         Route::get('profile-overview-2-page', 'profileOverview2')->name('profile-overview-2');
+//         Route::get('profile-overview-3-page', 'profileOverview3')->name('profile-overview-3');
+//         Route::get('wizard-layout-1-page', 'wizardLayout1')->name('wizard-layout-1');
+//         Route::get('wizard-layout-2-page', 'wizardLayout2')->name('wizard-layout-2');
+//         Route::get('wizard-layout-3-page', 'wizardLayout3')->name('wizard-layout-3');
+//         Route::get('blog-layout-1-page', 'blogLayout1')->name('blog-layout-1');
+//         Route::get('blog-layout-2-page', 'blogLayout2')->name('blog-layout-2');
+//         Route::get('blog-layout-3-page', 'blogLayout3')->name('blog-layout-3');
+//         Route::get('pricing-layout-1-page', 'pricingLayout1')->name('pricing-layout-1');
+//         Route::get('pricing-layout-2-page', 'pricingLayout2')->name('pricing-layout-2');
+//         Route::get('invoice-layout-1-page', 'invoiceLayout1')->name('invoice-layout-1');
+//         Route::get('invoice-layout-2-page', 'invoiceLayout2')->name('invoice-layout-2');
+//         Route::get('faq-layout-1-page', 'faqLayout1')->name('faq-layout-1');
+//         Route::get('faq-layout-2-page', 'faqLayout2')->name('faq-layout-2');
+//         Route::get('faq-layout-3-page', 'faqLayout3')->name('faq-layout-3');
+//         Route::get('login-page', 'login')->name('login');
+//         Route::get('register-page', 'register')->name('register');
+//         Route::get('error-page-page', 'errorPage')->name('error-page');
+//         Route::get('update-profile-page', 'updateProfile')->name('update-profile');
+//         Route::get('change-password-page', 'changePassword')->name('change-password');
+//         Route::get('regular-table-page', 'regularTable')->name('regular-table');
+//         Route::get('tabulator-page', 'tabulator')->name('tabulator');
+//         Route::get('modal-page', 'modal')->name('modal');
+//         Route::get('slide-over-page', 'slideOver')->name('slide-over');
+//         Route::get('notification-page', 'notification')->name('notification');
+//         Route::get('tab-page', 'tab')->name('tab');
+//         Route::get('accordion-page', 'accordion')->name('accordion');
+//         Route::get('button-page', 'button')->name('button');
+//         Route::get('alert-page', 'alert')->name('alert');
+//         Route::get('progress-bar-page', 'progressBar')->name('progress-bar');
+//         Route::get('tooltip-page', 'tooltip')->name('tooltip');
+//         Route::get('dropdown-page', 'dropdown')->name('dropdown');
+//         Route::get('typography-page', 'typography')->name('typography');
+//         Route::get('icon-page', 'icon')->name('icon');
+//         Route::get('loading-icon-page', 'loadingIcon')->name('loading-icon');
+//         Route::get('regular-form-page', 'regularForm')->name('regular-form');
+//         Route::get('datepicker-page', 'datepicker')->name('datepicker');
+//         Route::get('tom-select-page', 'tomSelect')->name('tom-select');
+//         Route::get('file-upload-page', 'fileUpload')->name('file-upload');
+//         Route::get('wysiwyg-editor-classic', 'wysiwygEditorClassic')->name('wysiwyg-editor-classic');
+//         Route::get('wysiwyg-editor-inline', 'wysiwygEditorInline')->name('wysiwyg-editor-inline');
+//         Route::get('wysiwyg-editor-balloon', 'wysiwygEditorBalloon')->name('wysiwyg-editor-balloon');
+//         Route::get('wysiwyg-editor-balloon-block', 'wysiwygEditorBalloonBlock')->name('wysiwyg-editor-balloon-block');
+//         Route::get('wysiwyg-editor-document', 'wysiwygEditorDocument')->name('wysiwyg-editor-document');
+//         Route::get('validation-page', 'validation')->name('validation');
+//         Route::get('chart-page', 'chart')->name('chart');
+//         Route::get('slider-page', 'slider')->name('slider');
+//         Route::get('image-zoom-page', 'imageZoom')->name('image-zoom');
+//     });
+// });
 
 Route::middleware('auth')->group(function () {
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
@@ -142,6 +129,18 @@ Route::middleware('auth')->group(function () {
     Route::controller(DashboardController::class)->group(function () {
         // Route::get('/home', 'index')->name('home');
         Route::get('/', 'index')->name('home');
+    });
+
+    Route::controller(DepoDashboardController::class)->group(function () {
+        Route::get('/depo/dashboard', 'index')->name('depo.index');
+    });
+
+    Route::controller(MasterdataDashboardController::class)->group(function () {
+        Route::get('/master-data/dashboard', 'index')->name('masterdata.index');
+    });
+
+    Route::controller(PICController::class)->group(function () {
+        Route::get('/pic', 'index')->name('pic.index');
     });
 
     // MAINLINE AREA //
@@ -164,8 +163,8 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::controller(MainlineController::class)->group(function () {
-        Route::get('/mainline', 'index')->name('mainline.index');
-        Route::get('/mainline-create', 'create')->name('mainline.create');
+        Route::get('/trackbed', 'index')->name('mainline.index');
+        Route::get('/trackbed-create', 'create')->name('mainline.create');
         Route::post('/mainline', 'store')->name('mainline.store');
         Route::get('/mainline/{id}/edit', 'edit')->name('mainline.edit');
         Route::put('/mainline', 'update')->name('mainline.update');
@@ -249,121 +248,7 @@ Route::middleware('auth')->group(function () {
     });
 
 
-    // MASTERDATA //
-    Route::controller(MasterdataAreaController::class)->group(function () {
-        Route::get('/masterdata_area', 'index')->name('masterdata_area.index');
-        Route::get('/masterdata_area-create', 'create')->name('masterdata_area.create');
-        Route::post('/masterdata_area', 'store')->name('masterdata_area.store');
-        Route::get('/masterdata_area/{id}/edit', 'edit')->name('masterdata_area.edit');
-        Route::put('/masterdata_area', 'update')->name('masterdata_area.update');
-        Route::get('/masterdata_area/{id}/delete', 'destroy')->name('masterdata_area.delete');
-    });
-
-    Route::controller(MasterdataLineDepoController::class)->group(function () {
-        Route::get('/masterdata_linedepo', 'index')->name('masterdata_linedepo.index');
-        Route::get('/masterdata_linedepo-create', 'create')->name('masterdata_linedepo.create');
-        Route::post('/masterdata_linedepo', 'store')->name('masterdata_linedepo.store');
-        Route::get('/masterdata_linedepo/{id}/edit', 'edit')->name('masterdata_linedepo.edit');
-        Route::put('/masterdata_linedepo', 'update')->name('masterdata_linedepo.update');
-        Route::get('/masterdata_linedepo/{id}/delete', 'destroy')->name('masterdata_linedepo.delete');
-    });
-
-    Route::controller(MasterdataLineMainlineController::class)->group(function () {
-        Route::get('/masterdata_linemainline', 'index')->name('masterdata_linemainline.index');
-        Route::get('/masterdata_linemainline-create', 'create')->name('masterdata_linemainline.create');
-        Route::post('/masterdata_linemainline', 'store')->name('masterdata_linemainline.store');
-        Route::get('/masterdata_linemainline/{id}/edit', 'edit')->name('masterdata_linemainline.edit');
-        Route::put('/masterdata_linemainline', 'update')->name('masterdata_linemainline.update');
-        Route::get('/masterdata_linemainline/{id}/delete', 'destroy')->name('masterdata_linemainline.delete');
-    });
-
-    Route::controller(MasterdataMainlineController::class)->group(function () {
-        Route::get('/masterdata_mainline', 'index')->name('masterdata_mainline.index');
-        Route::get('/masterdata_mainline-create', 'create')->name('masterdata_mainline.create');
-        Route::post('/masterdata_mainline', 'store')->name('masterdata_mainline.store');
-        Route::get('/masterdata_mainline/{id}/edit', 'edit')->name('masterdata_mainline.edit');
-        Route::put('/masterdata_mainline', 'update')->name('masterdata_mainline.update');
-        Route::get('/masterdata_mainline/{id}/delete', 'destroy')->name('masterdata_mainline.delete');
-
-        // SPAN atau TRACK BED
-        Route::post('/masterdata_mainline/import', 'import')->name('masterdata_mainline.import');
-        Route::get('/masterdata_mainline/export', 'export')->name('masterdata_mainline.export');
-        Route::get('/masterdata_mainline/json', 'getJson')->name('masterdata_mainline.json');
-    });
-
-    Route::controller(MasterdataTrackbedController::class)->group(function () {
-        Route::get('/masterdata_trackbed', 'index')->name('masterdata_trackbed.index');
-        Route::get('/masterdata_trackbed-create', 'create')->name('masterdata_trackbed.create');
-        Route::post('/masterdata_trackbed', 'store')->name('masterdata_trackbed.store');
-        Route::get('/masterdata_trackbed/{id}/edit', 'edit')->name('masterdata_trackbed.edit');
-        Route::put('/masterdata_trackbed', 'update')->name('masterdata_trackbed.update');
-        Route::get('/masterdata_trackbed/{id}/delete', 'destroy')->name('masterdata_trackbed.delete');
-
-        Route::post('/masterdata_trackbed/import', 'import')->name('masterdata_trackbed.import');
-        Route::get('/masterdata_trackbed/export', 'export')->name('masterdata_trackbed.export');
-        Route::get('/masterdata_trackbed/json', 'getJson')->name('masterdata_trackbed.json');
-    });
-
-
-    Route::controller(MasterdataPartController::class)->group(function () {
-        Route::get('/masterdata_part', 'index')->name('masterdata_part.index');
-        Route::get('/masterdata_part-create', 'create')->name('masterdata_part.create');
-        Route::post('/masterdata_part', 'store')->name('masterdata_part.store');
-        Route::get('/masterdata_part/{id}/edit', 'edit')->name('masterdata_part.edit');
-        Route::put('/masterdata_part', 'update')->name('masterdata_part.update');
-        Route::get('/masterdata_part/{id}/delete', 'destroy')->name('masterdata_part.delete');
-    });
-
-    Route::controller(MasterdataDetailPartController::class)->group(function () {
-        Route::get('/masterdata_detail-part', 'index')->name('masterdata_detail-part.index');
-        Route::get('/masterdata_detail-part-create', 'create')->name('masterdata_detail-part.create');
-        Route::post('/masterdata_detail-part', 'store')->name('masterdata_detail-part.store');
-        Route::get('/masterdata_detail-part/{id}/edit', 'edit')->name('masterdata_detail-part.edit');
-        Route::put('/masterdata_detail-part', 'update')->name('masterdata_detail-part.update');
-        Route::get('/masterdata_detail-part/{id}/delete', 'destroy')->name('masterdata_detail-part.delete');
-    });
-
-    Route::controller(MasterdataDefectController::class)->group(function () {
-        Route::get('/masterdata_defect', 'index')->name('masterdata_defect.index');
-        Route::get('/masterdata_defect-create', 'create')->name('masterdata_defect.create');
-        Route::post('/masterdata_defect', 'store')->name('masterdata_defect.store');
-        Route::get('/masterdata_defect/{id}/edit', 'edit')->name('masterdata_defect.edit');
-        Route::put('/masterdata_defect', 'update')->name('masterdata_defect.update');
-        Route::get('/masterdata_defect/{id}/delete', 'destroy')->name('masterdata_defect.delete');
-    });
-
-    Route::controller(MasterdataTransDefectController::class)->group(function () {
-        Route::get('/masterdata_TransDefect', 'index')->name('masterdata_transDefect.index');
-        Route::get('/masterdata_TransDefect-create', 'create')->name('masterdata_transDefect.create');
-        Route::post('/masterdata_TransDefect', 'store')->name('masterdata_transDefect.store');
-        Route::get('/masterdata_TransDefect/{id}/edit', 'edit')->name('masterdata_transDefect.edit');
-        Route::put('/masterdata_TransDefect', 'update')->name('masterdata_transDefect.update');
-
-        // Import Trans Part & Defect
-        Route::post('/masterdata_TransDefect/import', 'import')->name('masterdata_transDefect.import');
-    });
-
-    Route::controller(MasterdataTemuanController::class)->group(function () {
-        Route::get('/temuan', 'index')->name('temuan.index');
-        Route::get('/temuan-create', 'create')->name('temuan.create');
-        Route::post('/temuan', 'store')->name('temuan.store');
-        Route::get('/temuan/{id}/edit', 'edit')->name('temuan.edit');
-        Route::put('/temuan', 'update')->name('temuan.update');
-        Route::delete('/temuan', 'destroy')->name('temuan.delete');
-        Route::get('/temuan/export', 'export')->name('temuan.export');
-    });
-
-
     // DEPO AREA
-    Route::controller(DepoAreaController::class)->group(function () {
-        Route::get('/depoarea', 'index')->name('depoarea.index');
-        Route::get('/depoarea-create', 'create')->name('depoarea.create');
-        Route::post('/depoarea', 'store')->name('depoarea.store');
-        Route::get('/depoarea/{id}/edit', 'edit')->name('depoarea.edit');
-        Route::put('/depoarea', 'update')->name('depoarea.update');
-        Route::get('/depoarea/{id}/delete', 'destroy')->name('depoarea.delete');
-    });
-
     Route::controller(DepoLineController::class)->group(function () {
         Route::get('/depoline', 'index')->name('depoline.index');
         Route::get('/depoline-create', 'create')->name('depoline.create');
@@ -371,58 +256,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/depoline/{id}/edit', 'edit')->name('depoline.edit');
         Route::put('/depoline', 'update')->name('depoline.update');
         Route::get('/depoline/{id}/delete', 'destroy')->name('depoline.delete');
-    });
-
-    Route::controller(DepoController::class)->group(function () {
-        Route::get('/depo', 'index')->name('depo.index');
-        Route::get('/depo-create', 'create')->name('depo.create');
-        Route::post('/depo', 'store')->name('depo.store');
-        Route::get('/depo/{id}/edit', 'edit')->name('depo.edit');
-        Route::put('/depo', 'update')->name('depo.update');
-        Route::get('/depo/{id}/delete', 'destroy')->name('depo.delete');
-
-        // SPAN atau TRACK BED
-        Route::post('/mainline/import', 'import')->name('depo.import');
-        Route::get('/mainline/export', 'export')->name('depo.export');
-        Route::get('/mainline/json', 'getJson')->name('depo.json');
-    });
-
-    Route::controller(DepoPartController::class)->group(function () {
-        Route::get('/depopart', 'index')->name('depopart.index');
-        Route::get('/depopart-create', 'create')->name('depopart.create');
-        Route::post('/depopart', 'store')->name('depopart.store');
-        Route::get('/depopart/{id}/edit', 'edit')->name('depopart.edit');
-        Route::put('/depopart', 'update')->name('depopart.update');
-        Route::get('/depopart/{id}/delete', 'destroy')->name('depopart.delete');
-    });
-
-    Route::controller(DepoDetailPartController::class)->group(function () {
-        Route::get('/depodetail-part', 'index')->name('depodetail-part.index');
-        Route::get('/depodetail-part-create', 'create')->name('depodetail-part.create');
-        Route::post('/depodetail-part', 'store')->name('depodetail-part.store');
-        Route::get('/depodetail-part/{id}/edit', 'edit')->name('depodetail-part.edit');
-        Route::put('/depodetail-part', 'update')->name('depodetail-part.update');
-        Route::get('/depodetail-part/{id}/delete', 'destroy')->name('depodetail-part.delete');
-    });
-
-    Route::controller(DepoTransDefectController::class)->group(function () {
-        Route::get('/depoTransDefect', 'index')->name('depotransDefect.index');
-        Route::get('/depoTransDefect-create', 'create')->name('depotransDefect.create');
-        Route::post('/depoTransDefect', 'store')->name('depotransDefect.store');
-        Route::get('/depoTransDefect/{id}/edit', 'edit')->name('depotransDefect.edit');
-        Route::put('/depoTransDefect', 'update')->name('depotransDefect.update');
-
-        // Import Trans Part & Defect
-        Route::post('/TransDefect/import', 'import')->name('transDefect.import');
-    });
-
-    Route::controller(DepoDefectController::class)->group(function () {
-        Route::get('/depodefect', 'index')->name('depodefect.index');
-        Route::get('/depodefect-create', 'create')->name('depodefect.create');
-        Route::post('/depodefect', 'store')->name('depodefect.store');
-        Route::get('/depodefect/{id}/edit', 'edit')->name('depodefect.edit');
-        Route::put('/depodefect', 'update')->name('depodefect.update');
-        Route::get('/depodefect/{id}/delete', 'destroy')->name('depodefect.delete');
     });
 
     Route::controller(TemuanDepoController::class)->group(function () {
@@ -473,16 +306,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/getValueAccelerometer', 'getValue')->name('accelerometer.getValue');
         Route::get('/getPICAccelerometer', 'getPIC')->name('accelerometer.getPIC');
     });
-});
 
-Route::controller(DepoDashboardController::class)->group(function () {
-    Route::get('/depodashboard', 'index')->name('depodashboard.index');
-});
-
-Route::controller(MasterdataDashboardController::class)->group(function () {
-    Route::get('/masterdatadashboard', 'index')->name('masterdatadashboard.index');
-});
-
-Route::controller(PICController::class)->group(function () {
-    Route::get('/pic', 'index')->name('pic.index');
+    Route::controller(PegawaiController::class)->group(function () {
+        Route::get('/dummy_user', 'dummy_user');
+    });
 });

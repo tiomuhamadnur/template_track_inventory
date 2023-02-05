@@ -58,8 +58,7 @@
                     </span>
 
                     <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                        <input class="input100" type="text" name="email" placeholder="Masukkan Email"
-                            value="tiomuhamadnur@gmail.com">
+                        <input class="input100" type="text" name="email" placeholder="Masukkan Email">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
@@ -72,8 +71,7 @@
                     @endif
 
                     <div class="wrap-input100 validate-input" data-validate="Password is required">
-                        <input class="input100" type="password" name="password" placeholder="Masukkan Password"
-                            value="admin">
+                        <input class="input100" type="password" name="password" placeholder="Masukkan Password">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-lock" aria-hidden="true"></i>

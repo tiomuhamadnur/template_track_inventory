@@ -128,6 +128,22 @@
                             </div>
                         </div>
 
+                        {{-- <div class="form-row">
+                            <div class="name">Defect</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <select name="defect_id" class="form-select">
+                                        <option disabled="disabled" selected="selected">- Pilih Nama Defect -
+                                        </option>
+                                        @foreach ($defect as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="select-dropdown"></div>
+                                </div>
+                            </div>
+                        </div> --}}
+
                         <div class="form-row">
                             <div class="name">Remark</div>
                             <div class="value">
@@ -157,8 +173,7 @@
                             <div class="name">Staff</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="form-control" type="text" name="pic"
-                                        value="{{ auth()->user()->name }}" readonly>
+                                    <input class="form-control" type="text" name="pic">
                                 </div>
                             </div>
                         </div>
@@ -181,6 +196,40 @@
                                 </div>
                             </div>
                         </div>
+
+                        {{-- <div class="form-row m-b-55">
+                            <div class="name">Name</div>
+                            <div class="value">
+                                <div class="row row-space">
+                                    <div class="col-2">
+                                        <div class="input-group-desc">
+                                            <input class="input--style-5" type="text" name="first_name">
+                                            <label class="label--desc">first name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="input-group-desc">
+                                            <input class="input--style-5" type="text" name="last_name">
+                                            <label class="label--desc">last name</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row p-t-20">
+                            <label class="label label--block">Are you an existing customer?</label>
+                            <div class="p-t-15">
+                                <label class="radio-container m-r-55">Yes
+                                    <input type="radio" checked="checked" name="exist">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="radio-container">No
+                                    <input type="radio" name="exist">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div> --}}
 
                         <div>
                             <a href="{{ route('temuan_mainline.index') }}" class="btn btn-warning rounded">Cancel</a>

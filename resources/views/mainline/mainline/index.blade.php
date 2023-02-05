@@ -1,11 +1,11 @@
-@extends('mainline.mainline_layout.base')
+@extends('masterdata.masterdata_layout.base')
 
 @section('sub-title')
     <title>Data Mainline | TCSM</title>
 @endsection
 
 @section('sub-content')
-    <h4>Master Data Mainline > Data Span</h4>
+    <h4>Master Data Mainline > Data Track Bed</h4>
     <div class="row">
         <div class="col-sm-12">
             <div class="home-tab">
@@ -16,7 +16,7 @@
                 <div class="col-lg-12 grid-margin stretch-card mt-3">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Data Span</h4>
+                            <h4 class="card-title">Data Track Bed</h4>
                             <a href="{{ route('mainline.create') }}" class="btn btn-outline-dark btn-lg" type="button">Add
                                 Data</a>
                             <button class="btn btn-outline-dark btn-lg dropdown-toggle" type="button"

@@ -1,4 +1,4 @@
-@extends('depo.depo_layout.base')
+@extends('masterdata.masterdata_layout.base')
 
 @section('sub-title')
     <title>Add Data Line | TCSM</title>
@@ -23,21 +23,17 @@
                                 <div class="form-group">
                                     <label for="exampleInputName1">Line Name</label>
                                     <input type="text" class="form-control" name="name" id="exampleInputName1"
-                                        placeholder="Input Line Name">
+                                        placeholder="Input Line Name" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail3">Line Code</label>
                                     <input type="text" class="form-control" name="code" id="exampleInputEmail3"
-                                        placeholder="Input Line Code">
+                                        placeholder="Input Line Code" required>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Line Area</label>
-                                    <select class="form-control" name="area">
-                                        <option disable selected>-Pilih Line-</option>
-                                        <option value="">Mainline</option>
-                                        <option value="">Depo</option>
-                                        <option value="">DAL</option>
-                                    </select>
+                                    <input type="text" class="form-control" name="area" id="exampleInputEmail3"
+                                        value="Depo" readonly required>
                                 </div>
                                 <button type="submit" class="btn btn-outline-primary me-2">Submit</button>
                                 <a href="{{ route('depoline.index') }}" class="btn btn-light">Cancel</a>

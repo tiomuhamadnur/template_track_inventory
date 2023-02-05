@@ -11,7 +11,7 @@
 <body>
     <div class="projcard-container">
 
-        <div class="projcard projcard-blue animate__animated animate__fadeInRight"><a href="{{ route('depodashboard.index') }}">
+        <div class="projcard projcard-blue animate__animated animate__fadeInRight"><a href="{{ route('depo.index') }}">
                 <div class="projcard-innerbox">
                     <img class="projcard-img" src="{{ asset('assets/transisi/img/depo.png') }}" />
                     <div class="projcard-textbox">
@@ -23,29 +23,30 @@
             </a></div>
 
 
-    <div class="projcard projcard-green animate__animated animate__fadeInLeft"><a href="{{ route('home') }}">
+        <div class="projcard projcard-green animate__animated animate__fadeInLeft"><a href="{{ route('home') }}">
+                <div class="projcard-innerbox">
+                    <img class="projcard-img" src="{{ asset('assets/transisi/img/mainline.png') }}" />
+                    <div class="projcard-textbox">
+                        <div class="projcard-title">Mainline</div>
+                        <div class="projcard-subtitle"></div>
+                        <div class="projcard-bar"></div>
+                    </div>
+            </a></div>
+    </div>
+
+    <div class="projcard projcard-green animate__animated animate__fadeInRight"><a
+            href="{{ route('masterdata.index') }}">
             <div class="projcard-innerbox">
-                <img class="projcard-img" src="{{ asset('assets/transisi/img/mainline.png') }}" />
+                <img class="projcard-img" src="{{ asset('assets/transisi/img/pict3.png') }}" />
                 <div class="projcard-textbox">
-                    <div class="projcard-title">Mainline</div>
+                    <div class="projcard-title">Masterdata</div>
                     <div class="projcard-subtitle"></div>
                     <div class="projcard-bar"></div>
                 </div>
         </a></div>
     </div>
 
-    <div class="projcard projcard-green animate__animated animate__fadeInRight"><a href="{{ route('masterdatadashboard.index') }}">
-        <div class="projcard-innerbox">
-            <img class="projcard-img" src="{{ asset('assets/transisi/img/pict3.png') }}" />
-            <div class="projcard-textbox">
-                <div class="projcard-title">Masterdata</div>
-                <div class="projcard-subtitle"></div>
-                <div class="projcard-bar"></div>
-            </div>
-    </a></div>
-</div>
-
-</div>
+    </div>
 
 </body>
 
