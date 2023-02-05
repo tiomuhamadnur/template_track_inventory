@@ -101,12 +101,15 @@
                                                             data-area="{{ $item->mainline->area->code }}"
                                                             data-line="{{ $item->mainline->line->code }}"
                                                             data-no_span="{{ $item->mainline->no_span }}"
+                                                            data-no_sleeper="{{ $item->no_sleeper }}"
                                                             data-tanggal="{{ $item->tanggal }}"
                                                             data-part="{{ $item->part->name }}"
                                                             data-detail_part="{{ $item->detail_part->name }}"
                                                             data-kilometer="{{ $item->mainline->kilometer }}"
                                                             data-direction="{{ $item->direction }}"
-                                                            {{-- data-defect="{{ $item->defect->name }}" --}}
+                                                            data-defect="{{ $item->defect->name }}"
+                                                            data-klasifikasi="{{ $item->klasifikasi }}"
+                                                            data-pic="{{ $item->pic }}"
                                                             data-remark="{{ $item->remark }}"
                                                             data-status="{{ $item->status }}"
                                                             data-photo="{{ asset('storage/' . $item->photo) }}">
@@ -135,9 +138,10 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3 class="modal-title" id="modalAdminTitle">Detail Temuan Mainline</h3>
-                        <div class="col--1">
-                            <img class="img-xs rounded-circle"style="width: 60px; height: 60px;" src="{{ asset('assets/images/dashboard/img_2.jpg') }}" alt="">
-                            <p class="ml-5">Examiner</p>
+                        <div class="col--1 text-center">
+                            <img class="img-xs rounded-circle img-thumbnail" style="width: 70px; height: 70px;"
+                                src="{{ asset('assets/images/dashboard/examiner.png') }}" alt="">
+                            <p class="ml-5 fw-bolder" id="pic_modal">Examiner</p>
                         </div>
                     </div>
                     <form action="" method="POST">
@@ -153,7 +157,7 @@
                                 </div>
                                 <div class="col mb-1">
                                     <label for="" class="form-label">Area</label>
-                                    <input readonly type="text" id="area" class="form-control">
+                                    <input readonly type="text" value="Mainline" class="form-control">
                                 </div>
                             </div>
                             <div class="row g-2">
@@ -169,11 +173,11 @@
                             <div class="row g-2">
                                 <div class="col mb-1">
                                     <label for="emailWithTitle" class="form-label">Part</label>
-                                    <input readonly type="text" id="part" class="form-control">
+                                    <input readonly type="text" id="part_modal" class="form-control">
                                 </div>
                                 <div class="col mb-1">
                                     <label for="dobWithTitle" class="form-label">Detail Part</label>
-                                    <input readonly type="text" id="detail_part" class="form-control">
+                                    <input readonly type="text" id="detail_part_modal" class="form-control">
                                 </div>
                             </div>
                             <div class="row g-2">
@@ -183,7 +187,7 @@
                                 </div>
                                 <div class="col mb-1">
                                     <label for="emailWithTitle" class="form-label">No. Sleeper</label>
-                                    <input readonly type="text" id="#" class="form-control">
+                                    <input readonly type="text" id="no_sleeper_modal" class="form-control">
                                 </div>
                                 <div class="col mb-1">
                                     <label for="emailWithTitle" class="form-label">Chainage</label>
@@ -197,11 +201,11 @@
                             <div class="row g-2">
                                 <div class="col mb-1">
                                     <label for="emailWithTitle" class="form-label">Defect</label>
-                                    <input readonly type="text" id="" class="form-control">
+                                    <input readonly type="text" id="defect_modal" class="form-control">
                                 </div>
                                 <div class="col mb-1">
                                     <label for="emailWithTitle" class="form-label">Classification of Defect</label>
-                                    <input readonly type="text" id="defect_modal" class="form-control">
+                                    <input readonly type="text" id="klasifikasi_modal" class="form-control">
                                 </div>
                             </div>
                             <div class="row g-2">
@@ -337,13 +341,15 @@
                 var area = $(e.relatedTarget).data('area');
                 var line = $(e.relatedTarget).data('line');
                 var no_span = $(e.relatedTarget).data('no_span');
+                var no_sleeper = $(e.relatedTarget).data('no_sleeper');
                 var kilometer = $(e.relatedTarget).data('kilometer');
                 var part = $(e.relatedTarget).data('part');
                 var detail_part = $(e.relatedTarget).data('detail_part');
-                part = part + ' - (' + detail_part + ')';
                 var direction = $(e.relatedTarget).data('direction');
                 var defect = $(e.relatedTarget).data('defect');
+                var klasifikasi = $(e.relatedTarget).data('klasifikasi');
                 var remark = $(e.relatedTarget).data('remark');
+                var pic = $(e.relatedTarget).data('pic');
                 var status = $(e.relatedTarget).data('status');
                 var photo = $(e.relatedTarget).data('photo');
                 var photo_temuan = '<img class"img-thumbnail" style="width: 60%"src="' +
@@ -354,11 +360,15 @@
                 $('#area_modal').val(area);
                 $('#line_modal').val(line);
                 $('#no_span_modal').val(no_span);
+                $('#no_sleeper_modal').val(no_sleeper);
                 $('#kilometer_modal').val(kilometer);
                 $('#part_modal').val(part);
+                $('#detail_part_modal').val(detail_part);
                 $('#direction_modal').val(direction);
                 $('#defect_modal').val(defect);
+                $('#klasifikasi_modal').val(klasifikasi);
                 $('#remark_modal').val(remark);
+                document.getElementById("pic_modal").innerHTML = pic;
                 $('#status_modal').val(status);
                 document.getElementById("photo").innerHTML = photo_temuan;
             });

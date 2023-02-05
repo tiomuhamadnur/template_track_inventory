@@ -267,13 +267,6 @@ Route::middleware('auth')->group(function () {
         Route::delete('/temuan_depo', 'destroy')->name('temuan_depo.delete');
         Route::get('/depo/export_mainline', 'export')->name('temuan_depo.export');
 
-        // GET DATA
-        Route::get('/getLocation', 'getLocation')->name('getLocation');
-        Route::get('/getLine', 'getLine')->name('getLine');
-        Route::get('/getSpan', 'getSpan')->name('getSpan');
-        Route::get('/getDetailPart', 'getDetailPart')->name('getDetailPart');
-        Route::get('/getDefect', 'getDefect')->name('getDefect');
-
         // FILTER DATA
         Route::get('/temuan-depo/filter', 'filter')->name('temuan_depo.filter');
 

@@ -6,7 +6,7 @@
             </button>
         </div>
         <div>
-            <a class="navbar-brand brand-logo" href="/dashboard" style="margin-left: 18px">
+            <a class="navbar-brand brand-logo" href="{{ route('transisi') }}" style="margin-left: 18px">
                 <img src="{{ asset('assets/images/mm.png') }}" alt="logo" /> TCSM
             </a>
             <a class="navbar-brand brand-logo-mini" href="index.html">
