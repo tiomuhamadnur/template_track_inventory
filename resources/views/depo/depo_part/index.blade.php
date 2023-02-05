@@ -45,20 +45,20 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{-- @foreach ($part as $item) --}}
+                                        @foreach ($part as $item)
                                             <tr>
                                                 <td class="text-center">
-                                                    {{-- {{ $loop->iteration }} --}}
+                                                    {{ $loop->iteration }}
                                                 </td>
                                                 <td class="text-center">
-                                                    {{-- {{ $item->name }} --}}
+                                                    {{ $item->name }}
                                                 </td>
                                                 <td class="text-center">
                                                     <button type="button" class="btn btn-outline-warning">Edit</button>
                                                     <button type="button" class="btn btn-outline-danger">Delete</button>
                                                 </td>
                                             </tr>
-                                        {{-- @endforeach --}}
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

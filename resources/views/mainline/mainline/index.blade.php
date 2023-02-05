@@ -17,7 +17,8 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Data Span</h4>
-                            <a href="/mainline-create" class="btn btn-outline-dark btn-lg" type="button">Add Data</a>
+                            <a href="{{ route('mainline.create') }}" class="btn btn-outline-dark btn-lg" type="button">Add
+                                Data</a>
                             <button class="btn btn-outline-dark btn-lg dropdown-toggle" type="button"
                                 id="dropdownMenuIconButton1" data-bs-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false" style="margin-left: -10px;">
@@ -27,7 +28,9 @@
                                 <a class="dropdown-item" href="#">Print</a>
                                 <a class="dropdown-item" href="#">Export to Excel</a>
                                 <a class="dropdown-item" href="#">Export to PDF</a>
-                                <a class="dropdown-item" href="#">Import Excel File</a>
+                                <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                    data-bs-target="#import-file-modal">Import Excel File</a>
+
                             </div>
                             <div class="table-responsive pt-3">
                                 <table class="table table-bordered">
@@ -162,6 +165,36 @@
                 </div>
             </div>
         </div>
+
+        <!-- BEGIN: Import Modal -->
+        <div id="import-file-modal" class="modal fade" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form action="{{ route('mainline.import') }}" method="POST" enctype="multipart/form-data">
+                        <div class="modal-body">
+                            @csrf
+                            @method('post')
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalAdminTitle">Import File Excel Track
+                                    Bed</h5>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <input type="file" name="file_excel" class="form-control">
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary me-3">Import</button>
+                                <button type="button" data-bs-dismiss="modal"
+                                    class="btn btn-outline-secondary">Cancel</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <!-- END: Import Modal -->
     </div>
 @endsection
 
