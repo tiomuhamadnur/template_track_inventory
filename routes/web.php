@@ -3,19 +3,28 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DepoController;
 use App\Http\Controllers\LineController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PartController;
 use App\Http\Controllers\DefectController;
 use App\Http\Controllers\TemuanController;
 use App\Http\Controllers\DarkModeController;
+use App\Http\Controllers\DepoAreaController;
+use App\Http\Controllers\DepoLineController;
+use App\Http\Controllers\DepoPartController;
 use App\Http\Controllers\MainlineController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DepoDefectController;
 use App\Http\Controllers\DetailPartController;
+use App\Http\Controllers\TemuanDepoController;
 use App\Http\Controllers\ColorSchemeController;
 use App\Http\Controllers\TransDefectController;
 use App\Http\Controllers\AccelerometerController;
+use App\Http\Controllers\DepoDashboardController;
+use App\Http\Controllers\DepoDetailPartController;
 use App\Http\Controllers\TemuanMainlineController;
+use App\Http\Controllers\DepoTransDefectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -123,7 +132,7 @@ Route::middleware('auth')->group(function () {
         // Route::get('/home', 'index')->name('home');
         Route::get('/', 'index')->name('home');
     });
-
+    // MAINLINE AREA
     Route::controller(AreaController::class)->group(function () {
         Route::get('/area', 'index')->name('area.index');
         Route::get('/area-create', 'create')->name('area.create');
@@ -133,6 +142,17 @@ Route::middleware('auth')->group(function () {
         Route::get('/area/{id}/delete', 'destroy')->name('area.delete');
     });
 
+    // DEPO AREA
+    Route::controller(DepoAreaController::class)->group(function () {
+        Route::get('/depoarea', 'index')->name('depoarea.index');
+        Route::get('/depoarea-create', 'create')->name('depoarea.create');
+        Route::post('/depoarea', 'store')->name('depoarea.store');
+        Route::get('/depoarea/{id}/edit', 'edit')->name('depoarea.edit');
+        Route::put('/depoarea', 'update')->name('depoarea.update');
+        Route::get('/depoarea/{id}/delete', 'destroy')->name('depoarea.delete');
+    });
+
+    // MAINLINE AREA
     Route::controller(LineController::class)->group(function () {
         Route::get('/line', 'index')->name('line.index');
         Route::get('/line-create', 'create')->name('line.create');
@@ -142,6 +162,17 @@ Route::middleware('auth')->group(function () {
         Route::get('/line/{id}/delete', 'destroy')->name('line.delete');
     });
 
+    //DEPO AREA
+    Route::controller(DepoLineController::class)->group(function () {
+        Route::get('/depoline', 'index')->name('depoline.index');
+        Route::get('/depoline-create', 'create')->name('depoline.create');
+        Route::post('/depoline', 'store')->name('depoline.store');
+        Route::get('/depoline/{id}/edit', 'edit')->name('depoline.edit');
+        Route::put('/depoline', 'update')->name('depoline.update');
+        Route::get('/depoline/{id}/delete', 'destroy')->name('depoline.delete');
+    });
+
+    // MAINLINE AREA
     Route::controller(MainlineController::class)->group(function () {
         Route::get('/mainline', 'index')->name('mainline.index');
         Route::get('/mainline-create', 'create')->name('mainline.create');
@@ -156,6 +187,22 @@ Route::middleware('auth')->group(function () {
         Route::get('/mainline/json', 'getJson')->name('mainline.json');
     });
 
+    // DEPO AREA
+    Route::controller(DepoController::class)->group(function () {
+        Route::get('/depo', 'index')->name('depo.index');
+        Route::get('/depo-create', 'create')->name('depo.create');
+        Route::post('/depo', 'store')->name('depo.store');
+        Route::get('/depo/{id}/edit', 'edit')->name('depo.edit');
+        Route::put('/depo', 'update')->name('depo.update');
+        Route::get('/depo/{id}/delete', 'destroy')->name('depo.delete');
+
+        // SPAN atau TRACK BED
+        Route::post('/mainline/import', 'import')->name('depo.import');
+        Route::get('/mainline/export', 'export')->name('depo.export');
+        Route::get('/mainline/json', 'getJson')->name('depo.json');
+    });
+
+    // MAINLINE AREA
     Route::controller(PartController::class)->group(function () {
         Route::get('/part', 'index')->name('part.index');
         Route::get('/part-create', 'create')->name('part.create');
@@ -165,6 +212,17 @@ Route::middleware('auth')->group(function () {
         Route::get('/part/{id}/delete', 'destroy')->name('part.delete');
     });
 
+    // DEPO AREA
+    Route::controller(DepoPartController::class)->group(function () {
+        Route::get('/depopart', 'index')->name('depopart.index');
+        Route::get('/depopart-create', 'create')->name('depopart.create');
+        Route::post('/depopart', 'store')->name('depopart.store');
+        Route::get('/depopart/{id}/edit', 'edit')->name('depopart.edit');
+        Route::put('/depopart', 'update')->name('depopart.update');
+        Route::get('/depopart/{id}/delete', 'destroy')->name('depopart.delete');
+    });
+
+    // MAINLINE AREA
     Route::controller(DetailPartController::class)->group(function () {
         Route::get('/detail-part', 'index')->name('detail-part.index');
         Route::get('/detail-part-create', 'create')->name('detail-part.create');
@@ -174,6 +232,17 @@ Route::middleware('auth')->group(function () {
         Route::get('/detail-part/{id}/delete', 'destroy')->name('detail-part.delete');
     });
 
+    // DEPO AREA
+    Route::controller(DepoDetailPartController::class)->group(function () {
+        Route::get('/depodetail-part', 'index')->name('depodetail-part.index');
+        Route::get('/depodetail-part-create', 'create')->name('depodetail-part.create');
+        Route::post('/depodetail-part', 'store')->name('depodetail-part.store');
+        Route::get('/depodetail-part/{id}/edit', 'edit')->name('depodetail-part.edit');
+        Route::put('/depodetail-part', 'update')->name('depodetail-part.update');
+        Route::get('/depodetail-part/{id}/delete', 'destroy')->name('depodetail-part.delete');
+    });
+
+    // MAINLINE AREA
     Route::controller(TransDefectController::class)->group(function () {
         Route::get('/TransDefect', 'index')->name('transDefect.index');
         Route::get('/TransDefect-create', 'create')->name('transDefect.create');
@@ -185,6 +254,19 @@ Route::middleware('auth')->group(function () {
         Route::post('/TransDefect/import', 'import')->name('transDefect.import');
     });
 
+    // DEPO CONTROLLER
+    Route::controller(DepoTransDefectController::class)->group(function () {
+        Route::get('/depoTransDefect', 'index')->name('depotransDefect.index');
+        Route::get('/depoTransDefect-create', 'create')->name('depotransDefect.create');
+        Route::post('/depoTransDefect', 'store')->name('depotransDefect.store');
+        Route::get('/depoTransDefect/{id}/edit', 'edit')->name('depotransDefect.edit');
+        Route::put('/depoTransDefect', 'update')->name('depotransDefect.update');
+
+        // Import Trans Part & Defect
+        Route::post('/TransDefect/import', 'import')->name('transDefect.import');
+    });
+
+    // MAINLINE AREA
     Route::controller(DefectController::class)->group(function () {
         Route::get('/defect', 'index')->name('defect.index');
         Route::get('/defect-create', 'create')->name('defect.create');
@@ -192,6 +274,16 @@ Route::middleware('auth')->group(function () {
         Route::get('/defect/{id}/edit', 'edit')->name('defect.edit');
         Route::put('/defect', 'update')->name('defect.update');
         Route::get('/defect/{id}/delete', 'destroy')->name('defect.delete');
+    });
+
+    // DEPO AREA
+    Route::controller(DepoDefectController::class)->group(function () {
+        Route::get('/depodefect', 'index')->name('depodefect.index');
+        Route::get('/depodefect-create', 'create')->name('depodefect.create');
+        Route::post('/depodefect', 'store')->name('depodefect.store');
+        Route::get('/depodefect/{id}/edit', 'edit')->name('depodefect.edit');
+        Route::put('/depodefect', 'update')->name('depodefect.update');
+        Route::get('/depodefect/{id}/delete', 'destroy')->name('depodefect.delete');
     });
 
     Route::controller(TemuanController::class)->group(function () {
@@ -241,6 +333,28 @@ Route::middleware('auth')->group(function () {
         Route::get('/temuan-mainline/report', 'report')->name('temuan_mainline.report');
     });
 
+    Route::controller(TemuanDepoController::class)->group(function () {
+        Route::get('/temuan_depo', 'index')->name('temuan_depo.index');
+        Route::get('/temuan_depo-create', 'create')->name('temuan_depo.create');
+        Route::post('/temuan_depo', 'store')->name('temuan_depo.store');
+        Route::get('/temuan_depo/{id}/edit', 'edit')->name('temuan_depo.edit');
+        Route::put('/temuan_depo', 'update')->name('temuan_depo.update');
+        Route::delete('/temuan_depo', 'destroy')->name('temuan_depo.delete');
+        Route::get('/depo/export_mainline', 'export')->name('temuan_depo.export');
+
+        // GET DATA
+        Route::get('/getLocation', 'getLocation')->name('getLocation');
+        Route::get('/getLine', 'getLine')->name('getLine');
+        Route::get('/getSpan', 'getSpan')->name('getSpan');
+        Route::get('/getDetailPart', 'getDetailPart')->name('getDetailPart');
+        Route::get('/getDefect', 'getDefect')->name('getDefect');
+
+        // FILTER DATA
+        Route::get('/temuan-depo/filter', 'filter')->name('temuan_depo.filter');
+
+        // REPORT GENERATOR
+        Route::get('/temuan-depo/report', 'report')->name('temuan_depo.report');
+    });
 
     Route::controller(AccelerometerController::class)->group(function () {
         Route::get('/accelerometer', 'index')->name('accelerometer.index');
@@ -266,4 +380,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/getValueAccelerometer', 'getValue')->name('accelerometer.getValue');
         Route::get('/getPICAccelerometer', 'getPIC')->name('accelerometer.getPIC');
     });
+});
+
+Route::controller(DepoDashboardController::class)->group(function () {
+    Route::get('/depodashboard', 'index')->name('depodashboard.index');
 });

@@ -106,7 +106,7 @@
                                                             data-detail_part="{{ $item->detail_part->name }}"
                                                             data-kilometer="{{ $item->mainline->kilometer }}"
                                                             data-direction="{{ $item->direction }}"
-                                                            data-defect="{{ $item->defect->name }}"
+                                                            {{-- data-defect="{{ $item->defect->name }}" --}}
                                                             data-remark="{{ $item->remark }}"
                                                             data-status="{{ $item->status }}"
                                                             data-photo="{{ asset('storage/' . $item->photo) }}">
@@ -134,7 +134,11 @@
             <div class="modal-dialog modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalAdminTitle">Detail Temuan Mainline</h5>
+                        <h3 class="modal-title" id="modalAdminTitle">Detail Temuan Mainline</h3>
+                        <div class="col--1">
+                            <img class="img-xs rounded-circle"style="width: 60px; height: 60px;" src="{{ asset('assets/images/dashboard/img_2.jpg') }}" alt="">
+                            <p class="ml-5">Examiner</p>
+                        </div>
                     </div>
                     <form action="" method="POST">
                         <div class="modal-body">
@@ -149,7 +153,7 @@
                                 </div>
                                 <div class="col mb-1">
                                     <label for="" class="form-label">Area</label>
-                                    <input readonly type="text" id="area_modal" class="form-control">
+                                    <input readonly type="text" id="area" class="form-control">
                                 </div>
                             </div>
                             <div class="row g-2">
@@ -158,27 +162,45 @@
                                     <input readonly type="text" id="line_modal" class="form-control">
                                 </div>
                                 <div class="col mb-1">
-                                    <label for="dobWithTitle" class="form-label">Nomor Span</label>
-                                    <input readonly type="text" id="no_span_modal" class="form-control">
+                                    <label for="dobWithTitle" class="form-label">Location</label>
+                                    <input readonly type="text" id="area_modal" class="form-control">
                                 </div>
                             </div>
                             <div class="row g-2">
                                 <div class="col mb-1">
                                     <label for="emailWithTitle" class="form-label">Part</label>
-                                    <input readonly type="text" id="part_modal" class="form-control">
+                                    <input readonly type="text" id="part" class="form-control">
                                 </div>
                                 <div class="col mb-1">
-                                    <label for="emailWithTitle" class="form-label">Chaniage (m)</label>
-                                    <input readonly type="text" id="kilometer_modal" class="form-control">
+                                    <label for="dobWithTitle" class="form-label">Detail Part</label>
+                                    <input readonly type="text" id="detail_part" class="form-control">
                                 </div>
                             </div>
                             <div class="row g-2">
                                 <div class="col mb-1">
+                                    <label for="emailWithTitle" class="form-label">No. Span</label>
+                                    <input readonly type="text" id="no_span_modal" class="form-control">
+                                </div>
+                                <div class="col mb-1">
+                                    <label for="emailWithTitle" class="form-label">No. Sleeper</label>
+                                    <input readonly type="text" id="#" class="form-control">
+                                </div>
+                                <div class="col mb-1">
+                                    <label for="emailWithTitle" class="form-label">Chainage</label>
+                                    <input readonly type="text" id="kilometer_modal" class="form-control">
+                                </div>
+                                <div class="col mb-1">
                                     <label for="emailWithTitle" class="form-label">Line Direction</label>
                                     <input readonly type="text" id="direction_modal" class="form-control">
                                 </div>
+                            </div>
+                            <div class="row g-2">
                                 <div class="col mb-1">
                                     <label for="emailWithTitle" class="form-label">Defect</label>
+                                    <input readonly type="text" id="" class="form-control">
+                                </div>
+                                <div class="col mb-1">
+                                    <label for="emailWithTitle" class="form-label">Classification of Defect</label>
                                     <input readonly type="text" id="defect_modal" class="form-control">
                                 </div>
                             </div>
@@ -194,8 +216,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-primary">
-                                Edit
+                            <button type="button" class="btn btn-outline-warning">
+                                Close Temuan
                             </button>
                             <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
                                 Tutup
@@ -207,32 +229,6 @@
         </div>
     </div>
 
-    {{-- MODALS VIEW DOC --}}
-    <div class="col-lg-2 col-md-4">
-        <!-- Modal -->
-        <div class="modal fade" id="ModalDok" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog modal-md" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalAdminTitle">Dokumentasi Temuan Mainline</h5>
-                    </div>
-                    <div class="modal-body">
-                        <div class="px-5 pb-8 text-center">
-                            <div class="items-center align-center border-1" id="photo">
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
-                            Tutup
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     {{-- MODALS FILTER --}}
     <div class="col-lg-2 col-md-4">
@@ -311,7 +307,7 @@
                             <div class="modal-body">
                                 <div class="form-group align-middle">
                                     <label class="form-label">Pilih Tanggal Kegiatan</label>
-                                    <input class="form-control" type="date" name="tanggal">
+                                    <input class="form-control p-1" type="date" name="tanggal">
                                 </div>
                             </div>
 

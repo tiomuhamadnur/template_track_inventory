@@ -5,7 +5,7 @@
 @endsection
 
 @section('body')
-    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+    <div class="page-wrapper p-t-45 p-b-50">
         <div class="wrapper wrapper--w790">
             <div class="card card-5">
                 <div class="card-heading">
@@ -232,7 +232,7 @@
                         </div> --}}
 
                         <div>
-                            <a href="{{ route('temuan_mainline.index') }}" class="btn btn-danger rounded">Cancel</a>
+                            <a href="{{ route('temuan_mainline.index') }}" class="btn btn-warning rounded">Cancel</a>
                             <button class="btn btn-success ms-2" type="submit">Save</button>
                         </div>
                     </form>

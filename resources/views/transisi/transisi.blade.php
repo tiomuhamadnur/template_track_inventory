@@ -11,7 +11,7 @@
 <body>
     <div class="projcard-container">
 
-        <div class="projcard projcard-blue animate__animated animate__fadeInRight"><a href="#">
+        <div class="projcard projcard-blue animate__animated animate__fadeInRight"><a href="{{ route('depodashboard.index') }}">
                 <div class="projcard-innerbox">
                     <img class="projcard-img" src="{{ asset('assets/transisi/img/depo.png') }}" />
                     <div class="projcard-textbox">
