@@ -15,16 +15,26 @@
             </a>
             <div class="collapse" id="form-elements">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"><a class="nav-link" href="/temuan_mainline">List Temuan Mainline</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('temuan_mainline.index') }}">List Temuan
+                            Mainline</a>
+                    </li>
                 </ul>
             </div>
         </li>
 
         <li class="nav-item nav-category">Settings</li>
         <li class="nav-item animate__animated animate__fadeInLeft">
-            <a class="nav-link" href="/transisi" aria-expanded="false" aria-controls="auth">
+            <a class="nav-link" href="{{ route('transisi') }}" aria-expanded="false" aria-controls="auth">
                 <i class="menu-icon mdi mdi-call-split"></i>
                 <span class="menu-title">Switch Dashboard</span>
+            </a>
+        </li>
+
+        <li class="nav-item nav-category">Logout</li>
+        <li class="nav-item animate__animated animate__fadeInLeft">
+            <a class="nav-link" href="{{ route('logout') }}" aria-expanded="false" aria-controls="auth">
+                <i class="menu-icon mdi mdi-logout"></i>
+                <span class="menu-title">Logout</span>
             </a>
         </li>
     </ul>

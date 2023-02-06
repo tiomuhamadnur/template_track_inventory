@@ -22,7 +22,6 @@ use App\Http\Controllers\DepoDashboardController;
 use App\Http\Controllers\TemuanMainlineController;
 use App\Http\Controllers\MasterdataDashboardController;
 use App\Http\Controllers\PegawaiController;
-use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
