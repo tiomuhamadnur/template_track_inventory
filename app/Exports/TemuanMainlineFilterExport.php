@@ -19,7 +19,7 @@ class TemuanMainlineFilterExport implements FromView
 
     public function view(): View
     {
-        return view('temuan.export', [
+        return view('mainline.mainline_temuan.export', [
             'temuan' => Temuan::select(
             'summary_temuan.*',
             'mainline.area_id as area_id',

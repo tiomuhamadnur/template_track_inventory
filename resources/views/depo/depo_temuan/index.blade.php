@@ -1,4 +1,4 @@
-@extends('mainline.mainline_layout.base')
+@extends('depo.depo_layout.base')
 
 @section('sub-title')
     <title>Data Temuan Depo | TCSM</title>
@@ -30,11 +30,10 @@
                                         data-bs-toggle="modal" data-bs-target="#ModalFilter" title="Filter data">
                                         <i class="ti-filter"></i>
                                     </a>
-                                    {{-- <input type="text" name="area_id" value="{{ $area_id ?? '' }}" hidden>
                                     <input type="text" name="line_id" value="{{ $line_id ?? '' }}" hidden>
                                     <input type="text" name="part_id" value="{{ $part_id ?? '' }}" hidden>
-                                    <input type="text" name="status" value="{{ $status ?? '' }}" hidden> --}}
-                                    <button type="submit" disabled class="btn btn-outline-success btn-lg mx-0"
+                                    <input type="text" name="status" value="{{ $status ?? '' }}" hidden>
+                                    <button type="submit" class="btn btn-outline-success btn-lg mx-0"
                                         title="Export to Excel">
                                         <i class="ti-download"></i>
                                     </button>
@@ -68,48 +67,42 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{-- @foreach ($temuan as $item) --}}
-                                        <tr>
-                                            <td class="text-center">
-                                                {{-- {{ $loop->iteration }} --}}
-                                            </td>
-                                            <td class="text-center">
-                                                {{-- {{ $item->mainline->line->code }} --}}
-                                            </td>
-                                            <td class="text-center">
-                                                {{-- {{ $item->mainline->no_span }} --}}
-                                            </td>
-                                            <td class="text-center">
-                                                {{-- {{ $item->part->name }} --}}
-                                            </td>
-                                            <td class="text-center">
-                                                {{-- {{ $item->detail_part->name }} --}}
-                                            </td>
-                                            <td class="text-center">
-                                                {{-- <div class="btn-group">
-                                                    <button type="button" class="btn btn-outline-primary me-0"
-                                                            data-bs-toggle="modal" data-bs-target="#ModalDok">Photo</button>
+                                        @foreach ($temuan_depo as $item)
+                                            <tr>
+                                                <td class="text-center">
+                                                    {{ $loop->iteration }}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ $item->line->code }}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ $item->kilometer }}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ $item->part->name }}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ $item->detail_part->name }}
+                                                </td>
+                                                <td class="text-center">
                                                     <button type="button" class="btn btn-outline-primary ms-0"
-                                                        onclick="showPhotoModal('{{ asset('storage/' . $item->photo) }}')"
                                                         data-bs-toggle="modal" data-bs-target="#ModalTemuan"
-                                                        data-area="{{ $item->mainline->area->code }}"
-                                                        data-line="{{ $item->mainline->line->code }}"
-                                                        data-no_span="{{ $item->mainline->no_span }}"
+                                                        data-line="{{ $item->line->code }}"
                                                         data-tanggal="{{ $item->tanggal }}"
                                                         data-part="{{ $item->part->name }}"
                                                         data-detail_part="{{ $item->detail_part->name }}"
-                                                        data-kilometer="{{ $item->mainline->kilometer }}"
+                                                        data-kilometer="{{ $item->kilometer }}"
                                                         data-direction="{{ $item->direction }}"
                                                         data-defect="{{ $item->defect->name }}"
-                                                        data-remark="{{ $item->remark }}"
+                                                        data-klasifikasi="{{ $item->klasifikasi }}"
+                                                        data-pic="{{ $item->pic }}" data-remark="{{ $item->remark }}"
                                                         data-status="{{ $item->status }}"
                                                         data-photo="{{ asset('storage/' . $item->photo) }}">
                                                         Detail
                                                     </button>
-                                                </div> --}}
-                                            </td>
-                                        </tr>
-                                        {{-- @endforeach --}}
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -129,10 +122,10 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3 class="modal-title" id="modalAdminTitle">Detail Temuan Mainline</h3>
-                        <div class="col--1">
-                            <img class="img-xs rounded-circle"style="width: 60px; height: 60px;"
-                                src="{{ asset('assets/images/dashboard/img_2.jpg') }}" alt="">
-                            <p class="ml-5">Examiner</p>
+                        <div class="col--1 text-center">
+                            <img class="img-xs rounded-circle img-thumbnail" style="width: 70px; height: 70px;"
+                                src="{{ asset('assets/images/dashboard/examiner.png') }}" alt="">
+                            <p class="ml-5 fw-bolder" id="pic_modal">Examiner</p>
                         </div>
                     </div>
                     <form action="" method="POST">
@@ -143,42 +136,31 @@
                             <div class="row g-2">
                                 <div class="col mb-1">
                                     <label for="nameWithTitle" class="form-label">Tanggal Temuan</label>
-                                    <input readonly type="text" id="tanggal_modal" name="no" class="form-control">
-                                </div>
-                                <div class="col mb-1">
-                                    <label for="" class="form-label">Area</label>
-                                    <input readonly type="text" id="area" class="form-control">
+                                    <input readonly type="text" id="tanggal_modal" name="no"
+                                        class="form-control">
                                 </div>
                             </div>
                             <div class="row g-2">
                                 <div class="col mb-1">
-                                    <label for="emailWithTitle" class="form-label">Line</label>
-                                    <input readonly type="text" id="line_modal" class="form-control">
+                                    <label for="" class="form-label">Area</label>
+                                    <input readonly type="text" value="Depo" class="form-control">
                                 </div>
                                 <div class="col mb-1">
-                                    <label for="dobWithTitle" class="form-label">Location</label>
-                                    <input readonly type="text" id="area_modal" class="form-control">
+                                    <label for="emailWithTitle" class="form-label">Line</label>
+                                    <input readonly type="text" id="line_modal" class="form-control">
                                 </div>
                             </div>
                             <div class="row g-2">
                                 <div class="col mb-1">
                                     <label for="emailWithTitle" class="form-label">Part</label>
-                                    <input readonly type="text" id="part" class="form-control">
+                                    <input readonly type="text" id="part_modal" class="form-control">
                                 </div>
                                 <div class="col mb-1">
                                     <label for="dobWithTitle" class="form-label">Detail Part</label>
-                                    <input readonly type="text" id="detail_part" class="form-control">
+                                    <input readonly type="text" id="detail_part_modal" class="form-control">
                                 </div>
                             </div>
                             <div class="row g-2">
-                                <div class="col mb-1">
-                                    <label for="emailWithTitle" class="form-label">No. Span</label>
-                                    <input readonly type="text" id="no_span_modal" class="form-control">
-                                </div>
-                                <div class="col mb-1">
-                                    <label for="emailWithTitle" class="form-label">No. Sleeper</label>
-                                    <input readonly type="text" id="#" class="form-control">
-                                </div>
                                 <div class="col mb-1">
                                     <label for="emailWithTitle" class="form-label">Chainage</label>
                                     <input readonly type="text" id="kilometer_modal" class="form-control">
@@ -191,11 +173,11 @@
                             <div class="row g-2">
                                 <div class="col mb-1">
                                     <label for="emailWithTitle" class="form-label">Defect</label>
-                                    <input readonly type="text" id="" class="form-control">
+                                    <input readonly type="text" id="defect_modal" class="form-control">
                                 </div>
                                 <div class="col mb-1">
                                     <label for="emailWithTitle" class="form-label">Classification of Defect</label>
-                                    <input readonly type="text" id="defect_modal" class="form-control">
+                                    <input readonly type="text" id="klasifikasi_modal" class="form-control">
                                 </div>
                             </div>
                             <div class="row g-2">
@@ -227,7 +209,7 @@
     {{-- MODALS FILTER --}}
     <div class="col-lg-2 col-md-4">
         <!-- Modal -->
-        {{-- <div class="modal fade" id="ModalFilter" tabindex="-1" aria-hidden="true">
+        <div class="modal fade" id="ModalFilter" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog modal-md" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -237,15 +219,6 @@
                         @csrf
                         @method('get')
                         <div class="modal-body">
-                            <div class="form-group">
-                                <label class="form-label">Area</label>
-                                <select class="form-control" name="area_id">
-                                    <option disabled selected>- Pilih Area -</option>
-                                    @foreach ($area as $item)
-                                        <option value="{{ $item->id }}">{{ $item->code }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
                             <div class="form-group">
                                 <label class="form-label">Line</label>
                                 <select class="form-control" name="line_id">
@@ -284,7 +257,7 @@
                     </form>
                 </div>
             </div>
-        </div> --}}
+        </div>
 
         {{-- MODALS GENERATE REPORT --}}
         <div class="col-lg-2 col-md-4">
@@ -328,16 +301,15 @@
         $(document).ready(function() {
             $('#ModalTemuan').on('show.bs.modal', function(e) {
                 var tanggal = $(e.relatedTarget).data('tanggal');
-                var area = $(e.relatedTarget).data('area');
                 var line = $(e.relatedTarget).data('line');
-                var no_span = $(e.relatedTarget).data('no_span');
                 var kilometer = $(e.relatedTarget).data('kilometer');
                 var part = $(e.relatedTarget).data('part');
                 var detail_part = $(e.relatedTarget).data('detail_part');
-                part = part + ' - (' + detail_part + ')';
                 var direction = $(e.relatedTarget).data('direction');
                 var defect = $(e.relatedTarget).data('defect');
+                var klasifikasi = $(e.relatedTarget).data('klasifikasi');
                 var remark = $(e.relatedTarget).data('remark');
+                var pic = $(e.relatedTarget).data('pic');
                 var status = $(e.relatedTarget).data('status');
                 var photo = $(e.relatedTarget).data('photo');
                 var photo_temuan = '<img class"img-thumbnail" style="width: 60%"src="' +
@@ -345,14 +317,15 @@
                 console.log(photo_temuan);
 
                 $('#tanggal_modal').val(tanggal);
-                $('#area_modal').val(area);
                 $('#line_modal').val(line);
-                $('#no_span_modal').val(no_span);
                 $('#kilometer_modal').val(kilometer);
                 $('#part_modal').val(part);
+                $('#detail_part_modal').val(detail_part);
                 $('#direction_modal').val(direction);
                 $('#defect_modal').val(defect);
+                $('#klasifikasi_modal').val(klasifikasi);
                 $('#remark_modal').val(remark);
+                document.getElementById("pic_modal").innerHTML = pic;
                 $('#status_modal').val(status);
                 document.getElementById("photo").innerHTML = photo_temuan;
             });

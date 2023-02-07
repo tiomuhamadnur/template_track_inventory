@@ -14,11 +14,8 @@
             <tr>
                 <th>NO</th>
                 <th>DATE</th>
-                <th>AREA</th>
                 <th>LINE</th>
-                <th>SPAN</th>
                 <th>CHAINAGE</th>
-                <th>SLEEPER</th>
                 <th>DIR</th>
                 <th>PART</th>
                 <th>DETAIL PART</th>
@@ -26,12 +23,12 @@
                 <th>REMARK</th>
                 <th>CLASSIFICATION</th>
                 <th>STATUS</th>
+                <th>PIC</th>
                 <th>PHOTO</th>
-                {{-- <th>ACTIONS</th> --}}
             </tr>
         </thead>
         <tbody>
-            @foreach ($temuan as $item)
+            @foreach ($temuan_depo as $item)
                 <tr>
                     <td>
                         <div>
@@ -45,27 +42,12 @@
                     </td>
                     <td>
                         <div>
-                            {{ $item->mainline->area->code }}
+                            {{ $item->line->name }}
                         </div>
                     </td>
                     <td>
                         <div>
-                            {{ $item->mainline->line->code }}
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            {{ $item->mainline->no_span }}
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            {{ $item->mainline->kilometer }}
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            {{ $item->no_sleeper }}
+                            {{ $item->kilometer }}
                         </div>
                     </td>
                     <td>
@@ -99,28 +81,18 @@
                         </div>
                     </td>
                     <td>
-                        <span
-                            class="text-xs px-1 rounded-full @if ($item->status == 'open') btn-sm bg-success @else btn-sm bg-danger @endif text-white mr-1">
-                            {{ $item->status }}
-                        </span>
+                        {{ $item->status }}
                     </td>
-                    <td class="item-center">
-                        <div>
+                    <td>
+                        {{ $item->pic }}
+                    </td>
+                    <td>
+                        @if ($item->photo != null)
                             {{ asset('storage/' . $item->photo) }}
-                        </div>
+                        @else
+                            '-'
+                        @endif
                     </td>
-                    {{-- <td class="table-report__action w-56">
-                        <div>
-                            <a class="flex items-center mr-3" href="{{ route('temuan.edit', $item->id) }}">
-                                <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit
-                            </a>
-                            <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal"
-                                data-tw-target="#delete-confirmation-modal"
-                                onclick="toggleModal('{{ $item->id }}')">
-                                <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete
-                            </a>
-                        </div>
-                    </td> --}}
                 </tr>
             @endforeach
         </tbody>
