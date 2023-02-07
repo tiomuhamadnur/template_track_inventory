@@ -39,7 +39,7 @@
             <div class="projcard-innerbox">
                 <img class="projcard-img" src="{{ asset('assets/transisi/img/pict3.png') }}" />
                 <div class="projcard-textbox">
-                    <div class="projcard-title">Masterdata</div>
+                    <div class="projcard-title">Master Data</div>
                     <div class="projcard-subtitle"></div>
                     <div class="projcard-bar"></div>
                 </div>

@@ -50,12 +50,18 @@
                                     <td colspan="2" class="text-center align-middle"
                                         style="background-color:rgb(193, 255, 193); padding: 1px">The section</td>
                                 </tr>
-                                @foreach ($area as $item)
-                                    <tr>
-                                        <td style="height: 4mm; padding: 1px" colspan="2">
-                                            {{ $item->mainline->area->code ?? '' }}</td>
-                                    </tr>
-                                @endforeach
+
+                                <tr>
+                                    <td style="height: 4mm; padding: 1px" colspan="2">
+                                        Depo
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"></td>
+                                </tr>
                                 <tr>
                                     <td colspan="2"></td>
                                 </tr>
@@ -231,14 +237,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($temuan as $item)
+                            @foreach ($temuan_depo as $item)
                                 <tr>
-                                    <td>{{ $item->mainline->area->code ?? '' }}</td>
-                                    <td>{{ $item->mainline->line->code ?? '' }}</td>
-                                    <td>{{ $item->mainline->no_span ?? '' }}</td>
+                                    <td>{{ 'Depo' }}</td>
+                                    <td>{{ $item->line->code ?? '' }}</td>
+                                    <td>{{ '-' }}</td>
                                     <td>{{ $item->mainline->kilometer ?? '' }}</td>
                                     <td>{{ $item->direction ?? '' }}</td>
-                                    <td></td>
+                                    <td> {{ '-' }}</td>
                                     <td>{{ $item->part->name ?? '' }}</td>
                                     <td>{{ $item->detail_part->name ?? '' }}</td>
                                     <td>{{ $item->defect->name ?? '' }}</td>

@@ -121,7 +121,7 @@
             <div class="modal-dialog modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title" id="modalAdminTitle">Detail Temuan Mainline</h3>
+                        <h3 class="modal-title" id="modalAdminTitle">Detail Temuan Depo</h3>
                         <div class="col--1 text-center">
                             <img class="img-xs rounded-circle img-thumbnail" style="width: 70px; height: 70px;"
                                 src="{{ asset('assets/images/dashboard/examiner.png') }}" alt="">

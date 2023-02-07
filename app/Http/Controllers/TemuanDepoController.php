@@ -110,6 +110,14 @@ class TemuanDepoController extends Controller
         return view('depo.depo_temuan.index', compact(['temuan_depo', 'line', 'part', 'line_id', 'part_id', 'status']));
     }
 
+    public function report(Request $request)
+    {
+        $tanggal = $request->tanggal;
+        $area = 'Depo';
+        $temuan_depo = TemuanDepo::where('tanggal', $tanggal)->orderBy('kilometer', 'asc')->get();
+        return view('depo.depo_temuan.report.report', compact(['tanggal', 'temuan_depo', 'area']));
+    }
+
 
     public function show($id)
     {
