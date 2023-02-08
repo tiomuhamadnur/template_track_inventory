@@ -1,53 +1,63 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>Dashboard Option</title>
+	<meta name="viewport" content="width=device-width,intial-scale=1.0">
+	<meta charset="utf-8">
+	<title>Dashboard Switch</title>
+    <link rel="stylesheet" href="{{ asset('assets/transisiflex/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/transisi/style.css') }}">
-<script type="text/javascript" href='{{ asset('assets/transisi/style.js') }}'></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-
 <body>
-    <div class="projcard-container">
+	<div class="container">
 
-        <div class="projcard projcard-blue animate__animated animate__fadeInRight"><a href="{{ route('depo.index') }}">
-                <div class="projcard-innerbox">
-                    <img class="projcard-img" src="{{ asset('assets/transisi/img/depo.png') }}" />
-                    <div class="projcard-textbox">
-                        <div class="projcard-title">Depo</div>
-                        <div class="projcard-subtitle"></div>
-                        <div class="projcard-bar"></div>
-                    </div>
-                </div>
-            </a></div>
+        <div class="bg">
+            <ul class="glass">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+		<div class="card animate__animated animate__fadeInDown">
+			<a href="{{ route('depo.index') }}"><div class="imgBx">
+				<img src="{{ asset('assets/transisiflex/img/depo.png') }}">
+			</div>
+			<div class="content">
+				<h2>Depo</h2>
+				<p>Dashboard Depo
+                </p>
+			</div>
+		</a>
+		</div>
 
+		<div class="card animate__animated animate__fadeInDown">
+			<a href="{{ route('home') }}"><div class="imgBx">
+				<img src="{{ asset('assets/transisiflex/img/mainline.png') }}">
+			</div>
+			<div class="content">
+				<h2>Mainline</h2>
+				<p>Dashboard Mainline</p>
+			</div>
+        </a>
+		</div>
 
-        <div class="projcard projcard-green animate__animated animate__fadeInLeft"><a href="{{ route('home') }}">
-                <div class="projcard-innerbox">
-                    <img class="projcard-img" src="{{ asset('assets/transisi/img/mainline.png') }}" />
-                    <div class="projcard-textbox">
-                        <div class="projcard-title">Mainline</div>
-                        <div class="projcard-subtitle"></div>
-                        <div class="projcard-bar"></div>
-                    </div>
-            </a></div>
-    </div>
-
-    <div class="projcard projcard-green animate__animated animate__fadeInRight"><a
-            href="{{ route('masterdata.index') }}">
-            <div class="projcard-innerbox">
-                <img class="projcard-img" src="{{ asset('assets/transisi/img/pict3.png') }}" />
-                <div class="projcard-textbox">
-                    <div class="projcard-title">Master Data</div>
-                    <div class="projcard-subtitle"></div>
-                    <div class="projcard-bar"></div>
-                </div>
-        </a></div>
-    </div>
-
-    </div>
+		<div class="card animate__animated animate__fadeInDown">
+			<a href="{{ route('masterdata.index') }}"><div class="imgBx">
+				<img src="{{ asset('assets/transisiflex/img/masterdata.png') }}">
+			</div>
+			<div class="content">
+				<h2>Master Data</h2>
+				<p>Depo & Mainline</p>
+			</div>
+        </a>
+		</div>
+	</div>
 
 </body>
-
 </html>

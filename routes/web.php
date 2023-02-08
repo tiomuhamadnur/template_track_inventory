@@ -22,6 +22,7 @@ use App\Http\Controllers\DepoDashboardController;
 use App\Http\Controllers\TemuanMainlineController;
 use App\Http\Controllers\MasterdataDashboardController;
 use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -139,7 +140,14 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::controller(PICController::class)->group(function () {
-        Route::get('/pic', 'index')->name('pic.index');
+        Route::get('/pic', 'index')->name('pic.index')->name('pic.index');
+        Route::get('/pic-create', 'create')->name('pic.create')->name('pic.create');
+    });
+
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/usermanage', 'index')->name('usermanage.index')->name('usermanage.index');
+        Route::get('/usermanage-create', 'create')->name('usermanage.create')->name('usermanage.create');
+        Route::get('/usermanage-update', 'store')->name('usermanage.create')->name('usermanage.update');
     });
 
     // MAINLINE AREA //

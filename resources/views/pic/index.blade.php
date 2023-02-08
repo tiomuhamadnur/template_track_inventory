@@ -1,7 +1,7 @@
 @extends('masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title> Dashboard | TCSM</title>
+    <title> PIC PM | TCSM</title>
 @endsection
 @section('sub-content')
     <div class="row flex-grow">
@@ -14,8 +14,7 @@
                             <p class="card-subtitle card-subtitle-dash">Track Examination Team</p>
                         </div>
                         <div>
-                            <button class="btn btn-primary btn-sm text-white mb-0 me-0" type="button"><i
-                                    class="mdi mdi-account-plus"></i>Add new PIC</button>
+                            <a href="/pic-create"><button class="btn btn-primary btn-sm text-white mb-0 me-0" type="button">Add new PIC</button></a>
                         </div>
                     </div>
                     <div class="table-responsive  mt-1">
@@ -27,6 +26,7 @@
                                     <th>PM</th>
                                     <th>Progress</th>
                                     <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -64,6 +64,9 @@
                                     <td>
                                         <div class="badge badge-opacity-success">Completed</div>
                                     </td>
+                                    <td>
+                                        <button class="btn-sm btn-outline-warning btn-sm" type="button">Edit</button>
+                                    </td>
                                 </tr>
 
                                 <tr>
@@ -88,7 +91,7 @@
                                         <div>
                                             <div
                                                 class="d-flex justify-content-between align-items-center mb-1 max-width-progress-wrap">
-                                                <p class="text-success">%</p>
+                                                <p class="text-success">8.3%</p>
                                                 <p>1/12</p>
                                             </div>
                                             <div class="progress progress-md">
@@ -100,7 +103,89 @@
                                     <td>
                                         <div class="badge badge-opacity-warning">On Pogress</div>
                                     </td>
+                                    <td>
+                                        <button class="btn-sm btn-outline-warning btn-sm" type="button">Edit</button>
+                                    </td>
                                 </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="form-check form-check-flat mt-0 text-center">
+                                            3.
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex ">
+                                            <img src="{{ asset('assets/images/faces/tio.jpg') }}" alt="">
+                                            <div>
+                                                <h6>Tio Muhamad Nur</h6>
+                                                <p>Technician</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <h6>Cabin Ride</h6>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <div
+                                                class="d-flex justify-content-between align-items-center mb-1 max-width-progress-wrap">
+                                                <p class="text-success">8.3%</p>
+                                                <p>1/12</p>
+                                            </div>
+                                            <div class="progress progress-md">
+                                                <div class="progress-bar bg-success" role="progressbar" style="width: 8.3%"
+                                                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="badge badge-opacity-warning">On Pogress</div>
+                                    </td>
+                                    <td>
+                                        <button class="btn-sm btn-outline-warning btn-sm" type="button">Edit</button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="form-check form-check-flat mt-0 text-center">
+                                            4.
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex ">
+                                            <img src="{{ asset('assets/images/faces/tio.jpg') }}" alt="">
+                                            <div>
+                                                <h6>Tio Muhamad Nur</h6>
+                                                <p>Technician</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <h6>Accelerometer</h6>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <div
+                                                class="d-flex justify-content-between align-items-center mb-1 max-width-progress-wrap">
+                                                <p class="text-success">8.3%</p>
+                                                <p>1/12</p>
+                                            </div>
+                                            <div class="progress progress-md">
+                                                <div class="progress-bar bg-success" role="progressbar" style="width: 8.3%"
+                                                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="badge badge-opacity-warning">On Pogress</div>
+                                    </td>
+                                    <td>
+                                        <button class="btn-sm btn-outline-warning btn-sm" type="button">Edit</button>
+                                    </td>
+                                </tr>
+
                             </tbody>
                         </table>
                     </div>

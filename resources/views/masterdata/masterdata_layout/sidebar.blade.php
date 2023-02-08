@@ -31,7 +31,7 @@
         </li>
 
         <li class="nav-item animate__animated animate__fadeInLeft">
-            <a class="nav-link" href="{{ route('pic.index') }}" aria-expanded="false" aria-controls="auth">
+            <a class="nav-link" href="/pic" aria-expanded="false" aria-controls="auth">
                 <i class="menu-icon mdi mdi-account-details"></i>
                 <span class="menu-title">PIC</span>
             </a>
@@ -39,7 +39,7 @@
 
         <li class="nav-item nav-category">Settings</li>
         <li class="nav-item animate__animated animate__fadeInLeft">
-            <a class="nav-link" href="#" aria-expanded="false" aria-controls="auth">
+            <a class="nav-link" href="/usermanage" aria-expanded="false" aria-controls="auth">
                 <i class="menu-icon mdi mdi-account"></i>
                 <span class="menu-title">Management User</span>
             </a>
