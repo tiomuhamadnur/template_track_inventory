@@ -31,13 +31,20 @@
             </li>
             <li class="nav-item dropdown d-none d-lg-block user-dropdown">
                 <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img class="img-xs rounded-circle" src="{{ asset('assets/images/faces/face8.jpg') }}"
+                    <img class="img-xs rounded-circle"
+                        @if (auth()->user()->photo != null) src="{{ asset('storage/' . auth()->user()->photo) }}"
+                    @else
+                    src="{{ asset('storage/photo-profil/default.png') }}" @endif
                         alt="Profile image"> </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                     <div class="dropdown-header text-center">
-                        <img class="img-md rounded-circle" src="{{ asset('assets/images/faces/face8.jpg') }}"
+                        <img class="img-xs rounded-circle"
+                            @if (auth()->user()->photo != null) src="{{ asset('storage/' . auth()->user()->photo) }}"
+                    @else
+                    src="{{ asset('storage/photo-profil/default.png') }}" @endif
                             alt="Profile image">
-                        <p class="mb-1 mt-3 font-weight-semibold">{{ auth()->user()->name ?? '' }}</p>
+                        <p class="mb-1 mt-3 font-weight-bold">{{ auth()->user()->name ?? '' }}</p>
+                        <p class="fw-light text-muted mb-0">{{ auth()->user()->jabatan ?? '' }}</p>
                         <p class="fw-light text-muted mb-0">{{ auth()->user()->email ?? '' }}</p>
                         <a href=""><i class="ti-user icon-md" style="margin: 10px"></i></a>
                         <a href="{{ route('logout') }}"><i class="ti-power-off icon-md"></i></a>

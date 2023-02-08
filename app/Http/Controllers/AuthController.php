@@ -37,4 +37,9 @@ class AuthController extends Controller
     {
         return view('transisi.transisi');
     }
+
+    public function transisi_user()
+    {
+        return view('transisi.transisi_user');
+    }
 }

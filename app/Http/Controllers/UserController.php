@@ -2,81 +2,105 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pegawai;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return view('user.index');
+        $user = Pegawai::all();
+        return view('user.index', compact(['user']));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('user.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        return view('user.update');
+        $this->validate($request, [
+            'photo' => ['file', 'image'],
+        ], [
+            'photo.image' => 'File harus dalam format gambar/photo!'
+        ]);
+
+        $cek = Pegawai::where('email', $request->email)->get();
+        if ($cek->count() == 0) {
+            $photo_profil = $request->file('photo')->store('photo-profil/' . $request->role);
+            Pegawai::create([
+                "name" => $request->name,
+                "email" => $request->email,
+                "password" => Hash::make('user123'),
+                "jabatan" => $request->jabatan,
+                "section" => $request->section,
+                "departement" => $request->departement,
+                "role" => $request->role,
+                "photo" => $photo_profil,
+            ]);
+            return redirect()->route('usermanage.index');
+        } else {
+            return back();
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $user = Pegawai::findOrFail($id);
+        return view('user.update', compact(['user']));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $this->validate($request, [
+            'photo' => ['file', 'image'],
+        ], [
+            'photo.image' => 'File harus dalam format gambar/photo!'
+        ]);
+
+        if ($request->hasFile('photo') && $request->photo != '') {
+            $cek = Pegawai::findOrFail($request->id);
+            if ($cek->count() != 0) {
+                $photo_profil = $request->file('photo')->store('photo-profil/' . $request->role);
+                $cek->update([
+                    "name" => $request->name,
+                    "email" => $request->email,
+                    "password" => Hash::make('user123'),
+                    "jabatan" => $request->jabatan,
+                    "section" => $request->section,
+                    "departement" => $request->departement,
+                    "role" => $request->role,
+                    "photo" => $photo_profil,
+                ]);
+                return redirect()->route('usermanage.index');
+            } else {
+                return back();
+            }
+        } else {
+            $cek = Pegawai::findOrFail($request->id);
+            if ($cek->count() != 0) {
+                $cek->update([
+                    "name" => $request->name,
+                    "email" => $request->email,
+                    "password" => Hash::make('user123'),
+                    "jabatan" => $request->jabatan,
+                    "section" => $request->section,
+                    "departement" => $request->departement,
+                    "role" => $request->role,
+                ]);
+                return redirect()->route('usermanage.index');
+            }
+        }
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

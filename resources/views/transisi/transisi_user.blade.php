@@ -51,17 +51,6 @@
             </a>
         </div>
 
-        <div class="card animate__animated animate__fadeInDown" hidden>
-            <a href="{{ route('masterdata.index') }}">
-                <div class="imgBx">
-                    <img src="{{ asset('assets/transisiflex/img/masterdata.png') }}">
-                </div>
-                <div class="content">
-                    <h2>Master Data</h2>
-                    <p>Depo & Mainline</p>
-                </div>
-            </a>
-        </div>
     </div>
 
 </body>

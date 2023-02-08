@@ -124,7 +124,8 @@ Route::controller(AuthController::class)->middleware('loggedin')->group(function
 
 Route::middleware('auth')->group(function () {
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
-    Route::get('transisi', [AuthController::class, 'transisi'])->name('transisi');
+    Route::get('transisi', [AuthController::class, 'transisi'])->name('transisi')->middleware('isUser');
+    Route::get('transisi-user', [AuthController::class, 'transisi_user'])->name('transisi.user');
 
     Route::controller(DashboardController::class)->group(function () {
         // Route::get('/home', 'index')->name('home');
@@ -133,92 +134,6 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(DepoDashboardController::class)->group(function () {
         Route::get('/depo/dashboard', 'index')->name('depo.index');
-    });
-
-    Route::controller(MasterdataDashboardController::class)->group(function () {
-        Route::get('/master-data/dashboard', 'index')->name('masterdata.index');
-    });
-
-    Route::controller(PICController::class)->group(function () {
-        Route::get('/pic', 'index')->name('pic.index')->name('pic.index');
-        Route::get('/pic-create', 'create')->name('pic.create')->name('pic.create');
-    });
-
-    Route::controller(UserController::class)->group(function () {
-        Route::get('/usermanage', 'index')->name('usermanage.index')->name('usermanage.index');
-        Route::get('/usermanage-create', 'create')->name('usermanage.create')->name('usermanage.create');
-        Route::get('/usermanage-update', 'store')->name('usermanage.create')->name('usermanage.update');
-    });
-
-    // MAINLINE AREA //
-    Route::controller(AreaController::class)->group(function () {
-        Route::get('/area', 'index')->name('area.index');
-        Route::get('/area-create', 'create')->name('area.create');
-        Route::post('/area', 'store')->name('area.store');
-        Route::get('/area/{id}/edit', 'edit')->name('area.edit');
-        Route::put('/area', 'update')->name('area.update');
-        Route::get('/area/{id}/delete', 'destroy')->name('area.delete');
-    });
-
-    Route::controller(LineController::class)->group(function () {
-        Route::get('/line', 'index')->name('line.index');
-        Route::get('/line-create', 'create')->name('line.create');
-        Route::post('/line', 'store')->name('line.store');
-        Route::get('/line/{id}/edit', 'edit')->name('line.edit');
-        Route::put('/line', 'update')->name('line.update');
-        Route::get('/line/{id}/delete', 'destroy')->name('line.delete');
-    });
-
-    Route::controller(MainlineController::class)->group(function () {
-        Route::get('/trackbed', 'index')->name('mainline.index');
-        Route::get('/trackbed-create', 'create')->name('mainline.create');
-        Route::post('/mainline', 'store')->name('mainline.store');
-        Route::get('/mainline/{id}/edit', 'edit')->name('mainline.edit');
-        Route::put('/mainline', 'update')->name('mainline.update');
-        Route::get('/mainline/{id}/delete', 'destroy')->name('mainline.delete');
-
-        // SPAN atau TRACK BED
-        Route::post('/mainline/import', 'import')->name('mainline.import');
-        Route::get('/mainline/export', 'export')->name('mainline.export');
-        Route::get('/mainline/json', 'getJson')->name('mainline.json');
-    });
-
-    Route::controller(PartController::class)->group(function () {
-        Route::get('/part', 'index')->name('part.index');
-        Route::get('/part-create', 'create')->name('part.create');
-        Route::post('/part', 'store')->name('part.store');
-        Route::get('/part/{id}/edit', 'edit')->name('part.edit');
-        Route::put('/part', 'update')->name('part.update');
-        Route::get('/part/{id}/delete', 'destroy')->name('part.delete');
-    });
-
-    Route::controller(DetailPartController::class)->group(function () {
-        Route::get('/detail-part', 'index')->name('detail-part.index');
-        Route::get('/detail-part-create', 'create')->name('detail-part.create');
-        Route::post('/detail-part', 'store')->name('detail-part.store');
-        Route::get('/detail-part/{id}/edit', 'edit')->name('detail-part.edit');
-        Route::put('/detail-part', 'update')->name('detail-part.update');
-        Route::get('/detail-part/{id}/delete', 'destroy')->name('detail-part.delete');
-    });
-
-    Route::controller(DefectController::class)->group(function () {
-        Route::get('/defect', 'index')->name('defect.index');
-        Route::get('/defect-create', 'create')->name('defect.create');
-        Route::post('/defect', 'store')->name('defect.store');
-        Route::get('/defect/{id}/edit', 'edit')->name('defect.edit');
-        Route::put('/defect', 'update')->name('defect.update');
-        Route::get('/defect/{id}/delete', 'destroy')->name('defect.delete');
-    });
-
-    Route::controller(TransDefectController::class)->group(function () {
-        Route::get('/TransDefect', 'index')->name('transDefect.index');
-        Route::get('/TransDefect-create', 'create')->name('transDefect.create');
-        Route::post('/TransDefect', 'store')->name('transDefect.store');
-        Route::get('/TransDefect/{id}/edit', 'edit')->name('transDefect.edit');
-        Route::put('/TransDefect', 'update')->name('transDefect.update');
-
-        // Import Trans Part & Defect
-        Route::post('/TransDefect/import', 'import')->name('transDefect.import');
     });
 
     Route::controller(TemuanController::class)->group(function () {
@@ -252,17 +167,6 @@ Route::middleware('auth')->group(function () {
 
         // REPORT GENERATOR
         Route::get('/temuan-mainline/report', 'report')->name('temuan_mainline.report');
-    });
-
-
-    // DEPO AREA
-    Route::controller(DepoLineController::class)->group(function () {
-        Route::get('/depoline', 'index')->name('depoline.index');
-        Route::get('/depoline-create', 'create')->name('depoline.create');
-        Route::post('/depoline', 'store')->name('depoline.store');
-        Route::get('/depoline/{id}/edit', 'edit')->name('depoline.edit');
-        Route::put('/depoline', 'update')->name('depoline.update');
-        Route::get('/depoline/{id}/delete', 'destroy')->name('depoline.delete');
     });
 
     Route::controller(TemuanDepoController::class)->group(function () {
@@ -307,7 +211,104 @@ Route::middleware('auth')->group(function () {
         Route::get('/getPICAccelerometer', 'getPIC')->name('accelerometer.getPIC');
     });
 
-    // Route::controller(PegawaiController::class)->group(function () {
-    //     Route::get('/dummy_user', 'dummy_user');
-    // });
+    Route::middleware('isAdmin')->group(function () {
+        // MAINLINE
+        Route::controller(MasterdataDashboardController::class)->group(function () {
+            Route::get('/master-data/dashboard', 'index')->name('masterdata.index');
+        });
+
+        Route::controller(PICController::class)->group(function () {
+            Route::get('/pic', 'index')->name('pic.index')->name('pic.index');
+            Route::get('/pic-create', 'create')->name('pic.create')->name('pic.create');
+        });
+
+        Route::controller(UserController::class)->group(function () {
+            Route::get('/usermanage', 'index')->name('usermanage.index');
+            Route::get('/usermanage-create', 'create')->name('usermanage.create');
+            Route::post('/usermanage', 'store')->name('usermanage.store');
+            Route::get('/usermanage/{id}/update', 'edit')->name('usermanage.edit');
+            Route::put('/usermanage', 'update')->name('usermanage.update');
+        });
+
+        // MAINLINE AREA //
+        Route::controller(AreaController::class)->group(function () {
+            Route::get('/area', 'index')->name('area.index');
+            Route::get('/area-create', 'create')->name('area.create');
+            Route::post('/area', 'store')->name('area.store');
+            Route::get('/area/{id}/edit', 'edit')->name('area.edit');
+            Route::put('/area', 'update')->name('area.update');
+            Route::get('/area/{id}/delete', 'destroy')->name('area.delete');
+        });
+
+        Route::controller(LineController::class)->group(function () {
+            Route::get('/line', 'index')->name('line.index');
+            Route::get('/line-create', 'create')->name('line.create');
+            Route::post('/line', 'store')->name('line.store');
+            Route::get('/line/{id}/edit', 'edit')->name('line.edit');
+            Route::put('/line', 'update')->name('line.update');
+            Route::get('/line/{id}/delete', 'destroy')->name('line.delete');
+        });
+
+        Route::controller(MainlineController::class)->group(function () {
+            Route::get('/trackbed', 'index')->name('mainline.index');
+            Route::get('/trackbed-create', 'create')->name('mainline.create');
+            Route::post('/mainline', 'store')->name('mainline.store');
+            Route::get('/mainline/{id}/edit', 'edit')->name('mainline.edit');
+            Route::put('/mainline', 'update')->name('mainline.update');
+            Route::get('/mainline/{id}/delete', 'destroy')->name('mainline.delete');
+
+            // SPAN atau TRACK BED
+            Route::post('/mainline/import', 'import')->name('mainline.import');
+            Route::get('/mainline/export', 'export')->name('mainline.export');
+            Route::get('/mainline/json', 'getJson')->name('mainline.json');
+        });
+
+        Route::controller(PartController::class)->group(function () {
+            Route::get('/part', 'index')->name('part.index');
+            Route::get('/part-create', 'create')->name('part.create');
+            Route::post('/part', 'store')->name('part.store');
+            Route::get('/part/{id}/edit', 'edit')->name('part.edit');
+            Route::put('/part', 'update')->name('part.update');
+            Route::get('/part/{id}/delete', 'destroy')->name('part.delete');
+        });
+
+        Route::controller(DetailPartController::class)->group(function () {
+            Route::get('/detail-part', 'index')->name('detail-part.index');
+            Route::get('/detail-part-create', 'create')->name('detail-part.create');
+            Route::post('/detail-part', 'store')->name('detail-part.store');
+            Route::get('/detail-part/{id}/edit', 'edit')->name('detail-part.edit');
+            Route::put('/detail-part', 'update')->name('detail-part.update');
+            Route::get('/detail-part/{id}/delete', 'destroy')->name('detail-part.delete');
+        });
+
+        Route::controller(DefectController::class)->group(function () {
+            Route::get('/defect', 'index')->name('defect.index');
+            Route::get('/defect-create', 'create')->name('defect.create');
+            Route::post('/defect', 'store')->name('defect.store');
+            Route::get('/defect/{id}/edit', 'edit')->name('defect.edit');
+            Route::put('/defect', 'update')->name('defect.update');
+            Route::get('/defect/{id}/delete', 'destroy')->name('defect.delete');
+        });
+
+        Route::controller(TransDefectController::class)->group(function () {
+            Route::get('/TransDefect', 'index')->name('transDefect.index');
+            Route::get('/TransDefect-create', 'create')->name('transDefect.create');
+            Route::post('/TransDefect', 'store')->name('transDefect.store');
+            Route::get('/TransDefect/{id}/edit', 'edit')->name('transDefect.edit');
+            Route::put('/TransDefect', 'update')->name('transDefect.update');
+
+            // Import Trans Part & Defect
+            Route::post('/TransDefect/import', 'import')->name('transDefect.import');
+        });
+
+        // DEPO
+        Route::controller(DepoLineController::class)->group(function () {
+            Route::get('/depoline', 'index')->name('depoline.index');
+            Route::get('/depoline-create', 'create')->name('depoline.create');
+            Route::post('/depoline', 'store')->name('depoline.store');
+            Route::get('/depoline/{id}/edit', 'edit')->name('depoline.edit');
+            Route::put('/depoline', 'update')->name('depoline.update');
+            Route::get('/depoline/{id}/delete', 'destroy')->name('depoline.delete');
+        });
+    });
 });

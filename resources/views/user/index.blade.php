@@ -11,10 +11,11 @@
                     <div class="d-sm-flex justify-content-between align-items-start">
                         <div>
                             <h4 class="card-title card-title-dash">Management User</h4>
-                            <p class="card-subtitle card-subtitle-dash">Track Examination Team</p>
+                            <p class="card-subtitle card-subtitle-dash">Track & Civil Structure Maintenance</p>
                         </div>
                         <div>
-                            <a href="/usermanage-create"><button class="btn btn-primary btn-sm text-white mb-0 me-0" type="button">Add new User</button></a>
+                            <a href="/usermanage-create"><button class="btn btn-primary btn-sm text-white mb-0 me-0"
+                                    type="button">Add new User</button></a>
                         </div>
                     </div>
                     <div class="table-responsive  mt-1">
@@ -23,6 +24,7 @@
                                 <tr>
                                     <th>No.</th>
                                     <th>Nama</th>
+                                    <th>Email</th>
                                     <th>Section</th>
                                     <th>Role</th>
                                     <th>Action</th>
@@ -30,57 +32,46 @@
                             </thead>
                             <tbody>
 
-                                <tr>
-                                    <td>
-                                        <div class="form-check form-check-flat mt-0 text-center">
-                                            1.
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex ">
-                                            <img src="{{ asset('assets/images/faces/dede.jpg') }}" alt="">
-                                            <div>
-                                                <h6>Dede Irfan</h6>
-                                                <p>Technician</p>
+                                @foreach ($user as $item)
+                                    <tr>
+                                        <td>
+                                            <div class="form-check form-check-flat mt-0 text-center">
+                                                {{ $loop->iteration }}
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        Track Examination
-                                    </td>
-                                    <td>
-                                        <div class="badge badge-opacity-warning">User</div>
-                                    </td>
-                                    <td>
-                                        <a href="/usermanage-update"><button class="btn-sm btn-outline-warning btn-sm" type="button">Edit</button></a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <div class="form-check form-check-flat mt-0 text-center">
-                                            2.
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex ">
-                                            <img src="{{ asset('assets/images/faces/dede.jpg') }}" alt="">
-                                            <div>
-                                                <h6>Hermawan Wisnu Wijanarko</h6>
-                                                <p>Section Head</p>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex ">
+                                                @if ($item->photo != null)
+                                                    <img src="{{ asset('storage/' . $item->photo) }}" alt="IMG">
+                                                @else
+                                                    <img src="{{ asset('storage/photo-profil/default.png') }}"
+                                                        alt="IMG">
+                                                @endif
+                                                <div>
+                                                    <h6>{{ $item->name }}</h6>
+                                                    <p>{{ $item->jabatan }}</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        Track Examination
-                                    </td>
-                                    <td>
-                                        <div class="badge badge-opacity-success">Admin</div>
-                                    </td>
-                                    <td>
-                                        <a href="/usermanage-update"><button class="btn-sm btn-outline-warning btn-sm" type="button">Edit</button></a>
-                                    </td>
-                                </tr>
+                                        </td>
+                                        <td>
+                                            {{ $item->email }}
+                                        </td>
+                                        <td>
+                                            {{ $item->section }}
+                                        </td>
+                                        <td>
+                                            @if ($item->role == 'Admin')
+                                                <div class="badge badge-opacity-warning">{{ $item->role }}</div>
+                                            @else
+                                                <div class="badge badge-opacity-success">{{ $item->role }}</div>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('usermanage.edit', $item->id) }}"
+                                                class="btn-sm btn-outline-warning btn-sm" type="button">Edit</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
 
                             </tbody>
                         </table>
