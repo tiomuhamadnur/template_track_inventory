@@ -19,16 +19,34 @@ class TemuanMainlineFilterExport implements FromView
 
     public function view(): View
     {
-        return view('mainline.mainline_temuan.export', [
-            'temuan' => Temuan::select(
+        $temuan = Temuan::query()->select(
             'summary_temuan.*',
             'mainline.area_id as area_id',
         )
-        ->join('mainline', 'mainline.id', '=', 'summary_temuan.mainline_id')
-        ->orWhere('area_id', $this->area_id)
-        ->orWhere('line_id', $this->line_id)
-        ->orWhere('part_id', $this->part_id)
-        ->orWhere('status', $this->status)->get()
+        ->join('mainline', 'mainline.id', '=', 'summary_temuan.mainline_id');
+
+        // Filter by area_id
+        $temuan->when($this->area_id, function ($query) {
+            return $query->where('area_id', $this->area_id);
+        });
+
+        // Filter by line_id
+        $temuan->when($this->line_id, function ($query) {
+            return $query->where('line_id', $this->line_id);
+        });
+
+        // Filter by part_id
+        $temuan->when($this->part_id, function ($query) {
+            return $query->where('part_id', $this->part_id);
+        });
+
+        // Filter by status
+        $temuan->when($this->status, function ($query) {
+            return $query->where('status', $this->status);
+        });
+
+        return view('mainline.mainline_temuan.export', [
+            'temuan' => $temuan->get()
         ]);
     }
 }

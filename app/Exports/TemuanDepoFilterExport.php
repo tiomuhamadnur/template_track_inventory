@@ -18,12 +18,25 @@ class TemuanDepoFilterExport implements FromView
 
     public function view(): View
     {
+        $temuan_depo = TemuanDepo::query();
+
+        // Filter by line_id
+        $temuan_depo->when($this->line_id, function ($query) {
+            return $query->where('line_id', $this->line_id);
+        });
+
+        // Filter by part_id
+        $temuan_depo->when($this->part_id, function ($query) {
+            return $query->where('part_id', $this->part_id);
+        });
+
+        // Filter by status
+        $temuan_depo->when($this->status, function ($query) {
+            return $query->where('status', $this->status);
+        });
+
         return view('depo.depo_temuan.export', [
-            'temuan_depo' => TemuanDepo::
-            orWhere('line_id', $this->line_id)
-            ->orWhere('part_id', $this->part_id)
-            ->orWhere('status', $this->status)
-            ->get()
+            'temuan_depo' => $temuan_depo->get()
         ]);
     }
 }

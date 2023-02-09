@@ -97,7 +97,8 @@
                                                         data-klasifikasi="{{ $item->klasifikasi }}"
                                                         data-pic="{{ $item->pic }}" data-remark="{{ $item->remark }}"
                                                         data-status="{{ $item->status }}"
-                                                        data-photo="{{ asset('storage/' . $item->photo) }}">
+                                                        data-photo="{{ asset('storage/' . $item->photo) }}"
+                                                        data-href="{{ '/temuan_depo' . '/' . Crypt::encryptString($item->id) . '/close_temuan' }}">
                                                         Detail
                                                     </button>
                                                 </td>
@@ -192,9 +193,10 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-warning">
-                                Close Temuan
-                            </button>
+                            <a href="#" id="close_temuan_modal" class="btn btn-outline-warning"
+                                @if (auth()->user()->role != 'Admin') hidden @endif>
+                                Ubah Status
+                            </a>
                             <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
                                 Tutup
                             </button>
@@ -221,7 +223,7 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label class="form-label">Line</label>
-                                <select class="form-control" name="line_id">
+                                <select class="form-select" name="line_id">
                                     <option disabled selected>- Pilih Line -</option>
                                     @foreach ($line as $item)
                                         <option value="{{ $item->id }}">{{ $item->code }}</option>
@@ -230,7 +232,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Part</label>
-                                <select class="form-control" name="part_id">
+                                <select class="form-select" name="part_id">
                                     <option disabled selected>- Pilih Part -</option>
                                     @foreach ($part as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -239,7 +241,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Status</label>
-                                <select class="form-control" name="status">
+                                <select class="form-select" name="status">
                                     <option disabled selected>- Status -</option>
                                     <option value="open">Open</option>
                                     <option value="close">Close</option>
@@ -274,7 +276,7 @@
                             <div class="modal-body">
                                 <div class="form-group align-middle">
                                     <label class="form-label">Pilih Tanggal Kegiatan</label>
-                                    <input class="form-control p-1" type="date" name="tanggal">
+                                    <input class="form-control p-1" type="date" name="tanggal" required>
                                 </div>
                             </div>
 
@@ -314,7 +316,7 @@
                 var photo = $(e.relatedTarget).data('photo');
                 var photo_temuan = '<img class"img-thumbnail" style="width: 60%"src="' +
                     photo + '" alt="Tidak ada photo dokumentasi">'
-                console.log(photo_temuan);
+                var href = $(e.relatedTarget).data('href');
 
                 $('#tanggal_modal').val(tanggal);
                 $('#line_modal').val(line);
@@ -328,6 +330,7 @@
                 document.getElementById("pic_modal").innerHTML = pic;
                 $('#status_modal').val(status);
                 document.getElementById("photo").innerHTML = photo_temuan;
+                document.getElementById("close_temuan_modal").href = href;
             });
         });
     </script>

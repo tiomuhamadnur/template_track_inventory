@@ -153,6 +153,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/temuan_mainline/{id}/edit', 'edit')->name('temuan_mainline.edit');
         Route::put('/temuan_mainline', 'update')->name('temuan_mainline.update');
         Route::delete('/temuan_mainline', 'destroy')->name('temuan_mainline.delete');
+        Route::get('/temuan_mainline/{id}/close_temuan', 'close_temuan')->name('temuan_mainline.close.temuan');
+        Route::put('/temuan_mainline/close_temuan', 'store_temuan')->name('temuan_mainline.store.temuan');
         Route::get('/temuan/export_mainline', 'export')->name('temuan_mainline.export');
 
         // GET DATA
@@ -176,6 +178,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/temuan_depo/{id}/edit', 'edit')->name('temuan_depo.edit');
         Route::put('/temuan_depo', 'update')->name('temuan_depo.update');
         Route::delete('/temuan_depo', 'destroy')->name('temuan_depo.delete');
+        Route::get('/temuan_depo/{id}/close_temuan', 'close_temuan')->name('temuan_depo.close.temuan');
+        Route::put('/temuan_depo/close_temuan', 'store_temuan')->name('temuan_depo.store.temuan');
         Route::get('/depo/export_mainline', 'export')->name('temuan_depo.export');
 
         // FILTER DATA

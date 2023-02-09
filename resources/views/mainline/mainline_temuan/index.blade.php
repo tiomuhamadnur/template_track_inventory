@@ -111,7 +111,8 @@
                                                             data-pic="{{ $item->pic }}"
                                                             data-remark="{{ $item->remark }}"
                                                             data-status="{{ $item->status }}"
-                                                            data-photo="{{ asset('storage/' . $item->photo) }}">
+                                                            data-photo="{{ asset('storage/' . $item->photo) }}"
+                                                            data-href="{{ '/temuan_mainline' . '/' . Crypt::encryptString($item->id) . '/close_temuan' }}">
                                                             Detail
                                                         </button>
                                                     </div>
@@ -220,9 +221,9 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <a href="#" data-bs-toggle="modal" id="close-button" data-id=""
-                                data-bs-target="#" class="btn btn-outline-warning">
-                                Close Temuan
+                            <a href="#" id="close_temuan_modal" class="btn btn-outline-warning"
+                                @if (auth()->user()->role != 'Admin') hidden @endif>
+                                Ubah Status
                             </a>
                             <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
                                 Tutup
@@ -246,7 +247,7 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label class="form-label">Area</label>
-                                <select class="form-control" name="area_id">
+                                <select class="form-select" name="area_id">
                                     <option disabled selected>- Pilih Area -</option>
                                     @foreach ($area as $item)
                                         <option value="{{ $item->id }}">{{ $item->code }}</option>
@@ -255,7 +256,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Line</label>
-                                <select class="form-control" name="line_id">
+                                <select class="form-select" name="line_id">
                                     <option disabled selected>- Pilih Line -</option>
                                     @foreach ($line as $item)
                                         <option value="{{ $item->id }}">{{ $item->code }}</option>
@@ -264,7 +265,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Part</label>
-                                <select class="form-control" name="part_id">
+                                <select class="form-select" name="part_id">
                                     <option disabled selected>- Pilih Part -</option>
                                     @foreach ($part as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -273,7 +274,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Status</label>
-                                <select class="form-control" name="status">
+                                <select class="form-select" name="status">
                                     <option disabled selected>- Status -</option>
                                     <option value="open">Open</option>
                                     <option value="close">Close</option>
@@ -305,8 +306,28 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group align-middle">
+                                <label class="form-label">Pilih Area</label> <br>
+                                <div class="btn-group align-middle">
+                                    <select name="area_rencana_start" class="form-select" required>
+                                        <option value="" disabled selected>-Pilih area start-</option>
+                                        @foreach ($area_rencana as $item)
+                                            <option value="{{ $item->code }}">{{ $item->code }}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="mx-3">
+                                        <p>to</p>
+                                    </div>
+                                    <select name="area_rencana_finish" class="form-select" required>
+                                        <option value="" disabled selected>-Pilih area finish-</option>
+                                        @foreach ($area_rencana as $item)
+                                            <option value="{{ $item->code }}">{{ $item->code }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group align-middle">
                                 <label class="form-label">Pilih Tanggal Kegiatan</label>
-                                <input class="form-control p-1" type="date" name="tanggal">
+                                <input class="form-control p-1" type="date" name="tanggal" required>
                             </div>
                         </div>
 
@@ -319,41 +340,6 @@
                             </button>
                         </div>
                     </form>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal close temuan -->
-        <div class="modal fade" id="close-temuan-confirmation-modal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog modal-md" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2 class="modal-title" id="modalAdminTitle">Apakah anda yakin?</h2>
-                    </div>
-                    {{-- <form action="#" method="POST">
-                    @csrf
-                    @method('put') --}}
-                    <div class="modal-body">
-                        <input type="text" id="id_modal" name="id" hidden>
-                        <div class="form-group text-center">
-                            <div class="text-warning" style="font-size: 100px">
-                                <i class="mdi mdi-comment-question-outline"></i>
-                            </div>
-                            <div>
-                                <h4>Status temuan ini akan diubah menjadi "CLOSE"!</h4>
-                            </div>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="sumbit" class="btn btn-primary justify-content-center">
-                                Submit
-                            </button>
-                            <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">
-                                Cancel
-                            </button>
-                        </div>
-                        {{-- </form> --}}
-                    </div>
                 </div>
             </div>
         </div>
@@ -382,6 +368,7 @@
                     var photo_temuan = '<img class"img-thumbnail" style="width: 60%"src="' +
                         photo + '" alt="Tidak ada photo dokumentasi">'
                     console.log(photo_temuan);
+                    var href = $(e.relatedTarget).data('href');
 
                     $('#tanggal_modal').val(tanggal);
                     $('#area_modal').val(area);
@@ -398,6 +385,7 @@
                     document.getElementById("pic_modal").innerHTML = pic;
                     $('#status_modal').val(status);
                     document.getElementById("photo").innerHTML = photo_temuan;
+                    document.getElementById("close_temuan_modal").href = href;
                 });
             });
         </script>

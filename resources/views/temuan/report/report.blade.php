@@ -50,12 +50,18 @@
                                     <td colspan="2" class="text-center align-middle"
                                         style="background-color:rgb(193, 255, 193); padding: 1px">The section</td>
                                 </tr>
-                                @foreach ($area as $item)
-                                    <tr>
-                                        <td style="height: 4mm; padding: 1px" colspan="2">
-                                            {{ $item->mainline->area->code ?? '' }}</td>
-                                    </tr>
-                                @endforeach
+
+                                <tr>
+                                    <td style="height: 4mm; padding: 1px" colspan="2">
+                                        {{ $area_rencana_start ?? '' }} - {{ $area_rencana_finish ?? '' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"></td>
+                                </tr>
                                 <tr>
                                     <td colspan="2"></td>
                                 </tr>
@@ -248,6 +254,66 @@
                                     <td>{{ $item->remark ?? '' }}</td>
                                 </tr>
                             @endforeach
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
                             <tr>
                                 <td></td>
                                 <td></td>

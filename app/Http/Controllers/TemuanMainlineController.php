@@ -14,6 +14,8 @@ use App\Models\TransDefect;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Excel;
+use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Support\Facades\Crypt;
 
 class TemuanMainlineController extends Controller
 {
@@ -21,6 +23,7 @@ class TemuanMainlineController extends Controller
     {
         $temuan = Temuan::where('status', 'open')->orderBy('created_at', 'DESC')->get();
         $area = Area::whereNot('area', 'Depo')->get();
+        $area_rencana = Area::where('stasiun', 'true')->orWhere('area', 'DAL')->get();
         $line = Line::whereNot('area', 'Depo')->get();
         $part = Part::all();
 
@@ -29,7 +32,7 @@ class TemuanMainlineController extends Controller
         $part_id = "";
         $status = "";
 
-        return view('mainline.mainline_temuan.index', compact(['temuan', 'area', 'line', 'part', 'area_id', 'line_id', 'part_id', 'status']));
+        return view('mainline.mainline_temuan.index', compact(['temuan', 'area', 'area_rencana', 'line', 'part', 'area_id', 'line_id', 'part_id', 'status']));
     }
 
     public function export(Request $request)
@@ -55,23 +58,49 @@ class TemuanMainlineController extends Controller
         $part_id = $request->part_id;
         $status = $request->status;
 
-        $temuan = Temuan::select(
+        $temuan = Temuan::query()->select(
             'summary_temuan.*',
             'mainline.area_id as area_id',
         )
-        ->join('mainline', 'mainline.id', '=', 'summary_temuan.mainline_id')
-        ->orWhere('area_id', $area_id)
-        ->orWhere('line_id', $line_id)
-        ->orWhere('part_id', $part_id)
-        ->orWhere('status', $status)
-        ->orderBy('mainline_id', 'asc')
-        ->get();
+        ->join('mainline', 'mainline.id', '=', 'summary_temuan.mainline_id');
+
+        // Filter by area_id
+        $temuan->when($area_id, function ($query) use ($request) {
+            return $query->where('area_id', $request->area_id);
+        });
+
+        // Filter by line_id
+        $temuan->when($line_id, function ($query) use ($request) {
+            return $query->where('line_id', $request->line_id);
+        });
+
+        // Filter by part_id
+        $temuan->when($part_id, function ($query) use ($request) {
+            return $query->where('part_id', $request->part_id);
+        });
+
+        // Filter by status
+        $temuan->when($status, function ($query) use ($request) {
+            return $query->where('status', $request->status);
+        });
 
         $area = Area::all();
-        $line = Line::all();
+        $area_rencana = Area::where('stasiun', 'true')->orWhere('area', 'DAL')->get();
+        $line = Line::whereNot('area', 'Depo')->get();
         $part = Part::all();
 
-        return view('mainline.mainline_temuan.index', compact(['temuan', 'area', 'line', 'part', 'area_id', 'line_id', 'part_id', 'status']));
+        // return view('mainline.mainline_temuan.index', compact(['temuan', 'area', 'line', 'part', 'area_id', 'line_id', 'part_id', 'status']));
+        return view('mainline.mainline_temuan.index', [
+            'temuan' => $temuan->orderBy('mainline_id', 'asc')->get(),
+            'area_rencana' => $area_rencana,
+            'area' => $area,
+            'line' => $line,
+            'part' => $part,
+            'area_id' => $area_id,
+            'line_id' => $line_id,
+            'part_id' => $part_id,
+            'status' => $status
+        ]);
     }
 
     public function create()
@@ -130,14 +159,35 @@ class TemuanMainlineController extends Controller
     public function report(Request $request)
     {
         $tanggal = $request->tanggal;
-        $area = Temuan::where('tanggal', $tanggal)->orderBy('mainline_id', 'asc')->distinct()->get();
+        $area_rencana_start = $request->area_rencana_start;
+        $area_rencana_finish = $request->area_rencana_finish;
         $temuan = Temuan::where('tanggal', $tanggal)->orderBy('mainline_id', 'asc')->get();
-        return view('temuan.report.report', compact(['tanggal', 'temuan', 'area']));
+        return view('temuan.report.report', compact(['tanggal', 'temuan', 'area_rencana_start', 'area_rencana_finish']));
     }
 
-    public function show($id)
+    public function close_temuan($id)
     {
-        //
+        try {
+            $secret = Crypt::decryptString($id);
+            $temuan = Temuan::findOrFail($secret);
+            if ($temuan){
+                return view('mainline.mainline_temuan.close', compact(['temuan']));
+            } else {
+                return redirect()->back();
+            }
+        } catch (DecryptException $e) {
+            return redirect()->back();
+        }
+    }
+
+    public function store_temuan(Request $request)
+    {
+        $id = $request->id;
+        $temuan = Temuan::findOrFail($id);
+        $temuan->update([
+            "status" => $request->status,
+        ]);
+        return redirect()->route('temuan_mainline.index');
     }
 
     public function edit($id)
