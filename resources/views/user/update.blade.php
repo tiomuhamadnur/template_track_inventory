@@ -21,9 +21,20 @@
                             @method('put')
                             <div class="intro-y col-span-12 lg:col-span-6">
                                 <div class="intro-y box p-2">
-                                    <div>
-                                        <input id="crud-form-1" type="text" class="form-control w-full" name="id"
-                                            required value="{{ $user->id }}" hidden>
+                                    <input id="crud-form-1" type="text" class="form-control w-full" name="id"
+                                        required value="{{ $user->id }}" hidden>
+                                    <div class="text-center">
+                                        @if ($user->photo != null)
+                                            <img class="img-thumbnail" style="height: 250px"
+                                                src="{{ asset('storage/' . $user->photo) }}" alt="Photo Profil">
+                                        @else
+                                            <img class="img-thumbnail" style="height: 250px"
+                                                src="{{ asset('storage/photo-profil/default.png') }}" alt="Photo Profil">
+                                        @endif
+                                    </div>
+                                    <div class="form-label mt-2">
+                                        <div class="name">Ubah Foto Profil</div>
+                                        <input class="form-control w-full" type="file" name="photo">
                                     </div>
                                     <div>
                                         <label for="crud-form-1" class="form-label mt-2">Nama User</label>
@@ -71,12 +82,18 @@
                                         </select>
                                     </div>
                                     <div class="form-label mt-2">
-                                        <div class="name">Foto Profil</div>
-                                        <input class="form-control w-full" type="file" name="photo">
+                                        <label for="crud-form-1" class="form-label mt-2">Reset Password</label>
+                                        <br>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#reset-confirmation-modal"
+                                            data-id="{{ $user->id }}" class="btn btn-danger btn-sm rounded"
+                                            title="Reset password default">
+                                            <i class="mdi mdi-refresh mr-1"></i>
+                                            Reset
+                                        </a>
                                     </div>
                                     <div class="text-right mt-5">
                                         <a href="{{ route('usermanage.index') }}"
-                                            class="btn btn-outline-warning w-24 mr-1">Cancel</a>
+                                            class="btn btn-outline-warning w-24 mr-1">Close</a>
                                         <button type="submit" class="btn btn-primary w-24">Save</button>
                                     </div>
                                 </div>
@@ -86,4 +103,49 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="reset-confirmation-modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="modalAdminTitle">Apakah anda yakin?</h2>
+                </div>
+                <form action="{{ route('reset.password') }}" method="POST">
+                    @csrf
+                    @method('put')
+                    <div class="modal-body">
+                        <input type="text" id="id_modal" name="id" hidden>
+                        <div class="form-group text-center">
+                            <div class="text-danger" style="font-size: 100px">
+                                <i class="mdi mdi-refresh"></i>
+                            </div>
+                            <div>
+                                <h4>Password akan direset ke setelan default!</h4>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary justify-content-center">
+                                Reset
+                            </button>
+                            <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">
+                                Tutup
+                            </button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('javascript')
+    <script>
+        $(document).ready(function() {
+            $('#reset-confirmation-modal').on('show.bs.modal', function(e) {
+                var id = $(e.relatedTarget).data('id');
+                $('#id_modal').val(id);
+            });
+        });
+    </script>
 @endsection

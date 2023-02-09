@@ -93,11 +93,10 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">
-                                                        {{-- <button type="button" class="btn btn-outline-primary me-0"
-                                                            data-bs-toggle="modal" data-bs-target="#ModalDok">Photo</button> --}}
                                                         <button type="button" class="btn btn-outline-primary ms-0"
                                                             onclick="showPhotoModal('{{ asset('storage/' . $item->photo) }}')"
                                                             data-bs-toggle="modal" data-bs-target="#ModalTemuan"
+                                                            data-id="{{ $item->id }}"
                                                             data-area="{{ $item->mainline->area->code }}"
                                                             data-line="{{ $item->mainline->line->code }}"
                                                             data-no_span="{{ $item->mainline->no_span }}"
@@ -131,7 +130,7 @@
 
 
     {{-- MODALS DETAIL --}}
-    <div class="col-lg-4 col-md-6">
+    <div class="col-lg-4 col-md-6 mt-4">
         <!-- Modal -->
         <div class="modal fade" id="ModalTemuan" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog modal-lg" role="document">
@@ -139,7 +138,8 @@
                     <div class="modal-header">
                         <h3 class="modal-title" id="modalAdminTitle">Detail Temuan Mainline</h3>
                         <div class="col--1 text-center">
-                            <img class="img-xs rounded-circle img-thumbnail" style="width: 70px; height: 70px;"
+                            <img class="img-xs rounded-circle img-thumbnail" id="examiner_modal"
+                                style="width: 70px; height: 70px;"
                                 src="{{ asset('assets/images/dashboard/examiner.png') }}" alt="">
                             <p class="ml-5 fw-bolder" id="pic_modal">Examiner</p>
                         </div>
@@ -220,9 +220,10 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-warning">
+                            <a href="#" data-bs-toggle="modal" id="close-button" data-id=""
+                                data-bs-target="#" class="btn btn-outline-warning">
                                 Close Temuan
-                            </button>
+                            </a>
                             <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
                                 Tutup
                             </button>
@@ -231,12 +232,8 @@
                 </div>
             </div>
         </div>
-    </div>
 
-
-    {{-- MODALS FILTER --}}
-    <div class="col-lg-2 col-md-4">
-        <!-- Modal -->
+        <!-- Modal Filter-->
         <div class="modal fade" id="ModalFilter" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog modal-md" role="document">
                 <div class="modal-content">
@@ -296,82 +293,112 @@
             </div>
         </div>
 
-        {{-- MODALS GENERATE REPORT --}}
-        <div class="col-lg-2 col-md-4">
-            <!-- Modal -->
-            <div class="modal fade" id="ModalReport" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-dialog modal-md" role="document">
-                    <div class="modal-content">
-                        <form action="{{ route('temuan_mainline.report') }}" method="GET">
-                            @csrf
-                            @method('get')
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="modalAdminTitle">Generate Report Activity</h5>
+        <!-- Modal Report -->
+        <div class="modal fade" id="ModalReport" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog modal-md" role="document">
+                <div class="modal-content">
+                    <form action="{{ route('temuan_mainline.report') }}" method="GET">
+                        @csrf
+                        @method('get')
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalAdminTitle">Generate Report Activity</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group align-middle">
+                                <label class="form-label">Pilih Tanggal Kegiatan</label>
+                                <input class="form-control p-1" type="date" name="tanggal">
                             </div>
-                            <div class="modal-body">
-                                <div class="form-group align-middle">
-                                    <label class="form-label">Pilih Tanggal Kegiatan</label>
-                                    <input class="form-control p-1" type="date" name="tanggal">
-                                </div>
-                            </div>
+                        </div>
 
-                            <div class="modal-footer">
-                                <button type="submit" formtarget="_blank"
-                                    class="btn btn-primary justify-content-center">
-                                    Generate
-                                </button>
-                                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
-                                    Tutup
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                        <div class="modal-footer">
+                            <button type="submit" formtarget="_blank" class="btn btn-primary justify-content-center">
+                                Generate
+                            </button>
+                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
+                                Tutup
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
 
-    </div>
-@endsection
+        <!-- Modal close temuan -->
+        <div class="modal fade" id="close-temuan-confirmation-modal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog modal-md" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="modalAdminTitle">Apakah anda yakin?</h2>
+                    </div>
+                    {{-- <form action="#" method="POST">
+                    @csrf
+                    @method('put') --}}
+                    <div class="modal-body">
+                        <input type="text" id="id_modal" name="id" hidden>
+                        <div class="form-group text-center">
+                            <div class="text-warning" style="font-size: 100px">
+                                <i class="mdi mdi-comment-question-outline"></i>
+                            </div>
+                            <div>
+                                <h4>Status temuan ini akan diubah menjadi "CLOSE"!</h4>
+                            </div>
+                        </div>
 
-@section('javascript')
-    <script>
-        $(document).ready(function() {
-            $('#ModalTemuan').on('show.bs.modal', function(e) {
-                var tanggal = $(e.relatedTarget).data('tanggal');
-                var area = $(e.relatedTarget).data('area');
-                var line = $(e.relatedTarget).data('line');
-                var no_span = $(e.relatedTarget).data('no_span');
-                var no_sleeper = $(e.relatedTarget).data('no_sleeper');
-                var kilometer = $(e.relatedTarget).data('kilometer');
-                var part = $(e.relatedTarget).data('part');
-                var detail_part = $(e.relatedTarget).data('detail_part');
-                var direction = $(e.relatedTarget).data('direction');
-                var defect = $(e.relatedTarget).data('defect');
-                var klasifikasi = $(e.relatedTarget).data('klasifikasi');
-                var remark = $(e.relatedTarget).data('remark');
-                var pic = $(e.relatedTarget).data('pic');
-                var status = $(e.relatedTarget).data('status');
-                var photo = $(e.relatedTarget).data('photo');
-                var photo_temuan = '<img class"img-thumbnail" style="width: 60%"src="' +
-                    photo + '" alt="Tidak ada photo dokumentasi">'
-                console.log(photo_temuan);
+                        <div class="modal-footer">
+                            <button type="sumbit" class="btn btn-primary justify-content-center">
+                                Submit
+                            </button>
+                            <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">
+                                Cancel
+                            </button>
+                        </div>
+                        {{-- </form> --}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endsection
 
-                $('#tanggal_modal').val(tanggal);
-                $('#area_modal').val(area);
-                $('#line_modal').val(line);
-                $('#no_span_modal').val(no_span);
-                $('#no_sleeper_modal').val(no_sleeper);
-                $('#kilometer_modal').val(kilometer);
-                $('#part_modal').val(part);
-                $('#detail_part_modal').val(detail_part);
-                $('#direction_modal').val(direction);
-                $('#defect_modal').val(defect);
-                $('#klasifikasi_modal').val(klasifikasi);
-                $('#remark_modal').val(remark);
-                document.getElementById("pic_modal").innerHTML = pic;
-                $('#status_modal').val(status);
-                document.getElementById("photo").innerHTML = photo_temuan;
+    @section('javascript')
+        <script>
+            $(document).ready(function() {
+                $('#ModalTemuan').on('show.bs.modal', function(e) {
+                    var id = $(e.relatedTarget).data('id');
+                    var tanggal = $(e.relatedTarget).data('tanggal');
+                    var area = $(e.relatedTarget).data('area');
+                    var line = $(e.relatedTarget).data('line');
+                    var no_span = $(e.relatedTarget).data('no_span');
+                    var no_sleeper = $(e.relatedTarget).data('no_sleeper');
+                    var kilometer = $(e.relatedTarget).data('kilometer');
+                    var part = $(e.relatedTarget).data('part');
+                    var detail_part = $(e.relatedTarget).data('detail_part');
+                    var direction = $(e.relatedTarget).data('direction');
+                    var defect = $(e.relatedTarget).data('defect');
+                    var klasifikasi = $(e.relatedTarget).data('klasifikasi');
+                    var remark = $(e.relatedTarget).data('remark');
+                    var pic = $(e.relatedTarget).data('pic');
+                    var status = $(e.relatedTarget).data('status');
+                    var photo = $(e.relatedTarget).data('photo');
+                    var photo_temuan = '<img class"img-thumbnail" style="width: 60%"src="' +
+                        photo + '" alt="Tidak ada photo dokumentasi">'
+                    console.log(photo_temuan);
+
+                    $('#tanggal_modal').val(tanggal);
+                    $('#area_modal').val(area);
+                    $('#line_modal').val(line);
+                    $('#no_span_modal').val(no_span);
+                    $('#no_sleeper_modal').val(no_sleeper);
+                    $('#kilometer_modal').val(kilometer);
+                    $('#part_modal').val(part);
+                    $('#detail_part_modal').val(detail_part);
+                    $('#direction_modal').val(direction);
+                    $('#defect_modal').val(defect);
+                    $('#klasifikasi_modal').val(klasifikasi);
+                    $('#remark_modal').val(remark);
+                    document.getElementById("pic_modal").innerHTML = pic;
+                    $('#status_modal').val(status);
+                    document.getElementById("photo").innerHTML = photo_temuan;
+                });
             });
-        });
-    </script>
-@endsection
+        </script>
+    @endsection

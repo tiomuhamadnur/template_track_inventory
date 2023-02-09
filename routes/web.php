@@ -128,7 +128,7 @@ Route::middleware('auth')->group(function () {
     Route::get('transisi-user', [AuthController::class, 'transisi_user'])->name('transisi.user');
 
     Route::controller(DashboardController::class)->group(function () {
-        // Route::get('/home', 'index')->name('home');
+        Route::get('/home', 'home');
         Route::get('/', 'index')->name('home');
     });
 
@@ -228,6 +228,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/usermanage', 'store')->name('usermanage.store');
             Route::get('/usermanage/{id}/update', 'edit')->name('usermanage.edit');
             Route::put('/usermanage', 'update')->name('usermanage.update');
+            Route::put('/usermanage/reset-password', 'reset_password')->name('reset.password');
         });
 
         // MAINLINE AREA //

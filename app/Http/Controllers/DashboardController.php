@@ -12,6 +12,11 @@ class DashboardController extends Controller
         return view('mainline.mainline_dashboard.index');
     }
 
+    public function home()
+    {
+        return redirect()->route('home');
+    }
+
     public function create()
     {
         //

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pegawai;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -22,14 +24,30 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'photo' => ['file', 'image'],
+            'photo' => ['image'],
         ], [
             'photo.image' => 'File harus dalam format gambar/photo!'
         ]);
 
-        $cek = Pegawai::where('email', $request->email)->get();
-        if ($cek->count() == 0) {
-            $photo_profil = $request->file('photo')->store('photo-profil/' . $request->role);
+        if ($request->hasFile('photo') && $request->photo != '') {
+            $cek = Pegawai::where('email', $request->email)->get();
+            if ($cek->count() == 0) {
+                $photo_profil = $request->file('photo')->store('photo-profil/' . $request->role);
+                Pegawai::create([
+                    "name" => $request->name,
+                    "email" => $request->email,
+                    "password" => Hash::make('user123'),
+                    "jabatan" => $request->jabatan,
+                    "section" => $request->section,
+                    "departement" => $request->departement,
+                    "role" => $request->role,
+                    "photo" => $photo_profil,
+                ]);
+                return redirect()->route('usermanage.index');
+            } else {
+                return back();
+            }
+        } else {
             Pegawai::create([
                 "name" => $request->name,
                 "email" => $request->email,
@@ -38,23 +56,38 @@ class UserController extends Controller
                 "section" => $request->section,
                 "departement" => $request->departement,
                 "role" => $request->role,
-                "photo" => $photo_profil,
             ]);
             return redirect()->route('usermanage.index');
-        } else {
-            return back();
         }
     }
 
-    public function show($id)
+    public function reset_password(Request $request)
     {
-        //
+        $id = $request->id;
+        $user = Pegawai::findOrFail($id);
+        if ($user){
+            $user->update([
+                "password" => Hash::make('user123'),
+            ]);
+            return redirect()->route('usermanage.index');
+        } else {
+            return redirect()->route('usermanage.index');
+        }
     }
 
     public function edit($id)
     {
-        $user = Pegawai::findOrFail($id);
-        return view('user.update', compact(['user']));
+        try {
+            $secret = Crypt::decryptString($id);
+            $user = Pegawai::findOrFail($secret);
+            if ($user){
+                return view('user.update', compact(['user']));
+            } else {
+                return redirect()->back();
+            }
+        } catch (DecryptException $e) {
+            return redirect()->back();
+        }
     }
 
     public function update(Request $request)
@@ -72,14 +105,13 @@ class UserController extends Controller
                 $cek->update([
                     "name" => $request->name,
                     "email" => $request->email,
-                    "password" => Hash::make('user123'),
                     "jabatan" => $request->jabatan,
                     "section" => $request->section,
                     "departement" => $request->departement,
                     "role" => $request->role,
                     "photo" => $photo_profil,
                 ]);
-                return redirect()->route('usermanage.index');
+                return back();
             } else {
                 return back();
             }
@@ -89,13 +121,12 @@ class UserController extends Controller
                 $cek->update([
                     "name" => $request->name,
                     "email" => $request->email,
-                    "password" => Hash::make('user123'),
                     "jabatan" => $request->jabatan,
                     "section" => $request->section,
                     "departement" => $request->departement,
                     "role" => $request->role,
                 ]);
-                return redirect()->route('usermanage.index');
+                return back();
             }
         }
 

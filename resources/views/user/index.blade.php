@@ -67,7 +67,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('usermanage.edit', $item->id) }}"
+                                            <a href="{{ route('usermanage.edit', Crypt::encryptString($item->id)) }}"
                                                 class="btn-sm btn-outline-warning btn-sm" type="button">Edit</a>
                                         </td>
                                     </tr>
