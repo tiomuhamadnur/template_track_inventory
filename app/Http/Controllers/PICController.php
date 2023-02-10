@@ -26,15 +26,24 @@ class PICController extends Controller
         return view('pic.create');
     }
 
+    public function profile()
+    {
+        return view('profile.index');
+    }
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function update()
     {
-        //
+        return view('profile.update');
+    }
+
+    public function changepass()
+    {
+        return view('profile.changepass');
     }
 
     /**
@@ -66,10 +75,6 @@ class PICController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.

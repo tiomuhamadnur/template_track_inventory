@@ -106,7 +106,7 @@
                                                             data-detail_part="{{ $item->detail_part->name }}"
                                                             data-kilometer="{{ $item->mainline->kilometer }}"
                                                             data-direction="{{ $item->direction }}"
-                                                            data-defect="{{ $item->defect->name }}"
+                                                            {{-- data-defect="{{ $item->defect->name }}" --}}
                                                             data-klasifikasi="{{ $item->klasifikasi }}"
                                                             data-pic="{{ $item->pic }}"
                                                             data-remark="{{ $item->remark }}"

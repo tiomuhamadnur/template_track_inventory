@@ -65,7 +65,7 @@ class UserController extends Controller
     {
         $id = $request->id;
         $user = Pegawai::findOrFail($id);
-        if ($user){
+        if ($user) {
             $user->update([
                 "password" => Hash::make('user123'),
             ]);
@@ -80,7 +80,7 @@ class UserController extends Controller
         try {
             $secret = Crypt::decryptString($id);
             $user = Pegawai::findOrFail($secret);
-            if ($user){
+            if ($user) {
                 return view('user.update', compact(['user']));
             } else {
                 return redirect()->back();
@@ -129,7 +129,6 @@ class UserController extends Controller
                 return back();
             }
         }
-
     }
 
     public function destroy($id)

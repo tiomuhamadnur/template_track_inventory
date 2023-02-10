@@ -224,6 +224,9 @@ Route::middleware('auth')->group(function () {
         Route::controller(PICController::class)->group(function () {
             Route::get('/pic', 'index')->name('pic.index')->name('pic.index');
             Route::get('/pic-create', 'create')->name('pic.create')->name('pic.create');
+            Route::get('/profile', 'profile')->name('profile')->name('profile');
+            Route::get('/profile-update', 'update')->name('profile.update')->name('profile.update');
+            Route::get('/profile-changepass', 'changepass')->name('profile.changepass')->name('profile.changepass');
         });
 
         Route::controller(UserController::class)->group(function () {

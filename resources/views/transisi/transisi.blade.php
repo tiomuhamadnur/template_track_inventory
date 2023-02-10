@@ -12,6 +12,13 @@
 <body>
     <div class="container">
 
+        <div class="main">
+            <h1>Admin Dashboard Switch<div class="roller">
+                <span id="rolltext">Exodus<br>
+                Data Distribution System<br>
+            </div>
+        </div>
+
         <div class="bg">
             <ul class="glass">
                 <li></li>

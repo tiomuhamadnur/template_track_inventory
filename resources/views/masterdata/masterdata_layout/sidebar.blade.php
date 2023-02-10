@@ -39,8 +39,14 @@
 
         <li class="nav-item nav-category">Settings</li>
         <li class="nav-item animate__animated animate__fadeInLeft">
-            <a class="nav-link" href="/usermanage" aria-expanded="false" aria-controls="auth">
+            <a class="nav-link" href="/profile" aria-expanded="false" aria-controls="auth">
                 <i class="menu-icon mdi mdi-account"></i>
+                <span class="menu-title">My Profile</span>
+            </a>
+        </li>
+        <li class="nav-item animate__animated animate__fadeInLeft">
+            <a class="nav-link" href="/usermanage" aria-expanded="false" aria-controls="auth">
+                <i class="menu-icon mdi mdi-account-multiple"></i>
                 <span class="menu-title">Management User</span>
             </a>
         </li>

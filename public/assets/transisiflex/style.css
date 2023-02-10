@@ -10,7 +10,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: grey ;
+    background: rgb(222, 221, 221) ;
 }
 
 .container{
@@ -27,13 +27,13 @@ body {
     position: relative;
     max-width: 300px;
     height: 215px;
-    background: #fff;
-    margin: 30px 10px;
+    background:linear-gradient(324deg, rgba(43,43,43,1) 52%, rgb(0, 9, 74) 86%);
+    margin: 20px 10px;
     padding: 20px 15px;
     display: flex;
     flex-direction: column;
     box-shadow: 0 5px 202px rgba(0,0,0,0.5);
-    transition: 0.3s ease-in-out;
+    transition: 0.5s ease-in-out;
     border-radius: 10px;
 
 }
@@ -43,7 +43,7 @@ body {
 }
 .container .card .imgBx {
     position: relative;
-    width:260px;
+    width: 260px;
     height: 260px;
     box-shadow: 0 5px 202px rgba(0,0,0,0.5);
 }
@@ -59,7 +59,7 @@ body {
     margin-top: -130px;
     padding: 10px 15px;
     text-align: center;
-    color: #111;
+    color: white;
     visibility: hidden;
     opacity: 0;
     transition: 0.3s ease-in-out;
@@ -183,4 +183,98 @@ body {
 
 a:link {
 	text-decoration: none;
+}
+
+
+.main{
+    height: 30vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0px;
+}
+
+h1{
+    text-align: center;
+    text-transform: uppercase;
+    color: black;
+    font-size: 3.5rem;
+}
+
+.roller{
+    height: 4.125rem;
+    line-height: 3.9rem;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #093169
+}
+
+#spare-time{
+    font-size: 1rem;
+    font-style: italic;
+    letter-spacing: 1rem;
+    margin-top: 0;
+    color: black;
+}
+
+.roller #rolltext{
+    position: absolute;
+    top: 0;
+    animation: slide 5s infinite;
+}
+
+@keyframes slide{
+    0%{
+        top: 0;
+    }
+    25%{
+        top: -4rem;
+    }
+    50%{
+        top: -8rem;
+    }
+    /* 72.5%{
+        top: -12.1rem
+    } */
+}
+
+@media screen and (max-width: 600px){
+    h1{
+        text-align: center;
+        text-transform: uppercase;
+        color: black;
+        font-size: 2.125rem;
+    }
+    .roller{
+        height: 2.6rem;
+        line-height: 2.125rem;
+    }
+    #spare-time{
+        font-size: 1rem
+        letter-spacing: 0.1rem;
+    }
+    .roller #roltext{
+        animation: slide-mob 1s infinite;
+    }
+
+    @keyframes slide-mob {
+        0%{
+            top: 0;
+        }
+        25%{
+            top:-2.125rem;
+        }
+        50%{
+            top: -4.25rem;
+        }
+        72.5%{
+            top: -6.375rem;
+        }
+    }
 }
