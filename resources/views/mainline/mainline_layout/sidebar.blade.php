@@ -18,6 +18,8 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('temuan_mainline.index') }}">List Temuan
                             Mainline</a>
                     </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('accelerometer.index') }}">Accelerometer</a>
+                    </li>
                 </ul>
             </div>
         </li>
