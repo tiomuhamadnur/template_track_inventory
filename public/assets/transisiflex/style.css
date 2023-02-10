@@ -10,7 +10,30 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgb(222, 221, 221) ;
+    background: linear-gradient(
+        45deg,
+        hsl(106deg 92% 20%) 0%,
+        hsl(142deg 100% 21%) 11%,
+        hsl(159deg 100% 22%) 21%,
+        hsl(176deg 100% 23%) 29%,
+        hsl(192deg 100% 30%) 38%,
+        hsl(201deg 100% 38%) 47%,
+        hsl(207deg 100% 45%) 56%,
+        hsl(211deg 100% 49%) 66%,
+        hsl(214deg 100% 50%) 77%,
+        hsl(236deg 99% 66%) 96%
+      );
+      background-size: 200%;
+      animation: bg-animation 5s infinite alternate;
+}
+
+@keyframes bg-animation {
+    0% {
+        background-position: left;
+    }
+    100% {
+        background-position: right;
+    }
 }
 
 .container{
@@ -20,20 +43,20 @@ body {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    padding: 50px;
+    padding: 62px;
 }
 
 .container .card {
     position: relative;
     max-width: 300px;
-    height: 215px;
+    height: 300px;
     background:linear-gradient(324deg, rgba(43,43,43,1) 52%, rgb(0, 9, 74) 86%);
     margin: 20px 10px;
-    padding: 20px 15px;
+    padding: 30px 15px;
     display: flex;
     flex-direction: column;
     box-shadow: 0 5px 202px rgba(0,0,0,0.5);
-    transition: 0.5s ease-in-out;
+    transition: 0.4s ease-in-out;
     border-radius: 10px;
 
 }
@@ -200,7 +223,7 @@ h1{
     text-align: center;
     text-transform: uppercase;
     color: black;
-    font-size: 3.5rem;
+    font-size: 3.3rem;
 }
 
 .roller{
@@ -212,7 +235,7 @@ h1{
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #093169
+    color: #d5d7da;
 }
 
 #spare-time{
@@ -256,7 +279,7 @@ h1{
         line-height: 2.125rem;
     }
     #spare-time{
-        font-size: 1rem
+        font-size: 1rem;
         letter-spacing: 0.1rem;
     }
     .roller #roltext{

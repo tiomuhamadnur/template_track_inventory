@@ -14,7 +14,7 @@
 
     <div class="container">
         <div class="main">
-            <h1>User Dashboard Switch<div class="roller">
+            <h1>Dashboard Switch<div class="roller">
                 <span id="rolltext">Exodus<br>
                 Data Distribution System<br>
             </div>

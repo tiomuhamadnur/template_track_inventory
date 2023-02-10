@@ -13,7 +13,7 @@
     <div class="container">
 
         <div class="main">
-            <h1>Admin Dashboard Switch<div class="roller">
+            <h1 class=" animate__animated animate__fadeInDown">Dashboard Switch<div class="roller">
                 <span id="rolltext">Exodus<br>
                 Data Distribution System<br>
             </div>
