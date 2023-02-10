@@ -57,8 +57,9 @@
                             <div class="name">No Span</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <select id="mainline_id" name="mainline_id" class="form-select">
-                                        <option disabled="disabled" selected="selected">- Pilih Nomor Span -</option>
+                                    <select id="mainline_id" name="mainline_id" class="form-select" required>
+                                        <option value="" disabled="disabled" selected="selected">- Pilih Nomor Span -
+                                        </option>
                                     </select>
                                     <div class="select-dropdown"></div>
                                 </div>
@@ -69,8 +70,9 @@
                             <div class="name">Parts</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <select id="part_id" name="part_id" class="form-select">
-                                        <option disabled="disabled" selected="selected">- Pilih Nama Part -</option>
+                                    <select id="part_id" name="part_id" class="form-select" required>
+                                        <option value="" disabled="disabled" selected="selected">- Pilih Nama Part -
+                                        </option>
                                         @foreach ($part as $item)
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                                         @endforeach
@@ -84,8 +86,9 @@
                             <div class="name">Detail Part</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <select id="detail_part_id" name="detail_part_id" class="form-select">
-                                        <option disabled="disabled" selected="selected">- Pilih Detail Part -</option>
+                                    <select id="detail_part_id" name="detail_part_id" class="form-select" required>
+                                        <option value="" disabled="disabled" selected="selected">- Pilih Detail Part -
+                                        </option>
                                     </select>
                                     <div class="select-dropdown"></div>
                                 </div>
@@ -96,8 +99,8 @@
                             <div class="name">Defect</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <select id="defect_id" name="defect_id" class="form-select">
-                                        <option disabled="disabled" selected="selected">- Pilih Nama Defect -
+                                    <select id="defect_id" name="defect_id" class="form-select" required>
+                                        <option value="" disabled="disabled" selected="selected">- Pilih Nama Defect -
                                         </option>
                                     </select>
                                     <div class="select-dropdown"></div>
@@ -119,7 +122,8 @@
                             <div class="value">
                                 <div class="input-group">
                                     <select name="direction" class="form-select">
-                                        <option disabled="disabled" selected="selected">- Pilih Direction -</option>
+                                        <option value="" disabled="disabled" selected="selected">- Pilih Direction -
+                                        </option>
                                         <option value="L">L (Left)</option>
                                         <option value="R">R (Right)</option>
                                     </select>
@@ -141,8 +145,9 @@
                             <div class="name">Classification of Defect</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <select name="klasifikasi" class="form-select">
-                                        <option disabled="disabled" selected="selected">- Pilih Klasifikasi -
+                                    <select name="klasifikasi" class="form-select" required>
+                                        <option value="" disabled="disabled" selected="selected">- Pilih
+                                            Klasifikasi -
                                         </option>
                                         <option value="Minor">Minor</option>
                                         <option value="Moderate">Moderate</option>
@@ -158,7 +163,7 @@
                             <div class="value">
                                 <div class="input-group">
                                     <input class="form-control" type="text" name="pic"
-                                        value="{{ auth()->user()->name }}" readonly>
+                                        value="{{ auth()->user()->name }}" readonly required>
                                 </div>
                             </div>
                         </div>
@@ -168,7 +173,7 @@
                             <div class="name">Tanggal</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="form-control" type="date" name="tanggal">
+                                    <input class="form-control" type="date" name="tanggal" required>
                                 </div>
                             </div>
                         </div>
@@ -177,7 +182,12 @@
                             <div class="name">Foto Dokumentasi</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="form-control" type="file" name="photo">
+                                    <input class="form-control" type="file" name="photo" required>
+                                    @error('photo')
+                                        <p class="bg-danger rounded-3 text-center text-white mt-1">
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
                                 </div>
                             </div>
                         </div>

@@ -105,11 +105,11 @@
                                                             data-part="{{ $item->part->name }}"
                                                             data-detail_part="{{ $item->detail_part->name }}"
                                                             data-kilometer="{{ $item->mainline->kilometer }}"
-                                                            data-direction="{{ $item->direction }}"
-                                                            {{-- data-defect="{{ $item->defect->name }}" --}}
+                                                            data-direction="{{ $item->direction ?? '-' }}"
+                                                            data-defect="{{ $item->defect->name ?? '-' }}"
                                                             data-klasifikasi="{{ $item->klasifikasi }}"
                                                             data-pic="{{ $item->pic }}"
-                                                            data-remark="{{ $item->remark }}"
+                                                            data-remark="{{ $item->remark ?? '-' }}"
                                                             data-status="{{ $item->status }}"
                                                             data-photo="{{ asset('storage/' . $item->photo) }}"
                                                             data-href="{{ '/temuan_mainline' . '/' . Crypt::encryptString($item->id) . '/close_temuan' }}">
