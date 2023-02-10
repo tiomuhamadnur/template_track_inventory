@@ -17,74 +17,80 @@
 
                     <div class="grid grid-cols-12">
 
-                            <div class="intro-y col-span-12 lg:col-span-6">
-                                <div class="intro-y box p-2">
-                                    <input id="crud-form-1" type="text" class="form-control w-full" name="id"
-                                        required value=" FESF" hidden>
-                                    <div class="text-center">
-
+                        <div class="intro-y col-span-12 lg:col-span-6">
+                            <div class="intro-y box p-2">
+                                <div class="row">
+                                    <div class="text-center mb-3">
+                                        @if (auth()->user()->photo != null)
+                                            <img class="img-thumbnail" style="height: 250px"
+                                                src="{{ asset('storage/' . auth()->user()->photo) }}" alt="Photo Profil">
+                                        @else
                                             <img class="img-thumbnail" style="height: 250px"
                                                 src="{{ asset('storage/photo-profil/default.png') }}" alt="Photo Profil">
+                                        @endif
                                     </div>
-                                    <div class="form-label mt-2">
-                                        <div class="name">Ubah Foto Profil</div>
-                                        <input class="form-control w-full" type="file" name="photo">
+                                    <div class="col">
+                                        <form action="{{ route('profile.update.photo') }}" method="POST"
+                                            enctype="multipart/form-data">
+                                            @csrf
+                                            @method('put')
+                                            <div class="form-label mt-2">
+                                                <div class="name mb-2">Ubah Foto Profil</div>
+                                                <input class="form-control w-full" type="file" name="photo" required>
+                                                @error('photo')
+                                                    <p class="bg-danger rounded-3 text-center text-white mt-1">
+                                                        {{ $message }}
+                                                    </p>
+                                                @enderror
+                                            </div>
+                                            <div class="mt-3 mb-5 btn-group">
+                                                <button type="submit" class="btn btn-primary w-24 mr-1">Submit</button>
+                                                <a href="{{ route('profile') }}" class="btn btn-danger w-24 mr-1">Cancel</a>
+                                            </div>
+                                        </form>
                                     </div>
-                                    <div class="row g-2">
-                                        <div class="col text-center">
-                                            <label for="nameWithTitle" class="form-label">Section</label>
-                                            <input readonly type="text" id="" name="no" value="Track & Civil Strutcure Maintenance"
-                                                class="form-control text-center">
-                                        </div>
-                                    </div>
-                                    <div class="row g-2 mt-3">
-                                        <div class="col mb-1 text-center">
-                                            <label for="nameWithTitle" class="form-label">Role </label>
-                                            <input readonly type="text" id="" name="no" value="User"
-                                                class="form-control text-center">
-                                        </div>
-                                        <div class="col mb-1 text-center">
-                                            <label for="" class="form-label">Jabatan</label>
-                                            <input readonly type="text" value="Technician" class="form-control text-center">
-                                        </div>
-                                    </div>
-                                    <div class="row g-2">
-                                        <div class="col mb-1 text-center">
-                                            <label for="nameWithTitle" class="form-label">E-mail</label>
-                                            <input readonly type="text" id="" name="no" value="idede@jakartamrt.co.id"
-                                                class="form-control text-center">
-                                        </div>
-                                        <div class="col mb-1 text-center">
-                                            <label for="" class="form-label">Password</label>
-                                            <input readonly type="password" value="xxxxx" class="form-control text-center" id="myPassword">
-                                            <p class="mt-2" type="checkbox" onclick="showPassword()"><i class="mdi mdi-eye ">  Show Password</i></p>
-                                        </div>
-                                    </div>
-                                    <div class="text-center mt-3 mb-5">
-                                        <a href="/profile-changepass"
-                                            class="btn btn-outline-primary w-24 mr-1">Change Password</a>
-                                        <a href="/profile-update"
-                                            class="btn btn-primary w-24 mr-1">Save</a>
+                                    <div class="col">
+                                        <form action="{{ route('profile.update.password') }}" method="POST">
+                                            @csrf
+                                            @method('put')
+                                            <div class="form-label mt-2">
+                                                <div class="name mb-2">Ubah Password</div>
+                                                <input class="form-control w-full mb-2" type="password" name="old_password"
+                                                    placeholder="Old Password" required>
+                                                <input class="form-control w-full mb-2" type="password" name="new_password"
+                                                    placeholder="New Password" required>
+                                                <input class="form-control w-full mb-2" type="password"
+                                                    name="confirm_new_password" placeholder="Confirm New Password" required>
+                                                @if (session('status'))
+                                                    <p class="bg-danger rounded-3 text-center text-white mt-1">
+                                                        {{ session('status') }}
+                                                    </p>
+                                                @endif
+                                            </div>
+                                            <div class="mt-3 mb-5">
+                                                <button type="submit" class="btn btn-warning w-24 mr-1 me-2">Ubah</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
+                            </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
 
-    <script>
-    function showPassword() {
-        var x = document.getElementById("myPassword");
-        if (x.type === "password") {
-          x.type = "text";
-        } else {
-          x.type = "password";
-        }
-      }
-    </script>
-@endsection
-
+        <script>
+            function showPassword() {
+                var x = document.getElementById("myPassword");
+                if (x.type === "password") {
+                    x.type = "text";
+                } else {
+                    x.type = "password";
+                }
+            }
+        </script>
+    @endsection

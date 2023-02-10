@@ -2,25 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pegawai;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class PICController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('pic.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('pic.create');
@@ -30,12 +22,7 @@ class PICController extends Controller
     {
         return view('profile.index');
     }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function update()
     {
         return view('profile.update');
@@ -46,42 +33,52 @@ class PICController extends Controller
         return view('profile.changepass');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function update_photo(Request $request)
     {
-        //
+        $this->validate($request, [
+            'photo' => ['image'],
+        ], [
+            'photo.image' => 'File harus dalam format gambar/photo!'
+        ]);
+        $id = auth()->user()->id;
+        if ($request->hasFile('photo') && $request->photo != '') {
+            $photo_profil = $request->file('photo')->store('photo-profil/' . auth()->user()->role);
+            $user = Pegawai::findOrFail($id);
+            $user->update([
+                "photo" => $photo_profil,
+            ]);
+            return redirect()->route('profile');
+        } else {
+            return back();
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function update_password(Request $request)
+    {
+        $id = auth()->user()->id;
+
+        $user = Pegawai::findOrFail($id);
+        $old_password = $user->password;
+        $cek = Hash::check($request->old_password, $old_password);
+        if($cek) {
+            if ($request->new_password == $request->confirm_new_password){
+                $user->update([
+                    'password' => Hash::make($request->new_password),
+                ]);
+                return redirect()->route('logout');
+            } else {
+                return back()->withStatus('New password berbeda!');
+            }
+        } else {
+            return back()->withStatus('Old password salah!');
+        }
+    }
+
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

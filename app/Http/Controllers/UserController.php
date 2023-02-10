@@ -93,7 +93,7 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $this->validate($request, [
-            'photo' => ['file', 'image'],
+            'photo' => ['image'],
         ], [
             'photo.image' => 'File harus dalam format gambar/photo!'
         ]);

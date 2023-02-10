@@ -222,11 +222,12 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::controller(PICController::class)->group(function () {
-            Route::get('/pic', 'index')->name('pic.index')->name('pic.index');
-            Route::get('/pic-create', 'create')->name('pic.create')->name('pic.create');
-            Route::get('/profile', 'profile')->name('profile')->name('profile');
-            Route::get('/profile-update', 'update')->name('profile.update')->name('profile.update');
-            Route::get('/profile-changepass', 'changepass')->name('profile.changepass')->name('profile.changepass');
+            Route::get('/pic', 'index')->name('pic.index');
+            Route::get('/pic-create', 'create')->name('pic.create');
+            Route::get('/profile', 'profile')->name('profile');
+            Route::get('/profile-update', 'update')->name('profile.update');
+            Route::put('/profile-update', 'update_photo')->name('profile.update.photo');
+            Route::put('/profile-update/password', 'update_password')->name('profile.update.password');
         });
 
         Route::controller(UserController::class)->group(function () {

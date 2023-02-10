@@ -46,7 +46,6 @@ class TemuanDepoController extends Controller
 
 
         if ($request->hasFile('photo') && $request->photo != '') {
-
             $photo_temuan = $request->file('photo')->store('temuan/depo');
             TemuanDepo::create([
                 "line_id" => $request->line_id,
