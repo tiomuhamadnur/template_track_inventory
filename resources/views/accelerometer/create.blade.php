@@ -406,7 +406,7 @@
                         </div> --}}
 
                         <div>
-                            <a href="{{ route('accelerometer.index') }}" class="btn btn-danger rounded">Cancel</a>
+                            <a href="{{ route('accelerometer.index') }}" class="btn btn-warning rounded">Cancel</a>
                             <button class="btn btn-success ms-2" type="submit">Save</button>
                         </div>
                     </form>

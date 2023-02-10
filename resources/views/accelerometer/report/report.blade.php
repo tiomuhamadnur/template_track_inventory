@@ -224,3 +224,11 @@
         </div>
     </div>
 @endsection
+
+@section('javascript')
+    <script>
+        $(document).ready(function() {
+            window.print();
+        });
+    </script>
+@endsection

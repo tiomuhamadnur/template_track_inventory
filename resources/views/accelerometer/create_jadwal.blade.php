@@ -1,45 +1,48 @@
-@extends('../layout/' . $layout)
+@extends('masterdata.masterdata_layout.base')
 
-@section('subhead')
-    <title>Tambah Data Jadwal</title>
+@section('sub-title')
+    <title>Add Data Jadwal Accelerometer | TCSM</title>
 @endsection
 
-@section('subcontent')
-    <div class="intro-y flex items-center mt-8">
-        <h2 class="text-lg font-medium mr-auto">Form Data Jadwal Kegitan Accelerometer</h2>
-    </div>
-    <div class="grid grid-cols-12 gap-6 mt-5">
-        <div class="intro-y col-span-12 lg:col-span-6">
-            <!-- BEGIN: Form Layout -->
-            <form action="{{ route('accelerometer.jadwal.store') }}" method="POST">
-                @csrf
-                @method('post')
-                <div class="intro-y box p-5">
+@section('sub-content')
+    <h5>Mainline > Accelerometer > Create Data Jadwal</h5>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="home-tab">
+                <div class="d-sm-flex align-items-center justify-content-between border-bottom">
                     <div>
-                        <label for="crud-form-1" class="form-label">Nama Kegiatan</label>
-                        <input id="crud-form-1" type="text" class="form-control w-full" name="kegiatan"
-                            placeholder="Input nama kegiatan">
-                    </div>
-                    <div>
-                        <label for="crud-form-1" class="form-label mt-2">Tanggal</label>
-                        <input id="crud-form-1" type="date" class="form-control w-full" name="tanggal">
-                    </div>
-                    <div>
-                        <label for="crud-form-1" class="form-label mt-2">PIC</label>
-                        <input id="crud-form-1" type="text" class="form-control w-full" name="pic"
-                            placeholder="Input nama staff">
-                    </div>
-                    <div class="text-right mt-5">
-                        <a href="{{ route('accelerometer.index') }}" class="btn btn-outline-secondary w-24 mr-1">Cancel</a>
-                        <button type="submit" class="btn btn-primary w-24">Save</button>
                     </div>
                 </div>
-            </form>
-            <!-- END: Form Layout -->
+                <div class="col-lg-12 grid-margin stretch-card mt-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Form Data Jadwal</h4>
+                            <form class="forms-sample" action="{{ route('accelerometer.jadwal.store') }}" method="POST">
+                                @csrf
+                                @method('post')
+                                <div class="form-group">
+                                    <label for="exampleInputName1">Kegiatan</label>
+                                    <input type="text" name="kegiatan" class="form-control" id="exampleInputName1"
+                                        placeholder="Input Nama Kegiatan" value="Accelerometer" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail3">Tanggal</label>
+                                    <input type="date" class="form-control" name="tanggal" id="exampleInputEmail3"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">PIC</label>
+                                    <input type="text" class="form-control" name="pic" id="exampleInputEmail3"
+                                        value="{{ auth()->user()->name }}" required readonly>
+                                </div>
+                                <button type="submit" class="btn btn-outline-primary me-2">Submit</button>
+                                <button class="btn btn-light">Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
-@endsection
-
-@section('script')
-    @vite('resources/js/ckeditor-classic.js')
 @endsection

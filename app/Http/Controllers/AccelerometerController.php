@@ -6,26 +6,39 @@ use App\Models\Accelerometer;
 use App\Models\Area;
 use App\Models\JadwalAccelerometer;
 use App\Models\Line;
+use Carbon\Carbon;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class AccelerometerController extends Controller
 {
     public function index()
     {
-        $jadwal_accelerometer = JadwalAccelerometer::all();
+        $jadwal_accelerometer = JadwalAccelerometer::orderBy('id', 'desc')->get();
         return view('accelerometer.index', compact(['jadwal_accelerometer']));
     }
 
     public function index_summary($id)
     {
-        $jadwal = JadwalAccelerometer::findOrFail($id);
-        $accelerometer = Accelerometer::where('jadwal_id', $id)->get();
-        return view('accelerometer.accelerometer', compact(['jadwal','accelerometer']));
+        try {
+            $secret = Crypt::decryptString($id);
+            $jadwal = JadwalAccelerometer::findOrFail($secret);
+            if ($jadwal) {
+                $accelerometer = Accelerometer::where('jadwal_id', $secret)->get();
+                return view('accelerometer.accelerometer', compact(['jadwal','accelerometer']));
+            } else {
+                return redirect()->back();
+            }
+        } catch (DecryptException $e) {
+            return redirect()->back();
+        }
     }
 
     public function create()
     {
-        $jadwal = JadwalAccelerometer::all();
+        $bulan_ini = Carbon::now()->format('m');
+        $jadwal = JadwalAccelerometer::whereMonth('tanggal', $bulan_ini)->get();
         $area = Area::where('area', 'Mainline')->where('stasiun', 'false')->get();
         return view('accelerometer.create', compact(['jadwal','area']));
     }
@@ -61,7 +74,7 @@ class AccelerometerController extends Controller
 
     public function edit($id)
     {
-        
+
     }
 
     public function report(Request $request)
@@ -89,9 +102,9 @@ class AccelerometerController extends Controller
         $FTM_CPR_DT_X = $area_FTM_CPR_DT->value('sumbu_x');
         $FTM_CPR_DT_Y = $area_FTM_CPR_DT->value('sumbu_y');
         $FTM_CPR_DT_Z = $area_FTM_CPR_DT->value('sumbu_z');
-        
+
         // BATAS PETAK
-        
+
         $area_CPR_HJN_UT = Accelerometer::where('jadwal_id', $jadwal_id)->where('area_id', '8')->where('line_id', '1')->get();
         $CPR_HJN_UT_X = $area_CPR_HJN_UT->value('sumbu_x');
         $CPR_HJN_UT_Y = $area_CPR_HJN_UT->value('sumbu_y');
@@ -103,7 +116,7 @@ class AccelerometerController extends Controller
         $CPR_HJN_DT_Z = $area_CPR_HJN_DT->value('sumbu_z');
 
         // BATAS PETAK
-        
+
         $area_HJN_BLA_UT = Accelerometer::where('jadwal_id', $jadwal_id)->where('area_id', '10')->where('line_id', '1')->get();
         $HJN_BLA_UT_X = $area_HJN_BLA_UT->value('sumbu_x');
         $HJN_BLA_UT_Y = $area_HJN_BLA_UT->value('sumbu_y');
@@ -113,9 +126,9 @@ class AccelerometerController extends Controller
         $HJN_BLA_DT_X = $area_HJN_BLA_DT->value('sumbu_x');
         $HJN_BLA_DT_Y = $area_HJN_BLA_DT->value('sumbu_y');
         $HJN_BLA_DT_Z = $area_HJN_BLA_DT->value('sumbu_z');
-        
+
         // BATAS PETAK
-        
+
         $area_BLA_BLM_UT = Accelerometer::where('jadwal_id', $jadwal_id)->where('area_id', '12')->where('line_id', '1')->get();
         $BLA_BLM_UT_X = $area_BLA_BLM_UT->value('sumbu_x');
         $BLA_BLM_UT_Y = $area_BLA_BLM_UT->value('sumbu_y');
@@ -125,9 +138,9 @@ class AccelerometerController extends Controller
         $BLA_BLM_DT_X = $area_BLA_BLM_DT->value('sumbu_x');
         $BLA_BLM_DT_Y = $area_BLA_BLM_DT->value('sumbu_y');
         $BLA_BLM_DT_Z = $area_BLA_BLM_DT->value('sumbu_z');
-                
+
         // BATAS PETAK
-        
+
         $area_BLM_ASN_UT = Accelerometer::where('jadwal_id', $jadwal_id)->where('area_id', '14')->where('line_id', '1')->get();
         $BLM_ASN_UT_X = $area_BLM_ASN_UT->value('sumbu_x');
         $BLM_ASN_UT_Y = $area_BLM_ASN_UT->value('sumbu_y');
@@ -137,9 +150,9 @@ class AccelerometerController extends Controller
         $BLM_ASN_DT_X = $area_BLM_ASN_DT->value('sumbu_x');
         $BLM_ASN_DT_Y = $area_BLA_BLM_DT->value('sumbu_y');
         $BLM_ASN_DT_Z = $area_BLM_ASN_DT->value('sumbu_z');
-                        
+
         // BATAS PETAK
-        
+
         $area_ASN_SNY_UT = Accelerometer::where('jadwal_id', $jadwal_id)->where('area_id', '16')->where('line_id', '1')->get();
         $ASN_SNY_UT_X = $area_ASN_SNY_UT->value('sumbu_x');
         $ASN_SNY_UT_Y = $area_ASN_SNY_UT->value('sumbu_y');
@@ -149,9 +162,9 @@ class AccelerometerController extends Controller
         $ASN_SNY_DT_X = $area_ASN_SNY_DT->value('sumbu_x');
         $ASN_SNY_DT_Y = $area_ASN_SNY_DT->value('sumbu_y');
         $ASN_SNY_DT_Z = $area_ASN_SNY_DT->value('sumbu_z');
-                                
+
         // BATAS PETAK
-        
+
         $area_SNY_IST_UT = Accelerometer::where('jadwal_id', $jadwal_id)->where('area_id', '18')->where('line_id', '1')->get();
         $SNY_IST_UT_X = $area_SNY_IST_UT->value('sumbu_x');
         $SNY_IST_UT_Y = $area_SNY_IST_UT->value('sumbu_y');
@@ -163,7 +176,7 @@ class AccelerometerController extends Controller
         $SNY_IST_DT_Z = $area_SNY_IST_DT->value('sumbu_z');
 
         // BATAS PETAK
-        
+
         $area_IST_BNH_UT = Accelerometer::where('jadwal_id', $jadwal_id)->where('area_id', '20')->where('line_id', '1')->get();
         $IST_BNH_UT_X = $area_IST_BNH_UT->value('sumbu_x');
         $IST_BNH_UT_Y = $area_IST_BNH_UT->value('sumbu_y');
@@ -173,9 +186,9 @@ class AccelerometerController extends Controller
         $IST_BNH_DT_X = $area_IST_BNH_DT->value('sumbu_x');
         $IST_BNH_DT_Y = $area_IST_BNH_DT->value('sumbu_y');
         $IST_BNH_DT_Z = $area_IST_BNH_DT->value('sumbu_z');
-        
+
         // BATAS PETAK
-        
+
         $area_BNH_STB_UT = Accelerometer::where('jadwal_id', $jadwal_id)->where('area_id', '22')->where('line_id', '1')->get();
         $BNH_STB_UT_X = $area_BNH_STB_UT->value('sumbu_x');
         $BNH_STB_UT_Y = $area_BNH_STB_UT->value('sumbu_y');
@@ -209,7 +222,7 @@ class AccelerometerController extends Controller
         $DKA_BHI_DT_X = $area_DKA_BHI_DT->value('sumbu_x');
         $DKA_BHI_DT_Y = $area_DKA_BHI_DT->value('sumbu_y');
         $DKA_BHI_DT_Z = $area_DKA_BHI_DT->value('sumbu_z');
-        
+
         return view('accelerometer.report.report', compact([
             'jadwal',
 
@@ -268,7 +281,7 @@ class AccelerometerController extends Controller
             'SNY_IST_DT_X',
             'SNY_IST_DT_Y',
             'SNY_IST_DT_Z',
-            
+
             'IST_BNH_UT_X',
             'IST_BNH_UT_Y',
             'IST_BNH_UT_Z',
@@ -350,7 +363,12 @@ class AccelerometerController extends Controller
     public function destroy_jadwal(Request $request)
     {
         $id = $request->id;
-        JadwalAccelerometer::findOrFail($id)->delete();
-        return redirect()->route('accelerometer.index');
+        $cek = Accelerometer::where('jadwal_id', $id)->get();
+        if (!$cek){
+            JadwalAccelerometer::findOrFail($id)->delete();
+            return redirect()->route('accelerometer.index');
+        } else {
+            return redirect()->back();
+        }
     }
 }
