@@ -17,7 +17,8 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Ubah Status Temuan</h4>
-                            <form action="{{ route('temuan_depo.store.temuan') }}" method="POST">
+                            <form action="{{ route('temuan_depo.store.temuan') }}" method="POST"
+                                enctype='multipart/form-data'>
                                 @csrf
                                 @method('put')
                                 <div class="form-group">
@@ -29,6 +30,15 @@
                                     <label class="form-label">Defect</label>
                                     <input type="text" value="{{ $temuan_depo->defect->name }}" class="form-control"
                                         readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Photo Setelah Perbaikan</label>
+                                    <input type="file" class="form-control" name="photo_close" required>
+                                    @error('photo_close')
+                                        <p class="bg-danger rounded-3 text-center text-white mt-1">
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Status Temuan</label>

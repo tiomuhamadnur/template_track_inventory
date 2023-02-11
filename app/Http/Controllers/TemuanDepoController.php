@@ -150,12 +150,24 @@ class TemuanDepoController extends Controller
 
     public function store_temuan(Request $request)
     {
-        $id = $request->id;
-        $temuan_depo = TemuanDepo::findOrFail($id);
-        $temuan_depo->update([
-            "status" => $request->status,
+        $this->validate($request, [
+            'photo_close' => ['file', 'image'],
+        ], [
+            'photo_close.image' => 'File harus dalam format gambar/photo!'
         ]);
-        return redirect()->route('temuan_depo.index');
+
+        $id = $request->id;
+        if ($request->hasFile('photo_close') && $request->photo_close != '') {
+            $photo_close = $request->file('photo_close')->store('temuan/depo/perbaikan');
+            $temuan_depo = TemuanDepo::findOrFail($id);
+            $temuan_depo->update([
+                "status" => $request->status,
+                "photo_close" => $photo_close,
+            ]);
+            return redirect()->route('temuan_depo.index');
+        } else {
+            return redirect()->back();
+        }
     }
 
     public function edit($id)

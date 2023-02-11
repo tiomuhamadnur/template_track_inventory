@@ -83,7 +83,12 @@
                                                     {{ $item->mainline->line->code }}
                                                 </td>
                                                 <td class="text-center">
-                                                    {{ $item->mainline->no_span }}
+                                                    <span
+                                                        class="badge @if ($item->status == 'open') bg-success
+                                                    @else
+                                                    bg-danger @endif">
+                                                        {{ $item->mainline->no_span }}
+                                                    </span>
                                                 </td>
                                                 <td class="text-center">
                                                     {{ $item->part->name }}
@@ -112,6 +117,7 @@
                                                             data-remark="{{ $item->remark ?? '-' }}"
                                                             data-status="{{ $item->status }}"
                                                             data-photo="{{ asset('storage/' . $item->photo) }}"
+                                                            data-photo_close="{{ asset('storage/' . $item->photo_close) }}"
                                                             data-href="{{ '/temuan_mainline' . '/' . Crypt::encryptString($item->id) . '/close_temuan' }}">
                                                             Detail
                                                         </button>
@@ -139,16 +145,28 @@
                     <div class="modal-header">
                         <h3 class="modal-title" id="modalAdminTitle">Detail Temuan Mainline</h3>
                         <div class="col--1 text-center">
-                            <img class="img-xs rounded-circle img-thumbnail" id="examiner_modal"
-                                style="width: 70px; height: 70px;"
-                                src="{{ asset('assets/images/dashboard/examiner.png') }}" alt="">
+                            <img class="img-xs rounded-circle img-thumbnail" id="photo_pic_modal"
+                                style="width: 70px; height: 70px;" src="" alt="Examiner">
                             <p class="ml-5 fw-bolder" id="pic_modal">Examiner</p>
                         </div>
                     </div>
                     <form action="" method="POST">
                         <div class="modal-body">
-                            <div class="mb-4 text-center" id="photo">
+                            <div class="mb-4 text-center align-middle">
                                 {{-- KONTEN PHOTO DOKUMENTASI TEMUAN --}}
+                                <div class="border mx-auto" style="width: 70%">
+                                    <p class="fw-bolder mb-0">Sebelum Perbaikan</p>
+                                    <img src="" id="photo_modal" class="img-thumbnail"
+                                        alt="Tidak ada photo dokumentasi">
+                                </div>
+                            </div>
+                            <div class="mb-4 text-center align-middle">
+                                {{-- KONTEN PHOTO DOKUMENTASI TEMUAN CLOSE --}}
+                                <div class="border mx-auto" style="width: 70%">
+                                    <p class="fw-bolder mb-0">Setelah Perbaikan</p>
+                                    <img src="" id="photo_close_modal" class="img-thumbnail"
+                                        alt="Belum ada dokumentasi perbaikan">
+                                </div>
                             </div>
                             <div class="row g-2">
                                 <div class="col mb-1">
@@ -363,11 +381,18 @@
                     var klasifikasi = $(e.relatedTarget).data('klasifikasi');
                     var remark = $(e.relatedTarget).data('remark');
                     var pic = $(e.relatedTarget).data('pic');
+                    $.ajax({
+                        url: '/getAvatar?pic=' + pic,
+                        type: 'get',
+                        success: function(res) {
+                            $.each(res, function(key, value) {
+                                document.getElementById("photo_pic_modal").src = value;
+                            });
+                        }
+                    });
                     var status = $(e.relatedTarget).data('status');
                     var photo = $(e.relatedTarget).data('photo');
-                    var photo_temuan = '<img class"img-thumbnail" style="width: 60%"src="' +
-                        photo + '" alt="Tidak ada photo dokumentasi">'
-                    console.log(photo_temuan);
+                    var photo_close = $(e.relatedTarget).data('photo_close');
                     var href = $(e.relatedTarget).data('href');
 
                     $('#tanggal_modal').val(tanggal);
@@ -384,7 +409,8 @@
                     $('#remark_modal').val(remark);
                     document.getElementById("pic_modal").innerHTML = pic;
                     $('#status_modal').val(status);
-                    document.getElementById("photo").innerHTML = photo_temuan;
+                    document.getElementById("photo_modal").src = photo;
+                    document.getElementById("photo_close_modal").src = photo_close;
                     document.getElementById("close_temuan_modal").href = href;
                 });
             });

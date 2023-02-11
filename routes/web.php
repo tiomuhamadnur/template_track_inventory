@@ -163,6 +163,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/getSpan', 'getSpan')->name('getSpan');
         Route::get('/getDetailPart', 'getDetailPart')->name('getDetailPart');
         Route::get('/getDefect', 'getDefect')->name('getDefect');
+        Route::get('/getAvatar', 'getAvatar')->name('getAvatar');
 
         // FILTER DATA
         Route::get('/temuan-mainline/filter', 'filter')->name('temuan_mainline.filter');

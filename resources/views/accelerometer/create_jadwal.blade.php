@@ -36,7 +36,7 @@
                                         value="{{ auth()->user()->name }}" required readonly>
                                 </div>
                                 <button type="submit" class="btn btn-outline-primary me-2">Submit</button>
-                                <button class="btn btn-light">Cancel</button>
+                                <a href="{{ route('accelerometer.create') }}" class="btn btn-light">Cancel</a>
                             </form>
                         </div>
                     </div>

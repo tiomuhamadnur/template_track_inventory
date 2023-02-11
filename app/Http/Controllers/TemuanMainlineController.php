@@ -9,6 +9,7 @@ use App\Models\Defect;
 use App\Models\Line;
 use App\Models\Mainline;
 use App\Models\Part;
+use App\Models\Pegawai;
 use App\Models\Temuan;
 use App\Models\TransDefect;
 use Carbon\Carbon;
@@ -182,12 +183,25 @@ class TemuanMainlineController extends Controller
 
     public function store_temuan(Request $request)
     {
-        $id = $request->id;
-        $temuan = Temuan::findOrFail($id);
-        $temuan->update([
-            "status" => $request->status,
+        $this->validate($request, [
+            'photo_close' => ['file', 'image'],
+        ], [
+            'photo_close.image' => 'File harus dalam format gambar/photo!'
         ]);
-        return redirect()->route('temuan_mainline.index');
+
+        $id = $request->id;
+        if ($request->hasFile('photo_close') && $request->photo_close != '') {
+            $photo_close = $request->file('photo_close')->store('temuan/mainline/perbaikan');
+            $temuan = Temuan::findOrFail($id);
+            $temuan->update([
+                "status" => $request->status,
+                "photo_close" => $photo_close,
+            ]);
+            return redirect()->route('temuan_mainline.index');
+        } else {
+            return redirect()->back();
+        }
+
     }
 
     public function edit($id)
@@ -268,6 +282,21 @@ class TemuanMainlineController extends Controller
         ->get();
         if (count($defect) > 0) {
             return response()->json($defect);
+        }
+    }
+
+    public function getAvatar(Request $request)
+    {
+        $pic = $request->pic;
+        $photo = Pegawai::where('name', $pic)->first()->photo;
+        if ($photo != null){
+            return response()->json([
+                'photo' => asset('storage/' . $photo),
+            ]);
+        } else {
+            return response()->json([
+                'photo' => asset('storage/photo-profil/default.png'),
+            ]);
         }
     }
 }
