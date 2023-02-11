@@ -26,6 +26,8 @@
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('mainline.index') }}">Track Bed Mainline</a>
                     </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('wesel.index') }}">Wesel</a>
+                    </li>
                 </ul>
             </div>
         </li>

@@ -23,6 +23,7 @@ use App\Http\Controllers\TemuanMainlineController;
 use App\Http\Controllers\MasterdataDashboardController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WeselController;
 
 /*
 |--------------------------------------------------------------------------
@@ -240,7 +241,6 @@ Route::middleware('auth')->group(function () {
             Route::put('/usermanage/reset-password', 'reset_password')->name('reset.password');
         });
 
-        // MAINLINE AREA //
         Route::controller(AreaController::class)->group(function () {
             Route::get('/area', 'index')->name('area.index');
             Route::get('/area-create', 'create')->name('area.create');
@@ -309,6 +309,15 @@ Route::middleware('auth')->group(function () {
 
             // Import Trans Part & Defect
             Route::post('/TransDefect/import', 'import')->name('transDefect.import');
+        });
+
+        Route::controller(WeselController::class)->group(function () {
+            Route::get('/wesel', 'index')->name('wesel.index');
+            Route::get('/wesel-create', 'create')->name('wesel.create');
+            Route::post('/wesel', 'store')->name('wesel.store');
+            Route::get('/wesel/{id}/edit', 'edit')->name('wesel.edit');
+            Route::put('/wesel', 'update')->name('wesel.update');
+            Route::delete('/wesel', 'destroy')->name('wesel.delete');
         });
 
         // DEPO
