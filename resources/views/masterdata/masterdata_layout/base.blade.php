@@ -54,6 +54,7 @@
     <script src="{{ asset('assets/js/dashboard.js') }}"></script>
     <script src="{{ asset('assets/js/Chart.roundedBarCharts.js') }}"></script>
     <script src="{{ asset('assets/js/select2.js') }}"></script>
+    @include('masterdata.masterdata_layout.modal_notification')
     @yield('javascript')
 </body>
 

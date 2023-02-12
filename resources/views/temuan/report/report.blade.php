@@ -379,12 +379,13 @@
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection
 
-    @section('javascript')
-        <script>
-            $(document).ready(function() {
-                window.print();
-            });
-        </script>
-    @endsection
+@section('javascript')
+    <script>
+        $(document).ready(function() {
+            window.print();
+        });
+    </script>
+@endsection

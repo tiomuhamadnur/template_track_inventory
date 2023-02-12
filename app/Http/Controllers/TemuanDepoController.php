@@ -39,7 +39,7 @@ class TemuanDepoController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'photo' => ['file', 'image'],
+            'photo' => ['file', 'image', 'required'],
         ], [
             'photo.image' => 'File harus dalam format gambar/photo!'
         ]);
@@ -60,7 +60,7 @@ class TemuanDepoController extends Controller
                 "tanggal" => $request->tanggal,
                 "photo" => $photo_temuan,
             ]);
-            return redirect()->route('temuan_depo.index');
+            return redirect()->route('temuan_depo.index')->withNotify('Data temuan baru depo berhasil ditambahkan!');
         }
         else {
             TemuanDepo::create([
@@ -75,7 +75,7 @@ class TemuanDepoController extends Controller
                 "pic" => $request->pic,
                 "tanggal" => $request->tanggal,
             ]);
-            return redirect()->route('temuan_depo.index');
+            return redirect()->route('temuan_depo.index')->withNotify('Data temuan baru depo berhasil ditambahkan!');
         }
     }
 
@@ -151,7 +151,7 @@ class TemuanDepoController extends Controller
     public function store_temuan(Request $request)
     {
         $this->validate($request, [
-            'photo_close' => ['file', 'image'],
+            'photo_close' => ['file', 'image', 'required'],
         ], [
             'photo_close.image' => 'File harus dalam format gambar/photo!'
         ]);
@@ -164,7 +164,7 @@ class TemuanDepoController extends Controller
                 "status" => $request->status,
                 "photo_close" => $photo_close,
             ]);
-            return redirect()->route('temuan_depo.index');
+            return redirect()->route('temuan_depo.index')->withNotify('Status temuan depo berhasil diubah!');
         } else {
             return redirect()->back();
         }

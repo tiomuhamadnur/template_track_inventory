@@ -322,7 +322,12 @@
                         <div class="modal-header">
                             <h5 class="modal-title" id="modalAdminTitle">Generate Report Activity</h5>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body pt-3 mb-0">
+                            <div class="form-group align-middle">
+                                <label class="form-label">Examiner</label>
+                                <input class="form-control p-1" type="text" name="examiner"
+                                    placeholder="Nama examiner" required>
+                            </div>
                             <div class="form-group align-middle">
                                 <label class="form-label">Pilih Area</label> <br>
                                 <div class="btn-group align-middle">
@@ -349,7 +354,7 @@
                             </div>
                         </div>
 
-                        <div class="modal-footer">
+                        <div class="modal-footer mt-2">
                             <button type="submit" formtarget="_blank" class="btn btn-primary justify-content-center">
                                 Generate
                             </button>

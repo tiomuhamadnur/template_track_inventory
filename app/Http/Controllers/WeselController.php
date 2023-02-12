@@ -33,7 +33,7 @@ class WeselController extends Controller
             "tipe" => $request->tipe,
             "kilometer" => $request->kilometer,
         ]);
-        return redirect()->route('wesel.index');
+        return redirect()->route('wesel.index')->withNotify('Data berhasil ditambahkan!');
     }
 
     public function show($id)
@@ -71,7 +71,7 @@ class WeselController extends Controller
                 "tipe" => $request->tipe,
                 "kilometer" => $request->kilometer,
             ]);
-            return redirect()->route('wesel.index');
+            return redirect()->route('wesel.index')->withNotify('Data berhasil diubah!');
         } else
         {
             return redirect()->back();
@@ -85,7 +85,7 @@ class WeselController extends Controller
         if($wesel)
         {
             $wesel->delete();
-            return redirect()->route('wesel.index');
+            return redirect()->route('wesel.index')->withNotify('Data berhasil dihapus!');;
         } else
         {
             return redirect()->back();

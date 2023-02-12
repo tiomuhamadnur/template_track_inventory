@@ -1,11 +1,11 @@
 @extends('masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title>Add Data Wesel | TCSM</title>
+    <title>Add Data Turn Out | TCSM</title>
 @endsection
 
 @section('sub-content')
-    <h5>Master Data > Wesel > Create Data</h5>
+    <h5>Master Data > Turn Out/Scissors Crossing > Create Data</h5>
     <div class="row">
         <div class="col-sm-12">
             <div class="home-tab">
@@ -16,7 +16,7 @@
                 <div class="col-lg-12 grid-margin stretch-card mt-3">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Form Data Wesel</h4>
+                            <h4 class="card-title">Form Data Turn Out/Scissors Crossing</h4>
                             <form class="forms-sample" action="{{ route('wesel.store') }}" method="POST">
                                 @csrf
                                 @method('post')
@@ -50,6 +50,7 @@
                                         <option value="" selected disabled>- Pilih tipe -</option>
                                         <option value="1:8">1:8</option>
                                         <option value="1:10">1:10</option>
+                                        <option value="scissors crossing">Scissors Crossing</option>
                                     </select>
                                 </div>
                                 <div class="form-group">

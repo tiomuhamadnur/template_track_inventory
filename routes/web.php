@@ -19,11 +19,13 @@ use App\Http\Controllers\ColorSchemeController;
 use App\Http\Controllers\TransDefectController;
 use App\Http\Controllers\AccelerometerController;
 use App\Http\Controllers\DepoDashboardController;
+use App\Http\Controllers\JointController;
 use App\Http\Controllers\TemuanMainlineController;
 use App\Http\Controllers\MasterdataDashboardController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WeselController;
+use App\Http\Controllers\WeselExaminationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -217,6 +219,19 @@ Route::middleware('auth')->group(function () {
         Route::get('/getPICAccelerometer', 'getPIC')->name('accelerometer.getPIC');
     });
 
+    // WESEL EXAMINATION
+    Route::controller(WeselExaminationController::class)->group(function () {
+        Route::get('/wesel-examination', 'index')->name('wesel.examination.index');
+        Route::get('/wesel-examination-create', 'create')->name('wesel.examination.create');
+        Route::post('/wesel-examination', 'store')->name('wesel.examination.store');
+        Route::get('/wesel-examination/{id}/edit', 'edit')->name('wesel.examination.edit');
+        Route::put('/wesel-examination', 'update')->name('wesel.examination.update');
+        Route::delete('/wesel-examination', 'destroy')->name('wesel.examination.delete');
+
+        // REPORT
+        Route::get('/wesel-examination-report', 'report')->name('wesel.examination.report');
+    });
+
     Route::middleware('isAdmin')->group(function () {
         // MAINLINE
         Route::controller(MasterdataDashboardController::class)->group(function () {
@@ -318,6 +333,15 @@ Route::middleware('auth')->group(function () {
             Route::get('/wesel/{id}/edit', 'edit')->name('wesel.edit');
             Route::put('/wesel', 'update')->name('wesel.update');
             Route::delete('/wesel', 'destroy')->name('wesel.delete');
+        });
+
+        Route::controller(JointController::class)->group(function () {
+            Route::get('/joint', 'index')->name('joint.index');
+            Route::get('/joint-create', 'create')->name('joint.create');
+            Route::post('/joint', 'store')->name('joint.store');
+            Route::get('/joint/{id}/edit', 'edit')->name('joint.edit');
+            Route::put('/joint', 'update')->name('joint.update');
+            Route::delete('/joint', 'destroy')->name('joint.delete');
         });
 
         // DEPO

@@ -116,7 +116,7 @@ class TemuanMainlineController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'photo' => ['file', 'image'],
+            'photo' => ['file', 'image', 'required'],
         ], [
             'photo.image' => 'File harus dalam format gambar/photo!'
         ]);
@@ -138,7 +138,7 @@ class TemuanMainlineController extends Controller
                 "tanggal" => $request->tanggal,
                 "photo" => $photo_temuan,
             ]);
-            return redirect()->route('temuan_mainline.index');
+            return redirect()->route('temuan_mainline.index')->withNotify('Data temuan baru mainline berhasil ditambahkan!');
         }
         else {
             Temuan::create([
@@ -153,7 +153,7 @@ class TemuanMainlineController extends Controller
                 "pic" => $request->pic,
                 "tanggal" => $request->tanggal,
             ]);
-            return redirect()->route('temuan_mainline.index');
+            return redirect()->route('temuan_mainline.index')->withNotify('Data temuan baru mainline berhasil ditambahkan!');
         }
     }
 
@@ -162,8 +162,9 @@ class TemuanMainlineController extends Controller
         $tanggal = $request->tanggal;
         $area_rencana_start = $request->area_rencana_start;
         $area_rencana_finish = $request->area_rencana_finish;
+        $examiner = $request->examiner;
         $temuan = Temuan::where('tanggal', $tanggal)->orderBy('mainline_id', 'asc')->get();
-        return view('temuan.report.report', compact(['tanggal', 'temuan', 'area_rencana_start', 'area_rencana_finish']));
+        return view('mainline.mainline_temuan.report.report', compact(['tanggal', 'temuan', 'area_rencana_start', 'area_rencana_finish', 'examiner']));
     }
 
     public function close_temuan($id)
@@ -184,7 +185,7 @@ class TemuanMainlineController extends Controller
     public function store_temuan(Request $request)
     {
         $this->validate($request, [
-            'photo_close' => ['file', 'image'],
+            'photo_close' => ['file', 'image', 'required'],
         ], [
             'photo_close.image' => 'File harus dalam format gambar/photo!'
         ]);
@@ -197,7 +198,7 @@ class TemuanMainlineController extends Controller
                 "status" => $request->status,
                 "photo_close" => $photo_close,
             ]);
-            return redirect()->route('temuan_mainline.index');
+            return redirect()->route('temuan_mainline.index')->withNotify('Status temuan mainline berhasil diubah!');;
         } else {
             return redirect()->back();
         }
@@ -218,8 +219,14 @@ class TemuanMainlineController extends Controller
     {
         $id = $request->id;
         $temuan = Temuan::findOrFail($id);
-        $temuan->delete();
-        return redirect()->route('temuan.index');
+        if ($temuan)
+        {
+            $temuan->delete();
+            return redirect()->route('temuan.index')->withNotify('Data temuan mainline berhasil dihapus!');
+        }
+        else{
+            return redirect()->back();
+        }
     }
 
     public function getSpan(Request $request)

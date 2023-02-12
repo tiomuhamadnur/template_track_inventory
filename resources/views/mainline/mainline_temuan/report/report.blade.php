@@ -50,12 +50,18 @@
                                     <td colspan="2" class="text-center align-middle"
                                         style="background-color:rgb(193, 255, 193); padding: 1px">The section</td>
                                 </tr>
-                                @foreach ($area as $item)
-                                    <tr>
-                                        <td style="height: 4mm; padding: 1px" colspan="2">
-                                            {{ $item->mainline->area->code ?? '' }}</td>
-                                    </tr>
-                                @endforeach
+
+                                <tr>
+                                    <td style="height: 4mm; padding: 1px" colspan="2">
+                                        {{ $area_rencana_start ?? '' }} - {{ $area_rencana_finish ?? '' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"></td>
+                                </tr>
                                 <tr>
                                     <td colspan="2"></td>
                                 </tr>
@@ -293,6 +299,66 @@
                                 <td></td>
                                 <td></td>
                             </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
                         </tbody>
                     </table>
                     <div class="position-relative" style="width: 27cm">
@@ -302,7 +368,7 @@
                                 <tr>
                                     <td rowspan="2" style="width: 3.5cm; background-color:rgb(193, 255, 193)"
                                         class="text-center align-middle">Examiner</td>
-                                    <td></td>
+                                    <td>{{ $examiner ?? '' }}</td>
                                 </tr>
                                 <tr>
                                     <td></td>
@@ -313,12 +379,13 @@
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection
 
-    @section('javascript')
-        <script>
-            $(document).ready(function() {
-                window.print();
-            });
-        </script>
-    @endsection
+@section('javascript')
+    <script>
+        $(document).ready(function() {
+            window.print();
+        });
+    </script>
+@endsection

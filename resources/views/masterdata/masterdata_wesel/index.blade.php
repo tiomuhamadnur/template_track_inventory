@@ -1,11 +1,11 @@
 @extends('masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title>Data Wesel | TCSM</title>
+    <title>Data Turn Out | TCSM</title>
 @endsection
 
 @section('sub-content')
-    <h4>Master Data > Wesel</h4>
+    <h4>Master Data > Turn Out/Scissors Crossing</h4>
     <div class="row">
         <div class="col-sm-12">
             <div class="home-tab">
@@ -16,7 +16,7 @@
                 <div class="col-lg-12 grid-margin stretch-card mt-3">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Data Wesel</h4>
+                            <h4 class="card-title">Data Turn Out/Scrissors Crossing</h4>
                             <a href="{{ route('wesel.create') }}" class="btn btn-outline-dark btn-lg" type="button">Add
                                 Data</a>
                             <button class="btn btn-outline-dark btn-lg dropdown-toggle" type="button"
