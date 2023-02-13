@@ -31,6 +31,7 @@ class WeselController extends Controller
             "area_id" => $request->area_id,
             "line_id" => $request->line_id,
             "tipe" => $request->tipe,
+            "direction" => $request->direction,
             "kilometer" => $request->kilometer,
         ]);
         return redirect()->route('wesel.index')->withNotify('Data berhasil ditambahkan!');
@@ -69,6 +70,7 @@ class WeselController extends Controller
                 "area_id" => $request->area_id,
                 "line_id" => $request->line_id,
                 "tipe" => $request->tipe,
+                "direction" => $request->direction,
                 "kilometer" => $request->kilometer,
             ]);
             return redirect()->route('wesel.index')->withNotify('Data berhasil diubah!');

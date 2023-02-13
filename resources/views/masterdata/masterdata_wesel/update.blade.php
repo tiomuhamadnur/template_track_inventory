@@ -57,6 +57,14 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
+                                    <label for="exampleInputEmail3">Direction</label>
+                                    <select name="direction" class="form-select">
+                                        <option value="{{ $wesel->direction }}" selected>{{ $wesel->direction }}</option>
+                                        <option value="Left">Left</option>
+                                        <option value="Right">Right</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <label for="exampleInputName1">Chainage (meter)</label>
                                     <input type="text" name="kilometer" class="form-control" id="exampleInputName1"
                                         placeholder="Input chainage" value="{{ $wesel->kilometer ?? '' }}">

@@ -103,7 +103,8 @@
                             </td>
                             <td style="width: 50px;" style="width: 70px;" rowspan="2">Turnout <br> type</td>
                             <td style="width: 150px;">
-                                <div class="text-danger">No.8 /No. 10 Left / Right</div>
+                                <div class="text-danger">No.
+                                    {{ $wesel->wesel->tipe ?? '' }} / {{ $wesel->wesel->direction ?? '' }}</div>
                             </td>
                         <tr>
                             <td style="width: 150px;">

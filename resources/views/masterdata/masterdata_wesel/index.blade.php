@@ -63,7 +63,8 @@
                                                     {{ $item->name }}
                                                 </td>
                                                 <td class="text-center">
-                                                    {{ $item->tipe }}
+                                                    {{ $item->tipe . ' ' ?? '' }}
+                                                    {{ $item->direction ?? '' }}
                                                 </td>
                                                 <td class="text-center">
                                                     {{ $item->area->code ?? '-' }}
@@ -72,11 +73,14 @@
                                                     {{ $item->line->code ?? '-' }}
                                                 </td>
                                                 <td class="text-center">
-                                                    <a href="{{ route('wesel.edit', Crypt::encryptString($item->id)) }}"
-                                                        type="button" class="btn btn-outline-warning">Edit</a>
-                                                    <a class="btn btn-outline-danger" href="javascript:;"
-                                                        data-bs-toggle="modal" data-bs-target="#delete-confirmation-modal"
-                                                        onclick="toggleModal('{{ $item->id }}')">Delete</a>
+                                                    <div class="btn-group">
+                                                        <a href="{{ route('wesel.edit', Crypt::encryptString($item->id)) }}"
+                                                            type="button" class="btn btn-outline-warning mx-0">Edit</a>
+                                                        <a class="btn btn-outline-danger mx-0" href="javascript:;"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#delete-confirmation-modal"
+                                                            onclick="toggleModal('{{ $item->id }}')">Delete</a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach
