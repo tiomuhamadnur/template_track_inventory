@@ -333,6 +333,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/wesel/{id}/edit', 'edit')->name('wesel.edit');
             Route::put('/wesel', 'update')->name('wesel.update');
             Route::delete('/wesel', 'destroy')->name('wesel.delete');
+            Route::post('/wesel-import', 'import')->name('wesel.import');
         });
 
         Route::controller(JointController::class)->group(function () {

@@ -28,6 +28,8 @@
                                 <a class="dropdown-item" href="#">Print</a>
                                 <a class="dropdown-item" href="#">Export to Excel</a>
                                 <a class="dropdown-item" href="#">Export to PDF</a>
+                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#import-file-modal"
+                                    href="#">Import Excel File</a>
                             </div>
                             <div class="table-responsive pt-3">
                                 <table class="table table-bordered">
@@ -119,6 +121,38 @@
         </div>
     </div>
     <!-- END: Delete Confirmation Modal -->
+
+    <!-- BEGIN: Import Modal -->
+    <div id="import-file-modal" class="modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body p-2">
+                    <div class="p-2 text-center">
+                        <form action="{{ route('wesel.import') }}" method="POST" enctype="multipart/form-data">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalAdminTitle">Import File Excel Turn Out</h5>
+                            </div>
+                            <div class="modal-body">
+                                @csrf
+                                @method('post')
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <input type="file" name="file_excel" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary mx-3">Import</button>
+                                    <button type="button" data-bs-dismiss="modal"
+                                        class="btn btn-outline-secondary">Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: Import Modal -->
 @endsection
 
 @section('javascript')

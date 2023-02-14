@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\WeselImport;
 use App\Models\Area;
 use App\Models\Line;
 use App\Models\Wesel;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Excel;
 
 class WeselController extends Controller
 {
@@ -80,6 +82,21 @@ class WeselController extends Controller
         }
     }
 
+    public function import(Request $request)
+    {
+        // validasi
+		$this->validate($request, [
+			'file_excel' => 'required|mimes:csv,xls,xlsx'
+		]);
+
+        if ($request->hasFile('file_excel')){
+            Excel::import(new WeselImport, request()->file('file_excel'));
+            return redirect()->route('wesel.index')->withNotify('Data berhasil diimport!');
+        } else {
+            return redirect()->route('wesel.index');
+        }
+    }
+
     public function destroy(Request $request)
     {
         $id = $request->id;
@@ -87,7 +104,7 @@ class WeselController extends Controller
         if($wesel)
         {
             $wesel->delete();
-            return redirect()->route('wesel.index')->withNotify('Data berhasil dihapus!');;
+            return redirect()->route('wesel.index')->withNotify('Data berhasil dihapus!');
         } else
         {
             return redirect()->back();

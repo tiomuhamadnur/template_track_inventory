@@ -9,9 +9,6 @@ use App\Models\Line;
 use App\Models\Mainline;
 use Illuminate\Http\Request;
 use Excel;
-use Illuminate\Support\Facades\DB;
-// use Maatwebsite\Excel\Excel as Excel;
-use Maatwebsite\Excel\Facades\Excel as FacadesExcel;
 use Yajra\DataTables\DataTables;
 
 class MainlineController extends Controller

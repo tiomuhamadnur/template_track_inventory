@@ -171,13 +171,13 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <form action="{{ route('mainline.import') }}" method="POST" enctype="multipart/form-data">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalAdminTitle">Import File Excel Track
+                                Bed</h5>
+                        </div>
                         <div class="modal-body">
                             @csrf
                             @method('post')
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="modalAdminTitle">Import File Excel Track
-                                    Bed</h5>
-                            </div>
                             <div class="row mb-4">
                                 <div class="col">
                                     <input type="file" name="file_excel" class="form-control">
