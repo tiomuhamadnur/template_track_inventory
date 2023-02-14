@@ -1,10 +1,11 @@
-@extends('mainline.mainline_layout.base')
+@extends('masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title>Accelerometer | TCSM</title>
+    <title>Data Buffer/Wheel Stop | TCSM</title>
 @endsection
 
 @section('sub-content')
+    <h4>Master Data > Buffer/Wheel Stop</h4>
     <div class="row">
         <div class="col-sm-12">
             <div class="home-tab">
@@ -15,9 +16,8 @@
                 <div class="col-lg-12 grid-margin stretch-card mt-3">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Data Accelerometer</h4>
-                            <a href="{{ route('accelerometer.create') }}" class="btn btn-outline-dark btn-lg"
-                                type="button">Add
+                            <h4 class="card-title">Data Buffer/Wheel Stop</h4>
+                            <a href="{{ route('buffer.create') }}" class="btn btn-outline-dark btn-lg" type="button">Add
                                 Data</a>
                             <button class="btn btn-outline-dark btn-lg dropdown-toggle" type="button"
                                 id="dropdownMenuIconButton1" data-bs-toggle="dropdown" aria-haspopup="true"
@@ -37,16 +37,16 @@
                                                 No
                                             </th>
                                             <th class="text-center">
-                                                Tanggal
+                                                Name
                                             </th>
                                             <th class="text-center">
-                                                Kegiatan
+                                                Tipe
                                             </th>
                                             <th class="text-center">
-                                                PIC
+                                                Area
                                             </th>
                                             <th class="text-center">
-                                                Report
+                                                Line
                                             </th>
                                             <th class="text-center">
                                                 Action
@@ -54,44 +54,32 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($jadwal_accelerometer as $item)
+                                        @foreach ($buffer_stop as $item)
                                             <tr>
                                                 <td class="text-center">
                                                     {{ $loop->iteration }}
                                                 </td>
                                                 <td class="text-center">
-                                                    <a href="{{ route('accelerometer.summary.index', Crypt::encryptString($item->id)) }}"
-                                                        class="btn btn-warning rounded"
-                                                        title="Lihat Detail Summary di tanggal {{ $item->tanggal }}!">
-                                                        {{ $item->tanggal }}
-                                                    </a>
+                                                    {{ $item->name }}
                                                 </td>
                                                 <td class="text-center">
-                                                    {{ $item->kegiatan }}
+                                                    {{ $item->tipe ?? '' }}
                                                 </td>
                                                 <td class="text-center">
-                                                    {{ $item->pic }}
+                                                    {{ $item->area->code ?? '-' }}
                                                 </td>
-                                                <td>
-                                                    <div>
-                                                        <form action="{{ route('accelerometer.report') }}" method="get">
-                                                            @csrf
-                                                            @method('get')
-                                                            <input type="text" name="jadwal_id" hidden
-                                                                value="{{ $item->id }}">
-                                                            <button class="btn btn-success rounded text-white"
-                                                                type="submit" title="Export Laporan Kegiatan"
-                                                                formtarget="_blank">
-                                                                <i class="mdi mdi-file-document"></i>
-                                                            </button>
-                                                        </form>
+                                                <td class="text-center">
+                                                    {{ $item->line->code ?? '-' }}
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="btn-group">
+                                                        <a href="{{ route('buffer.edit', Crypt::encryptString($item->id)) }}"
+                                                            type="button" class="btn btn-outline-warning mx-0">Edit</a>
+                                                        <a class="btn btn-outline-danger mx-0" href="javascript:;"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#delete-confirmation-modal"
+                                                            onclick="toggleModal('{{ $item->id }}')">Delete</a>
                                                     </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <button type="button" class="btn btn-outline-warning">Edit</button>
-                                                    <a class="btn btn-outline-danger" href="javascript:;"
-                                                        data-bs-toggle="modal" data-bs-target="#delete-confirmation-modal"
-                                                        onclick="toggleModal('{{ $item->id }}')">Delete</a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -116,7 +104,7 @@
                         <div class="text-slate-500 mt-2">Data ini akan dihapus secara permanen.</div>
                     </div>
                     <div class="px-5 pb-8 text-center mt-3">
-                        <form action="{{ route('accelerometer.jadwal.delete') }}" method="POST">
+                        <form action="{{ route('buffer.delete') }}" method="POST">
                             @csrf
                             @method('delete')
                             <input type="text" name="id" id="id" hidden>

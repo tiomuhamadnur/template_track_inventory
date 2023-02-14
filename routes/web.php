@@ -18,6 +18,8 @@ use App\Http\Controllers\TemuanDepoController;
 use App\Http\Controllers\ColorSchemeController;
 use App\Http\Controllers\TransDefectController;
 use App\Http\Controllers\AccelerometerController;
+use App\Http\Controllers\BufferController;
+use App\Http\Controllers\BufferExaminationController;
 use App\Http\Controllers\DepoDashboardController;
 use App\Http\Controllers\JointController;
 use App\Http\Controllers\TemuanMainlineController;
@@ -232,6 +234,23 @@ Route::middleware('auth')->group(function () {
         Route::get('/wesel-examination-report', 'report')->name('wesel.examination.report');
     });
 
+    // BUFFER/WHEEL STOP EXAMINATION
+    Route::controller(BufferExaminationController::class)->group(function () {
+        Route::get('/buffer-examination', 'index')->name('buffer.examination.index');
+        Route::get('/buffer-examination-create', 'create')->name('buffer.examination.create');
+        Route::post('/buffer-examination', 'store')->name('buffer.examination.store');
+        Route::get('/buffer-examination/{id}/edit', 'edit')->name('buffer.examination.edit');
+        Route::put('/buffer-examination', 'update')->name('buffer.examination.update');
+        Route::delete('/buffer-examination', 'destroy')->name('buffer.examination.delete');
+
+        // REPORT
+        Route::get('/buffer-examination-report', 'report')->name('buffer.examination.report');
+    });
+
+
+
+
+
     Route::middleware('isAdmin')->group(function () {
         // MAINLINE
         Route::controller(MasterdataDashboardController::class)->group(function () {
@@ -343,6 +362,15 @@ Route::middleware('auth')->group(function () {
             Route::get('/joint/{id}/edit', 'edit')->name('joint.edit');
             Route::put('/joint', 'update')->name('joint.update');
             Route::delete('/joint', 'destroy')->name('joint.delete');
+        });
+
+        Route::controller(BufferController::class)->group(function () {
+            Route::get('/buffer', 'index')->name('buffer.index');
+            Route::get('/buffer-create', 'create')->name('buffer.create');
+            Route::post('/buffer', 'store')->name('buffer.store');
+            Route::get('/buffer/{id}/edit', 'edit')->name('buffer.edit');
+            Route::put('/buffer', 'update')->name('buffer.update');
+            Route::delete('/buffer', 'destroy')->name('buffer.delete');
         });
 
         // DEPO

@@ -30,6 +30,8 @@
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('joint.index') }}">Joint</a>
                     </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('buffer.index') }}">Buffer/Wheel Stop</a>
+                    </li>
                 </ul>
             </div>
         </li>

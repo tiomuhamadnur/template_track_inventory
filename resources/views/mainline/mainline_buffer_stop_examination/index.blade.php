@@ -1,7 +1,7 @@
 @extends('mainline.mainline_layout.base')
 
 @section('sub-title')
-    <title>Data Turn Out Examination | TCSM</title>
+    <title>Data Buffer/Wheel Stop Examination | TCSM</title>
 @endsection
 
 @section('sub-content')
@@ -15,16 +15,16 @@
                 <div class="col-lg-12 grid-margin stretch-card mt-3">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Data Turn Out Examination</h4>
+                            <h4 class="card-title">Data Buffer/Wheel Stop Examination</h4>
                             {{-- <form action="{{ route('wesel.temuan.export') }}" method="GET">
                                 @csrf
                                 @method('get') --}}
                             <div class="btn-group">
-                                <a href="{{ route('wesel.examination.index') }}" class="btn btn-outline-dark btn-lg mx-0"
+                                <a href="{{ route('buffer.examination.index') }}" class="btn btn-outline-dark btn-lg mx-0"
                                     type="button">
                                     <i class="ti-reload"></i>
                                 </a>
-                                <a href="{{ route('wesel.examination.create') }}"
+                                <a href="{{ route('buffer.examination.create') }}"
                                     class="btn btn-outline-success btn-lg mx-0" type="button">Add Data</a>
                                 <a href="#" class="btn btn-outline-warning btn-lg mx-0" type="button"
                                     data-bs-toggle="modal" data-bs-target="#ModalFilter" title="Filter data">
@@ -64,13 +64,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($wesel_examination as $item)
+                                        @foreach ($buffer_stop_examination as $item)
                                             <tr>
                                                 <td class="text-center">
                                                     {{ $loop->iteration }}
                                                 </td>
                                                 <td class="text-center">
-                                                    {{ $item->wesel->name }}
+                                                    {{ $item->buffer_stop->name }}
                                                 </td>
                                                 <td class="text-center">
                                                     {{ $item->tanggal }}
@@ -103,7 +103,7 @@
     <div class="modal fade" id="ModalReport" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog modal-md" role="document">
             <div class="modal-content">
-                <form action="{{ route('wesel.examination.report') }}" method="GET">
+                <form action="{{ route('buffer.examination.report') }}" method="GET">
                     @csrf
                     @method('get')
                     <div class="modal-header">
@@ -111,11 +111,12 @@
                     </div>
                     <div class="modal-body pt-3 mb-0">
                         <div class="form-group align-middle">
-                            <label class="form-label">Wesel</label> <br>
-                            <select name="wesel_id" class="form-select" required>
-                                <option value="" disabled selected>- Pilih nama wesel -</option>
-                                @foreach ($wesel as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            <label class="form-label">Buffer/Wheel Stop</label> <br>
+                            <select name="buffer_stop_id" class="form-select" required>
+                                <option value="" disabled selected>- Pilih buffer/wheel stop -</option>
+                                @foreach ($buffer_stop as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }} ({{ $buffer_stop->area->code }})
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
