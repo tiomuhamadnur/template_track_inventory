@@ -313,7 +313,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/part', 'store')->name('part.store');
             Route::get('/part/{id}/edit', 'edit')->name('part.edit');
             Route::put('/part', 'update')->name('part.update');
-            Route::get('/part/{id}/delete', 'destroy')->name('part.delete');
+            Route::delete('/part', 'destroy')->name('part.delete');
         });
 
         Route::controller(DetailPartController::class)->group(function () {
@@ -322,7 +322,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/detail-part', 'store')->name('detail-part.store');
             Route::get('/detail-part/{id}/edit', 'edit')->name('detail-part.edit');
             Route::put('/detail-part', 'update')->name('detail-part.update');
-            Route::get('/detail-part/{id}/delete', 'destroy')->name('detail-part.delete');
+            Route::delete('/detail-part', 'destroy')->name('detail-part.delete');
         });
 
         Route::controller(DefectController::class)->group(function () {
@@ -331,7 +331,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/defect', 'store')->name('defect.store');
             Route::get('/defect/{id}/edit', 'edit')->name('defect.edit');
             Route::put('/defect', 'update')->name('defect.update');
-            Route::get('/defect/{id}/delete', 'destroy')->name('defect.delete');
+            Route::delete('/defect', 'destroy')->name('defect.delete');
         });
 
         Route::controller(TransDefectController::class)->group(function () {
@@ -340,6 +340,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/TransDefect', 'store')->name('transDefect.store');
             Route::get('/TransDefect/{id}/edit', 'edit')->name('transDefect.edit');
             Route::put('/TransDefect', 'update')->name('transDefect.update');
+            Route::delete('/TransDefect', 'destroy')->name('transDefect.delete');
 
             // Import Trans Part & Defect
             Route::post('/TransDefect/import', 'import')->name('transDefect.import');

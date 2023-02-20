@@ -59,8 +59,14 @@
                                                 {{-- <td class="text-center">
                                                 </td> --}}
                                                 <td class="text-center">
-                                                    <button type="button" class="btn btn-outline-warning">Edit</button>
-                                                    <button type="button" class="btn btn-outline-danger">Delete</button>
+                                                    <div class="btn-group">
+                                                        <a href="{{ route('detail-part.edit', $item->id) }}" type="button"
+                                                            class="btn btn-outline-warning mx-0">Edit</a>
+                                                        <a class="btn btn-outline-danger mx-0" href="javascript:;"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#delete-confirmation-modal"
+                                                            onclick="toggleModal('{{ $item->id }}')">Delete</a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -74,4 +80,29 @@
             </div>
         </div>
     </div>
+
+    <!-- BEGIN: Delete Confirmation Modal -->
+    <div id="delete-confirmation-modal" class="modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body p-2">
+                    <div class="p-2 text-center">
+                        <div class="text-3xl mt-2">Apakah anda yakin?</div>
+                        <div class="text-slate-500 mt-2">Data ini akan dihapus secara permanen.</div>
+                    </div>
+                    <div class="px-5 pb-8 text-center mt-3">
+                        <form action="{{ route('detail-part.delete') }}" method="POST">
+                            @csrf
+                            @method('delete')
+                            <input type="text" name="id" id="id" hidden>
+                            <button type="button" data-bs-dismiss="modal"
+                                class="btn btn-outline-warning w-24 mr-1 me-2">Cancel</button>
+                            <button type="submit" class="btn btn-danger w-24">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: Delete Confirmation Modal -->
 @endsection

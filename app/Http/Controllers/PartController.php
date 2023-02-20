@@ -53,7 +53,7 @@ class PartController extends Controller
     public function edit($id)
     {
         $part = Part::findOrFail($id);
-        return view('part.edit', compact(['part']));
+        return view('mainline.mainline_part.update', compact(['part']));
     }
 
     public function update(Request $request)
@@ -64,13 +64,19 @@ class PartController extends Controller
             'name' => $request->name,
             'code' => $request->code,
         ]);
-        return redirect()->route('part.index');
+        return redirect()->route('part.index')->withNotify('Data berhasil diupdate!');
     }
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
+        $id = $request->id;
         $part = Part::findOrFail($id);
-        $part->delete();
-        return redirect()->route('part.index');
+        if ($part) {
+            $part->delete();
+            return redirect()->route('part.index')->withNotify('Data berhasil dihapus!');
+        }
+        else {
+            return redirect()->back();
+        }
     }
 }

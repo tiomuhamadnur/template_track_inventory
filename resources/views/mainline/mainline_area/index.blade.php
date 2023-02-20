@@ -66,8 +66,12 @@
                                                     {{ $item->area }}
                                                 </td>
                                                 <td class="text-center">
-                                                    <button type="button" class="btn btn-outline-warning">Edit</button>
-                                                    <button type="button" class="btn btn-outline-danger">Delete</button>
+                                                    <div class="btn-group">
+                                                        <button type="button"
+                                                            class="btn btn-outline-warning mx-0">Edit</button>
+                                                        <button type="button"
+                                                            class="btn btn-outline-danger mx-0">Delete</button>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach

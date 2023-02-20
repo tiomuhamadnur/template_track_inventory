@@ -23,7 +23,36 @@ class BufferExaminationController extends Controller
 
     public function store(Request $request)
     {
-        dd($request);
+        $this->validate($request, [
+            'photo' => ['image', 'required'],
+        ], [
+            'photo.image' => 'File harus dalam format gambar/photo!'
+        ]);
+
+        if ($request->hasFile('photo') && $request->photo != '')
+        {
+            $photo_kegiatan = $request->file('photo')->store('photo_kegiatan/buffer_stop_examination');
+            BufferStopExamination::create([
+                "buffer_stop_id" => $request->buffer_stop_id,
+                "pic" => $request->pic,
+                "tanggal" => $request->tanggal,
+                "visual" => $request->visual,
+                "visual_remark" => $request->visual_remark,
+                "quantity" => $request->quantity,
+                "quantity_remark" => $request->quantity_remark,
+                "position" => $request->position,
+                "position_remark" => $request->position_remark,
+                "torque" => $request->torque,
+                "torque_remark" => $request->torque_remark,
+                "remark" => $request->remark,
+                'photo' => $photo_kegiatan,
+            ]);
+            return redirect()->route('buffer.examination.index')->withNotify('Data Buffer/Wheel Stop Examination berhasil ditambahkan!');
+        }
+        else
+        {
+            return redirect()->back();
+        }
     }
 
     public function show($id)
@@ -41,8 +70,15 @@ class BufferExaminationController extends Controller
         //
     }
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->id;
+        $buffer_stop_examination = BufferStopExamination::findOrFail($id);
+        if ($buffer_stop_examination) {
+            $buffer_stop_examination->delete();
+            return redirect()->route('buffer.examination.index')->withNotify('Data Buffer/Wheel Stop Examination berhasil dihapus!');
+        } else {
+            return redirect()->back();
+        }
     }
 }

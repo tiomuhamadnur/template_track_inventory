@@ -49,7 +49,7 @@ class TransDefectController extends Controller
             'detail_part_id' => $request->detail_part_id,
             'defect_id' => $request->defect_id,
         ]);
-        return redirect()->route('transDefect.index');
+        return redirect()->route('transDefect.index')->withNotify('Data berhasil ditambahkan!');
     }
 
     public function show($id)
@@ -63,7 +63,7 @@ class TransDefectController extends Controller
         $part = Part::all();
         $detail_part = DetailPart::all();
         $defect = Defect::all();
-        return view('trans_defect.edit', compact(['trans_defect', 'part', 'detail_part', 'defect']));
+        return view('mainline.mainline_relasidefect.update', compact(['trans_defect', 'part', 'detail_part', 'defect']));
     }
 
     public function update(Request $request)
@@ -75,11 +75,18 @@ class TransDefectController extends Controller
             'detail_part_id' => $request->detail_part_id,
             'defect_id' => $request->defect_id,
         ]);
-        return redirect()->route('transDefect.index');
+        return redirect()->route('transDefect.index')->withNotify('Data berhasil diupdate!');
     }
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->id;
+        $trans_defect = TransDefect::findOrFail($id);
+        if ($trans_defect) {
+            $trans_defect->delete();
+            return redirect()->route('transDefect.index')->withNotify('Data berhasil dihapus!');
+        } else {
+            return redirect()->back();
+        }
     }
 }

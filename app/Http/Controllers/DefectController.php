@@ -39,8 +39,7 @@ class DefectController extends Controller
     public function edit($id)
     {
         $defect = Defect::findOrFail($id);
-        $detail_part = DetailPart::all();
-        return view('defect.edit', compact(['defect', 'detail_part']));
+        return view('mainline.mainline_defect.update', compact(['defect']));
     }
 
     public function update(Request $request)
@@ -51,13 +50,18 @@ class DefectController extends Controller
             'name' => $request->name,
             'detail_part_id' => $request->detail_part_id,
         ]);
-        return redirect()->route('defect.index');
+        return redirect()->route('defect.index')->withNotify('Data berhasil diupdate!');
     }
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
+        $id = $request->id;
         $defect = Defect::findOrFail($id);
-        $defect->delete();
-        return redirect()->route('defect.index');
+        if ($defect) {
+            $defect->delete();
+            return redirect()->route('defect.index')->withNotify('Data berhasil dihapus!');
+        } else {
+            return redirect()->back();
+        }
     }
 }

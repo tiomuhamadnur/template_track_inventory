@@ -82,8 +82,10 @@
                                                     <div class="btn-group">
                                                         <button type="button"
                                                             class="btn btn-outline-success mx-0">Detail</button>
-                                                        <button type="button"
-                                                            class="btn btn-outline-danger mx-0">Delete</button>
+                                                        <a class="btn btn-outline-danger mx-0" href="javascript:;"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#delete-confirmation-modal"
+                                                            onclick="toggleModal('{{ $item->id }}')">Delete</a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -98,6 +100,31 @@
             </div>
         </div>
     </div>
+
+    <!-- BEGIN: Delete Confirmation Modal -->
+    <div id="delete-confirmation-modal" class="modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body p-2">
+                    <div class="p-2 text-center">
+                        <div class="text-3xl mt-2">Apakah anda yakin?</div>
+                        <div class="text-slate-500 mt-2">Data ini akan dihapus secara permanen.</div>
+                    </div>
+                    <div class="px-5 pb-8 text-center mt-3">
+                        <form action="{{ route('buffer.examination.delete') }}" method="POST">
+                            @csrf
+                            @method('delete')
+                            <input type="text" name="id" id="id" hidden>
+                            <button type="button" data-bs-dismiss="modal"
+                                class="btn btn-outline-warning w-24 mr-1 me-2">Cancel</button>
+                            <button type="submit" class="btn btn-danger w-24">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: Delete Confirmation Modal -->
 
     <!-- Modal Report -->
     <div class="modal fade" id="ModalReport" tabindex="-1" aria-hidden="true">
@@ -115,7 +142,7 @@
                             <select name="buffer_stop_id" class="form-select" required>
                                 <option value="" disabled selected>- Pilih buffer/wheel stop -</option>
                                 @foreach ($buffer_stop as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }} ({{ $buffer_stop->area->code }})
+                                    <option value="{{ $item->id }}">{{ $item->name }} ({{ $item->area->code }})
                                     </option>
                                 @endforeach
                             </select>
@@ -138,4 +165,12 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('javascript')
+    <script type="text/javascript">
+        function toggleModal(id) {
+            $('#id').val(id);
+        }
+    </script>
 @endsection
