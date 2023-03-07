@@ -141,6 +141,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/depo/dashboard', 'index')->name('depo.index');
     });
 
+    Route::controller(PICController::class)->group(function () {
+        Route::get('/pic', 'index')->name('pic.index');
+        Route::get('/pic-create', 'create')->name('pic.create');
+        Route::get('/profile', 'profile')->name('profile');
+        Route::get('/profile-update', 'update')->name('profile.update');
+        Route::put('/profile-update', 'update_photo')->name('profile.update.photo');
+        Route::put('/profile-update/password', 'update_password')->name('profile.update.password');
+    });
+
     Route::controller(TemuanController::class)->group(function () {
         Route::get('/temuan', 'index')->name('temuan.index');
         Route::get('/temuan-create', 'create')->name('temuan.create');
@@ -255,15 +264,6 @@ Route::middleware('auth')->group(function () {
         // MAINLINE
         Route::controller(MasterdataDashboardController::class)->group(function () {
             Route::get('/master-data/dashboard', 'index')->name('masterdata.index');
-        });
-
-        Route::controller(PICController::class)->group(function () {
-            Route::get('/pic', 'index')->name('pic.index');
-            Route::get('/pic-create', 'create')->name('pic.create');
-            Route::get('/profile', 'profile')->name('profile');
-            Route::get('/profile-update', 'update')->name('profile.update');
-            Route::put('/profile-update', 'update_photo')->name('profile.update.photo');
-            Route::put('/profile-update/password', 'update_password')->name('profile.update.password');
         });
 
         Route::controller(UserController::class)->group(function () {
