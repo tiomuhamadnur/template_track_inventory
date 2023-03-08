@@ -57,13 +57,16 @@
                                                 Line
                                             </th>
                                             <th class="text-center">
-                                                No. Span
+                                                No. Span <br> (No. Sleeper)
                                             </th>
                                             <th class="text-center">
                                                 Part
                                             </th>
                                             <th class="text-center">
                                                 Detail Part
+                                            </th>
+                                            <th class="text-center">
+                                                Date
                                             </th>
                                             <th class="text-center">
                                                 Action
@@ -87,7 +90,8 @@
                                                         class="badge @if ($item->status == 'open') bg-success
                                                     @else
                                                     bg-danger @endif">
-                                                        {{ $item->mainline->no_span }}
+                                                        {{ $item->mainline->no_span }} <br>
+                                                        ({{ $item->no_sleeper }})
                                                     </span>
                                                 </td>
                                                 <td class="text-center">
@@ -95,6 +99,9 @@
                                                 </td>
                                                 <td class="text-center">
                                                     {{ $item->detail_part->name }}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ $item->tanggal }}
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">

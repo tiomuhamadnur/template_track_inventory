@@ -62,6 +62,9 @@
                                                 Detail Part
                                             </th>
                                             <th class="text-center">
+                                                Date
+                                            </th>
+                                            <th class="text-center">
                                                 Action
                                             </th>
                                         </tr>
@@ -88,6 +91,9 @@
                                                 </td>
                                                 <td class="text-center">
                                                     {{ $item->detail_part->name }}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ $item->tanggal }}
                                                 </td>
                                                 <td class="text-center">
                                                     <button type="button" class="btn btn-outline-primary ms-0"
