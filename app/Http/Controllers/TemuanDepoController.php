@@ -18,7 +18,7 @@ class TemuanDepoController extends Controller
 {
     public function index()
     {
-        $temuan_depo = TemuanDepo::where('status', 'open')->orderBy('created_at', 'desc')->get();
+        $temuan_depo = TemuanDepo::where('status', 'open')->orderBy('tanggal', 'desc')->orderBy('mainline_id', 'desc')->get();
         $line = Line::where('area', 'Depo')->get();
         $part = Part::all();
 

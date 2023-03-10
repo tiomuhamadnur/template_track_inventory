@@ -22,7 +22,7 @@ class TemuanMainlineController extends Controller
 {
     public function index()
     {
-        $temuan = Temuan::where('status', 'open')->orderBy('created_at', 'DESC')->get();
+        $temuan = Temuan::where('status', 'open')->orderBy('tanggal', 'DESC')->orderBy('mainline_id', 'DESC')->get();
         $area = Area::whereNot('area', 'Depo')->get();
         $area_rencana = Area::where('stasiun', 'true')->orWhere('area', 'DAL')->get();
         $line = Line::whereNot('area', 'Depo')->get();
