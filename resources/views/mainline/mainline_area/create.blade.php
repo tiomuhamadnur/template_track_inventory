@@ -23,24 +23,32 @@
                                 <div class="form-group">
                                     <label for="exampleInputName1">Area Name</label>
                                     <input type="text" name="name" class="form-control" id="exampleInputName1"
-                                        placeholder="Input Area Name">
+                                        placeholder="Input Area Name" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail3">Area Code</label>
                                     <input type="text" class="form-control" name="code" id="exampleInputEmail3"
-                                        placeholder="Input Area Code">
+                                        placeholder="Input Area Code" required>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Location</label>
-                                    <select class="form-control" name="area">
-                                        <option disable value="">-Pilih Area-</option>
-                                        <option value="">Mainline</option>
-                                        <option value="">Depo</option>
-                                        <option value="">DAL</option>
+                                    <select class="form-control" name="area" required>
+                                        <option disable value="" selected>-Pilih Area-</option>
+                                        <option value="Mainline">Mainline</option>
+                                        <option value="Depo">Depo</option>
+                                        <option value="DAL">DAL</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Apakah ini Stasiun?</label>
+                                    <select class="form-control" name="stasiun" required>
+                                        <option disable value="" selected>-Pilih salah satu-</option>
+                                        <option value="true">Yes</option>
+                                        <option value="false">No</option>
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-outline-primary me-2">Submit</button>
-                                <button class="btn btn-light">Cancel</button>
+                                <a href="{{ route('area.index') }}" class="btn btn-light">Cancel</a>
                             </form>
                         </div>
                     </div>

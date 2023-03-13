@@ -35,12 +35,24 @@ class DepoLineController extends Controller
 
     public function edit($id)
     {
-        //
+        $line_depo = Line::findOrFail($id);
+        if ($line_depo){
+            return view('depo.depo_line.update', compact(['line_depo']));
+        }
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $id = $request->id;
+        $line_depo = Line::findOrFail($id);
+        if ($line_depo) {
+            $line_depo->update([
+                'name' => $request->name,
+                'code' => $request->code,
+                'area' => $request->area,
+            ]);
+        }
+        return redirect()->route('depoline.index');
     }
 
     public function destroy($id)

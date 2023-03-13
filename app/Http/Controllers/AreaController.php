@@ -24,6 +24,7 @@ class AreaController extends Controller
             'name' => $request->name,
             'code' => $request->code,
             'area' => $request->area,
+            'stasiun' => $request->stasiun,
         ]);
         return redirect()->route('area.index');
     }
@@ -36,18 +37,21 @@ class AreaController extends Controller
     public function edit($id)
     {
         $area = Area::findOrFail($id);
-        return view('area.edit', compact(['area']));
+        return view('mainline.mainline_area.update', compact(['area']));
     }
 
     public function update(Request $request)
     {
         $id = $request->id;
         $area = Area::findOrFail($id);
-        $area->update([
-            'name' => $request->name,
-            'code' => $request->code,
-            'area' => $request->area,
-        ]);
+        if ($area){
+            $area->update([
+                'name' => $request->name,
+                'code' => $request->code,
+                'area' => $request->area,
+                'stasiun' => $request->stasiun,
+            ]);
+        }
         return redirect()->route('area.index');
     }
 

@@ -7,6 +7,11 @@ use App\Http\Controllers\Controller;
 
 class AuthController extends Controller
 {
+    public function index()
+    {
+        return redirect()->route('transisi');
+    }
+
     public function loginView()
     {
         // return view('login.main', [

@@ -12,6 +12,7 @@ use App\Models\Part;
 use App\Models\Pegawai;
 use App\Models\Temuan;
 use App\Models\TransDefect;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Excel;
@@ -50,6 +51,54 @@ class TemuanMainlineController extends Controller
         } else {
             return Excel::download(new TemuanMainlineFilterExport($area_id, $line_id, $part_id, $status), $waktu.'_temuan_mainline_filtered.xlsx', \Maatwebsite\Excel\Excel::XLSX);
         }
+    }
+
+    public function export_pdf(Request $request)
+    {
+        $area_id = $request->area_id;
+        $line_id = $request->line_id;
+        $part_id = $request->part_id;
+        $status = $request->status;
+
+        if ($area_id == null and $line_id == null and $part_id == null and $status == null) {
+            $temuan = Temuan::all();
+            $waktu = Carbon::now();
+            $pdf = Pdf::loadView('mainline.mainline_temuan.export-pdf', ['temuan'=>$temuan]);
+            return $pdf->stream($waktu . '_list-temuan-mainline.pdf');
+        } else {
+            $temuan_filter = Temuan::query()->select(
+                'summary_temuan.*',
+                'mainline.area_id as area_id',
+            )
+            ->join('mainline', 'mainline.id', '=', 'summary_temuan.mainline_id');
+
+            // Filter by area_id
+            $temuan_filter->when($area_id, function ($query) use ($request) {
+                return $query->where('area_id', $request->area_id);
+            });
+
+            // Filter by line_id
+            $temuan_filter->when($line_id, function ($query) use ($request) {
+                return $query->where('line_id', $request->line_id);
+            });
+
+            // Filter by part_id
+            $temuan_filter->when($part_id, function ($query) use ($request) {
+                return $query->where('part_id', $request->part_id);
+            });
+
+            // Filter by status
+            $temuan_filter->when($status, function ($query) use ($request) {
+                return $query->where('status', $request->status);
+            });
+
+            $temuan = $temuan_filter->orderBy('mainline_id', 'asc')->get();
+            $waktu = Carbon::now();
+            $pdf = Pdf::loadView('mainline.mainline_temuan.export-pdf', ['temuan'=>$temuan]);
+            return $pdf->stream($waktu . '_list-temuan-mainline-filtered.pdf');
+        }
+
+
     }
 
     public function filter(Request $request)

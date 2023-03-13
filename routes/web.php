@@ -131,10 +131,11 @@ Route::middleware('auth')->group(function () {
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('transisi', [AuthController::class, 'transisi'])->name('transisi')->middleware('isUser');
     Route::get('transisi-user', [AuthController::class, 'transisi_user'])->name('transisi.user');
+    Route::get('/', [AuthController::class, 'index']);
 
     Route::controller(DashboardController::class)->group(function () {
         Route::get('/home', 'home');
-        Route::get('/', 'index')->name('home');
+        Route::get('/mainline/dashboard', 'index')->name('home');
     });
 
     Route::controller(DepoDashboardController::class)->group(function () {
@@ -170,6 +171,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/temuan_mainline/{id}/close_temuan', 'close_temuan')->name('temuan_mainline.close.temuan');
         Route::put('/temuan_mainline/close_temuan', 'store_temuan')->name('temuan_mainline.store.temuan');
         Route::get('/temuan/export_mainline', 'export')->name('temuan_mainline.export');
+        Route::get('/temuan/export_mainline_pdf', 'export_pdf')->name('temuan_mainline.export.pdf');
 
         // GET DATA
         Route::get('/getLocation', 'getLocation')->name('getLocation');
@@ -196,6 +198,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/temuan_depo/{id}/close_temuan', 'close_temuan')->name('temuan_depo.close.temuan');
         Route::put('/temuan_depo/close_temuan', 'store_temuan')->name('temuan_depo.store.temuan');
         Route::get('/depo/export_mainline', 'export')->name('temuan_depo.export');
+        Route::get('/depo/export_mainline_pdf', 'export_pdf')->name('temuan_depo.export.pdf');
 
         // FILTER DATA
         Route::get('/temuan-depo/filter', 'filter')->name('temuan_depo.filter');
@@ -381,7 +384,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/depoline', 'store')->name('depoline.store');
             Route::get('/depoline/{id}/edit', 'edit')->name('depoline.edit');
             Route::put('/depoline', 'update')->name('depoline.update');
-            Route::get('/depoline/{id}/delete', 'destroy')->name('depoline.delete');
+            Route::delete('/depoline/{id}/delete', 'destroy')->name('depoline.delete');
         });
     });
 });

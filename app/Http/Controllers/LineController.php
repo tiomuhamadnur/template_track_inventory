@@ -32,18 +32,20 @@ class LineController extends Controller
     public function edit($id)
     {
         $line = Line::findOrFail($id);
-        return view('line.edit', compact(['line']));
+        return view('mainline.mainline_line.update', compact(['line']));
     }
 
     public function update(Request $request)
     {
         $id = $request->id;
         $line = Line::findOrFail($id);
-        $line->update([
-            'name' => $request->name,
-            'code' => $request->code,
-            'area' => $request->area,
-        ]);
+        if ($line) {
+            $line->update([
+                'name' => $request->name,
+                'code' => $request->code,
+                'area' => $request->area,
+            ]);
+        }
         return redirect(route('line.index'));
     }
 

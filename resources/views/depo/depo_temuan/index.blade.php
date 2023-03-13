@@ -16,31 +16,43 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Data Temuan Depo</h4>
-                            <form action="{{ route('temuan_depo.export') }}" method="GET">
+                            <div class="btn-group">
+                                <a href="{{ route('temuan_depo.index') }}" class="btn btn-outline-dark btn-lg mx-0"
+                                    type="button">
+                                    <i class="ti-reload"></i>
+                                </a>
+                                <a href="{{ route('temuan_depo.create') }}" class="btn btn-outline-success btn-lg mx-0"
+                                    type="button">Add Data</a>
+                                <a href="#" class="btn btn-outline-warning btn-lg mx-0" type="button"
+                                    data-bs-toggle="modal" data-bs-target="#ModalFilter" title="Filter data">
+                                    <i class="ti-filter"></i>
+                                </a>
+                                <button type="submit" form="form_export_excel" class="btn btn-outline-success btn-lg mx-0"
+                                    title="Export to Excel">
+                                    <i class="ti-download"></i>
+                                </button>
+                                <button type="submit" form="form_export_pdf" class="btn btn-outline-success btn-lg mx-0"
+                                    title="Export to PDF">
+                                    <i class="ti-clip"></i>
+                                </button>
+                                <a href="#" class="btn btn-outline-danger btn-lg mx-0" type="button"
+                                    data-bs-toggle="modal" data-bs-target="#ModalReport" title="Generate Report">
+                                    <i class="ti-printer"></i></a>
+                            </div>
+                            <form action="{{ route('temuan_depo.export') }}" method="GET" id="form_export_excel">
                                 @csrf
                                 @method('get')
-                                <div class="btn-group">
-                                    <a href="{{ route('temuan_depo.index') }}" class="btn btn-outline-dark btn-lg mx-0"
-                                        type="button">
-                                        <i class="ti-reload"></i>
-                                    </a>
-                                    <a href="{{ route('temuan_depo.create') }}" class="btn btn-outline-success btn-lg mx-0"
-                                        type="button">Add Data</a>
-                                    <a href="#" class="btn btn-outline-warning btn-lg mx-0" type="button"
-                                        data-bs-toggle="modal" data-bs-target="#ModalFilter" title="Filter data">
-                                        <i class="ti-filter"></i>
-                                    </a>
-                                    <input type="text" name="line_id" value="{{ $line_id ?? '' }}" hidden>
-                                    <input type="text" name="part_id" value="{{ $part_id ?? '' }}" hidden>
-                                    <input type="text" name="status" value="{{ $status ?? '' }}" hidden>
-                                    <button type="submit" class="btn btn-outline-success btn-lg mx-0"
-                                        title="Export to Excel">
-                                        <i class="ti-download"></i>
-                                    </button>
-                                    <a href="#" class="btn btn-outline-danger btn-lg mx-0" type="button"
-                                        data-bs-toggle="modal" data-bs-target="#ModalReport" title="Generate Report">
-                                        <i class="ti-printer"></i></a>
-                                </div>
+                                <input type="text" name="line_id" value="{{ $line_id ?? '' }}" hidden>
+                                <input type="text" name="part_id" value="{{ $part_id ?? '' }}" hidden>
+                                <input type="text" name="status" value="{{ $status ?? '' }}" hidden>
+                            </form>
+                            <form action="{{ route('temuan_depo.export.pdf') }}" target="_blank" method="GET"
+                                id="form_export_pdf">
+                                @csrf
+                                @method('get')
+                                <input type="text" name="line_id" value="{{ $line_id ?? '' }}" hidden>
+                                <input type="text" name="part_id" value="{{ $part_id ?? '' }}" hidden>
+                                <input type="text" name="status" value="{{ $status ?? '' }}" hidden>
                             </form>
                             <div class="table-responsive pt-3">
                                 <table class="table table-bordered">

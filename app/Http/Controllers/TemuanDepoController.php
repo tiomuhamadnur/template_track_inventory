@@ -11,6 +11,7 @@ use App\Models\TemuanDepo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\Crypt;
 
@@ -18,7 +19,7 @@ class TemuanDepoController extends Controller
 {
     public function index()
     {
-        $temuan_depo = TemuanDepo::where('status', 'open')->orderBy('tanggal', 'desc')->orderBy('mainline_id', 'desc')->get();
+        $temuan_depo = TemuanDepo::where('status', 'open')->orderBy('tanggal', 'desc')->get();
         $line = Line::where('area', 'Depo')->get();
         $part = Part::all();
 
@@ -91,6 +92,44 @@ class TemuanDepoController extends Controller
             return Excel::download(new TemuanDepoExport(), $waktu.'_temuan_depo_all.xlsx', \Maatwebsite\Excel\Excel::XLSX);
         } else {
             return Excel::download(new TemuanDepoFilterExport($line_id, $part_id, $status), $waktu.'_temuan_depo_filtered.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+        }
+    }
+
+    public function export_pdf(Request $request)
+    {
+        $line_id = $request->line_id;
+        $part_id = $request->part_id;
+        $status = $request->status;
+
+        $waktu = Carbon::now();
+
+        if ($line_id == null and $part_id == null and $status == null) {
+            $temuan_depo = TemuanDepo::all();
+            $waktu = Carbon::now();
+            $pdf = Pdf::loadView('depo.depo_temuan.export-pdf', ['temuan_depo'=>$temuan_depo]);
+            return $pdf->stream($waktu . '_list-temuan-depo.pdf');
+        } else {
+            $temuan_depo_filter = TemuanDepo::query();
+
+            // Filter by line_id
+            $temuan_depo_filter->when($line_id, function ($query) use ($request) {
+                return $query->where('line_id', $request->line_id)->get();
+            });
+
+            // Filter by part_id
+            $temuan_depo_filter->when($part_id, function ($query) use ($request) {
+                return $query->where('part_id', $request->part_id)->get();
+            });
+
+            // Filter by status
+            $temuan_depo_filter->when($status, function ($query) use ($request) {
+                return $query->where('status', $request->status)->get();
+            });
+
+            $temuan_depo = $temuan_depo_filter->get();
+            $waktu = Carbon::now();
+            $pdf = Pdf::loadView('depo.depo_temuan.export-pdf', ['temuan_depo'=>$temuan_depo]);
+            return $pdf->stream($waktu . '_list-temuan-depo-filtered.pdf');
         }
     }
 

@@ -33,13 +33,8 @@
                                         <div>
                                             <br>
                                             <h3 class="mb-3 fw-bolder">{{ auth()->user()->name }}</h3>
-                                            <button class="btn btn-outline-warning btn-rounded btn-fw btn-sm">Track Patrol
-                                                on Foot</button>
-                                            <button class="btn btn-outline-warning btn-rounded btn-fw btn-sm">Rail Joint
-                                                Gap</button>
-                                            <button class="btn btn-outline-warning btn-rounded btn-fw btn-sm">Turn Out
-                                                Examination</button>
-
+                                            <button
+                                                class="btn btn-outline-warning btn-rounded btn-fw btn-sm">{{ auth()->user()->jabatan . ' ' . auth()->user()->section }}</button>
 
                                         </div>
                                         <div class="row g-2 mt-3">

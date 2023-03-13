@@ -67,8 +67,8 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">
-                                                        <button type="button"
-                                                            class="btn btn-outline-warning mx-0">Edit</button>
+                                                        <a href="{{ route('line.edit', $item->id) }}" type="button"
+                                                            class="btn btn-outline-warning mx-0">Edit</a>
                                                         <button type="button"
                                                             class="btn btn-outline-danger mx-0">Delete</button>
                                                     </div>
