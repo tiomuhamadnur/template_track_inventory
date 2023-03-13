@@ -12,7 +12,7 @@
     <table border="1" style="width: 100%" class="mb-3">
         <thead>
             <th class="text-center">
-                <img style="height: 70px" src="{{ public_path('assets/images/tcsm.png') }}" alt="logo-marti">
+                <img style="height: 70px" src="{{ public_path('assets/images/tcsm.png') }}" alt="logo-tcsm">
             </th>
             <th class="text-center">
                 <h3 class="fw-bolder mx-auto mb-0">List Temuan Mainline</h3>
