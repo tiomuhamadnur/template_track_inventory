@@ -17,6 +17,9 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Ubah Status Temuan</h4>
+                            <a class="btn btn-danger float-end fw-bolder text-white" href="javascript:;"
+                                data-bs-toggle="modal" data-bs-target="#delete-confirmation-modal"
+                                title="Hapus data temuan?">Hapus temuan?</a>
                             <form action="{{ route('temuan_mainline.store.temuan') }}" method="POST"
                                 enctype='multipart/form-data'>
                                 @csrf
@@ -61,4 +64,29 @@
             </div>
         </div>
     </div>
+
+    <!-- BEGIN: Delete Confirmation Modal -->
+    <div id="delete-confirmation-modal" class="modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body p-2">
+                    <div class="p-2 text-center">
+                        <div class="text-3xl mt-2">Apakah anda yakin?</div>
+                        <div class="text-slate-500 mt-2">Data ini akan dihapus secara permanen.</div>
+                    </div>
+                    <div class="px-5 pb-8 text-center mt-3">
+                        <form action="{{ route('temuan_mainline.delete') }}" method="POST">
+                            @csrf
+                            @method('delete')
+                            <input type="text" name="id" value="{{ $temuan->id }}" hidden>
+                            <button type="button" data-bs-dismiss="modal"
+                                class="btn btn-outline-warning w-24 mr-1 me-2">Cancel</button>
+                            <button type="submit" class="btn btn-danger w-24">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: Delete Confirmation Modal -->
 @endsection

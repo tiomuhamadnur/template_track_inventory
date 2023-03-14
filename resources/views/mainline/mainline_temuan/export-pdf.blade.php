@@ -25,12 +25,12 @@
             </th>
         </thead>
     </table>
-    <table border="1" class="text-center">
+    <table border="1" class="text-center" style="width: 100%">
         <thead>
             <tr>
                 <th class="p-1">No</th>
-                <th class="p-1">Date</th>
                 <th class="p-1">Area</th>
+                <th class="p-1">Date</th>
                 <th class="p-1">Line</th>
                 <th class="p-1">Span</th>
                 {{-- <th class="p-1">Chainage</th> --}}
@@ -53,10 +53,10 @@
                         {{ $loop->iteration }}
                     </td>
                     <td>
-                        {{ $item->tanggal }}
+                        {{ $item->mainline->area->code }}
                     </td>
                     <td>
-                        {{ $item->mainline->area->code }}
+                        {{ $item->tanggal }}
                     </td>
                     <td>
                         {{ $item->mainline->line->code }}

@@ -47,9 +47,9 @@ class TemuanMainlineController extends Controller
         $waktu = Carbon::now();
 
         if ($area_id == null and $line_id == null and $part_id == null and $status == null) {
-            return Excel::download(new TemuanMainlineExport(), $waktu.'_temuan_mainline_all.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+            return Excel::download(new TemuanMainlineExport(), $waktu . '_temuan_mainline_all.xlsx', \Maatwebsite\Excel\Excel::XLSX);
         } else {
-            return Excel::download(new TemuanMainlineFilterExport($area_id, $line_id, $part_id, $status), $waktu.'_temuan_mainline_filtered.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+            return Excel::download(new TemuanMainlineFilterExport($area_id, $line_id, $part_id, $status), $waktu . '_temuan_mainline_filtered.xlsx', \Maatwebsite\Excel\Excel::XLSX);
         }
     }
 
@@ -63,14 +63,14 @@ class TemuanMainlineController extends Controller
         if ($area_id == null and $line_id == null and $part_id == null and $status == null) {
             $temuan = Temuan::all();
             $waktu = Carbon::now();
-            $pdf = Pdf::loadView('mainline.mainline_temuan.export-pdf', ['temuan'=>$temuan]);
+            $pdf = Pdf::loadView('mainline.mainline_temuan.export-pdf', ['temuan' => $temuan]);
             return $pdf->stream($waktu . '_list-temuan-mainline.pdf');
         } else {
             $temuan_filter = Temuan::query()->select(
                 'summary_temuan.*',
                 'mainline.area_id as area_id',
             )
-            ->join('mainline', 'mainline.id', '=', 'summary_temuan.mainline_id');
+                ->join('mainline', 'mainline.id', '=', 'summary_temuan.mainline_id');
 
             // Filter by area_id
             $temuan_filter->when($area_id, function ($query) use ($request) {
@@ -94,11 +94,9 @@ class TemuanMainlineController extends Controller
 
             $temuan = $temuan_filter->orderBy('mainline_id', 'asc')->get();
             $waktu = Carbon::now();
-            $pdf = Pdf::loadView('mainline.mainline_temuan.export-pdf', ['temuan'=>$temuan]);
+            $pdf = Pdf::loadView('mainline.mainline_temuan.export-pdf', ['temuan' => $temuan]);
             return $pdf->stream($waktu . '_list-temuan-mainline-filtered.pdf');
         }
-
-
     }
 
     public function filter(Request $request)
@@ -112,7 +110,7 @@ class TemuanMainlineController extends Controller
             'summary_temuan.*',
             'mainline.area_id as area_id',
         )
-        ->join('mainline', 'mainline.id', '=', 'summary_temuan.mainline_id');
+            ->join('mainline', 'mainline.id', '=', 'summary_temuan.mainline_id');
 
         // Filter by area_id
         $temuan->when($area_id, function ($query) use ($request) {
@@ -188,8 +186,7 @@ class TemuanMainlineController extends Controller
                 "photo" => $photo_temuan,
             ]);
             return redirect()->route('temuan_mainline.index')->withNotify('Data temuan baru mainline berhasil ditambahkan!');
-        }
-        else {
+        } else {
             Temuan::create([
                 "mainline_id" => $request->mainline_id,
                 "no_sleeper" => $request->no_sleeper,
@@ -221,7 +218,7 @@ class TemuanMainlineController extends Controller
         try {
             $secret = Crypt::decryptString($id);
             $temuan = Temuan::findOrFail($secret);
-            if ($temuan){
+            if ($temuan) {
                 return view('mainline.mainline_temuan.close', compact(['temuan']));
             } else {
                 return redirect()->back();
@@ -251,7 +248,6 @@ class TemuanMainlineController extends Controller
         } else {
             return redirect()->back();
         }
-
     }
 
     public function edit($id)
@@ -268,12 +264,10 @@ class TemuanMainlineController extends Controller
     {
         $id = $request->id;
         $temuan = Temuan::findOrFail($id);
-        if ($temuan)
-        {
+        if ($temuan) {
             $temuan->delete();
-            return redirect()->route('temuan.index')->withNotify('Data temuan mainline berhasil dihapus!');
-        }
-        else{
+            return redirect()->route('temuan_mainline.index')->withNotify('Data temuan mainline berhasil dihapus!');
+        } else {
             return redirect()->back();
         }
     }
@@ -288,7 +282,8 @@ class TemuanMainlineController extends Controller
         }
     }
 
-    public function getLocation(Request $request) {
+    public function getLocation(Request $request)
+    {
         $area = $request->area;
         $location = Area::where('area', $area)->get();
         if (count($location) > 0) {
@@ -312,11 +307,11 @@ class TemuanMainlineController extends Controller
             'trans_defect.detail_part_id',
             'detail_part.name as detail_part_name',
         )
-        ->join('detail_part', 'detail_part.id', '=', 'trans_defect.detail_part_id')
-        ->where('trans_defect.part_id', $part_id)
-        ->orderBy('detail_part_name', 'asc')
-        ->distinct()
-        ->get();
+            ->join('detail_part', 'detail_part.id', '=', 'trans_defect.detail_part_id')
+            ->where('trans_defect.part_id', $part_id)
+            ->orderBy('detail_part_name', 'asc')
+            ->distinct()
+            ->get();
 
         if (count($detail_part) > 0) {
             return response()->json($detail_part);
@@ -331,11 +326,11 @@ class TemuanMainlineController extends Controller
             'trans_defect.defect_id',
             'defect.name as defect_name',
         )
-        ->join('defect', 'defect.id', '=', 'trans_defect.defect_id')
-        ->where('trans_defect.detail_part_id', $detail_part_id)
-        ->where('trans_defect.part_id', $part_id)
-        ->orderBy('defect_name', 'asc')
-        ->get();
+            ->join('defect', 'defect.id', '=', 'trans_defect.defect_id')
+            ->where('trans_defect.detail_part_id', $detail_part_id)
+            ->where('trans_defect.part_id', $part_id)
+            ->orderBy('defect_name', 'asc')
+            ->get();
         if (count($defect) > 0) {
             return response()->json($defect);
         }
@@ -345,7 +340,7 @@ class TemuanMainlineController extends Controller
     {
         $pic = $request->pic;
         $photo = Pegawai::where('name', $pic)->first()->photo;
-        if ($photo != null){
+        if ($photo != null) {
             return response()->json([
                 'photo' => asset('storage/' . $photo),
             ]);

@@ -56,6 +56,7 @@
     <script src="{{ asset('assets/js/Chart.roundedBarCharts.js') }}"></script>
     <script src="{{ asset('assets/js/select2.js') }}"></script>
     <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.js"></script>
+    @include('masterdata.masterdata_layout.modal_notification')
     @yield('javascript')
 </body>
 

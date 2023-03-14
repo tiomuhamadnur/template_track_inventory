@@ -318,11 +318,11 @@
                             </div>
 
                             <div class="modal-footer">
-                                <button type="submit" formtarget="_blank"
-                                    class="btn btn-primary justify-content-center">
+                                <button type="submit" formtarget="_blank" class="btn btn-primary justify-content-center"
+                                    onclick="closeModal()">
                                     Generate
                                 </button>
-                                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
+                                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
                                     Tutup
                                 </button>
                             </div>
@@ -380,5 +380,9 @@
                 document.getElementById("close_temuan_modal").href = href;
             });
         });
+
+        function closeModal() {
+            $("#ModalReport").modal("hide");
+        }
     </script>
 @endsection

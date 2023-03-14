@@ -25,12 +25,12 @@
             </th>
         </thead>
     </table>
-    <table border="1" class="text-center">
+    <table border="1" class="text-center" style="width: 100%">
         <thead>
             <tr>
                 <th class="p-1">No</th>
-                <th class="p-1">Date</th>
                 <th class="p-1">Line</th>
+                <th class="p-1">Date</th>
                 <th class="p-1">Chainage (m)</th>
                 <th class="p-1">Dir</th>
                 <th class="p-1">Part</th>
@@ -50,10 +50,10 @@
                         {{ $loop->iteration }}
                     </td>
                     <td>
-                        {{ $item->tanggal }}
+                        {{ $item->line->name }}
                     </td>
                     <td>
-                        {{ $item->line->name }}
+                        {{ $item->tanggal }}
                     </td>
                     <td>
                         {{ $item->kilometer }}

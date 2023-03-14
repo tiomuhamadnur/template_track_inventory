@@ -219,8 +219,15 @@ class TemuanDepoController extends Controller
         //
     }
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->id;
+        $temuan_depo = TemuanDepo::findOrFail($id);
+        if ($temuan_depo) {
+            $temuan_depo->delete();
+            return redirect()->route('temuan_depo.index')->withNotify('Data temuan depo berhasil dihapus!');
+        } else {
+            return redirect()->back();
+        }
     }
 }

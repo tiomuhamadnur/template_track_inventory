@@ -220,7 +220,7 @@
                                 <th rowspan="2" style="padding: 1px">The section of station<br>(X1 to X2)</th>
                                 <th rowspan="2" style="padding: 1px">Name of<br>line</th>
                                 <th rowspan="2" style="padding: 1px">Guideway<br>type</th>
-                                <th rowspan="2" style="padding: 1px">Kilometer<br></th>
+                                <th rowspan="2" style="padding: 1px">Chainage<br>(m)</th>
                                 <th rowspan="2" style="padding: 1px">Left<br>or<br>Right</th>
                                 <th rowspan="2" style="padding: 1px">Inside<br>or<br>Outside</th>
                                 <th colspan="3" style="padding: 1px; width: 8.5cm">The defect and the result of
@@ -239,19 +239,20 @@
                         <tbody>
                             @foreach ($temuan as $item)
                                 <tr>
-                                    <td>{{ $item->mainline->area->code ?? '' }}</td>
-                                    <td>{{ $item->mainline->line->code ?? '' }}</td>
-                                    <td>{{ $item->mainline->no_span ?? '' }}</td>
-                                    <td>{{ $item->mainline->kilometer ?? '' }}</td>
-                                    <td>{{ $item->direction ?? '' }}</td>
-                                    <td></td>
-                                    <td>{{ $item->part->name ?? '' }}</td>
-                                    <td>{{ $item->detail_part->name ?? '' }}</td>
-                                    <td>{{ $item->defect->name ?? '' }}</td>
-                                    <td>1</td>
-                                    <td>pcs</td>
-                                    <td>Not OK</td>
-                                    <td>{{ $item->remark ?? '' }}</td>
+                                    <td class="p-1">{{ $item->mainline->area->code ?? '' }}</td>
+                                    <td class="p-1">{{ $item->mainline->line->code ?? '' }}</td>
+                                    <td class="p-1">{{ $item->mainline->no_span ?? '' }}</td>
+                                    <td class="p-1">{{ $item->mainline->kilometer ?? '' }}</td>
+                                    <td class="p-1">{{ $item->direction ?? '' }}</td>
+                                    <td class="p-1">-</td>
+                                    <td class="p-1">{{ $item->part->name ?? '' }}</td>
+                                    <td class="p-1">{{ $item->detail_part->name ?? '' }}</td>
+                                    <td class="p-1">{{ $item->defect->name ?? '' }}</td>
+                                    <td class="p-1">1</td>
+                                    <td class="p-1">pcs</td>
+                                    <td class="p-1">Not OK</td>
+                                    <td class="p-1">{{ $item->remark ?? '' }} (No. Sleeper:
+                                        {{ $item->no_sleeper ?? '-' }})</td>
                                 </tr>
                             @endforeach
                             <tr>
@@ -368,7 +369,7 @@
                                 <tr>
                                     <td rowspan="2" style="width: 3.5cm; background-color:rgb(193, 255, 193)"
                                         class="text-center align-middle">Examiner</td>
-                                    <td>{{ $examiner ?? '' }}</td>
+                                    <td class="p-1">{{ $examiner ?? '' }}</td>
                                 </tr>
                                 <tr>
                                     <td></td>
