@@ -37,6 +37,7 @@
                                             <option disabled selected>- Pilih Jabatan -</option>
                                             <option value="Departement Head">Departement Head</option>
                                             <option value="Section Head">Section Head</option>
+                                            <option value="Engineer">Engineer</option>
                                             <option value="Technician">Technician</option>
                                             <option value="Staff">Staff</option>
                                         </select>
