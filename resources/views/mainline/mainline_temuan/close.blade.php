@@ -25,12 +25,15 @@
                                 @csrf
                                 @method('put')
                                 <div class="form-group">
-                                    <label class="form-label">Part</label>
-                                    <input type="text" value="{{ $temuan->part->name }}" class="form-control" readonly>
+                                    <label class="form-label">PIC Close Temuan</label>
+                                    <input type="text" value="{{ auth()->user()->name }}" name="pic_close"
+                                        class="form-control" readonly required>
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">Defect</label>
-                                    <input type="text" value="{{ $temuan->defect->name }}" class="form-control" readonly>
+                                    <label class="form-label">Part (Defect)</label>
+                                    <input type="text"
+                                        value="{{ $temuan->part->name }} - {{ $temuan->detail_part->name }} - ({{ $temuan->defect->name ?? 'Lainnya' }})"
+                                        class="form-control" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Photo Setelah Perbaikan</label>

@@ -26,7 +26,9 @@ class TemuanDepoController extends Controller
         $line_id = "";
         $part_id = "";
         $status = "";
-        return view ('depo.depo_temuan.index', compact('temuan_depo', 'line', 'part', 'line_id', 'part_id', 'status'));
+        $klasifikasi = "";
+
+        return view('depo.depo_temuan.index', compact('temuan_depo', 'line', 'part', 'line_id', 'part_id', 'status', 'klasifikasi'));
     }
 
     public function create()
@@ -62,8 +64,7 @@ class TemuanDepoController extends Controller
                 "photo" => $photo_temuan,
             ]);
             return redirect()->route('temuan_depo.index')->withNotify('Data temuan baru depo berhasil ditambahkan!');
-        }
-        else {
+        } else {
             TemuanDepo::create([
                 "line_id" => $request->line_id,
                 "kilometer" => $request->kilometer,
@@ -85,13 +86,14 @@ class TemuanDepoController extends Controller
         $line_id = $request->line_id;
         $part_id = $request->part_id;
         $status = $request->status;
+        $klasifikasi = $request->klasifikasi;
 
         $waktu = Carbon::now();
 
-        if ($line_id == null and $part_id == null and $status == null) {
-            return Excel::download(new TemuanDepoExport(), $waktu.'_temuan_depo_all.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+        if ($line_id == null and $part_id == null and $status == null and $klasifikasi == null) {
+            return Excel::download(new TemuanDepoExport(), $waktu . '_temuan_depo_all.xlsx', \Maatwebsite\Excel\Excel::XLSX);
         } else {
-            return Excel::download(new TemuanDepoFilterExport($line_id, $part_id, $status), $waktu.'_temuan_depo_filtered.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+            return Excel::download(new TemuanDepoFilterExport($line_id, $part_id, $status, $klasifikasi), $waktu . '_temuan_depo_filtered.xlsx', \Maatwebsite\Excel\Excel::XLSX);
         }
     }
 
@@ -100,13 +102,14 @@ class TemuanDepoController extends Controller
         $line_id = $request->line_id;
         $part_id = $request->part_id;
         $status = $request->status;
+        $klasifikasi = $request->klasifikasi;
 
         $waktu = Carbon::now();
 
-        if ($line_id == null and $part_id == null and $status == null) {
+        if ($line_id == null and $part_id == null and $status == null and $klasifikasi == null) {
             $temuan_depo = TemuanDepo::all();
             $waktu = Carbon::now();
-            $pdf = Pdf::loadView('depo.depo_temuan.export-pdf', ['temuan_depo'=>$temuan_depo]);
+            $pdf = Pdf::loadView('depo.depo_temuan.export-pdf', ['temuan_depo' => $temuan_depo]);
             return $pdf->stream($waktu . '_list-temuan-depo.pdf');
         } else {
             $temuan_depo_filter = TemuanDepo::query();
@@ -126,9 +129,14 @@ class TemuanDepoController extends Controller
                 return $query->where('status', $request->status)->get();
             });
 
+            // Filter by klasifikasi
+            $temuan_depo_filter->when($klasifikasi, function ($query) use ($request) {
+                return $query->where('klasifikasi', $request->klasifikasi)->get();
+            });
+
             $temuan_depo = $temuan_depo_filter->get();
             $waktu = Carbon::now();
-            $pdf = Pdf::loadView('depo.depo_temuan.export-pdf', ['temuan_depo'=>$temuan_depo]);
+            $pdf = Pdf::loadView('depo.depo_temuan.export-pdf', ['temuan_depo' => $temuan_depo]);
             return $pdf->stream($waktu . '_list-temuan-depo-filtered.pdf');
         }
     }
@@ -138,6 +146,7 @@ class TemuanDepoController extends Controller
         $line_id = $request->line_id;
         $part_id = $request->part_id;
         $status = $request->status;
+        $klasifikasi = $request->klasifikasi;
 
         $temuan_depo = TemuanDepo::query();
 
@@ -156,11 +165,15 @@ class TemuanDepoController extends Controller
             return $query->where('status', $request->status)->get();
         });
 
+        // Filter by klasifikasi
+        $temuan_depo->when($klasifikasi, function ($query) use ($request) {
+            return $query->where('klasifikasi', $request->klasifikasi)->get();
+        });
+
         $line = Line::where('area', 'Depo')->get();
         $part = Part::all();
 
-        // return view('depo.depo_temuan.index', compact(['temuan_depo', 'line', 'part', 'line_id', 'part_id', 'status']));
-        return view('depo.depo_temuan.index', ['temuan_depo' => $temuan_depo->get(), 'line' => $line, 'part' => $part, 'line_id' => $line_id, 'part_id' => $part_id, 'status' => $status]);
+        return view('depo.depo_temuan.index', ['temuan_depo' => $temuan_depo->get(), 'line' => $line, 'part' => $part, 'line_id' => $line_id, 'part_id' => $part_id, 'status' => $status, 'klasifikasi' => $klasifikasi]);
     }
 
     public function report(Request $request)
@@ -177,7 +190,7 @@ class TemuanDepoController extends Controller
         try {
             $secret = Crypt::decryptString($id);
             $temuan_depo = TemuanDepo::findOrFail($secret);
-            if ($temuan_depo){
+            if ($temuan_depo) {
                 return view('depo.depo_temuan.close', compact(['temuan_depo']));
             } else {
                 return redirect()->back();
@@ -202,6 +215,7 @@ class TemuanDepoController extends Controller
             $temuan_depo->update([
                 "status" => $request->status,
                 "photo_close" => $photo_close,
+                "pic_close" => $request->pic_close,
             ]);
             return redirect()->route('temuan_depo.index')->withNotify('Status temuan depo berhasil diubah!');
         } else {

@@ -46,6 +46,7 @@
                                 <input type="text" name="line_id" value="{{ $line_id ?? '' }}" hidden>
                                 <input type="text" name="part_id" value="{{ $part_id ?? '' }}" hidden>
                                 <input type="text" name="status" value="{{ $status ?? '' }}" hidden>
+                                <input type="text" name="klasifikasi" value="{{ $klasifikasi ?? '' }}" hidden>
                             </form>
                             <form action="{{ route('temuan_mainline.export.pdf') }}" target="_blank" method="GET"
                                 id="form_export_pdf">
@@ -55,6 +56,7 @@
                                 <input type="text" name="line_id" value="{{ $line_id ?? '' }}" hidden>
                                 <input type="text" name="part_id" value="{{ $part_id ?? '' }}" hidden>
                                 <input type="text" name="status" value="{{ $status ?? '' }}" hidden>
+                                <input type="text" name="klasifikasi" value="{{ $klasifikasi ?? '' }}" hidden>
                             </form>
                             <div class="table-responsive pt-3">
                                 <table class="table table-bordered">
@@ -70,13 +72,15 @@
                                                 Line
                                             </th>
                                             <th class="text-center">
-                                                No. Span <br> (No. Sleeper)
+                                                No. Span <br>
+                                                (No. Sleeper)
                                             </th>
                                             <th class="text-center">
                                                 Part
                                             </th>
                                             <th class="text-center">
-                                                Detail Part
+                                                Detail Part <br>
+                                                (Defect)
                                             </th>
                                             <th class="text-center">
                                                 Date
@@ -111,7 +115,8 @@
                                                     {{ $item->part->name }}
                                                 </td>
                                                 <td class="text-center">
-                                                    {{ $item->detail_part->name }}
+                                                    {{ $item->detail_part->name }} <br>
+                                                    ({{ $item->defect->name ?? 'Lainnya' }})
                                                 </td>
                                                 <td class="text-center">
                                                     {{ $item->tanggal }}
@@ -131,13 +136,14 @@
                                                             data-detail_part="{{ $item->detail_part->name }}"
                                                             data-kilometer="{{ $item->mainline->kilometer }}"
                                                             data-direction="{{ $item->direction ?? '-' }}"
-                                                            data-defect="{{ $item->defect->name ?? '-' }}"
+                                                            data-defect="{{ $item->defect->name ?? 'Lainnya' }}"
                                                             data-klasifikasi="{{ $item->klasifikasi }}"
                                                             data-pic="{{ $item->pic }}"
                                                             data-remark="{{ $item->remark ?? '-' }}"
                                                             data-status="{{ $item->status }}"
                                                             data-photo="{{ asset('storage/' . $item->photo) }}"
                                                             data-photo_close="{{ asset('storage/' . $item->photo_close) }}"
+                                                            data-pic_close="{{ $item->pic_close ?? '' }}"
                                                             data-href="{{ '/temuan_mainline' . '/' . Crypt::encryptString($item->id) . '/close_temuan' }}">
                                                             Detail
                                                         </button>
@@ -229,7 +235,7 @@
                                     <input readonly type="text" id="no_sleeper_modal" class="form-control">
                                 </div>
                                 <div class="col mb-1">
-                                    <label for="emailWithTitle" class="form-label">Chainage</label>
+                                    <label for="emailWithTitle" class="form-label">Chainage (m)</label>
                                     <input readonly type="text" id="kilometer_modal" class="form-control">
                                 </div>
                                 <div class="col mb-1">
@@ -276,13 +282,13 @@
         <div class="modal fade" id="ModalFilter" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog modal-md" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    {{-- <div class="modal-header">
                         <h5 class="modal-title" id="modalAdminTitle">Filter Data</h5>
-                    </div>
-                    <form action="{{ route('temuan_mainline.filter') }}" method="GET">
-                        @csrf
-                        @method('get')
-                        <div class="modal-body">
+                    </div> --}}
+                    <div class="modal-body">
+                        <form id="form_filter" action="{{ route('temuan_mainline.filter') }}" method="GET">
+                            @csrf
+                            @method('get')
                             <div class="form-group">
                                 <label class="form-label">Area</label>
                                 <select class="form-select" name="area_id">
@@ -318,16 +324,25 @@
                                     <option value="close">Close</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary justify-content-center">
-                                Filter
-                            </button>
-                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
-                                Tutup
-                            </button>
-                        </div>
-                    </form>
+                            <div class="form-group">
+                                <label class="form-label">Classification</label>
+                                <select class="form-select" name="klasifikasi">
+                                    <option disabled selected>- Classification -</option>
+                                    <option value="Minor">Minor</option>
+                                    <option value="Moderate">Moderate</option>
+                                    <option value="Mayor">Mayor</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" form="form_filter" class="btn btn-primary justify-content-center">
+                            Filter
+                        </button>
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                            Tutup
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -407,6 +422,7 @@
                     var klasifikasi = $(e.relatedTarget).data('klasifikasi');
                     var remark = $(e.relatedTarget).data('remark');
                     var pic = $(e.relatedTarget).data('pic');
+                    var pic_close = $(e.relatedTarget).data('pic_close');
                     $.ajax({
                         url: '/getAvatar?pic=' + pic,
                         type: 'get',
@@ -434,7 +450,11 @@
                     $('#klasifikasi_modal').val(klasifikasi);
                     $('#remark_modal').val(remark);
                     document.getElementById("pic_modal").innerHTML = pic;
-                    $('#status_modal').val(status);
+                    if (pic_close == '') {
+                        $('#status_modal').val(status);
+                    } else {
+                        $('#status_modal').val(status + ' (by: ' + pic_close + ')');
+                    }
                     document.getElementById("photo_modal").src = photo;
                     document.getElementById("photo_close_modal").src = photo_close;
                     document.getElementById("close_temuan_modal").href = href;

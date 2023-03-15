@@ -9,11 +9,12 @@ use Maatwebsite\Excel\Concerns\FromView;
 
 class TemuanDepoFilterExport implements FromView
 {
-    public function __construct(?int $line_id = null, ?int $part_id = null, ?string $status = null)
+    public function __construct(?int $line_id = null, ?int $part_id = null, ?string $status = null, ?string $klasifikasi = null)
     {
         $this->line_id = $line_id;
         $this->part_id = $part_id;
         $this->status = $status;
+        $this->klasifikasi = $klasifikasi;
     }
 
     public function view(): View
@@ -33,6 +34,11 @@ class TemuanDepoFilterExport implements FromView
         // Filter by status
         $temuan_depo->when($this->status, function ($query) {
             return $query->where('status', $this->status);
+        });
+
+        // Filter by klasifikasi
+        $temuan_depo->when($this->klasifikasi, function ($query) {
+            return $query->where('klasifikasi', $this->klasifikasi);
         });
 
         return view('depo.depo_temuan.export', [

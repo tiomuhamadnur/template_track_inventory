@@ -159,7 +159,7 @@
                         </div>
 
                         <div class="form-row">
-                            <div class="name">Staff</div>
+                            <div class="name">PIC</div>
                             <div class="value">
                                 <div class="input-group">
                                     <input class="form-control" type="text" name="pic"
@@ -290,7 +290,7 @@
                                 .defect_id + '">' + value.defect_name +
                                 '</option>');
                         });
-                        $('#defect_id').append('<option value="">Lainnya</option>')
+                        $('#defect_id').append('<option value="Lainnya">Lainnya</option>')
                     }
                 });
             });

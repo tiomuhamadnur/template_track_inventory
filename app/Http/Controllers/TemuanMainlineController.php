@@ -33,8 +33,9 @@ class TemuanMainlineController extends Controller
         $line_id = "";
         $part_id = "";
         $status = "";
+        $klasifikasi = "";
 
-        return view('mainline.mainline_temuan.index', compact(['temuan', 'area', 'area_rencana', 'line', 'part', 'area_id', 'line_id', 'part_id', 'status']));
+        return view('mainline.mainline_temuan.index', compact(['temuan', 'area', 'area_rencana', 'line', 'part', 'area_id', 'line_id', 'part_id', 'status', 'klasifikasi']));
     }
 
     public function export(Request $request)
@@ -43,13 +44,14 @@ class TemuanMainlineController extends Controller
         $line_id = $request->line_id;
         $part_id = $request->part_id;
         $status = $request->status;
+        $klasifikasi = $request->klasifikasi;
 
         $waktu = Carbon::now();
 
-        if ($area_id == null and $line_id == null and $part_id == null and $status == null) {
+        if ($area_id == null and $line_id == null and $part_id == null and $status == null and $klasifikasi == null) {
             return Excel::download(new TemuanMainlineExport(), $waktu . '_temuan_mainline_all.xlsx', \Maatwebsite\Excel\Excel::XLSX);
         } else {
-            return Excel::download(new TemuanMainlineFilterExport($area_id, $line_id, $part_id, $status), $waktu . '_temuan_mainline_filtered.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+            return Excel::download(new TemuanMainlineFilterExport($area_id, $line_id, $part_id, $status, $klasifikasi), $waktu . '_temuan_mainline_filtered.xlsx', \Maatwebsite\Excel\Excel::XLSX);
         }
     }
 
@@ -59,8 +61,9 @@ class TemuanMainlineController extends Controller
         $line_id = $request->line_id;
         $part_id = $request->part_id;
         $status = $request->status;
+        $klasifikasi = $request->klasifikasi;
 
-        if ($area_id == null and $line_id == null and $part_id == null and $status == null) {
+        if ($area_id == null and $line_id == null and $part_id == null and $status == null and $klasifikasi == null) {
             $temuan = Temuan::all();
             $waktu = Carbon::now();
             $pdf = Pdf::loadView('mainline.mainline_temuan.export-pdf', ['temuan' => $temuan]);
@@ -92,6 +95,11 @@ class TemuanMainlineController extends Controller
                 return $query->where('status', $request->status);
             });
 
+            // Filter by klasifikasi
+            $temuan_filter->when($klasifikasi, function ($query) use ($request) {
+                return $query->where('klasifikasi', $request->klasifikasi);
+            });
+
             $temuan = $temuan_filter->orderBy('mainline_id', 'asc')->get();
             $waktu = Carbon::now();
             $pdf = Pdf::loadView('mainline.mainline_temuan.export-pdf', ['temuan' => $temuan]);
@@ -105,6 +113,7 @@ class TemuanMainlineController extends Controller
         $line_id = $request->line_id;
         $part_id = $request->part_id;
         $status = $request->status;
+        $klasifikasi = $request->klasifikasi;
 
         $temuan = Temuan::query()->select(
             'summary_temuan.*',
@@ -132,6 +141,11 @@ class TemuanMainlineController extends Controller
             return $query->where('status', $request->status);
         });
 
+        // Filter by klasifikasi
+        $temuan->when($klasifikasi, function ($query) use ($request) {
+            return $query->where('klasifikasi', $request->klasifikasi);
+        });
+
         $area = Area::all();
         $area_rencana = Area::where('stasiun', 'true')->orWhere('area', 'DAL')->get();
         $line = Line::whereNot('area', 'Depo')->get();
@@ -147,7 +161,8 @@ class TemuanMainlineController extends Controller
             'area_id' => $area_id,
             'line_id' => $line_id,
             'part_id' => $part_id,
-            'status' => $status
+            'status' => $status,
+            'klasifikasi' => $klasifikasi,
         ]);
     }
 
@@ -243,6 +258,7 @@ class TemuanMainlineController extends Controller
             $temuan->update([
                 "status" => $request->status,
                 "photo_close" => $photo_close,
+                "pic_close" => $request->pic_close,
             ]);
             return redirect()->route('temuan_mainline.index')->withNotify('Status temuan mainline berhasil diubah!');;
         } else {
