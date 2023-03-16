@@ -25,6 +25,7 @@ use App\Http\Controllers\JointController;
 use App\Http\Controllers\TemuanMainlineController;
 use App\Http\Controllers\MasterdataDashboardController;
 use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\PMController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WeselController;
 use App\Http\Controllers\WeselExaminationController;
@@ -145,9 +146,14 @@ Route::middleware('auth')->group(function () {
     Route::controller(PICController::class)->group(function () {
         Route::get('/pic', 'index')->name('pic.index');
         Route::get('/pic-create', 'create')->name('pic.create');
+        Route::post('/pic', 'store')->name('pic.store');
+        Route::get('/pic/{id}/edit', 'edit')->name('pic.edit');
+        Route::put('/pic', 'pic_update')->name('pic.update');
+
         Route::get('/profile', 'profile')->name('profile');
         Route::get('/profile-update', 'update')->name('profile.update');
         Route::put('/profile-update', 'update_photo')->name('profile.update.photo');
+        Route::put('/profile-update-ttd', 'update_ttd')->name('profile.update.ttd');
         Route::put('/profile-update/password', 'update_password')->name('profile.update.password');
     });
 
@@ -366,6 +372,15 @@ Route::middleware('auth')->group(function () {
             Route::get('/joint/{id}/edit', 'edit')->name('joint.edit');
             Route::put('/joint', 'update')->name('joint.update');
             Route::delete('/joint', 'destroy')->name('joint.delete');
+        });
+
+        Route::controller(PMController::class)->group(function () {
+            Route::get('/pm', 'index')->name('pm.index');
+            Route::get('/pm-create', 'create')->name('pm.create');
+            Route::post('/pm', 'store')->name('pm.store');
+            Route::get('/pm/{id}/edit', 'edit')->name('pm.edit');
+            Route::put('/pm', 'update')->name('pm.update');
+            Route::delete('/pm', 'destroy')->name('pm.delete');
         });
 
         Route::controller(BufferController::class)->group(function () {

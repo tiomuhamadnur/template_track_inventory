@@ -260,7 +260,7 @@ class TemuanMainlineController extends Controller
                 "photo_close" => $photo_close,
                 "pic_close" => $request->pic_close,
             ]);
-            return redirect()->route('temuan_mainline.index')->withNotify('Status temuan mainline berhasil diubah!');;
+            return redirect()->route('temuan_mainline.index')->withNotify('Status temuan mainline berhasil diubah!');
         } else {
             return redirect()->back();
         }

@@ -36,16 +36,46 @@
                                             @method('put')
                                             <div class="form-label mt-2">
                                                 <div class="name mb-2">Ubah Foto Profil</div>
-                                                <input class="form-control w-full" type="file" name="photo" required>
+                                                <div class="input-group">
+                                                    <input class="form-control w-full" type="file" name="photo"
+                                                        required>
+                                                </div>
                                                 @error('photo')
                                                     <p class="bg-danger rounded-3 text-center text-white mt-1">
                                                         {{ $message }}
                                                     </p>
                                                 @enderror
                                             </div>
-                                            <div class="mt-3 mb-5 btn-group">
-                                                <button type="submit" class="btn btn-primary w-24 mr-1">Submit</button>
-                                                <a href="{{ route('profile') }}" class="btn btn-danger w-24 mr-1">Cancel</a>
+                                            <div class="mt-1 mb-4 btn-group">
+                                                <button type="submit" class="btn btn-primary w-24 mr-1">Update
+                                                    Foto Profil</button>
+                                            </div>
+                                        </form>
+
+                                        <form action="{{ route('profile.update.ttd') }}" method="POST"
+                                            enctype="multipart/form-data">
+                                            @csrf
+                                            @method('put')
+                                            <div class="form-label mt-2">
+                                                <div class="name mb-2">Ubah Foto TTD</div>
+                                                <div class="mb-1">
+                                                    <img style="height: 100px" class="img-thumbnail"
+                                                        src="{{ asset('storage/' . auth()->user()->ttd) }}"
+                                                        alt="Belum diupload!">
+                                                </div>
+                                                <div class="input-group">
+                                                    <input class="form-control w-full" type="file" name="photo_ttd"
+                                                        required>
+                                                </div>
+                                                @error('photo_ttd')
+                                                    <p class="bg-danger rounded-3 text-center text-white mt-1">
+                                                        {{ $message }}
+                                                    </p>
+                                                @enderror
+                                            </div>
+                                            <div class="mt-1 mb-5 btn-group">
+                                                <button type="submit" class="btn btn-success w-24 mr-1">Update
+                                                    Foto TTD</button>
                                             </div>
                                         </form>
                                     </div>
@@ -68,10 +98,12 @@
                                                 @endif
                                             </div>
                                             <div class="mt-3 mb-5">
-                                                <button type="submit" class="btn btn-warning w-24 mr-1 me-2">Ubah</button>
+                                                <button type="submit" class="btn btn-warning w-24 mr-1 me-2">Update
+                                                    Password</button>
                                             </div>
                                         </form>
                                     </div>
+                                    <a href="{{ route('profile') }}" class="btn btn-danger">Cancel</a>
                                 </div>
                             </div>
 
