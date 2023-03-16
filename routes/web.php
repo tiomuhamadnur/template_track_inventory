@@ -1,34 +1,33 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PICController;
+use App\Http\Controllers\AccelerometerController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\LineController;
-use App\Http\Controllers\PageController;
-use App\Http\Controllers\PartController;
-use App\Http\Controllers\DefectController;
-use App\Http\Controllers\TemuanController;
-use App\Http\Controllers\DarkModeController;
-use App\Http\Controllers\DepoLineController;
-use App\Http\Controllers\MainlineController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DetailPartController;
-use App\Http\Controllers\TemuanDepoController;
-use App\Http\Controllers\ColorSchemeController;
-use App\Http\Controllers\TransDefectController;
-use App\Http\Controllers\AccelerometerController;
 use App\Http\Controllers\BufferController;
 use App\Http\Controllers\BufferExaminationController;
+use App\Http\Controllers\ColorSchemeController;
+use App\Http\Controllers\DarkModeController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DefectController;
 use App\Http\Controllers\DepoDashboardController;
+use App\Http\Controllers\DepoLineController;
+use App\Http\Controllers\DetailPartController;
 use App\Http\Controllers\JointController;
-use App\Http\Controllers\TemuanMainlineController;
+use App\Http\Controllers\LineController;
+use App\Http\Controllers\MainlineController;
 use App\Http\Controllers\MasterdataDashboardController;
-use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\PartController;
+use App\Http\Controllers\PICController;
 use App\Http\Controllers\PMController;
+use App\Http\Controllers\TemuanController;
+use App\Http\Controllers\TemuanDepoController;
+use App\Http\Controllers\TemuanMainlineController;
+use App\Http\Controllers\TransDefectController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WeselController;
 use App\Http\Controllers\WeselExaminationController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -264,10 +263,6 @@ Route::middleware('auth')->group(function () {
         // REPORT
         Route::get('/buffer-examination-report', 'report')->name('buffer.examination.report');
     });
-
-
-
-
 
     Route::middleware('isAdmin')->group(function () {
         // MAINLINE

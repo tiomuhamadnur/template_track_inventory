@@ -2,22 +2,21 @@
 
 namespace App\Http\View\Composers;
 
-use Illuminate\View\View;
-use App\Main\TopMenu;
 use App\Main\SideMenu;
 use App\Main\SimpleMenu;
+use App\Main\TopMenu;
+use Illuminate\View\View;
 
 class MenuComposer
 {
     /**
      * Bind data to the view.
      *
-     * @param  View  $view
      * @return void
      */
     public function compose(View $view)
     {
-        if (!is_null(request()->route())) {
+        if (! is_null(request()->route())) {
             $pageName = request()->route()->getName();
             $layout = $this->layout($view);
             $activeMenu = $this->activeMenu($pageName, $layout);
@@ -43,7 +42,7 @@ class MenuComposer
     {
         if (isset($view->layout)) {
             return $view->layout;
-        } else if (request()->has('layout')) {
+        } elseif (request()->has('layout')) {
             return request()->query('layout');
         }
 
@@ -61,7 +60,6 @@ class MenuComposer
         $firstLevelActiveIndex = '';
         $secondLevelActiveIndex = '';
         $thirdLevelActiveIndex = '';
-
 
         if ($layout == 'top-menu') {
             foreach (TopMenu::menu() as $menuKey => $menu) {
@@ -88,7 +86,7 @@ class MenuComposer
                     }
                 }
             }
-        } else if ($layout == 'simple-menu') {
+        } elseif ($layout == 'simple-menu') {
             foreach (SimpleMenu::menu() as $menuKey => $menu) {
                 if ($menu !== 'devider' && isset($menu['route_name']) && $menu['route_name'] == $pageName && empty($firstPageName)) {
                     $firstLevelActiveIndex = $menuKey;
@@ -143,7 +141,7 @@ class MenuComposer
         return [
             'first_level_active_index' => $firstLevelActiveIndex,
             'second_level_active_index' => $secondLevelActiveIndex,
-            'third_level_active_index' => $thirdLevelActiveIndex
+            'third_level_active_index' => $thirdLevelActiveIndex,
         ];
     }
 }

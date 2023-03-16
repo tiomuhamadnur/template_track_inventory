@@ -14,6 +14,7 @@ class BufferController extends Controller
     public function index()
     {
         $buffer_stop = BufferStop::all();
+
         return view('masterdata.masterdata_buffer.index', compact(['buffer_stop']));
     }
 
@@ -21,17 +22,19 @@ class BufferController extends Controller
     {
         $area = Area::all();
         $line = Line::all();
+
         return view('masterdata.masterdata_buffer.create', compact(['area', 'line']));
     }
 
     public function store(Request $request)
     {
         BufferStop::create([
-            "name" => $request->name,
-            "area_id" => $request->area_id,
-            "line_id" => $request->line_id,
-            "tipe" => $request->tipe,
+            'name' => $request->name,
+            'area_id' => $request->area_id,
+            'line_id' => $request->line_id,
+            'tipe' => $request->tipe,
         ]);
+
         return redirect()->route('buffer.index')->withNotify('Data berhasil ditambahkan!');
     }
 
@@ -48,6 +51,7 @@ class BufferController extends Controller
             if ($buffer_stop) {
                 $area = Area::all();
                 $line = Line::all();
+
                 return view('masterdata.masterdata_buffer.update', compact(['area', 'line', 'buffer_stop']));
             } else {
                 return redirect()->back();
@@ -61,17 +65,16 @@ class BufferController extends Controller
     {
         $id = $request->id;
         $buffer_stop = BufferStop::findOrFail($id);
-        if ($buffer_stop)
-        {
+        if ($buffer_stop) {
             $buffer_stop->update([
-                "name" => $request->name,
-                "area_id" => $request->area_id,
-                "line_id" => $request->line_id,
-                "tipe" => $request->tipe,
+                'name' => $request->name,
+                'area_id' => $request->area_id,
+                'line_id' => $request->line_id,
+                'tipe' => $request->tipe,
             ]);
+
             return redirect()->route('buffer.index')->withNotify('Data berhasil diubah!');
-        } else
-        {
+        } else {
             return redirect()->back();
         }
     }
@@ -80,12 +83,11 @@ class BufferController extends Controller
     {
         $id = $request->id;
         $buffer_stop = BufferStop::findOrFail($id);
-        if($buffer_stop)
-        {
+        if ($buffer_stop) {
             $buffer_stop->delete();
+
             return redirect()->route('buffer.index')->withNotify('Data berhasil dihapus!');
-        } else
-        {
+        } else {
             return redirect()->back();
         }
     }

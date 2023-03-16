@@ -10,6 +10,7 @@ class PIC extends Model
     use HasFactory;
 
     protected $table = 'pic_job';
+
     protected $guarded = [];
 
     public function user()

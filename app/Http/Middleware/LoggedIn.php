@@ -8,7 +8,7 @@ class LoggedIn
 {
     public function handle($request, Closure $next)
     {
-        if (!is_null(request()->user())) {
+        if (! is_null(request()->user())) {
             return redirect('/home');
         } else {
             return $next($request);

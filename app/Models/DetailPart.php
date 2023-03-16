@@ -10,6 +10,7 @@ class DetailPart extends Model
     use HasFactory;
 
     protected $table = 'detail_part';
+
     protected $guarded = [];
 
     public function part()

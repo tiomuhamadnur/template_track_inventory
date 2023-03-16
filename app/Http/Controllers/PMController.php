@@ -12,6 +12,7 @@ class PMController extends Controller
     public function index()
     {
         $pm = PM::all();
+
         return view('masterdata.masterdata_pm.index', compact(['pm']));
     }
 
@@ -23,11 +24,12 @@ class PMController extends Controller
     public function store(Request $request)
     {
         PM::create([
-            "name" => $request->name,
-            "item" => $request->item,
-            "detail" => $request->detail,
-            "frekuensi" => $request->frekuensi,
+            'name' => $request->name,
+            'item' => $request->item,
+            'detail' => $request->detail,
+            'frekuensi' => $request->frekuensi,
         ]);
+
         return redirect()->route('pm.index')->withNotify('Data berhasil ditambahkan!');
     }
 
@@ -55,17 +57,16 @@ class PMController extends Controller
     {
         $id = $request->id;
         $pm = PM::findOrFail($id);
-        if ($pm)
-        {
+        if ($pm) {
             $pm->update([
-                "name" => $request->name,
-                "item" => $request->item,
-                "detail" => $request->detail,
-                "frekuensi" => $request->frekuensi,
+                'name' => $request->name,
+                'item' => $request->item,
+                'detail' => $request->detail,
+                'frekuensi' => $request->frekuensi,
             ]);
+
             return redirect()->route('pm.index')->withNotify('Data berhasil diubah!');
-        } else
-        {
+        } else {
             return redirect()->back();
         }
     }
@@ -74,12 +75,11 @@ class PMController extends Controller
     {
         $id = $request->id;
         $pm = PM::findOrFail($id);
-        if($pm)
-        {
+        if ($pm) {
             $pm->delete();
+
             return redirect()->route('pm.index')->withNotify('Data berhasil dihapus!');
-        } else
-        {
+        } else {
             return redirect()->back();
         }
     }

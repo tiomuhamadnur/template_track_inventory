@@ -12,8 +12,8 @@ use App\Models\Part;
 use App\Models\Temuan;
 use App\Models\TransDefect;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Excel;
+use Illuminate\Http\Request;
 
 class TemuanController extends Controller
 {
@@ -24,10 +24,10 @@ class TemuanController extends Controller
         $line = Line::all();
         $part = Part::all();
 
-        $area_id = "";
-        $line_id = "";
-        $part_id = "";
-        $status = "";
+        $area_id = '';
+        $line_id = '';
+        $part_id = '';
+        $status = '';
 
         return view('temuan.index', compact(['temuan', 'area', 'line', 'part', 'area_id', 'line_id', 'part_id', 'status']));
     }
@@ -80,6 +80,7 @@ class TemuanController extends Controller
         $part = Part::all();
         $defect = Defect::all();
         $area = Area::all();
+
         return view('temuan.create', compact(['mainline', 'part', 'defect', 'area']));
     }
 
@@ -88,41 +89,40 @@ class TemuanController extends Controller
         $this->validate($request, [
             'photo' => ['file', 'image'],
         ], [
-            'photo.image' => 'File harus dalam format gambar/photo!'
+            'photo.image' => 'File harus dalam format gambar/photo!',
         ]);
 
-
         if ($request->hasFile('photo') && $request->photo != '') {
-
             $photo_temuan = $request->file('photo')->store('temuan/mainline');
             Temuan::create([
-                "mainline_id" => $request->mainline_id,
-                "no_sleeper" => $request->no_sleeper,
-                "part_id" => $request->part_id,
-                "detail_part_id" => $request->detail_part_id,
-                "direction" => $request->direction,
-                "defect_id" => $request->defect_id,
-                "remark" => $request->remark,
-                "klasifikasi" => $request->klasifikasi,
-                "pic" => $request->pic,
-                "tanggal" => $request->tanggal,
-                "photo" => $photo_temuan,
+                'mainline_id' => $request->mainline_id,
+                'no_sleeper' => $request->no_sleeper,
+                'part_id' => $request->part_id,
+                'detail_part_id' => $request->detail_part_id,
+                'direction' => $request->direction,
+                'defect_id' => $request->defect_id,
+                'remark' => $request->remark,
+                'klasifikasi' => $request->klasifikasi,
+                'pic' => $request->pic,
+                'tanggal' => $request->tanggal,
+                'photo' => $photo_temuan,
             ]);
+
             return redirect()->route('temuan.index');
-        }
-        else {
+        } else {
             Temuan::create([
-                "mainline_id" => $request->mainline_id,
-                "no_sleeper" => $request->no_sleeper,
-                "part_id" => $request->part_id,
-                "detail_part_id" => $request->detail_part_id,
-                "direction" => $request->direction,
-                "defect_id" => $request->defect_id,
-                "remark" => $request->remark,
-                "klasifikasi" => $request->klasifikasi,
-                "pic" => $request->pic,
-                "tanggal" => $request->tanggal,
+                'mainline_id' => $request->mainline_id,
+                'no_sleeper' => $request->no_sleeper,
+                'part_id' => $request->part_id,
+                'detail_part_id' => $request->detail_part_id,
+                'direction' => $request->direction,
+                'defect_id' => $request->defect_id,
+                'remark' => $request->remark,
+                'klasifikasi' => $request->klasifikasi,
+                'pic' => $request->pic,
+                'tanggal' => $request->tanggal,
             ]);
+
             return redirect()->route('temuan.index');
         }
     }
@@ -132,6 +132,7 @@ class TemuanController extends Controller
         $tanggal = $request->tanggal;
         $area = Temuan::where('tanggal', $tanggal)->orderBy('mainline_id', 'asc')->distinct()->get();
         $temuan = Temuan::where('tanggal', $tanggal)->orderBy('mainline_id', 'asc')->get();
+
         return view('temuan.report.report', compact(['tanggal', 'temuan', 'area']));
     }
 
@@ -155,6 +156,7 @@ class TemuanController extends Controller
         $id = $request->id;
         $temuan = Temuan::findOrFail($id);
         $temuan->delete();
+
         return redirect()->route('temuan.index');
     }
 
@@ -168,7 +170,8 @@ class TemuanController extends Controller
         }
     }
 
-    public function getLocation(Request $request) {
+    public function getLocation(Request $request)
+    {
         $area = $request->area;
         $location = Area::where('area', $area)->get();
         if (count($location) > 0) {

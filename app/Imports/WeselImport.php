@@ -11,12 +11,12 @@ class WeselImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         return new Wesel([
-            'area_id'  => $row['area_id'],
-            'line_id'  => $row['line_id'],
-            'name'  => $row['name'],
-            'tipe'  => $row['tipe'],
-            'direction'  => $row['direction'],
-            'kilometer'  => $row['kilometer'],
+            'area_id' => $row['area_id'],
+            'line_id' => $row['line_id'],
+            'name' => $row['name'],
+            'tipe' => $row['tipe'],
+            'direction' => $row['direction'],
+            'kilometer' => $row['kilometer'],
         ]);
     }
 }

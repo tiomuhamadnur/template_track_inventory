@@ -10,6 +10,7 @@ class Wesel extends Model
     use HasFactory;
 
     protected $table = 'wesel';
+
     protected $guarded = [];
 
     public function area()

@@ -10,5 +10,6 @@ class Part extends Model
     use HasFactory;
 
     protected $table = 'part';
+
     protected $guarded = [];
 }

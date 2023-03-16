@@ -44,7 +44,7 @@ class PegawaiController extends Controller
         //
     }
 
-    public function dummy_user ()
+    public function dummy_user()
     {
         Pegawai::insert([
             [

@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 class DepoDashboardController extends Controller
 {
-
     public function index()
     {
         return view('depo.depo_dashboard.index');

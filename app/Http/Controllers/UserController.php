@@ -13,6 +13,7 @@ class UserController extends Controller
     public function index()
     {
         $user = Pegawai::all();
+
         return view('user.index', compact(['user']));
     }
 
@@ -26,37 +27,39 @@ class UserController extends Controller
         $this->validate($request, [
             'photo' => ['image'],
         ], [
-            'photo.image' => 'File harus dalam format gambar/photo!'
+            'photo.image' => 'File harus dalam format gambar/photo!',
         ]);
 
         if ($request->hasFile('photo') && $request->photo != '') {
             $cek = Pegawai::where('email', $request->email)->get();
             if ($cek->count() == 0) {
-                $photo_profil = $request->file('photo')->store('photo-profil/' . $request->role);
+                $photo_profil = $request->file('photo')->store('photo-profil/'.$request->role);
                 Pegawai::create([
-                    "name" => $request->name,
-                    "email" => $request->email,
-                    "password" => Hash::make('user123'),
-                    "jabatan" => $request->jabatan,
-                    "section" => $request->section,
-                    "departement" => $request->departement,
-                    "role" => $request->role,
-                    "photo" => $photo_profil,
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => Hash::make('user123'),
+                    'jabatan' => $request->jabatan,
+                    'section' => $request->section,
+                    'departement' => $request->departement,
+                    'role' => $request->role,
+                    'photo' => $photo_profil,
                 ]);
+
                 return redirect()->route('usermanage.index');
             } else {
                 return back();
             }
         } else {
             Pegawai::create([
-                "name" => $request->name,
-                "email" => $request->email,
-                "password" => Hash::make('user123'),
-                "jabatan" => $request->jabatan,
-                "section" => $request->section,
-                "departement" => $request->departement,
-                "role" => $request->role,
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make('user123'),
+                'jabatan' => $request->jabatan,
+                'section' => $request->section,
+                'departement' => $request->departement,
+                'role' => $request->role,
             ]);
+
             return redirect()->route('usermanage.index');
         }
     }
@@ -67,8 +70,9 @@ class UserController extends Controller
         $user = Pegawai::findOrFail($id);
         if ($user) {
             $user->update([
-                "password" => Hash::make('user123'),
+                'password' => Hash::make('user123'),
             ]);
+
             return redirect()->route('usermanage.index');
         } else {
             return redirect()->route('usermanage.index');
@@ -95,22 +99,23 @@ class UserController extends Controller
         $this->validate($request, [
             'photo' => ['image'],
         ], [
-            'photo.image' => 'File harus dalam format gambar/photo!'
+            'photo.image' => 'File harus dalam format gambar/photo!',
         ]);
 
         if ($request->hasFile('photo') && $request->photo != '') {
             $cek = Pegawai::findOrFail($request->id);
             if ($cek->count() != 0) {
-                $photo_profil = $request->file('photo')->store('photo-profil/' . $request->role);
+                $photo_profil = $request->file('photo')->store('photo-profil/'.$request->role);
                 $cek->update([
-                    "name" => $request->name,
-                    "email" => $request->email,
-                    "jabatan" => $request->jabatan,
-                    "section" => $request->section,
-                    "departement" => $request->departement,
-                    "role" => $request->role,
-                    "photo" => $photo_profil,
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'jabatan' => $request->jabatan,
+                    'section' => $request->section,
+                    'departement' => $request->departement,
+                    'role' => $request->role,
+                    'photo' => $photo_profil,
                 ]);
+
                 return back();
             } else {
                 return back();
@@ -119,13 +124,14 @@ class UserController extends Controller
             $cek = Pegawai::findOrFail($request->id);
             if ($cek->count() != 0) {
                 $cek->update([
-                    "name" => $request->name,
-                    "email" => $request->email,
-                    "jabatan" => $request->jabatan,
-                    "section" => $request->section,
-                    "departement" => $request->departement,
-                    "role" => $request->role,
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'jabatan' => $request->jabatan,
+                    'section' => $request->section,
+                    'departement' => $request->departement,
+                    'role' => $request->role,
                 ]);
+
                 return back();
             }
         }

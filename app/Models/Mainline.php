@@ -10,6 +10,7 @@ class Mainline extends Model
     use HasFactory;
 
     protected $table = 'mainline';
+
     protected $guarded = [];
 
     protected $with = ['area', 'line'];

@@ -15,6 +15,7 @@ class JointController extends Controller
     public function index()
     {
         $joint = Joint::all();
+
         return view('masterdata.masterdata_joint.index', compact(['joint']));
     }
 
@@ -23,19 +24,21 @@ class JointController extends Controller
         $area = Area::all();
         $line = Line::all();
         $wesel = Wesel::all();
+
         return view('masterdata.masterdata_joint.create', compact(['area', 'line', 'wesel']));
     }
 
     public function store(Request $request)
     {
         Joint::create([
-            "name" => $request->name,
-            "area_id" => $request->area_id,
-            "line_id" => $request->line_id,
-            "wesel_id" => $request->wesel_id,
-            "tipe" => $request->tipe,
-            "kilometer" => $request->kilometer,
+            'name' => $request->name,
+            'area_id' => $request->area_id,
+            'line_id' => $request->line_id,
+            'wesel_id' => $request->wesel_id,
+            'tipe' => $request->tipe,
+            'kilometer' => $request->kilometer,
         ]);
+
         return redirect()->route('joint.index')->withNotify('Data berhasil ditambahkan!');
     }
 
@@ -53,6 +56,7 @@ class JointController extends Controller
                 $area = Area::all();
                 $line = Line::all();
                 $wesel = Wesel::all();
+
                 return view('masterdata.masterdata_joint.update', compact(['joint', 'area', 'line', 'wesel']));
             } else {
                 return redirect()->back();
@@ -66,19 +70,18 @@ class JointController extends Controller
     {
         $id = $request->id;
         $joint = Joint::findOrFail($id);
-        if ($joint)
-        {
+        if ($joint) {
             $joint->update([
-                "name" => $request->name,
-                "area_id" => $request->area_id,
-                "line_id" => $request->line_id,
-                "wesel_id" => $request->wesel_id,
-                "tipe" => $request->tipe,
-                "kilometer" => $request->kilometer,
+                'name' => $request->name,
+                'area_id' => $request->area_id,
+                'line_id' => $request->line_id,
+                'wesel_id' => $request->wesel_id,
+                'tipe' => $request->tipe,
+                'kilometer' => $request->kilometer,
             ]);
+
             return redirect()->route('joint.index')->withNotify('Data berhasil diubah!');
-        } else
-        {
+        } else {
             return redirect()->back();
         }
     }
@@ -87,12 +90,11 @@ class JointController extends Controller
     {
         $id = $request->id;
         $joint = Joint::findOrFail($id);
-        if($joint)
-        {
+        if ($joint) {
             $joint->delete();
+
             return redirect()->route('joint.index')->withNotify('Data berhasil dihapus!');
-        } else
-        {
+        } else {
             return redirect()->back();
         }
     }

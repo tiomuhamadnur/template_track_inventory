@@ -10,6 +10,7 @@ class Joint extends Model
     use HasFactory;
 
     protected $table = 'joint';
+
     protected $guarded = [];
 
     public function area()

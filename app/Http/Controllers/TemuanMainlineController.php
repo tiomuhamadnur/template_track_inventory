@@ -14,9 +14,9 @@ use App\Models\Temuan;
 use App\Models\TransDefect;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Excel;
 use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
 class TemuanMainlineController extends Controller
@@ -29,11 +29,11 @@ class TemuanMainlineController extends Controller
         $line = Line::whereNot('area', 'Depo')->get();
         $part = Part::all();
 
-        $area_id = "";
-        $line_id = "";
-        $part_id = "";
-        $status = "";
-        $klasifikasi = "";
+        $area_id = '';
+        $line_id = '';
+        $part_id = '';
+        $status = '';
+        $klasifikasi = '';
 
         return view('mainline.mainline_temuan.index', compact(['temuan', 'area', 'area_rencana', 'line', 'part', 'area_id', 'line_id', 'part_id', 'status', 'klasifikasi']));
     }
@@ -49,9 +49,9 @@ class TemuanMainlineController extends Controller
         $waktu = Carbon::now();
 
         if ($area_id == null and $line_id == null and $part_id == null and $status == null and $klasifikasi == null) {
-            return Excel::download(new TemuanMainlineExport(), $waktu . '_temuan_mainline_all.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+            return Excel::download(new TemuanMainlineExport(), $waktu.'_temuan_mainline_all.xlsx', \Maatwebsite\Excel\Excel::XLSX);
         } else {
-            return Excel::download(new TemuanMainlineFilterExport($area_id, $line_id, $part_id, $status, $klasifikasi), $waktu . '_temuan_mainline_filtered.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+            return Excel::download(new TemuanMainlineFilterExport($area_id, $line_id, $part_id, $status, $klasifikasi), $waktu.'_temuan_mainline_filtered.xlsx', \Maatwebsite\Excel\Excel::XLSX);
         }
     }
 
@@ -67,7 +67,8 @@ class TemuanMainlineController extends Controller
             $temuan = Temuan::all();
             $waktu = Carbon::now();
             $pdf = Pdf::loadView('mainline.mainline_temuan.export-pdf', ['temuan' => $temuan]);
-            return $pdf->stream($waktu . '_list-temuan-mainline.pdf');
+
+            return $pdf->stream($waktu.'_list-temuan-mainline.pdf');
         } else {
             $temuan_filter = Temuan::query()->select(
                 'summary_temuan.*',
@@ -103,7 +104,8 @@ class TemuanMainlineController extends Controller
             $temuan = $temuan_filter->orderBy('mainline_id', 'asc')->get();
             $waktu = Carbon::now();
             $pdf = Pdf::loadView('mainline.mainline_temuan.export-pdf', ['temuan' => $temuan]);
-            return $pdf->stream($waktu . '_list-temuan-mainline-filtered.pdf');
+
+            return $pdf->stream($waktu.'_list-temuan-mainline-filtered.pdf');
         }
     }
 
@@ -172,6 +174,7 @@ class TemuanMainlineController extends Controller
         $part = Part::all();
         $defect = Defect::all();
         $area = Area::all();
+
         return view('mainline.mainline_temuan.create', compact(['mainline', 'part', 'defect', 'area']));
     }
 
@@ -180,40 +183,40 @@ class TemuanMainlineController extends Controller
         $this->validate($request, [
             'photo' => ['file', 'image', 'required'],
         ], [
-            'photo.image' => 'File harus dalam format gambar/photo!'
+            'photo.image' => 'File harus dalam format gambar/photo!',
         ]);
 
-
         if ($request->hasFile('photo') && $request->photo != '') {
-
             $photo_temuan = $request->file('photo')->store('temuan/mainline');
             Temuan::create([
-                "mainline_id" => $request->mainline_id,
-                "no_sleeper" => $request->no_sleeper,
-                "part_id" => $request->part_id,
-                "detail_part_id" => $request->detail_part_id,
-                "direction" => $request->direction,
-                "defect_id" => $request->defect_id,
-                "remark" => $request->remark,
-                "klasifikasi" => $request->klasifikasi,
-                "pic" => $request->pic,
-                "tanggal" => $request->tanggal,
-                "photo" => $photo_temuan,
+                'mainline_id' => $request->mainline_id,
+                'no_sleeper' => $request->no_sleeper,
+                'part_id' => $request->part_id,
+                'detail_part_id' => $request->detail_part_id,
+                'direction' => $request->direction,
+                'defect_id' => $request->defect_id,
+                'remark' => $request->remark,
+                'klasifikasi' => $request->klasifikasi,
+                'pic' => $request->pic,
+                'tanggal' => $request->tanggal,
+                'photo' => $photo_temuan,
             ]);
+
             return redirect()->route('temuan_mainline.index')->withNotify('Data temuan baru mainline berhasil ditambahkan!');
         } else {
             Temuan::create([
-                "mainline_id" => $request->mainline_id,
-                "no_sleeper" => $request->no_sleeper,
-                "part_id" => $request->part_id,
-                "detail_part_id" => $request->detail_part_id,
-                "direction" => $request->direction,
-                "defect_id" => $request->defect_id,
-                "remark" => $request->remark,
-                "klasifikasi" => $request->klasifikasi,
-                "pic" => $request->pic,
-                "tanggal" => $request->tanggal,
+                'mainline_id' => $request->mainline_id,
+                'no_sleeper' => $request->no_sleeper,
+                'part_id' => $request->part_id,
+                'detail_part_id' => $request->detail_part_id,
+                'direction' => $request->direction,
+                'defect_id' => $request->defect_id,
+                'remark' => $request->remark,
+                'klasifikasi' => $request->klasifikasi,
+                'pic' => $request->pic,
+                'tanggal' => $request->tanggal,
             ]);
+
             return redirect()->route('temuan_mainline.index')->withNotify('Data temuan baru mainline berhasil ditambahkan!');
         }
     }
@@ -225,6 +228,7 @@ class TemuanMainlineController extends Controller
         $area_rencana_finish = $request->area_rencana_finish;
         $examiner = $request->examiner;
         $temuan = Temuan::where('tanggal', $tanggal)->orderBy('mainline_id', 'asc')->get();
+
         return view('mainline.mainline_temuan.report.report', compact(['tanggal', 'temuan', 'area_rencana_start', 'area_rencana_finish', 'examiner']));
     }
 
@@ -248,7 +252,7 @@ class TemuanMainlineController extends Controller
         $this->validate($request, [
             'photo_close' => ['file', 'image', 'required'],
         ], [
-            'photo_close.image' => 'File harus dalam format gambar/photo!'
+            'photo_close.image' => 'File harus dalam format gambar/photo!',
         ]);
 
         $id = $request->id;
@@ -256,10 +260,11 @@ class TemuanMainlineController extends Controller
             $photo_close = $request->file('photo_close')->store('temuan/mainline/perbaikan');
             $temuan = Temuan::findOrFail($id);
             $temuan->update([
-                "status" => $request->status,
-                "photo_close" => $photo_close,
-                "pic_close" => $request->pic_close,
+                'status' => $request->status,
+                'photo_close' => $photo_close,
+                'pic_close' => $request->pic_close,
             ]);
+
             return redirect()->route('temuan_mainline.index')->withNotify('Status temuan mainline berhasil diubah!');
         } else {
             return redirect()->back();
@@ -282,6 +287,7 @@ class TemuanMainlineController extends Controller
         $temuan = Temuan::findOrFail($id);
         if ($temuan) {
             $temuan->delete();
+
             return redirect()->route('temuan_mainline.index')->withNotify('Data temuan mainline berhasil dihapus!');
         } else {
             return redirect()->back();
@@ -358,7 +364,7 @@ class TemuanMainlineController extends Controller
         $photo = Pegawai::where('name', $pic)->first()->photo;
         if ($photo != null) {
             return response()->json([
-                'photo' => asset('storage/' . $photo),
+                'photo' => asset('storage/'.$photo),
             ]);
         } else {
             return response()->json([

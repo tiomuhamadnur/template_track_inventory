@@ -10,5 +10,6 @@ class JadwalAccelerometer extends Model
     use HasFactory;
 
     protected $table = 'jadwal_accelerometer';
+
     protected $guarded = [];
 }

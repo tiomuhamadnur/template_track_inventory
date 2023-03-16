@@ -10,6 +10,7 @@ class BufferStopExamination extends Model
     use HasFactory;
 
     protected $table = 'buffer_stop_examination';
+
     protected $guarded = [];
 
     public function buffer_stop()

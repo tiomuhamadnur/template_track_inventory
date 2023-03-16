@@ -78,6 +78,7 @@ return array(
     'App\\Models\\Joint' => $baseDir . '/app/Models/Joint.php',
     'App\\Models\\Line' => $baseDir . '/app/Models/Line.php',
     'App\\Models\\Mainline' => $baseDir . '/app/Models/Mainline.php',
+    'App\\Models\\PIC' => $baseDir . '/app/Models/PIC.php',
     'App\\Models\\PM' => $baseDir . '/app/Models/PM.php',
     'App\\Models\\Part' => $baseDir . '/app/Models/Part.php',
     'App\\Models\\Pegawai' => $baseDir . '/app/Models/Pegawai.php',

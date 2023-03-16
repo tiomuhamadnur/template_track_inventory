@@ -10,6 +10,7 @@ class Accelerometer extends Model
     use HasFactory;
 
     protected $table = 'accelerometer';
+
     protected $guarded = [];
 
     public function area()

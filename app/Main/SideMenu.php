@@ -17,9 +17,9 @@ class SideMenu
                 'icon' => 'home',
                 'route_name' => 'home',
                 'params' => [
-                    'layout' => 'side-menu'
+                    'layout' => 'side-menu',
                 ],
-                'title' => 'Home'
+                'title' => 'Home',
             ],
             'master' => [
                 'icon' => 'database',
@@ -29,59 +29,59 @@ class SideMenu
                         'icon' => 'map',
                         'route_name' => 'area.index',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Area'
+                        'title' => 'Area',
                     ],
                     'line' => [
                         'icon' => 'shuffle',
                         'route_name' => 'line.index',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Line'
+                        'title' => 'Line',
                     ],
                     'part' => [
                         'icon' => 'settings',
                         'route_name' => 'part.index',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Parts'
+                        'title' => 'Parts',
                     ],
                     'detail_part' => [
                         'icon' => 'settings',
                         'route_name' => 'detail-part.index',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Detail Parts'
+                        'title' => 'Detail Parts',
                     ],
                     'defect' => [
                         'icon' => 'x',
                         'route_name' => 'defect.index',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Defects'
+                        'title' => 'Defects',
                     ],
                     'transDefect' => [
                         'icon' => 'tag',
                         'route_name' => 'transDefect.index',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Relasi Defects'
+                        'title' => 'Relasi Defects',
                     ],
                     'mainline' => [
                         'icon' => 'wind',
                         'route_name' => 'mainline.index',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Track Bed'
+                        'title' => 'Track Bed',
                     ],
-                ]
+                ],
             ],
             'activity' => [
                 'icon' => 'briefcase',
@@ -91,19 +91,19 @@ class SideMenu
                         'icon' => 'slack',
                         'route_name' => 'temuan.index',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Summary Temuan'
+                        'title' => 'Summary Temuan',
                     ],
                     'accelerometer' => [
                         'icon' => 'codesandbox',
                         'route_name' => 'accelerometer.index',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Accelerometer'
+                        'title' => 'Accelerometer',
                     ],
-                ]
+                ],
             ],
             'menu-layout' => [
                 'icon' => 'box',
@@ -113,27 +113,27 @@ class SideMenu
                         'icon' => '',
                         'route_name' => 'dashboard-overview-1',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Side Menu'
+                        'title' => 'Side Menu',
                     ],
                     'simple-menu' => [
                         'icon' => '',
                         'route_name' => 'dashboard-overview-1',
                         'params' => [
-                            'layout' => 'simple-menu'
+                            'layout' => 'simple-menu',
                         ],
-                        'title' => 'Simple Menu'
+                        'title' => 'Simple Menu',
                     ],
                     'top-menu' => [
                         'icon' => '',
                         'route_name' => 'dashboard-overview-1',
                         'params' => [
-                            'layout' => 'top-menu'
+                            'layout' => 'top-menu',
                         ],
-                        'title' => 'Top Menu'
-                    ]
-                ]
+                        'title' => 'Top Menu',
+                    ],
+                ],
             ],
             'e-commerce' => [
                 'icon' => 'shopping-bag',
@@ -143,15 +143,15 @@ class SideMenu
                         'icon' => '',
                         'route_name' => 'categories',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Categories'
+                        'title' => 'Categories',
                     ],
                     'add-product' => [
                         'icon' => '',
                         'route_name' => 'add-product',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
                         'title' => 'Add Product',
                     ],
@@ -163,19 +163,19 @@ class SideMenu
                                 'icon' => '',
                                 'route_name' => 'product-list',
                                 'params' => [
-                                    'layout' => 'side-menu'
+                                    'layout' => 'side-menu',
                                 ],
-                                'title' => 'Product List'
+                                'title' => 'Product List',
                             ],
                             'product-grid' => [
                                 'icon' => '',
                                 'route_name' => 'product-grid',
                                 'params' => [
-                                    'layout' => 'side-menu'
+                                    'layout' => 'side-menu',
                                 ],
-                                'title' => 'Product Grid'
-                            ]
-                        ]
+                                'title' => 'Product Grid',
+                            ],
+                        ],
                     ],
                     'transactions' => [
                         'icon' => '',
@@ -185,19 +185,19 @@ class SideMenu
                                 'icon' => '',
                                 'route_name' => 'transaction-list',
                                 'params' => [
-                                    'layout' => 'side-menu'
+                                    'layout' => 'side-menu',
                                 ],
-                                'title' => 'Transaction List'
+                                'title' => 'Transaction List',
                             ],
                             'transaction-detail' => [
                                 'icon' => '',
                                 'route_name' => 'transaction-detail',
                                 'params' => [
-                                    'layout' => 'side-menu'
+                                    'layout' => 'side-menu',
                                 ],
-                                'title' => 'Transaction Detail'
-                            ]
-                        ]
+                                'title' => 'Transaction Detail',
+                            ],
+                        ],
                     ],
                     'sellers' => [
                         'icon' => '',
@@ -207,77 +207,77 @@ class SideMenu
                                 'icon' => '',
                                 'route_name' => 'seller-list',
                                 'params' => [
-                                    'layout' => 'side-menu'
+                                    'layout' => 'side-menu',
                                 ],
-                                'title' => 'Seller List'
+                                'title' => 'Seller List',
                             ],
                             'seller-detail' => [
                                 'icon' => '',
                                 'route_name' => 'seller-detail',
                                 'params' => [
-                                    'layout' => 'side-menu'
+                                    'layout' => 'side-menu',
                                 ],
-                                'title' => 'Seller Detail'
-                            ]
-                        ]
+                                'title' => 'Seller Detail',
+                            ],
+                        ],
                     ],
                     'reviews' => [
                         'icon' => '',
                         'route_name' => 'reviews',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Reviews'
+                        'title' => 'Reviews',
                     ],
-                ]
+                ],
             ],
             'inbox' => [
                 'icon' => 'inbox',
                 'route_name' => 'inbox',
                 'params' => [
-                    'layout' => 'side-menu'
+                    'layout' => 'side-menu',
                 ],
-                'title' => 'Inbox'
+                'title' => 'Inbox',
             ],
             'file-manager' => [
                 'icon' => 'hard-drive',
                 'route_name' => 'file-manager',
                 'params' => [
-                    'layout' => 'side-menu'
+                    'layout' => 'side-menu',
                 ],
-                'title' => 'File Manager'
+                'title' => 'File Manager',
             ],
             'point-of-sale' => [
                 'icon' => 'credit-card',
                 'route_name' => 'point-of-sale',
                 'params' => [
-                    'layout' => 'side-menu'
+                    'layout' => 'side-menu',
                 ],
-                'title' => 'Point of Sale'
+                'title' => 'Point of Sale',
             ],
             'chat' => [
                 'icon' => 'message-square',
                 'route_name' => 'chat',
                 'params' => [
-                    'layout' => 'side-menu'
+                    'layout' => 'side-menu',
                 ],
-                'title' => 'Chat'
+                'title' => 'Chat',
             ],
             'post' => [
                 'icon' => 'file-text',
                 'route_name' => 'post',
                 'params' => [
-                    'layout' => 'side-menu'
+                    'layout' => 'side-menu',
                 ],
-                'title' => 'Post'
+                'title' => 'Post',
             ],
             'calendar' => [
                 'icon' => 'calendar',
                 'route_name' => 'calendar',
                 'params' => [
-                    'layout' => 'side-menu'
+                    'layout' => 'side-menu',
                 ],
-                'title' => 'Calendar'
+                'title' => 'Calendar',
             ],
             'devider',
             'crud' => [
@@ -288,19 +288,19 @@ class SideMenu
                         'icon' => '',
                         'route_name' => 'crud-data-list',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Data List'
+                        'title' => 'Data List',
                     ],
                     'crud-form' => [
                         'icon' => '',
                         'route_name' => 'crud-form',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Form'
-                    ]
-                ]
+                        'title' => 'Form',
+                    ],
+                ],
             ],
             'users' => [
                 'icon' => 'users',
@@ -310,27 +310,27 @@ class SideMenu
                         'icon' => '',
                         'route_name' => 'users-layout-1',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Layout 1'
+                        'title' => 'Layout 1',
                     ],
                     'users-layout-2' => [
                         'icon' => '',
                         'route_name' => 'users-layout-2',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Layout 2'
+                        'title' => 'Layout 2',
                     ],
                     'users-layout-3' => [
                         'icon' => '',
                         'route_name' => 'users-layout-3',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Layout 3'
-                    ]
-                ]
+                        'title' => 'Layout 3',
+                    ],
+                ],
             ],
             'profile' => [
                 'icon' => 'trello',
@@ -340,27 +340,27 @@ class SideMenu
                         'icon' => '',
                         'route_name' => 'profile-overview-1',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Overview 1'
+                        'title' => 'Overview 1',
                     ],
                     'profile-overview-2' => [
                         'icon' => '',
                         'route_name' => 'profile-overview-2',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Overview 2'
+                        'title' => 'Overview 2',
                     ],
                     'profile-overview-3' => [
                         'icon' => '',
                         'route_name' => 'profile-overview-3',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Overview 3'
-                    ]
-                ]
+                        'title' => 'Overview 3',
+                    ],
+                ],
             ],
             'pages' => [
                 'icon' => 'layout',
@@ -374,27 +374,27 @@ class SideMenu
                                 'icon' => '',
                                 'route_name' => 'wizard-layout-1',
                                 'params' => [
-                                    'layout' => 'side-menu'
+                                    'layout' => 'side-menu',
                                 ],
-                                'title' => 'Layout 1'
+                                'title' => 'Layout 1',
                             ],
                             'wizard-layout-2' => [
                                 'icon' => '',
                                 'route_name' => 'wizard-layout-2',
                                 'params' => [
-                                    'layout' => 'side-menu'
+                                    'layout' => 'side-menu',
                                 ],
-                                'title' => 'Layout 2'
+                                'title' => 'Layout 2',
                             ],
                             'wizard-layout-3' => [
                                 'icon' => '',
                                 'route_name' => 'wizard-layout-3',
                                 'params' => [
-                                    'layout' => 'side-menu'
+                                    'layout' => 'side-menu',
                                 ],
-                                'title' => 'Layout 3'
-                            ]
-                        ]
+                                'title' => 'Layout 3',
+                            ],
+                        ],
                     ],
                     'blog' => [
                         'icon' => '',
@@ -404,27 +404,27 @@ class SideMenu
                                 'icon' => '',
                                 'route_name' => 'blog-layout-1',
                                 'params' => [
-                                    'layout' => 'side-menu'
+                                    'layout' => 'side-menu',
                                 ],
-                                'title' => 'Layout 1'
+                                'title' => 'Layout 1',
                             ],
                             'blog-layout-2' => [
                                 'icon' => '',
                                 'route_name' => 'blog-layout-2',
                                 'params' => [
-                                    'layout' => 'side-menu'
+                                    'layout' => 'side-menu',
                                 ],
-                                'title' => 'Layout 2'
+                                'title' => 'Layout 2',
                             ],
                             'blog-layout-3' => [
                                 'icon' => '',
                                 'route_name' => 'blog-layout-3',
                                 'params' => [
-                                    'layout' => 'side-menu'
+                                    'layout' => 'side-menu',
                                 ],
-                                'title' => 'Layout 3'
-                            ]
-                        ]
+                                'title' => 'Layout 3',
+                            ],
+                        ],
                     ],
                     'pricing' => [
                         'icon' => '',
@@ -434,19 +434,19 @@ class SideMenu
                                 'icon' => '',
                                 'route_name' => 'pricing-layout-1',
                                 'params' => [
-                                    'layout' => 'side-menu'
+                                    'layout' => 'side-menu',
                                 ],
-                                'title' => 'Layout 1'
+                                'title' => 'Layout 1',
                             ],
                             'pricing-layout-2' => [
                                 'icon' => '',
                                 'route_name' => 'pricing-layout-2',
                                 'params' => [
-                                    'layout' => 'side-menu'
+                                    'layout' => 'side-menu',
                                 ],
-                                'title' => 'Layout 2'
-                            ]
-                        ]
+                                'title' => 'Layout 2',
+                            ],
+                        ],
                     ],
                     'invoice' => [
                         'icon' => '',
@@ -456,19 +456,19 @@ class SideMenu
                                 'icon' => '',
                                 'route_name' => 'invoice-layout-1',
                                 'params' => [
-                                    'layout' => 'side-menu'
+                                    'layout' => 'side-menu',
                                 ],
-                                'title' => 'Layout 1'
+                                'title' => 'Layout 1',
                             ],
                             'invoice-layout-2' => [
                                 'icon' => '',
                                 'route_name' => 'invoice-layout-2',
                                 'params' => [
-                                    'layout' => 'side-menu'
+                                    'layout' => 'side-menu',
                                 ],
-                                'title' => 'Layout 2'
-                            ]
-                        ]
+                                'title' => 'Layout 2',
+                            ],
+                        ],
                     ],
                     'faq' => [
                         'icon' => '',
@@ -478,69 +478,69 @@ class SideMenu
                                 'icon' => '',
                                 'route_name' => 'faq-layout-1',
                                 'params' => [
-                                    'layout' => 'side-menu'
+                                    'layout' => 'side-menu',
                                 ],
-                                'title' => 'Layout 1'
+                                'title' => 'Layout 1',
                             ],
                             'faq-layout-2' => [
                                 'icon' => '',
                                 'route_name' => 'faq-layout-2',
                                 'params' => [
-                                    'layout' => 'side-menu'
+                                    'layout' => 'side-menu',
                                 ],
-                                'title' => 'Layout 2'
+                                'title' => 'Layout 2',
                             ],
                             'faq-layout-3' => [
                                 'icon' => '',
                                 'route_name' => 'faq-layout-3',
                                 'params' => [
-                                    'layout' => 'side-menu'
+                                    'layout' => 'side-menu',
                                 ],
-                                'title' => 'Layout 3'
-                            ]
-                        ]
+                                'title' => 'Layout 3',
+                            ],
+                        ],
                     ],
                     'login' => [
                         'icon' => '',
                         'route_name' => 'login',
                         'params' => [
-                            'layout' => 'login'
+                            'layout' => 'login',
                         ],
-                        'title' => 'Login'
+                        'title' => 'Login',
                     ],
                     'register' => [
                         'icon' => '',
                         'route_name' => 'register',
                         'params' => [
-                            'layout' => 'login'
+                            'layout' => 'login',
                         ],
-                        'title' => 'Register'
+                        'title' => 'Register',
                     ],
                     'error-page' => [
                         'icon' => '',
                         'route_name' => 'error-page',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Error Page'
+                        'title' => 'Error Page',
                     ],
                     'update-profile' => [
                         'icon' => '',
                         'route_name' => 'update-profile',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Update profile'
+                        'title' => 'Update profile',
                     ],
                     'change-password' => [
                         'icon' => '',
                         'route_name' => 'change-password',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Change Password'
-                    ]
-                ]
+                        'title' => 'Change Password',
+                    ],
+                ],
             ],
             'devider',
             'components' => [
@@ -555,19 +555,19 @@ class SideMenu
                                 'icon' => '',
                                 'route_name' => 'regular-table',
                                 'params' => [
-                                    'layout' => 'side-menu'
+                                    'layout' => 'side-menu',
                                 ],
-                                'title' => 'Regular Table'
+                                'title' => 'Regular Table',
                             ],
                             'tabulator' => [
                                 'icon' => '',
                                 'route_name' => 'tabulator',
                                 'params' => [
-                                    'layout' => 'side-menu'
+                                    'layout' => 'side-menu',
                                 ],
-                                'title' => 'Tabulator'
-                            ]
-                        ]
+                                'title' => 'Tabulator',
+                            ],
+                        ],
                     ],
                     'overlay' => [
                         'icon' => '',
@@ -577,109 +577,109 @@ class SideMenu
                                 'icon' => '',
                                 'route_name' => 'modal',
                                 'params' => [
-                                    'layout' => 'side-menu'
+                                    'layout' => 'side-menu',
                                 ],
-                                'title' => 'Modal'
+                                'title' => 'Modal',
                             ],
                             'slide-over' => [
                                 'icon' => '',
                                 'route_name' => 'slide-over',
                                 'params' => [
-                                    'layout' => 'side-menu'
+                                    'layout' => 'side-menu',
                                 ],
-                                'title' => 'Slide Over'
+                                'title' => 'Slide Over',
                             ],
                             'notification' => [
                                 'icon' => '',
                                 'route_name' => 'notification',
                                 'params' => [
-                                    'layout' => 'side-menu'
+                                    'layout' => 'side-menu',
                                 ],
-                                'title' => 'Notification'
+                                'title' => 'Notification',
                             ],
-                        ]
+                        ],
                     ],
                     'tab' => [
                         'icon' => '',
                         'route_name' => 'tab',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Tab'
+                        'title' => 'Tab',
                     ],
                     'accordion' => [
                         'icon' => '',
                         'route_name' => 'accordion',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Accordion'
+                        'title' => 'Accordion',
                     ],
                     'button' => [
                         'icon' => '',
                         'route_name' => 'button',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Button'
+                        'title' => 'Button',
                     ],
                     'alert' => [
                         'icon' => '',
                         'route_name' => 'alert',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Alert'
+                        'title' => 'Alert',
                     ],
                     'progress-bar' => [
                         'icon' => '',
                         'route_name' => 'progress-bar',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Progress Bar'
+                        'title' => 'Progress Bar',
                     ],
                     'tooltip' => [
                         'icon' => '',
                         'route_name' => 'tooltip',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Tooltip'
+                        'title' => 'Tooltip',
                     ],
                     'dropdown' => [
                         'icon' => '',
                         'route_name' => 'dropdown',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Dropdown'
+                        'title' => 'Dropdown',
                     ],
                     'typography' => [
                         'icon' => '',
                         'route_name' => 'typography',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Typography'
+                        'title' => 'Typography',
                     ],
                     'icon' => [
                         'icon' => '',
                         'route_name' => 'icon',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Icon'
+                        'title' => 'Icon',
                     ],
                     'loading-icon' => [
                         'icon' => '',
                         'route_name' => 'loading-icon',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Loading Icon'
-                    ]
-                ]
+                        'title' => 'Loading Icon',
+                    ],
+                ],
             ],
             'forms' => [
                 'icon' => 'sidebar',
@@ -689,33 +689,33 @@ class SideMenu
                         'icon' => '',
                         'route_name' => 'regular-form',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Regular Form'
+                        'title' => 'Regular Form',
                     ],
                     'datepicker' => [
                         'icon' => '',
                         'route_name' => 'datepicker',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Datepicker'
+                        'title' => 'Datepicker',
                     ],
                     'tom-select' => [
                         'icon' => '',
                         'route_name' => 'tom-select',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Tom Select'
+                        'title' => 'Tom Select',
                     ],
                     'file-upload' => [
                         'icon' => '',
                         'route_name' => 'file-upload',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'File Upload'
+                        'title' => 'File Upload',
                     ],
                     'wysiwyg-editor' => [
                         'icon' => '',
@@ -725,53 +725,53 @@ class SideMenu
                                 'icon' => '',
                                 'route_name' => 'wysiwyg-editor-classic',
                                 'params' => [
-                                    'layout' => 'side-menu'
+                                    'layout' => 'side-menu',
                                 ],
-                                'title' => 'Classic'
+                                'title' => 'Classic',
                             ],
                             'wysiwyg-editor-inline' => [
                                 'icon' => '',
                                 'route_name' => 'wysiwyg-editor-inline',
                                 'params' => [
-                                    'layout' => 'side-menu'
+                                    'layout' => 'side-menu',
                                 ],
-                                'title' => 'Inline'
+                                'title' => 'Inline',
                             ],
                             'wysiwyg-editor-balloon' => [
                                 'icon' => '',
                                 'route_name' => 'wysiwyg-editor-balloon',
                                 'params' => [
-                                    'layout' => 'side-menu'
+                                    'layout' => 'side-menu',
                                 ],
-                                'title' => 'Balloon'
+                                'title' => 'Balloon',
                             ],
                             'wysiwyg-editor-balloon-block' => [
                                 'icon' => '',
                                 'route_name' => 'wysiwyg-editor-balloon-block',
                                 'params' => [
-                                    'layout' => 'side-menu'
+                                    'layout' => 'side-menu',
                                 ],
-                                'title' => 'Balloon Block'
+                                'title' => 'Balloon Block',
                             ],
                             'wysiwyg-editor-document' => [
                                 'icon' => '',
                                 'route_name' => 'wysiwyg-editor-document',
                                 'params' => [
-                                    'layout' => 'side-menu'
+                                    'layout' => 'side-menu',
                                 ],
-                                'title' => 'Document'
+                                'title' => 'Document',
                             ],
-                        ]
+                        ],
                     ],
                     'validation' => [
                         'icon' => '',
                         'route_name' => 'validation',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Validation'
-                    ]
-                ]
+                        'title' => 'Validation',
+                    ],
+                ],
             ],
             'widgets' => [
                 'icon' => 'hard-drive',
@@ -781,28 +781,28 @@ class SideMenu
                         'icon' => '',
                         'route_name' => 'chart',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Chart'
+                        'title' => 'Chart',
                     ],
                     'slider' => [
                         'icon' => '',
                         'route_name' => 'slider',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Slider'
+                        'title' => 'Slider',
                     ],
                     'image-zoom' => [
                         'icon' => '',
                         'route_name' => 'image-zoom',
                         'params' => [
-                            'layout' => 'side-menu'
+                            'layout' => 'side-menu',
                         ],
-                        'title' => 'Image Zoom'
-                    ]
-                ]
-            ]
+                        'title' => 'Image Zoom',
+                    ],
+                ],
+            ],
         ];
     }
 }

@@ -10,6 +10,7 @@ class WeselExamination extends Model
     use HasFactory;
 
     protected $table = 'wesel_examination';
+
     protected $guarded = [];
 
     public function wesel()

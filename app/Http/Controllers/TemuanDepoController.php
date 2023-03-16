@@ -4,15 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Exports\TemuanDepoExport;
 use App\Exports\TemuanDepoFilterExport;
-use App\Models\Area;
 use App\Models\Line;
 use App\Models\Part;
 use App\Models\TemuanDepo;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
+use Excel;
 use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
 class TemuanDepoController extends Controller
@@ -23,10 +22,10 @@ class TemuanDepoController extends Controller
         $line = Line::where('area', 'Depo')->get();
         $part = Part::all();
 
-        $line_id = "";
-        $part_id = "";
-        $status = "";
-        $klasifikasi = "";
+        $line_id = '';
+        $part_id = '';
+        $status = '';
+        $klasifikasi = '';
 
         return view('depo.depo_temuan.index', compact('temuan_depo', 'line', 'part', 'line_id', 'part_id', 'status', 'klasifikasi'));
     }
@@ -35,48 +34,49 @@ class TemuanDepoController extends Controller
     {
         $line_depo = Line::where('area', 'Depo')->orderBy('name', 'asc')->get();
         $part = Part::all();
+
         return view('depo.depo_temuan.create', compact(['line_depo', 'part']));
     }
-
 
     public function store(Request $request)
     {
         $this->validate($request, [
             'photo' => ['file', 'image', 'required'],
         ], [
-            'photo.image' => 'File harus dalam format gambar/photo!'
+            'photo.image' => 'File harus dalam format gambar/photo!',
         ]);
-
 
         if ($request->hasFile('photo') && $request->photo != '') {
             $photo_temuan = $request->file('photo')->store('temuan/depo');
             TemuanDepo::create([
-                "line_id" => $request->line_id,
-                "kilometer" => $request->kilometer,
-                "part_id" => $request->part_id,
-                "detail_part_id" => $request->detail_part_id,
-                "direction" => $request->direction,
-                "defect_id" => $request->defect_id,
-                "remark" => $request->remark,
-                "klasifikasi" => $request->klasifikasi,
-                "pic" => $request->pic,
-                "tanggal" => $request->tanggal,
-                "photo" => $photo_temuan,
+                'line_id' => $request->line_id,
+                'kilometer' => $request->kilometer,
+                'part_id' => $request->part_id,
+                'detail_part_id' => $request->detail_part_id,
+                'direction' => $request->direction,
+                'defect_id' => $request->defect_id,
+                'remark' => $request->remark,
+                'klasifikasi' => $request->klasifikasi,
+                'pic' => $request->pic,
+                'tanggal' => $request->tanggal,
+                'photo' => $photo_temuan,
             ]);
+
             return redirect()->route('temuan_depo.index')->withNotify('Data temuan baru depo berhasil ditambahkan!');
         } else {
             TemuanDepo::create([
-                "line_id" => $request->line_id,
-                "kilometer" => $request->kilometer,
-                "part_id" => $request->part_id,
-                "detail_part_id" => $request->detail_part_id,
-                "direction" => $request->direction,
-                "defect_id" => $request->defect_id,
-                "remark" => $request->remark,
-                "klasifikasi" => $request->klasifikasi,
-                "pic" => $request->pic,
-                "tanggal" => $request->tanggal,
+                'line_id' => $request->line_id,
+                'kilometer' => $request->kilometer,
+                'part_id' => $request->part_id,
+                'detail_part_id' => $request->detail_part_id,
+                'direction' => $request->direction,
+                'defect_id' => $request->defect_id,
+                'remark' => $request->remark,
+                'klasifikasi' => $request->klasifikasi,
+                'pic' => $request->pic,
+                'tanggal' => $request->tanggal,
             ]);
+
             return redirect()->route('temuan_depo.index')->withNotify('Data temuan baru depo berhasil ditambahkan!');
         }
     }
@@ -91,9 +91,9 @@ class TemuanDepoController extends Controller
         $waktu = Carbon::now();
 
         if ($line_id == null and $part_id == null and $status == null and $klasifikasi == null) {
-            return Excel::download(new TemuanDepoExport(), $waktu . '_temuan_depo_all.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+            return Excel::download(new TemuanDepoExport(), $waktu.'_temuan_depo_all.xlsx', \Maatwebsite\Excel\Excel::XLSX);
         } else {
-            return Excel::download(new TemuanDepoFilterExport($line_id, $part_id, $status, $klasifikasi), $waktu . '_temuan_depo_filtered.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+            return Excel::download(new TemuanDepoFilterExport($line_id, $part_id, $status, $klasifikasi), $waktu.'_temuan_depo_filtered.xlsx', \Maatwebsite\Excel\Excel::XLSX);
         }
     }
 
@@ -110,7 +110,8 @@ class TemuanDepoController extends Controller
             $temuan_depo = TemuanDepo::all();
             $waktu = Carbon::now();
             $pdf = Pdf::loadView('depo.depo_temuan.export-pdf', ['temuan_depo' => $temuan_depo]);
-            return $pdf->stream($waktu . '_list-temuan-depo.pdf');
+
+            return $pdf->stream($waktu.'_list-temuan-depo.pdf');
         } else {
             $temuan_depo_filter = TemuanDepo::query();
 
@@ -137,7 +138,8 @@ class TemuanDepoController extends Controller
             $temuan_depo = $temuan_depo_filter->get();
             $waktu = Carbon::now();
             $pdf = Pdf::loadView('depo.depo_temuan.export-pdf', ['temuan_depo' => $temuan_depo]);
-            return $pdf->stream($waktu . '_list-temuan-depo-filtered.pdf');
+
+            return $pdf->stream($waktu.'_list-temuan-depo-filtered.pdf');
         }
     }
 
@@ -181,9 +183,9 @@ class TemuanDepoController extends Controller
         $tanggal = $request->tanggal;
         $area = 'DEPO';
         $temuan_depo = TemuanDepo::where('tanggal', $tanggal)->orderBy('kilometer', 'asc')->get();
+
         return view('depo.depo_temuan.report.report', compact(['tanggal', 'temuan_depo', 'area']));
     }
-
 
     public function close_temuan($id)
     {
@@ -205,7 +207,7 @@ class TemuanDepoController extends Controller
         $this->validate($request, [
             'photo_close' => ['file', 'image', 'required'],
         ], [
-            'photo_close.image' => 'File harus dalam format gambar/photo!'
+            'photo_close.image' => 'File harus dalam format gambar/photo!',
         ]);
 
         $id = $request->id;
@@ -213,10 +215,11 @@ class TemuanDepoController extends Controller
             $photo_close = $request->file('photo_close')->store('temuan/depo/perbaikan');
             $temuan_depo = TemuanDepo::findOrFail($id);
             $temuan_depo->update([
-                "status" => $request->status,
-                "photo_close" => $photo_close,
-                "pic_close" => $request->pic_close,
+                'status' => $request->status,
+                'photo_close' => $photo_close,
+                'pic_close' => $request->pic_close,
             ]);
+
             return redirect()->route('temuan_depo.index')->withNotify('Status temuan depo berhasil diubah!');
         } else {
             return redirect()->back();
@@ -239,6 +242,7 @@ class TemuanDepoController extends Controller
         $temuan_depo = TemuanDepo::findOrFail($id);
         if ($temuan_depo) {
             $temuan_depo->delete();
+
             return redirect()->route('temuan_depo.index')->withNotify('Data temuan depo berhasil dihapus!');
         } else {
             return redirect()->back();

@@ -10,6 +10,7 @@ class TemuanDepo extends Model
     use HasFactory;
 
     protected $table = 'summary_temuan_depo';
+
     protected $guarded = [];
 
     protected $with = ['line', 'part', 'detail_part', 'defect'];

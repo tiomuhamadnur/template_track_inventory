@@ -10,5 +10,6 @@ class PM extends Model
     use HasFactory;
 
     protected $table = 'annual_planning';
+
     protected $guarded = [];
 }

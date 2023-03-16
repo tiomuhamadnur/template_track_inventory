@@ -7,8 +7,8 @@ use App\Imports\MainlineImport;
 use App\Models\Area;
 use App\Models\Line;
 use App\Models\Mainline;
-use Illuminate\Http\Request;
 use Excel;
+use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
 class MainlineController extends Controller
@@ -34,13 +34,14 @@ class MainlineController extends Controller
     public function getJson()
     {
         $mainline = Mainline::select(
-            "mainline.*",
+            'mainline.*',
             'area.code as area_code',
             'line.code as line_code',
         )
         ->join('area', 'area.id', '=', 'mainline.area_id')
         ->join('line', 'line.id', '=', 'mainline.line_id')
         ->get();
+
         return DataTables::of($mainline)->make(true);
         // return response()->json($mainline);
     }
@@ -49,41 +50,45 @@ class MainlineController extends Controller
     {
         $area = Area::all();
         $line = Line::all();
+
         return view('mainline.mainline.create', compact(['area', 'line']));
     }
 
     public function store(Request $request)
     {
         Mainline::create([
-            "area_id" => $request->area_id,
-            "line_id" => $request->line_id,
-            "no_span" => $request->no_span,
-            "kilometer" => $request->kilometer,
-            "panjang_span" => $request->panjang_span,
-            "jumlah_sleeper" => $request->jumlah_sleeper,
-            "spacing_sleeper" => $request->spacing_sleeper,
-            "jenis_sleeper" => $request->spacing_sleeper,
-            "joint" => $request->joint,
+            'area_id' => $request->area_id,
+            'line_id' => $request->line_id,
+            'no_span' => $request->no_span,
+            'kilometer' => $request->kilometer,
+            'panjang_span' => $request->panjang_span,
+            'jumlah_sleeper' => $request->jumlah_sleeper,
+            'spacing_sleeper' => $request->spacing_sleeper,
+            'jenis_sleeper' => $request->spacing_sleeper,
+            'joint' => $request->joint,
         ]);
+
         return redirect()->route('mainline.index');
     }
 
     public function import(Request $request)
     {
         // validasi
-		$this->validate($request, [
-			'file_excel' => 'required|mimes:csv,xls,xlsx'
-		]);
+        $this->validate($request, [
+            'file_excel' => 'required|mimes:csv,xls,xlsx',
+        ]);
 
-        if ($request->hasFile('file_excel')){
+        if ($request->hasFile('file_excel')) {
             Excel::import(new MainlineImport, request()->file('file_excel'));
+
             return redirect()->route('mainline.index');
         } else {
             return redirect()->route('mainline.index');
         }
     }
 
-    public function export(){
+    public function export()
+    {
         return Excel::download(new MainlineExport, 'mainline.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 
@@ -92,6 +97,7 @@ class MainlineController extends Controller
         $mainline = Mainline::findOrFail($id);
         $area = Area::all();
         $line = Line::all();
+
         return view('mainline.edit', compact(['mainline', 'area', 'line']));
     }
 
@@ -100,16 +106,17 @@ class MainlineController extends Controller
         $id = $request->id;
         $mainline = Mainline::findOrFail($id);
         $mainline->update([
-            "area_id" => $request->area_id,
-            "line_id" => $request->line_id,
-            "no_span" => $request->no_span,
-            "kilometer" => $request->kilometer,
-            "panjang_span" => $request->panjang_span,
-            "jumlah_sleeper" => $request->jumlah_sleeper,
-            "spacing_sleeper" => $request->spacing_sleeper,
-            "jenis_sleeper" => $request->spacing_sleeper,
-            "joint" => $request->joint,
+            'area_id' => $request->area_id,
+            'line_id' => $request->line_id,
+            'no_span' => $request->no_span,
+            'kilometer' => $request->kilometer,
+            'panjang_span' => $request->panjang_span,
+            'jumlah_sleeper' => $request->jumlah_sleeper,
+            'spacing_sleeper' => $request->spacing_sleeper,
+            'jenis_sleeper' => $request->spacing_sleeper,
+            'joint' => $request->joint,
         ]);
+
         return redirect()->route('mainline.index');
     }
 
@@ -117,6 +124,7 @@ class MainlineController extends Controller
     {
         $mainline = Mainline::findOrFail($id);
         $mainline->delete();
+
         return redirect()->route('mainline.index');
     }
 }

@@ -10,6 +10,7 @@ class LineController extends Controller
     public function index()
     {
         $line = Line::all();
+
         return view('mainline.mainline_line.index', compact(['line']));
         // return view('line.index', compact(['line']));
     }
@@ -26,12 +27,14 @@ class LineController extends Controller
             'code' => $request->code,
             'area' => $request->area,
         ]);
+
         return redirect(route('line.index'))->with('success', 'data berhasil ditambahkan');
     }
 
     public function edit($id)
     {
         $line = Line::findOrFail($id);
+
         return view('mainline.mainline_line.update', compact(['line']));
     }
 
@@ -46,6 +49,7 @@ class LineController extends Controller
                 'area' => $request->area,
             ]);
         }
+
         return redirect(route('line.index'));
     }
 
@@ -53,6 +57,7 @@ class LineController extends Controller
     {
         $line = Line::findOrFail($id);
         $line->delete();
+
         return redirect()->route('line.index');
     }
 }

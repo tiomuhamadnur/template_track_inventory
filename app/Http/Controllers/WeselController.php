@@ -6,16 +6,17 @@ use App\Imports\WeselImport;
 use App\Models\Area;
 use App\Models\Line;
 use App\Models\Wesel;
+use Excel;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
-use Excel;
 
 class WeselController extends Controller
 {
     public function index()
     {
         $wesel = Wesel::all();
+
         return view('masterdata.masterdata_wesel.index', compact(['wesel']));
     }
 
@@ -23,19 +24,21 @@ class WeselController extends Controller
     {
         $area = Area::all();
         $line = Line::all();
+
         return view('masterdata.masterdata_wesel.create', compact(['area', 'line']));
     }
 
     public function store(Request $request)
     {
         Wesel::create([
-            "name" => $request->name,
-            "area_id" => $request->area_id,
-            "line_id" => $request->line_id,
-            "tipe" => $request->tipe,
-            "direction" => $request->direction,
-            "kilometer" => $request->kilometer,
+            'name' => $request->name,
+            'area_id' => $request->area_id,
+            'line_id' => $request->line_id,
+            'tipe' => $request->tipe,
+            'direction' => $request->direction,
+            'kilometer' => $request->kilometer,
         ]);
+
         return redirect()->route('wesel.index')->withNotify('Data berhasil ditambahkan!');
     }
 
@@ -52,6 +55,7 @@ class WeselController extends Controller
             if ($wesel) {
                 $area = Area::all();
                 $line = Line::all();
+
                 return view('masterdata.masterdata_wesel.update', compact(['area', 'line', 'wesel']));
             } else {
                 return redirect()->back();
@@ -65,19 +69,18 @@ class WeselController extends Controller
     {
         $id = $request->id;
         $wesel = Wesel::findOrFail($id);
-        if ($wesel)
-        {
+        if ($wesel) {
             $wesel->update([
-                "name" => $request->name,
-                "area_id" => $request->area_id,
-                "line_id" => $request->line_id,
-                "tipe" => $request->tipe,
-                "direction" => $request->direction,
-                "kilometer" => $request->kilometer,
+                'name' => $request->name,
+                'area_id' => $request->area_id,
+                'line_id' => $request->line_id,
+                'tipe' => $request->tipe,
+                'direction' => $request->direction,
+                'kilometer' => $request->kilometer,
             ]);
+
             return redirect()->route('wesel.index')->withNotify('Data berhasil diubah!');
-        } else
-        {
+        } else {
             return redirect()->back();
         }
     }
@@ -85,12 +88,13 @@ class WeselController extends Controller
     public function import(Request $request)
     {
         // validasi
-		$this->validate($request, [
-			'file_excel' => 'required|mimes:csv,xls,xlsx'
-		]);
+        $this->validate($request, [
+            'file_excel' => 'required|mimes:csv,xls,xlsx',
+        ]);
 
-        if ($request->hasFile('file_excel')){
+        if ($request->hasFile('file_excel')) {
             Excel::import(new WeselImport, request()->file('file_excel'));
+
             return redirect()->route('wesel.index')->withNotify('Data berhasil diimport!');
         } else {
             return redirect()->route('wesel.index');
@@ -101,12 +105,11 @@ class WeselController extends Controller
     {
         $id = $request->id;
         $wesel = Wesel::findOrFail($id);
-        if($wesel)
-        {
+        if ($wesel) {
             $wesel->delete();
+
             return redirect()->route('wesel.index')->withNotify('Data berhasil dihapus!');
-        } else
-        {
+        } else {
             return redirect()->back();
         }
     }

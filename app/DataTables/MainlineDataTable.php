@@ -3,13 +3,11 @@
 namespace App\DataTables;
 
 use App\Models\Mainline;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
-use Yajra\DataTables\EloquentDataTable;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
 class MainlineDataTable extends DataTable
 {
@@ -54,6 +52,6 @@ class MainlineDataTable extends DataTable
 
     protected function filename(): string
     {
-        return 'Mainline_' . date('YmdHis');
+        return 'Mainline_'.date('YmdHis');
     }
 }

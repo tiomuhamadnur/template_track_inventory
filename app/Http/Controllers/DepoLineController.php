@@ -10,6 +10,7 @@ class DepoLineController extends Controller
     public function index()
     {
         $line_depo = Line::where('area', 'Depo')->get();
+
         return view('depo.depo_line.index', compact(['line_depo']));
     }
 
@@ -25,6 +26,7 @@ class DepoLineController extends Controller
             'code' => $request->code,
             'area' => $request->area,
         ]);
+
         return redirect()->route('depoline.index');
     }
 
@@ -36,7 +38,7 @@ class DepoLineController extends Controller
     public function edit($id)
     {
         $line_depo = Line::findOrFail($id);
-        if ($line_depo){
+        if ($line_depo) {
             return view('depo.depo_line.update', compact(['line_depo']));
         }
     }
@@ -52,6 +54,7 @@ class DepoLineController extends Controller
                 'area' => $request->area,
             ]);
         }
+
         return redirect()->route('depoline.index');
     }
 

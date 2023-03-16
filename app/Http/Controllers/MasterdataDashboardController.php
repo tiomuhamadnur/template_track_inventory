@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 class MasterdataDashboardController extends Controller
 {
-
     public function index()
     {
         return view('masterdata.masterdata_dashboard.index');

@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Imports\TransDefectImport;
 use App\Models\Part;
-use App\Models\TransDefect;
-use Illuminate\Http\Request;
 use Excel;
+use Illuminate\Http\Request;
 
 class PartController extends Controller
 {
@@ -24,12 +23,13 @@ class PartController extends Controller
 
     public function import(Request $request)
     {
-		$this->validate($request, [
-			'file_excel' => 'required|mimes:csv,xls,xlsx'
-		]);
+        $this->validate($request, [
+            'file_excel' => 'required|mimes:csv,xls,xlsx',
+        ]);
 
-        if ($request->hasFile('file_excel')){
+        if ($request->hasFile('file_excel')) {
             Excel::import(new TransDefectImport, request()->file('file_excel'));
+
             return redirect()->route('part.index');
         } else {
             return redirect()->route('part.index');
@@ -42,6 +42,7 @@ class PartController extends Controller
             'name' => $request->name,
             'code' => $request->code,
         ]);
+
         return redirect()->route('part.index');
     }
 
@@ -53,6 +54,7 @@ class PartController extends Controller
     public function edit($id)
     {
         $part = Part::findOrFail($id);
+
         return view('mainline.mainline_part.update', compact(['part']));
     }
 
@@ -64,6 +66,7 @@ class PartController extends Controller
             'name' => $request->name,
             'code' => $request->code,
         ]);
+
         return redirect()->route('part.index')->withNotify('Data berhasil diupdate!');
     }
 
@@ -73,9 +76,9 @@ class PartController extends Controller
         $part = Part::findOrFail($id);
         if ($part) {
             $part->delete();
+
             return redirect()->route('part.index')->withNotify('Data berhasil dihapus!');
-        }
-        else {
+        } else {
             return redirect()->back();
         }
     }

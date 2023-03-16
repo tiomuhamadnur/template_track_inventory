@@ -11,9 +11,9 @@ class TransDefectImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         return new TransDefect([
-            'part_id'  => $row['part_id'],
-            'detail_part_id'  => $row['detail_part_id'],
-            'defect_id'  => $row['defect_id'],
+            'part_id' => $row['part_id'],
+            'detail_part_id' => $row['detail_part_id'],
+            'defect_id' => $row['defect_id'],
         ]);
     }
 }

@@ -10,10 +10,11 @@ class Temuan extends Model
     use HasFactory;
 
     protected $table = 'summary_temuan';
+
     protected $guarded = [];
 
     protected $with = ['mainline', 'part', 'detail_part', 'defect'];
-    
+
     public function mainline()
     {
         return $this->belongsTo(Mainline::class, 'mainline_id', 'id');

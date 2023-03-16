@@ -10,6 +10,7 @@ class Defect extends Model
     use HasFactory;
 
     protected $table = 'defect';
+
     protected $guarded = [];
 
     public function detail_part()

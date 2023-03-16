@@ -17,6 +17,7 @@ class PICController extends Controller
     {
         $tahun = Carbon::now()->format('Y');
         $pic = PIC::where('tahun', $tahun)->get();
+
         return view('pic.index', compact(['pic']));
     }
 
@@ -25,6 +26,7 @@ class PICController extends Controller
         $technician = Pegawai::where('jabatan', 'Technician')->get();
         $job = PM::all();
         $tahun = Carbon::now()->format('Y');
+
         return view('pic.create', compact(['technician', 'job', 'tahun']));
     }
 
@@ -36,6 +38,7 @@ class PICController extends Controller
             'tahun' => $request->tahun,
             'progress' => $request->progress,
         ]);
+
         return redirect()->route('pic.index')->withNotify('Data PIC berhasil ditambahkan!');
     }
 
@@ -55,6 +58,7 @@ class PICController extends Controller
                 'tahun' => $request->tahun,
                 'progress' => $request->progress,
             ]);
+
             return redirect()->route('pic.index')->withNotify('Data PIC berhasil diubah!');
         } else {
             return redirect()->back();
@@ -76,15 +80,16 @@ class PICController extends Controller
         $this->validate($request, [
             'photo' => ['image'],
         ], [
-            'photo.image' => 'File harus dalam format gambar/photo!'
+            'photo.image' => 'File harus dalam format gambar/photo!',
         ]);
         $id = auth()->user()->id;
         if ($request->hasFile('photo') && $request->photo != '') {
-            $photo_profil = $request->file('photo')->store('photo-profil/' . auth()->user()->role);
+            $photo_profil = $request->file('photo')->store('photo-profil/'.auth()->user()->role);
             $user = Pegawai::findOrFail($id);
             $user->update([
-                "photo" => $photo_profil,
+                'photo' => $photo_profil,
             ]);
+
             return redirect()->route('profile')->withNotify('Foto profil berhasil dimutakhirkan!');
         } else {
             return back();
@@ -96,15 +101,16 @@ class PICController extends Controller
         $this->validate($request, [
             'photo_ttd' => ['image'],
         ], [
-            'photo_ttd.image' => 'File harus dalam format gambar/photo!'
+            'photo_ttd.image' => 'File harus dalam format gambar/photo!',
         ]);
         $id = auth()->user()->id;
         if ($request->hasFile('photo_ttd') && $request->photo_ttd != '') {
-            $photo_ttd = $request->file('photo_ttd')->store('photo-ttd/' . auth()->user()->role);
+            $photo_ttd = $request->file('photo_ttd')->store('photo-ttd/'.auth()->user()->role);
             $user = Pegawai::findOrFail($id);
             $user->update([
-                "ttd" => $photo_ttd,
+                'ttd' => $photo_ttd,
             ]);
+
             return redirect()->route('profile')->withNotify('Foto TTD berhasil diperbaharui!');
         } else {
             return back();
@@ -123,6 +129,7 @@ class PICController extends Controller
                 $user->update([
                     'password' => Hash::make($request->new_password),
                 ]);
+
                 return redirect()->route('logout');
             } else {
                 return back()->withStatus('New password berbeda!');

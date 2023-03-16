@@ -10,6 +10,7 @@ class TransDefect extends Model
     use HasFactory;
 
     protected $table = 'trans_defect';
+
     protected $guarded = [];
 
     public function part()

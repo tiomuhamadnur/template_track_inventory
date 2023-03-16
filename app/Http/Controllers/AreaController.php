@@ -10,6 +10,7 @@ class AreaController extends Controller
     public function index()
     {
         $area = Area::all();
+
         return view('mainline.mainline_area.index', compact(['area']));
     }
 
@@ -26,6 +27,7 @@ class AreaController extends Controller
             'area' => $request->area,
             'stasiun' => $request->stasiun,
         ]);
+
         return redirect()->route('area.index');
     }
 
@@ -37,6 +39,7 @@ class AreaController extends Controller
     public function edit($id)
     {
         $area = Area::findOrFail($id);
+
         return view('mainline.mainline_area.update', compact(['area']));
     }
 
@@ -44,7 +47,7 @@ class AreaController extends Controller
     {
         $id = $request->id;
         $area = Area::findOrFail($id);
-        if ($area){
+        if ($area) {
             $area->update([
                 'name' => $request->name,
                 'code' => $request->code,
@@ -52,6 +55,7 @@ class AreaController extends Controller
                 'stasiun' => $request->stasiun,
             ]);
         }
+
         return redirect()->route('area.index');
     }
 
@@ -59,6 +63,7 @@ class AreaController extends Controller
     {
         $area = Area::findOrFail($id);
         $area->delete();
+
         return redirect()->route('area.index');
     }
 }

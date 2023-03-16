@@ -543,10 +543,12 @@ class ComposerStaticInit47514cba5192a5f414778149a0e22242
         'Database\\Seeders\\' => 
         array (
             0 => __DIR__ . '/../..' . '/database/seeders',
+            1 => __DIR__ . '/..' . '/laravel/pint/database/seeders',
         ),
         'Database\\Factories\\' => 
         array (
             0 => __DIR__ . '/../..' . '/database/factories',
+            1 => __DIR__ . '/..' . '/laravel/pint/database/factories',
         ),
         'Cron\\' => 
         array (
@@ -579,6 +581,7 @@ class ComposerStaticInit47514cba5192a5f414778149a0e22242
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
+            1 => __DIR__ . '/..' . '/laravel/pint/app',
         ),
     );
 
@@ -672,6 +675,7 @@ class ComposerStaticInit47514cba5192a5f414778149a0e22242
         'App\\Models\\Joint' => __DIR__ . '/../..' . '/app/Models/Joint.php',
         'App\\Models\\Line' => __DIR__ . '/../..' . '/app/Models/Line.php',
         'App\\Models\\Mainline' => __DIR__ . '/../..' . '/app/Models/Mainline.php',
+        'App\\Models\\PIC' => __DIR__ . '/../..' . '/app/Models/PIC.php',
         'App\\Models\\PM' => __DIR__ . '/../..' . '/app/Models/PM.php',
         'App\\Models\\Part' => __DIR__ . '/../..' . '/app/Models/Part.php',
         'App\\Models\\Pegawai' => __DIR__ . '/../..' . '/app/Models/Pegawai.php',

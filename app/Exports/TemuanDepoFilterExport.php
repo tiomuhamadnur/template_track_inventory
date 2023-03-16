@@ -6,7 +6,6 @@ use App\Models\TemuanDepo;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 
-
 class TemuanDepoFilterExport implements FromView
 {
     public function __construct(?int $line_id = null, ?int $part_id = null, ?string $status = null, ?string $klasifikasi = null)
@@ -42,7 +41,7 @@ class TemuanDepoFilterExport implements FromView
         });
 
         return view('depo.depo_temuan.export', [
-            'temuan_depo' => $temuan_depo->get()
+            'temuan_depo' => $temuan_depo->get(),
         ]);
     }
 }

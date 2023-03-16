@@ -6,7 +6,6 @@ use App\Models\Temuan;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 
-
 class TemuanMainlineFilterExport implements FromView
 {
     public function __construct(?int $area_id = null, ?int $line_id = null, ?int $part_id = null, ?string $status = null, ?string $klasifikasi = null)
@@ -52,7 +51,7 @@ class TemuanMainlineFilterExport implements FromView
         });
 
         return view('mainline.mainline_temuan.export', [
-            'temuan' => $temuan->get()
+            'temuan' => $temuan->get(),
         ]);
     }
 }

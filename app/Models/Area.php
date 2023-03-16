@@ -10,5 +10,6 @@ class Area extends Model
     use HasFactory;
 
     protected $table = 'area';
+
     protected $guarded = [];
 }

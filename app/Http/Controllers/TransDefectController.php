@@ -15,18 +15,20 @@ class TransDefectController extends Controller
     public function index()
     {
         $part = TransDefect::all();
+
         return view('mainline.mainline_relasidefect.index', compact(['part']));
         // return view('trans_defect.index', compact(['part']));
     }
 
     public function import(Request $request)
     {
-		$this->validate($request, [
-			'file_excel' => 'required|mimes:csv,xls,xlsx'
-		]);
+        $this->validate($request, [
+            'file_excel' => 'required|mimes:csv,xls,xlsx',
+        ]);
 
-        if ($request->hasFile('file_excel')){
+        if ($request->hasFile('file_excel')) {
             Excel::import(new TransDefectImport, request()->file('file_excel'));
+
             return redirect()->route('transDefect.index');
         } else {
             return redirect()->route('transDefect.index');
@@ -38,6 +40,7 @@ class TransDefectController extends Controller
         $part = Part::all();
         $detail_part = DetailPart::all();
         $defect = Defect::all();
+
         return view('mainline.mainline_relasidefect.create', compact(['part', 'detail_part', 'defect']));
         // return view('trans_defect.create', compact(['part', 'detail_part', 'defect']));
     }
@@ -49,6 +52,7 @@ class TransDefectController extends Controller
             'detail_part_id' => $request->detail_part_id,
             'defect_id' => $request->defect_id,
         ]);
+
         return redirect()->route('transDefect.index')->withNotify('Data berhasil ditambahkan!');
     }
 
@@ -63,6 +67,7 @@ class TransDefectController extends Controller
         $part = Part::all();
         $detail_part = DetailPart::all();
         $defect = Defect::all();
+
         return view('mainline.mainline_relasidefect.update', compact(['trans_defect', 'part', 'detail_part', 'defect']));
     }
 
@@ -75,6 +80,7 @@ class TransDefectController extends Controller
             'detail_part_id' => $request->detail_part_id,
             'defect_id' => $request->defect_id,
         ]);
+
         return redirect()->route('transDefect.index')->withNotify('Data berhasil diupdate!');
     }
 
@@ -84,6 +90,7 @@ class TransDefectController extends Controller
         $trans_defect = TransDefect::findOrFail($id);
         if ($trans_defect) {
             $trans_defect->delete();
+
             return redirect()->route('transDefect.index')->withNotify('Data berhasil dihapus!');
         } else {
             return redirect()->back();

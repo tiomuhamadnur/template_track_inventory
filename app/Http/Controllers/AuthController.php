@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Request\LoginRequest;
-use App\Http\Controllers\Controller;
 
 class AuthController extends Controller
 {
@@ -22,9 +21,9 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
-        if (!\Auth::attempt([
+        if (! \Auth::attempt([
             'email' => $request->email,
-            'password' => $request->password
+            'password' => $request->password,
         ])) {
             return back()->withStatus('Wrong email or password.');
         } else {
@@ -35,6 +34,7 @@ class AuthController extends Controller
     public function logout()
     {
         \Auth::logout();
+
         return redirect('login');
     }
 

@@ -10,6 +10,7 @@ class BufferStop extends Model
     use HasFactory;
 
     protected $table = 'buffer_stop';
+
     protected $guarded = [];
 
     public function area()
