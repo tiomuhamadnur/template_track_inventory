@@ -257,7 +257,7 @@
                                 .defect_id + '">' + value.defect_name +
                                 '</option>');
                         });
-                        $('#defect_id').append('<option value="Lainnya">Lainnya</option>')
+                        $('#defect_id').append('<option value="">Lainnya</option>')
                     }
                 });
             });
