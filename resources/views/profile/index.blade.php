@@ -35,7 +35,7 @@
                                             @if ($pic->count() > 0)
                                                 @foreach ($pic as $item)
                                                     <button type="button" title="Update progress pekerjaan"
-                                                        class="btn btn-outline-warning btn-rounded btn-fw btn-sm"
+                                                        class="btn btn-outline-warning btn-rounded btn-fw btn-sm mb-1"
                                                         data-bs-toggle="modal" data-bs-target="#ModalUpdatePIC"
                                                         data-id="{{ $item->id }}" data-nama_job="{{ $item->job->name }}"
                                                         data-progress="{{ $item->progress }}"
