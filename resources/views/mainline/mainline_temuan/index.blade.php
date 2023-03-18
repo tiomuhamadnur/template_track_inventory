@@ -111,10 +111,10 @@
                                                         ({{ $item->no_sleeper }})
                                                     </span>
                                                 </td>
-                                                <td class="text-center">
+                                                <td class="text-center text-wrap">
                                                     {{ $item->part->name }}
                                                 </td>
-                                                <td class="text-center">
+                                                <td class="text-center text-wrap">
                                                     {{ $item->detail_part->name }} <br>
                                                     ({{ $item->defect->name ?? 'Lainnya' }})
                                                 </td>

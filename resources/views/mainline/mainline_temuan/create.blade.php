@@ -19,8 +19,8 @@
                             <div class="name">Area</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <select id="area" class="form-select">
-                                        <option disabled="disabled" selected="selected">- Pilih Nama Area -</option>
+                                    <select id="area" class="form-select" required>
+                                        <option value="" selected disabled>- Pilih Nama Area -</option>
                                         <option value="Mainline">Mainline</option>
                                         <option value="DAL">DAL</option>
                                     </select>
@@ -32,8 +32,8 @@
                             <div class="name">Location</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <select id="location" class="form-select">
-                                        <option disabled="disabled" selected="selected">- Pilih Nama Location -
+                                    <select id="location" class="form-select" required>
+                                        <option value="" selected disabled>- Pilih Nama Location -
                                         </option>
                                     </select>
                                     <div class="select-dropdown"></div>
@@ -45,8 +45,8 @@
                             <div class="name">Line</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <select id="line" class="form-select">
-                                        <option disabled="disabled" selected="selected">- Pilih Nama Line -</option>
+                                    <select id="line" class="form-select" required>
+                                        <option selected disabled value="">- Pilih Nama Line -</option>
                                     </select>
                                     <div class="select-dropdown"></div>
                                 </div>
@@ -58,7 +58,7 @@
                             <div class="value">
                                 <div class="input-group">
                                     <select id="mainline_id" name="mainline_id" class="form-select" required>
-                                        <option value="" disabled="disabled" selected="selected">- Pilih Nomor Span -
+                                        <option value="" selected disabled>- Pilih Nomor Span -
                                         </option>
                                     </select>
                                     <div class="select-dropdown"></div>
@@ -71,7 +71,7 @@
                             <div class="value">
                                 <div class="input-group">
                                     <select id="part_id" name="part_id" class="form-select" required>
-                                        <option value="" disabled="disabled" selected="selected">- Pilih Nama Part -
+                                        <option value="" selected disabled>- Pilih Nama Part -
                                         </option>
                                         @foreach ($part as $item)
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -87,7 +87,7 @@
                             <div class="value">
                                 <div class="input-group">
                                     <select id="detail_part_id" name="detail_part_id" class="form-select" required>
-                                        <option value="" disabled="disabled" selected="selected">- Pilih Detail Part -
+                                        <option value="" selected disabled>- Pilih Detail Part -
                                         </option>
                                     </select>
                                     <div class="select-dropdown"></div>
@@ -100,7 +100,7 @@
                             <div class="value">
                                 <div class="input-group">
                                     <select id="defect_id" name="defect_id" class="form-select" required>
-                                        <option value="" disabled="disabled" selected="selected">- Pilih Nama Defect -
+                                        <option value="" selected disabled>- Pilih Nama Defect -
                                         </option>
                                     </select>
                                     <div class="select-dropdown"></div>
@@ -112,7 +112,8 @@
                             <div class="name">No Sleeper</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="form-control" type="number" min="1" name="no_sleeper">
+                                    <input class="form-control" type="number" min="1" name="no_sleeper"
+                                        placeholder="isi nomor sleeper">
                                 </div>
                             </div>
                         </div>
@@ -121,8 +122,8 @@
                             <div class="name">Direction</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <select name="direction" class="form-select">
-                                        <option value="" disabled="disabled" selected="selected">- Pilih Direction -
+                                    <select name="direction" class="form-select" required>
+                                        <option value="" selected disabled>- Pilih Direction -
                                         </option>
                                         <option value="L">L (Left)</option>
                                         <option value="R">R (Right)</option>
@@ -146,7 +147,7 @@
                             <div class="value">
                                 <div class="input-group">
                                     <select name="klasifikasi" class="form-select" required>
-                                        <option value="" disabled="disabled" selected="selected">- Pilih
+                                        <option value="" disabled selected>- Pilih
                                             Klasifikasi -
                                         </option>
                                         <option value="Minor">Minor</option>
@@ -213,7 +214,8 @@
                     type: 'get',
                     success: function(res) {
                         $('#location').html(
-                            '<option selected disabled>- Pilih Nama Location -</option>');
+                            '<option value="" selected disabled>- Pilih Nama Location -</option>'
+                        );
                         $.each(res, function(key, value) {
                             $('#location').append('<option value="' + value
                                 .id + '">' + value.code + ' - (' + value.name +
@@ -230,7 +232,8 @@
                     type: 'get',
                     success: function(res) {
                         $('#line').html(
-                            '<option selected disabled>- Pilih Nama Line -</option>');
+                            '<option value="" selected disabled>- Pilih Nama Line -</option>'
+                        );
                         $.each(res, function(key, value) {
                             $('#line').append('<option value="' + value
                                 .id + '">' + value.code + ' - (' + value.name +
@@ -248,7 +251,8 @@
                     type: 'get',
                     success: function(res) {
                         $('#mainline_id').html(
-                            '<option selected disabled>- Pilih Nomor Span -</option>');
+                            '<option value="" selected disabled>- Pilih Nomor Span -</option>'
+                        );
                         $.each(res, function(key, value) {
                             $('#mainline_id').append('<option value="' + value
                                 .id + '">' + value.no_span + ' - (KM: ' + value
@@ -266,7 +270,8 @@
                     type: 'get',
                     success: function(res) {
                         $('#detail_part_id').html(
-                            '<option selected disabled>- Pilih Detail Part -</option>');
+                            '<option value="" selected disabled>- Pilih Detail Part -</option>'
+                        );
                         $.each(res, function(key, value) {
                             $('#detail_part_id').append('<option value="' + value
                                 .detail_part_id + '">' + value.detail_part_name +
@@ -284,7 +289,8 @@
                     type: 'get',
                     success: function(res) {
                         $('#defect_id').html(
-                            '<option selected disabled>- Pilih Nama Defect -</option>');
+                            '<option value="" selected disabled>- Pilih Nama Defect -</option>'
+                        );
                         $.each(res, function(key, value) {
                             $('#defect_id').append('<option value="' + value
                                 .defect_id + '">' + value.defect_name +

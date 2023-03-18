@@ -55,7 +55,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>
+                                        <td class="text-wrap">
                                             <h6>{{ $item->job->name }}</h6>
                                         </td>
                                         <td>

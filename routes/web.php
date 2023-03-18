@@ -154,6 +154,7 @@ Route::middleware('auth')->group(function () {
         Route::put('/profile-update', 'update_photo')->name('profile.update.photo');
         Route::put('/profile-update-ttd', 'update_ttd')->name('profile.update.ttd');
         Route::put('/profile-update/password', 'update_password')->name('profile.update.password');
+        Route::put('/profile-update/pic', 'update_progress_pic')->name('profile.update.progress.pic');
     });
 
     Route::controller(TemuanController::class)->group(function () {

@@ -66,8 +66,8 @@
                                             <th class="text-center">
                                                 Line
                                             </th>
-                                            <th class="text-center">
-                                                Kilometer
+                                            <th class="text-center text-wrap">
+                                                Chainage (m)
                                             </th>
                                             <th class="text-center">
                                                 Part
@@ -101,10 +101,10 @@
                                                         {{ $item->kilometer }}
                                                     </span>
                                                 </td>
-                                                <td class="text-center">
+                                                <td class="text-center text-wrap">
                                                     {{ $item->part->name }}
                                                 </td>
-                                                <td class="text-center">
+                                                <td class="text-center text-wrap">
                                                     {{ $item->detail_part->name }} <br>
                                                     ({{ $item->defect->name ?? 'Lainnya' }})
                                                 </td>
@@ -257,9 +257,6 @@
         <div class="modal fade" id="ModalFilter" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog modal-md" role="document">
                 <div class="modal-content">
-                    {{-- <div class="modal-header">
-                        <h5 class="modal-title" id="modalAdminTitle">Filter Data</h5>
-                    </div> --}}
                     <div class="modal-body">
                         <form action="{{ route('temuan_depo.filter') }}" id="form_filter" method="GET">
                             @csrf

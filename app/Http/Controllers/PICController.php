@@ -44,7 +44,11 @@ class PICController extends Controller
 
     public function profile()
     {
-        return view('profile.index');
+        $tahun = Carbon::now()->format('Y');
+        $user_id = auth()->user()->id;
+        $pic = PIC::where('tahun', $tahun)->where('user_id', $user_id)->get();
+
+        return view('profile.index', compact(['pic']));
     }
 
     public function pic_update(Request $request)
@@ -156,8 +160,15 @@ class PICController extends Controller
         }
     }
 
-    public function destroy($id)
+    public function update_progress_pic(Request $request)
     {
-        //
+        $id = $request->id;
+        $pic = PIC::findOrFail($id);
+        if ($pic) {
+            $pic->update([
+                'progress' => $request->progress,
+            ]);
+            return redirect()->route('profile')->withNotify('Progress PIC berhasil diperbaharui!');
+        }
     }
 }

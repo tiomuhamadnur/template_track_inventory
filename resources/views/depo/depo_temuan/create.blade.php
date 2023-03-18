@@ -20,7 +20,7 @@
                             <div class="value">
                                 <div class="input-group">
                                     <select id="line" name="line_id" class="form-select" required>
-                                        <option value="" disabled="disabled" selected="selected">- Pilih Nama Line -
+                                        <option value="" selected disabled>- Pilih Nama Line -
                                         </option>
                                         @foreach ($line_depo as $item)
                                             <option value="{{ $item->id }}">{{ $item->code }} ({{ $item->name }})
@@ -48,7 +48,7 @@
                             <div class="value">
                                 <div class="input-group">
                                     <select id="part_id" name="part_id" class="form-select" required>
-                                        <option value="" disabled="disabled" selected="selected">- Pilih Nama Part -
+                                        <option value="" selected disabled>- Pilih Nama Part -
                                         </option>
                                         @foreach ($part as $item)
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -64,7 +64,7 @@
                             <div class="value">
                                 <div class="input-group">
                                     <select id="detail_part_id" name="detail_part_id" class="form-select" required>
-                                        <option value="" disabled="disabled" selected="selected">- Pilih Detail Part -
+                                        <option value="" selected disabled>- Pilih Detail Part -
                                         </option>
                                     </select>
                                     <div class="select-dropdown"></div>
@@ -77,7 +77,7 @@
                             <div class="value">
                                 <div class="input-group">
                                     <select id="defect_id" name="defect_id" class="form-select" required>
-                                        <option value="" disabled="disabled" selected="selected">- Pilih Nama Defect -
+                                        <option value="" selected disabled>- Pilih Nama Defect -
                                         </option>
                                     </select>
                                     <div class="select-dropdown"></div>
@@ -89,8 +89,8 @@
                             <div class="name">Direction</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <select name="direction" class="form-select">
-                                        <option value="" disabled="disabled" selected="selected">- Pilih Direction -
+                                    <select name="direction" class="form-select" required>
+                                        <option value="" selected disabled>- Pilih Direction -
                                         </option>
                                         <option value="L">L (Left)</option>
                                         <option value="R">R (Right)</option>
@@ -114,7 +114,7 @@
                             <div class="value">
                                 <div class="input-group">
                                     <select name="klasifikasi" class="form-select" required>
-                                        <option value="" disabled="disabled" selected="selected">- Pilih Klasifikasi -
+                                        <option value="" selected disabled>- Pilih Klasifikasi -
                                         </option>
                                         <option value="Minor">Minor</option>
                                         <option value="Moderate">Moderate</option>
@@ -180,7 +180,8 @@
                     type: 'get',
                     success: function(res) {
                         $('#location').html(
-                            '<option selected disabled>- Pilih Nama Location -</option>');
+                            '<option value="" selected disabled>- Pilih Nama Location -</option>'
+                            );
                         $.each(res, function(key, value) {
                             $('#location').append('<option value="' + value
                                 .id + '">' + value.code + ' - (' + value.name +
@@ -197,7 +198,8 @@
                     type: 'get',
                     success: function(res) {
                         $('#line').html(
-                            '<option selected disabled>- Pilih Nama Line -</option>');
+                            '<option value="" selected disabled>- Pilih Nama Line -</option>'
+                            );
                         $.each(res, function(key, value) {
                             $('#line').append('<option value="' + value
                                 .id + '">' + value.code + ' - (' + value.name +
@@ -215,7 +217,8 @@
                     type: 'get',
                     success: function(res) {
                         $('#mainline_id').html(
-                            '<option selected disabled>- Pilih Nomor Span -</option>');
+                            '<option value="" selected disabled>- Pilih Nomor Span -</option>'
+                            );
                         $.each(res, function(key, value) {
                             $('#mainline_id').append('<option value="' + value
                                 .id + '">' + value.no_span + ' - (KM: ' + value
@@ -233,7 +236,8 @@
                     type: 'get',
                     success: function(res) {
                         $('#detail_part_id').html(
-                            '<option selected disabled>- Pilih Detail Part -</option>');
+                            '<option value="" selected disabled>- Pilih Detail Part -</option>'
+                            );
                         $.each(res, function(key, value) {
                             $('#detail_part_id').append('<option value="' + value
                                 .detail_part_id + '">' + value.detail_part_name +
@@ -251,7 +255,8 @@
                     type: 'get',
                     success: function(res) {
                         $('#defect_id').html(
-                            '<option selected disabled>- Pilih Nama Defect -</option>');
+                            '<option value="" selected disabled>- Pilih Nama Defect -</option>'
+                            );
                         $.each(res, function(key, value) {
                             $('#defect_id').append('<option value="' + value
                                 .defect_id + '">' + value.defect_name +

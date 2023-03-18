@@ -33,7 +33,7 @@ class TemuanDepoController extends Controller
     public function create()
     {
         $line_depo = Line::where('area', 'Depo')->orderBy('name', 'asc')->get();
-        $part = Part::all();
+        $part = Part::orderBy('name', 'asc')->get();
 
         return view('depo.depo_temuan.create', compact(['line_depo', 'part']));
     }

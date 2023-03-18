@@ -170,12 +170,9 @@ class TemuanMainlineController extends Controller
 
     public function create()
     {
-        $mainline = Mainline::all();
-        $part = Part::all();
-        $defect = Defect::all();
-        $area = Area::all();
+        $part = Part::orderBy('name', 'asc')->get();
 
-        return view('mainline.mainline_temuan.create', compact(['mainline', 'part', 'defect', 'area']));
+        return view('mainline.mainline_temuan.create', compact(['part']));
     }
 
     public function store(Request $request)

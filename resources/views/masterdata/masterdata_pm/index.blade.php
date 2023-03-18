@@ -61,13 +61,13 @@
                                                 <td class="text-center">
                                                     {{ $loop->iteration }}
                                                 </td>
-                                                <td class="text-center">
+                                                <td class="text-wrap">
                                                     {{ $item->name }}
                                                 </td>
-                                                <td class="text-center">
+                                                <td class="text-wrap">
                                                     {{ $item->item }}
                                                 </td>
-                                                <td class="text-center">
+                                                <td class="text-wrap">
                                                     {{ $item->detail }}
                                                 </td>
                                                 <td class="text-center">
