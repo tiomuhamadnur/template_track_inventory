@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Exports\TemuanMainlineExport;
 use App\Exports\TemuanMainlineFilterExport;
 use App\Models\Area;
-use App\Models\Defect;
 use App\Models\Line;
 use App\Models\Mainline;
 use App\Models\Part;

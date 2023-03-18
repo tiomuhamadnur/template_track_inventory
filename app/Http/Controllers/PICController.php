@@ -168,6 +168,7 @@ class PICController extends Controller
             $pic->update([
                 'progress' => $request->progress,
             ]);
+
             return redirect()->route('profile')->withNotify('Progress PIC berhasil diperbaharui!');
         }
     }
