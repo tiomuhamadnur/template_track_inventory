@@ -103,7 +103,7 @@
                               </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-12 d-flex flex-column">
+                            <div class="col-lg-12 d-flex flex-column animate__animated animate__zoomIn">
                               <div class="row flex-grow">
                                 <div class="col-12 grid-margin stretch-card">
                                   <div class="card card-rounded">
@@ -135,7 +135,7 @@
                                 </div>
                               </div>
                             </div>
-                            <div class="col-lg-4 d-flex flex-column">
+                            <div class="col-lg-4 d-flex flex-column animate__animated animate__zoomIn">
                               <div class="row flex-grow">
                                 <div class="col-12 grid-margin stretch-card">
                                   <div class="card bg-primary card-rounded">
@@ -212,7 +212,7 @@
                                 </div>
                               </div>
                             </div>
-                                <div class="col-8 grid-margin stretch-card">
+                                <div class="col-8 grid-margin stretch-card animate__animated animate__zoomIn">
                                   <div class="card card-rounded">
                                     <div class="card-body">
                                       <div class="row">
