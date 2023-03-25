@@ -13,6 +13,7 @@ use App\Http\Controllers\DepoDashboardController;
 use App\Http\Controllers\DepoLineController;
 use App\Http\Controllers\DetailPartController;
 use App\Http\Controllers\JointController;
+use App\Http\Controllers\LengkungController;
 use App\Http\Controllers\LineController;
 use App\Http\Controllers\MainlineController;
 use App\Http\Controllers\MasterdataDashboardController;
@@ -396,6 +397,17 @@ Route::middleware('auth')->group(function () {
             Route::get('/depoline/{id}/edit', 'edit')->name('depoline.edit');
             Route::put('/depoline', 'update')->name('depoline.update');
             Route::delete('/depoline/{id}/delete', 'destroy')->name('depoline.delete');
+        });
+
+        Route::controller(LengkungController::class)->group(function () {
+            Route::get('/lengkung', 'index')->name('lengkung.index');
+            Route::get('/lengkung-create', 'create')->name('lengkung.create');
+            Route::post('/lengkung', 'store')->name('lengkung.store');
+            Route::get('/lengkung/{id}/edit', 'edit')->name('lengkung.edit');
+            Route::get('/lengkung/{id}', 'filter')->name('lengkung.filter');
+            Route::put('/lengkung', 'update')->name('lengkung.update');
+            Route::delete('/lengkung', 'destroy')->name('lengkung.delete');
+            Route::post('/lengkung-import', 'import')->name('lengkung.import');
         });
     });
 });
