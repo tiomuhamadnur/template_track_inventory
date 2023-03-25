@@ -16,14 +16,6 @@ class LengkungController extends Controller
     {
         $lengkung = Lengkung::orderBy(DB::raw('CAST(ip AS FLOAT)', 'asc'))->get();
 
-        // $lengkung = Lengkung::select(
-        //     'lengkung.*',
-        // )
-        // ->join('area', 'area.id', '=', 'lengkung.area_id')
-        // ->where('area.area', 'Mainline')
-        // ->orderBy(DB::raw('CAST(ip AS FLOAT)', 'asc'))
-        // ->get();
-
         return view('masterdata.masterdata_lengkung.index', compact(['lengkung']));
     }
 

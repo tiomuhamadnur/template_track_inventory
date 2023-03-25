@@ -32,7 +32,7 @@
                                     <div class="card-body">
                                         <div class="d-sm-flex justify-content-between align-items-start">
                                             <div>
-                                                <h4 class="card-title card-title-dash">Total Temuan Open</h4>
+                                                <h4 class="card-title card-title-dash">Grafik Trend Temuan</h4>
                                                 <h5 class="card-subtitle card-subtitle-dash">
                                                     <span>
                                                         Update
@@ -42,8 +42,8 @@
                                             </div>
                                             <div id="performance-line-legend"></div>
                                         </div>
-                                        <div class="chartjs-wrapper mt-5">
-                                            <canvas id="trenOpen"></canvas>
+                                        <div id="chart-container" style="width: 100%; height:100%;">
+                                            {{-- <canvas id="trenOpen"></canvas> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -287,4 +287,36 @@
         </div>
         @include('mainline.mainline_dashboard.modals')
     </div>
+@endsection
+
+@section('javascript')
+    <script type="text/javascript">
+        let temuan = <?php echo json_encode($temuan); ?>;
+        let bulan = <?php echo json_encode($bulan); ?>;
+
+        Highcharts.chart('chart-container', {
+            title: {
+                text: ''
+            },
+            xAxis: {
+                categories: bulan
+            },
+            yAxis: {
+                title: {
+                    text: 'Jumlah'
+                }
+            },
+            plotOptions: {
+                series: {
+                    allowPointSelect: true
+                }
+            },
+
+            series: [{
+                type: 'column',
+                name: 'Temuan',
+                data: temuan
+            }, ]
+        });
+    </script>
 @endsection
