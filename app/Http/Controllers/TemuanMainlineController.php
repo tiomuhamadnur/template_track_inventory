@@ -33,8 +33,10 @@ class TemuanMainlineController extends Controller
         $part_id = '';
         $status = '';
         $klasifikasi = '';
+        $tanggal_awal = '';
+        $tanggal_akhir = '';
 
-        return view('mainline.mainline_temuan.index', compact(['temuan', 'area', 'area_rencana', 'line', 'part', 'area_id', 'line_id', 'part_id', 'status', 'klasifikasi']));
+        return view('mainline.mainline_temuan.index', compact(['temuan', 'area', 'area_rencana', 'line', 'part', 'area_id', 'line_id', 'part_id', 'status', 'klasifikasi', 'tanggal_awal', 'tanggal_akhir']));
     }
 
     public function export(Request $request)
@@ -44,13 +46,15 @@ class TemuanMainlineController extends Controller
         $part_id = $request->part_id;
         $status = $request->status;
         $klasifikasi = $request->klasifikasi;
+        $tanggal_awal = $request->tanggal_awal;
+        $tanggal_akhir = $request->tanggal_akhir;
 
         $waktu = Carbon::now();
 
-        if ($area_id == null and $line_id == null and $part_id == null and $status == null and $klasifikasi == null) {
-            return Excel::download(new TemuanMainlineExport(), $waktu.'_temuan_mainline_all.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+        if ($area_id == null and $line_id == null and $part_id == null and $status == null and $klasifikasi == null and $tanggal_awal == null and $tanggal_akhir == null) {
+            return Excel::download(new TemuanMainlineExport(), $waktu . '_temuan_mainline_all.xlsx', \Maatwebsite\Excel\Excel::XLSX);
         } else {
-            return Excel::download(new TemuanMainlineFilterExport($area_id, $line_id, $part_id, $status, $klasifikasi), $waktu.'_temuan_mainline_filtered.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+            return Excel::download(new TemuanMainlineFilterExport($area_id, $line_id, $part_id, $status, $klasifikasi, $tanggal_awal, $tanggal_akhir), $waktu . '_temuan_mainline_filtered.xlsx', \Maatwebsite\Excel\Excel::XLSX);
         }
     }
 
@@ -61,13 +65,15 @@ class TemuanMainlineController extends Controller
         $part_id = $request->part_id;
         $status = $request->status;
         $klasifikasi = $request->klasifikasi;
+        $tanggal_awal = $request->tanggal_awal;
+        $tanggal_akhir = $request->tanggal_akhir;
 
-        if ($area_id == null and $line_id == null and $part_id == null and $status == null and $klasifikasi == null) {
+        if ($area_id == null and $line_id == null and $part_id == null and $status == null and $klasifikasi == null and $tanggal_awal == null and $tanggal_akhir == null) {
             $temuan = Temuan::all();
             $waktu = Carbon::now();
             $pdf = Pdf::loadView('mainline.mainline_temuan.export-pdf', ['temuan' => $temuan]);
 
-            return $pdf->stream($waktu.'_list-temuan-mainline.pdf');
+            return $pdf->stream($waktu . '_list-temuan-mainline.pdf');
         } else {
             $temuan_filter = Temuan::query()->select(
                 'summary_temuan.*',
@@ -100,11 +106,21 @@ class TemuanMainlineController extends Controller
                 return $query->where('klasifikasi', $request->klasifikasi);
             });
 
+            // Filter by tanggal
+            if ($tanggal_awal != null and $tanggal_akhir != null) {
+                $temuan_filter->when($tanggal_awal, function ($query) use ($request) {
+                    return $query->whereDate('tanggal', '>=', $request->tanggal_awal);
+                });
+                $temuan_filter->when($tanggal_akhir, function ($query) use ($request) {
+                    return $query->whereDate('tanggal', '<=', $request->tanggal_akhir);
+                });
+            }
+
             $temuan = $temuan_filter->orderBy('mainline_id', 'asc')->get();
             $waktu = Carbon::now();
             $pdf = Pdf::loadView('mainline.mainline_temuan.export-pdf', ['temuan' => $temuan]);
 
-            return $pdf->stream($waktu.'_list-temuan-mainline-filtered.pdf');
+            return $pdf->stream($waktu . '_list-temuan-mainline-filtered.pdf');
         }
     }
 
@@ -115,12 +131,13 @@ class TemuanMainlineController extends Controller
         $part_id = $request->part_id;
         $status = $request->status;
         $klasifikasi = $request->klasifikasi;
+        $tanggal_awal = $request->tanggal_awal;
+        $tanggal_akhir = $request->tanggal_akhir;
 
         $temuan = Temuan::query()->select(
             'summary_temuan.*',
             'mainline.area_id as area_id',
-        )
-            ->join('mainline', 'mainline.id', '=', 'summary_temuan.mainline_id');
+        )->join('mainline', 'mainline.id', '=', 'summary_temuan.mainline_id');
 
         // Filter by area_id
         $temuan->when($area_id, function ($query) use ($request) {
@@ -147,6 +164,16 @@ class TemuanMainlineController extends Controller
             return $query->where('klasifikasi', $request->klasifikasi);
         });
 
+        // Filter by tanggal
+        if ($tanggal_awal != null and $tanggal_akhir != null) {
+            $temuan->when($tanggal_awal, function ($query) use ($request) {
+                return $query->whereDate('tanggal', '>=', $request->tanggal_awal);
+            });
+            $temuan->when($tanggal_akhir, function ($query) use ($request) {
+                return $query->whereDate('tanggal', '<=', $request->tanggal_akhir);
+            });
+        }
+
         $area = Area::all();
         $area_rencana = Area::where('stasiun', 'true')->orWhere('area', 'DAL')->get();
         $line = Line::whereNot('area', 'Depo')->get();
@@ -164,6 +191,8 @@ class TemuanMainlineController extends Controller
             'part_id' => $part_id,
             'status' => $status,
             'klasifikasi' => $klasifikasi,
+            'tanggal_awal' => $tanggal_awal,
+            'tanggal_akhir' => $tanggal_akhir,
         ]);
     }
 
@@ -360,7 +389,7 @@ class TemuanMainlineController extends Controller
         $photo = Pegawai::where('name', $pic)->first()->photo;
         if ($photo != null) {
             return response()->json([
-                'photo' => asset('storage/'.$photo),
+                'photo' => asset('storage/' . $photo),
             ]);
         } else {
             return response()->json([

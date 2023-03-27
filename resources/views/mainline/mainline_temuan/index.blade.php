@@ -47,6 +47,8 @@
                                 <input type="text" name="part_id" value="{{ $part_id ?? '' }}" hidden>
                                 <input type="text" name="status" value="{{ $status ?? '' }}" hidden>
                                 <input type="text" name="klasifikasi" value="{{ $klasifikasi ?? '' }}" hidden>
+                                <input type="text" name="tanggal_awal" value="{{ $tanggal_awal ?? '' }}" hidden>
+                                <input type="text" name="tanggal_akhir" value="{{ $tanggal_akhir ?? '' }}" hidden>
                             </form>
                             <form action="{{ route('temuan_mainline.export.pdf') }}" target="_blank" method="GET"
                                 id="form_export_pdf">
@@ -57,6 +59,8 @@
                                 <input type="text" name="part_id" value="{{ $part_id ?? '' }}" hidden>
                                 <input type="text" name="status" value="{{ $status ?? '' }}" hidden>
                                 <input type="text" name="klasifikasi" value="{{ $klasifikasi ?? '' }}" hidden>
+                                <input type="text" name="tanggal_awal" value="{{ $tanggal_awal ?? '' }}" hidden>
+                                <input type="text" name="tanggal_akhir" value="{{ $tanggal_akhir ?? '' }}" hidden>
                             </form>
                             <div class="table-responsive pt-3">
                                 <table class="table table-bordered">
@@ -332,6 +336,17 @@
                                     <option value="Moderate">Moderate</option>
                                     <option value="Mayor">Mayor</option>
                                 </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Tanggal</label>
+                                <div class="input-group">
+                                    <input placeholder="Tanggal Awal" class="form-control me-1" type="text"
+                                        onfocus="(this.type='date')" onblur="(this.type='text')" id="date"
+                                        name="tanggal_awal">
+                                    <input placeholder="Tanggal Akhir" class="form-control ms-1" type="text"
+                                        onfocus="(this.type='date')" onblur="(this.type='text')" id="date"
+                                        name="tanggal_akhir">
+                                </div>
                             </div>
                         </form>
                     </div>
