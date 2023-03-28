@@ -129,7 +129,8 @@
                                             <div class="card-body">
                                                 <div class="d-sm-flex justify-content-between align-items-start">
                                                     <div>
-                                                        <h4 class="card-title card-title-dash"> (%)Progress Pekerjaan Tahunan
+                                                        <h4 class="card-title card-title-dash"> (%)Progress Pekerjaan
+                                                            Tahunan
                                                         </h4>
                                                         <p class="card-subtitle card-subtitle-dash">Data didapat berdasarkan
                                                             Pekerjaan yang sudah dikerjakan</p>
@@ -198,8 +199,8 @@
 @endsection
 
 @section('javascript')
-{{-- JS TREN TEMUAN --}}
     <script type="text/javascript">
+        // {{-- JS TREN TEMUAN --}}
         let temuan = <?php echo json_encode($temuan); ?>;
         let bulan = <?php echo json_encode($bulan); ?>;
 
@@ -223,120 +224,118 @@
 
             series: [{
                 type: 'column',
-                name: 'Temuan',
+                name: 'jumlah temuan',
                 data: temuan
             }, ]
         });
-    </script>
 
-
-    //{{-- JS TREN PEKERJAAN PERTAHUN --}}
-    <script>
-
+        //{{-- JS TREN PEKERJAAN PERTAHUN --}}
         Highcharts.chart('chartpic', {
-    title: {
-        text: '',
-        align: 'left'
-    },
-    subtitle: {
-        text: '' +
-            '',
-        align: 'left'
-    },
-    xAxis: {
-        categories: ['Track Patrol on Foot', 'Cabin Ride', 'Accelerometer', 'Track Master', 'Rail Joint Gap', 'Rail Bonding Examination', 'TO & SC Examination', 'MPM Examination', 'Expansion Joint Examination', 'Buffer & Wheel Stop Examination', 'Fastening System Examination', 'Ballast Examination', 'Trackbed Examination', 'Sleeper Examination', 'Rail Profile Examination', 'Rail Corrugation Examination', 'Rail Surface of Welds Examination','GIJ Examination', 'Rail Flow, Corrosion & Defect Examination', 'Rail Hardness Test', 'NDT Examination']
-    },
-    series: [{
-        type: 'column',
-        name: 'Telah Dilaksanakan',
-        colorByPoint: true,
-        data: [31, 26, 27, 30, 49, 73, 23, 45,
-            97, 89, 12, 34, 34, 44, 100, 14, 44, 56, 23, 44, 67],
-        showInLegend: false
-    }]
-});
-
-        </script>
+            title: {
+                text: '',
+                align: 'left'
+            },
+            subtitle: {
+                text: '' +
+                    '',
+                align: 'left'
+            },
+            xAxis: {
+                categories: ['Track Patrol on Foot', 'Cabin Ride', 'Accelerometer', 'Track Master',
+                    'Rail Joint Gap', 'Rail Bonding Examination', 'TO & SC Examination', 'MPM Examination',
+                    'Expansion Joint Examination', 'Buffer & Wheel Stop Examination',
+                    'Fastening System Examination', 'Ballast Examination', 'Trackbed Examination',
+                    'Sleeper Examination', 'Rail Profile Examination', 'Rail Corrugation Examination',
+                    'Rail Surface of Welds Examination', 'GIJ Examination',
+                    'Rail Flow, Corrosion & Defect Examination', 'Rail Hardness Test', 'NDT Examination'
+                ]
+            },
+            series: [{
+                type: 'column',
+                name: 'Telah Dilaksanakan',
+                colorByPoint: true,
+                data: [31, 26, 27, 30, 49, 73, 23, 45,
+                    97, 89, 12, 34, 34, 44, 100, 14, 44, 56, 23, 44, 67
+                ],
+                showInLegend: false
+            }]
+        });
 
 
         //{{-- JS MAJOR MINOR --}}
-        <script type="text/javascript">
+        let minor = <?php echo json_encode($temuan_minor); ?>;
+        let moderate = <?php echo json_encode($temuan_moderate); ?>;
+        let mayor = <?php echo json_encode($temuan_mayor); ?>;
+        Highcharts.chart('donut-chart', {
+            chart: {
+                type: 'pie',
+                options3d: {
+                    enabled: true,
+                    alpha: 45
+                }
+            },
+            title: {
+                text: '',
+                align: 'left'
+            },
+            subtitle: {
+                text: '',
+                align: 'left'
+            },
+            plotOptions: {
+                pie: {
+                    innerSize: 100,
+                    depth: 45
+                }
+            },
+            series: [{
+                name: 'jumlah temuan',
+                data: [
+                    ['Major', mayor],
+                    ['Moderate', moderate],
+                    ['Minor', minor],
+                ]
+            }]
+        });
 
-            Highcharts.chart('donut-chart', {
-    chart: {
-        type: 'pie',
-        options3d: {
-            enabled: true,
-            alpha: 45
-        }
-    },
-    title: {
-        text: '',
-        align: 'left'
-    },
-    subtitle: {
-        text: '',
-        align: 'left'
-    },
-    plotOptions: {
-        pie: {
-            innerSize: 100,
-            depth: 45
-        }
-    },
-    series: [{
-        name: 'Presentase',
-        data: [
-            ['Major', 3],
-            ['Moderate', 2],
-            ['Minor', 9]
-
-        ]
-    }]
-});
-
-            </script>
-
-//{{-- JS SEBARAN --}}
-<script>
-
-    Highcharts.chart('sebaran-chart', {
-    chart: {
-        type: 'pie',
-        options3d: {
-            enabled: true,
-            alpha: 45
-        }
-    },
-    title: {
-        text: '',
-        align: 'left'
-    },
-    subtitle: {
-        text: '',
-        align: 'left'
-    },
-    plotOptions: {
-        pie: {
-            innerSize: 100,
-            depth: 45
-        }
-    },
-    series: [{
-        name: 'Presentase',
-        data: [
-            ['Uptrack', 3],
-            ['Downtrack', 2],
-            ['Middle Track', 9],
-            ['Depo', 9],
-            ['DAL', 9]
-
-        ]
-    }]
-});
-
-
-
+        //{{-- JS SEBARAN --}}
+        let ut = <?php echo json_encode($temuan_UT); ?>;
+        let dt = <?php echo json_encode($temuan_DT); ?>;
+        let mt = <?php echo json_encode($temuan_MT); ?>;
+        let dal = <?php echo json_encode($temuan_DAL); ?>;
+        let tb = <?php echo json_encode($temuan_TB); ?>;
+        Highcharts.chart('sebaran-chart', {
+            chart: {
+                type: 'pie',
+                options3d: {
+                    enabled: true,
+                    alpha: 45
+                }
+            },
+            title: {
+                text: '',
+                align: 'left'
+            },
+            subtitle: {
+                text: '',
+                align: 'left'
+            },
+            plotOptions: {
+                pie: {
+                    innerSize: 100,
+                    depth: 45
+                }
+            },
+            series: [{
+                name: 'jumlah temuan',
+                data: [
+                    ['Uptrack', ut],
+                    ['Downtrack', dt],
+                    ['Middle Track', mt],
+                    ['DAL', dal],
+                    ['TB', tb],
+                ]
+            }]
+        });
     </script>
-
 @endsection

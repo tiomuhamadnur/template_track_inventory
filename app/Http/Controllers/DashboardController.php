@@ -62,6 +62,41 @@ class DashboardController extends Controller
             'DEC',
         ];
 
+        $temuan_minor = Temuan::where('status', 'open')->where('klasifikasi', 'minor')->count();
+        $temuan_moderate = Temuan::where('status', 'open')->where('klasifikasi', 'moderate')->count();
+        $temuan_mayor = Temuan::where('status', 'open')->where('klasifikasi', 'mayor')->count();
+
+        $temuan_UT = DB::table('summary_temuan')
+            ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
+            ->join('line', 'mainline.line_id', '=', 'line.id')
+            ->select('line.id as line_id')
+            ->where('line_id', 1)
+            ->count();
+        $temuan_DT = DB::table('summary_temuan')
+            ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
+            ->join('line', 'mainline.line_id', '=', 'line.id')
+            ->select('line.id as line_id')
+            ->where('line_id', 2)
+            ->count();
+        $temuan_MT = DB::table('summary_temuan')
+            ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
+            ->join('line', 'mainline.line_id', '=', 'line.id')
+            ->select('line.id as line_id')
+            ->where('line_id', 3)
+            ->count();
+        $temuan_DAL = DB::table('summary_temuan')
+            ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
+            ->join('line', 'mainline.line_id', '=', 'line.id')
+            ->select('line.id as line_id')
+            ->where('line_id', 4)
+            ->count();
+        $temuan_TB = DB::table('summary_temuan')
+            ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
+            ->join('line', 'mainline.line_id', '=', 'line.id')
+            ->select('line.id as line_id')
+            ->where('line_id', 5)
+            ->count();
+
         return view('mainline.mainline_dashboard.index', compact([
             'temuan_all',
             'temuan_open',
@@ -70,6 +105,14 @@ class DashboardController extends Controller
             'temuan_close_bulan_ini',
             'temuan',
             'bulan',
+            'temuan_minor',
+            'temuan_moderate',
+            'temuan_mayor',
+            'temuan_UT',
+            'temuan_DT',
+            'temuan_MT',
+            'temuan_DAL',
+            'temuan_TB',
         ]));
     }
 
