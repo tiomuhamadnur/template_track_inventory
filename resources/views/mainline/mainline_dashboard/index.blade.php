@@ -129,10 +129,10 @@
                                             <div class="card-body">
                                                 <div class="d-sm-flex justify-content-between align-items-start">
                                                     <div>
-                                                        <h4 class="card-title card-title-dash">Komparasi Open-Close Temuan
+                                                        <h4 class="card-title card-title-dash"> (%)Progress Pekerjaan Tahunan
                                                         </h4>
                                                         <p class="card-subtitle card-subtitle-dash">Data didapat berdasarkan
-                                                            Open & Closing setiap bulan </p>
+                                                            Pekerjaan yang sudah dikerjakan</p>
                                                     </div>
                                                     <div>
                                                         <div class="dropdown">
@@ -150,113 +150,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="d-sm-flex align-items-center mt-1 justify-content-between">
-                                                    <div class="d-sm-flex align-items-center mt-4 justify-content-between">
-                                                        <h2 class="me-2 fw-bold"></h2>
-                                                        <h4 class="me-2">KOMPARASI</h4>
-                                                        <h4 class="text-success">(%)</h4>
-                                                    </div>
-                                                    <div class="me-3">
-                                                        <div id="marketing-overview-legend"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="chartjs-bar-wrapper mt-3">
-                                                    <canvas id="komparasiTemuan"></canvas>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 d-flex flex-column animate__animated animate__zoomIn">
-                                <div class="row flex-grow">
-                                    <div class="col-12 grid-margin stretch-card">
-                                        <div class="card bg-primary card-rounded">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <div class="d-flex justify-content-between align-items-center">
-                                                            <h4 class="card-title card-title-dash text-white">Tableau Bulan
-                                                                Ini</h4>
-                                                        </div>
-                                                        <div class="list-wrapper text-white">
-                                                            <ul class="todo-list todo-list-rounded">
-                                                                <li class="d-block">
-                                                                    <div class="form-check w-100">
-                                                                        <label class="form-check-label">
-                                                                            <span class="checkbox" type="checkbox">Track
-                                                                                Patrol on Foot<i
-                                                                                    class="input-helper rounded"></i></span>
-                                                                        </label>
-                                                                        <div class="d-flex mt-2">
-                                                                            <div class="ps-4 text-small me-3">12 June 2020
-                                                                            </div>
-                                                                            <div class="badge badge-opacity-success me-3">
-                                                                                Done</div>
-
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="d-block">
-                                                                    <div class="form-check w-100">
-                                                                        <label class="form-check-label">
-                                                                            <span class="checkbox" type="checkbox">EJ
-                                                                                Examination<i
-                                                                                    class="input-helper rounded"></i></span>
-                                                                        </label>
-                                                                        <div class="d-flex mt-2">
-                                                                            <div class="ps-4 text-small me-3">23 June 2020
-                                                                            </div>
-                                                                            <div class="badge badge-opacity-warning me-3">
-                                                                                On Going</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="form-check w-100">
-                                                                        <label class="form-check-label">
-                                                                            <span class="checkbox"
-                                                                                type="checkbox">Accelerometer <i
-                                                                                    class="input-helper rounded"></i></span>
-                                                                        </label>
-                                                                        <div class="d-flex mt-2">
-                                                                            <div class="ps-4 text-small me-3">24 June 2020
-                                                                            </div>
-                                                                            <div class="badge badge-opacity-warning me-3">
-                                                                                On Going</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="form-check w-100">
-                                                                        <label class="form-check-label">
-                                                                            <span class="checkbox" type="checkbox"> Rail
-                                                                                Joint Gap Examination <i
-                                                                                    class="input-helper rounded"></i></span>
-                                                                        </label>
-                                                                        <div class="d-flex mt-2">
-                                                                            <div class="ps-4 text-small me-3">24 June 2020
-                                                                            </div>
-                                                                            <div class="badge badge-opacity-warning me-3">
-                                                                                On Going</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="form-check w-100">
-                                                                        <label class="form-check-label">
-                                                                            <span class="checkbox" type="checkbox"> Cabin
-                                                                                Ride <i
-                                                                                    class="input-helper rounded"></i></span>
-                                                                        </label>
-                                                                        <div class="d-flex mt-2">
-                                                                            <div class="ps-4 text-small me-3">24 June 2020
-                                                                            </div>
-                                                                            <div class="badge badge-opacity-warning me-3">
-                                                                                On Going</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
+                                                    <div class="col-12">
+                                                        <div id="chartpic" style="width: 100%; height:100%;">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -265,16 +160,29 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-8 grid-margin stretch-card animate__animated animate__zoomIn">
+                            <div class="col-6 grid-margin stretch-card animate__animated animate__zoomIn">
                                 <div class="card card-rounded">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                                    <h4 class="card-title card-title-dash">Kategori Defect</h4>
+                                                    <h4 class="card-title card-title-dash">(%)Kategori Defect</h4>
                                                 </div>
-                                                <canvas class="my-auto" id="doughnutChart" height="200"></canvas>
-                                                <div id="doughnut-chart-legend" class="mt-5 text-center"></div>
+                                                <div id="donut-chart" class="mt-5 text-center"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 grid-margin stretch-card animate__animated animate__zoomIn">
+                                <div class="card card-rounded">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                                    <h4 class="card-title card-title-dash">(%)Sebaran Defect</h4>
+                                                </div>
+                                                <div id="sebaran-chart" class="mt-5 text-center"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -290,6 +198,7 @@
 @endsection
 
 @section('javascript')
+{{-- JS TREN TEMUAN --}}
     <script type="text/javascript">
         let temuan = <?php echo json_encode($temuan); ?>;
         let bulan = <?php echo json_encode($bulan); ?>;
@@ -319,4 +228,115 @@
             }, ]
         });
     </script>
+
+
+    //{{-- JS TREN PEKERJAAN PERTAHUN --}}
+    <script>
+
+        Highcharts.chart('chartpic', {
+    title: {
+        text: '',
+        align: 'left'
+    },
+    subtitle: {
+        text: '' +
+            '',
+        align: 'left'
+    },
+    xAxis: {
+        categories: ['Track Patrol on Foot', 'Cabin Ride', 'Accelerometer', 'Track Master', 'Rail Joint Gap', 'Rail Bonding Examination', 'TO & SC Examination', 'MPM Examination', 'Expansion Joint Examination', 'Buffer & Wheel Stop Examination', 'Fastening System Examination', 'Ballast Examination', 'Trackbed Examination', 'Sleeper Examination', 'Rail Profile Examination', 'Rail Corrugation Examination', 'Rail Surface of Welds Examination','GIJ Examination', 'Rail Flow, Corrosion & Defect Examination', 'Rail Hardness Test', 'NDT Examination']
+    },
+    series: [{
+        type: 'column',
+        name: 'Telah Dilaksanakan',
+        colorByPoint: true,
+        data: [31, 26, 27, 30, 49, 73, 23, 45,
+            97, 89, 12, 34, 34, 44, 100, 14, 44, 56, 23, 44, 67],
+        showInLegend: false
+    }]
+});
+
+        </script>
+
+
+        //{{-- JS MAJOR MINOR --}}
+        <script type="text/javascript">
+
+            Highcharts.chart('donut-chart', {
+    chart: {
+        type: 'pie',
+        options3d: {
+            enabled: true,
+            alpha: 45
+        }
+    },
+    title: {
+        text: '',
+        align: 'left'
+    },
+    subtitle: {
+        text: '',
+        align: 'left'
+    },
+    plotOptions: {
+        pie: {
+            innerSize: 100,
+            depth: 45
+        }
+    },
+    series: [{
+        name: 'Presentase',
+        data: [
+            ['Major', 3],
+            ['Moderate', 2],
+            ['Minor', 9]
+
+        ]
+    }]
+});
+
+            </script>
+
+//{{-- JS SEBARAN --}}
+<script>
+
+    Highcharts.chart('sebaran-chart', {
+    chart: {
+        type: 'pie',
+        options3d: {
+            enabled: true,
+            alpha: 45
+        }
+    },
+    title: {
+        text: '',
+        align: 'left'
+    },
+    subtitle: {
+        text: '',
+        align: 'left'
+    },
+    plotOptions: {
+        pie: {
+            innerSize: 100,
+            depth: 45
+        }
+    },
+    series: [{
+        name: 'Presentase',
+        data: [
+            ['Uptrack', 3],
+            ['Downtrack', 2],
+            ['Middle Track', 9],
+            ['Depo', 9],
+            ['DAL', 9]
+
+        ]
+    }]
+});
+
+
+
+    </script>
+
 @endsection
