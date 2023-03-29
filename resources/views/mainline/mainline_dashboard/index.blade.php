@@ -14,19 +14,22 @@
                 </div>
                 <div class="tab-content tab-content-basic">
                     <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
-                        <div class="text-center">
-                            <a class="btn btn-outline-primary btn-lg  animate__animated animate__jello"
-                                data-bs-toggle="collapse" href="#menu" aria-expanded="false" aria-controls="#menu">
-                                <span class="menu-title">MAPPING TEMUAN</span>
-                            </a>
-                        </div>
-                        <div class="collapse" id="menu">
-                            @include('mainline.mainline_dashboard.mapping')
-                        </div>
-                        {{-- <h1 class="animate__animated animate__fadeInDown">An animated element</h1> --}}
-
-
                         <div class="row">
+                            <div class="col-12 grid-margin stretch-card animate__animated animate__zoomIn">
+                                <div class="card card-rounded">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                                    <h4 class="card-title card-title-dash">Titik Sebaran Defect Area Mainline</h4>
+                                                </div>
+                                                <p class="card-subtitle card-subtitle-dash">Presentase Sebaran Temuan Per Area</p>
+                                                    <div id="sebaran-area-chart"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-lg-8 grid-margin stretch-card animate__animated animate__zoomIn">
                                 <div class="card">
                                     <div class="card-body">
@@ -122,6 +125,36 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-7 grid-margin stretch-card animate__animated animate__zoomIn">
+                                <div class="card card-rounded">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                                    <h4 class="card-title card-title-dash">(%)Kategori Defect</h4>
+                                                </div>
+                                                <p class="card-subtitle card-subtitle-dash">Klasifikasi Defect Berdasarkan Justifikasi Tim Track Examination</p>
+                                                <div id="klasifikasi-chart" class="mt-5 text-center"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-5 grid-margin stretch-card animate__animated animate__zoomIn">
+                                <div class="card card-rounded">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                                    <h4 class="card-title card-title-dash">(%)Sebaran Defect</h4>
+                                                </div>
+                                                <p class="card-subtitle card-subtitle-dash">Presentase Sebaran Temuan Per Area</p>
+                                                <div id="sebaran-chart" class="mt-5 text-center"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-lg-12 d-flex flex-column animate__animated animate__zoomIn">
                                 <div class="row flex-grow">
                                     <div class="col-12 grid-margin stretch-card">
@@ -129,8 +162,7 @@
                                             <div class="card-body">
                                                 <div class="d-sm-flex justify-content-between align-items-start">
                                                     <div>
-                                                        <h4 class="card-title card-title-dash"> (%)Progress Pekerjaan
-                                                            Tahunan
+                                                        <h4 class="card-title card-title-dash"> (%)Progress Pekerjaan Tahunan
                                                         </h4>
                                                         <p class="card-subtitle card-subtitle-dash">Data didapat berdasarkan
                                                             Pekerjaan yang sudah dikerjakan</p>
@@ -156,34 +188,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6 grid-margin stretch-card animate__animated animate__zoomIn">
-                                <div class="card card-rounded">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                                    <h4 class="card-title card-title-dash">(%)Kategori Defect</h4>
-                                                </div>
-                                                <div id="donut-chart" class="mt-5 text-center"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6 grid-margin stretch-card animate__animated animate__zoomIn">
-                                <div class="card card-rounded">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                                    <h4 class="card-title card-title-dash">(%)Sebaran Defect</h4>
-                                                </div>
-                                                <div id="sebaran-chart" class="mt-5 text-center"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -266,7 +270,7 @@
         let minor = <?php echo json_encode($temuan_minor); ?>;
         let moderate = <?php echo json_encode($temuan_moderate); ?>;
         let mayor = <?php echo json_encode($temuan_mayor); ?>;
-        Highcharts.chart('donut-chart', {
+        Highcharts.chart('klasifikasi-chart', {
             chart: {
                 type: 'pie',
                 options3d: {
@@ -299,43 +303,327 @@
         });
 
         //{{-- JS SEBARAN --}}
-        let ut = <?php echo json_encode($temuan_UT); ?>;
-        let dt = <?php echo json_encode($temuan_DT); ?>;
-        let mt = <?php echo json_encode($temuan_MT); ?>;
-        let dal = <?php echo json_encode($temuan_DAL); ?>;
-        let tb = <?php echo json_encode($temuan_TB); ?>;
         Highcharts.chart('sebaran-chart', {
-            chart: {
-                type: 'pie',
-                options3d: {
-                    enabled: true,
-                    alpha: 45
+    chart: {
+        type: 'column'
+    },
+    title: {
+        align: 'left',
+        text: ''
+    },
+    subtitle: {
+        align: 'left',
+        text: ''
+    },
+    accessibility: {
+        announceNewData: {
+            enabled: true
+        }
+    },
+    xAxis: {
+        type: 'category'
+    },
+    yAxis: {
+        title: {
+            text: 'Presentase Temuan'
+        }
+
+    },
+    legend: {
+        enabled: false
+    },
+    plotOptions: {
+        series: {
+            borderWidth: 0,
+            dataLabels: {
+                enabled: true,
+                format: '{point.y:.1f}%'
+            }
+        }
+    },
+
+    tooltip: {
+        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+    },
+
+    series: [
+        {
+            name: 'Line',
+            colorByPoint: true,
+            data: [
+                {
+                    name: 'Uptrack',
+                    y: 30.06,
+                },
+                {
+                    name: 'Downtrack',
+                    y: 25.84,
+                },
+                {
+                    name: 'Middle Track',
+                    y: 4.18,
+                },
+                {
+                    name: 'DAL-TB',
+                    y: 4.12,
                 }
+            ]
+        }
+    ]
+});
+    // JS BUBBLE SEBARAN TEMUAN PER-AREA
+
+    Highcharts.chart('sebaran-area-chart', {
+    chart: {
+        type: 'packedbubble',
+        height: '50%'
+    },
+    title: {
+        text: '',
+        align: 'left'
+    },
+    tooltip: {
+        useHTML: true,
+        pointFormat: '<b>{point.name}:</b> {point.value} Titik<sub></sub>'
+    },
+    plotOptions: {
+        packedbubble: {
+            minSize: '30%',
+            maxSize: '200%',
+            zMin: 0,
+            zMax: 1000,
+            layoutAlgorithm: {
+                splitSeries: false,
+                gravitationalConstant: 0.02
             },
-            title: {
-                text: '',
-                align: 'left'
-            },
-            subtitle: {
-                text: '',
-                align: 'left'
-            },
-            plotOptions: {
-                pie: {
-                    innerSize: 100,
-                    depth: 45
+            dataLabels: {
+                enabled: true,
+                format: '{point.name}',
+                filter: {
+                    property: 'y',
+                    operator: '>',
+                    value: 250
+                },
+                style: {
+                    color: 'black',
+                    textOutline: 'none',
+                    fontWeight: 'normal'
                 }
-            },
-            series: [{
-                name: 'jumlah temuan',
-                data: [
-                    ['Uptrack', ut],
-                    ['Downtrack', dt],
-                    ['Middle Track', mt],
-                    ['DAL', dal],
-                    ['TB', tb],
-                ]
-            }]
-        });
+            }
+        }
+    },
+    series: [{
+        name: 'Mainline UT',
+        data: [{
+            name: 'St. LBB',
+            value: 7.2
+        },
+        {
+            name: 'LBB-FTM',
+            value: 8.1
+        },
+        {
+            name: 'St.FTM',
+            value: 17.8
+        },
+        {
+            name: 'FTM-CPR',
+            value: 34
+        },
+        {
+            name: 'St.CPR',
+            value: 43
+        },
+        {
+            name: 'CPR-HJN',
+            value: 78.6
+        },
+        {
+            name: 'St.HJN',
+            value: 52
+        },
+        {
+            name: 'HJN-BLA',
+            value: 74.1
+        },
+        {
+            name: 'St.BLA',
+            value: 89.1
+        }, {
+            name: 'BLA-BLM',
+            value: 199
+        },
+        {
+            name: 'St.BLM',
+            value: 195.2
+        },
+        {
+            name: 'BLM-ASEAN',
+            value: 195.2
+        },{
+            name: 'St.ASEAN',
+            value: 195.2
+        },
+        {
+            name: 'ASEAN-SNY',
+            value: 195.2
+        },{
+            name: 'St.SNY',
+            value: 195.2
+        },{
+            name: 'SNY-IST',
+            value: 195.2
+        },
+        {
+            name: 'St.IST',
+            value: 195.2
+        },
+        {
+            name: 'IST-BNH',
+            value: 195.2
+        },
+        {
+            name: 'St.BNH',
+            value: 195.2
+        },{
+            name: 'BNH-STB',
+            value: 195.2
+        },{
+            name: 'St.STB',
+            value: 195.2
+        },
+        {
+            name: 'STB-DKA',
+            value: 195.2
+        },{
+            name: 'St.DKA',
+            value: 195.2
+        },{
+            name: 'DKA-BHI',
+            value: 195.2
+        },{
+            name: 'St.BHI',
+            value: 195.2
+        }]
+    },
+    {
+        name: 'Mainline DT',
+        data: [{
+            name: 'St. LBB',
+            value: 7.2
+        },
+        {
+            name: 'LBB-FTM',
+            value: 8.1
+        },
+        {
+            name: 'St.FTM',
+            value: 17.8
+        },
+        {
+            name: 'FTM-CPR',
+            value: 34
+        },
+        {
+            name: 'St.CPR',
+            value: 43
+        },
+        {
+            name: 'CPR-HJN',
+            value: 78.6
+        },
+        {
+            name: 'St.HJN',
+            value: 52
+        },
+        {
+            name: 'HJN-BLA',
+            value: 74.1
+        },
+        {
+            name: 'St.BLA',
+            value: 89.1
+        }, {
+            name: 'BLA-BLM',
+            value: 199
+        },
+        {
+            name: 'St.BLM',
+            value: 195.2
+        },
+        {
+            name: 'BLM-ASEAN',
+            value: 195.2
+        },{
+            name: 'St.ASEAN',
+            value: 195.2
+        },
+        {
+            name: 'ASEAN-SNY',
+            value: 195.2
+        },{
+            name: 'St.SNY',
+            value: 195.2
+        },{
+            name: 'SNY-IST',
+            value: 195.2
+        },
+        {
+            name: 'St.IST',
+            value: 195.2
+        },
+        {
+            name: 'IST-BNH',
+            value: 195.2
+        },
+        {
+            name: 'St.BNH',
+            value: 195.2
+        },{
+            name: 'BNH-STB',
+            value: 195.2
+        },{
+            name: 'St.STB',
+            value: 195.2
+        },
+        {
+            name: 'STB-DKA',
+            value: 195.2
+        },{
+            name: 'St.DKA',
+            value: 195.2
+        },{
+            name: 'DKA-BHI',
+            value: 195.2
+        },{
+            name: 'St.BHI',
+            value: 195.2
+        }]
+    },
+    {
+        name: 'Mainline Middle Track',
+        data: [{
+            name: 'MT BLM',
+            value: 7.2
+        },
+        {
+            name: 'MT BHI',
+            value: 8.1
+        }]
+    },
+    {
+        name: 'DAL-TB',
+        data: [{
+            name: 'DAL-TB',
+            value: 7.2
+        },
+        {
+            name: 'MT BHI',
+            value: 8.1
+        }]
+    }]
+
+});
     </script>
 @endsection
