@@ -97,6 +97,23 @@ class DashboardController extends Controller
             ->where('line_id', 5)
             ->count();
 
+        $persentase_UT = ($temuan_UT/$temuan_all->count())*100;
+        $persentase_DT = ($temuan_DT/$temuan_all->count())*100;
+        $persentase_MT = ($temuan_MT/$temuan_all->count())*100;
+        $persentase_DAL = ($temuan_DAL/$temuan_all->count())*100;
+        $persentase_TB = ($temuan_TB/$temuan_all->count())*100;
+
+        $defect_trackbed = Temuan::where('part_id', 10)->where('status', 'open')->count();
+        $defect_sleeper = Temuan::where('part_id', 9)->where('status', 'open')->count();
+        $defect_rail = Temuan::where('part_id', 7)->where('status', 'open')->count();
+        $defect_fastening = Temuan::where('part_id', 2)->where('status', 'open')->count();
+        $defect_lainnya = Temuan::where('status', 'open')
+                        ->whereNot('part_id', 10)
+                        ->whereNot('part_id', 9)
+                        ->whereNot('part_id', 7)
+                        ->whereNot('part_id', 2)
+                        ->count();
+
         return view('mainline.mainline_dashboard.index', compact([
             'temuan_all',
             'temuan_open',
@@ -113,6 +130,16 @@ class DashboardController extends Controller
             'temuan_MT',
             'temuan_DAL',
             'temuan_TB',
+            'persentase_UT',
+            'persentase_DT',
+            'persentase_MT',
+            'persentase_DAL',
+            'persentase_TB',
+            'defect_trackbed',
+            'defect_sleeper',
+            'defect_rail',
+            'defect_fastening',
+            'defect_lainnya',
         ]));
     }
 
