@@ -212,10 +212,10 @@
                                                             <table class="table select-table">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th class="text-wrap" style="width: 35%">
+                                                                        <th class="text-wrap" style="width: 40%">
                                                                             Preventive Maintenance</th>
-                                                                        <th class="text-wrap">Progress</th>
-                                                                        <th class="text-wrap" style="width: 25%">Status
+                                                                        <th class="text-wrap text-center">Progress</th>
+                                                                        <th class="text-wrap text-center">Status
                                                                         </th>
                                                                     </tr>
                                                                 </thead>
@@ -253,7 +253,7 @@
                                                                                         aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>
+                                                                            <td class="text-center">
                                                                                 @if (round($persentase) >= 100)
                                                                                     <div
                                                                                         class="badge badge-opacity-success">
