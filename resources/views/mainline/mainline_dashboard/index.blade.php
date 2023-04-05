@@ -278,7 +278,7 @@
                 categories: job
             },
             series: [{
-                type: 'bar',
+                type: 'column',
                 name: '% progress',
                 colorByPoint: false,
                 data: progress,
