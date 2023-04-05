@@ -271,7 +271,8 @@
             yAxis: {
                 title: {
                     text: 'Persentase (%)'
-                }
+                },
+                max: 100,
             },
             xAxis: {
                 categories: job
