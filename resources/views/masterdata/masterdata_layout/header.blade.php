@@ -7,10 +7,12 @@
         </div>
         <div>
             <a class="navbar-brand brand-logo" href="{{ route('transisi') }}" style="margin-left: 18px">
-                <img src="{{ asset('assets/images/mm.png') }}" alt="logo" /> TCSM
+                {{-- <img src="{{ asset('assets/images/mm.png') }}" alt="logo" /> TCSM --}}
+                <img src="{{ asset('assets/images/logo_sementara.png') }}" alt="logo" /> TRACK
             </a>
             <a class="navbar-brand brand-logo-mini" href="index.html">
-                <img src="{{ asset('assets/images/mm.png') }}" alt="logo" />
+                {{-- <img src="{{ asset('assets/images/mm.png') }}" alt="logo" /> --}}
+                <img src="{{ asset('assets/images/logo_sementara.png') }}" alt="logo" />
             </a>
         </div>
     </div>
