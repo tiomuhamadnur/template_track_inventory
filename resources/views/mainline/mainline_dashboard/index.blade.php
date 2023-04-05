@@ -247,11 +247,11 @@
                     allowPointSelect: true
                 }
             },
-
             series: [{
                 type: 'column',
                 name: 'jumlah temuan',
-                data: temuan
+                showInLegend: false,
+                data: temuan,
             }, ]
         });
 
@@ -261,12 +261,6 @@
         Highcharts.chart('chartpic', {
             title: {
                 text: '',
-                align: 'left'
-            },
-            subtitle: {
-                text: '' +
-                    '',
-                align: 'left'
             },
             yAxis: {
                 title: {
@@ -277,12 +271,16 @@
             xAxis: {
                 categories: job
             },
+            plotOptions: {
+                series: {
+                    allowPointSelect: true
+                }
+            },
             series: [{
-                type: 'column',
+                type: 'bar',
                 name: '% progress',
-                colorByPoint: false,
                 data: progress,
-                showInLegend: false
+                showInLegend: false,
             }]
         });
 
