@@ -118,15 +118,16 @@ class DashboardController extends Controller
         $progress_pm = DB::table('pic_job')
             ->join('annual_planning', 'pic_job.job_id', '=', 'annual_planning.id')
             ->selectRaw('pic_job.progress / annual_planning.frekuensi * 100 as progress')
-            ->where('tahun', $tahun_ini)->pluck('progress');
-            dd($progress_pm);
+            ->where('tahun', $tahun_ini)
+            ->pluck('progress')
+            ->toArray();
 
         $job_pm = DB::table('pic_job')
             ->join('annual_planning', 'pic_job.job_id', '=', 'annual_planning.id')
             ->select('annual_planning.name as job')
-            ->where('tahun', $tahun_ini)->pluck('job');
-
-
+            ->where('tahun', $tahun_ini)
+            ->pluck('job')
+            ->toArray();
 
         $temuan_LBBS = DB::table('summary_temuan')
             ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
