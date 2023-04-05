@@ -17,9 +17,6 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Ubah Status Temuan</h4>
-                            <a class="btn btn-danger float-end fw-bolder text-white" href="javascript:;"
-                                data-bs-toggle="modal" data-bs-target="#delete-confirmation-modal"
-                                title="Hapus data temuan?">Hapus temuan?</a>
                             <form action="{{ route('temuan_mainline.store.temuan') }}" method="POST"
                                 enctype='multipart/form-data'>
                                 @csrf

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\TemuanMainlineExport;
 use App\Exports\TemuanMainlineFilterExport;
 use App\Models\Area;
+use App\Models\Defect;
 use App\Models\Line;
 use App\Models\Mainline;
 use App\Models\Part;
@@ -298,12 +299,56 @@ class TemuanMainlineController extends Controller
 
     public function edit($id)
     {
-        //
+        try {
+            $secret = Crypt::decryptString($id);
+            $temuan = Temuan::findOrFail($secret);
+            $defect = Defect::all();
+            if ($temuan) {
+                return view('mainline.mainline_temuan.update', compact(['temuan', 'defect']));
+            } else {
+                return redirect()->back();
+            }
+        } catch (DecryptException $e) {
+            return redirect()->back();
+        }
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $this->validate($request, [
+            'photo' => ['image'],
+        ], [
+            'photo.image' => 'File harus dalam format gambar/photo!',
+        ]);
+
+        $id = $request->id;
+        $temuan = Temuan::findOrFail($id);
+
+        if ($request->hasFile('photo') && $request->photo != '') {
+            $photo_temuan = $request->file('photo')->store('temuan/mainline');
+            $temuan->update([
+                'no_sleeper' => $request->no_sleeper,
+                'direction' => $request->direction,
+                'defect_id' => $request->defect_id,
+                'remark' => $request->remark,
+                'klasifikasi' => $request->klasifikasi,
+                'tanggal' => $request->tanggal,
+                'photo' => $photo_temuan,
+            ]);
+
+            return redirect()->route('temuan_mainline.index')->withNotify('Data temuan mainline berhasil dimutakhirkan!');
+        } else {
+            $temuan->update([
+                'no_sleeper' => $request->no_sleeper,
+                'direction' => $request->direction,
+                'defect_id' => $request->defect_id,
+                'remark' => $request->remark,
+                'klasifikasi' => $request->klasifikasi,
+                'tanggal' => $request->tanggal,
+            ]);
+
+            return redirect()->route('temuan_mainline.index')->withNotify('Data temuan mainline berhasil dimutakhirkan!');
+        }
     }
 
     public function destroy(Request $request)

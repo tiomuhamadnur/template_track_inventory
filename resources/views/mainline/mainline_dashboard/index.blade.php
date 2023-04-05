@@ -30,7 +30,7 @@
                                             </div>
                                             <div id="performance-line-legend"></div>
                                         </div>
-                                        <div id="chart-container" style="width: 100%; height:100%;">
+                                        <div id="chart-container" style="width: 100%; height: 250px;">
                                             {{-- <canvas id="trenOpen"></canvas> --}}
                                         </div>
                                     </div>
@@ -52,7 +52,7 @@
                                                                     Temuan Baru
                                                                 </span>
                                                             </p>
-                                                            <h2 class="text-info">
+                                                            <h2 class="text-white fw-bolder">
                                                                 {{ $temuan_baru_bulan_ini->count() }}
                                                             </h2>
                                                         </div>
@@ -62,7 +62,7 @@
                                                                     Closing Temuan
                                                                 </span>
                                                             </p>
-                                                            <h2 class="text-info">
+                                                            <h2 class="text-white fw-bolder">
                                                                 {{ $temuan_close_bulan_ini->count() }}
                                                             </h2>
                                                         </div>
@@ -80,15 +80,18 @@
                                         <div class="card card-rounded">
                                             <div class="card-body">
                                                 <div class="row">
-                                                    <h4 class="text-center">Temuan Total</h4>
+                                                    <h4 class="text-center fw-bolder">Temuan Total</h4>
                                                     <div class="col-sm-6">
                                                         <div
                                                             class="d-flex justify-content-between align-items-center mb-2 mb-sm-0">
                                                             <div>
                                                                 <p class="text-small mb-2">Temuan Open</p>
-                                                                <h4 class="mb-0 fw-bold">
-                                                                    {{ $temuan_open->count() }}
-                                                                </h4>
+                                                                <a href="#"
+                                                                    title="Minor: {{ $temuan_minor }} | Moderate: {{ $temuan_moderate }} | Major: {{ $temuan_mayor }}">
+                                                                    <h4 class="mb-0 fw-bold text-danger">
+                                                                        {{ $temuan_open->count() }}
+                                                                    </h4>
+                                                                </a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -96,7 +99,7 @@
                                                         <div class="d-flex justify-content-between align-items-center">
                                                             <div>
                                                                 <p class="text-small mb-2">Temuan Closed</p>
-                                                                <h4 class="mb-0 fw-bold">
+                                                                <h4 class="mb-0 fw-bold text-success">
                                                                     {{ $temuan_close->count() }}
                                                                 </h4>
                                                             </div>
@@ -114,11 +117,12 @@
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                                    <h4 class="card-title card-title-dash">Defect Part</h4>
+                                                    <h4 class="card-title card-title-dash">Klasifikasi Defect</h4>
                                                 </div>
-                                                <p class="card-subtitle card-subtitle-dash">Jumlah defect part di Mainline
+                                                <p class="card-subtitle card-subtitle-dash">Klasifikasi Defect Berdasarkan
+                                                    Justifikasi Tim Track Examination
                                                 </p>
-                                                <div id="defect-part-chart"></div>
+                                                <div id="klasifikasi-chart"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -143,29 +147,29 @@
                             </div> --}}
                         </div>
                         <div class="row">
-                            <div class="col-7 grid-margin stretch-card animate__animated animate__zoomIn">
+                            <div class="col-6 grid-margin stretch-card animate__animated animate__zoomIn">
                                 <div class="card card-rounded">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                                    <h4 class="card-title card-title-dash">Kategori Defect</h4>
+                                                    <h4 class="card-title card-title-dash">Defect Part</h4>
                                                 </div>
-                                                <p class="card-subtitle card-subtitle-dash">Klasifikasi Defect Berdasarkan
-                                                    Justifikasi Tim Track Examination</p>
-                                                <div id="klasifikasi-chart" class="mt-5 text-center"></div>
+                                                <p class="card-subtitle card-subtitle-dash">Sebaran Defect Berdasarkan Part
+                                                    di Mainline</p>
+                                                <div id="defect-part-chart" class="mt-5 text-center"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-5 grid-margin stretch-card animate__animated animate__zoomIn">
+                            <div class="col-6 grid-margin stretch-card animate__animated animate__zoomIn">
                                 <div class="card card-rounded">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                                    <h4 class="card-title card-title-dash">(%)Sebaran Defect</h4>
+                                                    <h4 class="card-title card-title-dash">Defect per Line</h4>
                                                 </div>
                                                 <p class="card-subtitle card-subtitle-dash">Presentase Sebaran Temuan Per
                                                     Line</p>
@@ -175,14 +179,14 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- <div class="col-lg-12 d-flex flex-column animate__animated animate__zoomIn">
+                            <div class="col-lg-12 d-flex flex-column animate__animated animate__zoomIn">
                                 <div class="row flex-grow">
                                     <div class="col-12 grid-margin stretch-card">
                                         <div class="card card-rounded">
                                             <div class="card-body">
                                                 <div class="d-sm-flex justify-content-between align-items-start">
                                                     <div>
-                                                        <h4 class="card-title card-title-dash"> (%)Progress Pekerjaan
+                                                        <h4 class="card-title card-title-dash">Progress Pekerjaan
                                                             Tahunan
                                                         </h4>
                                                         <p class="card-subtitle card-subtitle-dash">Data didapat berdasarkan
@@ -194,18 +198,15 @@
                                                                 class="btn btn-secondary dropdown-toggle toggle-dark btn-lg mb-0 me-0"
                                                                 type="button" id="dropdownMenuButton2"
                                                                 data-bs-toggle="dropdown" aria-haspopup="true"
-                                                                aria-expanded="false"> Tahun ini </button>
-                                                            <div class="dropdown-menu"
-                                                                aria-labelledby="dropdownMenuButton2">
-                                                                <a class="dropdown-header">2022</a>
-
-                                                            </div>
+                                                                aria-expanded="false">
+                                                                Tahun {{ \Carbon\Carbon::now()->format('Y') }}
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="d-sm-flex align-items-center mt-1 justify-content-between">
                                                     <div class="col-12">
-                                                        <div id="chartpic" style="width: 100%; height:100%;">
+                                                        <div id="chartpic" style="width: 100%; height:500px;">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -213,7 +214,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -254,37 +255,35 @@
             }, ]
         });
 
-        // //{{-- JS TREN PEKERJAAN PERTAHUN --}}
-        // Highcharts.chart('chartpic', {
-        //     title: {
-        //         text: '',
-        //         align: 'left'
-        //     },
-        //     subtitle: {
-        //         text: '' +
-        //             '',
-        //         align: 'left'
-        //     },
-        //     xAxis: {
-        //         categories: ['Track Patrol on Foot', 'Cabin Ride', 'Accelerometer', 'Track Master',
-        //             'Rail Joint Gap', 'Rail Bonding Examination', 'TO & SC Examination', 'MPM Examination',
-        //             'Expansion Joint Examination', 'Buffer & Wheel Stop Examination',
-        //             'Fastening System Examination', 'Ballast Examination', 'Trackbed Examination',
-        //             'Sleeper Examination', 'Rail Profile Examination', 'Rail Corrugation Examination',
-        //             'Rail Surface of Welds Examination', 'GIJ Examination',
-        //             'Rail Flow, Corrosion & Defect Examination', 'Rail Hardness Test', 'NDT Examination'
-        //         ]
-        //     },
-        //     series: [{
-        //         type: 'column',
-        //         name: 'Telah Dilaksanakan',
-        //         colorByPoint: true,
-        //         data: [31, 26, 27, 30, 49, 73, 23, 45,
-        //             97, 89, 12, 34, 34, 44, 100, 14, 44, 56, 23, 44, 67
-        //         ],
-        //         showInLegend: false
-        //     }]
-        // });
+        //{{-- JS TREN PEKERJAAN PERTAHUN --}}
+        let progress = <?php echo json_encode($progress_pm); ?>;
+        let job = <?php echo json_encode($job_pm); ?>;
+        Highcharts.chart('chartpic', {
+            title: {
+                text: '',
+                align: 'left'
+            },
+            subtitle: {
+                text: '' +
+                    '',
+                align: 'left'
+            },
+            yAxis: {
+                title: {
+                    text: 'Persentase (%)'
+                }
+            },
+            xAxis: {
+                categories: job
+            },
+            series: [{
+                type: 'bar',
+                name: '% progress',
+                colorByPoint: false,
+                data: progress,
+                showInLegend: false
+            }]
+        });
 
 
         //{{-- JS MAJOR MINOR --}}

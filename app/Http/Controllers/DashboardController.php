@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PIC;
 use App\Models\Temuan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -97,22 +98,233 @@ class DashboardController extends Controller
             ->where('line_id', 5)
             ->count();
 
-        $persentase_UT = ($temuan_UT/$temuan_all->count())*100;
-        $persentase_DT = ($temuan_DT/$temuan_all->count())*100;
-        $persentase_MT = ($temuan_MT/$temuan_all->count())*100;
-        $persentase_DAL = ($temuan_DAL/$temuan_all->count())*100;
-        $persentase_TB = ($temuan_TB/$temuan_all->count())*100;
+        $persentase_UT = ($temuan_UT / $temuan_all->count()) * 100;
+        $persentase_DT = ($temuan_DT / $temuan_all->count()) * 100;
+        $persentase_MT = ($temuan_MT / $temuan_all->count()) * 100;
+        $persentase_DAL = ($temuan_DAL / $temuan_all->count()) * 100;
+        $persentase_TB = ($temuan_TB / $temuan_all->count()) * 100;
 
         $defect_trackbed = Temuan::where('part_id', 10)->where('status', 'open')->count();
         $defect_sleeper = Temuan::where('part_id', 9)->where('status', 'open')->count();
         $defect_rail = Temuan::where('part_id', 7)->where('status', 'open')->count();
         $defect_fastening = Temuan::where('part_id', 2)->where('status', 'open')->count();
         $defect_lainnya = Temuan::where('status', 'open')
-                        ->whereNot('part_id', 10)
-                        ->whereNot('part_id', 9)
-                        ->whereNot('part_id', 7)
-                        ->whereNot('part_id', 2)
-                        ->count();
+            ->whereNot('part_id', 10)
+            ->whereNot('part_id', 9)
+            ->whereNot('part_id', 7)
+            ->whereNot('part_id', 2)
+            ->count();
+
+        $progress_pm = DB::table('pic_job')
+            ->join('annual_planning', 'pic_job.job_id', '=', 'annual_planning.id')
+            ->select(DB::raw('pic_job.progress / annual_planning.frekuensi * 100 as progress'))
+            ->where('tahun', $tahun_ini)->pluck('progress');
+        $job_pm = DB::table('pic_job')
+            ->join('annual_planning', 'pic_job.job_id', '=', 'annual_planning.id')
+            ->select('annual_planning.name as job')
+            ->where('tahun', $tahun_ini)->pluck('job');
+
+
+
+        $temuan_LBBS = DB::table('summary_temuan')
+            ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
+            ->join('area', 'mainline.area_id', '=', 'area.id')
+            ->select('area.id as area_id')
+            ->where('status', 'open')
+            ->where('area_id', 3)
+            ->count();
+
+        $temuan_LBB_FTM = DB::table('summary_temuan')
+            ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
+            ->join('area', 'mainline.area_id', '=', 'area.id')
+            ->select('area.id as area_id')
+            ->where('status', 'open')
+            ->where('area_id', 4)
+            ->count();
+
+        $temuan_FTMS = DB::table('summary_temuan')
+            ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
+            ->join('area', 'mainline.area_id', '=', 'area.id')
+            ->select('area.id as area_id')
+            ->where('status', 'open')
+            ->where('area_id', 5)
+            ->count();
+
+        $temuan_FTM_CPR = DB::table('summary_temuan')
+            ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
+            ->join('area', 'mainline.area_id', '=', 'area.id')
+            ->select('area.id as area_id')
+            ->where('status', 'open')
+            ->where('area_id', 6)
+            ->count();
+
+        $temuan_CPRS = DB::table('summary_temuan')
+            ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
+            ->join('area', 'mainline.area_id', '=', 'area.id')
+            ->select('area.id as area_id')
+            ->where('status', 'open')
+            ->where('area_id', 7)
+            ->count();
+
+        $temuan_CPR_HJN = DB::table('summary_temuan')
+            ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
+            ->join('area', 'mainline.area_id', '=', 'area.id')
+            ->select('area.id as area_id')
+            ->where('status', 'open')
+            ->where('area_id', 8)
+            ->count();
+
+        $temuan_HJNS = DB::table('summary_temuan')
+            ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
+            ->join('area', 'mainline.area_id', '=', 'area.id')
+            ->select('area.id as area_id')
+            ->where('status', 'open')
+            ->where('area_id', 9)
+            ->count();
+
+        $temuan_HJN_BLA = DB::table('summary_temuan')
+            ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
+            ->join('area', 'mainline.area_id', '=', 'area.id')
+            ->select('area.id as area_id')
+            ->where('status', 'open')
+            ->where('area_id', 10)
+            ->count();
+
+        $temuan_BLAS = DB::table('summary_temuan')
+            ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
+            ->join('area', 'mainline.area_id', '=', 'area.id')
+            ->select('area.id as area_id')
+            ->where('status', 'open')
+            ->where('area_id', 11)
+            ->count();
+
+        $temuan_BLA_BLM = DB::table('summary_temuan')
+            ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
+            ->join('area', 'mainline.area_id', '=', 'area.id')
+            ->select('area.id as area_id')
+            ->where('status', 'open')
+            ->where('area_id', 12)
+            ->count();
+
+        $temuan_BLMS = DB::table('summary_temuan')
+            ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
+            ->join('area', 'mainline.area_id', '=', 'area.id')
+            ->select('area.id as area_id')
+            ->where('status', 'open')
+            ->where('area_id', 13)
+            ->count();
+
+        $temuan_BLM_ASN = DB::table('summary_temuan')
+            ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
+            ->join('area', 'mainline.area_id', '=', 'area.id')
+            ->select('area.id as area_id')
+            ->where('status', 'open')
+            ->where('area_id', 14)
+            ->count();
+
+        $temuan_ASNS = DB::table('summary_temuan')
+            ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
+            ->join('area', 'mainline.area_id', '=', 'area.id')
+            ->select('area.id as area_id')
+            ->where('status', 'open')
+            ->where('area_id', 15)
+            ->count();
+
+        $temuan_ASN_SNY = DB::table('summary_temuan')
+            ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
+            ->join('area', 'mainline.area_id', '=', 'area.id')
+            ->select('area.id as area_id')
+            ->where('status', 'open')
+            ->where('area_id', 16)
+            ->count();
+
+        $temuan_SNYS = DB::table('summary_temuan')
+            ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
+            ->join('area', 'mainline.area_id', '=', 'area.id')
+            ->select('area.id as area_id')
+            ->where('status', 'open')
+            ->where('area_id', 17)
+            ->count();
+
+        $temuan_SNY_IST = DB::table('summary_temuan')
+            ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
+            ->join('area', 'mainline.area_id', '=', 'area.id')
+            ->select('area.id as area_id')
+            ->where('status', 'open')
+            ->where('area_id', 18)
+            ->count();
+
+        $temuan_ISTS = DB::table('summary_temuan')
+            ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
+            ->join('area', 'mainline.area_id', '=', 'area.id')
+            ->select('area.id as area_id')
+            ->where('status', 'open')
+            ->where('area_id', 19)
+            ->count();
+
+        $temuan_IST_BNH = DB::table('summary_temuan')
+            ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
+            ->join('area', 'mainline.area_id', '=', 'area.id')
+            ->select('area.id as area_id')
+            ->where('status', 'open')
+            ->where('area_id', 20)
+            ->count();
+
+        $temuan_BNHS = DB::table('summary_temuan')
+            ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
+            ->join('area', 'mainline.area_id', '=', 'area.id')
+            ->select('area.id as area_id')
+            ->where('status', 'open')
+            ->where('area_id', 21)
+            ->count();
+
+        $temuan_BNH_STB = DB::table('summary_temuan')
+            ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
+            ->join('area', 'mainline.area_id', '=', 'area.id')
+            ->select('area.id as area_id')
+            ->where('status', 'open')
+            ->where('area_id', 22)
+            ->count();
+
+        $temuan_STBS = DB::table('summary_temuan')
+            ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
+            ->join('area', 'mainline.area_id', '=', 'area.id')
+            ->select('area.id as area_id')
+            ->where('status', 'open')
+            ->where('area_id', 23)
+            ->count();
+
+        $temuan_STB_DKA = DB::table('summary_temuan')
+            ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
+            ->join('area', 'mainline.area_id', '=', 'area.id')
+            ->select('area.id as area_id')
+            ->where('status', 'open')
+            ->where('area_id', 24)
+            ->count();
+
+        $temuan_DKAS = DB::table('summary_temuan')
+            ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
+            ->join('area', 'mainline.area_id', '=', 'area.id')
+            ->select('area.id as area_id')
+            ->where('status', 'open')
+            ->where('area_id', 25)
+            ->count();
+
+        $temuan_DKA_BHI = DB::table('summary_temuan')
+            ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
+            ->join('area', 'mainline.area_id', '=', 'area.id')
+            ->select('area.id as area_id')
+            ->where('status', 'open')
+            ->where('area_id', 26)
+            ->count();
+
+        $temuan_BHIS = DB::table('summary_temuan')
+            ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
+            ->join('area', 'mainline.area_id', '=', 'area.id')
+            ->select('area.id as area_id')
+            ->where('status', 'open')
+            ->where('area_id', 27)
+            ->count();
 
         return view('mainline.mainline_dashboard.index', compact([
             'temuan_all',
@@ -140,6 +352,8 @@ class DashboardController extends Controller
             'defect_rail',
             'defect_fastening',
             'defect_lainnya',
+            'progress_pm',
+            'job_pm',
         ]));
     }
 

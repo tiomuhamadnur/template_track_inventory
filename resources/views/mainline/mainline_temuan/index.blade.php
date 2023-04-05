@@ -148,7 +148,8 @@
                                                             data-photo="{{ asset('storage/' . $item->photo) }}"
                                                             data-photo_close="{{ asset('storage/' . $item->photo_close) }}"
                                                             data-pic_close="{{ $item->pic_close ?? '' }}"
-                                                            data-href="{{ '/temuan_mainline' . '/' . Crypt::encryptString($item->id) . '/close_temuan' }}">
+                                                            data-href="{{ '/temuan_mainline' . '/' . Crypt::encryptString($item->id) . '/close_temuan' }}"
+                                                            data-href-ubah="{{ '/temuan_mainline' . '/' . Crypt::encryptString($item->id) . '/edit' }}">
                                                             Detail
                                                         </button>
                                                     </div>
@@ -269,9 +270,9 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <a href="#" id="close_temuan_modal" class="btn btn-outline-warning"
+                            <a href="#" id="ubah_temuan_modal" class="btn btn-outline-warning"
                                 @if (auth()->user()->role != 'Admin') hidden @endif>
-                                Ubah Status
+                                Ubah Data Temuan
                             </a>
                             <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
                                 Tutup
@@ -451,6 +452,7 @@
                     var photo = $(e.relatedTarget).data('photo');
                     var photo_close = $(e.relatedTarget).data('photo_close');
                     var href = $(e.relatedTarget).data('href');
+                    var href_ubah_temuan = $(e.relatedTarget).data('href-ubah');
 
                     $('#tanggal_modal').val(tanggal);
                     $('#area_modal').val(area);
@@ -472,7 +474,8 @@
                     }
                     document.getElementById("photo_modal").src = photo;
                     document.getElementById("photo_close_modal").src = photo_close;
-                    document.getElementById("close_temuan_modal").href = href;
+                    // document.getElementById("close_temuan_modal").href = href;
+                    document.getElementById("ubah_temuan_modal").href = href_ubah_temuan;
                 });
             });
 
