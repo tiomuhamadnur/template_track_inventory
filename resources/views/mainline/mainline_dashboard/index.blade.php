@@ -206,7 +206,69 @@
                                                 </div>
                                                 <div class="d-sm-flex align-items-center mt-1 justify-content-between">
                                                     <div class="col-12">
-                                                        <div id="chartpic" style="width: 100%; height:500px;">
+                                                        {{-- <div id="chartpic" style="width: 100%; height:500px;">
+                                                        </div> --}}
+                                                        <div class="table-responsive  mt-1">
+                                                            <table class="table select-table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Preventive Maintenance</th>
+                                                                        <th>Progress</th>
+                                                                        <th>Status</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                                    @foreach ($pic as $item)
+                                                                        <tr>
+                                                                            <td class="text-wrap">
+                                                                                <h6>{{ $item->job->name }}</h6>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div>
+                                                                                    <div
+                                                                                        class="d-flex justify-content-between align-items-center mb-1 max-width-progress-wrap">
+                                                                                        <p class="text-success">
+                                                                                            @if ($item->progress == null or $item->progress == 0)
+                                                                                                @php
+                                                                                                    $persentase = 0;
+                                                                                                @endphp
+                                                                                            @else
+                                                                                                @php
+                                                                                                    $persentase = ($item->progress / $item->job->frekuensi) * 100;
+                                                                                                @endphp
+                                                                                            @endif
+                                                                                            {{ number_format($persentase, 1, '.', ',') }}%
+                                                                                        </p>
+                                                                                        <p>{{ $item->progress }}/{{ $item->job->frekuensi }}
+                                                                                        </p>
+                                                                                    </div>
+                                                                                    <div class="progress progress-md">
+                                                                                        <div class="progress-bar bg-success"
+                                                                                            role="progressbar"
+                                                                                            style="width: {{ round($persentase) }}%"
+                                                                                            aria-valuenow="25"
+                                                                                            aria-valuemin="0"
+                                                                                            aria-valuemax="100"></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                @if (round($persentase) >= 100)
+                                                                                    <div
+                                                                                        class="badge badge-opacity-success">
+                                                                                        Completed</div>
+                                                                                @else
+                                                                                    <div
+                                                                                        class="badge badge-opacity-warning">
+                                                                                        On Pogress</div>
+                                                                                @endif
+                                                                            </td>
+                                                                        </tr>
+                                                                    @endforeach
+
+                                                                </tbody>
+                                                            </table>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -253,35 +315,6 @@
                 showInLegend: false,
                 data: temuan,
             }, ]
-        });
-
-        //{{-- JS TREN PEKERJAAN PERTAHUN --}}
-        let progress = <?php echo json_encode($progress_pm); ?>;
-        let job = <?php echo json_encode($job_pm); ?>;
-        Highcharts.chart('chartpic', {
-            title: {
-                text: '',
-            },
-            yAxis: {
-                title: {
-                    text: 'Persentase (%)'
-                },
-                max: 100,
-            },
-            xAxis: {
-                categories: job
-            },
-            plotOptions: {
-                series: {
-                    allowPointSelect: true
-                }
-            },
-            series: [{
-                type: 'bar',
-                name: '% progress',
-                data: progress,
-                showInLegend: false,
-            }]
         });
 
 
