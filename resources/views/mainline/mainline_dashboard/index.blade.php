@@ -212,9 +212,11 @@
                                                             <table class="table select-table">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th>Preventive Maintenance</th>
-                                                                        <th>Progress</th>
-                                                                        <th>Status</th>
+                                                                        <th class="text-wrap" style="width: 35%">
+                                                                            Preventive Maintenance</th>
+                                                                        <th class="text-wrap">Progress</th>
+                                                                        <th class="text-wrap" style="width: 25%">Status
+                                                                        </th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -225,32 +227,30 @@
                                                                                 <h6>{{ $item->job->name }}</h6>
                                                                             </td>
                                                                             <td>
-                                                                                <div>
-                                                                                    <div
-                                                                                        class="d-flex justify-content-between align-items-center mb-1 max-width-progress-wrap">
-                                                                                        <p class="text-success">
-                                                                                            @if ($item->progress == null or $item->progress == 0)
-                                                                                                @php
-                                                                                                    $persentase = 0;
-                                                                                                @endphp
-                                                                                            @else
-                                                                                                @php
-                                                                                                    $persentase = ($item->progress / $item->job->frekuensi) * 100;
-                                                                                                @endphp
-                                                                                            @endif
-                                                                                            {{ number_format($persentase, 1, '.', ',') }}%
-                                                                                        </p>
-                                                                                        <p>{{ $item->progress }}/{{ $item->job->frekuensi }}
-                                                                                        </p>
-                                                                                    </div>
-                                                                                    <div class="progress progress-md">
-                                                                                        <div class="progress-bar bg-success"
-                                                                                            role="progressbar"
-                                                                                            style="width: {{ round($persentase) }}%"
-                                                                                            aria-valuenow="25"
-                                                                                            aria-valuemin="0"
-                                                                                            aria-valuemax="100"></div>
-                                                                                    </div>
+                                                                                <div
+                                                                                    class="d-flex justify-content-between align-items-center mb-1 max-width-progress-wrap">
+                                                                                    <p class="text-success">
+                                                                                        @if ($item->progress == null or $item->progress == 0)
+                                                                                            @php
+                                                                                                $persentase = 0;
+                                                                                            @endphp
+                                                                                        @else
+                                                                                            @php
+                                                                                                $persentase = ($item->progress / $item->job->frekuensi) * 100;
+                                                                                            @endphp
+                                                                                        @endif
+                                                                                        {{ number_format($persentase, 1, '.', ',') }}%
+                                                                                    </p>
+                                                                                    <p>{{ $item->progress }}/{{ $item->job->frekuensi }}
+                                                                                    </p>
+                                                                                </div>
+                                                                                <div class="progress progress-md">
+                                                                                    <div class="progress-bar bg-success"
+                                                                                        role="progressbar"
+                                                                                        style="width: {{ round($persentase) }}%; height: 100%;"
+                                                                                        aria-valuenow="25"
+                                                                                        aria-valuemin="0"
+                                                                                        aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
