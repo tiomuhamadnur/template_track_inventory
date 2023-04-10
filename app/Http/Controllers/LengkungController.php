@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Imports\LengkungImport;
 use App\Models\Lengkung;
-use Illuminate\Http\Request;
 use Excel;
-use Illuminate\Contracts\Encryption\DecryptException;
-use Illuminate\Support\Facades\Crypt;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class LengkungController extends Controller

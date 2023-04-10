@@ -46,6 +46,8 @@
                                 <input type="text" name="part_id" value="{{ $part_id ?? '' }}" hidden>
                                 <input type="text" name="status" value="{{ $status ?? '' }}" hidden>
                                 <input type="text" name="klasifikasi" value="{{ $klasifikasi ?? '' }}" hidden>
+                                <input type="text" name="tanggal_awal" value="{{ $tanggal_awal ?? '' }}" hidden>
+                                <input type="text" name="tanggal_akhir" value="{{ $tanggal_akhir ?? '' }}" hidden>
                             </form>
                             <form action="{{ route('temuan_depo.export.pdf') }}" target="_blank" method="GET"
                                 id="form_export_pdf">
@@ -55,6 +57,8 @@
                                 <input type="text" name="part_id" value="{{ $part_id ?? '' }}" hidden>
                                 <input type="text" name="status" value="{{ $status ?? '' }}" hidden>
                                 <input type="text" name="klasifikasi" value="{{ $klasifikasi ?? '' }}" hidden>
+                                <input type="text" name="tanggal_awal" value="{{ $tanggal_awal ?? '' }}" hidden>
+                                <input type="text" name="tanggal_akhir" value="{{ $tanggal_akhir ?? '' }}" hidden>
                             </form>
                             <div class="table-responsive pt-3">
                                 <table class="table table-bordered">
@@ -128,7 +132,8 @@
                                                         data-photo="{{ asset('storage/' . $item->photo) }}"
                                                         data-photo_close="{{ asset('storage/' . $item->photo_close) }}"
                                                         data-pic_close="{{ $item->pic_close ?? '' }}"
-                                                        data-href="{{ '/temuan_depo' . '/' . Crypt::encryptString($item->id) . '/close_temuan' }}">
+                                                        data-href="{{ '/temuan_depo' . '/' . Crypt::encryptString($item->id) . '/close_temuan' }}"
+                                                        data-href-ubah="{{ '/temuan_depo' . '/' . Crypt::encryptString($item->id) . '/edit' }}">
                                                         Detail
                                                     </button>
                                                 </td>
@@ -236,9 +241,9 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <a href="#" id="close_temuan_modal" class="btn btn-outline-warning"
+                            <a href="#" id="ubah_temuan_modal" class="btn btn-outline-warning"
                                 @if (auth()->user()->role != 'Admin') hidden @endif>
-                                Ubah Status
+                                Ubah Data Temuan
                             </a>
                             <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
                                 Tutup
@@ -295,6 +300,17 @@
                                     <option value="Moderate">Moderate</option>
                                     <option value="Mayor">Mayor</option>
                                 </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Tanggal</label>
+                                <div class="input-group">
+                                    <input placeholder="Tanggal Awal" class="form-control me-1" type="text"
+                                        onfocus="(this.type='date')" onblur="(this.type='text')" id="date"
+                                        name="tanggal_awal">
+                                    <input placeholder="Tanggal Akhir" class="form-control ms-1" type="text"
+                                        onfocus="(this.type='date')" onblur="(this.type='text')" id="date"
+                                        name="tanggal_akhir">
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -376,6 +392,7 @@
                 var photo = $(e.relatedTarget).data('photo');
                 var photo_close = $(e.relatedTarget).data('photo_close');
                 var href = $(e.relatedTarget).data('href');
+                var href_ubah_temuan = $(e.relatedTarget).data('href-ubah');
 
                 $('#tanggal_modal').val(tanggal);
                 $('#line_modal').val(line);
@@ -394,7 +411,8 @@
                 }
                 document.getElementById("photo_modal").src = photo;
                 document.getElementById("photo_close_modal").src = photo_close;
-                document.getElementById("close_temuan_modal").href = href;
+                // document.getElementById("close_temuan_modal").href = href;
+                document.getElementById("ubah_temuan_modal").href = href_ubah_temuan;
             });
         });
 

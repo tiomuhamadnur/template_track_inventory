@@ -36,7 +36,7 @@
                             <div class="name">Chainage (m)</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="kilometer"
+                                    <input type="number" class="form-control" name="kilometer"
                                         placeholder="masukan chainage dalam meter" required>
                                     <div class="select-dropdown"></div>
                                 </div>
@@ -181,7 +181,7 @@
                     success: function(res) {
                         $('#location').html(
                             '<option value="" selected disabled>- Pilih Nama Location -</option>'
-                            );
+                        );
                         $.each(res, function(key, value) {
                             $('#location').append('<option value="' + value
                                 .id + '">' + value.code + ' - (' + value.name +
@@ -199,7 +199,7 @@
                     success: function(res) {
                         $('#line').html(
                             '<option value="" selected disabled>- Pilih Nama Line -</option>'
-                            );
+                        );
                         $.each(res, function(key, value) {
                             $('#line').append('<option value="' + value
                                 .id + '">' + value.code + ' - (' + value.name +
@@ -218,7 +218,7 @@
                     success: function(res) {
                         $('#mainline_id').html(
                             '<option value="" selected disabled>- Pilih Nomor Span -</option>'
-                            );
+                        );
                         $.each(res, function(key, value) {
                             $('#mainline_id').append('<option value="' + value
                                 .id + '">' + value.no_span + ' - (KM: ' + value
@@ -237,7 +237,7 @@
                     success: function(res) {
                         $('#detail_part_id').html(
                             '<option value="" selected disabled>- Pilih Detail Part -</option>'
-                            );
+                        );
                         $.each(res, function(key, value) {
                             $('#detail_part_id').append('<option value="' + value
                                 .detail_part_id + '">' + value.detail_part_name +
@@ -256,7 +256,7 @@
                     success: function(res) {
                         $('#defect_id').html(
                             '<option value="" selected disabled>- Pilih Nama Defect -</option>'
-                            );
+                        );
                         $.each(res, function(key, value) {
                             $('#defect_id').append('<option value="' + value
                                 .defect_id + '">' + value.defect_name +

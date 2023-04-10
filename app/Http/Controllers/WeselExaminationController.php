@@ -6,9 +6,9 @@ use App\Exports\WeselExaminationExport;
 use App\Models\Wesel;
 use App\Models\WeselExamination;
 use Carbon\Carbon;
+use Excel;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
-use Excel;
 use Illuminate\Support\Facades\Crypt;
 
 class WeselExaminationController extends Controller
@@ -167,7 +167,7 @@ class WeselExaminationController extends Controller
 
         $waktu = Carbon::now();
 
-        return Excel::download(new WeselExaminationExport($wesel_id, $tanggal_awal, $tanggal_akhir), $waktu . '_data pengukuran_' . $wesel_name .'.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+        return Excel::download(new WeselExaminationExport($wesel_id, $tanggal_awal, $tanggal_akhir), $waktu.'_data pengukuran_'.$wesel_name.'.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 
     public function update(Request $request, $id)

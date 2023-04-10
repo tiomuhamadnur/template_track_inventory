@@ -53,9 +53,9 @@ class TemuanMainlineController extends Controller
         $waktu = Carbon::now();
 
         if ($area_id == null and $line_id == null and $part_id == null and $status == null and $klasifikasi == null and $tanggal_awal == null and $tanggal_akhir == null) {
-            return Excel::download(new TemuanMainlineExport(), $waktu . '_temuan_mainline_all.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+            return Excel::download(new TemuanMainlineExport(), $waktu.'_temuan_mainline_all.xlsx', \Maatwebsite\Excel\Excel::XLSX);
         } else {
-            return Excel::download(new TemuanMainlineFilterExport($area_id, $line_id, $part_id, $status, $klasifikasi, $tanggal_awal, $tanggal_akhir), $waktu . '_temuan_mainline_filtered.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+            return Excel::download(new TemuanMainlineFilterExport($area_id, $line_id, $part_id, $status, $klasifikasi, $tanggal_awal, $tanggal_akhir), $waktu.'_temuan_mainline_filtered.xlsx', \Maatwebsite\Excel\Excel::XLSX);
         }
     }
 
@@ -74,7 +74,7 @@ class TemuanMainlineController extends Controller
             $waktu = Carbon::now();
             $pdf = Pdf::loadView('mainline.mainline_temuan.export-pdf', ['temuan' => $temuan]);
 
-            return $pdf->stream($waktu . '_list-temuan-mainline.pdf');
+            return $pdf->stream($waktu.'_list-temuan-mainline.pdf');
         } else {
             $temuan_filter = Temuan::query()->select(
                 'summary_temuan.*',
@@ -121,7 +121,7 @@ class TemuanMainlineController extends Controller
             $waktu = Carbon::now();
             $pdf = Pdf::loadView('mainline.mainline_temuan.export-pdf', ['temuan' => $temuan]);
 
-            return $pdf->stream($waktu . '_list-temuan-mainline-filtered.pdf');
+            return $pdf->stream($waktu.'_list-temuan-mainline-filtered.pdf');
         }
     }
 
@@ -434,7 +434,7 @@ class TemuanMainlineController extends Controller
         $photo = Pegawai::where('name', $pic)->first()->photo;
         if ($photo != null) {
             return response()->json([
-                'photo' => asset('storage/' . $photo),
+                'photo' => asset('storage/'.$photo),
             ]);
         } else {
             return response()->json([

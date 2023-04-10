@@ -8,12 +8,14 @@ use Maatwebsite\Excel\Concerns\FromView;
 
 class TemuanDepoFilterExport implements FromView
 {
-    public function __construct(?int $line_id = null, ?int $part_id = null, ?string $status = null, ?string $klasifikasi = null)
+    public function __construct(?int $line_id = null, ?int $part_id = null, ?string $status = null, ?string $klasifikasi = null, ?string $tanggal_awal = null, ?string $tanggal_akhir = null)
     {
         $this->line_id = $line_id;
         $this->part_id = $part_id;
         $this->status = $status;
         $this->klasifikasi = $klasifikasi;
+        $this->tanggal_awal = $tanggal_awal;
+        $this->tanggal_akhir = $tanggal_akhir;
     }
 
     public function view(): View
@@ -39,6 +41,16 @@ class TemuanDepoFilterExport implements FromView
         $temuan_depo->when($this->klasifikasi, function ($query) {
             return $query->where('klasifikasi', $this->klasifikasi);
         });
+
+        // Filter by tanggal
+        if ($this->tanggal_awal != null and $this->tanggal_akhir != null) {
+            $temuan_depo->when($this->tanggal_awal, function ($query) {
+                return $query->whereDate('tanggal', '>=', $this->tanggal_awal);
+            });
+            $temuan_depo->when($this->tanggal_akhir, function ($query) {
+                return $query->whereDate('tanggal', '<=', $this->tanggal_akhir);
+            });
+        }
 
         return view('depo.depo_temuan.export', [
             'temuan_depo' => $temuan_depo->get(),
