@@ -55,6 +55,14 @@
     <script src="{{ asset('assetsdepo/js/dashboard.js') }}"></script>
     <script src="{{ asset('assetsdepo/js/Chart.roundedBarCharts.js') }}"></script>
     <script src="{{ asset('assetsdepo/js/select2.js') }}"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/modules/heatmap.js"></script>
+    <script src="https://code.highcharts.com/modules/tilemap.js"></script>
+    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
     @include('masterdata.masterdata_layout.modal_notification')
     @yield('javascript')
 </body>
