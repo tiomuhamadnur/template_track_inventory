@@ -22,7 +22,10 @@
                                     <select name="wesel_id" class="form-select" required autofocus>
                                         <option value="" selected disabled>- Pilih Nama Wesel -</option>
                                         @foreach ($wesel as $item)
-                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            <option value="{{ $item->id }}">{{ $item->name ?? '' }}
+                                                ({{ $item->area->code ?? '' }} -
+                                                {{ $item->line->code ?? '' }})
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>

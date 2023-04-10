@@ -244,8 +244,11 @@ Route::middleware('auth')->group(function () {
     Route::controller(WeselExaminationController::class)->group(function () {
         Route::get('/wesel-examination', 'index')->name('wesel.examination.index');
         Route::get('/wesel-examination-create', 'create')->name('wesel.examination.create');
+        Route::get('/wesel-examination/{id}/history', 'history')->name('wesel.examination.history');
         Route::post('/wesel-examination', 'store')->name('wesel.examination.store');
         Route::get('/wesel-examination/{id}/edit', 'edit')->name('wesel.examination.edit');
+        Route::get('/wesel-examination/filter', 'filter')->name('wesel.examination.filter');
+        Route::get('/wesel-examination-export', 'export')->name('wesel.examination.export');
         Route::put('/wesel-examination', 'update')->name('wesel.examination.update');
         Route::delete('/wesel-examination', 'destroy')->name('wesel.examination.delete');
 

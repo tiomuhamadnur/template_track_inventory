@@ -16,32 +16,17 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Data Turn Out Examination</h4>
-                            {{-- <form action="{{ route('wesel.temuan.export') }}" method="GET">
-                                @csrf
-                                @method('get') --}}
                             <div class="btn-group">
                                 <a href="{{ route('wesel.examination.index') }}" class="btn btn-outline-dark btn-lg mx-0"
-                                    type="button">
+                                    type="button" title="Refresh">
                                     <i class="ti-reload"></i>
                                 </a>
                                 <a href="{{ route('wesel.examination.create') }}"
                                     class="btn btn-outline-success btn-lg mx-0" type="button">Add Data</a>
-                                <a href="#" class="btn btn-outline-warning btn-lg mx-0" type="button"
-                                    data-bs-toggle="modal" data-bs-target="#ModalFilter" title="Filter data">
-                                    <i class="ti-filter"></i>
-                                </a>
-                                {{-- <input type="text" name="area_id" value="{{ $area_id ?? '' }}" hidden>
-                                    <input type="text" name="line_id" value="{{ $line_id ?? '' }}" hidden>
-                                    <input type="text" name="part_id" value="{{ $part_id ?? '' }}" hidden>
-                                    <input type="text" name="status" value="{{ $status ?? '' }}" hidden> --}}
-                                <button type="submit" class="btn btn-outline-success btn-lg mx-0" title="Export to Excel">
-                                    <i class="ti-download"></i>
-                                </button>
                                 <a href="#" class="btn btn-outline-danger btn-lg mx-0" type="button"
                                     data-bs-toggle="modal" data-bs-target="#ModalReport" title="Generate Report">
                                     <i class="ti-printer"></i></a>
                             </div>
-                            {{-- </form> --}}
                             <div class="table-responsive pt-3">
                                 <table class="table table-bordered">
                                     <thead>
@@ -53,37 +38,36 @@
                                                 Name
                                             </th>
                                             <th class="text-center">
-                                                Tanggal
+                                                Area
                                             </th>
                                             <th class="text-center">
-                                                PIC
+                                                Line
                                             </th>
-                                            <th class="text-center">
-                                                Action
+                                            <th class="text-center text-wrap">
+                                                History <br> Data Record
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($wesel_examination as $item)
+                                        @foreach ($wesel as $item)
                                             <tr>
                                                 <td class="text-center">
                                                     {{ $loop->iteration }}
                                                 </td>
-                                                <td class="text-center">
-                                                    {{ $item->wesel->name }}
+                                                <td class="text-center fw-bolder">
+                                                    {{ $item->name }}
                                                 </td>
                                                 <td class="text-center">
-                                                    {{ $item->tanggal }}
+                                                    {{ $item->area->code }}
                                                 </td>
                                                 <td class="text-center">
-                                                    {{ $item->pic }}
+                                                    {{ $item->line->code }}
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">
-                                                        <button type="button"
-                                                            class="btn btn-outline-success mx-0">Detail</button>
-                                                        <button type="button"
-                                                            class="btn btn-outline-danger mx-0">Delete</button>
+                                                        <a href="{{ route('wesel.examination.history', Crypt::encryptString($item->id)) }}"
+                                                            type="button" title="Show history data pengukuran"
+                                                            class="btn btn-outline-primary mx-0">Show</a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -115,7 +99,8 @@
                             <select name="wesel_id" class="form-select" required>
                                 <option value="" disabled selected>- Pilih nama wesel -</option>
                                 @foreach ($wesel as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    <option value="{{ $item->id }}">{{ $item->name }} ({{ $item->area->code ?? '' }}
+                                        - {{ $item->line->code ?? '' }})</option>
                                 @endforeach
                             </select>
                         </div>

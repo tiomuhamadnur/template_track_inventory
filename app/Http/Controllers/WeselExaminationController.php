@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\WeselExaminationExport;
 use App\Models\Wesel;
 use App\Models\WeselExamination;
+use Carbon\Carbon;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
+use Excel;
+use Illuminate\Support\Facades\Crypt;
 
 class WeselExaminationController extends Controller
 {
@@ -18,7 +23,7 @@ class WeselExaminationController extends Controller
 
     public function create()
     {
-        $wesel = Wesel::all();
+        $wesel = Wesel::whereNot('tipe', 'scissors crossing')->get();
 
         return view('mainline.mainline_wesel_examination.create', compact(['wesel']));
     }
@@ -101,14 +106,68 @@ class WeselExaminationController extends Controller
         }
     }
 
-    public function show($id)
+    public function history($id)
     {
-        //
+        try {
+            $secret = Crypt::decryptString($id);
+            $wesel = WeselExamination::where('wesel_id', $secret)->get();
+            $wesel_name = Wesel::where('id', $secret)->first();
+            $tanggal_awal = '';
+            $tanggal_akhir = '';
+
+            return view('mainline.mainline_wesel_examination.history', compact(['wesel', 'wesel_name', 'tanggal_awal', 'tanggal_akhir']));
+        } catch (DecryptException $e) {
+            return redirect()->back();
+        }
     }
 
     public function edit($id)
     {
         //
+    }
+
+    public function filter(Request $request)
+    {
+        $wesel_id = $request->wesel_id;
+        $tanggal_awal = $request->tanggal_awal;
+        $tanggal_akhir = $request->tanggal_akhir;
+
+        $wesel = WeselExamination::query();
+        $wesel_name = Wesel::where('id', $wesel_id)->first();
+
+        // Filter by wesel_id
+        $wesel->when($wesel_id, function ($query) use ($request) {
+            return $query->where('wesel_id', $request->wesel_id);
+        });
+
+        // Filter by tanggal
+        if ($tanggal_awal != null and $tanggal_akhir != null) {
+            $wesel->when($tanggal_awal, function ($query) use ($request) {
+                return $query->whereDate('tanggal', '>=', $request->tanggal_awal);
+            });
+            $wesel->when($tanggal_akhir, function ($query) use ($request) {
+                return $query->whereDate('tanggal', '<=', $request->tanggal_akhir);
+            });
+        }
+
+        return view('mainline.mainline_wesel_examination.history', [
+            'wesel' => $wesel->orderBy('tanggal', 'asc')->get(),
+            'wesel_name' => $wesel_name,
+            'tanggal_awal' => $tanggal_awal,
+            'tanggal_akhir' => $tanggal_akhir,
+        ]);
+    }
+
+    public function export(Request $request)
+    {
+        $wesel_id = $request->wesel_id;
+        $wesel_name = Wesel::findOrfail($wesel_id)->value('name');
+        $tanggal_awal = $request->tanggal_awal;
+        $tanggal_akhir = $request->tanggal_akhir;
+
+        $waktu = Carbon::now();
+
+        return Excel::download(new WeselExaminationExport($wesel_id, $tanggal_awal, $tanggal_akhir), $waktu . '_data pengukuran_' . $wesel_name .'.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 
     public function update(Request $request, $id)
