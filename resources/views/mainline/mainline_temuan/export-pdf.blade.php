@@ -39,11 +39,11 @@
                 <th class="p-1">Part</th>
                 {{-- <th class="p-1">Detail <br> Part</th> --}}
                 <th class="p-1">Defect</th>
-                <th class="p-1">Remark</th>
+                <th class="p-1 text-wrap">Remark</th>
                 <th class="p-1">Class</th>
                 <th class="p-1">Examiner</th>
                 <th class="p-1">Status</th>
-                <th class="p-1">Photo</th>
+                <th class="p-1">Photo <br> Documentation</th>
             </tr>
         </thead>
         <tbody>
@@ -83,7 +83,7 @@
                     <td>
                         {{ $item->defect->name ?? 'Lainnya' }}
                     </td>
-                    <td>
+                    <td class="text-wrap">
                         {{ $item->remark ?? '-' }}
                     </td>
                     <td>
@@ -95,9 +95,17 @@
                     <td>
                         {{ $item->status }}
                     </td>
-                    <td class="p-2">
-                        <img style="height: 120px" src="{{ public_path('storage/' . $item->photo) }}"
-                            alt="tidak ada foto">
+                    <td class="p-2 text-center">
+                        @if ($item->status == 'open')
+                            <img style="height: 120px" src="{{ public_path('storage/' . $item->photo) }}"
+                                alt="tidak ada foto">
+                            <p class="text-center mb-0" style="font-size: 10px">(Before Repair)</p>
+                        @elseif($item->status == 'close')
+                            <img style="height: 120px" src="{{ public_path('storage/' . $item->photo_close) }}"
+                                alt="tidak ada foto">
+                            <p class="text-center mb-0" style="font-size: 10px">(After Repair)</p>
+                        @endif
+
                     </td>
                 </tr>
             @endforeach

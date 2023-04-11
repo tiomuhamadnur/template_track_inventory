@@ -180,7 +180,7 @@
                         </div>
 
                         <div class="form-row">
-                            <div class="name">Foto Dokumentasi</div>
+                            <div class="name">Foto Dokumentasi (Landscape)</div>
                             <div class="value">
                                 <div class="input-group">
                                     <input class="form-control" type="file" name="photo" required>

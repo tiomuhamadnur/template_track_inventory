@@ -145,6 +145,7 @@
                                                             data-pic="{{ $item->pic }}"
                                                             data-remark="{{ $item->remark ?? '-' }}"
                                                             data-status="{{ $item->status }}"
+                                                            data-justifikasi="{{ $item->justifikasi }}"
                                                             data-photo="{{ asset('storage/' . $item->photo) }}"
                                                             data-photo_close="{{ asset('storage/' . $item->photo_close) }}"
                                                             data-pic_close="{{ $item->pic_close ?? '' }}"
@@ -266,6 +267,13 @@
                                 <div class="col mb-1">
                                     <label for="emailWithTitle" class="form-label">Status</label>
                                     <input readonly type="text" id="status_modal" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row g-2">
+                                <div class="col mb-1">
+                                    <label for="emailWithTitle" class="form-label fw-bolder mt-2">Justifikasi Tim Track
+                                        Maintenance</label>
+                                    <input readonly type="text" id="justifikasi_modal" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -449,6 +457,7 @@
                         }
                     });
                     var status = $(e.relatedTarget).data('status');
+                    var justifikasi = $(e.relatedTarget).data('justifikasi');
                     var photo = $(e.relatedTarget).data('photo');
                     var photo_close = $(e.relatedTarget).data('photo_close');
                     var href = $(e.relatedTarget).data('href');
@@ -472,6 +481,7 @@
                     } else {
                         $('#status_modal').val(status + ' (by: ' + pic_close + ')');
                     }
+                    $('#justifikasi_modal').val(justifikasi);
                     document.getElementById("photo_modal").src = photo;
                     document.getElementById("photo_close_modal").src = photo_close;
                     // document.getElementById("close_temuan_modal").href = href;

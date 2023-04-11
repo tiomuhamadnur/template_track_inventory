@@ -110,6 +110,11 @@
                                         </option>
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                    <label class="form-label fw-bolder">Justifikasi (Diisi Tim Track Maintenance)</label>
+                                    <input type="text" name="justifikasi" value="{{ $temuan->justifikasi ?? '' }}"
+                                        class="form-control">
+                                </div>
                                 <button type="submit" class="btn btn-outline-primary me-2">Submit</button>
                                 <a href="{{ route('temuan_mainline.index') }}" class="btn btn-light">Cancel</a>
                             </form>

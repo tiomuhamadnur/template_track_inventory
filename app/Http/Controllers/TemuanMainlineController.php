@@ -333,6 +333,7 @@ class TemuanMainlineController extends Controller
                 'remark' => $request->remark,
                 'klasifikasi' => $request->klasifikasi,
                 'tanggal' => $request->tanggal,
+                'justifikasi' => $request->justifikasi,
                 'photo' => $photo_temuan,
             ]);
 
@@ -345,6 +346,7 @@ class TemuanMainlineController extends Controller
                 'remark' => $request->remark,
                 'klasifikasi' => $request->klasifikasi,
                 'tanggal' => $request->tanggal,
+                'justifikasi' => $request->justifikasi,
             ]);
 
             return redirect()->route('temuan_mainline.index')->withNotify('Data temuan mainline berhasil dimutakhirkan!');
