@@ -21,6 +21,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\PartController;
 use App\Http\Controllers\PICController;
 use App\Http\Controllers\PMController;
+use App\Http\Controllers\RfiController;
 use App\Http\Controllers\TemuanController;
 use App\Http\Controllers\TemuanDepoController;
 use App\Http\Controllers\TemuanMainlineController;
@@ -156,6 +157,12 @@ Route::middleware('auth')->group(function () {
         Route::put('/profile-update-ttd', 'update_ttd')->name('profile.update.ttd');
         Route::put('/profile-update/password', 'update_password')->name('profile.update.password');
         Route::put('/profile-update/pic', 'update_progress_pic')->name('profile.update.progress.pic');
+    });
+
+    Route::controller(RfiController::class)->group(function () {
+        Route::get('/rfi-mainline', 'index')->name('rfi.mainline.index');
+        Route::get('/rfi-mainline/{id}/rfi', 'create')->name('rfi.mainline.create');
+        Route::post('/rfi-mainline', 'store')->name('rfi.mainline.store');
     });
 
     Route::controller(TemuanController::class)->group(function () {

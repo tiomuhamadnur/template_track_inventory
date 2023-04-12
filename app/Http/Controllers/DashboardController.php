@@ -67,6 +67,10 @@ class DashboardController extends Controller
         $temuan_moderate = Temuan::where('status', 'open')->where('klasifikasi', 'moderate')->count();
         $temuan_mayor = Temuan::where('status', 'open')->where('klasifikasi', 'mayor')->count();
 
+        $temuan_close_minor = Temuan::where('status', 'close')->where('klasifikasi', 'minor')->count();
+        $temuan_close_moderate = Temuan::where('status', 'close')->where('klasifikasi', 'moderate')->count();
+        $temuan_close_mayor = Temuan::where('status', 'close')->where('klasifikasi', 'mayor')->count();
+
         $temuan_UT = DB::table('summary_temuan')
             ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
             ->join('line', 'mainline.line_id', '=', 'line.id')
@@ -342,6 +346,9 @@ class DashboardController extends Controller
             'temuan_minor',
             'temuan_moderate',
             'temuan_mayor',
+            'temuan_close_minor',
+            'temuan_close_moderate',
+            'temuan_close_mayor',
             'temuan_UT',
             'temuan_DT',
             'temuan_MT',

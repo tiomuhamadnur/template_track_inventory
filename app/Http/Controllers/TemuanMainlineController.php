@@ -276,7 +276,7 @@ class TemuanMainlineController extends Controller
     public function store_temuan(Request $request)
     {
         $this->validate($request, [
-            'photo_close' => ['file', 'image', 'required'],
+            'photo_close' => ['image', 'required'],
         ], [
             'photo_close.image' => 'File harus dalam format gambar/photo!',
         ]);

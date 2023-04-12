@@ -29,6 +29,12 @@
                 </ul>
             </div>
         </li>
+        <li class="nav-item animate__animated animate__fadeInLeft">
+            <a class="nav-link" href="{{ route('rfi.mainline.index') }}">
+                <i class="mdi mdi-airplane menu-icon"></i>
+                <span class="menu-title">Request For Inpection</span>
+            </a>
+        </li>
 
         <li class="nav-item nav-category">Settings</li>
         <li class="nav-item animate__animated animate__fadeInLeft">

@@ -101,7 +101,8 @@
                                     <div class="d-flex justify-content-between align-items-center mb-2 mb-sm-0">
                                         <div>
                                             <p class="text-small mb-2">Temuan Open</p>
-                                            <a href="#" title="Minor: 0 | Moderate: 0 | Major: 0">
+                                            <a href="#"
+                                                title="Minor: {{ $temuan_minor }} | Moderate: {{ $temuan_moderate }} | Major: {{ $temuan_mayor }}">
                                                 <h4 class="mb-0 fw-bold text-danger">
                                                     {{ $temuan_open->count() }}
                                                 </h4>
@@ -159,6 +160,11 @@
             subtitle: {
                 text: '',
                 align: 'left'
+            },
+            yAxis: {
+                title: {
+                    text: 'Jumlah Temuan'
+                }
             },
             xAxis: {
                 categories: ['ST1', 'ST2', 'ST3', 'ST4', 'ST5', 'ST6', 'CT1', 'CT2', 'WLT', 'ERT', 'TDT1', 'TDT2',

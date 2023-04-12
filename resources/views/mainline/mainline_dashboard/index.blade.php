@@ -40,40 +40,42 @@
                                 <div class="row flex-grow">
                                     <div class="col-md-6 col-lg-12 grid-margin stretch-card">
                                         <div class="card bg-primary card-rounded">
-                                            <a href="">
-                                                <div class="card-body pb-0">
-                                                    <h4 class="card-title card-title-dash text-white mb-4">
-                                                        Temuan {{ \Carbon\Carbon::now()->format('F Y') }}
-                                                    </h4>
-                                                    <div class="row">
-                                                        <div class="col-sm-5">
-                                                            <p class="status-summary-ight-white mb-1">
-                                                                <span>
-                                                                    Temuan Baru
-                                                                </span>
-                                                            </p>
+                                            <div class="card-body pb-0">
+                                                <h4 class="card-title card-title-dash text-white mb-4">
+                                                    Temuan {{ \Carbon\Carbon::now()->format('F Y') }}
+                                                </h4>
+                                                <div class="row">
+                                                    <div class="col-sm-5">
+                                                        <p class="status-summary-ight-white mb-1">
+                                                            <span>
+                                                                Temuan Baru
+                                                            </span>
+                                                        </p>
+                                                        <a href="#">
                                                             <h2 class="text-white fw-bolder">
                                                                 {{ $temuan_baru_bulan_ini->count() }}
                                                             </h2>
-                                                        </div>
-                                                        <div class="col-sm-5">
-                                                            <p class="status-summary-ight-white mb-1">
-                                                                <span>
-                                                                    Closing Temuan
-                                                                </span>
-                                                            </p>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-sm-5">
+                                                        <p class="status-summary-ight-white mb-1">
+                                                            <span>
+                                                                Closing Temuan
+                                                            </span>
+                                                        </p>
+                                                        <a href="#">
                                                             <h2 class="text-white fw-bolder">
                                                                 {{ $temuan_close_bulan_ini->count() }}
                                                             </h2>
-                                                        </div>
-                                                        <div class="col-sm-10">
-                                                            <div class="status-summary-chart-wrapper pb-4">
-                                                                <canvas id="status-summary"></canvas>
-                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-sm-10">
+                                                        <div class="status-summary-chart-wrapper pb-4">
+                                                            <canvas id="status-summary"></canvas>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </a>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-lg-12 grid-margin stretch-card">
@@ -99,9 +101,12 @@
                                                         <div class="d-flex justify-content-between align-items-center">
                                                             <div>
                                                                 <p class="text-small mb-2">Temuan Closed</p>
-                                                                <h4 class="mb-0 fw-bold text-success">
-                                                                    {{ $temuan_close->count() }}
-                                                                </h4>
+                                                                <a href="#"
+                                                                    title="Minor: {{ $temuan_close_minor }} | Moderate: {{ $temuan_close_moderate }} | Major: {{ $temuan_close_mayor }}">
+                                                                    <h4 class="mb-0 fw-bold text-success">
+                                                                        {{ $temuan_close->count() }}
+                                                                    </h4>
+                                                                </a>
                                                             </div>
                                                         </div>
                                                     </div>
