@@ -163,6 +163,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/rfi-mainline', 'index')->name('rfi.mainline.index');
         Route::get('/rfi-mainline/{id}/rfi', 'create')->name('rfi.mainline.create');
         Route::post('/rfi-mainline', 'store')->name('rfi.mainline.store');
+        Route::put('/rfi-mainline', 'approve')->name('rfi.mainline.approve');
+        Route::put('/rfi-mainline-update', 'update')->name('rfi.mainline.update');
+        Route::delete('/rfi-mainline', 'destroy')->name('rfi.mainline.delete');
     });
 
     Route::controller(TemuanController::class)->group(function () {
