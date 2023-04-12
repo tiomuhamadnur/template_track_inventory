@@ -43,9 +43,6 @@
                                 <div class="form-group mb-2">
                                     <label class="form-label">Status Temuan</label>
                                     <input type="text" value="{{ $temuan->status }}" class="form-control" readonly>
-                                    <a href="{{ route('temuan_mainline.close.temuan', Crypt::encryptString($temuan->id)) }}"
-                                        class="btn btn-warning mt-1" title="Anda ingin closing temuan ini?">Closing
-                                        temuan?</a>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Defect</label>
