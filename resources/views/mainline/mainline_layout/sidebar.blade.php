@@ -62,29 +62,30 @@
 
 <style>
     .bell-notif {
-    color: #fff;
-    position: relative;
-    transform-origin: top;
+        color: #fff;
+        position: relative;
+        transform-origin: top;
 
-  }
-  .fa-bell {
-    font-size: 5px;
-  }
+    }
 
-  .bell-notif::after {
-    content: attr(current-count);
-    position: absolute;
-    top: 0;
-    right: -10%;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    /* background-color: red; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 4px;
-    border: 4px solid red;
+    .fa-bell {
+        font-size: 5px;
+    }
 
-  }
+    .bell-notif::after {
+        content: attr(current-count);
+        position: absolute;
+        top: 0;
+        right: -10%;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        /* background-color: red; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 4px;
+        border: 4px solid red;
+
+    }
 </style>
