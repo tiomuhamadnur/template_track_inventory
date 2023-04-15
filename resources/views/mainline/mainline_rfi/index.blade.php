@@ -55,11 +55,11 @@
                                                     {{ $loop->iteration }}
                                                 </td>
                                                 <td class="text-center">
-                                                    {{ $item->user->name }}
+                                                    {{ $item->user->name ?? '-' }}
                                                 </td>
                                                 <td class="text-center text-wrap">
-                                                    {{ $item->temuan_mainline->mainline->area->code }} <br>
-                                                    ({{ $item->temuan_mainline->mainline->no_span }})
+                                                    {{ $item->temuan_mainline->mainline->area->code ?? '-' }} <br>
+                                                    ({{ $item->temuan_mainline->mainline->no_span ?? '-' }})
                                                 </td>
                                                 <td class="text-center text-wrap">
                                                     {{ $item->temuan_mainline->part->name ?? '-' }} <br>
@@ -67,7 +67,7 @@
                                                     ({{ $item->temuan_mainline->defect->name ?? '-' }})
                                                 </td>
                                                 <td class="text-center">
-                                                    {{ $item->tanggal }}
+                                                    {{ $item->tanggal ?? '-' }}
                                                 </td>
                                                 <td class="text-wrap">
                                                     {{ $item->remark ?? '-' }}

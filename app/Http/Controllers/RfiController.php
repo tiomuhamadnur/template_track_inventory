@@ -14,7 +14,6 @@ class RfiController extends Controller
     public function index()
     {
         $data_rfi = TransRFI::where('temuan_mainline_id', '!=', null)->get();
-        dd($data_rfi);
         return view('mainline.mainline_rfi.index', compact(['data_rfi']));
     }
 
@@ -36,7 +35,7 @@ class RfiController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'photo_close' => ['image', 'required'],
+            'photo_close' => ['image'],
         ], [
             'photo_close.image' => 'File harus dalam format gambar/photo!',
         ]);
