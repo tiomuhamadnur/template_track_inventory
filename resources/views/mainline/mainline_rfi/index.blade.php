@@ -64,7 +64,7 @@
                                                 <td class="text-center text-wrap">
                                                     {{ $item->temuan_mainline->part->name ?? '-' }} <br>
                                                     {{ $item->temuan_mainline->detail_part->name ?? '-' }} <br>
-                                                    ({{ $item->temuan_mainline->defect->name ?? '-' }})
+                                                    ({{ $item->temuan_mainline->defect->name ?? 'Lainnya' }})
                                                 </td>
                                                 <td class="text-center">
                                                     {{ $item->tanggal ?? '-' }}

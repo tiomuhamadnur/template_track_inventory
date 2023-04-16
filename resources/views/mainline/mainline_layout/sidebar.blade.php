@@ -31,7 +31,7 @@
         </li>
         <li class="nav-item animate__animated animate__fadeInLeft">
             <a class="nav-link" href="{{ route('rfi.mainline.index') }}">
-                <i class="mdi mdi-arrange-send-backward menu-icon bell-notif"></i>
+                <i id="notification_rfi" class="mdi mdi-arrange-send-backward menu-icon"></i>
                 <span class="menu-title">Request For Inpection</span>
             </a>
         </li>

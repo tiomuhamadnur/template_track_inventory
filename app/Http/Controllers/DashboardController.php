@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PIC;
 use App\Models\Temuan;
+use App\Models\TransRFI;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -335,6 +336,8 @@ class DashboardController extends Controller
             ->where('area_id', 27)
             ->count();
 
+        $data_rfi = TransRFI::all()->count();
+
         return view('mainline.mainline_dashboard.index', compact([
             'temuan_all',
             'temuan_open',
@@ -365,6 +368,7 @@ class DashboardController extends Controller
             'defect_fastening',
             'defect_lainnya',
             'pic',
+            'data_rfi',
         ]));
     }
 

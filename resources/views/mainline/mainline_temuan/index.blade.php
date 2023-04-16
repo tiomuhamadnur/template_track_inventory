@@ -502,6 +502,9 @@
                 // document.getElementById("close_temuan_modal").href = href;
                 document.getElementById("ubah_temuan_modal").href = href_ubah_temuan;
                 document.getElementById("rfi_temuan_modal").href = href_rfi;
+                if (status == 'close') {
+                    document.getElementById("rfi_temuan_modal").style.display = 'none';
+                }
             });
         });
 

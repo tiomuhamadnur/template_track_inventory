@@ -45,22 +45,27 @@ class RfiController extends Controller
         $tanggal = $request->tanggal;
         $remark = $request->remark;
 
-        if ($request->hasFile('photo_close') && $request->photo_close != '') {
-            TransRFI::create([
-                'user_id' => $user_id,
-                'temuan_mainline_id' => $temuan_mainline_id,
-                'tanggal' => $tanggal,
-                'remark' => $remark,
-            ]);
-            $photo_close = $request->file('photo_close')->store('temuan/mainline/perbaikan');
-            $temuan = Temuan::findOrFail($temuan_mainline_id);
-            $temuan->update([
-                'photo_close' => $photo_close,
-            ]);
-
-            return redirect()->route('rfi.mainline.index')->withNotify('Data RFI berhasil disumbit!');
+        $data_rfi = TransRFI::where('temuan_mainline_id', $temuan_mainline_id)->count();
+        if ($data_rfi > 0) {
+            return redirect()->back()->withNotifyerror('Transaksi tidak bisa dilakukan, data temuan ini sudah diajukan RFI dan menunggu di-review oleh Section Head terkait!');
         } else {
-            return redirect()->back();
+            if ($request->hasFile('photo_close') && $request->photo_close != '') {
+                TransRFI::create([
+                    'user_id' => $user_id,
+                    'temuan_mainline_id' => $temuan_mainline_id,
+                    'tanggal' => $tanggal,
+                    'remark' => $remark,
+                ]);
+                $photo_close = $request->file('photo_close')->store('temuan/mainline/perbaikan');
+                $temuan = Temuan::findOrFail($temuan_mainline_id);
+                $temuan->update([
+                    'photo_close' => $photo_close,
+                ]);
+
+                return redirect()->route('rfi.mainline.index')->withNotify('Data RFI berhasil disumbit!');
+            } else {
+                return redirect()->back();
+            }
         }
     }
 
