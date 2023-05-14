@@ -49,7 +49,8 @@
                                     <select name="wesel_id" class="form-select">
                                         <option value="" selected disabled>- Pilih wesel -</option>
                                         @foreach ($wesel as $item)
-                                            <option value="{{ $item->id }}">{{ $item->name }}
+                                            <option value="{{ $item->id }}">{{ $item->name }} -
+                                                {{ $item->area->code }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -62,11 +63,20 @@
                                         <option value="W">W (Welding)</option>
                                         <option value="GIJ">GIJ (Glued Insulated Joint)</option>
                                         <option value="IRJ">IRJ (Insulated Rail Joint)</option>
+                                        <option value="EJ">EJ (Expansion Joint)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail3">Direction</label>
+                                    <select name="direction" class="form-select" required>
+                                        <option value="" selected disabled>- Pilih direction -</option>
+                                        <option value="R">R (Right)</option>
+                                        <option value="L">L (Left)</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputName1">Chainage (meter)</label>
-                                    <input type="text" name="kilometer" class="form-control" id="exampleInputName1"
+                                    <input type="text" name="kilometer" class="form-control"
                                         placeholder="Input chainage">
                                 </div>
                                 <button type="submit" class="btn btn-outline-primary me-2">Submit</button>

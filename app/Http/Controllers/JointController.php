@@ -35,8 +35,10 @@ class JointController extends Controller
             'area_id' => $request->area_id,
             'line_id' => $request->line_id,
             'wesel_id' => $request->wesel_id,
+            'mainline_id' => $request->mainline_id,
             'tipe' => $request->tipe,
             'kilometer' => $request->kilometer,
+            'direction' => $request->direction,
         ]);
 
         return redirect()->route('joint.index')->withNotify('Data berhasil ditambahkan!');
