@@ -347,7 +347,7 @@
                             <tr>
                                 <td style="padding: 0 2.5em; text-align: left;">
                                     <div class="text">
-                                        <h4>Dear Bpk/Ibu., <br> <b>{{ $name ?? '' }}</b> <br> <br>
+                                        <h4>Dear Bpk/Ibu, <br> <b>{{ $name ?? '' }}</b> <br> <br>
                                             Sebagai informasi, terdapat pengajuan <b>RFI</b> di Exodus yang perlu
                                             di-review.
                                             Karena telah dilakukan perbaikan temuan defect dengan detail sebagai berikut
