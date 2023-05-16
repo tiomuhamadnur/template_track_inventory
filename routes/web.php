@@ -22,6 +22,7 @@ use App\Http\Controllers\PartController;
 use App\Http\Controllers\PICController;
 use App\Http\Controllers\PMController;
 use App\Http\Controllers\RfiController;
+use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\TemuanController;
 use App\Http\Controllers\TemuanDepoController;
 use App\Http\Controllers\TemuanMainlineController;
@@ -423,4 +424,8 @@ Route::middleware('auth')->group(function () {
             Route::post('/lengkung-import', 'import')->name('lengkung.import');
         });
     });
+});
+
+Route::controller(SendEmailController::class)->group(function () {
+    Route::get('/send-email-rfi', 'rfi')->name('send-email.rfi');
 });
