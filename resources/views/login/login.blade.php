@@ -64,11 +64,6 @@
                             <i class="fa fa-envelope" aria-hidden="true"></i>
                         </span>
                     </div>
-                    @if (session('status'))
-                        <div class="badge badge-danger p-2 mb-3" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
 
                     <div class="wrap-input100 validate-input" data-validate="Password is required">
                         <input class="input100" type="password" name="password" placeholder="Masukkan Password">
@@ -77,6 +72,11 @@
                             <i class="fa fa-lock" aria-hidden="true"></i>
                         </span>
                     </div>
+                    @if (session('status'))
+                        <div class="badge badge-danger p-2 mb-3" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
 
                     <div class="container-login100-form-btn">
                         <button type="submit" class="login100-form-btn">Login</button>

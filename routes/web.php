@@ -51,6 +51,10 @@ Route::controller(AuthController::class)->middleware('loggedin')->group(function
     Route::post('login', 'login')->name('login.check');
 });
 
+Route::controller(AuthController::class)->group(function () {
+    Route::get('login', 'loginView')->name('login.index');
+});
+
 // Route::middleware('auth')->group(function () {
 //     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 //     Route::controller(PageController::class)->group(function () {
@@ -130,7 +134,7 @@ Route::controller(AuthController::class)->middleware('loggedin')->group(function
 //     });
 // });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('transisi', [AuthController::class, 'transisi'])->name('transisi')->middleware('isUser');
     Route::get('transisi-user', [AuthController::class, 'transisi_user'])->name('transisi.user');
@@ -293,6 +297,9 @@ Route::middleware('auth')->group(function () {
             Route::get('/usermanage/{id}/update', 'edit')->name('usermanage.edit');
             Route::put('/usermanage', 'update')->name('usermanage.update');
             Route::put('/usermanage/reset-password', 'reset_password')->name('reset.password');
+            Route::get('/usermanage/ban-user/{id}', 'ban_user')->name('ban.user');
+            Route::get('/usermanage/unban-user/{id}', 'unban_user')->name('unban.user');
+            Route::get('/usermanage/list-ban-user', 'list_ban_user')->name('list.ban.user');
         });
 
         Route::controller(AreaController::class)->group(function () {

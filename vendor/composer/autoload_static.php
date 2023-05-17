@@ -125,6 +125,7 @@ class ComposerStaticInit47514cba5192a5f414778149a0e22242
         array (
             'MyCLabs\\Enum\\' => 13,
             'Monolog\\' => 8,
+            'Mchev\\Banhammer\\' => 16,
             'Matrix\\' => 7,
             'Masterminds\\' => 12,
             'Maatwebsite\\Excel\\' => 18,
@@ -421,6 +422,10 @@ class ComposerStaticInit47514cba5192a5f414778149a0e22242
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'Mchev\\Banhammer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mchev/banhammer/src',
         ),
         'Matrix\\' => 
         array (
@@ -3887,6 +3892,19 @@ class ComposerStaticInit47514cba5192a5f414778149a0e22242
         'Matrix\\Operators\\Multiplication' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/Operators/Multiplication.php',
         'Matrix\\Operators\\Operator' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/Operators/Operator.php',
         'Matrix\\Operators\\Subtraction' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/Operators/Subtraction.php',
+        'Mchev\\Banhammer\\Banhammer' => __DIR__ . '/..' . '/mchev/banhammer/src/Banhammer.php',
+        'Mchev\\Banhammer\\BanhammerServiceProvider' => __DIR__ . '/..' . '/mchev/banhammer/src/BanhammerServiceProvider.php',
+        'Mchev\\Banhammer\\Commands\\ClearBans' => __DIR__ . '/..' . '/mchev/banhammer/src/Commands/ClearBans.php',
+        'Mchev\\Banhammer\\Commands\\DeleteExpired' => __DIR__ . '/..' . '/mchev/banhammer/src/Commands/DeleteExpired.php',
+        'Mchev\\Banhammer\\Events\\ModelWasBanned' => __DIR__ . '/..' . '/mchev/banhammer/src/Events/ModelWasBanned.php',
+        'Mchev\\Banhammer\\Events\\ModelWasUnbanned' => __DIR__ . '/..' . '/mchev/banhammer/src/Events/ModelWasUnbanned.php',
+        'Mchev\\Banhammer\\IP' => __DIR__ . '/..' . '/mchev/banhammer/src/IP.php',
+        'Mchev\\Banhammer\\Middleware\\AuthBanned' => __DIR__ . '/..' . '/mchev/banhammer/src/Middleware/AuthBanned.php',
+        'Mchev\\Banhammer\\Middleware\\IPBanned' => __DIR__ . '/..' . '/mchev/banhammer/src/Middleware/IPBanned.php',
+        'Mchev\\Banhammer\\Middleware\\LogoutBanned' => __DIR__ . '/..' . '/mchev/banhammer/src/Middleware/LogoutBanned.php',
+        'Mchev\\Banhammer\\Models\\Ban' => __DIR__ . '/..' . '/mchev/banhammer/src/Models/Ban.php',
+        'Mchev\\Banhammer\\Observers\\BanObserver' => __DIR__ . '/..' . '/mchev/banhammer/src/Observers/BanObserver.php',
+        'Mchev\\Banhammer\\Traits\\Bannable' => __DIR__ . '/..' . '/mchev/banhammer/src/Traits/Bannable.php',
         'Mockery' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegration' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegration.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegrationAssertPostConditions' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegrationAssertPostConditions.php',

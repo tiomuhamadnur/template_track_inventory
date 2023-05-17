@@ -4,13 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Mchev\Banhammer\Traits\Bannable;
 
-class Pegawai extends Model
+class Ban extends Model
 {
-    use HasFactory, Bannable;
+    use HasFactory;
 
-    protected $table = 'users';
+    protected $table = 'bans';
 
     protected $guarded = [];
 }

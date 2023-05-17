@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Request\LoginRequest;
+use App\Models\Ban;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -27,6 +29,12 @@ class AuthController extends Controller
         ])) {
             return back()->withStatus('Wrong email or password.');
         } else {
+            $user = User::findOrFail(auth()->user()->id);
+            $user_banned = $user->isBanned();
+            if ($user_banned) {
+                \Auth::logout();
+                return redirect('login')->withStatus('Your account have been banned!');
+            }
             return redirect()->route('transisi');
         }
     }

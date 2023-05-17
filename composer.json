@@ -13,6 +13,7 @@
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
         "maatwebsite/excel": "^3.1",
+        "mchev/banhammer": "^1.2",
         "yajra/laravel-datatables-buttons": "9.0",
         "yajra/laravel-datatables-oracle": "10.0"
     },

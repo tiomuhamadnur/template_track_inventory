@@ -1,7 +1,7 @@
 @extends('masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title> Management User | TCSM</title>
+    <title> List Banned User | TCSM</title>
 @endsection
 @section('sub-content')
     <div class="row flex-grow">
@@ -10,14 +10,12 @@
                 <div class="card-body">
                     <div class="d-sm-flex justify-content-between align-items-start">
                         <div>
-                            <h4 class="card-title card-title-dash">Management User</h4>
+                            <h4 class="card-title card-title-dash">List Banned User</h4>
                             <p class="card-subtitle card-subtitle-dash">Track & Civil Structure Maintenance</p>
                         </div>
                         <div>
-                            <a href="{{ route('list.ban.user') }}"><button class="btn btn-warning btn-sm text-white mb-0 me-0"
-                                    type="button">List Banned User</button></a>
-                            <a href="/usermanage-create"><button class="btn btn-primary btn-sm text-white mb-0 me-0"
-                                    type="button">Add new User</button></a>
+                            <a href="{{ route('usermanage.index') }}"><button
+                                    class="btn btn-primary btn-sm text-white mb-0 me-0" type="button">Back</button></a>
                         </div>
                     </div>
                     <div class="table-responsive  mt-1">
@@ -69,8 +67,9 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('usermanage.edit', Crypt::encryptString($item->id)) }}"
-                                                class="btn-sm btn-outline-warning btn-sm" type="button">Edit</a>
+                                            <a href="{{ route('unban.user', $item->id) }}"
+                                                class="btn-sm btn-outline-success btn-sm" type="button"
+                                                title="Unban akun ini">Unban</a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -85,11 +85,20 @@
                                     <div class="form-label mt-2">
                                         <label for="crud-form-1" class="form-label mt-2">Reset Password</label>
                                         <br>
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#reset-confirmation-modal"
-                                            data-id="{{ $user->id }}" class="btn btn-danger btn-sm rounded"
-                                            title="Reset password default">
+                                        <a href="#" data-bs-toggle="modal" type="button"
+                                            data-bs-target="#reset-confirmation-modal" data-id="{{ $user->id }}"
+                                            class="btn btn-danger btn-sm rounded" title="Reset password default">
                                             <i class="mdi mdi-refresh mr-1"></i>
                                             Reset
+                                        </a>
+                                    </div>
+                                    <div class="form-label mt-2">
+                                        <label for="crud-form-1" class="form-label mt-2">Ban User</label>
+                                        <br>
+                                        <a href="{{ route('ban.user', $user->id) }}" class="btn btn-warning btn-sm rounded"
+                                            title="Ban akun ini?">
+                                            <i class="mdi mdi-block-helper mr-1"></i>
+                                            Ban Akun Ini
                                         </a>
                                     </div>
                                     <div class="text-right mt-5">
@@ -106,47 +115,48 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="reset-confirmation-modal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog modal-md" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="modal-title" id="modalAdminTitle">Apakah anda yakin?</h2>
-                </div>
-                <form action="{{ route('reset.password') }}" method="POST">
-                    @csrf
-                    @method('put')
-                    <div class="modal-body">
-                        <input type="text" id="id_modal" name="id" hidden>
-                        <div class="form-group text-center">
-                            <div class="text-danger" style="font-size: 100px">
-                                <i class="mdi mdi-refresh"></i>
+    <div>
+        <div class="modal fade" id="reset-confirmation-modal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog modal-md" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="modalAdminTitle">Apakah anda yakin?</h2>
+                    </div>
+                    <form action="{{ route('reset.password') }}" method="POST">
+                        @csrf
+                        @method('put')
+                        <div class="modal-body">
+                            <input type="text" id="id_modal" name="id" hidden>
+                            <div class="form-group text-center">
+                                <div class="text-danger" style="font-size: 100px">
+                                    <i class="mdi mdi-refresh"></i>
+                                </div>
+                                <div>
+                                    <h4>Password akan direset ke setelan default!</h4>
+                                </div>
                             </div>
-                            <div>
-                                <h4>Password akan direset ke setelan default!</h4>
-                            </div>
-                        </div>
 
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary justify-content-center">
-                                Reset
-                            </button>
-                            <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">
-                                Tutup
-                            </button>
-                        </div>
-                </form>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary justify-content-center">
+                                    Reset
+                                </button>
+                                <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">
+                                    Tutup
+                                </button>
+                            </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-@endsection
+    @endsection
 
-@section('javascript')
-    <script>
-        $(document).ready(function() {
-            $('#reset-confirmation-modal').on('show.bs.modal', function(e) {
-                var id = $(e.relatedTarget).data('id');
-                $('#id_modal').val(id);
+    @section('javascript')
+        <script>
+            $(document).ready(function() {
+                $('#reset-confirmation-modal').on('show.bs.modal', function(e) {
+                    var id = $(e.relatedTarget).data('id');
+                    $('#id_modal').val(id);
+                });
             });
-        });
-    </script>
-@endsection
+        </script>
+    @endsection

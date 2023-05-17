@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pegawai;
+use App\Models\User;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -77,6 +78,36 @@ class UserController extends Controller
         } else {
             return redirect()->route('usermanage.index');
         }
+    }
+
+    public function ban_user($id)
+    {
+        $user = User::findOrFail($id);
+        if ($user) {
+            $user->ban();
+
+            return redirect()->route('usermanage.index')->withNotify('Akun ini sudah diban sehingga tidak bisa login!');
+        } else {
+            return redirect()->route('usermanage.index');
+        }
+    }
+
+    public function unban_user($id)
+    {
+        $user = User::findOrFail($id);
+        if ($user) {
+            $user->unban();
+
+            return redirect()->route('usermanage.index')->withNotify('Akun ini sudah di-unban sehingga bisa login kembali!');
+        } else {
+            return redirect()->route('usermanage.index');
+        }
+    }
+
+    public function list_ban_user()
+    {
+        $user = User::banned()->get();
+        return view('user.ban-user', compact(['user']));
     }
 
     public function edit($id)
