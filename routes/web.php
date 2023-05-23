@@ -5,6 +5,7 @@ use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BufferController;
 use App\Http\Controllers\BufferExaminationController;
+use App\Http\Controllers\ClosingReportController;
 use App\Http\Controllers\ColorSchemeController;
 use App\Http\Controllers\DarkModeController;
 use App\Http\Controllers\DashboardController;
@@ -208,6 +209,13 @@ Route::middleware(['auth'])->group(function () {
 
         // REPORT GENERATOR
         Route::get('/temuan-mainline/report', 'report')->name('temuan_mainline.report');
+    });
+
+    Route::controller(ClosingReportController::class)->group(function () {
+        Route::get('/closing_report', 'index')->name('closing_report.index');
+        Route::get('/closing_report_create', 'create')->name('closing_report.create');
+        Route::post('/closing_report', 'store')->name('closing_report.store');
+        Route::get('/closing_report_form', 'form')->name('closing_report.form');
     });
 
     Route::controller(TemuanDepoController::class)->group(function () {

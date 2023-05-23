@@ -27,16 +27,17 @@
                                     data-bs-toggle="modal" data-bs-target="#ModalFilter" title="Filter data">
                                     <i class="ti-filter"></i>
                                 </a>
-                                <button type="submit" form="form_export_excel" class="btn btn-outline-success btn-lg mx-0"
-                                    title="Export to Excel">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#ModalExportExcel" type="button"
+                                    class="btn btn-outline-success btn-lg mx-0" title="Export to Excel">
                                     <i class="ti-download"></i>
-                                </button>
-                                <button type="submit" form="form_export_pdf" class="btn btn-outline-success btn-lg mx-0"
-                                    title="Export to PDF">
+                                </a>
+                                <a href="#" type="button" data-bs-toggle="modal" data-bs-target="#ModalExportPdf"
+                                    class="btn btn-outline-success btn-lg mx-0" title="Export to PDF">
                                     <i class="ti-clip"></i>
-                                </button>
+                                </a>
                                 <a href="#" class="btn btn-outline-danger btn-lg mx-0" type="button"
-                                    data-bs-toggle="modal" data-bs-target="#ModalReport" title="Generate Closing Report">
+                                    data-bs-toggle="modal" data-bs-target="#ModalReport"
+                                    title="Generate Report Form Track Patrol on Foot">
                                     <i class="ti-printer"></i></a>
                             </div>
                             <form action="{{ route('temuan_mainline.export') }}" method="GET" id="form_export_excel">
@@ -378,6 +379,64 @@
         </div>
     </div>
 
+    <!-- Modal Export Excel -->
+    <div class="modal fade" id="ModalExportExcel" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAdminTitle">Apakah anda yakin?</h5>
+                </div>
+                <div class="modal-body pt-3 mb-0">
+                    <div class="p-2 text-center">
+                        <h1 class="text-center align-middle text-success mt-2" style="font-size: 100px">
+                            <i class="mdi mdi-file-excel mx-auto"></i>
+                        </h1>
+                        <div class="text-slate-500 mt-2">File excel akan didownload sesuai data yang difilter!</div>
+                    </div>
+                </div>
+
+                <div class="modal-footer mt-2">
+                    <button type="submit" formtarget="_blank" form="form_export_excel" onclick="closeModal()"
+                        class="btn btn-success justify-content-center">
+                        Download Excel
+                    </button>
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                        Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Export Pdf -->
+    <div class="modal fade" id="ModalExportPdf" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAdminTitle">Apakah anda yakin?</h5>
+                </div>
+                <div class="modal-body pt-3 mb-0">
+                    <div class="p-2 text-center">
+                        <h1 class="text-center align-middle text-danger mt-2" style="font-size: 100px">
+                            <i class="mdi mdi-file-pdf mx-auto"></i>
+                        </h1>
+                        <div class="text-slate-500 mt-2">File PDF akan didownload sesuai data yang difilter!</div>
+                    </div>
+                </div>
+
+                <div class="modal-footer mt-2">
+                    <button type="submit" formtarget="_blank" form="form_export_pdf" onclick="closeModal()"
+                        class="btn btn-success justify-content-center">
+                        Download PDF
+                    </button>
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                        Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal Report -->
     <div class="modal fade" id="ModalReport" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog modal-md" role="document">
@@ -386,7 +445,7 @@
                     @csrf
                     @method('get')
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalAdminTitle">Generate Report Activity</h5>
+                        <h5 class="modal-title" id="modalAdminTitle">Generate Report Form Track Patrol on Foot</h5>
                     </div>
                     <div class="modal-body pt-3 mb-0">
                         <div class="form-group align-middle">
@@ -510,6 +569,8 @@
 
         function closeModal() {
             $("#ModalReport").modal("hide");
+            $("#ModalExportExcel").modal("hide");
+            $("#ModalExportPdf").modal("hide");
         }
     </script>
 @endsection
