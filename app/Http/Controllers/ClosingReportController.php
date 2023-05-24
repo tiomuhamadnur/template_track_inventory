@@ -34,6 +34,8 @@ class ClosingReportController extends Controller
             return $closing_report;
         }
 
+        $closing_report = closing_report();
+
         $sh = closing_report()->section_head;
         $ttd_sh = Pegawai::where('name', $sh)->value('ttd');
         $kegiatan = closing_report()->kegiatan;
@@ -43,7 +45,7 @@ class ClosingReportController extends Controller
         $tanggal = date('Ymd', strtotime($tanggal));
         $tanggal_format = date('l, d-F-Y', strtotime(closing_report()->value('tanggal')));
 
-        $pdf = Pdf::loadView('mainline.mainline_closing_report.format-pdf', ['closing_report' => closing_report(), 'ttd_sh' => $ttd_sh, 'tanggal' => $tanggal_format])->setPaper('a4', 'potrait');
+        $pdf = Pdf::loadView('mainline.mainline_closing_report.format-pdf', ['closing_report' => $closing_report, 'ttd_sh' => $ttd_sh, 'tanggal' => $tanggal_format])->setPaper('a4', 'potrait');
 
         return $pdf->stream($tanggal . '_Closing Report Activity_' . $kegiatan . '_' . $lokasi . '.pdf');
     }
