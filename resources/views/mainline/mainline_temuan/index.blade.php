@@ -445,7 +445,13 @@
                     @csrf
                     @method('get')
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalAdminTitle">Generate Report Form Track Patrol on Foot</h5>
+                        <h5 class="modal-title" id="modalAdminTitle">
+                            <a href="{{ route('closing_report.check') }}" onclick="closeModal()" target="_blank"
+                                class="text-danger">
+                                <i class="mdi mdi-file-pdf"></i>
+                            </a>
+                            Generate Report Form Track Patrol on Foot
+                        </h5>
                     </div>
                     <div class="modal-body pt-3 mb-0">
                         <div class="form-group align-middle">

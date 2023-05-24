@@ -216,6 +216,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/closing_report_create', 'create')->name('closing_report.create');
         Route::post('/closing_report', 'store')->name('closing_report.store');
         Route::get('/closing_report_form', 'form')->name('closing_report.form');
+        Route::get('/closing_report_check', 'destroy')->name('closing_report.check');
     });
 
     Route::controller(TemuanDepoController::class)->group(function () {

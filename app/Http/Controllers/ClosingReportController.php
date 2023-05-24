@@ -8,14 +8,10 @@ use App\Models\PM;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class ClosingReportController extends Controller
 {
-    public function index()
-    {
-        //
-    }
-
     public function create()
     {
         $activity = PM::orderBy('name', 'asc')->get();
@@ -27,6 +23,11 @@ class ClosingReportController extends Controller
 
     public function form()
     {
+        $validasi = ClosingReport::get()->count();
+        if ($validasi == 0) {
+            return redirect()->route('temuan_mainline.index');
+        }
+
         function closing_report()
         {
             $closing_report = ClosingReport::orderBy('id', 'desc')->first();
@@ -55,7 +56,7 @@ class ClosingReportController extends Controller
             'photo_4' => ['file', 'image', 'required'],
             'photo_5' => ['file', 'image', 'required'],
             'photo_6' => ['file', 'image', 'required'],
-            'lampiran_1' => ['file', 'image', 'required'],
+            'lampiran_1' => ['file', 'image'],
             'lampiran_2' => ['file', 'image'],
         ], [
             'photo_1.image' => 'File harus dalam format gambar/photo!',
@@ -177,8 +178,28 @@ class ClosingReportController extends Controller
         //
     }
 
-    public function destroy($id)
+    public function destroy()
     {
-        //
+        $foto_kegiatan = Storage::disk('public')->files('closing_report/foto_kegiatan');
+        $foto_lampiran = Storage::disk('public')->files('closing_report/foto_lampiran');
+
+        $closing_report = ClosingReport::get();
+        if ($closing_report) {
+            ClosingReport::truncate();
+            if ($foto_kegiatan or $foto_lampiran) {
+                foreach ($foto_kegiatan as $item) {
+                    Storage::disk('public')->delete($item);
+                }
+
+                foreach ($foto_lampiran as $item) {
+                    Storage::disk('public')->delete($item);
+                }
+
+                return redirect()->route('closing_report.create');
+            }
+        } else {
+            return redirect()->route('closing_report.create');
+        }
+        return redirect()->route('closing_report.create');
     }
 }

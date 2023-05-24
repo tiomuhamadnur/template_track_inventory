@@ -117,10 +117,10 @@
                 </td>
                 <td class="p-1">
                     <p class="text-report mb-0">
-                        <b>Section Head of Permanent Ways:</b> <br>
+                        <b>Section Head of Permanent Way:</b> <br>
                         1. {{ $closing_report->section_head ?? '?' }} <br> <br>
 
-                        <b>Staff of Permanent Ways:</b> <br>
+                        <b>Staff of Permanent Way:</b> <br>
                         1. {{ $closing_report->personel_1 ?? '?' }} <br>
                         2. {{ $closing_report->personel_2 ?? '?' }} <br>
                         3. {{ $closing_report->personel_3 ?? '' }} <br>
@@ -1344,77 +1344,85 @@
         </tbody>
     </table>
 
-    {{-- PAGE 4 --}}
-    <div class="page-break"></div>
+    <div @if ($closing_report->status_lampiran == 'Nihil') hidden @endif>
+        <div @if ($closing_report->lampiran_1 == null) hidden @endif>
+            {{-- PAGE 4 --}}
+            <div class="page-break"></div>
 
-    <table border="1" style="width: 100%" class="mb-3">
-        <thead>
-            <th class="text-center">
-                <img style="height: 70px" src="{{ public_path('assets/images/tcsm.png') }}" alt="logo-tcsm">
-            </th>
-            <th class="text-center">
-                <h3 class="fw-bolder mx-auto mb-0">DAILY REPORT</h3>
-            </th>
-            <th class="text-center">
-                <img style="height: 70px" src="{{ public_path('assets/images/logo_mrtj.png') }}" alt="logo-mrt">
-            </th>
-        </thead>
-    </table>
+            <table border="1" style="width: 100%" class="mb-3">
+                <thead>
+                    <th class="text-center">
+                        <img style="height: 70px" src="{{ public_path('assets/images/tcsm.png') }}" alt="logo-tcsm">
+                    </th>
+                    <th class="text-center">
+                        <h3 class="fw-bolder mx-auto mb-0">DAILY REPORT</h3>
+                    </th>
+                    <th class="text-center">
+                        <img style="height: 70px" src="{{ public_path('assets/images/logo_mrtj.png') }}"
+                            alt="logo-mrt">
+                    </th>
+                </thead>
+            </table>
 
-    <table border="1" class="text-center mb-3" style="width: 100%">
-        <thead>
-            <th class="text-center p-2" style="background-color: rgb(0, 0, 87)">
-                <h6 class="fw-bolder mx-auto mb-0 text-white">LAMPIRAN</h6>
-            </th>
-        </thead>
-    </table>
+            <table border="1" class="text-center mb-3" style="width: 100%">
+                <thead>
+                    <th class="text-center p-2" style="background-color: rgb(0, 0, 87)">
+                        <h6 class="fw-bolder mx-auto mb-0 text-white">LAMPIRAN</h6>
+                    </th>
+                </thead>
+            </table>
 
-    <table border="1" class="text-center mb-3" style="width: 100%;">
-        <thead>
-            <tr>
-                <td class="text-center p-2">
-                    <img style="width: 80%" src="{{ public_path('storage/' . $closing_report->lampiran_1) }}"
-                        alt="lampiran-1">
-                </td>
-            </tr>
-        </thead>
-    </table>
+            <table border="1" class="text-center mb-3" style="width: 100%;">
+                <thead>
+                    <tr>
+                        <td class="text-center p-2">
+                            <img style="width: 80%" src="{{ public_path('storage/' . $closing_report->lampiran_1) }}"
+                                alt="lampiran-1">
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
 
-    {{-- PAGE 5 --}}
-    <div class="page-break"></div>
+        <div @if ($closing_report->lampiran_2 == null) hidden @endif>
+            {{-- PAGE 5 --}}
+            <div class="page-break"></div>
 
-    <table border="1" style="width: 100%" class="mb-3">
-        <thead>
-            <th class="text-center">
-                <img style="height: 70px" src="{{ public_path('assets/images/tcsm.png') }}" alt="logo-tcsm">
-            </th>
-            <th class="text-center">
-                <h3 class="fw-bolder mx-auto mb-0">DAILY REPORT</h3>
-            </th>
-            <th class="text-center">
-                <img style="height: 70px" src="{{ public_path('assets/images/logo_mrtj.png') }}" alt="logo-mrt">
-            </th>
-        </thead>
-    </table>
+            <table border="1" style="width: 100%" class="mb-3">
+                <thead>
+                    <th class="text-center">
+                        <img style="height: 70px" src="{{ public_path('assets/images/tcsm.png') }}" alt="logo-tcsm">
+                    </th>
+                    <th class="text-center">
+                        <h3 class="fw-bolder mx-auto mb-0">DAILY REPORT</h3>
+                    </th>
+                    <th class="text-center">
+                        <img style="height: 70px" src="{{ public_path('assets/images/logo_mrtj.png') }}"
+                            alt="logo-mrt">
+                    </th>
+                </thead>
+            </table>
 
-    <table border="1" class="text-center mb-3" style="width: 100%">
-        <thead>
-            <th class="text-center p-2" style="background-color: rgb(0, 0, 87)">
-                <h6 class="fw-bolder mx-auto mb-0 text-white">LAMPIRAN</h6>
-            </th>
-        </thead>
-    </table>
+            <table border="1" class="text-center mb-3" style="width: 100%">
+                <thead>
+                    <th class="text-center p-2" style="background-color: rgb(0, 0, 87)">
+                        <h6 class="fw-bolder mx-auto mb-0 text-white">LAMPIRAN</h6>
+                    </th>
+                </thead>
+            </table>
 
-    <table border="1" class="text-center mb-3" style="width: 100%;">
-        <thead>
-            <tr>
-                <td class="text-center p-2">
-                    <img style="width: 80%" src="{{ public_path('storage/' . $closing_report->lampiran_2) }}"
-                        alt="lampiran-2">
-                </td>
-            </tr>
-        </thead>
-    </table>
+            <table border="1" class="text-center mb-3" style="width: 100%;">
+                <thead>
+                    <tr>
+                        <td class="text-center p-2">
+                            <img style="width: 80%" src="{{ public_path('storage/' . $closing_report->lampiran_2) }}"
+                                alt="lampiran-2">
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
 </body>
 
 </html>
