@@ -18,7 +18,7 @@ class DashboardController extends Controller
         $temuan_all = Temuan::all();
         $temuan_open = Temuan::where('status', 'open')->get();
         $temuan_close = Temuan::where('status', 'close')->get();
-        $temuan_baru_bulan_ini = Temuan::where('status', 'open')->whereMonth('tanggal', $bulan_ini)->get();
+        $temuan_baru_bulan_ini = Temuan::whereYear('tanggal', $tahun_ini)->whereMonth('tanggal', $bulan_ini)->get();
         $temuan_close_bulan_ini = Temuan::where('status', 'close')->whereMonth('updated_at', $bulan_ini)->get();
 
         $temuan_jan = Temuan::whereYear('tanggal', $tahun_ini)->whereMonth('tanggal', 1)->count();
