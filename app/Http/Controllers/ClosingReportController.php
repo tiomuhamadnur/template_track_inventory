@@ -45,9 +45,17 @@ class ClosingReportController extends Controller
         $tanggal = date('Ymd', strtotime($tanggal));
         $tanggal_format = date('l, d-F-Y', strtotime(closing_report()->value('tanggal')));
 
-        $pdf = Pdf::loadView('mainline.mainline_closing_report.format-pdf', ['closing_report' => $closing_report, 'ttd_sh' => $ttd_sh, 'tanggal' => $tanggal_format])->setPaper('a4', 'potrait');
+        $pdf = Pdf::loadView(
+            'mainline.mainline_closing_report.format-pdf',
+            [
+                'closing_report' => $closing_report,
+                'ttd_sh' => $ttd_sh,
+                'tanggal' => $tanggal_format
+            ]
+        )
+            ->setPaper('a4', 'potrait');
 
-        return $pdf->download($tanggal . '_Closing Report Activity_' . $kegiatan . '_' . $lokasi . '.pdf');
+        return $pdf->stream($tanggal . '_Closing Report Activity_' . $kegiatan . '_' . $lokasi . '.pdf');
     }
 
     public function store(Request $request)
@@ -135,8 +143,7 @@ class ClosingReportController extends Controller
             ]);
 
             return redirect()->route('closing_report.form');
-        }
-        else {
+        } else {
             $photo_1 = $request->file('photo_1')->store('closing_report/foto_kegiatan');
             $photo_2 = $request->file('photo_2')->store('closing_report/foto_kegiatan');
             $photo_3 = $request->file('photo_3')->store('closing_report/foto_kegiatan');

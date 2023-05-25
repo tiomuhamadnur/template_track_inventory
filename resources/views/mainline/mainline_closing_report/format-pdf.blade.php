@@ -18,7 +18,6 @@
 </head>
 
 <body>
-    {{-- PAGE 1 --}}
     <table border="1" style="width: 100%" class="mb-3">
         <thead>
             <th class="text-center">
@@ -33,7 +32,7 @@
         </thead>
     </table>
 
-    <table border="1" class="text-center mb-3" style="width: 100%">
+    {{-- <table border="1" class="text-center mb-3" style="width: 100%">
         <thead>
             <th class="text-center p-2" style="background-color: rgb(0, 0, 87)">
                 <h6 class="fw-bolder mx-auto mb-0 text-white">REPORT OF CLOSING ACTIVITY</h6>
@@ -181,7 +180,6 @@
         </tbody>
     </table>
 
-    {{-- PAGE 2 --}}
     <div class="page-break"></div>
 
     <table border="1" style="width: 100%" class="mb-3">
@@ -277,937 +275,937 @@
                 <td class="p-1 text-center">
                     <p class="text-report mb-0">
                         {{-- Initial Checking --}}
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Ending Checking --}}
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        {{-- Remarks --}}
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        2.
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        String
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Initial Checking --}}
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Ending Checking --}}
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        {{-- Remarks --}}
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        3.
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        Tapper Gauge
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Initial Checking --}}
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Ending Checking --}}
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        {{-- Remarks --}}
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        4.
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        Thickness Gauge
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Initial Checking --}}
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Ending Checking --}}
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        {{-- Remarks --}}
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        5.
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        Penggaris 15 cm
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        1
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Initial Checking --}}
-                        V
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Ending Checking --}}
-                        V
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        {{-- Remarks --}}
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        6.
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        Flag
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Initial Checking --}}
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Ending Checking --}}
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        {{-- Remarks --}}
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        7.
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        Roll Meter
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Initial Checking --}}
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Ending Checking --}}
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        {{-- Remarks --}}
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        8.
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        Chalk/Pen/Marker
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        4
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Initial Checking --}}
-                        V
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Ending Checking --}}
-                        V
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        {{-- Remarks --}}
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        9.
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        Flashlight
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        4
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Initial Checking --}}
-                        V
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Ending Checking --}}
-                        V
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        {{-- Remarks --}}
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        10.
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        Penggaris Siku
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        {{-- Remarks --}}
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        11.
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        Whistle
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Initial Checking --}}
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Ending Checking --}}
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        {{-- Remarks --}}
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        12.
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        Camera
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Initial Checking --}}
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Ending Checking --}}
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        {{-- Remarks --}}
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        13.
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        Crack Scale
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        4
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Initial Checking --}}
-                        V
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Ending Checking --}}
-                        V
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        {{-- Remarks --}}
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        14.
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        Track Master
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Initial Checking --}}
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Ending Checking --}}
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        {{-- Remarks --}}
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        15.
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        Gloves
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        4
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Initial Checking --}}
-                        V
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Ending Checking --}}
-                        V
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        {{-- Remarks --}}
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        16.
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        Rachet
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Initial Checking --}}
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Ending Checking --}}
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        {{-- Remarks --}}
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        17.
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        Hammer
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Initial Checking --}}
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Ending Checking --}}
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        {{-- Remarks --}}
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        18.
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        Torque Momen
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Initial Checking --}}
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Ending Checking --}}
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        {{-- Remarks --}}
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        19.
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        Thermometer
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Initial Checking --}}
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Ending Checking --}}
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        {{-- Remarks --}}
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        20.
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        Mistar Besi
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Initial Checking --}}
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Ending Checking --}}
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        {{-- Remarks --}}
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        21.
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        Wrench
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Initial Checking --}}
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Ending Checking --}}
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        {{-- Remarks --}}
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        22.
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        Rail Profile Gauge (Riftek)
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Initial Checking --}}
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Ending Checking --}}
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        {{-- Remarks --}}
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        23.
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        Amplas
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Initial Checking --}}
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Ending Checking --}}
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        {{-- Remarks --}}
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        24.
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        WD
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Initial Checking --}}
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Ending Checking --}}
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        {{-- Remarks --}}
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        25.
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        Palu Karet
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Initial Checking --}}
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Ending Checking --}}
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        {{-- Remarks --}}
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        26.
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        Antirust Terami
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Initial Checking --}}
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Ending Checking --}}
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        {{-- Remarks --}}
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        27.
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        Accelerometer
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Initial Checking --}}
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Ending Checking --}}
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        {{-- Remarks --}}
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        28.
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        Form Pemeriksaan
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        2
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Initial Checking --}}
-                        V
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Ending Checking --}}
-                        V
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        {{-- Remarks --}}
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        29.
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        Sound Level Meter
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Initial Checking --}}
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Ending Checking --}}
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        {{-- Remarks --}}
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        30.
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        Tablet/Smartphone
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        2
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Initial Checking --}}
-                        V
-                    </p>
-                </td>
-                <td class="p-1 text-center">
-                    <p class="text-report mb-0">
-                        {{-- Ending Checking --}}
-                        V
-                    </p>
-                </td>
-                <td class="p-1">
-                    <p class="text-report mb-0">
-                        {{-- Remarks --}}
-                    </p>
-                </td>
-            </tr>
-        </tbody>
+    </p>
+    </td>
+    <td class="p-1 text-center">
+        <p class="text-report mb-0">
+            {{-- Ending Checking --}}
+        </p>
+    </td>
+    <td class="p-1">
+        <p class="text-report mb-0">
+            {{-- Remarks --}}
+        </p>
+    </td>
+    </tr>
+    <tr>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                2.
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                String
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Initial Checking --}}
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Ending Checking --}}
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                {{-- Remarks --}}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                3.
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                Tapper Gauge
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Initial Checking --}}
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Ending Checking --}}
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                {{-- Remarks --}}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                4.
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                Thickness Gauge
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Initial Checking --}}
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Ending Checking --}}
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                {{-- Remarks --}}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                5.
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                Penggaris 15 cm
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                1
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Initial Checking --}}
+                V
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Ending Checking --}}
+                V
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                {{-- Remarks --}}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                6.
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                Flag
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Initial Checking --}}
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Ending Checking --}}
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                {{-- Remarks --}}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                7.
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                Roll Meter
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Initial Checking --}}
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Ending Checking --}}
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                {{-- Remarks --}}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                8.
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                Chalk/Pen/Marker
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                4
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Initial Checking --}}
+                V
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Ending Checking --}}
+                V
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                {{-- Remarks --}}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                9.
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                Flashlight
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                4
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Initial Checking --}}
+                V
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Ending Checking --}}
+                V
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                {{-- Remarks --}}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                10.
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                Penggaris Siku
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                {{-- Remarks --}}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                11.
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                Whistle
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Initial Checking --}}
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Ending Checking --}}
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                {{-- Remarks --}}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                12.
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                Camera
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Initial Checking --}}
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Ending Checking --}}
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                {{-- Remarks --}}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                13.
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                Crack Scale
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                4
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Initial Checking --}}
+                V
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Ending Checking --}}
+                V
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                {{-- Remarks --}}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                14.
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                Track Master
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Initial Checking --}}
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Ending Checking --}}
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                {{-- Remarks --}}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                15.
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                Gloves
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                4
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Initial Checking --}}
+                V
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Ending Checking --}}
+                V
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                {{-- Remarks --}}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                16.
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                Rachet
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Initial Checking --}}
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Ending Checking --}}
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                {{-- Remarks --}}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                17.
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                Hammer
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Initial Checking --}}
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Ending Checking --}}
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                {{-- Remarks --}}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                18.
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                Torque Momen
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Initial Checking --}}
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Ending Checking --}}
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                {{-- Remarks --}}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                19.
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                Thermometer
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Initial Checking --}}
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Ending Checking --}}
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                {{-- Remarks --}}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                20.
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                Mistar Besi
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Initial Checking --}}
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Ending Checking --}}
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                {{-- Remarks --}}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                21.
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                Wrench
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Initial Checking --}}
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Ending Checking --}}
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                {{-- Remarks --}}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                22.
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                Rail Profile Gauge (Riftek)
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Initial Checking --}}
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Ending Checking --}}
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                {{-- Remarks --}}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                23.
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                Amplas
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Initial Checking --}}
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Ending Checking --}}
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                {{-- Remarks --}}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                24.
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                WD
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Initial Checking --}}
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Ending Checking --}}
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                {{-- Remarks --}}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                25.
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                Palu Karet
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Initial Checking --}}
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Ending Checking --}}
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                {{-- Remarks --}}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                26.
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                Antirust Terami
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Initial Checking --}}
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Ending Checking --}}
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                {{-- Remarks --}}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                27.
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                Accelerometer
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Initial Checking --}}
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Ending Checking --}}
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                {{-- Remarks --}}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                28.
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                Form Pemeriksaan
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                2
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Initial Checking --}}
+                V
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Ending Checking --}}
+                V
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                {{-- Remarks --}}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                29.
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                Sound Level Meter
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Initial Checking --}}
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Ending Checking --}}
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                {{-- Remarks --}}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                30.
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                Tablet/Smartphone
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                2
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Initial Checking --}}
+                V
+            </p>
+        </td>
+        <td class="p-1 text-center">
+            <p class="text-report mb-0">
+                {{-- Ending Checking --}}
+                V
+            </p>
+        </td>
+        <td class="p-1">
+            <p class="text-report mb-0">
+                {{-- Remarks --}}
+            </p>
+        </td>
+    </tr>
+    </tbody>
     </table>
 
     <div class="page-break"></div>
@@ -1418,7 +1416,7 @@
                 </thead>
             </table>
         </div>
-    </div>
+    </div> --}}
 </body>
 
 </html>
