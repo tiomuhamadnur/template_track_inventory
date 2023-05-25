@@ -32,7 +32,7 @@
         </thead>
     </table>
 
-    {{-- <table border="1" class="text-center mb-3" style="width: 100%">
+    <table border="1" class="text-center mb-3" style="width: 100%">
         <thead>
             <th class="text-center p-2" style="background-color: rgb(0, 0, 87)">
                 <h6 class="fw-bolder mx-auto mb-0 text-white">REPORT OF CLOSING ACTIVITY</h6>
@@ -40,7 +40,7 @@
         </thead>
     </table>
 
-    <table border="1" class="text-left mb-5" style="width: 100%">
+    {{-- <table border="1" class="text-left mb-5" style="width: 100%">
         <thead>
             <tr>
                 <th class="align-middle" colspan="3">
@@ -178,7 +178,7 @@
                 </td>
             </tr>
         </tbody>
-    </table>
+    </table> --}}
 
     <div class="page-break"></div>
 
@@ -1253,7 +1253,7 @@
         </tbody>
     </table>
 
-    <div @if ($closing_report->status_lampiran == 'Nihil') hidden @endif>
+    {{-- <div @if ($closing_report->status_lampiran == 'Nihil') hidden @endif>
         <div @if ($closing_report->lampiran_1 == null) hidden @endif>
             <div class="page-break"></div>
             <table border="1" style="width: 100%" class="mb-3">
