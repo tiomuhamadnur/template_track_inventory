@@ -1236,7 +1236,7 @@
         </thead>
     </table>
 
-    {{-- <table border="1" style="width: 100%" class="mb-3">
+    <table border="1" style="width: 100%" class="mb-3">
         <tbody>
             <tr>
                 <th class="p-1" style="width: 4%">
@@ -1341,9 +1341,9 @@
                 </td>
             </tr>
         </tbody>
-    </table> --}}
+    </table>
 
-    {{-- <div @if ($closing_report->status_lampiran == 'Nihil') hidden @endif>
+    <div @if ($closing_report->status_lampiran == 'Nihil') hidden @endif>
         <div @if ($closing_report->lampiran_1 == null) hidden @endif>
             <div class="page-break"></div>
             <table border="1" style="width: 100%" class="mb-3">
@@ -1418,7 +1418,7 @@
                 </thead>
             </table>
         </div>
-    </div> --}}
+    </div>
 </body>
 
 </html>

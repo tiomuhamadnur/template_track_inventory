@@ -29,16 +29,17 @@
                                 </a>
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#ModalExportExcel" type="button"
                                     class="btn btn-outline-success btn-lg mx-0" title="Export to Excel">
-                                    <i class="ti-download"></i>
+                                    <i class="mdi mdi-file-excel text-success"></i>
                                 </a>
                                 <a href="#" type="button" data-bs-toggle="modal" data-bs-target="#ModalExportPdf"
                                     class="btn btn-outline-success btn-lg mx-0" title="Export to PDF">
-                                    <i class="ti-clip"></i>
+                                    <i class="mdi mdi-file-pdf text-danger"></i>
                                 </a>
                                 <a href="#" class="btn btn-outline-danger btn-lg mx-0" type="button"
                                     data-bs-toggle="modal" data-bs-target="#ModalReport"
                                     title="Generate Report Form Track Patrol on Foot">
-                                    <i class="ti-printer"></i></a>
+                                    <i class="ti-printer"></i>
+                                </a>
                             </div>
                             <form action="{{ route('temuan_mainline.export') }}" method="GET" id="form_export_excel">
                                 @csrf
