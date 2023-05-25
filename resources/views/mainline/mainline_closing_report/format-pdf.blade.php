@@ -40,7 +40,7 @@
         </thead>
     </table>
 
-    {{-- <table border="1" class="text-left mb-5" style="width: 100%">
+    <table border="1" class="text-left mb-5" style="width: 100%">
         <thead>
             <tr>
                 <th class="align-middle" colspan="3">
@@ -178,7 +178,7 @@
                 </td>
             </tr>
         </tbody>
-    </table> --}}
+    </table>
 
     <div class="page-break"></div>
 
