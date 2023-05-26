@@ -246,7 +246,7 @@
                                                 <div class="input-group">
                                                     <div class="form-row">
                                                         <div class="form-label mb-1">
-                                                            Lampiran 1
+                                                            Lampiran
                                                         </div>
                                                         <input class="form-control" type="file" name="lampiran_1">
                                                         @error('lampiran_1')
@@ -258,7 +258,7 @@
                                                 </div>
                                             </th>
                                         </tr>
-                                        <tr>
+                                        {{-- <tr>
                                             <th class="p-2">
                                                 <div class="input-group">
                                                     <div class="form-row">
@@ -274,7 +274,7 @@
                                                     </div>
                                                 </div>
                                             </th>
-                                        </tr>
+                                        </tr> --}}
                                     </tbody>
                                 </table>
                             </div>
