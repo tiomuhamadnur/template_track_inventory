@@ -1,4 +1,4 @@
-@extends('masterdata.masterdata_layout.base')
+@extends('masterdata.masterdata_layout.profile.base')
 
 @section('sub-title')
     <title> Update Profile | TCSM</title>
