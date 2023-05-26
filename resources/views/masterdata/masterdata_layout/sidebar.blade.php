@@ -36,6 +36,8 @@
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('pm.index') }}">Annual Jobs</a>
                     </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('tools.index') }}">Tools & Materials</a>
+                    </li>
                 </ul>
             </div>
         </li>

@@ -119,7 +119,7 @@
                             <div class="name">Ada Lampiran?</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <select name="status_lampiran" class="form-select" required>
+                                    <select name="status_lampiran" id="status_lampiran" class="form-select" required>
                                         <option value="" selected disabled>- Pilih Keterangan Lampiran -</option>
                                         <option value="Terlampir">Ada</option>
                                         <option value="Nihil">Tidak Ada</option>
@@ -236,47 +236,49 @@
                             </div>
                         </div>
 
-                        <div class="form-row">
-                            <div class="name">Foto Lampiran (Potrait)</div>
-                            <div class="value">
-                                <table border="1" class="table-bordered" style="width: 100%">
-                                    <tbody>
-                                        <tr>
-                                            <th class="p-2">
-                                                <div class="input-group">
-                                                    <div class="form-row">
-                                                        <div class="form-label mb-1">
-                                                            Lampiran
+                        <div id="lampiran">
+                            <div class="form-row">
+                                <div class="name">Foto Lampiran (Potrait)</div>
+                                <div class="value">
+                                    <table border="1" class="table-bordered" style="width: 100%">
+                                        <tbody>
+                                            <tr>
+                                                <th class="p-2">
+                                                    <div class="input-group">
+                                                        <div class="form-row">
+                                                            <div class="form-label mb-1">
+                                                                Lampiran 1
+                                                            </div>
+                                                            <input class="form-control" type="file" name="lampiran_1">
+                                                            @error('lampiran_1')
+                                                                <p class="bg-danger rounded-3 text-center text-white mt-1">
+                                                                    {{ $message }}
+                                                                </p>
+                                                            @enderror
                                                         </div>
-                                                        <input class="form-control" type="file" name="lampiran_1">
-                                                        @error('lampiran_1')
-                                                            <p class="bg-danger rounded-3 text-center text-white mt-1">
-                                                                {{ $message }}
-                                                            </p>
-                                                        @enderror
                                                     </div>
-                                                </div>
-                                            </th>
-                                        </tr>
-                                        {{-- <tr>
-                                            <th class="p-2">
-                                                <div class="input-group">
-                                                    <div class="form-row">
-                                                        <div class="form-label mb-1">
-                                                            Lampiran 2
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th class="p-2">
+                                                    <div class="input-group">
+                                                        <div class="form-row">
+                                                            <div class="form-label mb-1">
+                                                                Lampiran 2
+                                                            </div>
+                                                            <input class="form-control" type="file" name="lampiran_2">
+                                                            @error('lampiran_2')
+                                                                <p class="bg-danger rounded-3 text-center text-white mt-1">
+                                                                    {{ $message }}
+                                                                </p>
+                                                            @enderror
                                                         </div>
-                                                        <input class="form-control" type="file" name="lampiran_2">
-                                                        @error('lampiran_2')
-                                                            <p class="bg-danger rounded-3 text-center text-white mt-1">
-                                                                {{ $message }}
-                                                            </p>
-                                                        @enderror
                                                     </div>
-                                                </div>
-                                            </th>
-                                        </tr> --}}
-                                    </tbody>
-                                </table>
+                                                </th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
 
@@ -289,4 +291,21 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('javascript')
+    <script>
+        $(document).ready(function() {
+            $('#status_lampiran').on('change', function() {
+                let status_lampiran = this.value;
+                if (status_lampiran == 'Nihil') {
+                    var lampiran = document.getElementById("lampiran");
+                    lampiran.style.display = "none";
+                } else if (status_lampiran == 'Terlampir') {
+                    var lampiran = document.getElementById("lampiran");
+                    lampiran.style.display = "block";
+                }
+            });
+        });
+    </script>
 @endsection

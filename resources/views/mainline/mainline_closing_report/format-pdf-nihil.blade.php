@@ -11,6 +11,14 @@
             font-size: 12px;
         }
 
+        .text-judul {
+            font-size: 24px;
+        }
+
+        .text-sub-judul {
+            font-size: 16px;
+        }
+
         .page-break {
             page-break-after: always;
         }
@@ -20,13 +28,13 @@
 <body>
     <table border="1" style="width: 100%" class="mb-3">
         <thead>
-            <th class="text-center">
+            <th class="text-center" style="width: 30%">
                 <img style="height: 70px" src="{{ public_path('assets/images/tcsm.png') }}" alt="logo-tcsm">
             </th>
             <th class="text-center">
-                <h3 class="fw-bolder mx-auto mb-0">DAILY REPORT</h3>
+                <p class="text-judul fw-bolder mx-auto mb-0">DAILY REPORT</p>
             </th>
-            <th class="text-center">
+            <th class="text-center" style="width: 30%">
                 <img style="height: 70px" src="{{ public_path('assets/images/logo_mrtj.png') }}" alt="logo-mrt">
             </th>
         </thead>
@@ -34,8 +42,8 @@
 
     <table border="1" class="text-center mb-3" style="width: 100%">
         <thead>
-            <th class="text-center p-2" style="background-color: rgb(0, 0, 87)">
-                <h6 class="fw-bolder mx-auto mb-0 text-white">REPORT OF CLOSING ACTIVITY</h6>
+            <th class="text-center p-1" style="background-color: rgb(0, 0, 87)">
+                <p class="text-sub-judul fw-bolder mx-auto mb-0 text-white">REPORT OF CLOSING ACTIVITY</p>
             </th>
         </thead>
     </table>
@@ -184,13 +192,13 @@
 
     <table border="1" style="width: 100%" class="mb-3">
         <thead>
-            <th class="text-center">
+            <th class="text-center" style="width: 30%">
                 <img style="height: 70px" src="{{ public_path('assets/images/tcsm.png') }}" alt="logo-tcsm">
             </th>
             <th class="text-center">
-                <h3 class="fw-bolder mx-auto mb-0">DAILY REPORT</h3>
+                <p class="text-judul fw-bolder mx-auto mb-0">DAILY REPORT</p>
             </th>
-            <th class="text-center">
+            <th class="text-center" style="width: 30%">
                 <img style="height: 70px" src="{{ public_path('assets/images/logo_mrtj.png') }}" alt="logo-mrt">
             </th>
         </thead>
@@ -198,8 +206,9 @@
 
     <table border="1" class="text-center mb-3" style="width: 100%">
         <thead>
-            <th class="text-center p-2" style="background-color: rgb(0, 0, 87)">
-                <h6 class="fw-bolder mx-auto mb-0 text-white">CHECKLIST THE QUANTITY OF EQUIPMENTS AND TOOLS</h6>
+            <th class="text-center p-1" style="background-color: rgb(0, 0, 87)">
+                <p class="text-sub-judul fw-bolder mx-auto mb-0 text-white">CHECKLIST THE QUANTITY OF EQUIPMENTS AND
+                    TOOLS</p>
             </th>
         </thead>
     </table>
@@ -234,7 +243,7 @@
     </table>
 
     <table border="1" class="text-left mb-5" style="width: 100%">
-        <thead>
+        {{-- <thead>
             <tr>
                 <th class="p-1 text-center" style="width: 4%;">
                     <p class="text-report mb-0 fw-bolder"><b>No.</b></p>
@@ -255,292 +264,358 @@
                     <p class="text-report mb-0 fw-bolder"><b>Remarks</b></p>
                 </th>
             </tr>
+        </thead> --}}
+        <thead>
+            <tr>
+                <th class="p-1 text-center" style="width: 4%;">
+                    <p class="text-report mb-0 fw-bolder"><b>No.</b></p>
+                </th>
+                <th class="p-1 text-center" style="width: 30%;">
+                    <p class="text-report mb-0 fw-bolder"><b>Equipment Name</b></p>
+                </th>
+                <th class="p-1 text-center" style="width: 10%;">
+                    <p class="text-report mb-0 fw-bolder"><b>Quantity</b></p>
+                </th>
+                <th class="p-1 text-center" style="width: 5%;">
+                    <p class="text-report mb-0 fw-bolder"><b>Unit</b></p>
+                </th>
+                <th class="p-1 text-center" style="width: 20%;">
+                    <p class="text-report mb-0 fw-bolder"><b>Initial <br> Checking</b></p>
+                </th>
+                <th class="p-1 text-center" style="width: 20%;">
+                    <p class="text-report mb-0 fw-bolder"><b>Ending <br> Checking</b></p>
+                </th>
+                <th class="p-1 text-center">
+                    <p class="text-report mb-0 fw-bolder"><b>Remarks</b></p>
+                </th>
+            </tr>
         </thead>
         <tbody>
+            @foreach ($tools as $item)
+                <tr>
+                    <td class="text-center">
+                        <p class="text-report mb-0">
+                            {{ $loop->iteration }}
+                        </p>
+                    </td>
+                    <td class="">
+                        <p class="text-report mb-0">
+                            {{ $item->name ?? '' }}
+                        </p>
+                    </td>
+                    <td class="text-center">
+                        <p class="text-report mb-0">
+                            {{ $item->qty ?? '' }}
+                        </p>
+                    </td>
+                    <td class="text-center">
+                        <p class="text-report mb-0">
+                            {{ $item->unit ?? '' }}
+                        </p>
+                    </td>
+                    <td class="text-center">
+                        <p class="text-report mb-0">
+                            {{ $item->initial_check ?? '' }}
+                        </p>
+                    </td>
+                    <td class="text-center">
+                        <p class="text-report mb-0">
+                            {{ $item->ending_check ?? '' }}
+                        </p>
+                    </td>
+                    <td class="text-center">
+                        <p class="text-report mb-0">
+                            {{ $item->remark ?? '' }}
+                        </p>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+        {{-- <tbody>
             <tr>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                         1.
                     </p>
                 </td>
-                <td class="p-1">
+                <td class="p-0">
                     <p class="text-report mb-0">
                         Track Gauge
                     </p>
                 </td>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                     </p>
                 </td>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                     </p>
                 </td>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                     </p>
                 </td>
-                <td class="p-1">
+                <td class="p-0">
                     <p class="text-report mb-0">
                     </p>
                 </td>
             </tr>
             <tr>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                         2.
                     </p>
                 </td>
-                <td class="p-1">
+                <td class="p-0">
                     <p class="text-report mb-0">
                         String
                     </p>
                 </td>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                     </p>
                 </td>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                     </p>
                 </td>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                     </p>
                 </td>
-                <td class="p-1">
+                <td class="p-0">
                     <p class="text-report mb-0">
                     </p>
                 </td>
             </tr>
             <tr>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                         3.
                     </p>
                 </td>
-                <td class="p-1">
+                <td class="p-0">
                     <p class="text-report mb-0">
                         Tapper Gauge
                     </p>
                 </td>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                     </p>
                 </td>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                     </p>
                 </td>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                     </p>
                 </td>
-                <td class="p-1">
+                <td class="p-0">
                     <p class="text-report mb-0">
                     </p>
                 </td>
             </tr>
             <tr>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                         4.
                     </p>
                 </td>
-                <td class="p-1">
+                <td class="p-0">
                     <p class="text-report mb-0">
                         Thickness Gauge
                     </p>
                 </td>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                     </p>
                 </td>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                     </p>
                 </td>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                     </p>
                 </td>
-                <td class="p-1">
+                <td class="p-0">
                     <p class="text-report mb-0">
                     </p>
                 </td>
             </tr>
             <tr>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                         5.
                     </p>
                 </td>
-                <td class="p-1">
+                <td class="p-0">
                     <p class="text-report mb-0">
                         Penggaris 15 cm
                     </p>
                 </td>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                         1
                     </p>
                 </td>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                         V
                     </p>
                 </td>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                         V
                     </p>
                 </td>
-                <td class="p-1">
+                <td class="p-0">
                     <p class="text-report mb-0">
                     </p>
                 </td>
             </tr>
             <tr>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                         6.
                     </p>
                 </td>
-                <td class="p-1">
+                <td class="p-0">
                     <p class="text-report mb-0">
                         Flag
                     </p>
                 </td>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                     </p>
                 </td>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                     </p>
                 </td>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                     </p>
                 </td>
-                <td class="p-1">
+                <td class="p-0">
                     <p class="text-report mb-0">
                     </p>
                 </td>
             </tr>
             <tr>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                         7.
                     </p>
                 </td>
-                <td class="p-1">
+                <td class="p-0">
                     <p class="text-report mb-0">
                         Roll Meter
                     </p>
                 </td>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                     </p>
                 </td>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                     </p>
                 </td>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                     </p>
                 </td>
-                <td class="p-1">
+                <td class="p-0">
                     <p class="text-report mb-0">
                     </p>
                 </td>
             </tr>
             <tr>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                         8.
                     </p>
                 </td>
-                <td class="p-1">
+                <td class="p-0">
                     <p class="text-report mb-0">
                         Chalk/Pen/Marker
                     </p>
                 </td>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                         4
                     </p>
                 </td>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                         V
                     </p>
                 </td>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                         V
                     </p>
                 </td>
-                <td class="p-1">
+                <td class="p-0">
                     <p class="text-report mb-0">
                     </p>
                 </td>
             </tr>
             <tr>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                         9.
                     </p>
                 </td>
-                <td class="p-1">
+                <td class="p-0">
                     <p class="text-report mb-0">
                         Flashlight
                     </p>
                 </td>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                         4
                     </p>
                 </td>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                         V
                     </p>
                 </td>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                         V
                     </p>
                 </td>
-                <td class="p-1">
+                <td class="p-0">
                     <p class="text-report mb-0">
                     </p>
                 </td>
             </tr>
             <tr>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                         10.
                     </p>
                 </td>
-                <td class="p-1">
+                <td class="p-0">
                     <p class="text-report mb-0">
                         Penggaris Siku
                     </p>
                 </td>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     </p>
                 </td>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                     </p>
                 </td>
-                <td class="p-1 text-center">
+                <td class="p-0 text-center">
                     <p class="text-report mb-0">
                     </p>
                 </td>
-                <td class="p-1">
+                <td class="p-0">
                     <p class="text-report mb-0">
                     </p>
                 </td>
@@ -1117,20 +1192,20 @@
                     </p>
                 </td>
             </tr>
-        </tbody>
+        </tbody> --}}
     </table>
 
     <div class="page-break"></div>
 
     <table border="1" style="width: 100%" class="mb-3">
         <thead>
-            <th class="text-center">
+            <th class="text-center" style="width: 30%">
                 <img style="height: 70px" src="{{ public_path('assets/images/tcsm.png') }}" alt="logo-tcsm">
             </th>
             <th class="text-center">
-                <h3 class="fw-bolder mx-auto mb-0">DAILY REPORT</h3>
+                <p class="text-judul fw-bolder mx-auto mb-0">DAILY REPORT</p>
             </th>
-            <th class="text-center">
+            <th class="text-center" style="width: 30%">
                 <img style="height: 70px" src="{{ public_path('assets/images/logo_mrtj.png') }}" alt="logo-mrt">
             </th>
         </thead>
@@ -1138,10 +1213,11 @@
 
     <table border="1" class="text-center mb-3" style="width: 100%">
         <thead>
-            <th class="text-center p-2" style="background-color: rgb(0, 0, 87)">
-                <h6 class="fw-bolder mx-auto mb-0 text-white text-uppercase" style="text-transform: capitalize;">
+            <th class="text-center p-1" style="background-color: rgb(0, 0, 87)">
+                <p class="text-sub-judul fw-bolder mx-auto mb-0 text-white text-uppercase"
+                    style="text-transform: capitalize;">
                     DOKUMENTASI KEGIATAN
-                    {{ $closing_report->kegiatan ?? '?' }}</h6>
+                    {{ $closing_report->kegiatan ?? '?' }}</p>
             </th>
         </thead>
     </table>
@@ -1149,18 +1225,18 @@
     <table border="1" style="width: 100%" class="mb-3">
         <tbody>
             <tr>
-                <th class="p-1" style="width: 4%">
+                <td class="p-1" style="width: 4%">
                     <p class="text-report text-center mb-0">1</p>
-                </th>
-                <th class="p-1">
+                </td>
+                <td class="p-1">
                     <p class="text-report mb-0">Dokumentasi saat kegiatan</p>
-                </th>
-                <th class="p-1" style="width: 4%">
+                </td>
+                <td class="p-1" style="width: 4%">
                     <p class="text-report text-center mb-0">2</p>
-                </th>
-                <th class="p-1">
+                </td>
+                <td class="p-1">
                     <p class="text-report mb-0">Dokumentasi saat kegiatan</p>
-                </th>
+                </td>
             </tr>
             <tr>
                 <td rowspan="2"></td>

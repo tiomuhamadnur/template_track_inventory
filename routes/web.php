@@ -27,6 +27,7 @@ use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\TemuanController;
 use App\Http\Controllers\TemuanDepoController;
 use App\Http\Controllers\TemuanMainlineController;
+use App\Http\Controllers\ToolsMaterialsController;
 use App\Http\Controllers\TransDefectController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WeselController;
@@ -213,6 +214,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::controller(ClosingReportController::class)->group(function () {
         Route::get('/closing_report', 'index')->name('closing_report.index');
+        Route::get('/setdev', 'setdev');
         Route::get('/closing_report_create', 'create')->name('closing_report.create');
         Route::post('/closing_report', 'store')->name('closing_report.store');
         Route::get('/closing_report_form', 'form')->name('closing_report.form');
@@ -438,6 +440,11 @@ Route::middleware(['auth'])->group(function () {
             Route::put('/lengkung', 'update')->name('lengkung.update');
             Route::delete('/lengkung', 'destroy')->name('lengkung.delete');
             Route::post('/lengkung-import', 'import')->name('lengkung.import');
+        });
+
+        Route::controller(ToolsMaterialsController::class)->group(function () {
+            Route::get('/tools', 'index')->name('tools.index');
+            Route::post('/tools', 'store')->name('tools.store');
         });
     });
 });

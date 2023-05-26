@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\ClosingReport;
 use App\Models\Pegawai;
 use App\Models\PM;
+use App\Models\ToolsMaterials;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
+use MathPHP\Statistics\Descriptive;
 
 class ClosingReportController extends Controller
 {
@@ -38,35 +40,39 @@ class ClosingReportController extends Controller
 
         $sh = closing_report()->section_head;
         $ttd_sh = Pegawai::where('name', $sh)->value('ttd');
+        $section_head = Pegawai::where('name', $sh)->first();
         $kegiatan = closing_report()->kegiatan;
         $lokasi = closing_report()->lokasi;
-        $status_lampiran = closing_report()->status_lampiran;
+        // $status_lampiran = closing_report()->status_lampiran;
+        $tools = ToolsMaterials::all();
 
         $tanggal = closing_report()->value('tanggal');
         $tanggal = date('Ymd', strtotime($tanggal));
         $tanggal_format = date('l, d-F-Y', strtotime(closing_report()->value('tanggal')));
 
-        if ($status_lampiran == 'Terlampir') {
+        // if ($status_lampiran == 'Terlampir') {
             $pdf = Pdf::loadView(
                 'mainline.mainline_closing_report.format-pdf',
                 [
                     'closing_report' => $closing_report,
-                    'ttd_sh' => $ttd_sh,
+                    'section_head' => $section_head,
+                    'tools' => $tools,
                     'tanggal' => $tanggal_format
                 ]
             )
                 ->setPaper('a4', 'potrait');
-        } else {
-            $pdf = Pdf::loadView(
-                'mainline.mainline_closing_report.format-pdf-nihil',
-                [
-                    'closing_report' => $closing_report,
-                    'ttd_sh' => $ttd_sh,
-                    'tanggal' => $tanggal_format
-                ]
-            )
-                ->setPaper('a4', 'potrait');
-        }
+        // } else {
+        //     $pdf = Pdf::loadView(
+        //         'mainline.mainline_closing_report.format-pdf-nihil',
+        //         [
+        //             'closing_report' => $closing_report,
+        //             'ttd_sh' => $ttd_sh,
+        //             'tools' => $tools,
+        //             'tanggal' => $tanggal_format
+        //         ]
+        //     )
+        //         ->setPaper('a4', 'potrait');
+        // }
 
         return $pdf->stream($tanggal . '_Closing Report Activity_' . $kegiatan . '_' . $lokasi . '.pdf');
     }
@@ -187,9 +193,12 @@ class ClosingReportController extends Controller
         }
     }
 
-    public function show($id)
+    public function setdev()
     {
-        //
+        $data = [3, 2, 6, 1, -3];
+        $standarDeviasi = Descriptive::standardDeviation($data);
+
+        return "Standar deviasi: " . $standarDeviasi;
     }
 
     public function edit($id)

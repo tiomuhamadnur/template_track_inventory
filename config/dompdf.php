@@ -186,7 +186,7 @@ return [
          *
          * @var string
          */
-        'default_font' => 'serif',
+        'default_font' => 'calibri',
 
         /**
          * Image DPI setting
