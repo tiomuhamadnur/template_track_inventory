@@ -11,7 +11,7 @@
                     <div class="d-sm-flex justify-content-between align-items-start">
                         <div>
                             <h4 class="card-title card-title-dash">Update Management User</h4>
-                            <p class="card-subtitle card-subtitle-dash">Track & Civil Structure Maintenance</p>
+                            <p class="card-subtitle card-subtitle-dash">Civil Permanent Way Maintenance</p>
                         </div>
                     </div>
 
@@ -56,6 +56,7 @@
                                             <option value="Engineer">Engineer</option>
                                             <option value="Technician">Technician</option>
                                             <option value="Staff">Staff</option>
+                                            <option value="Guest">Guest</option>
                                         </select>
                                     </div>
                                     <div>
@@ -63,15 +64,19 @@
                                         <select class="form-select w-full" name="section">
                                             <option value="{{ $user->section }}" selected>{{ $user->section }}
                                             </option>
-                                            <option value="Track Examination">Track Examination</option>
-                                            <option value="Track Maintenance">Track Maintenance</option>
+                                            <option value="Permanent Way RAMS">Permanent Way RAMS</option>
+                                            <option value="Permanent Way Maintenance">Permanent Way Maintenance</option>
+                                            <option value="Guest">Guest</option>
                                         </select>
                                     </div>
                                     <div>
                                         <label for="crud-form-1" class="form-label mt-2">Departement</label>
-                                        <input id="crud-form-1" type="text" class="form-control w-full"
-                                            name="departement" placeholder="Masukkan Nama Departement"
-                                            value="{{ $user->departement }}" readonly>
+                                        <select class="form-select w-full" name="departement">
+                                            <option value="{{ $user->departement }}" selected>{{ $user->departement }}
+                                            </option>
+                                            <option value="Civil Permanent Way">Civil Permanent Way</option>
+                                            <option value="Guest">Guest</option>
+                                        </select>
                                     </div>
                                     <div>
                                         <label for="crud-form-1" class="form-label mt-2">Role</label>
@@ -80,6 +85,7 @@
                                             </option>
                                             <option value="User">User</option>
                                             <option value="Admin">Admin</option>
+                                            <option value="Guest">Guest</option>
                                         </select>
                                     </div>
                                     <div class="form-label mt-2">

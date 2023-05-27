@@ -40,21 +40,25 @@
                                             <option value="Engineer">Engineer</option>
                                             <option value="Technician">Technician</option>
                                             <option value="Staff">Staff</option>
+                                            <option value="Guest">Guest</option>
                                         </select>
                                     </div>
                                     <div>
                                         <label for="crud-form-1" class="form-label mt-2">Section</label>
                                         <select class="form-select w-full" name="section">
                                             <option disabled selected>- Pilih Section -</option>
-                                            <option value="Track Examination">Track Examination</option>
-                                            <option value="Track Maintenance">Track Maintenance</option>
+                                            <option value="Permanent Way RAMS">Permanent Way RAMS</option>
+                                            <option value="Permanent Way Maintenance">Permanent Way Maintenance</option>
+                                            <option value="Guest">Guest</option>
                                         </select>
                                     </div>
                                     <div>
                                         <label for="crud-form-1" class="form-label mt-2">Departement</label>
-                                        <input id="crud-form-1" type="text" class="form-control w-full"
-                                            name="departement" placeholder="Masukkan Nama Departement"
-                                            value="Track Civil Structure" readonly>
+                                        <select class="form-select w-full" name="departement">
+                                            <option disabled selected>- Pilih Departement -</option>
+                                            <option value="Civil Permanent Way">Civil Permanent Way</option>
+                                            <option value="Guest">Guest</option>
+                                        </select>
                                     </div>
                                     <div>
                                         <label for="crud-form-1" class="form-label mt-2">Role</label>
@@ -62,6 +66,7 @@
                                             <option disabled selected>- Pilih Role -</option>
                                             <option value="User">User</option>
                                             <option value="Admin">Admin</option>
+                                            <option value="Guest">Guest</option>
                                         </select>
                                     </div>
                                     <div class="form-label mt-2">
