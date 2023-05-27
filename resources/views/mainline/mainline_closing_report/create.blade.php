@@ -2,6 +2,11 @@
 
 @section('head')
     <title>Form Closing Report Activity</title>
+    <style>
+        .temp-hide {
+            display: block;
+        }
+    </style>
 @endsection
 
 @section('body')
@@ -116,15 +121,74 @@
                         </div>
 
                         <div class="form-row">
-                            <div class="name">Ada Lampiran?</div>
+                            <div class="name">Penggunaan Tools & Materials</div>
                             <div class="value">
-                                <div class="input-group">
-                                    <select name="status_lampiran" id="status_lampiran" class="form-select" required>
-                                        <option value="" selected disabled>- Pilih Keterangan Lampiran -</option>
-                                        <option value="Terlampir">Ada</option>
-                                        <option value="Nihil">Tidak Ada</option>
-                                    </select>
-                                </div>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center" style="width: 3%">
+                                                No
+                                            </th>
+                                            {{-- <th class="text-center">
+                                                #
+                                            </th> --}}
+                                            <th class="text-center">
+                                                Name
+                                            </th>
+                                            <th class="text-center">
+                                                Qty.
+                                            </th>
+                                            <th class="text-center">
+                                                Initials
+                                            </th>
+                                            <th class="text-center">
+                                                Ending
+                                            </th>
+                                            <th class="text-center">
+                                                Remarks
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($tools as $item)
+                                            <tr>
+                                                <td class="text-center">
+                                                    {{ $loop->iteration }}
+                                                </td>
+                                                <td class="text-wrap">
+                                                    <select class="form-select" name="tools_id[]">
+                                                        <option value="" selected disabled>Pilih
+                                                        </option>
+                                                        @foreach ($tools as $item)
+                                                            <option value="{{ $item->id }}">{{ $item->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td class="text-wrap text-center">
+                                                    <div class="temp-hide">
+                                                        <input type="number" class="form-control" name="qty[]"
+                                                            min="1">
+                                                    </div>
+                                                </td>
+                                                <td class="text-center text-center">
+                                                    <input class="form-check-input temp-hide" type="checkbox"
+                                                        name="initial_check[]" value="V" id="flexCheckDefault">
+                                                </td>
+                                                <td class="text-center text-center">
+                                                    <input class="form-check-input temp-hide" type="checkbox"
+                                                        name="ending_check[]" value="V" id="flexCheckDefault">
+                                                </td>
+                                                <td class="text-wrap text-center">
+                                                    <div class="temp-hide">
+                                                        <input type="text" class="form-control" value=""
+                                                            name="remark[]">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
 
@@ -233,6 +297,19 @@
                                         </tr>
                                     </tbody>
                                 </table>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="name">Ada Lampiran?</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <select name="status_lampiran" id="status_lampiran" class="form-select" required>
+                                        <option value="" selected disabled>- Pilih Keterangan Lampiran -</option>
+                                        <option value="Terlampir">Ada</option>
+                                        <option value="Nihil">Tidak Ada</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
 

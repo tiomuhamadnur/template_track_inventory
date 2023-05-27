@@ -6,6 +6,7 @@ use App\Models\ClosingReport;
 use App\Models\Pegawai;
 use App\Models\PM;
 use App\Models\ToolsMaterials;
+use App\Models\TransToolsMaterials;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
@@ -19,8 +20,9 @@ class ClosingReportController extends Controller
         $activity = PM::orderBy('name', 'asc')->get();
         $section_head = Pegawai::where('jabatan', 'Section Head')->get();
         $personel = Pegawai::where('jabatan', 'Technician')->orderBy('name', 'asc')->get();
+        $tools = ToolsMaterials::orderBy('name', 'asc')->get();
 
-        return view('mainline.mainline_closing_report.create', compact(['activity', 'section_head', 'personel']));
+        return view('mainline.mainline_closing_report.create', compact(['activity', 'section_head', 'personel', 'tools']));
     }
 
     public function form()
@@ -39,47 +41,41 @@ class ClosingReportController extends Controller
         $closing_report = closing_report();
 
         $sh = closing_report()->section_head;
-        $ttd_sh = Pegawai::where('name', $sh)->value('ttd');
         $section_head = Pegawai::where('name', $sh)->first();
         $kegiatan = closing_report()->kegiatan;
         $lokasi = closing_report()->lokasi;
-        // $status_lampiran = closing_report()->status_lampiran;
-        $tools = ToolsMaterials::all();
+        $tools = TransToolsMaterials::all();
 
         $tanggal = closing_report()->value('tanggal');
         $tanggal = date('Ymd', strtotime($tanggal));
         $tanggal_format = date('l, d-F-Y', strtotime(closing_report()->value('tanggal')));
 
-        // if ($status_lampiran == 'Terlampir') {
-            $pdf = Pdf::loadView(
-                'mainline.mainline_closing_report.format-pdf',
-                [
-                    'closing_report' => $closing_report,
-                    'section_head' => $section_head,
-                    'tools' => $tools,
-                    'tanggal' => $tanggal_format
-                ]
-            )
-                ->setPaper('a4', 'potrait');
-        // } else {
-        //     $pdf = Pdf::loadView(
-        //         'mainline.mainline_closing_report.format-pdf-nihil',
-        //         [
-        //             'closing_report' => $closing_report,
-        //             'ttd_sh' => $ttd_sh,
-        //             'tools' => $tools,
-        //             'tanggal' => $tanggal_format
-        //         ]
-        //     )
-        //         ->setPaper('a4', 'potrait');
-        // }
+        $pdf = Pdf::loadView(
+            'mainline.mainline_closing_report.format-pdf',
+            [
+                'closing_report' => $closing_report,
+                'section_head' => $section_head,
+                'tools' => $tools,
+                'tanggal' => $tanggal_format
+            ]
+        )
+            ->setPaper('a4', 'potrait');
 
         return $pdf->stream($tanggal . '_Closing Report Activity_' . $kegiatan . '_' . $lokasi . '.pdf');
     }
 
     public function store(Request $request)
     {
-        // dd($request);
+        for ($i = 0; $i < count($request->tools_id); $i++){
+            TransToolsMaterials::create([
+                'tools_id' => $request->tools_id[$i],
+                'qty' => $request->qty[$i],
+                'initial_check' => $request->initial_check[$i],
+                'ending_check' => $request->ending_check[$i],
+                'remark' => $request->remark[$i],
+            ]);
+        }
+
         $this->validate($request, [
             'photo_1' => ['file', 'image', 'required'],
             'photo_2' => ['file', 'image', 'required'],
@@ -217,8 +213,10 @@ class ClosingReportController extends Controller
         $foto_lampiran = Storage::disk('public')->files('closing_report/foto_lampiran');
 
         $closing_report = ClosingReport::get();
-        if ($closing_report) {
+        $trans_tools_materials = TransToolsMaterials::get();
+        if ($closing_report and $trans_tools_materials) {
             ClosingReport::truncate();
+            TransToolsMaterials::truncate();
             if ($foto_kegiatan or $foto_lampiran) {
                 foreach ($foto_kegiatan as $item) {
                     Storage::disk('public')->delete($item);
