@@ -6,6 +6,10 @@
         .temp-hide {
             display: block;
         }
+
+        .lampiran {
+            display: none;
+        }
     </style>
 @endsection
 
@@ -150,10 +154,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($tools as $item)
+                                        @for ($i = 1; $i <= 10; $i++)
                                             <tr>
                                                 <td class="text-center">
-                                                    {{ $loop->iteration }}
+                                                    {{ $i }}
                                                 </td>
                                                 <td class="text-wrap">
                                                     <select class="form-select" name="tools_id[]">
@@ -186,7 +190,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        @endfor
                                     </tbody>
                                 </table>
                             </div>
@@ -313,7 +317,7 @@
                             </div>
                         </div>
 
-                        <div id="lampiran">
+                        <div class="lampiran" id="lampiran">
                             <div class="form-row">
                                 <div class="name">Foto Lampiran (Potrait)</div>
                                 <div class="value">
