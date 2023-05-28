@@ -133,11 +133,8 @@
                                             <th class="text-center" style="width: 3%">
                                                 No
                                             </th>
-                                            {{-- <th class="text-center">
-                                                #
-                                            </th> --}}
-                                            <th class="text-center">
-                                                Name
+                                            <th class="text-center text-wrap">
+                                                Item Name
                                             </th>
                                             <th class="text-center">
                                                 Qty.
@@ -176,12 +173,16 @@
                                                     </div>
                                                 </td>
                                                 <td class="text-center text-center">
-                                                    <input class="form-check-input temp-hide" type="checkbox"
-                                                        name="initial_check[]" value="V" id="flexCheckDefault">
+                                                    <div class="text-center">
+                                                        <input class="form-check-input temp-hide" type="checkbox"
+                                                            name="initial_check[]" value="V" id="flexCheckDefault">
+                                                    </div>
                                                 </td>
                                                 <td class="text-center text-center">
-                                                    <input class="form-check-input temp-hide" type="checkbox"
-                                                        name="ending_check[]" value="V" id="flexCheckDefault">
+                                                    <div class="text-center">
+                                                        <input class="form-check-input temp-hide" type="checkbox"
+                                                            name="ending_check[]" value="V" id="flexCheckDefault">
+                                                    </div>
                                                 </td>
                                                 <td class="text-wrap text-center">
                                                     <div class="temp-hide">
