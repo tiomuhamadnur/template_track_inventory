@@ -336,7 +336,7 @@ class DashboardController extends Controller
             ->where('area_id', 27)
             ->count();
 
-        $data_rfi = TransRFI::all()->count();
+        $data_rfi = TransRFI::where('temuan_mainline_id', '!=', null)->get()->count();
 
         return view('mainline.mainline_dashboard.index', compact([
             'temuan_all',

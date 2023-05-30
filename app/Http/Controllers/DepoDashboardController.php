@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TemuanDepo;
+use App\Models\TransRFI;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -33,6 +34,8 @@ class DepoDashboardController extends Controller
             ->whereNot('part_id', 2)
             ->count();
 
+        $data_rfi = TransRFI::where('temuan_depo_id', '!=', null)->get()->count();
+
         return view(
             'depo.depo_dashboard.index',
             compact([
@@ -49,6 +52,7 @@ class DepoDashboardController extends Controller
                 'defect_rail',
                 'defect_fastening',
                 'defect_lainnya',
+                'data_rfi',
             ])
         );
     }

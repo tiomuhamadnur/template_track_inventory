@@ -382,7 +382,11 @@
                         <tr>
                             <td valign="middle" style="text-align:left; padding: 1em 2.5em;">
                                 <p><a href="https://exodus.tideupindustries.com/rfi-mainline" target="_blank"
-                                        class="btn btn-primary">Lihat Daftar RFI</a></p>
+                                        class="btn btn-primary">Daftar RFI Mainline</a></p>
+                            </td>
+                            <td valign="middle" style="text-align:left; padding: 1em 2.5em;">
+                                <p><a href="https://exodus.tideupindustries.com/rfi-depo" target="_blank"
+                                        class="btn btn-primary">Daftar RFI Depo</a></p>
                             </td>
                         </tr>
                         <tr>
