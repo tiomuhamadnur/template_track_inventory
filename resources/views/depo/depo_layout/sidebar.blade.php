@@ -21,6 +21,12 @@
                 </ul>
             </div>
         </li>
+        <li class="nav-item animate__animated animate__fadeInLeft">
+            <a class="nav-link" href="{{ route('rfi.depo.index') }}">
+                <i id="notification_rfi" class="mdi mdi-arrange-send-backward menu-icon"></i>
+                <span class="menu-title">Request For Inspection</span>
+            </a>
+        </li>
         <li class="nav-item nav-category">Settings</li>
         <li class="nav-item animate__animated animate__fadeInLeft">
             <a class="nav-link" href="{{ route('profile') }}" aria-expanded="false" aria-controls="auth">

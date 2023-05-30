@@ -23,6 +23,7 @@ use App\Http\Controllers\PartController;
 use App\Http\Controllers\PICController;
 use App\Http\Controllers\PMController;
 use App\Http\Controllers\RfiController;
+use App\Http\Controllers\RfiDepoController;
 use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\TemuanController;
 use App\Http\Controllers\TemuanDepoController;
@@ -173,6 +174,15 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/rfi-mainline', 'approve')->name('rfi.mainline.approve');
         Route::put('/rfi-mainline-update', 'update')->name('rfi.mainline.update');
         Route::delete('/rfi-mainline', 'destroy')->name('rfi.mainline.delete');
+    });
+
+    Route::controller(RfiDepoController::class)->group(function () {
+        Route::get('/rfi-depo', 'index')->name('rfi.depo.index');
+        Route::get('/rfi-depo/{id}/rfi', 'create')->name('rfi.depo.create');
+        Route::post('/rfi-depo', 'store')->name('rfi.depo.store');
+        Route::put('/rfi-depo', 'approve')->name('rfi.depo.approve');
+        Route::put('/rfi-depo-update', 'update')->name('rfi.depo.update');
+        Route::delete('/rfi-depo', 'destroy')->name('rfi.depo.delete');
     });
 
     Route::controller(TemuanController::class)->group(function () {

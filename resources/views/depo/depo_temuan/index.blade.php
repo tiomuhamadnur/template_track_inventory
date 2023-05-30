@@ -71,7 +71,7 @@
                                                 Line
                                             </th>
                                             <th class="text-center text-wrap">
-                                                Chainage (m)
+                                                Chainage
                                             </th>
                                             <th class="text-center">
                                                 Part
@@ -102,7 +102,7 @@
                                                         class="badge @if ($item->status == 'open') bg-success
                                                     @else
                                                     bg-danger @endif">
-                                                        {{ $item->kilometer }}
+                                                        {{ $item->kilometer . ' m' }}
                                                     </span>
                                                 </td>
                                                 <td class="text-center text-wrap">
@@ -129,11 +129,16 @@
                                                         data-pic="{{ $item->pic }}"
                                                         data-remark="{{ $item->remark ?? '-' }}"
                                                         data-status="{{ $item->status }}"
+                                                        data-justifikasi="{{ $item->justifikasi ?? '-' }}"
                                                         data-photo="{{ asset('storage/' . $item->photo) }}"
                                                         data-photo_close="{{ asset('storage/' . $item->photo_close) }}"
                                                         data-pic_close="{{ $item->pic_close ?? '' }}"
+                                                        data-tanggal_close="{{ $item->tanggal_close ?? '' }}"
+                                                        data-tanggal_rfi="{{ $item->tanggal_rfi ?? '' }}"
+                                                        data-pic_rfi="{{ $item->pic_rfi ?? '' }}"
                                                         data-href="{{ '/temuan_depo' . '/' . Crypt::encryptString($item->id) . '/close_temuan' }}"
-                                                        data-href-ubah="{{ '/temuan_depo' . '/' . Crypt::encryptString($item->id) . '/edit' }}">
+                                                        data-href-ubah="{{ '/temuan_depo' . '/' . Crypt::encryptString($item->id) . '/edit' }}"
+                                                        data-href-rfi="{{ '/rfi-depo' . '/' . Crypt::encryptString($item->id) . '/rfi' }}">
                                                         Detail
                                                     </button>
                                                 </td>
@@ -239,11 +244,24 @@
                                     <input readonly type="text" id="status_modal" class="form-control">
                                 </div>
                             </div>
+                            <div class="row g-2">
+                                <div class="col mb-1">
+                                    <label for="emailWithTitle" class="form-label">Justifikasi Tim Maintenance</label>
+                                    <input readonly type="text" id="justifikasi_modal" class="form-control">
+                                </div>
+                                <div class="col mb-1">
+                                    <label for="emailWithTitle" class="form-label">Pic Perbaikan</label>
+                                    <input readonly type="text" id="rfi_modal" class="form-control">
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <a href="#" id="ubah_temuan_modal" class="btn btn-outline-warning"
                                 @if (auth()->user()->role != 'Admin') hidden @endif>
                                 Ubah Data Temuan
+                            </a>
+                            <a href="#" id="rfi_temuan_modal" class="btn btn-outline-success">
+                                Request For Inspection
                             </a>
                             <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
                                 Tutup
@@ -436,6 +454,9 @@
                 var remark = $(e.relatedTarget).data('remark');
                 var pic = $(e.relatedTarget).data('pic');
                 var pic_close = $(e.relatedTarget).data('pic_close');
+                var tanggal_close = $(e.relatedTarget).data('tanggal_close');
+                var pic_rfi = $(e.relatedTarget).data('pic_rfi');
+                var tanggal_rfi = $(e.relatedTarget).data('tanggal_rfi');
                 $.ajax({
                     url: '/getAvatar?pic=' + pic,
                     type: 'get',
@@ -447,10 +468,12 @@
                 });
 
                 var status = $(e.relatedTarget).data('status');
+                var justifikasi = $(e.relatedTarget).data('justifikasi');
                 var photo = $(e.relatedTarget).data('photo');
                 var photo_close = $(e.relatedTarget).data('photo_close');
                 var href = $(e.relatedTarget).data('href');
                 var href_ubah_temuan = $(e.relatedTarget).data('href-ubah');
+                var href_rfi = $(e.relatedTarget).data('href-rfi');
 
                 $('#tanggal_modal').val(tanggal);
                 $('#line_modal').val(line);
@@ -465,12 +488,15 @@
                 if (pic_close == '') {
                     $('#status_modal').val(status);
                 } else {
-                    $('#status_modal').val(status + ' (by: ' + pic_close + ')');
+                    $('#status_modal').val(status + ' (by: ' + pic_close + ' - at: ' + tanggal_close + ')');
+                    $('#rfi_modal').val(pic_rfi + ' (' + tanggal_rfi + ')');
                 }
+                $('#justifikasi_modal').val(justifikasi);
                 document.getElementById("photo_modal").src = photo;
                 document.getElementById("photo_close_modal").src = photo_close;
                 // document.getElementById("close_temuan_modal").href = href;
                 document.getElementById("ubah_temuan_modal").href = href_ubah_temuan;
+                document.getElementById("rfi_temuan_modal").href = href_rfi;
             });
         });
 

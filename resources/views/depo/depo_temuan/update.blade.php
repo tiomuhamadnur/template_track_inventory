@@ -37,9 +37,6 @@
                                 <div class="form-group mb-2">
                                     <label class="form-label">Status Temuan</label>
                                     <input type="text" value="{{ $temuan_depo->status }}" class="form-control" readonly>
-                                    <a href="{{ route('temuan_depo.close.temuan', Crypt::encryptString($temuan_depo->id)) }}"
-                                        class="btn btn-warning mt-1" title="Anda ingin closing temuan ini?">Closing
-                                        temuan?</a>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Chainage (m)</label>
@@ -103,6 +100,11 @@
                                             Mayor
                                         </option>
                                     </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label fw-bolder">Justifikasi (Diisi Tim Track Maintenance)</label>
+                                    <input type="text" name="justifikasi" value="{{ $temuan_depo->justifikasi ?? '' }}"
+                                        class="form-control">
                                 </div>
                                 <button type="submit" class="btn btn-outline-primary me-2">Submit</button>
                                 <a href="{{ route('temuan_depo.index') }}" class="btn btn-light">Cancel</a>

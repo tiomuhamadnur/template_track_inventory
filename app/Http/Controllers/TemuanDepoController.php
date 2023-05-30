@@ -301,6 +301,7 @@ class TemuanDepoController extends Controller
                 'remark' => $request->remark,
                 'klasifikasi' => $request->klasifikasi,
                 'tanggal' => $request->tanggal,
+                'justifikasi' => $request->justifikasi,
                 'photo' => $photo_temuan,
             ]);
 
@@ -313,6 +314,7 @@ class TemuanDepoController extends Controller
                 'remark' => $request->remark,
                 'klasifikasi' => $request->klasifikasi,
                 'tanggal' => $request->tanggal,
+                'justifikasi' => $request->justifikasi,
             ]);
 
             return redirect()->route('temuan_depo.index')->withNotify('Data temuan depo berhasil dimutakhirkan!');
