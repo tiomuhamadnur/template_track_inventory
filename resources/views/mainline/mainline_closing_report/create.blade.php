@@ -133,7 +133,7 @@
                                             <th class="text-center" style="width: 3%">
                                                 No
                                             </th>
-                                            <th class="text-center text-wrap">
+                                            <th class="text-center text-wrap" style="width: 30%">
                                                 Item Name
                                             </th>
                                             <th class="text-center">
@@ -166,7 +166,7 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td class="text-wrap text-center">
+                                                <td class="text-wrap text-center" style="width: 22%">
                                                     <div class="temp-hide">
                                                         <input type="number" class="form-control" name="qty[]"
                                                             min="1">
@@ -198,7 +198,8 @@
                         </div>
 
                         <div class="form-row">
-                            <div class="name">Foto Dokumentasi Kegiatan (Landscape)</div>
+                            <div class="name">Foto Dokumentasi Kegiatan <span class="text-danger">(*Landscape)</span>
+                            </div>
                             <div class="value">
                                 <table border="1" class="table-bordered" style="width: 100%">
                                     <thead>
@@ -320,18 +321,25 @@
 
                         <div class="lampiran" id="lampiran">
                             <div class="form-row">
-                                <div class="name">Foto Lampiran (Potrait)</div>
+                                <div class="name">Foto Lampiran <span class="text-danger">(*Potrait)</span>
+                                </div>
                                 <div class="value">
+                                    <a id="btn-add" hidden style="width:100%" class="btn btn-primary mb-2 pt-0 me-2">
+                                        Add Row
+                                    </a>
                                     <table border="1" class="table-bordered" style="width: 100%">
-                                        <tbody>
+                                        <tbody id="tabel-lampiran">
                                             <tr>
-                                                <th class="p-2">
+                                                <td class="p-2">
                                                     <div class="input-group">
                                                         <div class="form-row">
-                                                            <div class="form-label mb-1">
-                                                                Lampiran 1
+                                                            <div class="form-label fw-bolder mb-2">
+                                                                <p class="text-danger">
+                                                                    *Bisa pilih lebih dari 1 foto
+                                                                </p>
                                                             </div>
-                                                            <input class="form-control" type="file" name="lampiran_1">
+                                                            <input class="form-control" type="file"
+                                                                name="lampiran_1[]" multiple>
                                                             @error('lampiran_1')
                                                                 <p class="bg-danger rounded-3 text-center text-white mt-1">
                                                                     {{ $message }}
@@ -339,24 +347,7 @@
                                                             @enderror
                                                         </div>
                                                     </div>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th class="p-2">
-                                                    <div class="input-group">
-                                                        <div class="form-row">
-                                                            <div class="form-label mb-1">
-                                                                Lampiran 2
-                                                            </div>
-                                                            <input class="form-control" type="file" name="lampiran_2">
-                                                            @error('lampiran_2')
-                                                                <p class="bg-danger rounded-3 text-center text-white mt-1">
-                                                                    {{ $message }}
-                                                                </p>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-                                                </th>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -387,6 +378,16 @@
                     var lampiran = document.getElementById("lampiran");
                     lampiran.style.display = "block";
                 }
+            });
+
+            $("#btn-add").click(function() {
+                $("#tabel-lampiran").append(
+                    '<tr><td class="p-2"><input type="file" name="lampiran_1[]" class="form-control" /></td><td class="p-2"><button type="button" class="btn btn-danger btn-sm remove-input-field">Hapus</button></td></tr>'
+                );
+            });
+
+            $(document).on('click', '.remove-input-field', function() {
+                $(this).parents('tr').remove();
             });
         });
     </script>

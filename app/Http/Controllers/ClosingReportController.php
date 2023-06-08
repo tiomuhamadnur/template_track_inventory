@@ -9,7 +9,6 @@ use App\Models\ToolsMaterials;
 use App\Models\TransToolsMaterials;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use MathPHP\Statistics\Descriptive;
 
@@ -34,7 +33,7 @@ class ClosingReportController extends Controller
 
         function closing_report()
         {
-            $closing_report = ClosingReport::orderBy('id', 'desc')->first();
+            $closing_report = ClosingReport::where('kegiatan', '!=', null)->orderBy('id', 'desc')->first();
             return $closing_report;
         }
 
@@ -45,6 +44,7 @@ class ClosingReportController extends Controller
         $kegiatan = closing_report()->kegiatan;
         $lokasi = closing_report()->lokasi;
         $tools = TransToolsMaterials::all();
+        $lampiran = ClosingReport::where('kegiatan', null)->get();
 
         $tanggal = closing_report()->value('tanggal');
         $tanggal = date('Ymd', strtotime($tanggal));
@@ -54,6 +54,7 @@ class ClosingReportController extends Controller
             'mainline.mainline_closing_report.format-pdf',
             [
                 'closing_report' => $closing_report,
+                'lampiran' => $lampiran,
                 'section_head' => $section_head,
                 'tools' => $tools,
                 'tanggal' => $tanggal_format
@@ -66,7 +67,27 @@ class ClosingReportController extends Controller
 
     public function store(Request $request)
     {
-        for ($i = 0; $i < count($request->tools_id); $i++){
+        $this->validate($request, [
+            'photo_1' => ['file', 'image', 'required'],
+            'photo_2' => ['file', 'image', 'required'],
+            'photo_3' => ['file', 'image', 'required'],
+            'photo_4' => ['file', 'image', 'required'],
+            'photo_5' => ['file', 'image', 'required'],
+            'photo_6' => ['file', 'image', 'required'],
+            'lampiran_1.*' => ['file', 'image'],
+            // 'lampiran_2' => ['file', 'image'],
+        ], [
+            'photo_1.image' => 'File harus dalam format gambar/photo!',
+            'photo_2.image' => 'File harus dalam format gambar/photo!',
+            'photo_3.image' => 'File harus dalam format gambar/photo!',
+            'photo_4.image' => 'File harus dalam format gambar/photo!',
+            'photo_5.image' => 'File harus dalam format gambar/photo!',
+            'photo_6.image' => 'File harus dalam format gambar/photo!',
+            // 'lampiran_1.image' => 'File harus dalam format gambar/photo!',
+            // 'lampiran_2.image' => 'File harus dalam format gambar/photo!',
+        ]);
+
+        for ($i = 0; $i < count($request->tools_id); $i++) {
             TransToolsMaterials::create([
                 'tools_id' => $request->tools_id[$i],
                 'qty' => $request->qty[$i],
@@ -76,117 +97,41 @@ class ClosingReportController extends Controller
             ]);
         }
 
-        $this->validate($request, [
-            'photo_1' => ['file', 'image', 'required'],
-            'photo_2' => ['file', 'image', 'required'],
-            'photo_3' => ['file', 'image', 'required'],
-            'photo_4' => ['file', 'image', 'required'],
-            'photo_5' => ['file', 'image', 'required'],
-            'photo_6' => ['file', 'image', 'required'],
-            'lampiran_1' => ['file', 'image'],
-            'lampiran_2' => ['file', 'image'],
-        ], [
-            'photo_1.image' => 'File harus dalam format gambar/photo!',
-            'photo_2.image' => 'File harus dalam format gambar/photo!',
-            'photo_3.image' => 'File harus dalam format gambar/photo!',
-            'photo_4.image' => 'File harus dalam format gambar/photo!',
-            'photo_5.image' => 'File harus dalam format gambar/photo!',
-            'photo_6.image' => 'File harus dalam format gambar/photo!',
-            'lampiran_1.image' => 'File harus dalam format gambar/photo!',
-            'lampiran_2.image' => 'File harus dalam format gambar/photo!',
+        $lampiran_1 = $request->file('lampiran_1');
+        foreach ($lampiran_1 as $lampiran) {
+            $save_url = $lampiran->store('closing_report/foto_lampiran');
+            ClosingReport::create([
+                'lampiran_1' => $save_url,
+            ]);
+        }
+
+        $photo_1 = $request->file('photo_1')->store('closing_report/foto_kegiatan');
+        $photo_2 = $request->file('photo_2')->store('closing_report/foto_kegiatan');
+        $photo_3 = $request->file('photo_3')->store('closing_report/foto_kegiatan');
+        $photo_4 = $request->file('photo_4')->store('closing_report/foto_kegiatan');
+        $photo_5 = $request->file('photo_5')->store('closing_report/foto_kegiatan');
+        $photo_6 = $request->file('photo_6')->store('closing_report/foto_kegiatan');
+
+        ClosingReport::create([
+            "kegiatan" => $request->kegiatan,
+            "tanggal" => $request->tanggal,
+            "lokasi" => $request->lokasi,
+            "waktu_mulai" => $request->waktu_mulai,
+            "section_head" => $request->section_head,
+            "personel_1" => $request->personel_1,
+            "personel_2" => $request->personel_2,
+            "personel_3" => $request->personel_3,
+            "personel_4" => $request->personel_4,
+            "status_lampiran" => $request->status_lampiran,
+            'photo_1' => $photo_1,
+            'photo_2' => $photo_2,
+            'photo_3' => $photo_3,
+            'photo_4' => $photo_4,
+            'photo_5' => $photo_5,
+            'photo_6' => $photo_6,
         ]);
 
-        if ($request->hasFile('lampiran_1') && $request->hasFile('lampiran_2')) {
-            $photo_1 = $request->file('photo_1')->store('closing_report/foto_kegiatan');
-            $photo_2 = $request->file('photo_2')->store('closing_report/foto_kegiatan');
-            $photo_3 = $request->file('photo_3')->store('closing_report/foto_kegiatan');
-            $photo_4 = $request->file('photo_4')->store('closing_report/foto_kegiatan');
-            $photo_5 = $request->file('photo_5')->store('closing_report/foto_kegiatan');
-            $photo_6 = $request->file('photo_6')->store('closing_report/foto_kegiatan');
-            $lampiran_1 = $request->file('lampiran_1')->store('closing_report/foto_lampiran');
-            $lampiran_2 = $request->file('lampiran_2')->store('closing_report/foto_lampiran');
-
-            ClosingReport::create([
-                "kegiatan" => $request->kegiatan,
-                "tanggal" => $request->tanggal,
-                "lokasi" => $request->lokasi,
-                "waktu_mulai" => $request->waktu_mulai,
-                "section_head" => $request->section_head,
-                "personel_1" => $request->personel_1,
-                "personel_2" => $request->personel_2,
-                "personel_3" => $request->personel_3,
-                "personel_4" => $request->personel_4,
-                "status_lampiran" => $request->status_lampiran,
-                'photo_1' => $photo_1,
-                'photo_2' => $photo_2,
-                'photo_3' => $photo_3,
-                'photo_4' => $photo_4,
-                'photo_5' => $photo_5,
-                'photo_6' => $photo_6,
-                'lampiran_1' => $lampiran_1,
-                'lampiran_2' => $lampiran_2,
-            ]);
-
-            return redirect()->route('closing_report.form');
-        } elseif ($request->hasFile('lampiran_1')) {
-            $photo_1 = $request->file('photo_1')->store('closing_report/foto_kegiatan');
-            $photo_2 = $request->file('photo_2')->store('closing_report/foto_kegiatan');
-            $photo_3 = $request->file('photo_3')->store('closing_report/foto_kegiatan');
-            $photo_4 = $request->file('photo_4')->store('closing_report/foto_kegiatan');
-            $photo_5 = $request->file('photo_5')->store('closing_report/foto_kegiatan');
-            $photo_6 = $request->file('photo_6')->store('closing_report/foto_kegiatan');
-            $lampiran_1 = $request->file('lampiran_1')->store('closing_report/foto_lampiran');
-
-            ClosingReport::create([
-                "kegiatan" => $request->kegiatan,
-                "tanggal" => $request->tanggal,
-                "lokasi" => $request->lokasi,
-                "waktu_mulai" => $request->waktu_mulai,
-                "section_head" => $request->section_head,
-                "personel_1" => $request->personel_1,
-                "personel_2" => $request->personel_2,
-                "personel_3" => $request->personel_3,
-                "personel_4" => $request->personel_4,
-                "status_lampiran" => $request->status_lampiran,
-                'photo_1' => $photo_1,
-                'photo_2' => $photo_2,
-                'photo_3' => $photo_3,
-                'photo_4' => $photo_4,
-                'photo_5' => $photo_5,
-                'photo_6' => $photo_6,
-                'lampiran_1' => $lampiran_1,
-            ]);
-
-            return redirect()->route('closing_report.form');
-        } else {
-            $photo_1 = $request->file('photo_1')->store('closing_report/foto_kegiatan');
-            $photo_2 = $request->file('photo_2')->store('closing_report/foto_kegiatan');
-            $photo_3 = $request->file('photo_3')->store('closing_report/foto_kegiatan');
-            $photo_4 = $request->file('photo_4')->store('closing_report/foto_kegiatan');
-            $photo_5 = $request->file('photo_5')->store('closing_report/foto_kegiatan');
-            $photo_6 = $request->file('photo_6')->store('closing_report/foto_kegiatan');
-
-            ClosingReport::create([
-                "kegiatan" => $request->kegiatan,
-                "tanggal" => $request->tanggal,
-                "lokasi" => $request->lokasi,
-                "waktu_mulai" => $request->waktu_mulai,
-                "section_head" => $request->section_head,
-                "personel_1" => $request->personel_1,
-                "personel_2" => $request->personel_2,
-                "personel_3" => $request->personel_3,
-                "personel_4" => $request->personel_4,
-                "status_lampiran" => $request->status_lampiran,
-                'photo_1' => $photo_1,
-                'photo_2' => $photo_2,
-                'photo_3' => $photo_3,
-                'photo_4' => $photo_4,
-                'photo_5' => $photo_5,
-                'photo_6' => $photo_6,
-            ]);
-
-            return redirect()->route('closing_report.form');
-        }
+        return redirect()->route('closing_report.form');
     }
 
     public function setdev()

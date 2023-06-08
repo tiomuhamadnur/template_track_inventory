@@ -458,46 +458,48 @@
         </tbody>
     </table>
 
-    @if ($closing_report->lampiran_1 != null)
-        <div class="page-break"></div>
-        <table border="1" style="width: 100%" class="mb-3">
-            <thead>
-                <th class="text-center" style="width: 30%">
-                    <img style="height: 70px" src="{{ public_path('assets/images/tcsm.png') }}" alt="logo-tcsm">
-                </th>
-                <th class="text-center">
-                    <p class="text-judul fw-bolder mx-auto mb-0">DAILY REPORT</p>
-                </th>
-                <th class="text-center" style="width: 30%">
-                    <img style="height: 70px" src="{{ public_path('assets/images/logo_mrtj.png') }}" alt="logo-mrt">
-                </th>
-            </thead>
-        </table>
+    @if ($lampiran->count() != null)
+        @foreach ($lampiran as $item)
+            <div class="page-break"></div>
+            <table border="1" style="width: 100%" class="mb-3">
+                <thead>
+                    <th class="text-center" style="width: 30%">
+                        <img style="height: 70px" src="{{ public_path('assets/images/tcsm.png') }}" alt="logo-tcsm">
+                    </th>
+                    <th class="text-center">
+                        <p class="text-judul fw-bolder mx-auto mb-0">DAILY REPORT</p>
+                    </th>
+                    <th class="text-center" style="width: 30%">
+                        <img style="height: 70px" src="{{ public_path('assets/images/logo_mrtj.png') }}"
+                            alt="logo-mrt">
+                    </th>
+                </thead>
+            </table>
 
-        <table border="1" class="text-center mb-3" style="width: 100%">
-            <thead>
-                <th class="text-center p-1" style="background-color: rgb(0, 0, 87)">
-                    <p class="text-sub-judul fw-bolder mx-auto mb-0 text-white">LAMPIRAN</p>
-                </th>
-            </thead>
-        </table>
+            <table border="1" class="text-center mb-3" style="width: 100%">
+                <thead>
+                    <th class="text-center p-1" style="background-color: rgb(0, 0, 87)">
+                        <p class="text-sub-judul fw-bolder mx-auto mb-0 text-white">LAMPIRAN</p>
+                    </th>
+                </thead>
+            </table>
 
-        <table border="1" class="text-center mb-3" style="width: 100%;">
-            <thead>
-                <tr>
-                    <td class="text-center p-2">
-                        <img style="width: 80%"
-                            src="{{ public_path('storage/' . $closing_report->lampiran_1 ?? '-') }}"
-                            alt="lampiran-1">
-                    </td>
-                </tr>
-            </thead>
-        </table>
+            <table border="1" class="text-center mb-3" style="width: 100%;">
+                <thead>
+                    <tr>
+                        <td class="text-center p-2">
+                            <img style="width: 80%" src="{{ public_path('storage/' . $item->lampiran_1 ?? '-') }}"
+                                alt="lampiran-1">
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+        @endforeach
     @else
         {{-- Do Nothing --}}
     @endif
 
-    @if ($closing_report->lampiran_2 != null)
+    {{-- @if ($closing_report->lampiran_2 != null)
         <div class="page-break"></div>
         <table border="1" style="width: 100%" class="mb-3">
             <thead>
@@ -533,8 +535,8 @@
             </thead>
         </table>
     @else
-        {{-- Do Nothing --}}
-    @endif
+
+    @endif --}}
 
 </body>
 
