@@ -48,7 +48,7 @@ class ClosingReportController extends Controller
 
         $tanggal = closing_report()->value('tanggal');
         $tanggal = date('Ymd', strtotime($tanggal));
-        $tanggal_format = date('l, d-F-Y', strtotime(closing_report()->value('tanggal')));
+        $tanggal_format = date('l, d F Y', strtotime(closing_report()->tanggal));
 
         $pdf = Pdf::loadView(
             'mainline.mainline_closing_report.format-pdf',
