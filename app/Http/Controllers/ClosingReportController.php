@@ -46,7 +46,7 @@ class ClosingReportController extends Controller
         $tools = TransToolsMaterials::all();
         $lampiran = ClosingReport::where('kegiatan', null)->get();
 
-        $tanggal = closing_report()->value('tanggal');
+        $tanggal = closing_report()->tanggal;
         $tanggal = date('Ymd', strtotime($tanggal));
         $tanggal_format = date('l, d F Y', strtotime(closing_report()->tanggal));
 
