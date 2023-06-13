@@ -98,6 +98,7 @@ class ClosingReportController extends Controller
         }
 
         $lampiran_1 = $request->file('lampiran_1');
+
         if ($lampiran_1) {
             foreach ($lampiran_1 as $lampiran) {
                 $save_url = $lampiran->store('closing_report/foto_lampiran');
