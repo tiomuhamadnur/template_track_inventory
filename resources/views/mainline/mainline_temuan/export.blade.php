@@ -26,7 +26,8 @@
                 <th>REMARK</th>
                 <th>CLASSIFICATION</th>
                 <th>STATUS</th>
-                <th>PHOTO</th>
+                <th>PHOTO OPEN</th>
+                <th>PHOTO CLOSE</th>
             </tr>
         </thead>
         <tbody>
@@ -105,6 +106,13 @@
                             {{ asset('storage/' . $item->photo) }}
                         @else
                             '-'
+                        @endif
+                    </td>
+                    <td>
+                        @if ($item->photo_close != null)
+                            {{ asset('storage/' . $item->photo_close) }}
+                        @else
+                            ''
                         @endif
                     </td>
                 </tr>
