@@ -446,7 +446,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/lengkung-create', 'create')->name('lengkung.create');
             Route::post('/lengkung', 'store')->name('lengkung.store');
             Route::get('/lengkung/{id}/edit', 'edit')->name('lengkung.edit');
-            Route::get('/lengkung/{id}', 'filter')->name('lengkung.filter');
+            Route::get('/lengkung/filter', 'filter')->name('lengkung.filter');
             Route::put('/lengkung', 'update')->name('lengkung.update');
             Route::delete('/lengkung', 'destroy')->name('lengkung.delete');
             Route::post('/lengkung-import', 'import')->name('lengkung.import');

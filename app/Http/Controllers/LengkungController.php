@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Imports\LengkungImport;
+use App\Models\Area;
 use App\Models\Lengkung;
+use App\Models\Line;
 use Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,21 +15,56 @@ class LengkungController extends Controller
     public function index()
     {
         $lengkung = Lengkung::orderBy(DB::raw('CAST(ip AS FLOAT)', 'asc'))->get();
+        $area = Area::where('stasiun', 'false')->get();
+        $line = Line::all();
 
-        return view('masterdata.masterdata_lengkung.index', compact(['lengkung']));
+        return view('masterdata.masterdata_lengkung.index', compact(['lengkung', 'area', 'line']));
     }
 
-    public function filter($area)
+    public function filter(Request $request)
     {
-        $lengkung = Lengkung::select(
-            'lengkung.*',
-        )
-        ->join('area', 'area.id', '=', 'lengkung.area_id')
-        ->where('area.area', $area)
-        ->orderBy(DB::raw('CAST(ip AS FLOAT)', 'asc'))
-        ->get();
+        // dd($request);
+        $area_id = $request->area_id;
+        $line_id = $request->line_id;
+        $tipe = $request->tipe;
+        $radius = $request->radius;
 
-        return view('masterdata.masterdata_lengkung.index', compact(['lengkung']));
+        $area = Area::where('stasiun', 'false')->get();
+        $line = Line::all();
+
+        $lengkung = Lengkung::query()->select(
+            'lengkung.*',
+        );
+
+        // Filter by area_id
+        $lengkung->when($area_id, function ($query) use ($request) {
+            return $query->where('area_id', $request->area_id);
+        });
+
+        // Filter by line_id
+        $lengkung->when($line_id, function ($query) use ($request) {
+            return $query->where('line_id', $request->line_id);
+        });
+
+        // Filter by tipe
+        $lengkung->when($tipe, function ($query) use ($request) {
+            return $query->where('tipe', $request->tipe);
+        });
+
+        // Filter by radius
+        if ($radius == '<=') {
+            $lengkung->where(DB::raw('CAST(radius AS FLOAT)'), '<=' ,600);
+        }
+        elseif ($radius == '>') {
+            $lengkung->where(DB::raw('CAST(radius AS FLOAT)'), '>' ,600);
+        }
+
+        return view('masterdata.masterdata_lengkung.index',
+        [
+            'lengkung' => $lengkung->orderBy(DB::raw('CAST(ip AS FLOAT)', 'asc'))->get(),
+            'area' => $area,
+            'line'=> $line,
+        ]);
     }
 
     public function create()

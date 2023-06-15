@@ -22,28 +22,19 @@
                                     type="button" title="Reload halaman">
                                     <i class="ti-reload"></i>
                                 </a>
-                                <a href="{{ route('lengkung.create') }}" class="btn btn-outline-dark btn-lg" type="button"
-                                    title="Tambah data lengkung">Add
+                                <a href="{{ route('lengkung.create') }}" class="btn btn-outline-primary btn-lg me-0"
+                                    type="button" title="Tambah data lengkung">Add
                                     Data
                                 </a>
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#import-file-modal"
-                                    class="btn btn-outline-dark btn-lg" type="button"
+                                    class="btn btn-outline-success btn-lg me-0 ms-0" type="button"
                                     title="Import file Excel data lengkung" style="margin-left: -10px;">
                                     Import
                                 </a>
-                                <button class="btn btn-outline-dark btn-lg dropdown-toggle" type="button"
-                                    id="dropdownMenuIconButton1" data-bs-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false" style="margin-left: -10px;">
-                                    - Pilih area -
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuIconButton1">
-                                    <a @php $area='Mainline' @endphp class="dropdown-item"
-                                        href="{{ route('lengkung.filter', $area) }}">Mainline</a>
-                                    <a @php $area='Depo' @endphp class="dropdown-item"
-                                        href="{{ route('lengkung.filter', $area) }}">Depo</a>
-                                    <a @php $area='DAL' @endphp class="dropdown-item"
-                                        href="{{ route('lengkung.filter', $area) }}">DAL</a>
-                                </div>
+                                <a href="#" class="btn btn-outline-warning btn-lg ms-0" type="button"
+                                    data-bs-toggle="modal" data-bs-target="#ModalFilter" title="Filter data">
+                                    <i class="ti-filter"></i>
+                                </a>
                             </div>
 
                             <div class="table-responsive pt-3">
@@ -62,6 +53,9 @@
                                             <th class="text-center fw-bolder">
                                                 Line
                                             </th>
+                                            <th class="text-center text-wrap fw-bolder">
+                                                Radius (m)
+                                            </th>
                                             <th class="text-center fw-bolder">
                                                 Type
                                             </th>
@@ -79,9 +73,6 @@
                                             </th>
                                             <th class="text-center text-wrap fw-bolder">
                                                 ETC (m)
-                                            </th>
-                                            <th class="text-center text-wrap fw-bolder">
-                                                Radius (m)
                                             </th>
                                             <th class="text-center text-wrap fw-bolder">
                                                 Versin (mm)
@@ -115,6 +106,9 @@
                                                 <td class="text-wrap">
                                                     {{ $item->line->code }}
                                                 </td>
+                                                <td class="text-wrap text-center">
+                                                    R{{ $item->radius ?? '-' }}
+                                                </td>
                                                 <td class="text-wrap">
                                                     {{ $item->tipe }}
                                                 </td>
@@ -132,9 +126,6 @@
                                                 </td>
                                                 <td class="text-wrap">
                                                     {{ $item->etc ?? '-' }}
-                                                </td>
-                                                <td class="text-wrap">
-                                                    {{ $item->radius ?? '-' }}
                                                 </td>
                                                 <td class="text-wrap">
                                                     {{ $item->versin ?? '-' }}
@@ -227,6 +218,65 @@
         </div>
     </div>
     <!-- END: Import Modal -->
+
+    <!-- Modal Filter-->
+    <div class="modal fade" id="ModalFilter" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form id="form_filter" action="{{ route('lengkung.filter') }}" method="GET">
+                        @csrf
+                        @method('get')
+                        <div class="form-group">
+                            <label class="form-label">Area</label>
+                            <select class="form-select" name="area_id">
+                                <option disabled selected>- Pilih Area -</option>
+                                @foreach ($area as $item)
+                                    <option value="{{ $item->id }}">{{ $item->code }} ({{ $item->name }})
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Line</label>
+                            <select class="form-select" name="line_id">
+                                <option disabled selected>- Pilih Line -</option>
+                                @foreach ($line as $item)
+                                    <option value="{{ $item->id }}">{{ $item->code }} ({{ $item->name }})
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Tipe</label>
+                            <select class="form-select" name="tipe">
+                                <option disabled selected>- Tipe -</option>
+                                <option value="horizontal">Horizontal</option>
+                                <option value="vertikal">Vertikal</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Radius</label>
+                            <select class="form-select" name="radius">
+                                <option disabled selected>- Radius -</option>
+                                <option value="<=">
+                                    <=600 m </option>
+                                <option value=">">>600 m</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" form="form_filter" class="btn btn-primary justify-content-center">
+                        Filter
+                    </button>
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                        Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('javascript')
