@@ -27,4 +27,9 @@ class Joint extends Model
     {
         return $this->belongsTo(Wesel::class);
     }
+
+    public function mainline()
+    {
+        return $this->belongsTo(Mainline::class);
+    }
 }

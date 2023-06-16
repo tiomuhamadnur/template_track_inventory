@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Area;
 use App\Models\Joint;
 use App\Models\Line;
+use App\Models\Mainline;
 use App\Models\Wesel;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
@@ -24,12 +25,14 @@ class JointController extends Controller
         $area = Area::all();
         $line = Line::all();
         $wesel = Wesel::all();
+        $span = Mainline::all();
 
-        return view('masterdata.masterdata_joint.create', compact(['area', 'line', 'wesel']));
+        return view('masterdata.masterdata_joint.create', compact(['area', 'line', 'wesel', 'span']));
     }
 
     public function store(Request $request)
     {
+        // dd($request);
         Joint::create([
             'name' => $request->name,
             'area_id' => $request->area_id,

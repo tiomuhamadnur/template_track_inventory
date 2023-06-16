@@ -49,10 +49,13 @@
                                                 Line
                                             </th>
                                             <th class="text-center">
+                                                Span
+                                            </th>
+                                            <th class="text-center">
                                                 Wesel
                                             </th>
                                             <th class="text-center">
-                                                Chainage
+                                                Chainage (m)
                                             </th>
                                             <th class="text-center">
                                                 Action
@@ -78,10 +81,17 @@
                                                     {{ $item->line->code ?? '-' }}
                                                 </td>
                                                 <td class="text-center">
+                                                    {{ $item->mainline->no_span ?? '-' }}
+                                                </td>
+                                                <td class="text-center">
                                                     {{ $item->wesel->name ?? '-' }}
                                                 </td>
                                                 <td class="text-center">
-                                                    {{ $item->kilometer ?? '-' }}
+                                                    @if ($item->mainline_id != null)
+                                                        {{ $item->mainline->kilometer ?? '-' }}
+                                                    @else
+                                                        {{ $item->kilometer ?? '-' }}
+                                                    @endif
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">
