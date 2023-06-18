@@ -260,7 +260,8 @@
                                 @if (auth()->user()->role != 'Admin') hidden @endif>
                                 Ubah Data Temuan
                             </a>
-                            <a href="#" id="rfi_temuan_modal" class="btn btn-outline-success">
+                            <a href="#" id="rfi_temuan_modal" target="_blank" class="btn btn-outline-success"
+                                onclick="closeModal()">
                                 Request For Inspection
                             </a>
                             <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
@@ -501,6 +502,7 @@
         });
 
         function closeModal() {
+            $("#ModalTemuan").modal("hide");
             $("#ModalReport").modal("hide");
             $("#ModalExportExcel").modal("hide");
             $("#ModalExportPdf").modal("hide");

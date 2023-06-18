@@ -81,24 +81,27 @@
                                                     </a>
                                                 </td>
                                                 <td class="text-center">
-                                                    <div class="btn-group">
+                                                    <div class="row">
                                                         <a href="javascript:;" data-bs-toggle="modal"
                                                             data-bs-target="#approve-confirmation-modal"
                                                             data-id_approve="{{ $item->id }}" type="button"
-                                                            class="btn btn-success mx-0 text-white"
-                                                            @if (auth()->user()->jabatan != 'Section Head') hidden @endif>Approve</a>
+                                                            class="btn btn-success mx-0 text-white mb-1"
+                                                            @if (auth()->user()->jabatan != 'Section Head') hidden @endif>
+                                                            <i class="ti-check fw-bolder"></i>Approve</a>
                                                         <a href="javascript:;" data-bs-toggle="modal"
                                                             data-bs-target="#edit-rfi-modal"
                                                             data-id_rfi="{{ $item->id }}"
                                                             data-remark_rfi="{{ $item->remark }}"
                                                             data-id_temuan_depo="{{ $item->temuan_depo_id }}"
-                                                            type="button" class="btn btn-primary mx-0 text-white"
-                                                            @if (auth()->user()->id != $item->user_id) hidden @endif>Edit</a>
+                                                            type="button" class="btn btn-warning mx-0 text-white mb-1"
+                                                            @if (auth()->user()->id != $item->user_id) hidden @endif>
+                                                            <i class="ti-pencil fw-bolder"></i>Edit</a>
                                                         <a href="javascript:;" data-bs-toggle="modal"
                                                             data-bs-target="#delete-confirmation-modal"
                                                             data-id="{{ $item->id }}" type="button"
-                                                            class="btn btn-danger mx-0 text-white"
-                                                            @if (auth()->user()->jabatan != 'Section Head') hidden @endif>Reject</a>
+                                                            class="btn btn-danger mx-0 text-white mb-1"
+                                                            @if (auth()->user()->jabatan != 'Section Head') hidden @endif>
+                                                            <i class="ti-close fw-bolder"></i>Tolak</a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -157,7 +160,7 @@
                 <div class="modal-body p-2">
                     <div class="p-2 text-center">
                         <h3 class="fw-bolder text-5xl mt-2">Apakah anda yakin?</h3>
-                        <div class="text-slate-500 mt-4">Jika di-reject, maka data Request For Inspection (RFI) ini akan
+                        <div class="text-slate-500 mt-4">Jika ditolak, maka data Request For Inspection (RFI) ini akan
                             dihapus secara permanen.
                         </div>
                     </div>
@@ -168,7 +171,7 @@
                             <input type="text" name="id_rfi" id="id_modal" value="" hidden>
                             <button type="button" data-bs-dismiss="modal"
                                 class="btn btn-outline-warning w-24 mr-1 me-2">Cancel</button>
-                            <button type="submit" class="btn btn-danger w-24">Reject RFI</button>
+                            <button type="submit" class="btn btn-danger w-24">Tolak RFI</button>
                         </form>
                     </div>
                 </div>
