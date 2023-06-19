@@ -27,7 +27,7 @@ class TemuanMainlineController extends Controller
         $area = Area::whereNot('area', 'Depo')->get();
         $area_rencana = Area::where('stasiun', 'true')->orWhere('area', 'DAL')->get();
         $line = Line::whereNot('area', 'Depo')->get();
-        $part = Part::all();
+        $part = Part::orderBy('name', 'asc')->get();
 
         $area_id = '';
         $line_id = '';
@@ -79,6 +79,7 @@ class TemuanMainlineController extends Controller
             $temuan_filter = Temuan::query()->select(
                 'summary_temuan.*',
                 'mainline.area_id as area_id',
+                'mainline.kilometer as kilometer',
             )
                 ->join('mainline', 'mainline.id', '=', 'summary_temuan.mainline_id');
 
@@ -117,7 +118,7 @@ class TemuanMainlineController extends Controller
                 });
             }
 
-            $temuan = $temuan_filter->orderBy('mainline_id', 'asc')->get();
+            $temuan = $temuan_filter->orderBy('kilometer', 'asc')->get();
             $waktu = Carbon::now();
             $pdf = Pdf::loadView('mainline.mainline_temuan.export-pdf', ['temuan' => $temuan]);
 
@@ -138,6 +139,7 @@ class TemuanMainlineController extends Controller
         $temuan = Temuan::query()->select(
             'summary_temuan.*',
             'mainline.area_id as area_id',
+            'mainline.kilometer as kilometer',
         )->join('mainline', 'mainline.id', '=', 'summary_temuan.mainline_id');
 
         // Filter by area_id
@@ -178,11 +180,10 @@ class TemuanMainlineController extends Controller
         $area = Area::all();
         $area_rencana = Area::where('stasiun', 'true')->orWhere('area', 'DAL')->get();
         $line = Line::whereNot('area', 'Depo')->get();
-        $part = Part::all();
+        $part = Part::orderBy('name', 'asc')->get();
 
-        // return view('mainline.mainline_temuan.index', compact(['temuan', 'area', 'line', 'part', 'area_id', 'line_id', 'part_id', 'status']));
         return view('mainline.mainline_temuan.index', [
-            'temuan' => $temuan->orderBy('mainline_id', 'asc')->get(),
+            'temuan' => $temuan->orderBy('kilometer', 'asc')->get(),
             'area_rencana' => $area_rencana,
             'area' => $area,
             'line' => $line,

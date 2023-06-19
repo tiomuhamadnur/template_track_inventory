@@ -18,11 +18,11 @@
                             <h4 class="card-title">Data Temuan Mainline</h4>
                             <div class="btn-group">
                                 <a href="{{ route('temuan_mainline.index') }}" class="btn btn-outline-dark btn-lg mx-0"
-                                    type="button" title="Reload halaman">
+                                    type="button" title="Reset Filter">
                                     <i class="ti-reload"></i>
                                 </a>
-                                <a href="{{ route('temuan_mainline.create') }}" class="btn btn-outline-success btn-lg mx-0"
-                                    type="button">Add Data</a>
+                                <a href="{{ route('temuan_mainline.create') }}" target="_blank"
+                                    class="btn btn-outline-success btn-lg mx-0" type="button">Add Data</a>
                                 <a href="#" class="btn btn-outline-warning btn-lg mx-0" type="button"
                                     data-bs-toggle="modal" data-bs-target="#ModalFilter" title="Filter data">
                                     <i class="ti-filter"></i>

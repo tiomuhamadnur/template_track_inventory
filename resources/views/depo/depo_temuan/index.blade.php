@@ -18,7 +18,7 @@
                             <h4 class="card-title">Data Temuan Depo</h4>
                             <div class="btn-group">
                                 <a href="{{ route('temuan_depo.index') }}" class="btn btn-outline-dark btn-lg mx-0"
-                                    type="button">
+                                    type="button" title="Reset Filter">
                                     <i class="ti-reload"></i>
                                 </a>
                                 <a href="{{ route('temuan_depo.create') }}" class="btn btn-outline-success btn-lg mx-0"

@@ -24,6 +24,7 @@ class TemuanMainlineFilterExport implements FromView
         $temuan = Temuan::query()->select(
             'summary_temuan.*',
             'mainline.area_id as area_id',
+            'mainline.kilometer as kilometer',
         )
             ->join('mainline', 'mainline.id', '=', 'summary_temuan.mainline_id');
 
@@ -63,7 +64,7 @@ class TemuanMainlineFilterExport implements FromView
         }
 
         return view('mainline.mainline_temuan.export', [
-            'temuan' => $temuan->get(),
+            'temuan' => $temuan->orderBy('kilometer', 'asc')->get(),
         ]);
     }
 }

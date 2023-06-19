@@ -21,7 +21,7 @@ class TemuanDepoController extends Controller
     {
         $temuan_depo = TemuanDepo::where('status', 'open')->orderBy('tanggal', 'desc')->get();
         $line = Line::where('area', 'Depo')->get();
-        $part = Part::all();
+        $part = Part::orderBy('name', 'asc')->get();
 
         $line_id = '';
         $part_id = '';
@@ -202,10 +202,10 @@ class TemuanDepoController extends Controller
         }
 
         $line = Line::where('area', 'Depo')->get();
-        $part = Part::all();
+        $part = Part::orderBy('name', 'asc')->get();
 
         return view('depo.depo_temuan.index', [
-            'temuan_depo' => $temuan_depo->get(),
+            'temuan_depo' => $temuan_depo->orderBy('kilometer', 'asc')->get(),
             'line' => $line,
             'part' => $part,
             'line_id' => $line_id,
