@@ -26,15 +26,21 @@
                                     type="button" title="Tambah data lengkung">Add
                                     Data
                                 </a>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#import-file-modal"
-                                    class="btn btn-outline-success btn-lg me-0 ms-0" type="button"
-                                    title="Import file Excel data lengkung" style="margin-left: -10px;">
-                                    Import
-                                </a>
-                                <a href="#" class="btn btn-outline-warning btn-lg ms-0" type="button"
+                                <a href="#" class="btn btn-outline-warning btn-lg ms-0 me-0" type="button"
                                     data-bs-toggle="modal" data-bs-target="#ModalFilter" title="Filter data">
                                     <i class="ti-filter"></i>
                                 </a>
+                                <button class="btn btn-outline-dark btn-lg dropdown-toggle ms-0" type="button"
+                                    id="dropdownMenuIconButton1" data-bs-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <i class="ti-link"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuIconButton1">
+                                    <a class="dropdown-item"href="#" data-bs-toggle="modal"
+                                        data-bs-target="#import-file-modal">Import Excel</a>
+                                    <a class="dropdown-item" href="#">Export to Excel</a>
+                                    <a class="dropdown-item" href="#">Export to PDF</a>
+                                </div>
                             </div>
 
                             <div class="table-responsive pt-3">
@@ -208,7 +214,7 @@
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary mx-3">Import</button>
                                     <button type="button" data-bs-dismiss="modal"
-                                        class="btn btn-outline-secondary">Cancel</button>
+                                        class="btn btn-outline-danger">Cancel</button>
                                 </div>
                             </div>
                         </form>

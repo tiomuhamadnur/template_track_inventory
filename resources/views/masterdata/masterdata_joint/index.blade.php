@@ -17,17 +17,29 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Data Joint</h4>
-                            <a href="{{ route('joint.create') }}" class="btn btn-outline-dark btn-lg" type="button">Add
-                                Data</a>
-                            <button class="btn btn-outline-dark btn-lg dropdown-toggle" type="button"
-                                id="dropdownMenuIconButton1" data-bs-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false" style="margin-left: -10px;">
-                                <i class="ti-link"></i>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuIconButton1">
-                                <a class="dropdown-item" href="#">Print</a>
-                                <a class="dropdown-item" href="#">Export to Excel</a>
-                                <a class="dropdown-item" href="#">Export to PDF</a>
+                            <div class="btn-group">
+                                <a href="{{ route('joint.index') }}" class="btn btn-outline-dark btn-lg mx-0" type="button"
+                                    title="Reset Filter">
+                                    <i class="ti-reload"></i>
+                                </a>
+                                <a href="{{ route('joint.create') }}" class="btn btn-outline-primary btn-lg me-0"
+                                    type="button">Add
+                                    Data</a>
+                                <a href="#" class="btn btn-outline-warning btn-lg ms-0 me-0" type="button"
+                                    data-bs-toggle="modal" data-bs-target="#ModalFilter" title="Filter data">
+                                    <i class="ti-filter"></i>
+                                </a>
+                                <button class="btn btn-outline-dark btn-lg dropdown-toggle ms-0" type="button"
+                                    id="dropdownMenuIconButton1" data-bs-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <i class="ti-link"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuIconButton1">
+                                    <a class="dropdown-item"href="#" data-bs-toggle="modal"
+                                        data-bs-target="#import-file-modal">Import Excel</a>
+                                    <a class="dropdown-item" href="#">Export to Excel</a>
+                                    <a class="dropdown-item" href="#">Export to PDF</a>
+                                </div>
                             </div>
                             <div class="table-responsive pt-3">
                                 <table class="table table-bordered">
@@ -37,16 +49,19 @@
                                                 No
                                             </th>
                                             <th class="text-center">
+                                                Area
+                                            </th>
+                                            <th class="text-center">
                                                 Name
                                             </th>
                                             <th class="text-center">
                                                 Tipe
                                             </th>
                                             <th class="text-center">
-                                                Area
+                                                Line
                                             </th>
                                             <th class="text-center">
-                                                Line
+                                                Direction
                                             </th>
                                             <th class="text-center">
                                                 Span
@@ -69,16 +84,19 @@
                                                     {{ $loop->iteration }}
                                                 </td>
                                                 <td class="text-center">
+                                                    {{ $item->area->code ?? '-' }}
+                                                </td>
+                                                <td class="text-center">
                                                     {{ $item->name }}
                                                 </td>
                                                 <td class="text-center">
                                                     {{ $item->tipe }}
                                                 </td>
                                                 <td class="text-center">
-                                                    {{ $item->area->code ?? '-' }}
+                                                    {{ $item->line->code ?? '-' }}
                                                 </td>
                                                 <td class="text-center">
-                                                    {{ $item->line->code ?? '-' }}
+                                                    {{ $item->direction ?? '-' }}
                                                 </td>
                                                 <td class="text-center">
                                                     {{ $item->mainline->no_span ?? '-' }}
@@ -140,6 +158,102 @@
         </div>
     </div>
     <!-- END: Delete Confirmation Modal -->
+
+    <!-- BEGIN: Import Modal -->
+    <div id="import-file-modal" class="modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body p-2">
+                    <div class="p-2 text-center">
+                        <form action="{{ route('joint.import') }}" method="POST" enctype="multipart/form-data">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalAdminTitle">Import File Excel Joint</h5>
+                            </div>
+                            <div class="modal-body">
+                                @csrf
+                                @method('post')
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <input type="file" name="file_excel" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary mx-3">Import</button>
+                                    <button type="button" data-bs-dismiss="modal"
+                                        class="btn btn-outline-danger">Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: Import Modal -->
+
+    <!-- Modal Filter-->
+    <div class="modal fade" id="ModalFilter" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form id="form_filter" action="{{ route('joint.filter') }}" method="GET">
+                        @csrf
+                        @method('get')
+                        <div class="form-group">
+                            <label class="form-label">Area</label>
+                            <select class="form-select" name="area_id">
+                                <option disabled selected>- Pilih Area -</option>
+                                @foreach ($area as $item)
+                                    <option value="{{ $item->id }}">{{ $item->code }} ({{ $item->name }})
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Line</label>
+                            <select class="form-select" name="line_id">
+                                <option disabled selected>- Pilih Line -</option>
+                                @foreach ($line as $item)
+                                    <option value="{{ $item->id }}">{{ $item->code }} ({{ $item->name }})
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Tipe Joint</label>
+                            <select class="form-select" name="tipe">
+                                <option disabled selected>- Pilih Tipe Joint -</option>
+                                <option value="NJ">NJ (Normal Joint)</option>
+                                <option value="W">W (Welding)</option>
+                                <option value="GIJ">GIJ (Glued Rail Joint)</option>
+                                <option value="IRJ">IRJ (Insulated Rail Joint)</option>
+                                <option value="EJ">EJ (Expansion Joint)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Wesel</label>
+                            <select class="form-select" name="wesel_id">
+                                <option disabled selected>- Pilih Wesel -</option>
+                                @foreach ($wesel as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }} -
+                                        {{ $item->area->code }} - {{ $item->line->code }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" form="form_filter" class="btn btn-primary justify-content-center">
+                        Filter
+                    </button>
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                        Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('javascript')

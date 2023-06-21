@@ -407,10 +407,12 @@ Route::middleware(['auth'])->group(function () {
         Route::controller(JointController::class)->group(function () {
             Route::get('/joint', 'index')->name('joint.index');
             Route::get('/joint-create', 'create')->name('joint.create');
+            Route::get('/joint/filter', 'filter')->name('joint.filter');
             Route::post('/joint', 'store')->name('joint.store');
             Route::get('/joint/{id}/edit', 'edit')->name('joint.edit');
             Route::put('/joint', 'update')->name('joint.update');
             Route::delete('/joint', 'destroy')->name('joint.delete');
+            Route::post('/joint-import', 'import')->name('joint.import');
         });
 
         Route::controller(PMController::class)->group(function () {
