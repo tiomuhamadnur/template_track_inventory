@@ -143,7 +143,7 @@
                                                     <h4 class="card-title card-title-dash">Klasifikasi Defect</h4>
                                                 </div>
                                                 <p class="card-subtitle card-subtitle-dash">Klasifikasi Defect Berdasarkan
-                                                    Justifikasi Tim Track Examination
+                                                    Justifikasi Tim Permanent Way RAMS
                                                 </p>
                                                 <div id="klasifikasi-chart"></div>
                                             </div>
@@ -151,23 +151,6 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- <div class="col-12 grid-margin stretch-card animate__animated animate__zoomIn">
-                                <div class="card card-rounded">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                                    <h4 class="card-title card-title-dash">Titik Sebaran Defect Area
-                                                        Mainline</h4>
-                                                </div>
-                                                <p class="card-subtitle card-subtitle-dash">Presentase Sebaran Temuan Per
-                                                    Area</p>
-                                                <div id="sebaran-area-chart"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
                         </div>
                         <div class="row">
                             <div class="col-6 grid-margin stretch-card animate__animated animate__zoomIn">

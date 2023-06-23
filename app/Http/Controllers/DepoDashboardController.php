@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Line;
 use App\Models\TemuanDepo;
 use App\Models\TransRFI;
 use Carbon\Carbon;
@@ -36,6 +37,13 @@ class DepoDashboardController extends Controller
 
         $data_rfi = TransRFI::where('temuan_depo_id', '!=', null)->get()->count();
 
+        $line_code = Line::where('area','Depo')->pluck('code')->toArray();
+        $line_id = Line::select('id')->where('area','Depo')->get()->toArray();
+        $temuan_line_depo = [];
+        foreach ($line_id as $id) {
+            $temuan_line_depo[] = TemuanDepo::where('status', 'open')->where('line_id', $id)->count();
+        }
+
         return view(
             'depo.depo_dashboard.index',
             compact([
@@ -53,6 +61,8 @@ class DepoDashboardController extends Controller
                 'defect_fastening',
                 'defect_lainnya',
                 'data_rfi',
+                'temuan_line_depo',
+                'line_code',
             ])
         );
     }

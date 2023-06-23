@@ -264,7 +264,7 @@
                                 onclick="closeModal()">
                                 Request For Inspection
                             </a>
-                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
+                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
                                 Tutup
                             </button>
                         </div>
