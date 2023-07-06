@@ -13,6 +13,7 @@ use App\Http\Controllers\DefectController;
 use App\Http\Controllers\DepoDashboardController;
 use App\Http\Controllers\DepoLineController;
 use App\Http\Controllers\DetailPartController;
+use App\Http\Controllers\JadwalPekerjaanController;
 use App\Http\Controllers\JointController;
 use App\Http\Controllers\LengkungController;
 use App\Http\Controllers\LineController;
@@ -304,6 +305,17 @@ Route::middleware(['auth'])->group(function () {
         // REPORT
         Route::get('/buffer-examination-report', 'report')->name('buffer.examination.report');
     });
+
+    // JADWAL PEKERJAAN
+    Route::controller(JadwalPekerjaanController::class)->group(function () {
+        Route::get('/jadwal-pekerjaan', 'index')->name('jadwal.pekerjaan.index');
+        Route::post('/jadwal-pekerjaan', 'store')->name('jadwal.pekerjaan.store');
+        Route::get('/jadwal-pekerjaan-list', 'list')->name('jadwal.pekerjaan.list');
+        Route::get('/jadwal-pekerjaan/filter', 'filter')->name('jadwal.pekerjaan.filter');
+        Route::put('/jadwal-pekerjaan', 'update')->name('jadwal.pekerjaan.update');
+        Route::delete('/jadwal-pekerjaan', 'destroy')->name('jadwal.pekerjaan.delete');
+    });
+
 
     Route::middleware('isAdmin')->group(function () {
         // MAINLINE

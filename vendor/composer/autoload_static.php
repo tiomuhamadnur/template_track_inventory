@@ -676,6 +676,7 @@ class ComposerStaticInit47514cba5192a5f414778149a0e22242
         'App\\Http\\View\\Composers\\FakerComposer' => __DIR__ . '/../..' . '/app/Http/View/Composers/FakerComposer.php',
         'App\\Http\\View\\Composers\\LoggedInUserComposer' => __DIR__ . '/../..' . '/app/Http/View/Composers/LoggedInUserComposer.php',
         'App\\Http\\View\\Composers\\MenuComposer' => __DIR__ . '/../..' . '/app/Http/View/Composers/MenuComposer.php',
+        'App\\Imports\\JointImport' => __DIR__ . '/../..' . '/app/Imports/JointImport.php',
         'App\\Imports\\LengkungImport' => __DIR__ . '/../..' . '/app/Imports/LengkungImport.php',
         'App\\Imports\\MainlineImport' => __DIR__ . '/../..' . '/app/Imports/MainlineImport.php',
         'App\\Imports\\TransDefectImport' => __DIR__ . '/../..' . '/app/Imports/TransDefectImport.php',

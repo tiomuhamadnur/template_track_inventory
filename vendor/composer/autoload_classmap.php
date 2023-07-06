@@ -69,6 +69,7 @@ return array(
     'App\\Http\\View\\Composers\\FakerComposer' => $baseDir . '/app/Http/View/Composers/FakerComposer.php',
     'App\\Http\\View\\Composers\\LoggedInUserComposer' => $baseDir . '/app/Http/View/Composers/LoggedInUserComposer.php',
     'App\\Http\\View\\Composers\\MenuComposer' => $baseDir . '/app/Http/View/Composers/MenuComposer.php',
+    'App\\Imports\\JointImport' => $baseDir . '/app/Imports/JointImport.php',
     'App\\Imports\\LengkungImport' => $baseDir . '/app/Imports/LengkungImport.php',
     'App\\Imports\\MainlineImport' => $baseDir . '/app/Imports/MainlineImport.php',
     'App\\Imports\\TransDefectImport' => $baseDir . '/app/Imports/TransDefectImport.php',
