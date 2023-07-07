@@ -21,18 +21,19 @@
                                     type="button" title="Refresh">
                                     <i class="ti-reload"></i>
                                 </a>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#ModalAddJadwal"
+                                <a href="{{ route('jadwal.pekerjaan.create') }}" class="btn btn-outline-success btn-lg mx-0"
+                                    title="Tambah Jadwal Pekerjaan" type="button">Add Data</a>
+                                {{-- <a href="#" data-bs-toggle="modal" data-bs-target="#ModalAddJadwal"
                                     class="btn btn-outline-success btn-lg mx-0" title="Tambah Jadwal Pekerjaan"
                                     type="button">Add Data</a>
                                 <a href="{{ route('jadwal.pekerjaan.list') }}" class="btn btn-outline-warning btn-lg mx-0"
-                                    title="List Jadwal Pekerjaan" type="button">All Data</a>
+                                    title="List Jadwal Pekerjaan" type="button">All Data</a> --}}
                             </div>
                             <div class="table-responsive pt-3">
-                                <span class="badge fw-bolder" style="background-color: #ff9500; font-size:15px;">Shift 1
-                                    atau
-                                    2</span>
-                                <span class="badge fw-bolder" style="background-color: #059c00; font-size:15px;">Shift
-                                    3</span>
+                                <span class="badge fw-bolder" style="background-color: #059c00; font-size:15px;">Permanent
+                                    Way RAMS</span>
+                                <span class="badge fw-bolder" style="background-color: #ff9500; font-size:15px;">Permanent
+                                    Way Maintenance</span>
                                 <div id='calendar' class="mt-2"></div>
                             </div>
                         </div>

@@ -10,14 +10,66 @@ class JadwalPekerjaanController extends Controller
 {
     public function index()
     {
-        $data = JadwalPekerjaan::where('section', auth()->user()->section)->get(['id', 'title', 'shift', 'start', 'end', 'color']);
+        $data = JadwalPekerjaan::get(['id', 'title', 'shift', 'start', 'end', 'color']);
 
         return view('jadwal_pekerjaan.index', compact(['data']));
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        //
+        if ($request->ajax()) {
+            $data = JadwalPekerjaan::whereDate('start', '>=', $request->start)
+                ->whereDate('end',   '<=', $request->end)
+                ->get(['id', 'title', 'start', 'end', 'color', 'shift']);
+
+            return response()->json($data);
+        }
+
+        return view('jadwal_pekerjaan.create');
+    }
+
+    public function ajax(Request $request)
+    {
+        $section = $request->section;
+        if ($section == 'PWR') {
+            $color = '#059c00';
+        } else {
+            $color = '#ff9500';
+        }
+        switch ($request->type) {
+            case 'add':
+                $event = JadwalPekerjaan::create([
+                    'title' => $request->section . ' - ' . $request->title . ' - ' . $request->location . ' - (Shift: ' . $request->shift . ')',
+                    'shift' => $request->shift,
+                    'start' => $request->start,
+                    'end' => $request->end,
+                    'section' => $request->section,
+                    'color' => $color,
+                    'location' => $request->location,
+                ]);
+
+                return response()->json($event);
+                break;
+
+            case 'update':
+                $event = JadwalPekerjaan::find($request->id)->update([
+                    'start' => $request->start,
+                    'end' => $request->end,
+                ]);
+
+                return response()->json($event);
+                break;
+
+            case 'delete':
+                $event = JadwalPekerjaan::find($request->id)->delete();
+
+                return response()->json($event);
+                break;
+
+            default:
+                # code...
+                break;
+        }
     }
 
     public function store(Request $request)

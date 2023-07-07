@@ -310,6 +310,8 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(JadwalPekerjaanController::class)->group(function () {
         Route::get('/jadwal-pekerjaan', 'index')->name('jadwal.pekerjaan.index');
         Route::post('/jadwal-pekerjaan', 'store')->name('jadwal.pekerjaan.store');
+        Route::post('fullcalenderAjax', 'ajax');
+        Route::get('/jadwal-pekerjaan/create', 'create')->name('jadwal.pekerjaan.create');
         Route::get('/jadwal-pekerjaan-list', 'list')->name('jadwal.pekerjaan.list');
         Route::get('/jadwal-pekerjaan/filter', 'filter')->name('jadwal.pekerjaan.filter');
         Route::put('/jadwal-pekerjaan', 'update')->name('jadwal.pekerjaan.update');
