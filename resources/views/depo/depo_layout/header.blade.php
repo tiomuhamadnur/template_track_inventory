@@ -11,7 +11,7 @@
                 {{-- <img src="{{ asset('assets/images/mm.png') }}" alt="logo" /> TCSM --}}
                 <img src="{{ asset('assets/images/logo_sementara.png') }}" alt="logo" /> CPWTM
             </a>
-            <a class="navbar-brand brand-logo-mini" href="index.html">
+            <a class="navbar-brand brand-logo-mini" href="{{ route('transisi') }}">
                 {{-- <img src="{{ asset('assets/images/mm.png') }}" alt="logo" /> --}}
                 <img src="{{ asset('assets/images/logo_sementara.png') }}" alt="logo" />
             </a>
