@@ -1,7 +1,7 @@
 @extends('mainline.mainline_layout.base')
 
 @section('sub-title')
-    <title> Dashboard | TCSM</title>
+    <title> Dashboard | CPWTM</title>
 @endsection
 @section('sub-content')
     <h4>Dashboard Mainline</h4>

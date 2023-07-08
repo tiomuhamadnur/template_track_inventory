@@ -1,7 +1,7 @@
 @extends('mainline.mainline_layout.base')
 
 @section('sub-title')
-    <title>Request For Inspection | TCSM</title>
+    <title>Request For Inspection | CPWTM</title>
 @endsection
 
 @section('sub-content')

@@ -1,7 +1,7 @@
 @extends('jadwal_pekerjaan.layout.base')
 
 @section('sub-title')
-    <title>Jadwal Pekerjaan | CPWTM</title>
+    <title>Man Power on Duty | CPWTM</title>
 @endsection
 
 @section('sub-content')
@@ -15,25 +15,25 @@
                 <div class="col-lg-12 grid-margin stretch-card mt-3">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Detail Jadwal Pekerjaan</h4>
+                            <h4 class="card-title">Detail Man Power on Duty</h4>
                             <div class="btn-group">
-                                <a href="{{ route('jadwal.pekerjaan.index') }}" class="btn btn-outline-dark btn-lg mx-0"
+                                <a href="{{ route('man.power.index') }}" class="btn btn-outline-dark btn-lg mx-0"
                                     type="button" title="Refresh">
                                     <i class="ti-reload"></i>
                                 </a>
-                                <a href="{{ route('jadwal.pekerjaan.create') }}" class="btn btn-outline-success btn-lg mx-0"
-                                    title="Tambah Jadwal Pekerjaan" type="button">Add Data</a>
-                                {{-- <a href="#" data-bs-toggle="modal" data-bs-target="#ModalAddJadwal"
-                                    class="btn btn-outline-success btn-lg mx-0" title="Tambah Jadwal Pekerjaan"
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#ModalAddJadwal"
+                                    class="btn btn-outline-success btn-lg mx-0" title="Tambah Jadwal Man Power"
                                     type="button">Add Data</a>
-                                <a href="{{ route('jadwal.pekerjaan.list') }}" class="btn btn-outline-warning btn-lg mx-0"
-                                    title="List Jadwal Pekerjaan" type="button">All Data</a> --}}
+                                <a href="{{ route('man.power.list') }}" class="btn btn-outline-warning btn-lg mx-0"
+                                    title="List Jadwal Man Power" type="button">Edit Data</a>
                             </div>
                             <div class="table-responsive pt-3">
-                                <span class="badge fw-bolder" style="background-color: #059c00; font-size:15px;">Permanent
-                                    Way RAMS</span>
-                                <span class="badge fw-bolder" style="background-color: #ff9500; font-size:15px;">Permanent
-                                    Way Maintenance</span>
+                                <span class="badge fw-bolder" style="background-color: #059c00; font-size:15px;">Shift
+                                    1</span>
+                                <span class="badge fw-bolder" style="background-color: #ff9500; font-size:15px;">Shift
+                                    2</span>
+                                <span class="badge fw-bolder" style="background-color: #0800ff; font-size:15px;">Shift
+                                    3</span>
                                 <div id='calendar' class="mt-2"></div>
                             </div>
                         </div>
@@ -44,49 +44,52 @@
         </div>
     </div>
 
-    <!-- Modal Form Add Jadwal Pekerjaan-->
+    <!-- Modal Form Add Jadwal Man Power on Duty-->
     <div class="modal fade" id="ModalAddJadwal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog modal-md" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalAdminTitle">Form Jadwal Pekerjaan</h5>
+                    <h5 class="modal-title" id="modalAdminTitle">Form Jadwal Man Power on Duty</h5>
                 </div>
                 <div class="modal-body">
-                    <form id="form_add_jadwal" action="{{ route('jadwal.pekerjaan.store') }}" method="POST">
+                    <form id="form_add_jadwal" action="{{ route('man.power.store') }}" method="POST">
                         @csrf
                         @method('post')
                         <div class="form-group">
                             <label class="form-label">Section</label>
                             <select class="form-select" name="section" required>
                                 <option value="" disabled selected>- pilih section -</option>
-                                <option value="Permanent Way RAMS">Permanent Way RAMS</option>
-                                <option value="Permanent Way Maintenance">Permanent Way Maintenance</option>
+                                <option value="PWR">Permanent Way RAMS</option>
+                                <option value="PWM">Permanent Way Maintenance</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Nama Pekerjaan</label>
-                            <input type="text" class="form-control" name="title" autocomplete="off" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Lokasi</label>
-                            <input type="text" class="form-control" name="location" autocomplete="off" required>
+                            <label class="form-label">Man Power</label>
+                            <select class="form-select" name="user_id" required>
+                                <option value="" disabled selected>- pilih man power -</option>
+                                @foreach ($user as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Tanggal</label>
                             <div class="input-group">
-                                <input placeholder="Tanggal Mulai" class="form-control me-1" type="text"
+                                <input placeholder="Pilih Tanggal" class="form-control me-1" type="text"
                                     onfocus="(this.type='date')" onblur="(this.type='text')" id="date" name="start"
                                     required>
-                                <input placeholder="Tanggal Akhir" class="form-control ms-1" type="text"
-                                    onfocus="(this.type='date')" onblur="(this.type='text')" id="date" name="end">
+                                {{-- <input placeholder="Tanggal Akhir" class="form-control ms-1" type="text"
+                                    onfocus="(this.type='date')" onblur="(this.type='text')" id="date" name="end"> --}}
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Shift</label>
                             <select class="form-select" name="shift" required>
                                 <option value="" disabled selected>- pilih shift -</option>
-                                <option value="1 atau 2">1 atau 2</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
                                 <option value="3">3</option>
+                                <option value="NS">Non Shift</option>
                             </select>
                         </div>
                     </form>

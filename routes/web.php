@@ -18,6 +18,7 @@ use App\Http\Controllers\JointController;
 use App\Http\Controllers\LengkungController;
 use App\Http\Controllers\LineController;
 use App\Http\Controllers\MainlineController;
+use App\Http\Controllers\ManPowerOnDutyController;
 use App\Http\Controllers\MasterdataDashboardController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PartController;
@@ -316,6 +317,18 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/jadwal-pekerjaan/filter', 'filter')->name('jadwal.pekerjaan.filter');
         Route::put('/jadwal-pekerjaan', 'update')->name('jadwal.pekerjaan.update');
         Route::delete('/jadwal-pekerjaan', 'destroy')->name('jadwal.pekerjaan.delete');
+    });
+
+    // MAN POWER ON DUTY
+    Route::controller(ManPowerOnDutyController::class)->group(function () {
+        Route::get('/man-power-on-duty', 'index')->name('man.power.index');
+        Route::post('/man-power-on-duty', 'store')->name('man.power.store');
+        Route::post('manPowerAjax', 'ajax');
+        Route::get('/man-power-on-duty/create', 'create')->name('man.power.create');
+        Route::get('/man-power-on-duty-list', 'list')->name('man.power.list');
+        Route::get('/man-power-on-duty/filter', 'filter')->name('man.power.filter');
+        Route::put('/man-power-on-duty', 'update')->name('man.power.update');
+        Route::delete('/man-power-on-duty', 'destroy')->name('man.power.delete');
     });
 
 

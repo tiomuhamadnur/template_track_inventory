@@ -4,7 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width,intial-scale=1.0">
     <meta charset="utf-8">
-    <title>Dashboard Switch</title>
+    <title>Dashboard Switch | CPWTM</title>
     {{-- <link rel="shortcut icon" href="{{ asset('assets/images/mm.png') }}" /> --}}
     <link rel="shortcut icon" href="{{ asset('assets/images/logo_sementara.png') }}" />
     <link rel="stylesheet" href="{{ asset('assets/transisiflex/style2.css') }}">

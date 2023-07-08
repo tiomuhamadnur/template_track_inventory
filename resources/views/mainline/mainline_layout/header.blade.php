@@ -6,7 +6,8 @@
             </button>
         </div>
         <div>
-            <a class="navbar-brand brand-logo text-black" href="{{ route('transisi') }}" style="margin-left: 18px">
+            <a class="navbar-brand brand-logo text-black fw-bolder" href="{{ route('transisi') }}"
+                style="margin-left: 18px">
                 {{-- <img src="{{ asset('assets/images/mm.png') }}" alt="logo"> TRACK --}}
                 <img src="{{ asset('assets/images/logo_sementara.png') }}" alt="logo"> CPWTM
             </a>

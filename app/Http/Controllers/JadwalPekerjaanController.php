@@ -40,6 +40,7 @@ class JadwalPekerjaanController extends Controller
             case 'add':
                 $event = JadwalPekerjaan::create([
                     'title' => $request->section . ' - ' . $request->title . ' - ' . $request->location . ' - (Shift: ' . $request->shift . ')',
+                    'nama_pekerjaan' => $request->title,
                     'shift' => $request->shift,
                     'start' => $request->start,
                     'end' => $request->end,
