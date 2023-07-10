@@ -23,6 +23,10 @@
                                 </a>
                                 <a href="{{ route('jadwal.pekerjaan.create') }}" class="btn btn-outline-success btn-lg mx-0"
                                     title="Tambah Jadwal Pekerjaan" type="button">Add Data</a>
+                                <a href="#" type="button" data-bs-toggle="modal" data-bs-target="#ModalExportPdf"
+                                    class="btn btn-outline-success btn-lg mx-0" title="Export to PDF">
+                                    <i class="mdi mdi-file-pdf text-danger"></i>
+                                </a>
                                 {{-- <a href="#" data-bs-toggle="modal" data-bs-target="#ModalAddJadwal"
                                     class="btn btn-outline-success btn-lg mx-0" title="Tambah Jadwal Pekerjaan"
                                     type="button">Add Data</a>
@@ -95,6 +99,75 @@
                     <div class="btn-group">
                         <button type="submit" form="form_add_jadwal" class="btn btn-primary">
                             Create
+                        </button>
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Form Export Pekerjaan-->
+    <div class="modal fade" id="ModalExportPdf" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAdminTitle">Form Export PDF Jadwal Pekerjaan</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="form_export_pdf_jadwal" action="{{ route('jadwal.pekerjaan.export_pdf') }}" method="GET">
+                        @csrf
+                        @method('get')
+                        <div class="form-group">
+                            <label class="form-label">Section</label>
+                            <select class="form-select" name="section" required>
+                                <option value="" disabled selected>- pilih section -</option>
+                                <option value="PWR">Permanent Way RAMS</option>
+                                <option value="PWM">Permanent Way Maintenance</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Tahun</label>
+                            <select class="form-select" name="tahun" required>
+                                <option value="" disabled selected>- pilih tahun -</option>
+                                @php
+                                    $tahun = \Carbon\Carbon::now()->format('Y');
+                                    $tahun = $tahun - 2;
+                                @endphp
+                                @for ($i = 0; $i <= 10; $i++)
+                                    <option value="{{ $tahun }}">{{ $tahun }}</option>
+                                    @php
+                                        $tahun++;
+                                    @endphp
+                                @endfor
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Bulan</label>
+                            <select class="form-select" name="bulan" required>
+                                <option value="" disabled selected>- pilih bulan -</option>
+                                <option value="1">Januari</option>
+                                <option value="2">Februari</option>
+                                <option value="3">Maret</option>
+                                <option value="4">April</option>
+                                <option value="5">Mei</option>
+                                <option value="6">Juni</option>
+                                <option value="7">Juli</option>
+                                <option value="8">Agustus</option>
+                                <option value="9">September</option>
+                                <option value="10">Oktober</option>
+                                <option value="11">November</option>
+                                <option value="12">Desember</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-group">
+                        <button type="submit" form="form_export_pdf_jadwal" class="btn btn-primary">
+                            Export
                         </button>
                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
                             Cancel
