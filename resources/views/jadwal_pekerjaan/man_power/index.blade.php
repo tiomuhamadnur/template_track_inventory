@@ -34,6 +34,8 @@
                                     2</span>
                                 <span class="badge fw-bolder" style="background-color: #0800ff; font-size:15px;">Shift
                                     3</span>
+                                <span class="badge fw-bolder" style="background-color: #8e8e8e; font-size:15px;">Non
+                                    Shift</span>
                                 <div id='calendar' class="mt-2"></div>
                             </div>
                         </div>
@@ -59,8 +61,9 @@
                             <label class="form-label">Section</label>
                             <select class="form-select" name="section" required>
                                 <option value="" disabled selected>- pilih section -</option>
-                                <option value="PWR">Permanent Way RAMS</option>
-                                <option value="PWM">Permanent Way Maintenance</option>
+                                @foreach ($section as $item)
+                                    <option value="{{ $item->code }}">{{ $item->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
@@ -86,10 +89,9 @@
                             <label class="form-label">Shift</label>
                             <select class="form-select" name="shift" required>
                                 <option value="" disabled selected>- pilih shift -</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="NS">Non Shift</option>
+                                @foreach ($shift as $item)
+                                    <option value="{{ $item->code }}">{{ $item->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </form>

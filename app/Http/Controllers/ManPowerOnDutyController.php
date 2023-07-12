@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\ManPowerOnDuty;
 use App\Models\Pegawai;
+use App\Models\Section;
+use App\Models\Shift;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -13,8 +15,10 @@ class ManPowerOnDutyController extends Controller
     {
         $data = ManPowerOnDuty::get(['id', 'title', 'shift', 'start', 'end', 'color']);
         $user = Pegawai::whereNot('jabatan', 'Section Head')->orderBy('name', 'asc')->get();
+        $section = Section::all();
+        $shift = Shift::all();
 
-        return view('jadwal_pekerjaan.man_power.index', compact(['data', 'user']));
+        return view('jadwal_pekerjaan.man_power.index', compact(['data', 'user', 'section', 'shift']));
     }
 
     public function create(Request $request)
@@ -83,7 +87,7 @@ class ManPowerOnDutyController extends Controller
         } elseif ($shift == 1) {
             $color = '#059c00';
         } else {
-            $color = '##8e8e8e';
+            $color = '#8e8e8e';
         }
 
         $man_power = Pegawai::findOrFail($request->user_id)->name;

@@ -1,7 +1,7 @@
 @extends('masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title> Dashboard Admin | TCSM</title>
+    <title> Dashboard Admin | CPWTM</title>
 @endsection
 @section('sub-content')
     <h4>Dashboard Master Data</h4>

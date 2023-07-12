@@ -216,9 +216,10 @@
                                                         {{-- <div id="chartpic" style="width: 100%; height:500px;">
                                                         </div> --}}
                                                         <div class="table-responsive  mt-1">
-                                                            <table class="table select-table">
+                                                            <table class="table select-table" style="width: 100%">
                                                                 <thead>
                                                                     <tr>
+                                                                        <th style="width: 3%"></th>
                                                                         <th class="text-wrap" style="width: 40%">
                                                                             Preventive Maintenance</th>
                                                                         <th class="text-wrap text-center">Progress</th>
@@ -230,6 +231,10 @@
 
                                                                     @foreach ($pic as $item)
                                                                         <tr>
+                                                                            <td class="text-center">
+                                                                                <img src="{{ asset('storage/' . $item->job->logo ?? '') }}"
+                                                                                    alt="logo">
+                                                                            </td>
                                                                             <td class="text-wrap">
                                                                                 <h6>{{ $item->job->name }}</h6>
                                                                                 <p class="text-success">PIC:

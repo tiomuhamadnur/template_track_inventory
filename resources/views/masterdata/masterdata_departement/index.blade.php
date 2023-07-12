@@ -1,11 +1,11 @@
 @extends('masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title>Data Annual Jobs | CPWTM</title>
+    <title>Data Departement | CPWTM</title>
 @endsection
 
 @section('sub-content')
-    <h4>Master Data > Annual Jobs </h4>
+    <h4>Master Data > Departement</h4>
     <div class="row">
         <div class="col-sm-12">
             <div class="home-tab">
@@ -16,8 +16,8 @@
                 <div class="col-lg-12 grid-margin stretch-card mt-3">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Data Annual Jobs</h4>
-                            <a href="{{ route('pm.create') }}" class="btn btn-outline-dark btn-lg" type="button">Add
+                            <h4 class="card-title">Data Departement</h4>
+                            <a href="{{ route('departement.create') }}" class="btn btn-outline-dark btn-lg" type="button">Add
                                 Data</a>
                             <button class="btn btn-outline-dark btn-lg dropdown-toggle" type="button"
                                 id="dropdownMenuIconButton1" data-bs-toggle="dropdown" aria-haspopup="true"
@@ -37,24 +37,10 @@
                                                 No
                                             </th>
                                             <th class="text-center">
-                                                Logo
-                                            </th>
-                                            <th class="text-center">
-                                                Section
-                                            </th>
-                                            <th class="text-center text-wrap">
                                                 Name
                                             </th>
                                             <th class="text-center">
-                                                Item <br>
-                                                (Part)
-                                            </th>
-                                            <th class="text-center text-wrap">
-                                                Detail
-                                            </th>
-                                            <th class="text-center">
-                                                Frequency <br>
-                                                (per Year)
+                                                Code
                                             </th>
                                             <th class="text-center">
                                                 Action
@@ -62,34 +48,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($pm as $item)
+                                        @foreach ($departement as $item)
                                             <tr>
                                                 <td class="text-center">
                                                     {{ $loop->iteration }}
                                                 </td>
                                                 <td class="text-center">
-                                                    <img src="{{ asset('storage/' . $item->logo ?? '') }}" alt="logo"
-                                                        style="height: 40px; width:40px">
-                                                </td>
-                                                <td class="text-wrap text-center">
-                                                    {{ $item->section }}
-                                                </td>
-                                                <td class="text-wrap">
                                                     {{ $item->name }}
                                                 </td>
-                                                <td class="text-wrap">
-                                                    {{ $item->item }}
-                                                </td>
-                                                <td class="text-wrap">
-                                                    {{ $item->detail }}
-                                                </td>
                                                 <td class="text-center">
-                                                    {{ $item->frekuensi }}
+                                                    {{ $item->code }}
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">
-                                                        <a href="{{ route('pm.edit', Crypt::encryptString($item->id)) }}"
-                                                            type="button" class="btn btn-outline-warning mx-0">Edit</a>
+                                                        <a href="{{ route('departement.edit', $item->id) }}" type="button"
+                                                            class="btn btn-outline-warning mx-0">Edit</a>
                                                         <a class="btn btn-outline-danger mx-0" href="javascript:;"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#delete-confirmation-modal"
@@ -119,7 +92,7 @@
                         <div class="text-slate-500 mt-2">Data ini akan dihapus secara permanen.</div>
                     </div>
                     <div class="px-5 pb-8 text-center mt-3">
-                        <form action="{{ route('pm.delete') }}" method="POST">
+                        <form action="{{ route('departement.delete') }}" method="POST">
                             @csrf
                             @method('delete')
                             <input type="text" name="id" id="id" hidden>

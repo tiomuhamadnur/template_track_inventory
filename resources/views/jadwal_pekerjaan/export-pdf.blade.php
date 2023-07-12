@@ -11,8 +11,8 @@
 <body>
     <table border="1" style="width: 100%" class="mb-3">
         <thead>
-            <th class="text-center">
-                <img style="height: 70px" src="{{ public_path('assets/images/tcsm.png') }}" alt="logo-tcsm">
+            <th class="text-center" style="width: 30%">
+                <img style="height: 70px" src="{{ public_path('assets/images/logo_mrtj.png') }}" alt="logo-mrt">
             </th>
             <th class="text-center">
                 <h5 class="fw-bolder mx-auto mb-0">Detail Pelaksanaan Kegiatan <br> {{ $section ?? '' }}</h5>
@@ -20,18 +20,18 @@
                     (Periode: {{ $bulan ?? '' }} {{ $tahun ?? '' }})
                 </h6>
             </th>
-            <th class="text-center">
-                <img style="height: 70px" src="{{ public_path('assets/images/logo_mrtj.png') }}" alt="logo-mrt">
+            <th class="text-center" style="width: 30%">
+                <img style="height: 70px" src="{{ public_path('assets/images/tcsm.png') }}" alt="logo-tcsm">
             </th>
         </thead>
     </table>
     <table border="1" class="text-center" style="width: 100%">
         <thead>
             <tr>
-                <th class="p-1" style="width: 15%">Hari</th>
-                <th class="p-1">Tanggal</th>
-                <th class="p-1">Lokasi</th>
-                <th class="p-1" style="width: 30%">Kegiatan</th>
+                <th class="p-1" style="width: 12%">Hari</th>
+                <th class="p-1" style="width: 13%">Tanggal</th>
+                <th class="p-1" style="width: 22%">Lokasi</th>
+                <th class="p-1">Kegiatan</th>
                 <th class="p-1 text-wrap" style="width: 10%">Shift</th>
             </tr>
         </thead>
@@ -39,10 +39,10 @@
             @foreach ($jadwal_pekerjaan as $item)
                 <tr>
                     <td>
-                        {{ date('l', strtotime($item->start)) }}
+                        {{ \Carbon\Carbon::parse($item->start)->translatedFormat('l') }}
                     </td>
                     <td>
-                        {{ $item->start }}
+                        {{ \Carbon\Carbon::parse($item->start)->translatedFormat('d-M-Y') }}
                     </td>
                     <td>
                         {{ $item->location }}

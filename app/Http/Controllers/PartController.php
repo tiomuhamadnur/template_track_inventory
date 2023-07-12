@@ -12,7 +12,6 @@ class PartController extends Controller
     public function index()
     {
         $part = Part::all();
-        // return view('part.index', compact(['part']));
         return view('mainline.mainline_part.index', compact(['part']));
     }
 

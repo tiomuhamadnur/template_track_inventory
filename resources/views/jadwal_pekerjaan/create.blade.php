@@ -65,43 +65,43 @@
                 },
                 selectable: true,
                 selectHelper: true,
-                select: function(start, end, allDay) {
-                    var title = prompt('Nama Pekerjaan:');
-                    var shift = prompt('Shift:');
-                    var location = prompt('Lokasi:');
-                    var section = prompt('Section (PWR atau PWM):');
-                    if (title && shift && location && section) {
-                        var start = $.fullCalendar.formatDate(start, "Y-MM-DD");
-                        var end = $.fullCalendar.formatDate(end, "Y-MM-DD");
-                        $.ajax({
-                            url: SITEURL + "/fullcalenderAjax",
-                            data: {
-                                title: title,
-                                start: start,
-                                end: end,
-                                shift: shift,
-                                location: location,
-                                section: section,
-                                type: 'add'
-                            },
-                            type: "POST",
-                            success: function(data) {
-                                displayMessage("Jadwal berhasil dibuat!");
+                // select: function(start, end, allDay) {
+                //     var title = prompt('Nama Pekerjaan:');
+                //     var shift = prompt('Shift:');
+                //     var location = prompt('Lokasi:');
+                //     var section = prompt('Section (PWR atau PWM):');
+                //     if (title && shift && location && section) {
+                //         var start = $.fullCalendar.formatDate(start, "Y-MM-DD");
+                //         var end = $.fullCalendar.formatDate(end, "Y-MM-DD");
+                //         $.ajax({
+                //             url: SITEURL + "/fullcalenderAjax",
+                //             data: {
+                //                 title: title,
+                //                 start: start,
+                //                 end: end,
+                //                 shift: shift,
+                //                 location: location,
+                //                 section: section,
+                //                 type: 'add'
+                //             },
+                //             type: "POST",
+                //             success: function(data) {
+                //                 displayMessage("Jadwal berhasil dibuat!");
 
-                                calendar.fullCalendar('renderEvent', {
-                                    id: data.id,
-                                    color: data.color,
-                                    title: title,
-                                    start: start,
-                                    end: end,
-                                    allDay: allDay
-                                }, true);
+                //                 calendar.fullCalendar('renderEvent', {
+                //                     id: data.id,
+                //                     color: data.color,
+                //                     title: title,
+                //                     start: start,
+                //                     end: end,
+                //                     allDay: allDay
+                //                 }, true);
 
-                                calendar.fullCalendar('unselect');
-                            }
-                        });
-                    }
-                },
+                //                 calendar.fullCalendar('unselect');
+                //             }
+                //         });
+                //     }
+                // },
                 eventDrop: function(event, delta) {
                     var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD");
                     var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD");

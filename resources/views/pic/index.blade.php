@@ -1,7 +1,7 @@
 @extends('masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title> PIC PM | TCSM</title>
+    <title> PIC PM | CPWTM</title>
 @endsection
 @section('sub-content')
     <div class="row flex-grow">
@@ -20,12 +20,12 @@
                         </div>
                     </div>
                     <div class="table-responsive  mt-1">
-                        <table class="table select-table">
+                        <table class="table select-table" style="width: 100%">
                             <thead>
-                                <tr>
+                                <tr class="text-center">
                                     <th>No.</th>
-                                    <th>Nama</th>
-                                    <th>PM</th>
+                                    <th style="width: 30%">PM</th>
+                                    <th>PIC</th>
                                     <th>Progress</th>
                                     <th>Status</th>
                                     <th>Action</th>
@@ -40,23 +40,27 @@
                                                 {{ $loop->iteration }}
                                             </div>
                                         </td>
-                                        <td>
+                                        <td class="text-wrap">
                                             <div class="d-flex ">
-                                                @if ($item->user->photo != null)
-                                                    <img src="{{ asset('storage/' . $item->user->photo ?? '') }}"
-                                                        alt="IMG">
+                                                @if ($item->job->logo != null)
+                                                    <img src="{{ asset('storage/' . $item->job->logo ?? '') }}"
+                                                        alt="logo">
                                                 @else
                                                     <img src="{{ asset('storage/photo-profil/default.png') }}"
-                                                        alt="IMG">
+                                                        alt="logo">
                                                 @endif
+                                                <div>
+                                                    <h6>{{ $item->job->name }}</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-wrap">
+                                            <div class="d-flex">
                                                 <div>
                                                     <h6>{{ $item->user->name }}</h6>
                                                     <p>{{ $item->user->jabatan }}</p>
                                                 </div>
                                             </div>
-                                        </td>
-                                        <td class="text-wrap">
-                                            <h6>{{ $item->job->name }}</h6>
                                         </td>
                                         <td>
                                             <div>

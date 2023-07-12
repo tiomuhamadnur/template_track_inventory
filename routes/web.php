@@ -10,6 +10,7 @@ use App\Http\Controllers\ColorSchemeController;
 use App\Http\Controllers\DarkModeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DefectController;
+use App\Http\Controllers\DepartementController;
 use App\Http\Controllers\DepoDashboardController;
 use App\Http\Controllers\DepoLineController;
 use App\Http\Controllers\DetailPartController;
@@ -26,7 +27,9 @@ use App\Http\Controllers\PICController;
 use App\Http\Controllers\PMController;
 use App\Http\Controllers\RfiController;
 use App\Http\Controllers\RfiDepoController;
+use App\Http\Controllers\SectionController;
 use App\Http\Controllers\SendEmailController;
+use App\Http\Controllers\ShiftController;
 use App\Http\Controllers\TemuanController;
 use App\Http\Controllers\TemuanDepoController;
 use App\Http\Controllers\TemuanMainlineController;
@@ -308,6 +311,33 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/part/{id}/edit', 'edit')->name('part.edit');
             Route::put('/part', 'update')->name('part.update');
             Route::delete('/part', 'destroy')->name('part.delete');
+        });
+
+        Route::controller(DepartementController::class)->group(function () {
+            Route::get('/departement', 'index')->name('departement.index');
+            Route::get('/departement-create', 'create')->name('departement.create');
+            Route::post('/departement', 'store')->name('departement.store');
+            Route::get('/departement/{id}/edit', 'edit')->name('departement.edit');
+            Route::put('/departement', 'update')->name('departement.update');
+            Route::delete('/departement', 'destroy')->name('departement.delete');
+        });
+
+        Route::controller(SectionController::class)->group(function () {
+            Route::get('/section', 'index')->name('section.index');
+            Route::get('/section-create', 'create')->name('section.create');
+            Route::post('/section', 'store')->name('section.store');
+            Route::get('/section/{id}/edit', 'edit')->name('section.edit');
+            Route::put('/section', 'update')->name('section.update');
+            Route::delete('/section', 'destroy')->name('section.delete');
+        });
+
+        Route::controller(ShiftController::class)->group(function () {
+            Route::get('/shift', 'index')->name('shift.index');
+            Route::get('/shift-create', 'create')->name('shift.create');
+            Route::post('/shift', 'store')->name('shift.store');
+            Route::get('/shift/{id}/edit', 'edit')->name('shift.edit');
+            Route::put('/shift', 'update')->name('shift.update');
+            Route::delete('/shift', 'destroy')->name('shift.delete');
         });
 
         Route::controller(DetailPartController::class)->group(function () {

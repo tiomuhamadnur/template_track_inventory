@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PM;
+use App\Models\Section;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -18,19 +19,42 @@ class PMController extends Controller
 
     public function create()
     {
-        return view('masterdata.masterdata_pm.create');
+        $section = Section::all();
+        return view('masterdata.masterdata_pm.create', compact(['section']));
     }
 
     public function store(Request $request)
     {
-        PM::create([
-            'name' => $request->name,
-            'item' => $request->item,
-            'detail' => $request->detail,
-            'frekuensi' => $request->frekuensi,
+        $this->validate($request, [
+            'logo' => ['file', 'image'],
+        ], [
+            'logo.image' => 'File harus dalam format gambar/photo!',
         ]);
 
-        return redirect()->route('pm.index')->withNotify('Data berhasil ditambahkan!');
+        if ($request->hasFile('logo') && $request->logo != '') {
+            $logo = $request->file('logo')->store('pm/logo');
+
+            PM::create([
+                'name' => $request->name,
+                'section' => $request->section,
+                'item' => $request->item,
+                'detail' => $request->detail,
+                'frekuensi' => $request->frekuensi,
+                'logo' => $logo,
+            ]);
+
+            return redirect()->route('pm.index')->withNotify('Data berhasil ditambahkan!');
+        } else {
+            PM::create([
+                'name' => $request->name,
+                'section' => $request->section,
+                'item' => $request->item,
+                'detail' => $request->detail,
+                'frekuensi' => $request->frekuensi,
+            ]);
+
+            return redirect()->route('pm.index')->withNotify('Data berhasil ditambahkan!');
+        }
     }
 
     public function show($id)
@@ -43,8 +67,9 @@ class PMController extends Controller
         try {
             $secret = Crypt::decryptString($id);
             $pm = PM::findOrFail($secret);
+            $section = Section::all();
             if ($pm) {
-                return view('masterdata.masterdata_pm.update', compact(['pm']));
+                return view('masterdata.masterdata_pm.update', compact(['pm', 'section']));
             } else {
                 return redirect()->back();
             }
@@ -55,17 +80,41 @@ class PMController extends Controller
 
     public function update(Request $request)
     {
+        // dd($request);
+
+        $this->validate($request, [
+            'logo' => ['file', 'image'],
+        ], [
+            'logo.image' => 'File harus dalam format gambar/photo!',
+        ]);
+
         $id = $request->id;
         $pm = PM::findOrFail($id);
         if ($pm) {
-            $pm->update([
-                'name' => $request->name,
-                'item' => $request->item,
-                'detail' => $request->detail,
-                'frekuensi' => $request->frekuensi,
-            ]);
+            if ($request->hasFile('logo') && $request->logo != '') {
+                $logo = $request->file('logo')->store('pm/logo');
 
-            return redirect()->route('pm.index')->withNotify('Data berhasil diubah!');
+                $pm->update([
+                    'name' => $request->name,
+                    'section' => $request->section,
+                    'item' => $request->item,
+                    'detail' => $request->detail,
+                    'frekuensi' => $request->frekuensi,
+                    'logo' => $logo,
+                ]);
+
+                return redirect()->route('pm.index')->withNotify('Data berhasil diubah!');
+            } else {
+                $pm->update([
+                    'name' => $request->name,
+                    'section' => $request->section,
+                    'item' => $request->item,
+                    'detail' => $request->detail,
+                    'frekuensi' => $request->frekuensi,
+                ]);
+
+                return redirect()->route('pm.index')->withNotify('Data berhasil diubah!');
+            }
         } else {
             return redirect()->back();
         }

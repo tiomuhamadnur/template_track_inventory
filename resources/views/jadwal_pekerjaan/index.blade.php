@@ -21,23 +21,23 @@
                                     type="button" title="Refresh">
                                     <i class="ti-reload"></i>
                                 </a>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#ModalAddJadwal"
+                                    class="btn btn-outline-primary btn-lg mx-0" title="Tambah Jadwal Pekerjaan"
+                                    type="button">Add Data</a>
                                 <a href="{{ route('jadwal.pekerjaan.create') }}" class="btn btn-outline-success btn-lg mx-0"
-                                    title="Tambah Jadwal Pekerjaan" type="button">Add Data</a>
+                                    title="Edit atau Hapus Jadwal Pekerjaan" type="button">Edit Data</a>
                                 <a href="#" type="button" data-bs-toggle="modal" data-bs-target="#ModalExportPdf"
-                                    class="btn btn-outline-success btn-lg mx-0" title="Export to PDF">
+                                    class="btn btn-outline-secondary btn-lg mx-0" title="Export to PDF">
                                     <i class="mdi mdi-file-pdf text-danger"></i>
                                 </a>
-                                {{-- <a href="#" data-bs-toggle="modal" data-bs-target="#ModalAddJadwal"
-                                    class="btn btn-outline-success btn-lg mx-0" title="Tambah Jadwal Pekerjaan"
-                                    type="button">Add Data</a>
-                                <a href="{{ route('jadwal.pekerjaan.list') }}" class="btn btn-outline-warning btn-lg mx-0"
+                                {{-- <a href="{{ route('jadwal.pekerjaan.list') }}" class="btn btn-outline-warning btn-lg mx-0"
                                     title="List Jadwal Pekerjaan" type="button">All Data</a> --}}
                             </div>
                             <div class="table-responsive pt-3">
-                                <span class="badge fw-bolder" style="background-color: #059c00; font-size:15px;">Permanent
+                                {{-- <span class="badge fw-bolder" style="background-color: #059c00; font-size:15px;">Permanent
                                     Way RAMS</span>
                                 <span class="badge fw-bolder" style="background-color: #ff9500; font-size:15px;">Permanent
-                                    Way Maintenance</span>
+                                    Way Maintenance</span> --}}
                                 <div id='calendar' class="mt-2"></div>
                             </div>
                         </div>
@@ -63,13 +63,19 @@
                             <label class="form-label">Section</label>
                             <select class="form-select" name="section" required>
                                 <option value="" disabled selected>- pilih section -</option>
-                                <option value="Permanent Way RAMS">Permanent Way RAMS</option>
-                                <option value="Permanent Way Maintenance">Permanent Way Maintenance</option>
+                                @foreach ($section as $item)
+                                    <option value="{{ $item->code }}">{{ $item->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Nama Pekerjaan</label>
-                            <input type="text" class="form-control" name="title" autocomplete="off" required>
+                            <select class="form-select" name="title" required>
+                                <option value="" disabled selected>- pilih pekerjaan -</option>
+                                @foreach ($pekerjaan as $item)
+                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Lokasi</label>
@@ -78,19 +84,20 @@
                         <div class="form-group">
                             <label class="form-label">Tanggal</label>
                             <div class="input-group">
-                                <input placeholder="Tanggal Mulai" class="form-control me-1" type="text"
+                                <input placeholder="Tanggal Pekerjaan" class="form-control me-1" type="text"
                                     onfocus="(this.type='date')" onblur="(this.type='text')" id="date" name="start"
                                     required>
-                                <input placeholder="Tanggal Akhir" class="form-control ms-1" type="text"
-                                    onfocus="(this.type='date')" onblur="(this.type='text')" id="date" name="end">
+                                {{-- <input placeholder="Tanggal Akhir" class="form-control ms-1" type="text"
+                                    onfocus="(this.type='date')" onblur="(this.type='text')" id="date" name="end"> --}}
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Shift</label>
                             <select class="form-select" name="shift" required>
                                 <option value="" disabled selected>- pilih shift -</option>
-                                <option value="1 atau 2">1 atau 2</option>
-                                <option value="3">3</option>
+                                @foreach ($shift as $item)
+                                    <option value="{{ $item->code }}">{{ $item->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </form>
@@ -124,8 +131,9 @@
                             <label class="form-label">Section</label>
                             <select class="form-select" name="section" required>
                                 <option value="" disabled selected>- pilih section -</option>
-                                <option value="PWR">Permanent Way RAMS</option>
-                                <option value="PWM">Permanent Way Maintenance</option>
+                                @foreach ($section as $item)
+                                    <option value="{{ $item->code }}">{{ $item->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">

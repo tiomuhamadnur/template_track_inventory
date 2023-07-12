@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\JadwalPekerjaan;
+use App\Models\PM;
+use App\Models\Section;
+use App\Models\Shift;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -12,8 +15,11 @@ class JadwalPekerjaanController extends Controller
     public function index()
     {
         $data = JadwalPekerjaan::get(['id', 'title', 'shift', 'start', 'end', 'color']);
+        $section = Section::all();
+        $shift = Shift::all();
+        $pekerjaan = PM::orderBy('name', 'asc')->get();
 
-        return view('jadwal_pekerjaan.index', compact(['data']));
+        return view('jadwal_pekerjaan.index', compact(['data', 'section', 'shift', 'pekerjaan']));
     }
 
     public function create(Request $request)
@@ -44,7 +50,7 @@ class JadwalPekerjaanController extends Controller
                     'nama_pekerjaan' => $request->title,
                     'shift' => $request->shift,
                     'start' => $request->start,
-                    'end' => $request->end,
+                    'end' => $request->end ?? $request->start,
                     'section' => $request->section,
                     'color' => $color,
                     'location' => $request->location,
@@ -84,10 +90,11 @@ class JadwalPekerjaanController extends Controller
         }
 
         JadwalPekerjaan::create([
-            'title' => $request->title . ' - ' . $request->location . ' - (Shift: ' . $shift . ')',
-            'shift' => $shift,
+            'title' => $request->section . ' - ' . $request->title . ' - ' . $request->location . ' - (Shift: ' . $request->shift . ')',
+            'nama_pekerjaan' => $request->title,
+            'shift' => $request->shift,
             'start' => $request->start,
-            'end' => $request->end,
+            'end' => $request->end ?? $request->start,
             'section' => $request->section,
             'color' => $color,
             'location' => $request->location,

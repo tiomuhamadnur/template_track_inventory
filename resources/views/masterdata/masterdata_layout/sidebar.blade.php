@@ -15,6 +15,10 @@
             </a>
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a class="nav-link" href="{{ route('departement.index') }}">Departement</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('section.index') }}">Section</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('shift.index') }}">Shift</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('area.index') }}">Area</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('line.index') }}">Line Mainline</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('depoline.index') }}">Line Depo</a></li>
@@ -24,7 +28,8 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('defect.index') }}">Defects</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('transDefect.index') }}">Relasi Defect</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('mainline.index') }}">Track Bed Mainline</a>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('mainline.index') }}">Track Bed
+                            Mainline</a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('wesel.index') }}">Turn Out/Scissors</a>
                     </li>
