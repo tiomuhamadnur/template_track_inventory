@@ -1,7 +1,7 @@
 @extends('depo.depo_layout.base')
 
 @section('sub-title')
-    <title> Dashboard | TCSM</title>
+    <title> Dashboard | CPWTM</title>
 @endsection
 @section('sub-content')
     <h4>Dashboard Depo</h4>

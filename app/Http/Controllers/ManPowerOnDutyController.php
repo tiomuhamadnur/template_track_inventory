@@ -13,7 +13,7 @@ class ManPowerOnDutyController extends Controller
 {
     public function index()
     {
-        $data = ManPowerOnDuty::get(['id', 'title', 'shift', 'start', 'end', 'color']);
+        $data = ManPowerOnDuty::orderBy('shift', 'asc')->get(['id', 'title', 'shift', 'start', 'end', 'color']);
         $user = Pegawai::whereNot('jabatan', 'Section Head')->orderBy('name', 'asc')->get();
         $section = Section::all();
         $shift = Shift::all();

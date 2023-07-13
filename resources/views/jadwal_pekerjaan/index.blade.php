@@ -70,10 +70,11 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Nama Pekerjaan</label>
-                            <select class="form-select" name="title" required>
+                            <select class="form-select" name="job_id" required>
                                 <option value="" disabled selected>- pilih pekerjaan -</option>
                                 @foreach ($pekerjaan as $item)
-                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                    <option value="{{ $item->id }}">({{ $item->section }}) - {{ $item->name }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -124,7 +125,8 @@
                     <h5 class="modal-title" id="modalAdminTitle">Form Export PDF Jadwal Pekerjaan</h5>
                 </div>
                 <div class="modal-body">
-                    <form id="form_export_pdf_jadwal" action="{{ route('jadwal.pekerjaan.export_pdf') }}" method="GET">
+                    <form id="form_export_pdf_jadwal" action="{{ route('jadwal.pekerjaan.export_pdf') }}"
+                        method="GET">
                         @csrf
                         @method('get')
                         <div class="form-group">

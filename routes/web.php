@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccelerometerController;
+use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BufferController;
@@ -30,6 +31,7 @@ use App\Http\Controllers\RfiDepoController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\ShiftController;
+use App\Http\Controllers\ShowPageController;
 use App\Http\Controllers\TemuanController;
 use App\Http\Controllers\TemuanDepoController;
 use App\Http\Controllers\TemuanMainlineController;
@@ -58,6 +60,10 @@ Route::controller(AuthController::class)->middleware('loggedin')->group(function
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('login', 'loginView')->name('login.index');
+});
+
+Route::controller(ShowPageController::class)->group(function () {
+    Route::get('/whats-today', 'index')->name('show.page.index');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -251,6 +257,16 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/man-power-on-duty/filter', 'filter')->name('man.power.filter');
         Route::put('/man-power-on-duty', 'update')->name('man.power.update');
         Route::delete('/man-power-on-duty', 'destroy')->name('man.power.delete');
+    });
+
+    // ANNOUNCEMENTS
+    Route::controller(AnnouncementController::class)->group(function () {
+        Route::get('/announcement', 'index')->name('announcement.index');
+        Route::post('/announcement', 'store')->name('announcement.store');
+        Route::get('/announcement/create', 'create')->name('announcement.create');
+        Route::get('/announcement/filter', 'filter')->name('announcement.filter');
+        Route::put('/announcement', 'update')->name('announcement.update');
+        Route::delete('/announcement', 'destroy')->name('announcement.delete');
     });
 
 

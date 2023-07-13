@@ -15,7 +15,8 @@
                 <div class="col-lg-12 grid-margin stretch-card mt-3">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">List Jadwal Man Power on Duty ({{ $bulan ?? '' }} {{ $tahun ?? '' }})
+                            <h4 class="card-title">List Jadwal Man Power on Duty <span
+                                    class="text-danger fw-bolder">({{ $bulan ?? '' }} {{ $tahun ?? '' }})</span>
                             </h4>
                             <div class="btn-group">
                                 <a href="{{ route('man.power.index') }}" class="btn btn-outline-dark btn-lg mx-0"
@@ -186,7 +187,7 @@
                                 <option value="" disabled selected>- pilih tahun -</option>
                                 @php
                                     $tahun = \Carbon\Carbon::now()->format('Y');
-                                    $tahun = $tahun - 2;
+                                    $tahun = $tahun - 1;
                                 @endphp
                                 @for ($i = 0; $i <= 10; $i++)
                                     <option value="{{ $tahun }}">{{ $tahun }}</option>

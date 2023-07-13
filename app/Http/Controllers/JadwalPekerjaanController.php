@@ -17,7 +17,7 @@ class JadwalPekerjaanController extends Controller
         $data = JadwalPekerjaan::get(['id', 'title', 'shift', 'start', 'end', 'color']);
         $section = Section::all();
         $shift = Shift::all();
-        $pekerjaan = PM::orderBy('name', 'asc')->get();
+        $pekerjaan = PM::orderBy('section', 'asc')->orderBy('name', 'asc')->get();
 
         return view('jadwal_pekerjaan.index', compact(['data', 'section', 'shift', 'pekerjaan']));
     }
@@ -82,16 +82,22 @@ class JadwalPekerjaanController extends Controller
 
     public function store(Request $request)
     {
-        $shift = $request->shift;
-        if ($shift == 3) {
+        $job_id = $request->job_id;
+        $section = $request->section;
+        if ($section == 'PWR') {
             $color = '#059c00';
         } else {
             $color = '#ff9500';
         }
 
+        $pekerjaan = PM::findOrFail($job_id);
+        if (!$pekerjaan) {
+            return redirect()->back();
+        }
         JadwalPekerjaan::create([
-            'title' => $request->section . ' - ' . $request->title . ' - ' . $request->location . ' - (Shift: ' . $request->shift . ')',
-            'nama_pekerjaan' => $request->title,
+            'job_id' => $job_id,
+            'title' => $request->section . ' - ' . $pekerjaan->name . ' - ' . $request->location . ' - (Shift: ' . $request->shift . ')',
+            'nama_pekerjaan' => $pekerjaan->name,
             'shift' => $request->shift,
             'start' => $request->start,
             'end' => $request->end ?? $request->start,

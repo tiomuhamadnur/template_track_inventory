@@ -12,7 +12,7 @@ class PMController extends Controller
 {
     public function index()
     {
-        $pm = PM::all();
+        $pm = PM::orderBy('section', 'ASC')->get();
 
         return view('masterdata.masterdata_pm.index', compact(['pm']));
     }

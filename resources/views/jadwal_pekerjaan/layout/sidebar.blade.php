@@ -13,6 +13,12 @@
                 <span class="menu-title">Man Power On Duty</span>
             </a>
         </li>
+        <li class="nav-item animate__animated animate__fadeInLeft">
+            <a class="nav-link" href="{{ route('announcement.index') }}">
+                <i class="mdi mdi-bullhorn-outline menu-icon"></i>
+                <span class="menu-title">Announcement</span>
+            </a>
+        </li>
 
         <li class="nav-item nav-category">Settings</li>
         <li class="nav-item animate__animated animate__fadeInLeft">

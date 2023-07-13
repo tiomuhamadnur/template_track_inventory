@@ -22,10 +22,15 @@ class RfiController extends Controller
         try {
             $secret = Crypt::decryptString($id);
             $temuan = Temuan::findOrFail($secret);
-            if ($temuan) {
-                return view('mainline.mainline_rfi.create', compact(['temuan']));
+            $data_rfi = TransRFI::where('temuan_mainline_id', $secret)->count();
+            if ($data_rfi > 0) {
+                return redirect()->back()->withNotifyerror('Transaksi tidak bisa dilakukan, data temuan ini sudah diajukan RFI dan menunggu di-review oleh Section Head terkait!');
             } else {
-                return redirect()->back();
+                if ($temuan) {
+                    return view('mainline.mainline_rfi.create', compact(['temuan']));
+                } else {
+                    return redirect()->back();
+                }
             }
         } catch (DecryptException $e) {
             return redirect()->back();
