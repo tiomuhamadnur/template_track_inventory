@@ -10,10 +10,6 @@ class AnnouncementController extends Controller
 {
     public function index()
     {
-        // $now = Carbon::now();
-        // $tahun = $now->format('Y');
-        // $bulan = $now->format('m');
-        // $announcement = Announcement::whereYear('start', $tahun)->whereMonth('start', $bulan)->get();
         $announcement = Announcement::all();
         return view('jadwal_pekerjaan.announcement.index', compact(['announcement']));
     }

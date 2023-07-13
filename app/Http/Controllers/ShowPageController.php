@@ -22,7 +22,7 @@ class ShowPageController extends Controller
         $pekerjaan = JadwalPekerjaan::whereYear('start', $tahun)->whereMonth('start', $bulan)->whereDay('start', $hari)->get();
         $man_power = ManPowerOnDuty::whereYear('start', $tahun)->whereMonth('start', $bulan)->whereDay('start', $hari)->orderBy('shift', 'asc')->get();
         $section_head = Pegawai::where('jabatan', 'Section Head')->orderBy('name', 'asc')->get();
-        $announcement = Announcement::where('start', '>=', $sekarang)->where('end', '<=', $sekarang)->get();
+        $announcement = Announcement::all();
 
         return view('show_page.index', compact(['pekerjaan', 'man_power', 'section_head', 'announcement']));
     }

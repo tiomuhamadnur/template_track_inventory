@@ -4,14 +4,14 @@
 <head>
 
     <meta charset="utf-8">
-    <meta http-equiv="refresh" content="10800">
+    <meta http-equiv="refresh" content="3600">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="{{ asset('assets/show_page/assets/images/exodus-header.png') }}" rel="shortcut icon">
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
 
-    <title>Schedule Permanent Way | EXODUS</title>
+    <title>What's Today | Exodus</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('assets/show_page/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -155,9 +155,11 @@
                                         @endforeach
                                     @else
                                         <div class="text-wrap">
-                                            <h4 class="text-warning">Jadwal pekerjaan belum diatur, silahkan hubungi PIC
+                                            <h4 class="text-warning mb-4">Jadwal pekerjaan belum diatur, silahkan
+                                                hubungi PIC
                                                 terkait!
                                             </h4>
+                                            <h4 class="text-danger">Atau hari ini OCS ON 24 jam.</h4>
                                         </div>
                                     @endif
                                 </div>
@@ -189,14 +191,15 @@
                                                     <div class="col-lg-11 text-center">
                                                         <div class="thumb">
                                                             <img src="{{ asset('storage/' . $item->photo ?? '') }}"
-                                                                alt="foto_sh" style="border-radius: 10px;">
+                                                                alt="foto_sh"
+                                                                style="border-radius: 10px; height:100px; width:100px;">
                                                         </div>
                                                         <a href="#" class="text-light fw-bolder"
                                                             style="font-size: 12px">
                                                             {{ $item->name }}
                                                         </a> <br class="mb-0 mt-0">
                                                         <p style="font-size: 12px">
-                                                            {{ $item->jabatan }}
+                                                            SH - {{ $item->section }}
                                                         </p>
                                                     </div>
                                                 </div>
