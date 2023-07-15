@@ -4,7 +4,7 @@
 <head>
 
     <meta charset="utf-8">
-    <meta http-equiv="refresh" content="3600">
+    <meta http-equiv="refresh" content="1800">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="{{ asset('assets/show_page/assets/images/exodus-header.png') }}" rel="shortcut icon">
 
@@ -108,7 +108,8 @@
                                     </div>
                                 @else
                                     <div class="text-wrap">
-                                        <h4 class="text-warning">Jadwal man power belum diatur, silahkan hubungi PIC
+                                        <h4 class="text-warning">Jadwal man power belum diatur, silahkan hubungi
+                                            PIC
                                             terkait!
                                         </h4>
                                     </div>
@@ -126,42 +127,44 @@
                                             <h5><em>Today's</em> Daily Activity</h5>
                                         </div>
                                     </div>
-                                    @if ($pekerjaan->count() > 0)
-                                        @foreach ($pekerjaan as $item)
-                                            <div class="col-lg-6">
-                                                <div class="item">
-                                                    <img src="{{ asset('storage/' . $item->job->logo ?? '') }}"
-                                                        alt="logo" class="templatemo-item">
-                                                    <div>
-                                                        <div class="text-wrap d-flex">
-                                                            <h4>{{ $item->section }} - {{ $item->job->name }}</h4>
-                                                        </div>
-                                                        <span>
-                                                            {{ $item->location }}
-                                                            <button
-                                                                class="btn @if ($item->shift == 1) btn-success
+                                    <div id="activity">
+                                        {{-- @if ($pekerjaan->count() > 0)
+                                            @foreach ($pekerjaan as $item)
+                                                <div class="col-lg-6">
+                                                    <div class="item">
+                                                        <img src="{{ asset('storage/' . $item->job->logo ?? '') }}"
+                                                            alt="logo" class="templatemo-item">
+                                                        <div>
+                                                            <div class="text-wrap d-flex">
+                                                                <h4>{{ $item->section }} - {{ $item->job->name }}</h4>
+                                                            </div>
+                                                            <span>
+                                                                {{ $item->location }}
+                                                                <button
+                                                                    class="btn @if ($item->shift == 1) btn-success
                                                         @elseif($item->shift == 2)
                                                         btn-warning
                                                         @elseif($item->shift == 3)
                                                         btn-danger
                                                         @else
                                                         btn-light @endif">
-                                                                Shift:{{ $item->shift }}
-                                                            </button>
-                                                        </span>
+                                                                    Shift:{{ $item->shift }}
+                                                                </button>
+                                                            </span>
+                                                        </div>
                                                     </div>
                                                 </div>
+                                            @endforeach
+                                        @else
+                                            <div class="text-wrap">
+                                                <h4 class="text-warning mb-4">Jadwal pekerjaan belum diatur, silahkan
+                                                    hubungi PIC
+                                                    terkait!
+                                                </h4>
+                                                <h4 class="text-danger">Atau hari ini OCS ON 24 jam.</h4>
                                             </div>
-                                        @endforeach
-                                    @else
-                                        <div class="text-wrap">
-                                            <h4 class="text-warning mb-4">Jadwal pekerjaan belum diatur, silahkan
-                                                hubungi PIC
-                                                terkait!
-                                            </h4>
-                                            <h4 class="text-danger">Atau hari ini OCS ON 24 jam.</h4>
-                                        </div>
-                                    @endif
+                                        @endif --}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -232,20 +235,12 @@
                                                             <span class="ripple pinkBg"></span>
                                                         </a>
                                                     </div>
-                                                    @foreach ($announcement as $item)
-                                                        <h5 class="notify">● {{ $item->content }}
-                                                        </h5>
-                                                    @endforeach
-                                                    {{-- <h5 class="notify">● Personel Shift 1 & 2 agar selalu
-                                                        mengikuti <i><em>Role Call Meeting</em></i> Pagi & Petang.
-                                                    </h5>
-                                                    <h5 class="notify">● Personel Shift 2 agar selalu mengecek jadwal
-                                                        kegiatan malam dan <em>mempersiapkan kebutuhan
-                                                            <i>tools/material</i> sesuai kebutuhan pekerjaan.</em>
-                                                    </h5>
-                                                    <h5 class="notify">● <em>LPP dan Perizinan</em> harap dicek
-                                                        kembali sesuai pekerjaan (Revisi terbaru).
-                                                    </h5> --}}
+                                                    <div id="announcement">
+                                                        {{-- @foreach ($announcement as $item)
+                                                            <h5 class="notify">● {{ $item->content }}
+                                                            </h5>
+                                                        @endforeach --}}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -281,6 +276,14 @@
     <!-- AKHIR FOOTER -->
 
     <!-- Scripts -->
+    <script>
+        var auto_refresh_announcement = setInterval(
+            function() {
+                $('#announcement').load('<?php echo url('api/announcement'); ?>').fadeIn('slow');
+                $('#activity').load('<?php echo url('api/activity'); ?>').fadeIn('slow');
+            }, 5000
+        );
+    </script>
     <!-- Bootstrap core JavaScript -->
     <script src="{{ asset('assets/show_page/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/show_page/vendor/bootstrap/js/bootstrap.min.js') }}"></script>

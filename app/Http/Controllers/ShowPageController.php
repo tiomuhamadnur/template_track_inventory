@@ -19,12 +19,31 @@ class ShowPageController extends Controller
         $hari = $now->format('d');
         $sekarang = $now->format('Y-m-d');
 
-        $pekerjaan = JadwalPekerjaan::whereYear('start', $tahun)->whereMonth('start', $bulan)->whereDay('start', $hari)->get();
+        // $pekerjaan = JadwalPekerjaan::whereYear('start', $tahun)->whereMonth('start', $bulan)->whereDay('start', $hari)->get();
         $man_power = ManPowerOnDuty::whereYear('start', $tahun)->whereMonth('start', $bulan)->whereDay('start', $hari)->orderBy('shift', 'asc')->get();
         $section_head = Pegawai::where('jabatan', 'Section Head')->orderBy('name', 'asc')->get();
+        // $announcement = Announcement::all();
+
+        return view('show_page.index', compact(['section_head', 'man_power']));
+    }
+
+    public function getAnnouncement()
+    {
         $announcement = Announcement::all();
 
-        return view('show_page.index', compact(['pekerjaan', 'man_power', 'section_head', 'announcement']));
+        return view('show_page.content.announcement', ['announcement' => $announcement]);
+    }
+
+    public function getActivity()
+    {
+        $now = Carbon::now();
+        $tahun = $now->format('Y');
+        $bulan = $now->format('m');
+        $hari = $now->format('d');
+
+        $pekerjaan = JadwalPekerjaan::whereYear('start', $tahun)->whereMonth('start', $bulan)->whereDay('start', $hari)->get();
+
+        return view('show_page.content.activity', ['pekerjaan' => $pekerjaan]);
     }
 
     public function create()

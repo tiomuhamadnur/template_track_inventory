@@ -64,6 +64,9 @@ Route::controller(AuthController::class)->group(function () {
 
 Route::controller(ShowPageController::class)->group(function () {
     Route::get('/whats-today', 'index')->name('show.page.index');
+
+    Route::get('/api/announcement', 'getAnnouncement')->name('announcement.get');
+    Route::get('/api/activity', 'getActivity')->name('activity.get');
 });
 
 Route::middleware(['auth'])->group(function () {
