@@ -9,11 +9,11 @@
             <a class="navbar-brand brand-logo text-black fw-bolder" href="{{ route('transisi') }}"
                 style="margin-left: 18px">
                 {{-- <img src="{{ asset('assets/images/mm.png') }}" alt="logo" /> TCSM --}}
-                <img src="{{ asset('assets/images/logo_sementara.png') }}" alt="logo" /> CPWTM
+                <img src="{{ asset('assets/images/exods.png') }}" alt="logo" /> CPWTM
             </a>
             <a class="navbar-brand brand-logo-mini" href="{{ route('transisi') }}">
                 {{-- <img src="{{ asset('assets/images/mm.png') }}" alt="logo" /> --}}
-                <img src="{{ asset('assets/images/logo_sementara.png') }}" alt="logo" />
+                <img src="{{ asset('assets/images/exods.png') }}" alt="logo" />
             </a>
         </div>
     </div>

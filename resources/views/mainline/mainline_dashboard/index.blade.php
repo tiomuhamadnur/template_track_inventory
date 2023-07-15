@@ -6,7 +6,7 @@
 @section('sub-content')
     <h4>Dashboard Mainline</h4>
     <div class="row">
-        <div class="col-12 grid-margin stretch-card animate__animated animate__zoomIn">
+        <div class="col-12 grid-margin stretch-card animate__animated animate__zoomIn ">
             <div class="card card-rounded">
                 <div class="card-body">
                     <div class="row">
@@ -298,6 +298,7 @@
         </div>
         @include('mainline.mainline_dashboard.modals')
     </div>
+
 @endsection
 
 @section('javascript')

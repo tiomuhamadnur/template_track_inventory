@@ -14,7 +14,7 @@
                 </div>
                 <div class="tab-content tab-content-basic">
                     <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
-
+                            @include('masterdata.masterdata_dashboard.card_asset')
                     </div>
                 </div>
             </div>

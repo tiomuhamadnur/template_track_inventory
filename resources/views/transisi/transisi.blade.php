@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <title>Dashboard Switch | CPWTM</title>
     {{-- <link rel="shortcut icon" href="{{ asset('assets/images/mm.png') }}" /> --}}
-    <link rel="shortcut icon" href="{{ asset('assets/images/logo_sementara.png') }}" />
+    <link rel="shortcut icon" href="{{ asset('assets/images/exods.png') }}" />
     <link rel="stylesheet" href="{{ asset('assets/transisiflex/style2.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
