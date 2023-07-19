@@ -1,7 +1,7 @@
 @extends('layout.form.form')
 
 @section('head')
-    <title>Form Data Joint</title>
+    <title>Form Edit Data Joint</title>
 @endsection
 
 @section('body')
@@ -9,7 +9,7 @@
         <div class="wrapper wrapper--w790">
             <div class="card card-5">
                 <div class="card-heading">
-                    <h2 class="title">Form Data Joint</h2>
+                    <h2 class="title">Form Edit Data Joint</h2>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('joint.update') }}" method="POST" enctype="multipart/form-data">
@@ -132,8 +132,7 @@
                                     <select name="wesel_id" class="form-select">
                                         <option value="">Bukan Wesel</option>
                                         <option value="{{ $joint->wesel->id ?? '' }}" selected>
-                                            {{ $joint->wesel->name ?? '' }}
-                                            {{ $joint->wesel->line->code ?? '' }}
+                                            {{ $joint->wesel->name ?? '' }} - {{ $joint->wesel->line->code ?? '' }} -
                                             {{ $joint->wesel->area->code ?? '' }}</option>
                                         @foreach ($wesel as $item)
                                             <option value="{{ $item->id }}">{{ $item->name }} -
@@ -148,7 +147,10 @@
                         </div>
 
                         <div>
-                            <a href="{{ route('joint.index') }}" class="btn btn-warning rounded">Cancel</a>
+                            <a @if ($joint->area->id == 1) href="{{ route('joint.depo.index') }}"
+                            @else
+                                href="{{ route('joint.index') }}" @endif
+                                class="btn btn-warning rounded">Cancel</a>
                             <button class="btn btn-success ms-2" type="submit">Save</button>
                         </div>
                     </form>

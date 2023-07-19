@@ -75,7 +75,7 @@
                                                     <div class="btn-group">
                                                         <a href="{{ route('shift.edit', $item->id) }}" type="button"
                                                             class="btn btn-outline-warning mx-0">Edit</a>
-                                                        <a class="btn btn-outline-danger mx-0" href="javascript:;"
+                                                        <a class="btn btn-outline-danger mx-0 disabled" href="javascript:;"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#delete-confirmation-modal"
                                                             onclick="toggleModal('{{ $item->id }}')">Delete</a>

@@ -1,7 +1,7 @@
 @extends('masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title>Data Tools & Materials | TCSM</title>
+    <title>Data Tools & Materials | CPWTM</title>
 @endsection
 
 @section('sub-content')
@@ -16,7 +16,7 @@
                 <div class="col-lg-12 grid-margin stretch-card mt-3">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Data Tools & Materials</h4>
+                            <h4 class="card-title">Data Tools & Materials (Temporary)</h4>
                             <a href="#" id="button_add" class="btn btn-outline-dark btn-lg" onclick="showForm()"
                                 type="button">Add
                                 Data</a>
@@ -78,11 +78,14 @@
                                                 <td class="text-wrap text-center">
                                                     {{ $item->unit }}
                                                 </td>
-                                                <td class="text-center text-center">
+                                                <td class="text-center">
                                                     {{ $item->initial_check }}
                                                 </td>
-                                                <td class="text-center text-center">
+                                                <td class="text-center">
                                                     {{ $item->ending_check }}
+                                                </td>
+                                                <td class="text-wrap">
+                                                    {{ $item->remark }}
                                                 </td>
                                             </tr>
                                         @endforeach

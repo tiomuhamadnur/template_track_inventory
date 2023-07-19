@@ -1,7 +1,7 @@
 @extends('masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title>Data Buffer/Wheel Stop | TCSM</title>
+    <title>Data Buffer/Wheel Stop | CPWTM</title>
 @endsection
 
 @section('sub-content')
@@ -75,7 +75,7 @@
                                                     <div class="btn-group">
                                                         <a href="{{ route('buffer.edit', Crypt::encryptString($item->id)) }}"
                                                             type="button" class="btn btn-outline-warning mx-0">Edit</a>
-                                                        <a class="btn btn-outline-danger mx-0" href="javascript:;"
+                                                        <a class="btn btn-outline-danger mx-0 disabled" href="javascript:;"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#delete-confirmation-modal"
                                                             onclick="toggleModal('{{ $item->id }}')">Delete</a>

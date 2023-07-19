@@ -65,6 +65,7 @@ Route::controller(AuthController::class)->group(function () {
 Route::controller(ShowPageController::class)->group(function () {
     Route::get('/whats-today', 'index')->name('show.page.index');
 
+    Route::get('/api/man_power', 'getManPower')->name('man_power.get');
     Route::get('/api/announcement', 'getAnnouncement')->name('announcement.get');
     Route::get('/api/activity', 'getActivity')->name('activity.get');
 });
@@ -401,8 +402,10 @@ Route::middleware(['auth'])->group(function () {
 
         Route::controller(JointController::class)->group(function () {
             Route::get('/joint', 'index')->name('joint.index');
+            Route::get('/joint-depo', 'depo')->name('joint.depo.index');
             Route::get('/joint-create', 'create')->name('joint.create');
             Route::get('/joint/filter', 'filter')->name('joint.filter');
+            Route::get('/joint-depo/filter', 'depo_filter')->name('joint.depo.filter');
             Route::post('/joint', 'store')->name('joint.store');
             Route::get('/joint/{id}/edit', 'edit')->name('joint.edit');
             Route::put('/joint', 'update')->name('joint.update');

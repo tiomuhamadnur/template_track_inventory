@@ -1,11 +1,11 @@
 @extends('masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title>Data Joint Mainline | CPWTM</title>
+    <title>Data Joint Depo | CPWTM</title>
 @endsection
 
 @section('sub-content')
-    <h4>Master Data > Joint Mainline</h4>
+    <h4>Master Data > Joint Depo</h4>
     <div class="row">
         <div class="col-sm-12">
             <div class="home-tab">
@@ -16,10 +16,10 @@
                 <div class="col-lg-12 grid-margin stretch-card mt-3">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Data Joint Mainline</h4>
+                            <h4 class="card-title">Data Joint Depo</h4>
                             <div class="btn-group">
-                                <a href="{{ route('joint.index') }}" class="btn btn-outline-dark btn-lg mx-0" type="button"
-                                    title="Reset Filter">
+                                <a href="{{ route('joint.depo.index') }}" class="btn btn-outline-dark btn-lg mx-0"
+                                    type="button" title="Reset Filter">
                                     <i class="ti-reload"></i>
                                 </a>
                                 <a href="{{ route('joint.create') }}" class="btn btn-outline-primary btn-lg me-0"
@@ -67,9 +67,6 @@
                                                 Direction
                                             </th>
                                             <th class="text-center">
-                                                Span
-                                            </th>
-                                            <th class="text-center">
                                                 Wesel
                                             </th>
                                             <th class="text-center">
@@ -102,17 +99,10 @@
                                                     {{ $item->direction ?? '-' }}
                                                 </td>
                                                 <td class="text-center">
-                                                    {{ $item->mainline->no_span ?? '-' }}
-                                                </td>
-                                                <td class="text-center">
                                                     {{ $item->wesel->name ?? '-' }}
                                                 </td>
                                                 <td class="text-center">
-                                                    @if ($item->mainline_id != null)
-                                                        {{ $item->mainline->kilometer ?? '-' }}
-                                                    @else
-                                                        {{ $item->kilometer ?? '-' }}
-                                                    @endif
+                                                    {{ $item->kilometer ?? '-' }}
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">
@@ -200,18 +190,13 @@
         <div class="modal-dialog modal-dialog modal-md" role="document">
             <div class="modal-content">
                 <div class="modal-body">
-                    <form id="form_filter" action="{{ route('joint.filter') }}" method="GET">
+                    <form id="form_filter" action="{{ route('joint.depo.filter') }}" method="GET">
                         @csrf
                         @method('get')
                         <div class="form-group">
                             <label class="form-label">Area</label>
-                            <select class="form-select" name="area_id">
-                                <option disabled selected>- Pilih Area -</option>
-                                @foreach ($area as $item)
-                                    <option value="{{ $item->id }}">{{ $item->code }} ({{ $item->name }})
-                                    </option>
-                                @endforeach
-                            </select>
+                            <input type="text" name="area_id" value="1" hidden>
+                            <input type="text" class="form-control" value="Depo" readonly>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Line</label>

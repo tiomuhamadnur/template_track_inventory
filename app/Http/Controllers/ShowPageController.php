@@ -46,6 +46,18 @@ class ShowPageController extends Controller
         return view('show_page.content.activity', ['pekerjaan' => $pekerjaan]);
     }
 
+    public function getManPower()
+    {
+        $now = Carbon::now();
+        $tahun = $now->format('Y');
+        $bulan = $now->format('m');
+        $hari = $now->format('d');
+
+        $man_power = ManPowerOnDuty::whereYear('start', $tahun)->whereMonth('start', $bulan)->whereDay('start', $hari)->orderBy('shift', 'asc')->get();
+
+        return view('show_page.content.man_power', ['man_power' => $man_power]);
+    }
+
     public function create()
     {
         //

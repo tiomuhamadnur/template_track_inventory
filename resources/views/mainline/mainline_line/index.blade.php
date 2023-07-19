@@ -1,7 +1,7 @@
 @extends('masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title>Data Line | TCSM</title>
+    <title>Data Line | CPWTM</title>
 @endsection
 
 @section('sub-content')
@@ -70,7 +70,7 @@
                                                         <a href="{{ route('line.edit', $item->id) }}" type="button"
                                                             class="btn btn-outline-warning mx-0">Edit</a>
                                                         <button type="button"
-                                                            class="btn btn-outline-danger mx-0">Delete</button>
+                                                            class="btn btn-outline-danger mx-0 disabled">Delete</button>
                                                     </div>
                                                 </td>
                                             </tr>

@@ -75,6 +75,7 @@
                                     <h5><em>Today's</em> Personel on Duty</h5>
                                 </div>
 
+
                                 @if ($man_power->count() > 0)
                                     <div class="owl-features owl-carousel">
                                         @foreach ($man_power as $item)
@@ -109,8 +110,7 @@
                                 @else
                                     <div class="text-wrap">
                                         <h4 class="text-warning">Jadwal man power belum diatur, silahkan hubungi
-                                            PIC
-                                            terkait!
+                                            PIC terkait!
                                         </h4>
                                     </div>
                                 @endif
@@ -277,11 +277,12 @@
 
     <!-- Scripts -->
     <script>
-        var auto_refresh_announcement = setInterval(
+        var auto_refresh_content = setInterval(
             function() {
+                $('#man_power').load('<?php echo url('api/man_power'); ?>').fadeIn('slow');
                 $('#announcement').load('<?php echo url('api/announcement'); ?>').fadeIn('slow');
                 $('#activity').load('<?php echo url('api/activity'); ?>').fadeIn('slow');
-            }, 5000
+            }, 500
         );
     </script>
     <!-- Bootstrap core JavaScript -->

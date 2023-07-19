@@ -33,7 +33,9 @@
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('wesel.index') }}">Turn Out/Scissors</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('joint.index') }}">Joint</a>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('joint.index') }}">Joint Mainline</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('joint.depo.index') }}">Joint Depo</a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('lengkung.index') }}">Lengkung</a>
                     </li>

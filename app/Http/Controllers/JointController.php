@@ -17,12 +17,22 @@ class JointController extends Controller
 {
     public function index()
     {
-        $joint = Joint::all();
-        $area = Area::all();
-        $line = Line::all();
-        $wesel = Wesel::all();
+        $joint = Joint::whereNot('area_id', 1)->get();
+        $area = Area::whereNot('area', 'Depo')->get();
+        $line = Line::whereNot('area', 'Depo')->get();
+        $wesel = Wesel::whereNot('area_id', 1)->get();
 
         return view('masterdata.masterdata_joint.index', compact(['joint', 'area', 'line', 'wesel']));
+    }
+
+    public function depo()
+    {
+        $joint = Joint::where('area_id', 1)->get();
+        $area = Area::all();
+        $line = Line::where('area', 'Depo')->get();
+        $wesel = Wesel::where('area_id', 1)->get();
+
+        return view('masterdata.masterdata_joint_depo.index', compact(['joint', 'area', 'line', 'wesel']));
     }
 
     public function create()
@@ -48,7 +58,11 @@ class JointController extends Controller
             'direction' => $request->direction,
         ]);
 
-        return redirect()->route('joint.index')->withNotify('Data berhasil ditambahkan!');
+        if ($request->area_id == 1) {
+            return redirect()->route('joint.depo.index')->withNotify('Data joint depo berhasil ditambahkan!');
+        }
+
+        return redirect()->route('joint.index')->withNotify('Data joint mainline berhasil ditambahkan!');
     }
 
     public function import(Request $request)
@@ -69,15 +83,14 @@ class JointController extends Controller
 
     public function filter(Request $request)
     {
-        // dd($request);
         $area_id = $request->area_id;
         $line_id = $request->line_id;
         $tipe = $request->tipe;
         $wesel_id = $request->wesel_id;
 
-        $area = Area::all();
-        $line = Line::all();
-        $wesel = Wesel::all();
+        $area = Area::whereNot('area', 'Depo')->get();
+        $line = Line::whereNot('area', 'Depo')->get();
+        $wesel = Wesel::whereNot('area_id', 1)->get();
 
         $joint = Joint::query()->select(
             'joint.*',
@@ -114,6 +127,52 @@ class JointController extends Controller
         );
     }
 
+    public function depo_filter(Request $request)
+    {
+        $area_id = $request->area_id;
+        $line_id = $request->line_id;
+        $tipe = $request->tipe;
+        $wesel_id = $request->wesel_id;
+
+        $area = Area::all();
+        $line = Line::where('area', 'Depo')->get();
+        $wesel = Wesel::where('area_id', 1)->get();
+
+        $joint = Joint::query()->select(
+            'joint.*',
+        );
+
+        // Filter by area_id
+        $joint->when($area_id, function ($query) use ($request) {
+            return $query->where('area_id', $request->area_id);
+        });
+
+        // Filter by line_id
+        $joint->when($line_id, function ($query) use ($request) {
+            return $query->where('line_id', $request->line_id);
+        });
+
+        // Filter by tipe
+        $joint->when($tipe, function ($query) use ($request) {
+            return $query->where('tipe', $request->tipe);
+        });
+
+        // Filter by wesel
+        $joint->when($wesel_id, function ($query) use ($request) {
+            return $query->where('wesel_id', $request->wesel_id);
+        });
+
+        return view(
+            'masterdata.masterdata_joint_depo.index',
+            [
+                'joint' => $joint->get(),
+                'area' => $area,
+                'line' => $line,
+                'wesel' => $wesel,
+            ]
+        );
+    }
+
     public function edit($id)
     {
         try {
@@ -137,34 +196,39 @@ class JointController extends Controller
     {
         $id = $request->id;
         $joint = Joint::findOrFail($id);
-        if ($joint) {
-            $joint->update([
-                'name' => $request->name,
-                'area_id' => $request->area_id,
-                'line_id' => $request->line_id,
-                'wesel_id' => $request->wesel_id,
-                'mainline_id' => $request->mainline_id,
-                'tipe' => $request->tipe,
-                'direction' => $request->direction,
-                'kilometer' => $request->kilometer,
-            ]);
-
-            return redirect()->route('joint.index')->withNotify('Data berhasil diubah!');
-        } else {
+        if(!$joint){
             return redirect()->back();
         }
+
+        $joint->update([
+            'name' => $request->name,
+            'area_id' => $request->area_id,
+            'line_id' => $request->line_id,
+            'wesel_id' => $request->wesel_id,
+            'mainline_id' => $request->mainline_id,
+            'tipe' => $request->tipe,
+            'direction' => $request->direction,
+            'kilometer' => $request->kilometer,
+        ]);
+
+        if ($request->mainline_id != null) {
+            return redirect()->route('joint.index')->withNotify('Data joint mainline berhasil diubah!');
+        }
+        return redirect()->route('joint.depo.index')->withNotify('Data joint depo berhasil diubah!');
     }
 
     public function destroy(Request $request)
     {
         $id = $request->id;
         $joint = Joint::findOrFail($id);
-        if ($joint) {
-            $joint->delete();
-
-            return redirect()->route('joint.index')->withNotify('Data berhasil dihapus!');
-        } else {
+        $area_id = $joint->area_id;
+        if (!$joint) {
             return redirect()->back();
         }
+        $joint->delete();
+        if ($area_id == 1) {
+            return redirect()->route('joint.depo.index')->withNotify('Data joint berhasil dihapus!');
+        }
+        return redirect()->route('joint.index')->withNotify('Data joint berhasil dihapus!');
     }
 }
