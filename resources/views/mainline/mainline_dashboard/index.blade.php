@@ -266,6 +266,11 @@
                                                                                         aria-valuemin="0"
                                                                                         aria-valuemax="100"></div>
                                                                                 </div>
+                                                                                <div class="mt-1">
+                                                                                    <p class="text-right">(Updated:
+                                                                                        {{ $item->created_at->format('d-M-Y') }})
+                                                                                    </p>
+                                                                                </div>
                                                                             </td>
                                                                             <td class="text-center">
                                                                                 @if (round($persentase) >= 100)
@@ -298,7 +303,6 @@
         </div>
         @include('mainline.mainline_dashboard.modals')
     </div>
-
 @endsection
 
 @section('javascript')

@@ -27,7 +27,7 @@ class JointController extends Controller
 
     public function depo()
     {
-        $joint = Joint::where('area_id', 1)->get();
+        $joint = Joint::where('area_id', 1)->orderBy('kilometer', 'asc')->get();
         $area = Area::all();
         $line = Line::where('area', 'Depo')->get();
         $wesel = Wesel::where('area_id', 1)->get();
@@ -94,7 +94,8 @@ class JointController extends Controller
 
         $joint = Joint::query()->select(
             'joint.*',
-        );
+        )
+        ->whereNot('area_id', 1);
 
         // Filter by area_id
         $joint->when($area_id, function ($query) use ($request) {
@@ -165,7 +166,7 @@ class JointController extends Controller
         return view(
             'masterdata.masterdata_joint_depo.index',
             [
-                'joint' => $joint->get(),
+                'joint' => $joint->orderBy('kilometer', 'asc')->get(),
                 'area' => $area,
                 'line' => $line,
                 'wesel' => $wesel,

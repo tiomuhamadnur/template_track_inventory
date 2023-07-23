@@ -89,7 +89,7 @@
                                                 <td class="text-center">
                                                     {{ $item->line->code ?? '-' }}
                                                 </td>
-                                                <td class="text-center">
+                                                <td class="text-center fw-bolder">
                                                     {{ $item->name }}
                                                 </td>
                                                 <td class="text-center">
