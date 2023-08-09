@@ -146,6 +146,24 @@
                             </div>
                         </div>
 
+                        <div class="form-row">
+                            <div class="name">Joint Repaired?</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <select name="repaired" class="form-select">
+                                        @if ($joint->repaired == 'yes')
+                                            <option value="yes" selected>Yes</option>
+                                            <option value="">No</option>
+                                        @else
+                                            <option value="yes">Yes</option>
+                                            <option value="" selected>No</option>
+                                        @endif
+                                    </select>
+                                    <div class="select-dropdown"></div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div>
                             <a @if ($joint->area->id == 1) href="{{ route('joint.depo.index') }}"
                             @else

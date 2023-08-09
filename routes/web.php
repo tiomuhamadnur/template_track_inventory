@@ -37,9 +37,11 @@ use App\Http\Controllers\TemuanDepoController;
 use App\Http\Controllers\TemuanMainlineController;
 use App\Http\Controllers\ToolsMaterialsController;
 use App\Http\Controllers\TransDefectController;
+use App\Http\Controllers\UltrasonicTestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WeselController;
 use App\Http\Controllers\WeselExaminationController;
+use App\Http\Controllers\WorkOrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -238,6 +240,26 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/buffer-examination-report', 'report')->name('buffer.examination.report');
     });
 
+    // ULTRASONIC TEST EXAMINATION
+    Route::controller(UltrasonicTestController::class)->group(function () {
+        Route::get('/ultrasonic-test-examination/work-order', 'index_wo_ut')->name('ut.examination.index_wo_ut');
+        Route::get('/ultrasonic-test-examination/{id}/detail', 'index')->name('ut.examination.index');
+        Route::get('/ultrasonic-test-examination/{id}/history', 'history')->name('ut.examination.history');
+        Route::get('/ultrasonic-test-examination/{id}/create', 'create')->name('ut.examination.create');
+        Route::get('/ultrasonic-test-examination/filter', 'filter')->name('ut.examination.filter');
+        Route::post('/ultrasonic-test-examination', 'store')->name('ut.examination.store');
+        Route::get('/ultrasonic-test-examination/{id}/edit', 'edit')->name('ut.examination.edit');
+        Route::put('/ultrasonic-test-examination', 'update')->name('ut.examination.update');
+        Route::delete('/ultrasonic-test-examination', 'destroy')->name('ut.examination.delete');
+
+        // REPORT
+        Route::get('/ultrasonic-test-examination-report', 'report')->name('ut.examination.report');
+
+        // GET DATA
+        Route::get('/get-no-joint', 'getNoWeldingJoint');
+        Route::get('/get-no-joint-wesel', 'getNoWeldingJointWesel');
+    });
+
     // JADWAL PEKERJAAN
     Route::controller(JadwalPekerjaanController::class)->group(function () {
         Route::get('/jadwal-pekerjaan', 'index')->name('jadwal.pekerjaan.index');
@@ -420,6 +442,15 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/pm/{id}/edit', 'edit')->name('pm.edit');
             Route::put('/pm', 'update')->name('pm.update');
             Route::delete('/pm', 'destroy')->name('pm.delete');
+        });
+
+        Route::controller(WorkOrderController::class)->group(function () {
+            Route::get('/work-order', 'index')->name('wo.index');
+            Route::get('/work-order-create', 'create')->name('wo.create');
+            Route::post('/work-order', 'store')->name('wo.store');
+            Route::get('/work-order/{id}/edit', 'edit')->name('wo.edit');
+            Route::put('/work-order', 'update')->name('wo.update');
+            Route::delete('/work-order', 'destroy')->name('wo.delete');
         });
 
         Route::controller(BufferController::class)->group(function () {

@@ -17,7 +17,7 @@ class JointController extends Controller
 {
     public function index()
     {
-        $joint = Joint::whereNot('area_id', 1)->get();
+        $joint = Joint::whereNot('area_id', 1)->where('repaired', null)->get();
         $area = Area::whereNot('area', 'Depo')->get();
         $line = Line::whereNot('area', 'Depo')->get();
         $wesel = Wesel::whereNot('area_id', 1)->get();
@@ -27,7 +27,7 @@ class JointController extends Controller
 
     public function depo()
     {
-        $joint = Joint::where('area_id', 1)->orderBy('kilometer', 'asc')->get();
+        $joint = Joint::where('area_id', 1)->where('repaired', null)->orderBy('kilometer', 'asc')->get();
         $area = Area::all();
         $line = Line::where('area', 'Depo')->get();
         $wesel = Wesel::where('area_id', 1)->get();
@@ -95,7 +95,8 @@ class JointController extends Controller
         $joint = Joint::query()->select(
             'joint.*',
         )
-        ->whereNot('area_id', 1);
+        ->whereNot('area_id', 1)
+        ->where('repaired', null);
 
         // Filter by area_id
         $joint->when($area_id, function ($query) use ($request) {
@@ -141,7 +142,8 @@ class JointController extends Controller
 
         $joint = Joint::query()->select(
             'joint.*',
-        );
+        )
+        ->where('repaired', null);
 
         // Filter by area_id
         $joint->when($area_id, function ($query) use ($request) {
@@ -210,6 +212,7 @@ class JointController extends Controller
             'tipe' => $request->tipe,
             'direction' => $request->direction,
             'kilometer' => $request->kilometer,
+            'repaired' => $request->repaired,
         ]);
 
         if ($request->mainline_id != null) {

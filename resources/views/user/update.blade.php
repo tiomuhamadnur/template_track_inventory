@@ -1,7 +1,7 @@
 @extends('masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title> Update User | TCSM</title>
+    <title> Update User | CPWTM</title>
 @endsection
 @section('sub-content')
     <div class="row flex-grow">
@@ -11,7 +11,7 @@
                     <div class="d-sm-flex justify-content-between align-items-start">
                         <div>
                             <h4 class="card-title card-title-dash">Update Management User</h4>
-                            <p class="card-subtitle card-subtitle-dash">Civil Permanent Way Maintenance</p>
+                            <p class="card-subtitle card-subtitle-dash">Civil Permanent Way Technology Maintenance</p>
                         </div>
                     </div>
 
@@ -44,7 +44,7 @@
                                     <div>
                                         <label for="crud-form-1" class="form-label mt-2">Email</label>
                                         <input id="crud-form-1" type="email" class="form-control w-full" name="email"
-                                            placeholder="Masukkan Nama User" required value="{{ $user->email }}">
+                                            placeholder="Masukkan Email" required value="{{ $user->email }}">
                                     </div>
                                     <div>
                                         <label for="crud-form-1" class="form-label mt-2">Jabatan</label>
@@ -64,8 +64,9 @@
                                         <select class="form-select w-full" name="section">
                                             <option value="{{ $user->section }}" selected>{{ $user->section }}
                                             </option>
-                                            <option value="Permanent Way RAMS">Permanent Way RAMS</option>
-                                            <option value="Permanent Way Maintenance">Permanent Way Maintenance</option>
+                                            @foreach ($section as $item)
+                                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                            @endforeach
                                             <option value="Guest">Guest</option>
                                         </select>
                                     </div>
@@ -74,7 +75,9 @@
                                         <select class="form-select w-full" name="departement">
                                             <option value="{{ $user->departement }}" selected>{{ $user->departement }}
                                             </option>
-                                            <option value="Civil Permanent Way">Civil Permanent Way</option>
+                                            @foreach ($departement as $item)
+                                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                            @endforeach
                                             <option value="Guest">Guest</option>
                                         </select>
                                     </div>
@@ -109,7 +112,7 @@
                                     </div>
                                     <div class="text-right mt-5">
                                         <a href="{{ route('usermanage.index') }}"
-                                            class="btn btn-outline-warning w-24 mr-1">Close</a>
+                                            class="btn btn-outline-danger w-24 mr-1">Cancel</a>
                                         <button type="submit" class="btn btn-primary w-24">Save</button>
                                     </div>
                                 </div>

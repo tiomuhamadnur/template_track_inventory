@@ -19,12 +19,19 @@
                             Mainline</a>
                     </li>
                     {{-- <li class="nav-item"><a class="nav-link" href="{{ route('accelerometer.index') }}">Accelerometer</a>
-                    </li> --}}
-                    {{-- <li class="nav-item"><a class="nav-link" href="{{ route('wesel.examination.index') }}">Turn Out
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('wesel.examination.index') }}">Turn Out
                             Irregularity</a>
-                    </li> --}}
-                    {{-- <li class="nav-item"><a class="nav-link" href="{{ route('buffer.examination.index') }}">Buffer/Wheel
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('buffer.examination.index') }}">Buffer/Wheel
                             Stop Exam.</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('ut.examination.index_wo_ut') }}">Ultrasonic
+                            Test
+                            Examination</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('ut.examination.index') }}">Ultrasonic Test
+                            Examination</a>
                     </li> --}}
                 </ul>
             </div>

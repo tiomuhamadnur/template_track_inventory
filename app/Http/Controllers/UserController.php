@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Departement;
 use App\Models\Pegawai;
+use App\Models\Section;
 use App\Models\User;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
@@ -13,14 +15,16 @@ class UserController extends Controller
 {
     public function index()
     {
-        $user = Pegawai::all();
+        $user = Pegawai::orderBy('name', 'asc')->get();
 
         return view('user.index', compact(['user']));
     }
 
     public function create()
     {
-        return view('user.create');
+        $departement = Departement::all();
+        $section = Section::all();
+        return view('user.create', compact(['departement', 'section']));
     }
 
     public function store(Request $request)
@@ -116,7 +120,9 @@ class UserController extends Controller
             $secret = Crypt::decryptString($id);
             $user = Pegawai::findOrFail($secret);
             if ($user) {
-                return view('user.update', compact(['user']));
+                $departement = Departement::all();
+                $section = Section::all();
+                return view('user.update', compact(['user', 'departement', 'section']));
             } else {
                 return redirect()->back();
             }

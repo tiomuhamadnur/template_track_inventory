@@ -1,7 +1,7 @@
 @extends('masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title> List Banned User | TCSM</title>
+    <title> List Banned User | CPWTM</title>
 @endsection
 @section('sub-content')
     <div class="row flex-grow">
@@ -11,7 +11,7 @@
                     <div class="d-sm-flex justify-content-between align-items-start">
                         <div>
                             <h4 class="card-title card-title-dash">List Banned User</h4>
-                            <p class="card-subtitle card-subtitle-dash">Track & Civil Structure Maintenance</p>
+                            <p class="card-subtitle card-subtitle-dash">Civil Permanent Way Technology Maintenance</p>
                         </div>
                         <div>
                             <a href="{{ route('usermanage.index') }}"><button

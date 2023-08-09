@@ -259,6 +259,7 @@
             </div>
         </div>
     </div>
+    <!-- End Modal Filter-->
 @endsection
 
 @section('javascript')

@@ -1,7 +1,7 @@
 @extends('masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title> Add User | TCSM</title>
+    <title> Add User | CPWTM</title>
 @endsection
 @section('sub-content')
     <div class="row flex-grow">
@@ -11,7 +11,7 @@
                     <div class="d-sm-flex justify-content-between align-items-start">
                         <div>
                             <h4 class="card-title card-title-dash">Management User</h4>
-                            <p class="card-subtitle card-subtitle-dash">Track & Civil Structure Maintenance</p>
+                            <p class="card-subtitle card-subtitle-dash">Civil Permanent Way Technology Maintenance</p>
                         </div>
                     </div>
 
@@ -29,12 +29,12 @@
                                     <div>
                                         <label for="crud-form-1" class="form-label mt-2">Email</label>
                                         <input id="crud-form-1" type="email" class="form-control w-full" name="email"
-                                            placeholder="Masukkan Nama User" required>
+                                            placeholder="Masukkan Email" required>
                                     </div>
                                     <div>
                                         <label for="crud-form-1" class="form-label mt-2">Jabatan</label>
-                                        <select class="form-select w-full" name="jabatan">
-                                            <option disabled selected>- Pilih Jabatan -</option>
+                                        <select class="form-select w-full" name="jabatan" required>
+                                            <option disabled selected value="">- Pilih Jabatan -</option>
                                             <option value="Departement Head">Departement Head</option>
                                             <option value="Section Head">Section Head</option>
                                             <option value="Engineer">Engineer</option>
@@ -45,25 +45,28 @@
                                     </div>
                                     <div>
                                         <label for="crud-form-1" class="form-label mt-2">Section</label>
-                                        <select class="form-select w-full" name="section">
-                                            <option disabled selected>- Pilih Section -</option>
-                                            <option value="Permanent Way RAMS">Permanent Way RAMS</option>
-                                            <option value="Permanent Way Maintenance">Permanent Way Maintenance</option>
+                                        <select class="form-select w-full" name="section" required>
+                                            <option disabled value="" selected>- Pilih Section -</option>
+                                            @foreach ($section as $item)
+                                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                            @endforeach
                                             <option value="Guest">Guest</option>
                                         </select>
                                     </div>
                                     <div>
                                         <label for="crud-form-1" class="form-label mt-2">Departement</label>
-                                        <select class="form-select w-full" name="departement">
-                                            <option disabled selected>- Pilih Departement -</option>
-                                            <option value="Civil Permanent Way">Civil Permanent Way</option>
+                                        <select class="form-select w-full" name="departement" required>
+                                            <option disabled selected value="">- Pilih Departement -</option>
+                                            @foreach ($departement as $item)
+                                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                            @endforeach
                                             <option value="Guest">Guest</option>
                                         </select>
                                     </div>
                                     <div>
                                         <label for="crud-form-1" class="form-label mt-2">Role</label>
-                                        <select class="form-select w-full" name="role">
-                                            <option disabled selected>- Pilih Role -</option>
+                                        <select class="form-select w-full" name="role" required>
+                                            <option disabled selected value="">- Pilih Role -</option>
                                             <option value="User">User</option>
                                             <option value="Admin">Admin</option>
                                             <option value="Guest">Guest</option>
@@ -75,7 +78,7 @@
                                     </div>
                                     <div class="text-right mt-5">
                                         <a href="{{ route('usermanage.index') }}"
-                                            class="btn btn-outline-primary w-24 mr-1">Cancel</a>
+                                            class="btn btn-outline-danger w-24 mr-1">Cancel</a>
                                         <button type="submit" class="btn btn-primary w-24">Save</button>
                                     </div>
                                 </div>

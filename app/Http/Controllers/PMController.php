@@ -80,8 +80,6 @@ class PMController extends Controller
 
     public function update(Request $request)
     {
-        // dd($request);
-
         $this->validate($request, [
             'logo' => ['file', 'image'],
         ], [
