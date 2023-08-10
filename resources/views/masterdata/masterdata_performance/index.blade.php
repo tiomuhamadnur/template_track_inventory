@@ -16,7 +16,7 @@
                 <div class="col-lg-12 grid-margin stretch-card mt-3">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Data Individual Performance</h4>
+                            <h4 class="card-title">Data Individual Performance (Filter: {{ $filter ?? '-' }})</h4>
                             <button class="btn btn-outline-dark btn-lg dropdown-toggle" type="button"
                                 id="dropdownMenuIconButton1" data-bs-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false" style="margin-left: -10px;">

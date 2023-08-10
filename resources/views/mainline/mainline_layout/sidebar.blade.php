@@ -26,10 +26,10 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('buffer.examination.index') }}">Buffer/Wheel
                             Stop Exam.</a>
                     </li> --}}
-                    <li class="nav-item"><a class="nav-link" href="{{ route('ut.examination.index_wo_ut') }}">Ultrasonic
+                    {{-- <li class="nav-item"><a class="nav-link" href="{{ route('ut.examination.index_wo_ut') }}">Ultrasonic
                             Test
                             Examination</a>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </li>

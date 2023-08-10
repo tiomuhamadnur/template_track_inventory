@@ -39,7 +39,11 @@
                                     </thead>
                                     <tbody>
                                         @if ($wo_ut->count() == 0)
-                                            <tr>Belum ada data Work Order untuk pekerjaan Ultrasonic Test</tr>
+                                            <tr>
+                                                <td class="text-center">
+                                                    Belum ada data Work Order untuk pekerjaan Ultrasonic Test
+                                                </td>
+                                            </tr>
                                         @else
                                             @foreach ($wo_ut as $item)
                                                 <tr>

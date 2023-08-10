@@ -41,6 +41,9 @@
                                     <i class="ti-printer"></i>
                                 </a>
                             </div>
+                            <div>
+                                showing: <u class="fw-bolder">{{ $temuan->count() ?? 0 }}</u> data
+                            </div>
                             <form action="{{ route('temuan_mainline.export') }}" method="GET" id="form_export_excel">
                                 @csrf
                                 @method('get')

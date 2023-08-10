@@ -434,6 +434,9 @@ Route::middleware(['auth'])->group(function () {
             Route::put('/joint', 'update')->name('joint.update');
             Route::delete('/joint', 'destroy')->name('joint.delete');
             Route::post('/joint-import', 'import')->name('joint.import');
+
+            Route::get('/joint-no-span', 'joint_no_span')->name('joint.no.span');
+            Route::get('/joint/export_mainline', 'export_excel')->name('joint.mainline.export.excel');
         });
 
         Route::controller(PMController::class)->group(function () {

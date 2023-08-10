@@ -39,6 +39,9 @@
                                     data-bs-toggle="modal" data-bs-target="#ModalReport" title="Generate Report">
                                     <i class="ti-printer"></i></a>
                             </div>
+                            <div>
+                                showing: <u class="fw-bolder">{{ $temuan_depo->count() ?? 0 }}</u> data
+                            </div>
                             <form action="{{ route('temuan_depo.export') }}" method="GET" id="form_export_excel">
                                 @csrf
                                 @method('get')

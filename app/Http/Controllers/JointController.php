@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\JointMainlineExport;
 use App\Imports\JointImport;
 use App\Models\Area;
 use App\Models\Joint;
 use App\Models\Line;
 use App\Models\Mainline;
 use App\Models\Wesel;
+use Carbon\Carbon;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -22,7 +24,12 @@ class JointController extends Controller
         $line = Line::whereNot('area', 'Depo')->get();
         $wesel = Wesel::whereNot('area_id', 1)->get();
 
-        return view('masterdata.masterdata_joint.index', compact(['joint', 'area', 'line', 'wesel']));
+        $area_id = '';
+        $line_id = '';
+        $tipe = '';
+        $wesel_id = '';
+
+        return view('masterdata.masterdata_joint.index', compact(['joint', 'area', 'line', 'wesel', 'area_id', 'line_id', 'tipe', 'wesel_id']));
     }
 
     public function depo()
@@ -67,7 +74,6 @@ class JointController extends Controller
 
     public function import(Request $request)
     {
-        // dd($request);
         $this->validate($request, [
             'file_excel' => 'required|mimes:csv,xls,xlsx',
         ]);
@@ -125,6 +131,10 @@ class JointController extends Controller
                 'area' => $area,
                 'line' => $line,
                 'wesel' => $wesel,
+                'area_id' => $area_id,
+                'line_id' => $line_id,
+                'tipe' => $tipe,
+                'wesel_id' => $wesel_id,
             ]
         );
     }
@@ -234,5 +244,27 @@ class JointController extends Controller
             return redirect()->route('joint.depo.index')->withNotify('Data joint berhasil dihapus!');
         }
         return redirect()->route('joint.index')->withNotify('Data joint berhasil dihapus!');
+    }
+
+    public function joint_no_span()
+    {
+        $joint = Joint::whereNot('area_id', 1)->where('mainline_id', null)->where('repaired', null)->get();
+        $area = Area::whereNot('area', 'Depo')->get();
+        $line = Line::whereNot('area', 'Depo')->get();
+        $wesel = Wesel::whereNot('area_id', 1)->get();
+
+        return view('masterdata.masterdata_joint.index', compact(['joint', 'area', 'line', 'wesel']));
+    }
+
+    public function export_excel(Request $request)
+    {
+        $area_id = $request->area_id;
+        $line_id = $request->line_id;
+        $tipe = $request->tipe;
+        $wesel_id = $request->wesel_id;
+
+        $waktu = Carbon::now()->format('Ymd');
+
+        return Excel::download(new JointMainlineExport($area_id, $line_id, $tipe, $wesel_id), $waktu.'_data joint mainline.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 }

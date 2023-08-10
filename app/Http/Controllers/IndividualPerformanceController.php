@@ -33,6 +33,7 @@ class IndividualPerformanceController extends Controller
                         $count = Temuan::where('pic_rfi', $pic)->whereMonth('tanggal', $bulan_ini)->count();
                         $rfi_maintenance[] = $count;
                     }
+                    $filter = Carbon::now()->format('F');
                     break;
                 case 'this_year':
                     foreach($rams_team as $pic) {
@@ -43,6 +44,7 @@ class IndividualPerformanceController extends Controller
                         $count = Temuan::where('pic_rfi', $pic)->whereYear('tanggal', $tahun_ini)->count();
                         $rfi_maintenance[] = $count;
                     }
+                    $filter = $tahun_ini;
                     break;
                 case 'all_time':
                     foreach($rams_team as $pic) {
@@ -53,6 +55,7 @@ class IndividualPerformanceController extends Controller
                         $count = Temuan::where('pic_rfi', $pic)->count();
                         $rfi_maintenance[] = $count;
                     }
+                    $filter = 'All Time';
                     break;
                 default:
                     foreach($rams_team as $pic) {
@@ -63,6 +66,7 @@ class IndividualPerformanceController extends Controller
                         $count = Temuan::where('pic_rfi', $pic)->whereMonth('tanggal', $bulan_ini)->count();
                         $rfi_maintenance[] = $count;
                     }
+                    $filter = Carbon::now()->format('F');
                     break;
             }
         } else{
@@ -74,9 +78,10 @@ class IndividualPerformanceController extends Controller
                 $count = Temuan::where('pic_rfi', $pic)->whereMonth('tanggal', $bulan_ini)->count();
                 $rfi_maintenance[] = $count;
             }
+            $filter = Carbon::now()->format('F');
         }
 
-        return view('masterdata.masterdata_performance.index', compact(['rams_team', 'temuan_rams', 'maintenance_team', 'rfi_maintenance']));
+        return view('masterdata.masterdata_performance.index', compact(['rams_team', 'temuan_rams', 'maintenance_team', 'rfi_maintenance', 'filter']));
     }
 
     public function create()
