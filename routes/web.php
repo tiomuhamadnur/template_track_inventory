@@ -15,6 +15,7 @@ use App\Http\Controllers\DepartementController;
 use App\Http\Controllers\DepoDashboardController;
 use App\Http\Controllers\DepoLineController;
 use App\Http\Controllers\DetailPartController;
+use App\Http\Controllers\IndividualPerformanceController;
 use App\Http\Controllers\JadwalPekerjaanController;
 use App\Http\Controllers\JointController;
 use App\Http\Controllers\LengkungController;
@@ -451,6 +452,10 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/work-order/{id}/edit', 'edit')->name('wo.edit');
             Route::put('/work-order', 'update')->name('wo.update');
             Route::delete('/work-order', 'destroy')->name('wo.delete');
+        });
+
+        Route::controller(IndividualPerformanceController::class)->group(function () {
+            Route::get('/individual-performance', 'index')->name('performance.index');
         });
 
         Route::controller(BufferController::class)->group(function () {

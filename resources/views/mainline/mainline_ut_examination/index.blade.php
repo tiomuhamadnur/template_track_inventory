@@ -41,6 +41,9 @@
                                     <i class="mdi mdi-file-pdf text-danger"></i>
                                 </a>
                             </div>
+                            <div>
+                                showing: <u class="fw-bolder">{{ $ut_examination->count() ?? 0 }}</u> data
+                            </div>
                             <div class="table-responsive pt-3">
                                 <table class="table table-bordered">
                                     <thead>

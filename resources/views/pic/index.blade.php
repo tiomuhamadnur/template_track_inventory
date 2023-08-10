@@ -12,7 +12,7 @@
                         <div>
                             <h4 class="card-title card-title-dash">Preventive Work Person In Charge (Periode:
                                 {{ \Carbon\Carbon::now()->format('Y') }})</h4>
-                            <p class="card-subtitle card-subtitle-dash">Track Examination Team</p>
+                            <p class="card-subtitle card-subtitle-dash">Permanent Way RAMS</p>
                         </div>
                         <div>
                             <a href="/pic-create"><button class="btn btn-primary btn-sm text-white mb-0 me-0"

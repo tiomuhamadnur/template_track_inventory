@@ -63,6 +63,13 @@
             </a>
         </li>
 
+        <li class="nav-item animate__animated animate__fadeInLeft">
+            <a class="nav-link" href="{{ route('performance.index') }}" aria-expanded="false" aria-controls="auth">
+                <i class="menu-icon mdi mdi-finance"></i>
+                <span class="menu-title">Individual Performance</span>
+            </a>
+        </li>
+
         <li class="nav-item nav-category">Settings</li>
         <li class="nav-item animate__animated animate__fadeInLeft">
             <a class="nav-link" href="{{ route('profile') }}" aria-expanded="false" aria-controls="auth">

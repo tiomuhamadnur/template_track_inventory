@@ -11,7 +11,7 @@
                     <div class="d-sm-flex justify-content-between align-items-start">
                         <div>
                             <h4 class="card-title card-title-dash">Management PIC</h4>
-                            <p class="card-subtitle card-subtitle-dash">Track Examination Team</p>
+                            <p class="card-subtitle card-subtitle-dash">Permanent Way RAMS</p>
                         </div>
                     </div>
 
