@@ -54,7 +54,8 @@
                                 showing: <u class="fw-bolder">{{ $joint->count() ?? 0 }}</u> data
                             </div>
                             <div>
-                                belum ada span: <a href="{{ route('joint.no.span') }}"><u>{{ $joint->count() ?? 0 }}</u></a>
+                                belum ada span: <a
+                                    href="{{ route('joint.no.span') }}"><u>{{ $joint_no_span->count() ?? 0 }}</u></a>
                                 joint
                             </div>
                             <div class="table-responsive pt-3">

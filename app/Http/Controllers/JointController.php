@@ -23,13 +23,14 @@ class JointController extends Controller
         $area = Area::whereNot('area', 'Depo')->get();
         $line = Line::whereNot('area', 'Depo')->get();
         $wesel = Wesel::whereNot('area_id', 1)->get();
+        $joint_no_span = Joint::whereNot('area_id', 1)->where('mainline_id', null)->where('repaired', null)->get();
 
         $area_id = '';
         $line_id = '';
         $tipe = '';
         $wesel_id = '';
 
-        return view('masterdata.masterdata_joint.index', compact(['joint', 'area', 'line', 'wesel', 'area_id', 'line_id', 'tipe', 'wesel_id']));
+        return view('masterdata.masterdata_joint.index', compact(['joint', 'joint_no_span', 'area', 'line', 'wesel', 'area_id', 'line_id', 'tipe', 'wesel_id']));
     }
 
     public function depo()
