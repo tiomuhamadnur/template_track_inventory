@@ -253,8 +253,9 @@ class JointController extends Controller
         $area = Area::whereNot('area', 'Depo')->get();
         $line = Line::whereNot('area', 'Depo')->get();
         $wesel = Wesel::whereNot('area_id', 1)->get();
+        $joint_no_span = Joint::whereNot('area_id', 1)->where('mainline_id', null)->where('repaired', null)->get();
 
-        return view('masterdata.masterdata_joint.index', compact(['joint', 'area', 'line', 'wesel']));
+        return view('masterdata.masterdata_joint.index', compact(['joint', 'joint_no_span', 'area', 'line', 'wesel']));
     }
 
     public function export_excel(Request $request)
