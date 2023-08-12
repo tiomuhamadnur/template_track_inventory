@@ -268,7 +268,7 @@
                                                                                 </div>
                                                                                 <div class="mt-1">
                                                                                     <p class="text-right">(Updated:
-                                                                                        {{ $item->created_at->format('d-M-Y') }})
+                                                                                        {{ $item->updated_at->format('d-M-Y') }})
                                                                                     </p>
                                                                                 </div>
                                                                             </td>
