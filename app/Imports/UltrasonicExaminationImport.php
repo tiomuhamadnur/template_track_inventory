@@ -19,7 +19,6 @@ class UltrasonicExaminationImport implements ToModel, WithHeadingRow
         return new UltrasonicTestExamination([
             'wo_id' => $this->wo_id,
             'joint_id' => $row['joint_id'],
-            // 'tanggal' => Carbon::parse($row['tanggal'])->format('Y-m-d'),
             'tanggal' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['tanggal']),
             'dac' => $row['dac'],
             'depth' => $row['depth'],
@@ -27,6 +26,7 @@ class UltrasonicExaminationImport implements ToModel, WithHeadingRow
             'status' => $row['status'],
             'remark' => $row['remark'],
             'status' => $row['status'],
+            'operator' => $row['operator'],
         ]);
     }
 }
