@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\UltrasonicExaminationImport;
 use App\Models\Area;
 use App\Models\Joint;
 use App\Models\Line;
@@ -11,6 +12,7 @@ use App\Models\WorkOrder;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Excel;
 
 class UltrasonicTestController extends Controller
 {
@@ -26,9 +28,7 @@ class UltrasonicTestController extends Controller
             $secret = Crypt::decryptString($id);
             $work_order = WorkOrder::findOrFail($secret);
             $ut_examination = UltrasonicTestExamination::where('wo_id', $secret)->orderBy('tanggal', 'ASC')->get();
-            if ($ut_examination->count() == 0) {
-                return redirect()->back();
-            }
+
             $area = Area::all();
             $line = Line::all();
             $wesel = Wesel::whereNot('area_id', 1)->get();
@@ -172,6 +172,24 @@ class UltrasonicTestController extends Controller
     public function show($id)
     {
         //
+    }
+
+    public function import(Request $request)
+    {
+        $this->validate($request, [
+            'file_excel' => 'required|mimes:csv,xls,xlsx',
+            'wo_id' => 'required',
+        ]);
+
+        $wo_id = $request->wo_id;
+
+        if ($request->hasFile('file_excel')) {
+            Excel::import(new UltrasonicExaminationImport($wo_id), request()->file('file_excel'));
+
+            return redirect()->route('ut.examination.index', Crypt::encryptString($wo_id))->withNotify('Data Ultrasonic Test berhasil diimport!');
+        } else {
+            return redirect()->route('ut.examination.index', Crypt::encryptString($wo_id));
+        }
     }
 
     public function edit($id)

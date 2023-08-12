@@ -248,6 +248,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/ultrasonic-test-examination/{id}/history', 'history')->name('ut.examination.history');
         Route::get('/ultrasonic-test-examination/{id}/create', 'create')->name('ut.examination.create');
         Route::get('/ultrasonic-test-examination/filter', 'filter')->name('ut.examination.filter');
+        Route::post('/ultrasonic-test-examination/import', 'import')->name('ut.examination.import');
         Route::post('/ultrasonic-test-examination', 'store')->name('ut.examination.store');
         Route::get('/ultrasonic-test-examination/{id}/edit', 'edit')->name('ut.examination.edit');
         Route::put('/ultrasonic-test-examination', 'update')->name('ut.examination.update');
@@ -437,6 +438,7 @@ Route::middleware(['auth'])->group(function () {
 
             Route::get('/joint-no-span', 'joint_no_span')->name('joint.no.span');
             Route::get('/joint/export_mainline', 'export_excel')->name('joint.mainline.export.excel');
+            Route::get('/joint/export_depo', 'export_excel_depo')->name('joint.depo.export.excel');
         });
 
         Route::controller(PMController::class)->group(function () {

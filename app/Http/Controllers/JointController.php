@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\JointDepoExport;
 use App\Exports\JointMainlineExport;
 use App\Imports\JointImport;
 use App\Models\Area;
@@ -40,7 +41,12 @@ class JointController extends Controller
         $line = Line::where('area', 'Depo')->get();
         $wesel = Wesel::where('area_id', 1)->get();
 
-        return view('masterdata.masterdata_joint_depo.index', compact(['joint', 'area', 'line', 'wesel']));
+        $area_id = '';
+        $line_id = '';
+        $tipe = '';
+        $wesel_id = '';
+
+        return view('masterdata.masterdata_joint_depo.index', compact(['joint', 'area', 'line', 'wesel', 'area_id', 'line_id', 'tipe', 'wesel_id']));
     }
 
     public function create()
@@ -186,6 +192,10 @@ class JointController extends Controller
                 'area' => $area,
                 'line' => $line,
                 'wesel' => $wesel,
+                'area_id' => $area_id,
+                'line_id' => $line_id,
+                'tipe' => $tipe,
+                'wesel_id' => $wesel_id,
             ]
         );
     }
@@ -271,5 +281,16 @@ class JointController extends Controller
         $waktu = Carbon::now()->format('Ymd');
 
         return Excel::download(new JointMainlineExport($area_id, $line_id, $tipe, $wesel_id), $waktu.'_data joint mainline.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+    }
+
+    public function export_excel_depo(Request $request)
+    {
+        $line_id = $request->line_id;
+        $tipe = $request->tipe;
+        $wesel_id = $request->wesel_id;
+
+        $waktu = Carbon::now()->format('Ymd');
+
+        return Excel::download(new JointDepoExport($line_id, $tipe, $wesel_id), $waktu.'_data joint depo.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 }

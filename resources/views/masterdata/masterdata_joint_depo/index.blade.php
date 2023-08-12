@@ -35,12 +35,18 @@
                                     <i class="ti-link"></i>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuIconButton1">
-                                    <a class="dropdown-item"href="#" data-bs-toggle="modal"
-                                        data-bs-target="#import-file-modal">Import Excel</a>
-                                    <a class="dropdown-item" href="#">Export to Excel</a>
-                                    <a class="dropdown-item" href="#">Export to PDF</a>
+                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                        data-bs-target="#ModalExportExcel">Export to Excel</a>
                                 </div>
                             </div>
+                            <form action="{{ route('joint.depo.export.excel') }}" method="GET" id="form_export_excel">
+                                @csrf
+                                @method('get')
+                                <input type="text" name="area_id" value="{{ $area_id ?? '' }}" hidden>
+                                <input type="text" name="line_id" value="{{ $line_id ?? '' }}" hidden>
+                                <input type="text" name="tipe" value="{{ $tipe ?? '' }}" hidden>
+                                <input type="text" name="wesel_id" value="{{ $wesel_id ?? '' }}" hidden>
+                            </form>
                             <div>
                                 showing: <u class="fw-bolder">{{ $joint->count() ?? 0 }}</u> data
                             </div>
@@ -244,12 +250,46 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Export Excel -->
+    <div class="modal fade" id="ModalExportExcel" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAdminTitle">Apakah anda yakin?</h5>
+                </div>
+                <div class="modal-body pt-3 mb-0">
+                    <div class="p-2 text-center">
+                        <h1 class="text-center align-middle text-success mt-2" style="font-size: 100px">
+                            <i class="mdi mdi-file-excel mx-auto"></i>
+                        </h1>
+                        <div class="text-slate-500 mt-2">File excel akan didownload sesuai data yang difilter!</div>
+                    </div>
+                </div>
+
+                <div class="modal-footer mt-2">
+                    <button type="submit" formtarget="_blank" form="form_export_excel" onclick="closeModal()"
+                        class="btn btn-success justify-content-center">
+                        Download Excel
+                    </button>
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                        Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Export Excel-->
 @endsection
 
 @section('javascript')
     <script type="text/javascript">
         function toggleModal(id) {
             $('#id').val(id);
+        }
+
+        function closeModal() {
+            $("#ModalExportExcel").modal("hide");
         }
     </script>
 @endsection

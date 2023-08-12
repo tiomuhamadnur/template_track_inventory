@@ -32,6 +32,10 @@
                                     data-bs-toggle="modal" data-bs-target="#ModalFilter" title="Filter data">
                                     <i class="ti-filter"></i>
                                 </a>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#ModalImport" type="button"
+                                    class="btn btn-outline-primary btn-lg mx-0" title="Import from Excel">
+                                    <i class="ti-import"></i>
+                                </a>
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#ModalExportExcel" type="button"
                                     class="btn btn-outline-success btn-lg mx-0" title="Export to Excel">
                                     <i class="mdi mdi-file-excel text-success"></i>
@@ -76,7 +80,11 @@
                                     </thead>
                                     <tbody>
                                         @if ($ut_examination->count() == 0)
-                                            <tr>Belum ada data Work Order untuk pekerjaan Ultrasonic Test</tr>
+                                            <tr>
+                                                <td class="text-center fw-bolder" colspan="8">Belum ada data Ultrasonic
+                                                    Test di No Work Order ini. Silahkan hubungi PIC terkait.
+                                                </td>
+                                            </tr>
                                         @else
                                             @foreach ($ut_examination as $item)
                                                 <tr>
@@ -314,6 +322,41 @@
         </div>
     </div>
     <!-- End Modal Filter-->
+
+    <!-- Modal Import-->
+    <div class="modal fade" id="ModalImport" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form id="form_import" action="{{ route('ut.examination.import') }}" method="POST"
+                        enctype="multipart/form-data">
+                        @csrf
+                        @method('post')
+                        <div class="form-group">
+                            <input type="text" name="wo_id" value="{{ $work_order->id }}" hidden>
+                            <label class="form-label">No. Work Order</label>
+                            <input type="text" class="form-control" value="{{ $work_order->nomor }}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">File Excel</label>
+                            <input type="file" class="form-control" name="file_excel" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-right">
+                        <button type="submit" form="form_import" class="btn btn-primary mx-1">
+                            Import
+                        </button>
+                        <button type="button" class="btn btn-outline-danger mx-1" data-bs-dismiss="modal">
+                            Tutup
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Import-->
 @endsection
 
 @section('javascript')

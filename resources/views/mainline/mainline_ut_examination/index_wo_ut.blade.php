@@ -40,8 +40,9 @@
                                     <tbody>
                                         @if ($wo_ut->count() == 0)
                                             <tr>
-                                                <td class="text-center">
-                                                    Belum ada data Work Order untuk pekerjaan Ultrasonic Test
+                                                <td colspan="5" class="text-center fw-bolder">
+                                                    Belum ada data Work Order untuk pekerjaan Ultrasonic Test, silahkan
+                                                    hubungi PIC terkait.
                                                 </td>
                                             </tr>
                                         @else
