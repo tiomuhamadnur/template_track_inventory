@@ -19,35 +19,18 @@ class DashboardController extends Controller
         $temuan_open = Temuan::where('status', 'open')->get();
         $temuan_close = Temuan::where('status', 'close')->get();
         $temuan_baru_bulan_ini = Temuan::whereYear('tanggal', $tahun_ini)->whereMonth('tanggal', $bulan_ini)->get();
-        $temuan_close_bulan_ini = Temuan::where('status', 'close')->whereMonth('updated_at', $bulan_ini)->get();
+        $temuan_close_bulan_ini = Temuan::where('status', 'close')->whereMonth('tanggal_close', $bulan_ini)->get();
 
-        $temuan_jan = Temuan::whereYear('tanggal', $tahun_ini)->whereMonth('tanggal', 1)->count();
-        $temuan_feb = Temuan::whereYear('tanggal', $tahun_ini)->whereMonth('tanggal', 2)->count();
-        $temuan_mar = Temuan::whereYear('tanggal', $tahun_ini)->whereMonth('tanggal', 3)->count();
-        $temuan_apr = Temuan::whereYear('tanggal', $tahun_ini)->whereMonth('tanggal', 4)->count();
-        $temuan_may = Temuan::whereYear('tanggal', $tahun_ini)->whereMonth('tanggal', 5)->count();
-        $temuan_jun = Temuan::whereYear('tanggal', $tahun_ini)->whereMonth('tanggal', 6)->count();
-        $temuan_jul = Temuan::whereYear('tanggal', $tahun_ini)->whereMonth('tanggal', 7)->count();
-        $temuan_aug = Temuan::whereYear('tanggal', $tahun_ini)->whereMonth('tanggal', 8)->count();
-        $temuan_sep = Temuan::whereYear('tanggal', $tahun_ini)->whereMonth('tanggal', 9)->count();
-        $temuan_oct = Temuan::whereYear('tanggal', $tahun_ini)->whereMonth('tanggal', 10)->count();
-        $temuan_nov = Temuan::whereYear('tanggal', $tahun_ini)->whereMonth('tanggal', 11)->count();
-        $temuan_dec = Temuan::whereYear('tanggal', $tahun_ini)->whereMonth('tanggal', 12)->count();
+        $bulan = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+        $temuan = [];
+        $perbaikan_temuan = [];
 
-        $temuan = [
-            $temuan_jan,
-            $temuan_feb,
-            $temuan_mar,
-            $temuan_apr,
-            $temuan_may,
-            $temuan_jun,
-            $temuan_jul,
-            $temuan_aug,
-            $temuan_sep,
-            $temuan_oct,
-            $temuan_nov,
-            $temuan_dec,
-        ];
+        foreach($bulan as $item) {
+            $result_temuan = Temuan::whereYear('tanggal', $tahun_ini)->whereMonth('tanggal', $item)->count();
+            $result_perbaikan = Temuan::whereYear('tanggal', $tahun_ini)->whereMonth('tanggal_close', $item)->where('status', 'close')->count();
+            $temuan[] = $result_temuan;
+            $perbaikan_temuan[] = $result_perbaikan;
+        }
 
         $bulan = [
             'JAN',
@@ -119,20 +102,6 @@ class DashboardController extends Controller
             ->whereNot('part_id', 7)
             ->whereNot('part_id', 2)
             ->count();
-
-        // $progress_pm = DB::table('pic_job')
-        //     ->join('annual_planning', 'pic_job.job_id', '=', 'annual_planning.id')
-        //     ->selectRaw('pic_job.progress / annual_planning.frekuensi * 100 as progress')
-        //     ->where('tahun', $tahun_ini)
-        //     ->pluck('progress')
-        //     ->toArray();
-
-        // $job_pm = DB::table('pic_job')
-        //     ->join('annual_planning', 'pic_job.job_id', '=', 'annual_planning.id')
-        //     ->select('annual_planning.name as job')
-        //     ->where('tahun', $tahun_ini)
-        //     ->pluck('job')
-        //     ->toArray();
 
         $pic = PIC::where('tahun', $tahun_ini)->get();
 
@@ -345,6 +314,7 @@ class DashboardController extends Controller
             'temuan_baru_bulan_ini',
             'temuan_close_bulan_ini',
             'temuan',
+            'perbaikan_temuan',
             'bulan',
             'temuan_minor',
             'temuan_moderate',

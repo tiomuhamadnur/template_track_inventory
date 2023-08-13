@@ -316,6 +316,7 @@
 
         // {{-- JS TREN TEMUAN --}}
         let temuan = <?php echo json_encode($temuan); ?>;
+        let perbaikan_temuan = <?php echo json_encode($perbaikan_temuan); ?>;
         let bulan = <?php echo json_encode($bulan); ?>;
 
         Highcharts.chart('chart-container', {
@@ -327,7 +328,7 @@
             },
             yAxis: {
                 title: {
-                    text: 'Jumlah Temuan'
+                    text: 'Temuan'
                 }
             },
             plotOptions: {
@@ -336,11 +337,20 @@
                 }
             },
             series: [{
-                type: 'column',
-                name: 'jumlah temuan',
-                showInLegend: false,
-                data: temuan,
-            }, ]
+                    type: 'column',
+                    name: 'Temuan baru',
+                    showInLegend: true,
+                    color: 'red',
+                    data: temuan,
+                },
+                {
+                    type: 'column',
+                    name: 'Closing temuan',
+                    showInLegend: true,
+                    color: 'green',
+                    data: perbaikan_temuan,
+                },
+            ]
         });
 
 
