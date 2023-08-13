@@ -235,7 +235,7 @@
                                                                             </td>
                                                                             <td class="text-wrap">
                                                                                 <h6>{{ $item->job->name }}</h6>
-                                                                                <p class="text-success">PIC:
+                                                                                <p class="text">PIC:
                                                                                     {{ $item->user->name ?? '-' }}</p>
                                                                             </td>
                                                                             <td>
