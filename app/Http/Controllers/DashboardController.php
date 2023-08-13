@@ -27,7 +27,7 @@ class DashboardController extends Controller
 
         foreach($bulan as $item) {
             $result_temuan = Temuan::whereYear('tanggal', $tahun_ini)->whereMonth('tanggal', $item)->count();
-            $result_perbaikan = Temuan::whereYear('tanggal', $tahun_ini)->whereMonth('tanggal_close', $item)->where('status', 'close')->count();
+            $result_perbaikan = Temuan::whereYear('tanggal_close', $tahun_ini)->whereMonth('tanggal_close', $item)->where('status', 'close')->count();
             $temuan[] = $result_temuan;
             $perbaikan_temuan[] = $result_perbaikan;
         }
