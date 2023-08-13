@@ -5,9 +5,13 @@
 @endsection
 @section('sub-content')
     <h4>Dashboard Mainline</h4>
+    <div class="d-sm-flex align-items-center justify-content-between border-bottom mb-3">
+        <div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-12 grid-margin stretch-card animate__animated animate__zoomIn ">
-            <div class="card card-rounded">
+            <div class="card card-rounded shadow">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-12">
@@ -26,15 +30,11 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="home-tab">
-                <div class="d-sm-flex align-items-center justify-content-between border-bottom">
-                    <div>
-                    </div>
-                </div>
                 <div class="tab-content tab-content-basic">
                     <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
                         <div class="row">
                             <div class="col-lg-8 grid-margin stretch-card animate__animated animate__zoomIn">
-                                <div class="card">
+                                <div class="card shadow">
                                     <div class="card-body">
                                         <div class="d-sm-flex justify-content-between align-items-start">
                                             <div>
@@ -57,7 +57,7 @@
                             <div class="col-lg-4 d-flex flex-column animate__animated animate__zoomIn">
                                 <div class="row flex-grow">
                                     <div class="col-md-6 col-lg-12 grid-margin stretch-card">
-                                        <div class="card bg-primary card-rounded">
+                                        <div class="card shadow bg-primary card-rounded">
                                             <div class="card-body pb-0">
                                                 <h4 class="card-title card-title-dash text-white mb-4">
                                                     Temuan {{ \Carbon\Carbon::now()->format('F Y') }}
@@ -97,7 +97,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-lg-12 grid-margin stretch-card">
-                                        <div class="card card-rounded">
+                                        <div class="card card-rounded shadow">
                                             <div class="card-body">
                                                 <div class="row">
                                                     <h4 class="text-center fw-bolder">Temuan Total</h4>
@@ -135,7 +135,7 @@
                                 </div>
                             </div>
                             <div class="col-12 grid-margin stretch-card animate__animated animate__zoomIn">
-                                <div class="card card-rounded">
+                                <div class="card card-rounded shadow">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-lg-12">
@@ -154,7 +154,7 @@
                         </div>
                         <div class="row">
                             <div class="col-6 grid-margin stretch-card animate__animated animate__zoomIn">
-                                <div class="card card-rounded">
+                                <div class="card card-rounded shadow">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-lg-12">
@@ -170,15 +170,15 @@
                                 </div>
                             </div>
                             <div class="col-6 grid-margin stretch-card animate__animated animate__zoomIn">
-                                <div class="card card-rounded">
+                                <div class="card card-rounded shadow">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                                     <h4 class="card-title card-title-dash">Defect per Line</h4>
                                                 </div>
-                                                <p class="card-subtitle card-subtitle-dash">Presentase Sebaran Temuan Per
-                                                    Line</p>
+                                                <p class="card-subtitle card-subtitle-dash">Persentase Sebaran Temuan Per
+                                                    Line di Mainline</p>
                                                 <div id="sebaran-chart" class="mt-5 text-center"></div>
                                             </div>
                                         </div>
@@ -188,7 +188,7 @@
                             <div class="col-lg-12 d-flex flex-column animate__animated animate__zoomIn">
                                 <div class="row flex-grow">
                                     <div class="col-12 grid-margin stretch-card">
-                                        <div class="card card-rounded">
+                                        <div class="card card-rounded shadow">
                                             <div class="card-body">
                                                 <div class="d-sm-flex justify-content-between align-items-start">
                                                     <div>
@@ -213,8 +213,6 @@
                                                 </div>
                                                 <div class="d-sm-flex align-items-center mt-1 justify-content-between">
                                                     <div class="col-12">
-                                                        {{-- <div id="chartpic" style="width: 100%; height:500px;">
-                                                        </div> --}}
                                                         <div class="table-responsive  mt-1">
                                                             <table class="table select-table" style="width: 100%">
                                                                 <thead>
