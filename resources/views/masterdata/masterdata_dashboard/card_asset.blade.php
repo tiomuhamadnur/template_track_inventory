@@ -1,17 +1,17 @@
 {{-- ROW 1 --}}
 <div class="row">
     <div class="col-lg-4 grid-margin stretch-card">
-        <div class="card card-rounded">
+        <div class="card card-rounded shadow">
             <div class="card-body">
                 <div class="row">
-                    <h4 class="text-center fw-bolder" style="padding-bottom: 10px;">Data Area/Petak</h4>
+                    <h4 class="text-center fw-bolder" style="padding-bottom: 10px;">Stasiun</h4>
                     <div class="col-sm-12 text-center">
                         <div>
                             <a href="#" title="">
                                 <h3 class="mb-0 fw-bold text-success">
-                                    30
+                                    {{ $stasiun }}
                                     <br>
-                                    <p>Area</p>
+                                    <p>stasiun</p>
                                 </h3>
                             </a>
                         </div>
@@ -22,17 +22,25 @@
     </div>
 
     <div class="col-lg-4 grid-margin stretch-card">
-        <div class="card card-rounded">
+        <div class="card card-rounded shadow">
             <div class="card-body">
                 <div class="row">
                     <h4 class="text-center fw-bolder" style="padding-bottom: 10px;">Data Line</h4>
                     <div class="col-sm-12 text-center">
-                        <div>
+                        <div class="btn-group">
                             <a href="#" title="">
                                 <h3 class="mb-0 fw-bold text-success">
-                                    20
+                                    {{ $line_mainline }}
                                     <br>
-                                    <p>Line</p>
+                                    <p>Mainline</p>
+                                </h3>
+                            </a>
+                            <div class="mx-5"></div>
+                            <a href="#" title="">
+                                <h3 class="mb-0 fw-bold text-success">
+                                    {{ $line_depo }}
+                                    <br>
+                                    <p>Depo</p>
                                 </h3>
                             </a>
                         </div>
@@ -43,17 +51,17 @@
     </div>
 
     <div class="col-lg-4 grid-margin stretch-card">
-        <div class="card card-rounded">
+        <div class="card card-rounded shadow">
             <div class="card-body">
                 <div class="row">
-                    <h4 class="text-center fw-bolder" style="padding-bottom: 10px;">Data Kategori Part</h4>
+                    <h4 class="text-center fw-bolder" style="padding-bottom: 10px;">Track Bed</h4>
                     <div class="col-sm-12 text-center">
                         <div>
                             <a href="#" title="">
                                 <h3 class="mb-0 fw-bold text-success">
-                                    10
+                                    {{ $trackbed }}
                                     <br>
-                                    <p>Kategori</p>
+                                    <p>Mainline</p>
                                 </h3>
                             </a>
                         </div>
@@ -64,17 +72,17 @@
     </div>
 
     <div class="col-lg-4 grid-margin stretch-card">
-        <div class="card card-rounded">
+        <div class="card card-rounded shadow">
             <div class="card-body">
                 <div class="row">
-                    <h4 class="text-center fw-bolder" style="padding-bottom: 10px;">Data Detail Part</h4>
+                    <h4 class="text-center fw-bolder" style="padding-bottom: 10px;">Sleeper</h4>
                     <div class="col-sm-12 text-center">
                         <div>
                             <a href="#" title="">
                                 <h3 class="mb-0 fw-bold text-success">
-                                    110
+                                    {{ $sleeper_mainline }}
                                     <br>
-                                    <p>Detail Part</p>
+                                    <p>Mainline</p>
                                 </h3>
                             </a>
                         </div>
@@ -85,17 +93,25 @@
     </div>
 
     <div class="col-lg-4 grid-margin stretch-card">
-        <div class="card card-rounded">
+        <div class="card card-rounded shadow">
             <div class="card-body">
                 <div class="row">
-                    <h4 class="text-center fw-bolder" style="padding-bottom: 10px;">Data Kategori Defect</h4>
+                    <h4 class="text-center fw-bolder" style="padding-bottom: 10px;">Turnouts</h4>
                     <div class="col-sm-12 text-center">
-                        <div>
+                        <div class="btn-group">
                             <a href="#" title="">
                                 <h3 class="mb-0 fw-bold text-success">
-                                    110
+                                    {{ $turnout_mainline }}
                                     <br>
-                                    <p>Kategori</p>
+                                    <p>Mainline</p>
+                                </h3>
+                            </a>
+                            <div class="mx-5"></div>
+                            <a href="#" title="">
+                                <h3 class="mb-0 fw-bold text-success">
+                                    {{ $turnout_depo }}
+                                    <br>
+                                    <p>Depo</p>
                                 </h3>
                             </a>
                         </div>
@@ -106,17 +122,25 @@
     </div>
 
     <div class="col-lg-4 grid-margin stretch-card">
-        <div class="card card-rounded">
+        <div class="card card-rounded shadow">
             <div class="card-body">
                 <div class="row">
-                    <h4 class="text-center fw-bolder" style="padding-bottom: 10px;">Total Relasi Defect</h4>
+                    <h4 class="text-center fw-bolder" style="padding-bottom: 10px;">Scissors Crossing</h4>
                     <div class="col-sm-12 text-center">
-                        <div>
+                        <div class="btn-group">
                             <a href="#" title="">
                                 <h3 class="mb-0 fw-bold text-success">
-                                    110
+                                    {{ $sc_mainline }}
                                     <br>
-                                    <p>Relasi</p>
+                                    <p>Mainline</p>
+                                </h3>
+                            </a>
+                            <div class="mx-5"></div>
+                            <a href="#" title="">
+                                <h3 class="mb-0 fw-bold text-success">
+                                    {{ $sc_depo }}
+                                    <br>
+                                    <p>Depo</p>
                                 </h3>
                             </a>
                         </div>
@@ -127,17 +151,25 @@
     </div>
 
     <div class="col-lg-4 grid-margin stretch-card">
-        <div class="card card-rounded">
+        <div class="card card-rounded shadow">
             <div class="card-body">
                 <div class="row">
-                    <h4 class="text-center fw-bolder" style="padding-bottom: 10px;">Total Asset Trackbed Mainline</h4>
+                    <h4 class="text-center fw-bolder" style="padding-bottom: 10px;">Buffer/Wheel Stop</h4>
                     <div class="col-sm-12 text-center">
-                        <div>
+                        <div class="btn-group">
                             <a href="#" title="">
                                 <h3 class="mb-0 fw-bold text-success">
-                                    110
+                                    {{ $buffer }}
                                     <br>
-                                    <p>Pcs</p>
+                                    <p>Buffer Stop</p>
+                                </h3>
+                            </a>
+                            <div class="mx-5"></div>
+                            <a href="#" title="">
+                                <h3 class="mb-0 fw-bold text-success">
+                                    {{ $wheel }}
+                                    <br>
+                                    <p>Wheel Stop</p>
                                 </h3>
                             </a>
                         </div>
@@ -148,17 +180,25 @@
     </div>
 
     <div class="col-lg-4 grid-margin stretch-card">
-        <div class="card card-rounded">
+        <div class="card card-rounded shadow">
             <div class="card-body">
                 <div class="row">
-                    <h4 class="text-center fw-bolder" style="padding-bottom: 10px;">Total Asset TO & Scissors</h4>
+                    <h4 class="text-center fw-bolder" style="padding-bottom: 10px;">Lengkung Mainline</h4>
                     <div class="col-sm-12 text-center">
-                        <div>
+                        <div class="btn-group">
                             <a href="#" title="">
                                 <h3 class="mb-0 fw-bold text-success">
-                                    110
+                                    {{ $lengkung_kurang }}
                                     <br>
-                                    <p>Pcs</p>
+                                    <p>R <= 600m</p>
+                                </h3>
+                            </a>
+                            <div class="mx-5"></div>
+                            <a href="#" title="">
+                                <h3 class="mb-0 fw-bold text-success">
+                                    {{ $lengkung_lebih }}
+                                    <br>
+                                    <p>R > 600m</p>
                                 </h3>
                             </a>
                         </div>
@@ -169,39 +209,25 @@
     </div>
 
     <div class="col-lg-4 grid-margin stretch-card">
-        <div class="card card-rounded">
+        <div class="card card-rounded shadow">
             <div class="card-body">
                 <div class="row">
-                    <h4 class="text-center fw-bolder" style="padding-bottom: 10px;">Total Buffer/Wheel Stop</h4>
+                    <h4 class="text-center fw-bolder" style="padding-bottom: 10px;">Lengkung Depo</h4>
                     <div class="col-sm-12 text-center">
-                        <div>
+                        <div class="btn-group">
                             <a href="#" title="">
                                 <h3 class="mb-0 fw-bold text-success">
-                                    110
+                                    {{ $lengkung_kurang_depo }}
                                     <br>
-                                    <p>Pcs</p>
+                                    <p>R <= 600m</p>
                                 </h3>
                             </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="col-lg-4 grid-margin stretch-card">
-        <div class="card card-rounded">
-            <div class="card-body">
-                <div class="row">
-                    <h4 class="text-center fw-bolder" style="padding-bottom: 10px;">Total Joint Depo</h4>
-                    <div class="col-sm-12 text-center">
-                        <div>
+                            <div class="mx-5"></div>
                             <a href="#" title="">
                                 <h3 class="mb-0 fw-bold text-success">
-                                    110
+                                    {{ $lengkung_lebih_depo }}
                                     <br>
-                                    <p>Pcs</p>
+                                    <p>R > 600m</p>
                                 </h3>
                             </a>
                         </div>
@@ -212,17 +238,25 @@
     </div>
 
     <div class="col-lg-4 grid-margin stretch-card">
-        <div class="card card-rounded">
+        <div class="card card-rounded shadow">
             <div class="card-body">
                 <div class="row">
-                    <h4 class="text-center fw-bolder" style="padding-bottom: 10px;">Total Joint Mainline</h4>
+                    <h4 class="text-center fw-bolder" style="padding-bottom: 10px;">Welding Joint</h4>
                     <div class="col-sm-12 text-center">
-                        <div>
+                        <div class="btn-group">
                             <a href="#" title="">
                                 <h3 class="mb-0 fw-bold text-success">
-                                    110
+                                    {{ $w_mainline }}
                                     <br>
-                                    <p>Pcs</p>
+                                    <p>Mainline</p>
+                                </h3>
+                            </a>
+                            <div class="mx-5"></div>
+                            <a href="#" title="">
+                                <h3 class="mb-0 fw-bold text-success">
+                                    {{ $w_depo }}
+                                    <br>
+                                    <p>Depo</p>
                                 </h3>
                             </a>
                         </div>
@@ -233,17 +267,25 @@
     </div>
 
     <div class="col-lg-4 grid-margin stretch-card">
-        <div class="card card-rounded">
+        <div class="card card-rounded shadow">
             <div class="card-body">
                 <div class="row">
-                    <h4 class="text-center fw-bolder" style="padding-bottom: 10px;">Data Lengkung</h4>
+                    <h4 class="text-center fw-bolder" style="padding-bottom: 10px;">Normal Joint (NJ)</h4>
                     <div class="col-sm-12 text-center">
-                        <div>
+                        <div class="btn-group">
                             <a href="#" title="">
                                 <h3 class="mb-0 fw-bold text-success">
-                                    110
+                                    {{ $nj_mainline }}
                                     <br>
-                                    <p>Pcs</p>
+                                    <p>Mainline</p>
+                                </h3>
+                            </a>
+                            <div class="mx-5"></div>
+                            <a href="#" title="">
+                                <h3 class="mb-0 fw-bold text-success">
+                                    {{ $nj_depo }}
+                                    <br>
+                                    <p>Depo</p>
                                 </h3>
                             </a>
                         </div>
@@ -252,6 +294,86 @@
             </div>
         </div>
     </div>
+
+    <div class="col-lg-4 grid-margin stretch-card">
+        <div class="card card-rounded shadow">
+            <div class="card-body">
+                <div class="row">
+                    <h4 class="text-center fw-bolder" style="padding-bottom: 10px;">Insulated Rail Joint (IRJ)</h4>
+                    <div class="col-sm-12 text-center">
+                        <div class="btn-group">
+                            <a href="#" title="">
+                                <h3 class="mb-0 fw-bold text-success">
+                                    {{ $irj_mainline }}
+                                    <br>
+                                    <p>Mainline</p>
+                                </h3>
+                            </a>
+                            <div class="mx-5"></div>
+                            <a href="#" title="">
+                                <h3 class="mb-0 fw-bold text-success">
+                                    {{ $irj_depo }}
+                                    <br>
+                                    <p>Depo</p>
+                                </h3>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 grid-margin stretch-card">
+        <div class="card card-rounded shadow">
+            <div class="card-body">
+                <div class="row">
+                    <h4 class="text-center fw-bolder" style="padding-bottom: 10px;">Glued Rail Joint (GIJ)</h4>
+                    <div class="col-sm-12 text-center">
+                        <div class="btn-group">
+                            <a href="#" title="">
+                                <h3 class="mb-0 fw-bold text-success">
+                                    {{ $gij_mainline }}
+                                    <br>
+                                    <p>Mainline</p>
+                                </h3>
+                            </a>
+                            <div class="mx-5"></div>
+                            <a href="#" title="">
+                                <h3 class="mb-0 fw-bold text-success">
+                                    {{ $gij_depo }}
+                                    <br>
+                                    <p>Depo</p>
+                                </h3>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 grid-margin stretch-card">
+        <div class="card card-rounded shadow">
+            <div class="card-body">
+                <div class="row">
+                    <h4 class="text-center fw-bolder" style="padding-bottom: 10px;">Expansion Joint (EJ)</h4>
+                    <div class="col-sm-12 text-center">
+                        <div>
+                            <a href="#" title="">
+                                <h3 class="mb-0 fw-bold text-success">
+                                    {{ $ej }}
+                                    <br>
+                                    <p>Mainline</p>
+                                </h3>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 </div>
 

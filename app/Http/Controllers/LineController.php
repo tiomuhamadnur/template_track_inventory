@@ -9,10 +9,9 @@ class LineController extends Controller
 {
     public function index()
     {
-        $line = Line::all();
+        $line = Line::whereNot('area', 'Depo')->get();
 
         return view('mainline.mainline_line.index', compact(['line']));
-        // return view('line.index', compact(['line']));
     }
 
     public function create()

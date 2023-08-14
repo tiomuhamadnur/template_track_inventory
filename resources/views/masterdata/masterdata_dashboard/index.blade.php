@@ -4,7 +4,7 @@
     <title> Dashboard Admin | CPWTM</title>
 @endsection
 @section('sub-content')
-    <h4>Dashboard Master Data <span class="text-danger">(Data masih dummy)</span></h4>
+    <h4>Dashboard Master Data</h4>
     <div class="row">
         <div class="col-sm-12">
             <div class="home-tab">
