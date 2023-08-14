@@ -124,7 +124,7 @@
                                                     {{ $item->part->name }}
                                                 </td>
                                                 <td class="text-center text-wrap">
-                                                    {{ $item->detail_part->name }} <br>
+                                                    {{ $item->detail_part->name ?? '-' }} <br>
                                                     ({{ $item->defect->name ?? 'Lainnya' }})
                                                 </td>
                                                 <td class="text-center">
@@ -142,7 +142,7 @@
                                                             data-no_sleeper="{{ $item->no_sleeper }}"
                                                             data-tanggal="{{ $item->tanggal }}"
                                                             data-part="{{ $item->part->name }}"
-                                                            data-detail_part="{{ $item->detail_part->name }}"
+                                                            data-detail_part="{{ $item->detail_part->name ?? '-' }}"
                                                             data-kilometer="{{ $item->mainline->kilometer }}"
                                                             data-direction="{{ $item->direction ?? '-' }}"
                                                             data-defect="{{ $item->defect->name ?? 'Lainnya' }}"

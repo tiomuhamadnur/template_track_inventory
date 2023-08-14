@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Temuan extends Model
 {
-    use HasFactory;
+    use HasFactory, Searchable;
 
     protected $table = 'summary_temuan';
 
@@ -33,5 +34,12 @@ class Temuan extends Model
     public function defect()
     {
         return $this->belongsTo(Defect::class, 'defect_id', 'id');
+    }
+
+    public function toSearchableArray()
+    {
+        return [
+            'part.name' => '',
+        ];
     }
 }
