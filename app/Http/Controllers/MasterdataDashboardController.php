@@ -30,8 +30,8 @@ class MasterdataDashboardController extends Controller
         $lengkung_lebih = Lengkung::where('tipe', 'horizontal')->whereNot('area_id', 1)->where('radius', '>', 600)->count();
         $lengkung_kurang_depo = Lengkung::where('tipe', 'horizontal')->where('area_id', 1)->where('radius', '<=', 600)->count();
         $lengkung_lebih_depo = Lengkung::where('tipe', 'horizontal')->where('area_id', 1)->where('radius', '>', 600)->count();
-        $w_mainline = Joint::where('tipe', 'W')->whereNot('area_id', 1)->count();
-        $w_depo = Joint::where('tipe', 'W')->where('area_id', 1)->count();
+        $w_mainline = Joint::where('tipe', 'W')->whereNot('area_id', 1)->where('repaired', null)->count();
+        $w_depo = Joint::where('tipe', 'W')->where('area_id', 1)->where('repaired', null)->count();
         $nj_mainline = Joint::where('tipe', 'NJ')->whereNot('area_id', 1)->count();
         $nj_depo = Joint::where('tipe', 'NJ')->where('area_id', 1)->count();
         $irj_mainline = Joint::where('tipe', 'IRJ')->whereNot('area_id', 1)->count();
