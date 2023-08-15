@@ -15,19 +15,20 @@
             </a>
             <div class="collapse" id="form-elements">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('temuan_mainline.index') }}">List Temuan
-                            Mainline</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('temuan_mainline.index') }}">List Temuan Mainline</a>
                     </li>
-                    {{-- <li class="nav-item"><a class="nav-link" href="{{ route('accelerometer.index') }}">Accelerometer</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('accelerometer.index') }}">Accelerometer</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('wesel.examination.index') }}">Turn Out
+                    {{-- <li class="nav-item"><a class="nav-link" href="{{ route('wesel.examination.index') }}">Turn Out
                             Irregularity</a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('buffer.examination.index') }}">Buffer/Wheel
                             Stop Exam.</a>
                     </li> --}}
-                    <li class="nav-item"><a class="nav-link" href="{{ route('ut.examination.index_wo_ut') }}">Ultrasonic
-                            Test
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('ut.examination.index_wo_ut') }}">Ultrasonic Test
                             Examination</a>
                     </li>
                 </ul>

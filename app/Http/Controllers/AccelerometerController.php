@@ -16,7 +16,7 @@ class AccelerometerController extends Controller
     {
         $jadwal_accelerometer = JadwalAccelerometer::orderBy('id', 'desc')->get();
 
-        return view('accelerometer.index', compact(['jadwal_accelerometer']));
+        return view('mainline.mainline_accelerometer_examination.index', compact(['jadwal_accelerometer']));
     }
 
     public function index_summary($id)
@@ -27,7 +27,7 @@ class AccelerometerController extends Controller
             if ($jadwal) {
                 $accelerometer = Accelerometer::where('jadwal_id', $secret)->get();
 
-                return view('accelerometer.accelerometer', compact(['jadwal', 'accelerometer']));
+                return view('mainline.mainline_accelerometer_examination.accelerometer', compact(['jadwal', 'accelerometer']));
             } else {
                 return redirect()->back();
             }
@@ -42,33 +42,22 @@ class AccelerometerController extends Controller
         $jadwal = JadwalAccelerometer::whereMonth('tanggal', $bulan_ini)->get();
         $area = Area::where('area', 'Mainline')->where('stasiun', 'false')->get();
 
-        return view('accelerometer.create', compact(['jadwal', 'area']));
+        return view('mainline.mainline_accelerometer_examination.create', compact(['jadwal', 'area']));
     }
 
     public function store(Request $request)
     {
         $jadwal_id = $request->jadwal_id;
         $line_id = $request->line_id;
-        $area_id = $request->area_id;
-        $validate = Accelerometer::where('jadwal_id', $jadwal_id)->where('line_id', $line_id)->where('area_id', $area_id)->get();
-        if (count($validate) == 0) {
+
+        for ($i = 0; $i < count($request->area_id); $i++) {
             Accelerometer::create([
                 'jadwal_id' => $jadwal_id,
                 'line_id' => $line_id,
-                'area_id' => $area_id,
-                'sumbu_x' => $request->sumbu_x,
-                'sumbu_y' => $request->sumbu_y,
-                'sumbu_z' => $request->sumbu_z,
-            ]);
-        } else {
-            $accelerometer = Accelerometer::where('jadwal_id', $jadwal_id)->where('line_id', $line_id)->where('area_id', $area_id);
-            $accelerometer->update([
-                'jadwal_id' => $jadwal_id,
-                'line_id' => $line_id,
-                'area_id' => $area_id,
-                'sumbu_x' => $request->sumbu_x,
-                'sumbu_y' => $request->sumbu_y,
-                'sumbu_z' => $request->sumbu_z,
+                'area_id' => $request->area_id[$i],
+                'sumbu_x' => $request->sumbu_x[$i],
+                'sumbu_y' => $request->sumbu_y[$i],
+                'sumbu_z' => $request->sumbu_z[$i],
             ]);
         }
 
@@ -225,7 +214,7 @@ class AccelerometerController extends Controller
         $DKA_BHI_DT_Y = $area_DKA_BHI_DT->value('sumbu_y');
         $DKA_BHI_DT_Z = $area_DKA_BHI_DT->value('sumbu_z');
 
-        return view('accelerometer.report.report', compact([
+        return view('mainline.mainline_accelerometer_examination.report.summary', compact([
             'jadwal',
 
             'LBB_FTM_UT_X',
@@ -314,9 +303,20 @@ class AccelerometerController extends Controller
         ]));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        // dd($request);
+        $id = $request->id;
+        $accelerometer =  Accelerometer::findOrFail($id);
+        if (!$accelerometer) {
+            return redirect()->back();
+        }
+        $accelerometer->update([
+            'sumbu_x' => $request->sumbu_x,
+            'sumbu_y' => $request->sumbu_y,
+            'sumbu_z' => $request->sumbu_z,
+        ]);
+        return back()->withNotify('Data Accelerometer berhasil diubah!');
     }
 
     public function destroy(Request $request)
@@ -331,9 +331,8 @@ class AccelerometerController extends Controller
     {
         $jadwal_id = $request->jadwal_id;
         $line_id = $request->line_id;
-        $area_id = $request->area_id;
-        $accelerometer = Accelerometer::where('jadwal_id', $jadwal_id)->where('line_id', $line_id)->where('area_id', $area_id)->get();
-        if (count($accelerometer) > 0) {
+        $accelerometer = Accelerometer::where('jadwal_id', $jadwal_id)->where('line_id', $line_id)->get();
+        if ($accelerometer->count() > 0) {
             return response()->json($accelerometer);
         }
     }
@@ -349,7 +348,7 @@ class AccelerometerController extends Controller
 
     public function create_jadwal(Request $request)
     {
-        return view('accelerometer.create_jadwal');
+        return view('mainline.mainline_accelerometer_examination.create_jadwal');
     }
 
     public function store_jadwal(Request $request)
@@ -367,10 +366,10 @@ class AccelerometerController extends Controller
     {
         $id = $request->id;
         $cek = Accelerometer::where('jadwal_id', $id)->get();
-        if (! $cek) {
+        if ($cek->count() == 0) {
             JadwalAccelerometer::findOrFail($id)->delete();
 
-            return redirect()->route('accelerometer.index');
+            return redirect()->route('accelerometer.index')->withNotify('Data jadwal Accelerometer berhasil dihapus!');
         } else {
             return redirect()->back();
         }

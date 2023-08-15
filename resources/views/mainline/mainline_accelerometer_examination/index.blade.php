@@ -1,7 +1,7 @@
 @extends('mainline.mainline_layout.base')
 
 @section('sub-title')
-    <title>Accelerometer | TCSM</title>
+    <title>Accelerometer | CPWTM</title>
 @endsection
 
 @section('sub-content')
@@ -19,7 +19,7 @@
                             <a href="{{ route('accelerometer.create') }}" class="btn btn-outline-dark btn-lg"
                                 type="button">Add
                                 Data</a>
-                            <button class="btn btn-outline-dark btn-lg dropdown-toggle" type="button"
+                            {{-- <button class="btn btn-outline-dark btn-lg dropdown-toggle" type="button"
                                 id="dropdownMenuIconButton1" data-bs-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false" style="margin-left: -10px;">
                                 <i class="ti-link"></i>
@@ -28,7 +28,7 @@
                                 <a class="dropdown-item" href="#">Print</a>
                                 <a class="dropdown-item" href="#">Export to Excel</a>
                                 <a class="dropdown-item" href="#">Export to PDF</a>
-                            </div>
+                            </div> --}}
                             <div class="table-responsive pt-3">
                                 <table class="table table-bordered">
                                     <thead>
@@ -46,7 +46,7 @@
                                                 PIC
                                             </th>
                                             <th class="text-center">
-                                                Report
+                                                Summary
                                             </th>
                                             <th class="text-center">
                                                 Action
@@ -72,26 +72,25 @@
                                                 <td class="text-center">
                                                     {{ $item->pic }}
                                                 </td>
-                                                <td>
-                                                    <div>
-                                                        <form action="{{ route('accelerometer.report') }}" method="get">
-                                                            @csrf
-                                                            @method('get')
-                                                            <input type="text" name="jadwal_id" hidden
-                                                                value="{{ $item->id }}">
-                                                            <button class="btn btn-success rounded text-white"
-                                                                type="submit" title="Export Laporan Kegiatan"
-                                                                formtarget="_blank">
-                                                                <i class="mdi mdi-file-document"></i>
-                                                            </button>
-                                                        </form>
-                                                    </div>
+                                                <td class="text-center">
+                                                    <form action="{{ route('accelerometer.report') }}" method="get">
+                                                        <input type="text" name="jadwal_id" hidden
+                                                            value="{{ $item->id }}">
+                                                        <button class="btn btn-success rounded text-white" type="submit"
+                                                            title="Show summary Accelerometer">
+                                                            <i class="mdi mdi-file-document"></i>
+                                                        </button>
+                                                    </form>
                                                 </td>
                                                 <td class="text-center">
-                                                    <button type="button" class="btn btn-outline-warning">Edit</button>
-                                                    <a class="btn btn-outline-danger" href="javascript:;"
-                                                        data-bs-toggle="modal" data-bs-target="#delete-confirmation-modal"
-                                                        onclick="toggleModal('{{ $item->id }}')">Delete</a>
+                                                    <div class="btn-group">
+                                                        <a class="btn btn-outline-danger ms-0"
+                                                            @if (auth()->user()->role != 'Admin') hidden @endif
+                                                            href="javascript:;" data-bs-toggle="modal"
+                                                            data-bs-target="#delete-confirmation-modal"
+                                                            onclick="toggleModal('{{ $item->id }}')">Delete
+                                                        </a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach

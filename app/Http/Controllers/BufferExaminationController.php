@@ -60,6 +60,11 @@ class BufferExaminationController extends Controller
         //
     }
 
+    public function report(Request $request)
+    {
+        //
+    }
+
     public function edit($id)
     {
         //
