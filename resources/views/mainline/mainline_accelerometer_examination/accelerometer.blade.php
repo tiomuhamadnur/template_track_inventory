@@ -15,10 +15,22 @@
                 <div class="col-lg-12 grid-margin stretch-card mt-3">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Data Accelerometer <span>(Tanggal: {{ $jadwal->tanggal }})</span></h4>
+                            <h4 class="card-title">Data Detail Accelerometer</h4>
                             <a href="{{ route('accelerometer.index') }}" class="btn btn-outline-dark btn-lg"
                                 type="button">Back
                             </a>
+                            <table>
+                                <tr>
+                                    <td>Examiner</td>
+                                    <td> : </td>
+                                    <td>{{ $jadwal->pic }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Tanggal</td>
+                                    <td> : </td>
+                                    <td>{{ \Carbon\Carbon::parse($jadwal->tanggal)->format('d F Y') }}</td>
+                                </tr>
+                            </table>
                             <div class="table-responsive pt-3">
                                 <table class="table table-bordered">
                                     <thead>
