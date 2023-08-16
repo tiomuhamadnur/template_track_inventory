@@ -197,7 +197,7 @@
         </div>
     </div>
 
-    <!-- Modal Export Excel -->
+    <!-- Modal Exports Excel -->
     <div class="modal fade" id="ModalExportExcel" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog modal-md" role="document">
             <div class="modal-content">
@@ -229,7 +229,7 @@
             </div>
         </div>
     </div>
-    <!-- End Modal Export Excel -->
+    <!-- End Modals Export Excel -->
 @endsection
 
 @section('javascript')
