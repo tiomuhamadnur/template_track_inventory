@@ -196,4 +196,178 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Export Excel -->
+    <div class="modal fade" id="ModalExportExcel" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAdminTitle">Apakah anda yakin?</h5>
+                </div>
+                <div class="modal-body pt-3 mb-0">
+                    <div class="p-2 text-center">
+                        <h1 class="text-center align-middle text-success mt-2" style="font-size: 100px">
+                            <i class="mdi mdi-file-excel mx-auto"></i>
+                        </h1>
+                        <div class="text-slate-500 mt-2">File excel akan didownload sesuai data yang ditampilkan pada
+                            halaman ini.</div>
+                        <form id="form_export_excel" action="{{ route('accelerometer.export.excel') }}" method="GET">
+                            <input type="text" name="jadwal_id" value="{{ $jadwal->id }}" hidden>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="modal-footer mt-2">
+                    <button type="submit" formtarget="_blank" form="form_export_excel" onclick="closeModal()"
+                        class="btn btn-success justify-content-center">
+                        Download Excel
+                    </button>
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                        Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Export Excel -->
+@endsection
+
+@section('javascript')
+    <script>
+        let threshold_very_good_value = 83;
+        let threshold_good_value = 88;
+        let threshold_very_good = [];
+        let threshold_good = [];
+        let tanggal = <?php echo json_encode(date('d F Y', strtotime($jadwal->tanggal))); ?>;
+        let examiner = <?php echo json_encode($jadwal->pic); ?>;
+        let area = <?php echo json_encode($area); ?>;
+        let acc_ut_x = <?php echo json_encode($acc_ut_x); ?>;
+        let acc_ut_y = <?php echo json_encode($acc_ut_y); ?>;
+        let acc_ut_z = <?php echo json_encode($acc_ut_z); ?>;
+
+        let acc_dt_x = <?php echo json_encode($acc_dt_x); ?>;
+        let acc_dt_y = <?php echo json_encode($acc_dt_y); ?>;
+        let acc_dt_z = <?php echo json_encode($acc_dt_z); ?>;
+
+        for (let i = 0; i < area.length; i++) {
+            threshold_very_good.push(threshold_very_good_value);
+            threshold_good.push(threshold_good_value);
+        }
+
+        Highcharts.chart('chart-ut', {
+            title: {
+                text: 'Accelerometer Up Track',
+            },
+            subtitle: {
+                text: '(Tanggal: ' + tanggal + ' | Examiner: ' + examiner + ')',
+            },
+            xAxis: {
+                categories: area,
+            },
+            yAxis: {
+                title: {
+                    text: 'Nilai Goyangan (dB)'
+                }
+            },
+            plotOptions: {
+                series: {
+                    allowPointSelect: true,
+                },
+            },
+            series: [{
+                    type: 'line',
+                    name: 'very good category',
+                    showInLegend: false,
+                    color: 'green',
+                    dashStyle: 'dash',
+                    lineWidth: 5,
+                    data: threshold_very_good,
+                },
+                {
+                    type: 'spline',
+                    name: 'sumbu X',
+                    showInLegend: true,
+                    color: 'blue',
+                    lineWidth: 3,
+                    data: acc_ut_x,
+                },
+                {
+                    type: 'spline',
+                    name: 'sumbu Y',
+                    showInLegend: true,
+                    color: 'red',
+                    lineWidth: 3,
+                    data: acc_ut_y,
+                },
+                {
+                    type: 'spline',
+                    name: 'sumbu Z',
+                    showInLegend: true,
+                    color: 'orange',
+                    lineWidth: 3,
+                    data: acc_ut_z,
+                },
+            ]
+        });
+
+        Highcharts.chart('chart-dt', {
+            title: {
+                text: 'Accelerometer Up Track'
+            },
+            subtitle: {
+                text: '(Tanggal: ' + tanggal + ' | Examiner: ' + examiner + ')',
+            },
+            xAxis: {
+                categories: area,
+            },
+            yAxis: {
+                title: {
+                    text: 'Nilai Goyangan (dB)'
+                }
+            },
+            plotOptions: {
+                series: {
+                    allowPointSelect: true,
+                },
+            },
+            series: [{
+                    type: 'line',
+                    name: 'very good category',
+                    showInLegend: false,
+                    color: 'green',
+                    dashStyle: 'dash',
+                    lineWidth: 5,
+                    data: threshold_very_good,
+                },
+                {
+                    type: 'spline',
+                    name: 'sumbu X',
+                    showInLegend: true,
+                    color: 'blue',
+                    lineWidth: 3,
+                    data: acc_dt_x,
+                },
+                {
+                    type: 'spline',
+                    name: 'sumbu Y',
+                    showInLegend: true,
+                    color: 'red',
+                    lineWidth: 3,
+                    data: acc_dt_y,
+                },
+                {
+                    type: 'spline',
+                    name: 'sumbu Z',
+                    showInLegend: true,
+                    color: 'orange',
+                    lineWidth: 3,
+                    data: acc_dt_z,
+                },
+            ]
+        });
+
+        function closeModal() {
+            $("#ModalExportExcel").modal("hide");
+        }
+    </script>
 @endsection
