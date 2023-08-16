@@ -1,7 +1,7 @@
 @extends('depo.depo_layout.base')
 
 @section('sub-title')
-    <title>Data Temuan Depo | TCSM</title>
+    <title>Data Temuan Depo | CPWTM</title>
 @endsection
 
 @section('sub-content')

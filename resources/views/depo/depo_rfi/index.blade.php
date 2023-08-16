@@ -1,7 +1,7 @@
 @extends('depo.depo_layout.base')
 
 @section('sub-title')
-    <title>Request For Inspection Depo | TCSM</title>
+    <title>Request For Inspection Depo | CPWTM</title>
 @endsection
 
 @section('sub-content')

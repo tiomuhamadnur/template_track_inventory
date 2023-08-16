@@ -40,7 +40,7 @@
                                 </tr>
                             </table>
                             <div class="table-responsive pt-3">
-                                <table class="table table-bordered">
+                                <table class="table table-bordered rounded">
                                     <thead>
                                         <tr class="text-center fw-bolder">
                                             <th class="align-middle" rowspan="2">NO</th>
@@ -49,12 +49,12 @@
                                             <th colspan="3">DOWN TRACK</th>
                                         </tr>
                                         <tr class="text-center fw-bolder">
-                                            <th>Lt-X</th>
-                                            <th>Lt-Y</th>
-                                            <th>Lt-Z</th>
-                                            <th>Lt-X</th>
-                                            <th>Lt-Y</th>
-                                            <th>Lt-Z</th>
+                                            <th>Lt-X (dB)</th>
+                                            <th>Lt-Y (dB)</th>
+                                            <th>Lt-Z (dB)</th>
+                                            <th>Lt-X (dB)</th>
+                                            <th>Lt-Y (dB)</th>
+                                            <th>Lt-Z (dB)</th>
                                         </tr>
                                     </thead>
                                     <tbody class="text-center">
@@ -218,13 +218,15 @@
                 </div>
 
                 <div class="modal-footer mt-2">
-                    <button type="submit" formtarget="_blank" form="form_export_excel" onclick="closeModal()"
-                        class="btn btn-success justify-content-center">
-                        Download Excel
-                    </button>
-                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
-                        Tutup
-                    </button>
+                    <div class="pull-right">
+                        <button type="submit" formtarget="_blank" form="form_export_excel" onclick="closeModal()"
+                            class="btn btn-success justify-content-center">
+                            Download Excel
+                        </button>
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                            Tutup
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -312,7 +314,7 @@
 
         Highcharts.chart('chart-dt', {
             title: {
-                text: 'Accelerometer Up Track'
+                text: 'Accelerometer Down Track'
             },
             subtitle: {
                 text: '(Tanggal: ' + tanggal + ' | Examiner: ' + examiner + ')',

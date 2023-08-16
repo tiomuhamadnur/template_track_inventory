@@ -373,12 +373,14 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" form="form_filter" class="btn btn-primary justify-content-center">
-                        Filter
-                    </button>
-                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
-                        Tutup
-                    </button>
+                    <div class="pull-right">
+                        <button type="submit" form="form_filter" class="btn btn-primary justify-content-center">
+                            Filter
+                        </button>
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                            Tutup
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -401,13 +403,15 @@
                 </div>
 
                 <div class="modal-footer mt-2">
-                    <button type="submit" formtarget="_blank" form="form_export_excel" onclick="closeModal()"
-                        class="btn btn-success justify-content-center">
-                        Download Excel
-                    </button>
-                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
-                        Tutup
-                    </button>
+                    <div class="pull-right">
+                        <button type="submit" formtarget="_blank" form="form_export_excel" onclick="closeModal()"
+                            class="btn btn-success justify-content-center">
+                            Download Excel
+                        </button>
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                            Tutup
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -430,13 +434,15 @@
                 </div>
 
                 <div class="modal-footer mt-2">
-                    <button type="submit" formtarget="_blank" form="form_export_pdf" onclick="closeModal()"
-                        class="btn btn-success justify-content-center">
-                        Download PDF
-                    </button>
-                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
-                        Tutup
-                    </button>
+                    <div class="pull-right">
+                        <button type="submit" formtarget="_blank" form="form_export_pdf" onclick="closeModal()"
+                            class="btn btn-success justify-content-center">
+                            Download PDF
+                        </button>
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                            Tutup
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -491,13 +497,15 @@
                     </div>
 
                     <div class="modal-footer mt-2">
-                        <button type="submit" formtarget="_blank" onclick="closeModal()"
-                            class="btn btn-primary justify-content-center">
-                            Generate
-                        </button>
-                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
-                            Tutup
-                        </button>
+                        <div class="pull-right">
+                            <button type="submit" formtarget="_blank" onclick="closeModal()"
+                                class="btn btn-primary justify-content-center">
+                                Generate
+                            </button>
+                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                                Tutup
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>

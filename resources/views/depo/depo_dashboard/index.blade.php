@@ -8,11 +8,15 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="home-tab">
+                <div class="d-sm-flex align-items-center justify-content-between border-bottom">
+                    <div>
+                    </div>
+                </div>
                 <div class="tab-content tab-content-basic">
                     <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
                         <div class="row">
                             <div class="col-12 grid-margin stretch-card animate__animated animate__zoomIn">
-                                <div class="card card-rounded">
+                                <div class="card card-rounded shadow">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-lg-12">
@@ -41,7 +45,7 @@
                     <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
                         <div class="row">
                             <div class="col-12 grid-margin stretch-card animate__animated animate__zoomIn">
-                                <div class="card card-rounded">
+                                <div class="card card-rounded shadow">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-lg-12">
@@ -64,8 +68,8 @@
     </div>
 
     <div class="row">
-        <div class="col-8 grid-margin stretch-card animate__animated animate__zoomIn">
-            <div class="card card-rounded">
+        <div class="col-lg-8 d-flex flex-column grid-margin stretch-card animate__animated animate__zoomIn">
+            <div class="card card-rounded shadow">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-12">
@@ -83,8 +87,8 @@
         <div class="col-lg-4 d-flex flex-column animate__animated animate__zoomIn">
             <div class="row flex-grow">
                 <div class="col-md-6 col-lg-12 grid-margin stretch-card">
-                    <div class="card bg-primary card-rounded">
-                        <a href="">
+                    <div class="card bg-primary card-rounded shadow">
+                        <a href="#">
                             <div class="card-body pb-0">
                                 <h4 class="card-title card-title-dash text-white mb-4">
                                     Temuan {{ \Carbon\Carbon::now()->format('F Y') }}
@@ -92,7 +96,7 @@
                                 <div class="row">
                                     <div class="col-sm-5">
                                         <p class="status-summary-ight-white mb-1">
-                                            <span>
+                                            <span class="text-white">
                                                 Temuan Baru
                                             </span>
                                         </p>
@@ -102,7 +106,7 @@
                                     </div>
                                     <div class="col-sm-5">
                                         <p class="status-summary-ight-white mb-1">
-                                            <span>
+                                            <span class="text-white">
                                                 Closing Temuan
                                             </span>
                                         </p>
@@ -110,7 +114,7 @@
                                             {{ $temuan_close_bulan_ini->count() }}
                                         </h2>
                                     </div>
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-12">
                                         <div class="status-summary-chart-wrapper pb-4">
                                             <canvas id="status-summary"></canvas>
                                         </div>
@@ -121,7 +125,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-12 grid-margin stretch-card">
-                    <div class="card card-rounded">
+                    <div class="card card-rounded shadow">
                         <div class="card-body">
                             <div class="row">
                                 <h4 class="text-center fw-bolder">Temuan Total</h4>
@@ -158,7 +162,7 @@
 
     <div class="row">
         <div class="col-12 grid-margin stretch-card animate__animated animate__zoomIn">
-            <div class="card card-rounded">
+            <div class="card card-rounded shadow">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-12">

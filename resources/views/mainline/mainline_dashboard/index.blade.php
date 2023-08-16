@@ -65,7 +65,7 @@
                                                 <div class="row">
                                                     <div class="col-sm-5">
                                                         <p class="status-summary-ight-white mb-1">
-                                                            <span>
+                                                            <span class="text-white">
                                                                 Temuan Baru
                                                             </span>
                                                         </p>
@@ -77,7 +77,7 @@
                                                     </div>
                                                     <div class="col-sm-5">
                                                         <p class="status-summary-ight-white mb-1">
-                                                            <span>
+                                                            <span class="text-white">
                                                                 Closing Temuan
                                                             </span>
                                                         </p>

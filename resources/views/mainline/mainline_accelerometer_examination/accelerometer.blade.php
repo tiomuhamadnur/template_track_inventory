@@ -16,8 +16,9 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Data Detail Accelerometer</h4>
-                            <a href="{{ route('accelerometer.index') }}" class="btn btn-outline-dark btn-lg"
-                                type="button">Back
+                            <a href="{{ route('accelerometer.index') }}" class="btn btn-outline-dark btn-lg" type="button">
+                                <i class="mdi mdi-arrow-left"></i>
+                                Back
                             </a>
                             <table>
                                 <tr>
@@ -31,6 +32,9 @@
                                     <td>{{ \Carbon\Carbon::parse($jadwal->tanggal)->format('d F Y') }}</td>
                                 </tr>
                             </table>
+                            <div class="mt-2">
+                                showing: <u class="fw-bolder">{{ $accelerometer->count() ?? 0 }}</u> data
+                            </div>
                             <div class="table-responsive pt-3">
                                 <table class="table table-bordered">
                                     <thead>
@@ -152,12 +156,14 @@
                     </div>
 
                     <div class="modal-footer mt-2">
-                        <button type="submit" class="btn btn-primary justify-content-center">
-                            Update
-                        </button>
-                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
-                            Tutup
-                        </button>
+                        <div class="pull-right">
+                            <button type="submit" class="btn btn-primary justify-content-center">
+                                Update
+                            </button>
+                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                                Tutup
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>

@@ -1,7 +1,7 @@
 @extends('masterdata.masterdata_layout.profile.base')
 
 @section('sub-title')
-    <title> Update Profile | TCSM</title>
+    <title> Update Profile | CPWTM</title>
 @endsection
 @section('sub-content')
     <div class="row flex-grow">
@@ -11,7 +11,8 @@
                     <div class="d-sm-flex justify-content-between align-items-start">
                         <div>
                             <h4 class="card-title card-title-dash">Update Profile User</h4>
-                            <p class="card-subtitle card-subtitle-dash">Track & Civil Structure Maintenance</p>
+                            <p class="card-subtitle card-subtitle-dash mb-0">{{ auth()->user()->departement }}</p>
+                            <p class="card-subtitle card-subtitle-dash mt-1">{{ auth()->user()->section }}</p>
                         </div>
                     </div>
 

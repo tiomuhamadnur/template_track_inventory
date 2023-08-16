@@ -13,7 +13,7 @@
             </a>
             <a class="navbar-brand brand-logo-mini" href="{{ route('transisi') }}">
                 {{-- <img src="{{ asset('assets/images/mm.png') }}" alt="logo"> --}}
-                <img src="{{ asset('assets/images/exods.png') }}" alt="logo">
+                <img src="{{ asset('assets/images/exods.png') }}" style="height: 38px; width: 38px;" alt="logo">
             </a>
         </div>
     </div>
@@ -47,8 +47,9 @@
                     @else
                     src="{{ asset('storage/photo-profil/default.png') }}" @endif
                             alt="Profile image">
-                        <p class="mb-1 mt-3 font-weight-bold">{{ auth()->user()->name ?? '' }}</p>
+                        <h5 class="mb-1 mt-3 font-weight-bold">{{ auth()->user()->name ?? '' }}</h5>
                         <p class="fw-light text-muted mb-0">{{ auth()->user()->jabatan ?? '' }}</p>
+                        <p class="fw-light text-muted mb-0">{{ auth()->user()->section ?? '' }}</p>
                         <p class="fw-light text-muted mb-0">{{ auth()->user()->email ?? '' }}</p>
                         <a href="{{ route('profile') }}"><i class="ti-user icon-md" style="margin: 10px"></i></a>
                         <a href="{{ route('logout') }}"><i class="ti-power-off icon-md"></i></a>

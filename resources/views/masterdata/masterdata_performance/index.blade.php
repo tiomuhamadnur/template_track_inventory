@@ -31,10 +31,10 @@
                                     Time</a>
                             </div>
                             <div class="table-responsive pt-3">
-                                <div id="performance-rams" class="border"></div>
+                                <div id="performance-rams" class="border rounded"></div>
                             </div>
                             <div class="table-responsive pt-5">
-                                <div id="performance-maintenance" class="border"></div>
+                                <div id="performance-maintenance" class="border rounded"></div>
                             </div>
                         </div>
                     </div>

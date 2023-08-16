@@ -12,7 +12,7 @@
                         <div class="d-sm-flex justify-content-between align-items-start">
                             <div>
                                 <h4 class="card-title card-title-dash">Profile User</h4>
-                                <p class="card-subtitle card-subtitle-dash">{{ auth()->user()->departement ?? '' }}</p>
+                                <p class="card-subtitle card-subtitle-dash mb-0">{{ auth()->user()->departement }}</p>
                             </div>
                         </div>
 
@@ -104,7 +104,7 @@
         <div class="modal fade" id="ModalUpdatePIC" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog modal-md" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header fw-bolder">
                         <h4>Update progress PIC</h4>
                     </div>
                     <div class="modal-body">
@@ -128,12 +128,14 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" form="form_update_pic" class="btn btn-primary justify-content-center">
-                            Update
-                        </button>
-                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
-                            Tutup
-                        </button>
+                        <div class="pull-right">
+                            <button type="submit" form="form_update_pic" class="btn btn-primary justify-content-center">
+                                Update
+                            </button>
+                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                                Tutup
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

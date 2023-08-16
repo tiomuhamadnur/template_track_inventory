@@ -113,9 +113,11 @@
                             @csrf
                             @method('delete')
                             <input type="text" name="id" id="id" hidden>
-                            <button type="button" data-bs-dismiss="modal"
-                                class="btn btn-outline-warning w-24 mr-1 me-2">Cancel</button>
-                            <button type="submit" class="btn btn-danger w-24">Delete</button>
+                            <div class="pull-right">
+                                <button type="button" data-bs-dismiss="modal"
+                                    class="btn btn-outline-warning w-24 mr-1 me-2">Cancel</button>
+                                <button type="submit" class="btn btn-danger w-24">Delete</button>
+                            </div>
                         </form>
                     </div>
                 </div>

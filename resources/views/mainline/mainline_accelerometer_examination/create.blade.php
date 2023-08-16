@@ -40,7 +40,7 @@
                             </div>
                         </div>
 
-                        <div class="form-row">
+                        {{-- <div class="form-row">
                             <div class="name">Line</div>
                             <div class="value">
                                 <div class="input-group">
@@ -52,50 +52,100 @@
                                     <div class="select-dropdown"></div>
                                 </div>
                             </div>
+                        </div> --}}
+
+                        <div id="banner" class="card bg-danger" style="display: none">
+                            <h3 class="fw-bolder text-center rounded m-2 text-white mb-3">DATA SUDAH TERISI</h3>
                         </div>
 
-                        <div id="banner" class="card bg-primary">
-                            <h3 class="fw-bolder text-center rounded-3 m-2" id="line">LINE</h3>
-                        </div>
+                        <div id="form" style="display: block">
+                            <div class="card bg-success">
+                                <h3 class="fw-bolder text-center rounded-3 m-2 text-white">UP TRACK</h3>
+                            </div>
 
-                        <div id="form" class="flex card border border-primary rounded mb-5">
-                            <div class="col p-4 text-center">
-                                @foreach ($area as $item)
-                                    <div class="form-row mb-1 mt-1 text-center">
-                                        <div class="name">{{ $item->code }}</div>
-                                        <input type="text" name="area_id[]" value="{{ $item->id }}" required hidden>
-                                        <div class="value">
-                                            <div class="row">
-                                                <div class="col-4">
-                                                    <div class="input-group-desc">
-                                                        <input class="form-control" type="number" min="0"
-                                                            step=".1" name="sumbu_x[]" required placeholder="Lt-X"
-                                                            autocomplete="off">
+                            <div class="flex card border border-success rounded mb-5">
+                                <div class="col p-4 text-center">
+                                    @foreach ($area as $item)
+                                        <div class="form-row mb-1 mt-1 text-center">
+                                            <div class="name">{{ $item->code }}</div>
+                                            <input type="text" name="area_id[]" value="{{ $item->id }}" required
+                                                hidden>
+                                            <input type="text" name="line_id[]" value="1" required hidden>
+                                            <div class="value">
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <div class="input-group-desc">
+                                                            <input class="form-control" type="number" min="0"
+                                                                step=".1" name="sumbu_x[]" required placeholder="Lt-X"
+                                                                autocomplete="off">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="input-group-desc">
-                                                        <input class="form-control" type="number" min="0"
-                                                            step=".1" name="sumbu_y[]" required placeholder="Lt-Y"
-                                                            autocomplete="off">
+                                                    <div class="col-4">
+                                                        <div class="input-group-desc">
+                                                            <input class="form-control" type="number" min="0"
+                                                                step=".1" name="sumbu_y[]" required placeholder="Lt-Y"
+                                                                autocomplete="off">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="input-group-desc">
-                                                        <input class="form-control" type="number" min="0"
-                                                            step=".1" name="sumbu_z[]" required placeholder="Lt-Z"
-                                                            autocomplete="off">
+                                                    <div class="col-4">
+                                                        <div class="input-group-desc">
+                                                            <input class="form-control" type="number" min="0"
+                                                                step=".1" name="sumbu_z[]" required placeholder="Lt-Z"
+                                                                autocomplete="off">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                @endforeach
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <div class="card bg-warning mt-5">
+                                <h3 class="fw-bolder text-center rounded-3 m-2">DOWN TRACK</h3>
+                            </div>
+
+                            <div class="flex card border border-warning rounded mb-5">
+                                <div class="col p-4 text-center">
+                                    @foreach ($area as $item)
+                                        <div class="form-row mb-1 mt-1 text-center">
+                                            <div class="name">{{ $item->code }}</div>
+                                            <input type="text" name="area_id[]" value="{{ $item->id }}" required
+                                                hidden>
+                                            <input type="text" name="line_id[]" value="2" required hidden>
+                                            <div class="value">
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <div class="input-group-desc">
+                                                            <input class="form-control" type="number" min="0"
+                                                                step=".1" name="sumbu_x[]" required placeholder="Lt-X"
+                                                                autocomplete="off">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <div class="input-group-desc">
+                                                            <input class="form-control" type="number" min="0"
+                                                                step=".1" name="sumbu_y[]" required placeholder="Lt-Y"
+                                                                autocomplete="off">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <div class="input-group-desc">
+                                                            <input class="form-control" type="number" min="0"
+                                                                step=".1" name="sumbu_z[]" required
+                                                                placeholder="Lt-Z" autocomplete="off">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
 
                         <div class="pull-right mt-3">
-                            <a href="{{ route('accelerometer.index') }}" class="btn btn-warning rounded">Cancel</a>
+                            <a href="{{ route('accelerometer.index') }}" class="btn btn-danger rounded">Cancel</a>
                             <button class="btn btn-success ms-2" type="submit">Save</button>
                         </div>
                     </form>
@@ -108,85 +158,24 @@
 @section('javascript')
     <script>
         $(document).ready(function() {
-            $('#line_id').on('change', function() {
-                var line_id = this.value;
-                var jadwal_id = document.getElementById("jadwal_id").value;
+            $('#jadwal_id').on('change', function() {
+                var jadwal_id = this.value;
                 var form = document.getElementById("form");
                 var banner = document.getElementById("banner");
 
                 $.ajax({
-                    url: '/getValueAccelerometer?jadwal_id=' + jadwal_id + '&line_id=' + line_id,
+                    url: '/getValueAccelerometer?jadwal_id=' + jadwal_id,
                     type: 'get',
                     success: function(res) {
                         if (res.length > 0) {
-                            document.getElementById("line").innerHTML = "DATA SUDAH TERISI";
                             form.style.display = "none";
-                            banner.classList.add('bg-danger');
-                            form.classList.add('border-danger');
+                            banner.style.display = "block";
                         } else {
                             form.style.display = "block";
-                            if (line_id == 1) {
-                                document.getElementById("line").innerHTML = "UP TRACK";
-                                banner.classList.toggle('bg-success');
-                                form.classList.toggle('border-success');
-                            } else if (line_id == 2) {
-                                document.getElementById("line").innerHTML = "DOWN TRACK";
-                                banner.classList.toggle('bg-warning');
-                                form.classList.toggle('border-warning');
-                            }
+                            banner.style.display = "none";
                         }
                     }
                 });
-            });
-
-            $('#area_id').on('change', function() {
-                var jadwal_id = document.getElementById("jadwal_id").value;
-                var line_id = document.getElementById("line_id").value;
-                var area_id = this.value;
-                $.ajax({
-                    url: '/getValueAccelerometer?jadwal_id=' + jadwal_id + '&line_id=' + line_id +
-                        '&area_id=' + area_id,
-                    type: 'get',
-                    success: function(res) {
-                        if (res.length > 0) {
-                            $.each(res, function(key, value) {
-                                $('#sumbu_x').val(value.sumbu_x);
-                                $('#sumbu_y').val(value.sumbu_y);
-                                $('#sumbu_z').val(value.sumbu_z);
-                            });
-                        } else {
-                            $('#sumbu_x').val('');
-                            $('#sumbu_y').val('');
-                            $('#sumbu_z').val('');
-                        }
-                    }
-                });
-
-                if (area_id == 4) {
-                    document.getElementById("area").innerHTML = "LBB-FTM";
-                } else if (area_id == 6) {
-                    document.getElementById("area").innerHTML = "FTM-CPR";
-                } else if (area_id == 8) {
-                    document.getElementById("area").innerHTML = "CPR-HJN";
-                } else if (area_id == 10) {
-                    document.getElementById("area").innerHTML = "HJN-BLA";
-                } else if (area_id == 12) {
-                    document.getElementById("area").innerHTML = "BLA-BLM";
-                } else if (area_id == 14) {
-                    document.getElementById("area").innerHTML = "BLM-ASN";
-                } else if (area_id == 16) {
-                    document.getElementById("area").innerHTML = "ASN-SNY";
-                } else if (area_id == 18) {
-                    document.getElementById("area").innerHTML = "SNY-IST";
-                } else if (area_id == 20) {
-                    document.getElementById("area").innerHTML = "IST-BNH";
-                } else if (area_id == 22) {
-                    document.getElementById("area").innerHTML = "BNH-STB";
-                } else if (area_id == 24) {
-                    document.getElementById("area").innerHTML = "STB-DKA";
-                } else if (area_id == 26) {
-                    document.getElementById("area").innerHTML = "DKA-BHI";
-                }
             });
 
         });

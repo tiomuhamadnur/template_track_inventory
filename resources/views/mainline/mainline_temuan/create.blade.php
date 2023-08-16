@@ -193,7 +193,7 @@
                             </div>
                         </div>
 
-                        <div>
+                        <div class="pull-right">
                             <a href="{{ route('temuan_mainline.index') }}" class="btn btn-warning rounded">Cancel</a>
                             <button class="btn btn-success ms-2" type="submit">Save</button>
                         </div>

@@ -51,12 +51,11 @@ class AccelerometerController extends Controller
     public function store(Request $request)
     {
         $jadwal_id = $request->jadwal_id;
-        $line_id = $request->line_id;
 
         for ($i = 0; $i < count($request->area_id); $i++) {
             Accelerometer::create([
                 'jadwal_id' => $jadwal_id,
-                'line_id' => $line_id,
+                'line_id' => $request->line_id[$i],
                 'area_id' => $request->area_id[$i],
                 'sumbu_x' => $request->sumbu_x[$i],
                 'sumbu_y' => $request->sumbu_y[$i],
@@ -64,7 +63,7 @@ class AccelerometerController extends Controller
             ]);
         }
 
-        return back();
+        return back()->withNotify('Data accelerometer berhasil disimpan');
     }
 
     public function edit($id)
@@ -379,8 +378,7 @@ class AccelerometerController extends Controller
     public function getValue(Request $request)
     {
         $jadwal_id = $request->jadwal_id;
-        $line_id = $request->line_id;
-        $accelerometer = Accelerometer::where('jadwal_id', $jadwal_id)->where('line_id', $line_id)->get();
+        $accelerometer = Accelerometer::where('jadwal_id', $jadwal_id)->get();
         if ($accelerometer->count() > 0) {
             return response()->json($accelerometer);
         }
@@ -408,7 +406,7 @@ class AccelerometerController extends Controller
             'pic' => $request->pic,
         ]);
 
-        return redirect()->route('accelerometer.create');
+        return redirect()->route('accelerometer.create')->withNotify('Data jadwal accelerometer berhasil dibuat!');
     }
 
     public function destroy_jadwal(Request $request)

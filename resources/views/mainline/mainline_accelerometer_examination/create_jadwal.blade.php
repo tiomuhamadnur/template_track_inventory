@@ -1,11 +1,10 @@
-@extends('masterdata.masterdata_layout.base')
+@extends('mainline.mainline_layout.base')
 
 @section('sub-title')
     <title>Add Data Jadwal Accelerometer | CPWTM</title>
 @endsection
 
 @section('sub-content')
-    <h5>Mainline > Accelerometer > Create Data Jadwal</h5>
     <div class="row">
         <div class="col-sm-12">
             <div class="home-tab">
@@ -16,7 +15,7 @@
                 <div class="col-lg-12 grid-margin stretch-card mt-3">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Form Data Jadwal</h4>
+                            <h4 class="card-title">Form Data Jadwal Accelerometer</h4>
                             <form class="forms-sample" action="{{ route('accelerometer.jadwal.store') }}" method="POST">
                                 @csrf
                                 @method('post')
@@ -35,8 +34,10 @@
                                     <input type="text" class="form-control" placeholder="nama examiner" name="pic"
                                         id="exampleInputEmail3" required>
                                 </div>
-                                <button type="submit" class="btn btn-outline-primary me-2">Submit</button>
-                                <a href="{{ route('accelerometer.create') }}" class="btn btn-light">Cancel</a>
+                                <div class="float-start">
+                                    <button type="submit" class="btn btn-outline-primary me-2">Submit</button>
+                                    <a href="{{ route('accelerometer.create') }}" class="btn btn-outline-danger">Cancel</a>
+                                </div>
                             </form>
                         </div>
                     </div>
