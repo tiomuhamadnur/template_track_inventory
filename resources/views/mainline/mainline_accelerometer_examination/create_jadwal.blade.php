@@ -1,7 +1,7 @@
 @extends('masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title>Add Data Jadwal Accelerometer | TCSM</title>
+    <title>Add Data Jadwal Accelerometer | CPWTM</title>
 @endsection
 
 @section('sub-content')
@@ -31,9 +31,9 @@
                                         required>
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">PIC</label>
-                                    <input type="text" class="form-control" name="pic" id="exampleInputEmail3"
-                                        value="{{ auth()->user()->name }}" required readonly>
+                                    <label class="form-label">Examiner</label>
+                                    <input type="text" class="form-control" placeholder="nama examiner" name="pic"
+                                        id="exampleInputEmail3" required>
                                 </div>
                                 <button type="submit" class="btn btn-outline-primary me-2">Submit</button>
                                 <a href="{{ route('accelerometer.create') }}" class="btn btn-light">Cancel</a>

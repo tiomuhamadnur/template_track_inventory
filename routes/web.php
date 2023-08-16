@@ -7,8 +7,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BufferController;
 use App\Http\Controllers\BufferExaminationController;
 use App\Http\Controllers\ClosingReportController;
-use App\Http\Controllers\ColorSchemeController;
-use App\Http\Controllers\DarkModeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DefectController;
 use App\Http\Controllers\DepartementController;
@@ -23,7 +21,6 @@ use App\Http\Controllers\LineController;
 use App\Http\Controllers\MainlineController;
 use App\Http\Controllers\ManPowerOnDutyController;
 use App\Http\Controllers\MasterdataDashboardController;
-use App\Http\Controllers\PageController;
 use App\Http\Controllers\PartController;
 use App\Http\Controllers\PICController;
 use App\Http\Controllers\PMController;
@@ -199,6 +196,7 @@ Route::middleware(['auth'])->group(function () {
 
         // REPORT
         Route::get('/accelerometer/report', 'report')->name('accelerometer.report');
+        Route::get('/accelerometer/export-excel', 'export_excel')->name('accelerometer.export.excel');
 
         // JADWAL ACCELEROMETER
         Route::get('/accelerometer/jadwal', 'index_jadwal')->name('accelerometer.jadwal.index');

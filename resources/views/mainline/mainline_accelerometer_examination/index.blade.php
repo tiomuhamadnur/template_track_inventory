@@ -15,20 +15,14 @@
                 <div class="col-lg-12 grid-margin stretch-card mt-3">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Data Accelerometer</h4>
+                            <h4 class="card-title">Data Realisasi Accelerometer (Tahun: {{ $tahun }})</h4>
                             <a href="{{ route('accelerometer.create') }}" class="btn btn-outline-dark btn-lg"
                                 type="button">Add
-                                Data</a>
-                            {{-- <button class="btn btn-outline-dark btn-lg dropdown-toggle" type="button"
-                                id="dropdownMenuIconButton1" data-bs-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false" style="margin-left: -10px;">
-                                <i class="ti-link"></i>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuIconButton1">
-                                <a class="dropdown-item" href="#">Print</a>
-                                <a class="dropdown-item" href="#">Export to Excel</a>
-                                <a class="dropdown-item" href="#">Export to PDF</a>
-                            </div> --}}
+                                Data
+                            </a>
+                            <div>
+                                showing: <u class="fw-bolder">{{ $jadwal_accelerometer->count() ?? 0 }}</u> data
+                            </div>
                             <div class="table-responsive pt-3">
                                 <table class="table table-bordered">
                                     <thead>
@@ -43,7 +37,7 @@
                                                 Kegiatan
                                             </th>
                                             <th class="text-center">
-                                                PIC
+                                                Examiner
                                             </th>
                                             <th class="text-center">
                                                 Summary
@@ -59,12 +53,8 @@
                                                 <td class="text-center">
                                                     {{ $loop->iteration }}
                                                 </td>
-                                                <td class="text-center">
-                                                    <a href="{{ route('accelerometer.summary.index', Crypt::encryptString($item->id)) }}"
-                                                        class="btn btn-warning rounded"
-                                                        title="Lihat Detail Summary di tanggal {{ $item->tanggal }}!">
-                                                        {{ $item->tanggal }}
-                                                    </a>
+                                                <td class="text-center fw-bolder">
+                                                    {{ \Carbon\Carbon::parse($item->tanggal)->format('d F Y') }}
                                                 </td>
                                                 <td class="text-center">
                                                     {{ $item->kegiatan }}
@@ -75,19 +65,23 @@
                                                 <td class="text-center">
                                                     <form action="{{ route('accelerometer.report') }}" method="get">
                                                         <input type="text" name="jadwal_id" hidden
-                                                            value="{{ $item->id }}">
-                                                        <button class="btn btn-success rounded text-white" type="submit"
-                                                            title="Show summary Accelerometer">
-                                                            <i class="mdi mdi-file-document"></i>
+                                                            value="{{ Crypt::encryptString($item->id) }}">
+                                                        <button class="btn btn-outline-success rounded text-dark"
+                                                            type="submit" title="Show summary Accelerometer">
+                                                            <i class="mdi mdi-file-document p-1"></i>
                                                         </button>
                                                     </form>
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">
+                                                        <a href="{{ route('accelerometer.summary.index', Crypt::encryptString($item->id)) }}"
+                                                            class="btn btn-outline-warning me-0" title="Ubah Data">
+                                                            Edit
+                                                        </a>
                                                         <a class="btn btn-outline-danger ms-0"
                                                             @if (auth()->user()->role != 'Admin') hidden @endif
                                                             href="javascript:;" data-bs-toggle="modal"
-                                                            data-bs-target="#delete-confirmation-modal"
+                                                            data-bs-target="#delete-confirmation-modal" title="Hapus Data"
                                                             onclick="toggleModal('{{ $item->id }}')">Delete
                                                         </a>
                                                     </div>

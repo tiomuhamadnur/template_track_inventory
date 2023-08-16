@@ -16,17 +16,21 @@
                         @csrf
                         @method('post')
                         <div class="form-row">
-                            <div class="name">Jadwal</div>
+                            <div class="name">Tanggal</div>
                             <div class="value">
                                 <div class="input-group">
                                     <select name="jadwal_id" id="jadwal_id" class="form-select" required>
-                                        <option disabled selected value="">- Pilih jadwal Kegiatan -</option>
+                                        <option disabled selected value="">- pilih tanggal realisasi kegiatan -
+                                        </option>
                                         @foreach ($jadwal as $item)
-                                            <option value="{{ $item->id }}">{{ $item->tanggal }}</option>
+                                            <option value="{{ $item->id }}">
+                                                {{ \Carbon\Carbon::parse($item->tanggal)->format('d F Y') }}
+                                                ({{ $item->pic }})
+                                            </option>
                                         @endforeach
                                     </select>
                                     <div class="select-dropdown"></div>
-                                    <label class="label label--block mt-2">Buat tanggal baru?
+                                    <label class="label label--block mt-2">Buat jadwal baru?
                                         <a href="{{ route('accelerometer.jadwal.create') }}"
                                             class="btn-sm btn-warning rounded mt-2"
                                             title="Buat tanggal kegiatan accelerometer baru">Yes</a>
@@ -37,20 +41,11 @@
                         </div>
 
                         <div class="form-row">
-                            <div class="name">PIC</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <input class="form-control" type="text" value="{{ auth()->user()->name }}" readonly>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
                             <div class="name">Line</div>
                             <div class="value">
                                 <div class="input-group">
                                     <select name="line_id" id="line_id" class="form-select" required>
-                                        <option value="" selected disabled>- Pilih Nama Line -</option>
+                                        <option value="" selected disabled>- pilih nama line -</option>
                                         <option value="1">UT (Up Track)</option>
                                         <option value="2">DT (Down Track)</option>
                                     </select>
@@ -71,22 +66,25 @@
                                         <input type="text" name="area_id[]" value="{{ $item->id }}" required hidden>
                                         <div class="value">
                                             <div class="row">
-                                                <div class="col-3">
+                                                <div class="col-4">
                                                     <div class="input-group-desc">
                                                         <input class="form-control" type="number" min="0"
-                                                            step=".1" name="sumbu_x[]" required placeholder="Lt-X">
+                                                            step=".1" name="sumbu_x[]" required placeholder="Lt-X"
+                                                            autocomplete="off">
                                                     </div>
                                                 </div>
-                                                <div class="col-3">
+                                                <div class="col-4">
                                                     <div class="input-group-desc">
                                                         <input class="form-control" type="number" min="0"
-                                                            step=".1" name="sumbu_y[]" required placeholder="Lt-Y">
+                                                            step=".1" name="sumbu_y[]" required placeholder="Lt-Y"
+                                                            autocomplete="off">
                                                     </div>
                                                 </div>
-                                                <div class="col-3">
+                                                <div class="col-4">
                                                     <div class="input-group-desc">
                                                         <input class="form-control" type="number" min="0"
-                                                            step=".1" name="sumbu_z[]" required placeholder="Lt-Z">
+                                                            step=".1" name="sumbu_z[]" required placeholder="Lt-Z"
+                                                            autocomplete="off">
                                                     </div>
                                                 </div>
                                             </div>
