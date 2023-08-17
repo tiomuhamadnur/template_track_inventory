@@ -6,8 +6,8 @@
  | Import Midone built-in components.
  |
  */
-import 'laravel-datatables-vite';
 import "./bootstrap";
+import 'laravel-datatables-vite';
 import "@left4code/tw-starter/dist/js/svg-loader";
 import "@left4code/tw-starter/dist/js/accordion";
 import "@left4code/tw-starter/dist/js/alert";

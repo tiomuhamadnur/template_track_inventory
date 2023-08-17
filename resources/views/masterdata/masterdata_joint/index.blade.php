@@ -39,8 +39,8 @@
                                         data-bs-target="#import-file-modal">Import Excel</a>
                                     <a class="dropdown-item" href="#" data-bs-toggle="modal"
                                         data-bs-target="#ModalExportExcel">Export to Excel</a>
-                                    {{-- <a class="dropdown-item" href="#">Export to PDF</a> --}}
                                 </div>
+                                <div class="float-end search-box" id="search"></div>
                             </div>
                             <form action="{{ route('joint.mainline.export.excel') }}" method="GET" id="form_export_excel">
                                 @csrf
@@ -50,16 +50,16 @@
                                 <input type="text" name="tipe" value="{{ $tipe ?? '' }}" hidden>
                                 <input type="text" name="wesel_id" value="{{ $wesel_id ?? '' }}" hidden>
                             </form>
-                            <div>
+                            {{-- <div>
                                 showing: <u class="fw-bolder">{{ $joint->count() ?? 0 }}</u> data
-                            </div>
+                            </div> --}}
                             <div>
                                 belum ada span: <a
                                     href="{{ route('joint.no.span') }}"><u>{{ $joint_no_span->count() ?? 0 }}</u></a>
                                 joint
                             </div>
                             <div class="table-responsive pt-3">
-                                <table class="table table-bordered">
+                                <table id="data-tables" class="table table-bordered">
                                     <thead>
                                         <tr>
                                             <th class="text-center">
@@ -311,6 +311,15 @@
         function toggleModal(id) {
             $('#id').val(id);
         }
+
+        $('#data-tables').dataTable({
+            dom: 'lfitp',
+            paging: true,
+            "columnDefs": [{
+                "searchable": false,
+                "targets": [0, 5, 8, 9]
+            }]
+        });
 
         function closeModal() {
             $("#ModalExportExcel").modal("hide");

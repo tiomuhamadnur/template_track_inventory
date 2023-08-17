@@ -44,7 +44,7 @@
                             </div>
 
                             <div class="table-responsive pt-3">
-                                <table class="table table-bordered">
+                                <table id="data-tables" class="table table-bordered">
                                     <thead>
                                         <tr>
                                             <th class="text-center fw-bolder">
@@ -290,5 +290,14 @@
         function toggleModal(id) {
             $('#id').val(id);
         }
+
+        $('#data-tables').dataTable({
+            dom: 'lfitp',
+            paging: true,
+            "columnDefs": [{
+                "searchable": true,
+                "targets": [1, 2, 3, 4, 5],
+            }]
+        });
     </script>
 @endsection

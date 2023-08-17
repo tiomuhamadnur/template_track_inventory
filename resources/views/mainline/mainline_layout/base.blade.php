@@ -48,6 +48,7 @@
     <script src="{{ asset('assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/progressbar.js/progressbar.min.js') }}"></script>
     <script src="{{ asset('assets/js/off-canvas.js') }}"></script>
+    <script src="{{ asset('assets/js/ajax.js') }}"></script>
     <script src="{{ asset('assets/js/hoverable-collapse.js') }}"></script>
     <script src="{{ asset('assets/js/template.js') }}"></script>
     <script src="{{ asset('assets/js/settings.js') }}"></script>
@@ -56,11 +57,13 @@
     <script src="{{ asset('assets/js/dashboard.js') }}"></script>
     <script src="{{ asset('assets/js/Chart.roundedBarCharts.js') }}"></script>
     <script src="{{ asset('assets/js/select2.js') }}"></script>
+    <script src="{{ asset('assets/js/lazysizes.min.js') }}" async=""></script>
     <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/highcharts-more.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.js"></script>
     @include('masterdata.masterdata_layout.modal_notification')
     @yield('javascript')
 </body>

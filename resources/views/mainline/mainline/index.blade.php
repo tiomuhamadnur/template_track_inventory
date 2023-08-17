@@ -33,7 +33,7 @@
 
                             </div>
                             <div class="table-responsive pt-3">
-                                <table class="table table-bordered">
+                                <table id="data-tables" class="table table-bordered">
                                     <thead>
                                         <tr>
                                             <th class="text-center">
@@ -223,6 +223,15 @@
                 $('#jenis_sleeper_modal').val(jenis_sleeper);
                 $('#joint_modal').val(joint);
             });
+        });
+
+        $('#data-tables').dataTable({
+            dom: 'lrfitp',
+            paging: 100,
+            "columnDefs": [{
+                "searchable": false,
+                "targets": [0, 4],
+            }]
         });
     </script>
 @endsection

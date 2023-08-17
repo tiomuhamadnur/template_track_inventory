@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\JointDataTable;
 use App\Exports\JointDepoExport;
 use App\Exports\JointMainlineExport;
 use App\Imports\JointImport;
