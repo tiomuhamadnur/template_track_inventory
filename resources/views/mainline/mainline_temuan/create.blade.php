@@ -7,7 +7,7 @@
 @section('body')
     <div class="page-wrapper p-t-45 p-b-50">
         <div class="wrapper wrapper--w790">
-            <div class="card card-5">
+            <div class="card card-5 shadow">
                 <div class="card-heading">
                     <h2 class="title">Form Data Temuan Baru Mainline</h2>
                 </div>
@@ -57,7 +57,7 @@
                             <div class="name">No Span</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <select id="mainline_id" name="mainline_id" class="form-select" required>
+                                    <select id="mainline_id" name="mainline_id" class="form-select mainline_id" required>
                                         <option value="" selected disabled>- Pilih Nomor Span -
                                         </option>
                                     </select>
@@ -174,7 +174,9 @@
                             <div class="name">Tanggal</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="form-control" type="date" name="tanggal" required>
+                                    <input placeholder="Tanggal Pelaksanaan" class="form-control" type="text"
+                                        onfocus="(this.type='date')" onblur="(this.type='text')" id="date"
+                                        name="tanggal" required>
                                 </div>
                             </div>
                         </div>
@@ -182,8 +184,13 @@
                         <div class="form-row">
                             <div class="name">Foto Dokumentasi (Landscape)</div>
                             <div class="value">
+                                <div class="mb-3">
+                                    <img class="img-thumbnail" id="previewImage" src="#" alt="Preview"
+                                        style="max-width: 250px; max-height: 250px; display: none;">
+                                </div>
                                 <div class="input-group">
-                                    <input class="form-control" type="file" name="photo" required>
+                                    <input class="form-control" type="file" name="photo" id="imageInput"
+                                        accept="image/*" required>
                                     @error('photo')
                                         <p class="bg-danger rounded-3 text-center text-white mt-1">
                                             {{ $message }}
@@ -301,5 +308,25 @@
                 });
             });
         });
+
+        const imageInput = document.getElementById('imageInput');
+        const previewImage = document.getElementById('previewImage');
+
+        imageInput.addEventListener('change', function(event) {
+            const selectedFile = event.target.files[0];
+
+            if (selectedFile) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = 'block';
+                }
+
+                reader.readAsDataURL(selectedFile);
+            }
+        });
+
+        $('.mainline_id').select2();
     </script>
 @endsection

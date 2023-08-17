@@ -31,8 +31,8 @@
                                     </select>
                                     <div class="select-dropdown"></div>
                                     <label class="label label--block mt-2">Buat jadwal baru?
-                                        <a href="{{ route('accelerometer.jadwal.create') }}"
-                                            class="btn-sm btn-warning rounded mt-2"
+                                        <a href="#" class="btn-sm btn-warning rounded mt-2" data-bs-toggle="modal"
+                                            data-bs-target="#ModalCreateJadwal"
                                             title="Buat tanggal kegiatan accelerometer baru">Yes</a>
                                     </label>
 
@@ -40,22 +40,8 @@
                             </div>
                         </div>
 
-                        {{-- <div class="form-row">
-                            <div class="name">Line</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <select name="line_id" id="line_id" class="form-select" required>
-                                        <option value="" selected disabled>- pilih nama line -</option>
-                                        <option value="1">UT (Up Track)</option>
-                                        <option value="2">DT (Down Track)</option>
-                                    </select>
-                                    <div class="select-dropdown"></div>
-                                </div>
-                            </div>
-                        </div> --}}
-
-                        <div id="banner" class="card bg-danger" style="display: none">
-                            <h3 class="fw-bolder text-center rounded m-2 text-white mb-3">DATA SUDAH TERISI</h3>
+                        <div id="banner" class="card border-danger mb-3" style="display: none">
+                            <h3 class="fw-bolder text-center rounded m-2 text-danger">DATA SUDAH TERISI</h3>
                         </div>
 
                         <div id="form" style="display: block">
@@ -125,8 +111,8 @@
                                                     <div class="col-4">
                                                         <div class="input-group-desc">
                                                             <input class="form-control" type="number" min="0"
-                                                                step=".1" name="sumbu_y[]" required placeholder="Lt-Y"
-                                                                autocomplete="off">
+                                                                step=".1" name="sumbu_y[]" required
+                                                                placeholder="Lt-Y" autocomplete="off">
                                                         </div>
                                                     </div>
                                                     <div class="col-4">
@@ -145,14 +131,58 @@
                         </div>
 
                         <div class="pull-right mt-3">
-                            <a href="{{ route('accelerometer.index') }}" class="btn btn-danger rounded">Cancel</a>
-                            <button class="btn btn-success ms-2" type="submit">Save</button>
+                            <a href="{{ route('accelerometer.index') }}" class="btn btn-danger rounded">Close</a>
+                            <button class="btn btn-success ms-2" type="submit">Submit</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Modal Create Jadwal-->
+    <div class="modal fade" id="ModalCreateJadwal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bolder" id="modalAdminTitle">Form Tambah Jadwal Accelerometer</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="form_jadwal" action="{{ route('accelerometer.jadwal.store') }}" method="POST">
+                        @csrf
+                        @method('post')
+                        <div class="form-group mb-2">
+                            <label class="form-label mb-0">Kegiatan</label>
+                            <input type="text" class="form-control" value="Accelerometer" name="kegiatan" required
+                                readonly>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="form-label mb-0">Tanggal</label>
+                            <input placeholder="Tanggal Pelaksanaan" class="form-control me-1" type="text"
+                                onfocus="(this.type='date')" onblur="(this.type='text')" id="date" name="tanggal"
+                                required>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="form-label mb-0">Examiner</label>
+                            <input type="text" class="form-control" name="pic" placeholder="nama personil"
+                                required autocomplete="off">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-right">
+                        <button type="submit" form="form_jadwal" class="btn btn-primary justify-content-center">
+                            Submit
+                        </button>
+                        <button type="button" class="btn btn-outline-danger text-dark" data-bs-dismiss="modal">
+                            Tutup
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Create Jadwal-->
 @endsection
 
 @section('javascript')
