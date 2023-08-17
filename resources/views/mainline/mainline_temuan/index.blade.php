@@ -184,8 +184,8 @@
                 <div class="modal-header">
                     <h3 class="modal-title" id="modalAdminTitle">Detail Temuan Mainline</h3>
                     <div class="col--1 text-center">
-                        <img class="img-xs rounded-circle img-thumbnail lazyload" id="photo_pic_modal"
-                            style="width: 70px; height: 70px;" alt="Examiner">
+                        <img class="img-xs rounded-circle img-thumbnail" id="photo_pic_modal"
+                            style="width: 70px; height: 70px;" src="" alt="Examiner">
                         <p class="ml-5 fw-bolder" id="pic_modal">Examiner</p>
                     </div>
                 </div>
@@ -574,8 +574,8 @@
                     photo_close = 'status-masih-open-tidak-ada-photo-perbaikan'
                 }
                 $('#justifikasi_modal').val(justifikasi);
-                document.getElementById("photo_modal").setAttribute('data-src', photo);
-                document.getElementById("photo_close_modal").setAttribute('data-src', photo_close);
+                document.getElementById("photo_modal").src = photo;
+                document.getElementById("photo_close_modal").src = photo_close;
                 document.getElementById("ubah_temuan_modal").href = href_ubah_temuan;
                 document.getElementById("rfi_temuan_modal").href = href_rfi;
                 if (status == 'close') {
