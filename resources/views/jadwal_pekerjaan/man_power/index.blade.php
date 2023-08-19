@@ -85,9 +85,14 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Man Power</label>
-                            <select class="form-select" id="user_id" name="user_id" required>
-                                <option value="" disabled selected>- pilih man power -</option>
-                            </select>
+                            @for ($i = 1; $i < 6; $i++)
+                                <select class="form-select mb-1" name="user_id[]" required>
+                                    <option value="" disabled selected>- Man power {{ $i }} -</option>
+                                    @foreach ($user as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
+                                </select>
+                            @endfor
                         </div>
                     </form>
                 </div>
@@ -130,22 +135,22 @@
             calendar.render();
         });
 
-        $('#section').on('change', function() {
-            var selectedOption = this.options[this.selectedIndex];
-            var section = selectedOption.getAttribute("data-section");
-            $.ajax({
-                url: '/getPegawai?section=' + section,
-                type: 'get',
-                success: function(res) {
-                    $('#user_id').html(
-                        '<option value="" selected disabled>- pilih man power -</option>'
-                    );
-                    $.each(res, function(key, value) {
-                        $('#user_id').append('<option value="' + value
-                            .id + '">' + value.name + '</option>');
-                    });
-                }
-            });
-        });
+        // $('#section').on('change', function() {
+        //     var selectedOption = this.options[this.selectedIndex];
+        //     var section = selectedOption.getAttribute("data-section");
+        //     $.ajax({
+        //         url: '/getPegawai?section=' + section,
+        //         type: 'get',
+        //         success: function(res) {
+        //             $('#user_id').html(
+        //                 '<option value="" selected disabled>- pilih man power -</option>'
+        //             );
+        //             $.each(res, function(key, value) {
+        //                 $('#user_id').append('<option value="' + value
+        //                     .id + '">' + value.name + '</option>');
+        //             });
+        //         }
+        //     });
+        // });
     </script>
 @endsection

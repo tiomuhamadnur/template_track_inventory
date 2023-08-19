@@ -14,7 +14,7 @@ class ManPowerOnDutyController extends Controller
     public function index()
     {
         $data = ManPowerOnDuty::orderBy('shift', 'asc')->get(['id', 'title', 'shift', 'start', 'end', 'color']);
-        $user = Pegawai::whereNot('jabatan', 'Section Head')->orderBy('name', 'asc')->get();
+        $user = Pegawai::whereNot('role', 'Guest')->orderBy('name', 'asc')->get();
         $section = Section::all();
         $shift = Shift::all();
 
@@ -79,6 +79,8 @@ class ManPowerOnDutyController extends Controller
 
     public function store(Request $request)
     {
+        $user_id = $request->user_id;
+
         $shift = $request->shift;
         if ($shift == 3) {
             $color = '#0800ff';
@@ -90,16 +92,18 @@ class ManPowerOnDutyController extends Controller
             $color = '#8e8e8e';
         }
 
-        $man_power = Pegawai::findOrFail($request->user_id)->name;
-        ManPowerOnDuty::create([
-            'user_id' => $request->user_id,
-            'title' => $request->section . ' - ' . $man_power . ' - (Shift: ' . $shift . ')',
-            'shift' => $shift,
-            'start' => $request->start,
-            'end' => $request->end,
-            'section' => $request->section,
-            'color' => $color,
-        ]);
+        foreach ($user_id as $id) {
+            $man_power = Pegawai::findOrFail($id)->name;
+            ManPowerOnDuty::create([
+                'user_id' => $id,
+                'title' => $request->section . ' - ' . $man_power . ' - (Shift: ' . $shift . ')',
+                'shift' => $shift,
+                'start' => $request->start,
+                'end' => $request->end,
+                'section' => $request->section,
+                'color' => $color,
+            ]);
+        }
 
         return redirect()->route('man.power.index')->withNotify('Data jadwal pekerjaan berhasil ditambahkan!');
     }
