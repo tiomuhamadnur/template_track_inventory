@@ -151,6 +151,16 @@ class ManPowerOnDutyController extends Controller
         }
     }
 
+    public function getPegawai(Request $request)
+    {
+        $section = $request->section;
+        $pegawai = Pegawai::where('section', $section)->orderBy('name', 'asc')->get();
+
+        if (count($pegawai) > 0) {
+            return response()->json($pegawai);
+        }
+    }
+
     public function destroy(Request $request)
     {
         $id = $request->id;

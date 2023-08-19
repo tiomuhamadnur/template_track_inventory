@@ -193,6 +193,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/accelerometer/{id}/edit', 'edit')->name('accelerometer.edit');
         Route::put('/accelerometer', 'update')->name('accelerometer.update');
         Route::delete('/accelerometer', 'destroy')->name('accelerometer.delete');
+        Route::get('/accelerometer-filter', 'filter')->name('accelerometer.filter');
 
         // REPORT
         Route::get('/accelerometer/report', 'report')->name('accelerometer.report');
@@ -272,6 +273,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/jadwal-pekerjaan/filter', 'filter')->name('jadwal.pekerjaan.filter');
         Route::put('/jadwal-pekerjaan', 'update')->name('jadwal.pekerjaan.update');
         Route::delete('/jadwal-pekerjaan', 'destroy')->name('jadwal.pekerjaan.delete');
+
+        // GET DATA
+        Route::get('/getPekerjaan', 'getPekerjaan')->name('get-data.pekerjaan');
     });
 
     // MAN POWER ON DUTY
@@ -284,6 +288,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/man-power-on-duty/filter', 'filter')->name('man.power.filter');
         Route::put('/man-power-on-duty', 'update')->name('man.power.update');
         Route::delete('/man-power-on-duty', 'destroy')->name('man.power.delete');
+
+        // GET DATA
+        Route::get('/getPegawai', 'getPegawai')->name('get-data.pegawai');
     });
 
     // ANNOUNCEMENTS

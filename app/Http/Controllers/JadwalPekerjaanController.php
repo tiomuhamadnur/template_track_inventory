@@ -37,28 +37,7 @@ class JadwalPekerjaanController extends Controller
 
     public function ajax(Request $request)
     {
-        $section = $request->section;
-        if ($section == 'PWR') {
-            $color = '#059c00';
-        } else {
-            $color = '#ff9500';
-        }
         switch ($request->type) {
-            case 'add':
-                $event = JadwalPekerjaan::create([
-                    'title' => $request->section . ' - ' . $request->title . ' - ' . $request->location . ' - (Shift: ' . $request->shift . ')',
-                    'nama_pekerjaan' => $request->title,
-                    'shift' => $request->shift,
-                    'start' => $request->start,
-                    'end' => $request->end ?? $request->start,
-                    'section' => $request->section,
-                    'color' => $color,
-                    'location' => $request->location,
-                ]);
-
-                return response()->json($event);
-                break;
-
             case 'update':
                 $event = JadwalPekerjaan::find($request->id)->update([
                     'start' => $request->start,
@@ -147,6 +126,16 @@ class JadwalPekerjaanController extends Controller
             return $pdf->stream($waktu.'_jadwal pekerjaan_' . $section . '_(periode ' . $bulan . ' ' . $tahun . ').pdf');
         } else {
             return redirect()->back();
+        }
+    }
+
+    public function getPekerjaan(Request $request)
+    {
+        $section = $request->section;
+        $pekerjaan = PM::where('section', $section)->orderBy('section', 'asc')->orderBy('name', 'asc')->get();
+
+        if (count($pekerjaan) > 0) {
+            return response()->json($pekerjaan);
         }
     }
 

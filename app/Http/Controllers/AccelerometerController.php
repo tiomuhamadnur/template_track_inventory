@@ -16,10 +16,15 @@ class AccelerometerController extends Controller
 {
     public function index()
     {
-        $tahun = Carbon::now()->format('Y');
-        $jadwal_accelerometer = JadwalAccelerometer::whereYear('tanggal', $tahun)->orderBy('tanggal', 'ASC')->get();
+        $waktu = Carbon::now();
+        $tahun = $waktu->format('Y');
+        $bulan = $waktu->format('m');
+        $jadwal_accelerometer = JadwalAccelerometer::whereYear('tanggal', $tahun)
+            ->whereMonth('tanggal', $bulan)
+            ->orderBy('tanggal', 'ASC')
+            ->get();
 
-        return view('mainline.mainline_accelerometer_examination.index', compact(['jadwal_accelerometer', 'tahun']));
+        return view('mainline.mainline_accelerometer_examination.index', compact(['jadwal_accelerometer', 'tahun', 'bulan']));
     }
 
     public function index_summary($id)
@@ -37,6 +42,19 @@ class AccelerometerController extends Controller
         } catch (DecryptException $e) {
             return redirect()->back();
         }
+    }
+
+    public function filter(Request $request)
+    {
+        $tahun = $request->tahun;
+        $bulan = $request->bulan;
+        $jadwal_accelerometer = JadwalAccelerometer::whereYear('tanggal', $tahun)
+            ->whereMonth('tanggal', $bulan)
+            ->orderBy('tanggal', 'ASC')
+            ->get();
+
+
+        return view('mainline.mainline_accelerometer_examination.index', compact(['jadwal_accelerometer', 'tahun', 'bulan']));
     }
 
     public function create()

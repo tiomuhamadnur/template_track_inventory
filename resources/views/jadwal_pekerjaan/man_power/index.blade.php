@@ -59,31 +59,19 @@
                         @method('post')
                         <div class="form-group">
                             <label class="form-label">Section</label>
-                            <select class="form-select" name="section" required>
+                            <select class="form-select" id="section" name="section" required>
                                 <option value="" disabled selected>- pilih section -</option>
                                 @foreach ($section as $item)
-                                    <option value="{{ $item->code }}">{{ $item->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Man Power</label>
-                            <select class="form-select" name="user_id" required>
-                                <option value="" disabled selected>- pilih man power -</option>
-                                @foreach ($user as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    <option value="{{ $item->code }}" data-section="{{ $item->name }}">
+                                        {{ $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Tanggal</label>
-                            <div class="input-group">
-                                <input placeholder="Pilih Tanggal" class="form-control me-1" type="text"
-                                    onfocus="(this.type='date')" onblur="(this.type='text')" id="date" name="start"
-                                    required>
-                                {{-- <input placeholder="Tanggal Akhir" class="form-control ms-1" type="text"
-                                    onfocus="(this.type='date')" onblur="(this.type='text')" id="date" name="end"> --}}
-                            </div>
+                            <input placeholder="Pilih Tanggal" class="form-control me-1" type="text"
+                                onfocus="(this.type='date')" onblur="(this.type='text')" id="date" name="start"
+                                required>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Shift</label>
@@ -94,15 +82,21 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label class="form-label">Man Power</label>
+                            <select class="form-select" id="user_id" name="user_id" required>
+                                <option value="" disabled selected>- pilih man power -</option>
+                            </select>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <div class="btn-group">
-                        <button type="submit" form="form_add_jadwal" class="btn btn-primary">
-                            Create
-                        </button>
+                    <div class="float-end">
                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
                             Cancel
+                        </button>
+                        <button type="submit" form="form_add_jadwal" class="btn btn-primary">
+                            Submit
                         </button>
                     </div>
                 </div>
@@ -133,6 +127,24 @@
             });
 
             calendar.render();
+        });
+
+        $('#section').on('change', function() {
+            var selectedOption = this.options[this.selectedIndex];
+            var section = selectedOption.getAttribute("data-section");
+            $.ajax({
+                url: '/getPegawai?section=' + section,
+                type: 'get',
+                success: function(res) {
+                    $('#user_id').html(
+                        '<option value="" selected disabled>- pilih man power -</option>'
+                    );
+                    $.each(res, function(key, value) {
+                        $('#user_id').append('<option value="' + value
+                            .id + '">' + value.name + '</option>');
+                    });
+                }
+            });
         });
     </script>
 @endsection

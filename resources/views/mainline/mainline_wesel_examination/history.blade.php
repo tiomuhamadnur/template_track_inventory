@@ -30,10 +30,10 @@
                                     <i class="ti-filter"></i>
                                 </a>
                                 <input type="text" name="wesel_id" value="{{ $wesel_name->id }}" hidden>
-                                <button type="submit" class="btn btn-outline-success btn-lg mx-0" form="form_export_excel"
+                                <a href="#" class="btn btn-outline-success btn-lg mx-0" form="form_export_excel"
                                     title="Export to Excel">
                                     <i class="ti-download"></i>
-                                </button>
+                                </a>
                             </div>
                             <form action="{{ route('wesel.examination.export') }}" method="GET" id="form_export_excel">
                                 @csrf

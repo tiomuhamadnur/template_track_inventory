@@ -30,14 +30,8 @@
                                     class="btn btn-outline-secondary btn-lg mx-0" title="Export to PDF">
                                     <i class="mdi mdi-file-pdf text-danger"></i>
                                 </a>
-                                {{-- <a href="{{ route('jadwal.pekerjaan.list') }}" class="btn btn-outline-warning btn-lg mx-0"
-                                    title="List Jadwal Pekerjaan" type="button">All Data</a> --}}
                             </div>
                             <div class="table-responsive pt-3">
-                                {{-- <span class="badge fw-bolder" style="background-color: #059c00; font-size:15px;">Permanent
-                                    Way RAMS</span>
-                                <span class="badge fw-bolder" style="background-color: #ff9500; font-size:15px;">Permanent
-                                    Way Maintenance</span> --}}
                                 <div id='calendar' class="mt-2"></div>
                             </div>
                         </div>
@@ -61,7 +55,7 @@
                         @method('post')
                         <div class="form-group">
                             <label class="form-label">Section</label>
-                            <select class="form-select" name="section" required>
+                            <select class="form-select" id="section" name="section" required>
                                 <option value="" disabled selected>- pilih section -</option>
                                 @foreach ($section as $item)
                                     <option value="{{ $item->code }}">{{ $item->name }}</option>
@@ -70,26 +64,21 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Nama Pekerjaan</label>
-                            <select class="form-select" name="job_id" required>
+                            <select class="form-select" id="job_id" name="job_id" required>
                                 <option value="" disabled selected>- pilih pekerjaan -</option>
-                                @foreach ($pekerjaan as $item)
-                                    <option value="{{ $item->id }}">({{ $item->section }}) - {{ $item->name }}
-                                    </option>
-                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Lokasi</label>
-                            <input type="text" class="form-control" name="location" autocomplete="off" required>
+                            <input type="text" class="form-control" name="location"
+                                placeholder="contoh: Mainline (LBB-FTM)" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Tanggal</label>
                             <div class="input-group">
-                                <input placeholder="Tanggal Pekerjaan" class="form-control me-1" type="text"
+                                <input placeholder="tanggal pekerjaan" class="form-control me-1" type="text"
                                     onfocus="(this.type='date')" onblur="(this.type='text')" id="date" name="start"
                                     required>
-                                {{-- <input placeholder="Tanggal Akhir" class="form-control ms-1" type="text"
-                                    onfocus="(this.type='date')" onblur="(this.type='text')" id="date" name="end"> --}}
                             </div>
                         </div>
                         <div class="form-group">
@@ -104,12 +93,12 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <div class="btn-group">
-                        <button type="submit" form="form_add_jadwal" class="btn btn-primary">
-                            Create
-                        </button>
+                    <div class="float-end">
                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
                             Cancel
+                        </button>
+                        <button type="submit" form="form_add_jadwal" class="btn btn-primary">
+                            Submit
                         </button>
                     </div>
                 </div>
@@ -125,8 +114,7 @@
                     <h5 class="modal-title" id="modalAdminTitle">Form Export PDF Jadwal Pekerjaan</h5>
                 </div>
                 <div class="modal-body">
-                    <form id="form_export_pdf_jadwal" action="{{ route('jadwal.pekerjaan.export_pdf') }}"
-                        method="GET">
+                    <form id="form_export_pdf_jadwal" action="{{ route('jadwal.pekerjaan.export_pdf') }}" method="GET">
                         @csrf
                         @method('get')
                         <div class="form-group">
@@ -144,10 +132,13 @@
                                 <option value="" disabled selected>- pilih tahun -</option>
                                 @php
                                     $tahun = \Carbon\Carbon::now()->format('Y');
+                                    $tahun_ini = \Carbon\Carbon::now()->format('Y');
+                                    $bulan = \Carbon\Carbon::now()->format('m');
                                     $tahun = $tahun - 2;
                                 @endphp
-                                @for ($i = 0; $i <= 10; $i++)
-                                    <option value="{{ $tahun }}">{{ $tahun }}</option>
+                                @for ($i = 0; $i <= 3; $i++)
+                                    <option value="{{ $tahun }}" @if ($tahun_ini == $tahun) selected @endif>
+                                        {{ $tahun }}</option>
                                     @php
                                         $tahun++;
                                     @endphp
@@ -157,30 +148,32 @@
                         <div class="form-group">
                             <label class="form-label">Bulan</label>
                             <select class="form-select" name="bulan" required>
-                                <option value="" disabled selected>- pilih bulan -</option>
-                                <option value="1">Januari</option>
-                                <option value="2">Februari</option>
-                                <option value="3">Maret</option>
-                                <option value="4">April</option>
-                                <option value="5">Mei</option>
-                                <option value="6">Juni</option>
-                                <option value="7">Juli</option>
-                                <option value="8">Agustus</option>
-                                <option value="9">September</option>
-                                <option value="10">Oktober</option>
-                                <option value="11">November</option>
-                                <option value="12">Desember</option>
+                                <option value="1" @if ($bulan == 1) selected @endif>Januari</option>
+                                <option value="2" @if ($bulan == 2) selected @endif>Februari</option>
+                                <option value="3" @if ($bulan == 3) selected @endif>Maret</option>
+                                <option value="4" @if ($bulan == 4) selected @endif>April</option>
+                                <option value="5" @if ($bulan == 5) selected @endif>Mei</option>
+                                <option value="6" @if ($bulan == 6) selected @endif>Juni</option>
+                                <option value="7" @if ($bulan == 7) selected @endif>Juli</option>
+                                <option value="8" @if ($bulan == 8) selected @endif>Agustus</option>
+                                <option value="9" @if ($bulan == 9) selected @endif>September
+                                </option>
+                                <option value="10" @if ($bulan == 10) selected @endif>Oktober</option>
+                                <option value="11" @if ($bulan == 11) selected @endif>November
+                                </option>
+                                <option value="12" @if ($bulan == 12) selected @endif>Desember
+                                </option>
                             </select>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <div class="btn-group">
-                        <button type="submit" form="form_export_pdf_jadwal" class="btn btn-primary">
-                            Export
-                        </button>
+                    <div class="float-end">
                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
                             Cancel
+                        </button>
+                        <button type="submit" form="form_export_pdf_jadwal" class="btn btn-primary">
+                            Export
                         </button>
                     </div>
                 </div>
@@ -211,6 +204,23 @@
             });
 
             calendar.render();
+        });
+
+        $('#section').on('change', function() {
+            var section = this.value;
+            $.ajax({
+                url: '/getPekerjaan?section=' + section,
+                type: 'get',
+                success: function(res) {
+                    $('#job_id').html(
+                        '<option value="" selected disabled>- pilih pekerjaan -</option>'
+                    );
+                    $.each(res, function(key, value) {
+                        $('#job_id').append('<option value="' + value
+                            .id + '">' + value.name + '</option>');
+                    });
+                }
+            });
         });
     </script>
 @endsection

@@ -2,6 +2,14 @@
 
 @section('head')
     <title>Form Data Turn Out Examination</title>
+    <style>
+        .float {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            text-align: center;
+        }
+    </style>
 @endsection
 
 @section('body')
@@ -19,7 +27,7 @@
                             <div class="name">Nama Wesel</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <select name="wesel_id" class="form-select" required autofocus>
+                                    <select name="wesel_id" class="form-select wesel_id" required autofocus>
                                         <option value="" selected disabled>- Pilih Nama Wesel -</option>
                                         @foreach ($wesel as $item)
                                             <option value="{{ $item->id }}">{{ $item->name ?? '' }}
@@ -47,18 +55,6 @@
                             <div class="value">
                                 <div class="input-group">
                                     <input class="form-control" type="date" name="tanggal" required>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="name">Detail Measurement</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <a class="btn btn-primary rounded-pill" href="javascript:;" data-bs-toggle="modal"
-                                        data-bs-target="#detail-measurement-modal">
-                                        Show Detail
-                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -115,15 +111,13 @@
                         </div>
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-success font-weight-bold"><b>3</b></span>
-                            <input type="number" class="form-control" placeholder="  Cross Level" name="CL_3"
-                                required>
+                            <input type="number" class="form-control" placeholder="  Cross Level" name="CL_3" required>
                         </div>
                         <br>
 
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-warning font-weight-bold"><b>3'</b></span>
-                            <input type="number" class="form-control" placeholder="  Track Gauge" name="TG_3A"
-                                required>
+                            <input type="number" class="form-control" placeholder="  Track Gauge" name="TG_3A" required>
                         </div>
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-success font-weight-bold"><b>3'</b></span>
@@ -335,7 +329,7 @@
                             </div>
                         </div>
 
-                        <div>
+                        <div class="pull-right mt-4">
                             <a href="{{ route('wesel.examination.index') }}" class="btn btn-warning rounded">Cancel</a>
                             <button class="btn btn-success ms-2" type="submit">Save</button>
                         </div>
@@ -344,6 +338,11 @@
             </div>
         </div>
     </div>
+
+    <a href="#" class="float btn btn-primary btn-sm rounded-pill shadow ps-3 pe-3" href="javascript:;"
+        data-bs-toggle="modal" data-bs-target="#detail-measurement-modal">
+        Show Position
+    </a>
 
     <!-- BEGIN: Detail Measurment Modal -->
     <div id="detail-measurement-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
@@ -366,4 +365,10 @@
         </div>
     </div>
     <!-- END: Detail Measurment Modal -->
+@endsection
+
+@section('javascript')
+    <script>
+        $('.wesel_id').select2();
+    </script>
 @endsection

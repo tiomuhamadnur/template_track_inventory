@@ -1,7 +1,7 @@
 @extends('mainline.mainline_layout.base')
 
 @section('sub-title')
-    <title>Data Turn Out Examination | TCSM</title>
+    <title>Data Turn Out Examination | CPWTM</title>
 @endsection
 
 @section('sub-content')
@@ -27,8 +27,8 @@
                                     data-bs-toggle="modal" data-bs-target="#ModalReport" title="Generate Report">
                                     <i class="ti-printer"></i></a>
                             </div>
-                            <div class="table-responsive pt-3">
-                                <table class="table table-bordered">
+                            <div class="table-responsive pt-2">
+                                <table id="data-tables" class="table table-bordered">
                                     <thead>
                                         <tr>
                                             <th class="text-center">
@@ -91,12 +91,12 @@
                     @csrf
                     @method('get')
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalAdminTitle">Generate Report Activity</h5>
+                        <h5 class="modal-title" id="modalAdminTitle">Generate Report Turnout Examination</h5>
                     </div>
                     <div class="modal-body pt-3 mb-0">
                         <div class="form-group align-middle">
                             <label class="form-label">Wesel</label> <br>
-                            <select name="wesel_id" class="form-select" required>
+                            <select name="wesel_id" class="form-select wesel_id" required>
                                 <option value="" disabled selected>- Pilih nama wesel -</option>
                                 @foreach ($wesel as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }} ({{ $item->area->code ?? '' }}
@@ -122,4 +122,20 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('javascript')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $('#data-tables').dataTable({
+            dom: 'ft',
+            paging: false,
+            "columnDefs": [{
+                "searchable": true,
+                "targets": [1]
+            }]
+        });
+
+        $('.wesel_id').select2();
+    </script>
 @endsection
