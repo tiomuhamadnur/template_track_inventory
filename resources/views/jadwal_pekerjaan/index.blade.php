@@ -23,9 +23,10 @@
                                 </a>
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#ModalAddJadwal"
                                     class="btn btn-outline-primary btn-lg mx-0" title="Tambah Jadwal Pekerjaan"
-                                    type="button">Add Data</a>
+                                    type="button"
+                                    @if (auth()->user()->role != 'Admin') hidden>Add Data</a>
                                 <a href="{{ route('jadwal.pekerjaan.create') }}" class="btn btn-outline-success btn-lg mx-0"
-                                    title="Edit atau Hapus Jadwal Pekerjaan" type="button">Edit Data</a>
+                                    title="Edit atau Hapus Jadwal Pekerjaan" type="button" @if (auth()->user()->role != 'Admin') hidden>Edit Data</a>
                                 <a href="#" type="button" data-bs-toggle="modal" data-bs-target="#ModalExportPdf"
                                     class="btn btn-outline-secondary btn-lg mx-0" title="Export to PDF">
                                     <i class="mdi mdi-file-pdf text-danger"></i>
@@ -138,89 +139,93 @@
                                 @endphp
                                 @for ($i = 0; $i <= 3; $i++)
                                     <option value="{{ $tahun }}" @if ($tahun_ini == $tahun) selected @endif>
-                                        {{ $tahun }}</option>
+                                    {{ $tahun }}</option>
                                     @php
                                         $tahun++;
                                     @endphp
-                                @endfor
-                            </select>
+                                    @endfor
+                                    </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Bulan</label>
+                                <select class="form-select" name="bulan" required>
+                                    <option value="1" @if ($bulan == 1) selected @endif>Januari
+                                    </option>
+                                    <option value="2" @if ($bulan == 2) selected @endif>Februari
+                                    </option>
+                                    <option value="3" @if ($bulan == 3) selected @endif>Maret</option>
+                                    <option value="4" @if ($bulan == 4) selected @endif>April</option>
+                                    <option value="5" @if ($bulan == 5) selected @endif>Mei</option>
+                                    <option value="6" @if ($bulan == 6) selected @endif>Juni</option>
+                                    <option value="7" @if ($bulan == 7) selected @endif>Juli</option>
+                                    <option value="8" @if ($bulan == 8) selected @endif>Agustus
+                                    </option>
+                                    <option value="9" @if ($bulan == 9) selected @endif>September
+                                    </option>
+                                    <option value="10" @if ($bulan == 10) selected @endif>Oktober
+                                    </option>
+                                    <option value="11" @if ($bulan == 11) selected @endif>November
+                                    </option>
+                                    <option value="12" @if ($bulan == 12) selected @endif>Desember
+                                    </option>
+                                </select>
+                            </div>
+                            </form>
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">Bulan</label>
-                            <select class="form-select" name="bulan" required>
-                                <option value="1" @if ($bulan == 1) selected @endif>Januari</option>
-                                <option value="2" @if ($bulan == 2) selected @endif>Februari</option>
-                                <option value="3" @if ($bulan == 3) selected @endif>Maret</option>
-                                <option value="4" @if ($bulan == 4) selected @endif>April</option>
-                                <option value="5" @if ($bulan == 5) selected @endif>Mei</option>
-                                <option value="6" @if ($bulan == 6) selected @endif>Juni</option>
-                                <option value="7" @if ($bulan == 7) selected @endif>Juli</option>
-                                <option value="8" @if ($bulan == 8) selected @endif>Agustus</option>
-                                <option value="9" @if ($bulan == 9) selected @endif>September
-                                </option>
-                                <option value="10" @if ($bulan == 10) selected @endif>Oktober</option>
-                                <option value="11" @if ($bulan == 11) selected @endif>November
-                                </option>
-                                <option value="12" @if ($bulan == 12) selected @endif>Desember
-                                </option>
-                            </select>
+                        <div class="modal-footer">
+                            <div class="float-end">
+                                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                                    Cancel
+                                </button>
+                                <button type="submit" form="form_export_pdf_jadwal" class="btn btn-primary">
+                                    Export
+                                </button>
+                            </div>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <div class="float-end">
-                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
-                            Cancel
-                        </button>
-                        <button type="submit" form="form_export_pdf_jadwal" class="btn btn-primary">
-                            Export
-                        </button>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-@endsection
+        @endsection
 
-@section('javascript')
-    <script>
-        let data_jadwal = <?php echo json_encode($data); ?>;
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
+        @section('javascript')
+            <script>
+                let data_jadwal = <?php echo json_encode($data); ?>;
+                document.addEventListener('DOMContentLoaded', function() {
+                    var calendarEl = document.getElementById('calendar');
 
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                headerToolbar: {
-                    left: 'title',
-                    center: 'prev,next',
-                    right: 'today,dayGridMonth,listMonth'
-                    // right: 'today,dayGridMonth,timeGridWeek,timeGridDay,listMonth'
-                },
-                initialDate: new Date().toJSON().slice(0, 10),
-                navLinks: true, // can click day/week names to navigate views
-                businessHours: true, // display business hours
-                editable: false,
-                selectable: false,
-                events: data_jadwal,
-            });
-
-            calendar.render();
-        });
-
-        $('#section').on('change', function() {
-            var section = this.value;
-            $.ajax({
-                url: '/getPekerjaan?section=' + section,
-                type: 'get',
-                success: function(res) {
-                    $('#job_id').html(
-                        '<option value="" selected disabled>- pilih pekerjaan -</option>'
-                    );
-                    $.each(res, function(key, value) {
-                        $('#job_id').append('<option value="' + value
-                            .id + '">' + value.name + '</option>');
+                    var calendar = new FullCalendar.Calendar(calendarEl, {
+                        headerToolbar: {
+                            left: 'title',
+                            center: 'prev,next',
+                            right: 'today,dayGridMonth,listMonth'
+                            // right: 'today,dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+                        },
+                        initialDate: new Date().toJSON().slice(0, 10),
+                        navLinks: true, // can click day/week names to navigate views
+                        businessHours: true, // display business hours
+                        editable: false,
+                        selectable: false,
+                        events: data_jadwal,
                     });
-                }
-            });
-        });
-    </script>
-@endsection
+
+                    calendar.render();
+                });
+
+                $('#section').on('change', function() {
+                    var section = this.value;
+                    $.ajax({
+                        url: '/getPekerjaan?section=' + section,
+                        type: 'get',
+                        success: function(res) {
+                            $('#job_id').html(
+                                '<option value="" selected disabled>- pilih pekerjaan -</option>'
+                            );
+                            $.each(res, function(key, value) {
+                                $('#job_id').append('<option value="' + value
+                                    .id + '">' + value.name + '</option>');
+                            });
+                        }
+                    });
+                });
+            </script>
+        @endsection

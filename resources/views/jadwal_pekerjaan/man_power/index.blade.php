@@ -23,7 +23,8 @@
                                 </a>
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#ModalAddJadwal"
                                     class="btn btn-outline-success btn-lg mx-0" title="Tambah Jadwal Man Power"
-                                    type="button">Add Data</a>
+                                    type="button" @if (auth()->user()->role != 'Admin')
+                                    hidden>Add Data</a>
                                 <a href="{{ route('man.power.list') }}" class="btn btn-outline-warning btn-lg mx-0"
                                     title="List Jadwal Man Power" type="button">Edit Data</a>
                             </div>
