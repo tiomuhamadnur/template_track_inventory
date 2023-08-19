@@ -116,12 +116,12 @@ class UltrasonicTestController extends Controller
         $direction = $request->direction;
 
         if($direction != null) {
-            $joint = Joint::where('tipe', 'W')->where('area_id', $area_id)->where('line_id', $line_id)->where('direction', $direction)->get();
+            $joint = Joint::where('tipe', 'W')->where('area_id', $area_id)->where('repaired', null)->where('line_id', $line_id)->where('direction', $direction)->get();
             if (count($joint) > 0) {
                 return response()->json($joint);
             }
         } else {
-            $joint = Joint::where('tipe', 'W')->where('area_id', $area_id)->where('line_id', $line_id)->get();
+            $joint = Joint::where('tipe', 'W')->where('area_id', $area_id)->where('repaired', null)->where('line_id', $line_id)->get();
             if (count($joint) > 0) {
                 return response()->json($joint);
             }
@@ -131,7 +131,7 @@ class UltrasonicTestController extends Controller
     public function getNoWeldingJointWesel(Request $request)
     {
         $wesel_id = $request->wesel_id;
-        $joint = Joint::where('wesel_id', $wesel_id)->get();
+        $joint = Joint::where('wesel_id', $wesel_id)->where('repaired', null)->get();
         if (count($joint) > 0) {
             return response()->json($joint);
         }

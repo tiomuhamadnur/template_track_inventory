@@ -36,14 +36,6 @@
                                     class="btn btn-outline-primary btn-lg mx-0" title="Import from Excel">
                                     <i class="ti-import"></i>
                                 </a>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#ModalExportExcel" type="button"
-                                    class="btn btn-outline-success btn-lg mx-0" title="Export to Excel">
-                                    <i class="mdi mdi-file-excel text-success"></i>
-                                </a>
-                                <a href="#" type="button" data-bs-toggle="modal" data-bs-target="#ModalExportPdf"
-                                    class="btn btn-outline-success btn-lg mx-0" title="Export to PDF">
-                                    <i class="mdi mdi-file-pdf text-danger"></i>
-                                </a>
                             </div>
                             <div>
                                 showing: <u class="fw-bolder">{{ $ut_examination->count() ?? 0 }}</u> data
@@ -135,7 +127,8 @@
                                                             <a class="btn btn-outline-danger mx-0 mb-0" href="javascript:;"
                                                                 data-bs-toggle="modal"
                                                                 data-bs-target="#delete-confirmation-modal"
-                                                                onclick="toggleModal('{{ $item->id }}')">Delete</a>
+                                                                onclick="toggleModal('{{ $item->id }}')"
+                                                                @if (auth()->user()->role != 'Admin') hidden @endif>Delete</a>
                                                         </div>
                                                     </td>
                                                 </tr>
