@@ -108,7 +108,7 @@
         </div>
     </div>
 
-    <!-- Modal Form Export Pekerjaan-->
+    <!-- Modal Form Export Jadwal-->
     <div class="modal fade" id="ModalExportPdf" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog modal-md" role="document">
             <div class="modal-content">
@@ -186,6 +186,7 @@
             </div>
         </div>
     </div>
+    <!-- End Modal Form Export Jadwal-->
 @endsection
 
 @section('javascript')
@@ -195,11 +196,21 @@
             var calendarEl = document.getElementById('calendar');
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
+                eventOrder: 'shift,title',
+                titleFormat: {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                },
+                buttonText: {
+                    list: 'detail',
+                },
                 headerToolbar: {
-                    left: 'title',
-                    center: 'prev,next',
-                    right: 'today,dayGridMonth,listMonth'
-                    // right: 'today,dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+                    top: 'title',
+                    right: 'today,dayGridMonth,listWeek'
+                },
+                footerToolbar: {
+                    center: 'prev next',
                 },
                 initialDate: new Date().toJSON().slice(0, 10),
                 navLinks: true, // can click day/week names to navigate views

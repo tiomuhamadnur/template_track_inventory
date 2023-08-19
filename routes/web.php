@@ -282,6 +282,7 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(ManPowerOnDutyController::class)->group(function () {
         Route::get('/man-power-on-duty', 'index')->name('man.power.index');
         Route::post('/man-power-on-duty', 'store')->name('man.power.store');
+        Route::get('/man-power-on-duty/export-pdf', 'export_pdf')->name('man.power.export_pdf');
         Route::post('manPowerAjax', 'ajax');
         Route::get('/man-power-on-duty/create', 'create')->name('man.power.create');
         Route::get('/man-power-on-duty-list', 'list')->name('man.power.list');

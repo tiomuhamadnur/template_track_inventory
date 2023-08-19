@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <head>
-    <title>Jadwal Pekerjaan</title>
+    <title>Jadwal Pekerjaan {{ $section ?? '' }}</title>
     <link rel="shortcut icon" href="{{ asset('assets/images/mm.png') }}" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -9,16 +9,22 @@
 </head>
 
 <body>
+    <div class="mb-4">
+        <p class="float-right mb-1">generated at: {{ \Carbon\Carbon::now() }}</p>
+    </div>
     <table border="1" style="width: 100%" class="mb-3">
         <thead>
             <th class="text-center" style="width: 30%">
                 <img style="height: 70px" src="{{ public_path('assets/images/logo_mrtj.png') }}" alt="logo-mrt">
             </th>
-            <th class="text-center">
-                <h5 class="fw-bolder mx-auto mb-0">Detail Pelaksanaan Kegiatan <br> {{ $section ?? '' }}</h5>
-                <h6>
+            <th class="text-center py-auto">
+                <p class="fw-bolder mt-2 mb-2" style="font-weight: 700">DETAIL PELAKSANAAN KEGIATAN</p>
+                <p class="mb-0 text-uppercase">
+                    {{ $section ?? '' }}
+                </p>
+                <p class="mt-0">
                     (Periode: {{ $bulan ?? '' }} {{ $tahun ?? '' }})
-                </h6>
+                </p>
             </th>
             <th class="text-center" style="width: 30%">
                 <img style="height: 70px" src="{{ public_path('assets/images/tcsm.png') }}" alt="logo-tcsm">

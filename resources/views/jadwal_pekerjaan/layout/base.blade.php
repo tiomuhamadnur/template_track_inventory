@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="{{ asset('assets/css/vertical-layout-light/style.css') }}">
     {{-- <link rel="shortcut icon" href="{{ asset('assets/images/mm.png') }}" /> --}}
     <link rel="shortcut icon" href="{{ asset('assets/images/exods.png') }}" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 
 <body>
@@ -54,6 +57,7 @@
     <script src="{{ asset('assets/js/Chart.roundedBarCharts.js') }}"></script>
     <script src="{{ asset('assets/js/select2.js') }}"></script>
     <script src="{{ asset('assets/js/full-calendar/index.global.js') }}"></script>
+    <script src="{{ asset('assets/js/datatables.js') }}"></script>
     @include('masterdata.masterdata_layout.modal_notification')
     @yield('javascript')
 </body>

@@ -61,7 +61,7 @@
         <div class="card animate__animated animate__fadeInDown">
             <a href="{{ route('jadwal.pekerjaan.index') }}">
                 <div class="imgBx">
-                    <img src="{{ asset('assets/transisiflex/img/jadwal.png') }}">
+                    <img src="{{ asset('assets/transisiflex/img/schedule.jpg') }}">
                 </div>
                 <div class="content">
                     <h2>Jadwal Pekerjaan</h2>

@@ -111,16 +111,16 @@ class JadwalPekerjaanController extends Controller
 
     public function export_pdf(Request $request)
     {
-        // dd($request);
         $section = $request->section;
         $tahun = $request->tahun;
         $bulan = $request->bulan;
-        $jadwal_pekerjaan = JadwalPekerjaan::whereYear('start', $tahun)->whereMonth('start', $bulan)->where('section', $section)->orderBy('start', 'asc')->get();
-        $bulan = date('F', mktime(0, 0, 0, $bulan, 10));
+        $jadwal_pekerjaan = JadwalPekerjaan::whereYear('start', $tahun)->whereMonth('start', $bulan)->where('section', $section)->orderBy('start', 'asc')->orderBy('shift', 'asc')->get();
+        $bulan = Carbon::parse(date('F', mktime(0, 0, 0, $bulan, 10)))->translatedFormat('F');
+        $nama_section = Section::where('code', $section)->first('name')->value('name');
 
-        $waktu = Carbon::now();
+        $waktu = Carbon::now()->format('Ymd');
         if ($jadwal_pekerjaan->count() > 0) {
-            $pdf = Pdf::loadView('jadwal_pekerjaan.export-pdf', ['jadwal_pekerjaan' => $jadwal_pekerjaan, 'section' => $section, 'bulan' => $bulan, 'tahun' => $tahun]);
+            $pdf = Pdf::loadView('jadwal_pekerjaan.export-pdf', ['jadwal_pekerjaan' => $jadwal_pekerjaan, 'section' => $nama_section, 'bulan' => $bulan, 'tahun' => $tahun]);
             $pdf->setPaper('A4', 'potrait');
 
             return $pdf->stream($waktu.'_jadwal pekerjaan_' . $section . '_(periode ' . $bulan . ' ' . $tahun . ').pdf');

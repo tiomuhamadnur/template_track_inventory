@@ -33,20 +33,17 @@
                                 </a>
                             </div>
                             <div class="table-responsive pt-3">
-                                <table class="table table-bordered">
+                                <table id="data-table" class="table-bordered" style="font-size:12px; width: 100%">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">
-                                                No
-                                            </th>
-                                            <th class="text-center">
-                                                Nama Man Power
-                                            </th>
                                             <th class="text-center">
                                                 Tanggal
                                             </th>
                                             <th class="text-center">
                                                 Shift
+                                            </th>
+                                            <th class="text-center">
+                                                Nama Man Power
                                             </th>
                                             <th class="text-center">
                                                 Action
@@ -56,27 +53,24 @@
                                     <tbody>
                                         @foreach ($man_power as $item)
                                             <tr>
-                                                <td class="text-center">
-                                                    {{ $loop->iteration }}
+                                                <td class="text-center fw-bolder py-1">
+                                                    {{ \Carbon\Carbon::parse($item->start)->translatedFormat('l, d F Y') }}
                                                 </td>
-                                                <td class="text-wrap fw-bolder">
+                                                <td class="text-center fw-bolder py-1">
+                                                    {{ $item->shift }}
+                                                </td>
+                                                <td class="text-wrap fw-bolder py-1">
                                                     {{ $item->user->name }}
                                                 </td>
                                                 <td class="text-center">
-                                                    {{ $item->start }}
-                                                </td>
-                                                <td class="text-center">
-                                                    {{ $item->shift }}
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="btn-group">
-                                                        <a class="btn btn-outline-warning mx-0" href="javascript:;"
+                                                    <div class="col">
+                                                        <a class="text-primary me-1 mb-0" href="javascript:;"
                                                             data-bs-toggle="modal" data-bs-target="#edit-modal"
-                                                            onclick="editModal('{{ $item->id }}', '{{ $item->user->name }}', '{{ $item->start }}', '{{ $item->shift }}')">Edit</a>
-                                                        <a class="btn btn-outline-danger mx-0" href="javascript:;"
+                                                            onclick="editModal('{{ $item->id }}', '{{ $item->user->name }}', '{{ $item->start }}', '{{ $item->shift }}')"><u>Edit</u></a>
+                                                        <a class="text-danger ms-1 mt-1" href="javascript:;"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#delete-confirmation-modal"
-                                                            onclick="toggleModal('{{ $item->id }}')">Delete</a>
+                                                            onclick="toggleModal('{{ $item->id }}')"><u>Delete</u></a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -107,12 +101,6 @@
                             <input type="text" name="id" id="id_edit_modal" hidden>
                             <label class="form-label">Man Power</label>
                             <input type="text" class="form-control" value="" id="name_edit_modal" readonly>
-                            {{-- <select class="form-select" name="user_id" required>
-                                <option value="" disabled selected>- pilih man power -</option>
-                                @foreach ($user as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                @endforeach
-                            </select> --}}
                         </div>
                         <div class="form-group">
                             <label class="form-label">Tanggal</label>
@@ -120,12 +108,10 @@
                                 <input placeholder="Pilih Tanggal" class="form-control me-1" type="text"
                                     onfocus="(this.type='date')" onblur="(this.type='text')" id="date" name="start"
                                     required>
-                                {{-- <input placeholder="Tanggal Akhir" class="form-control ms-1" type="text"
-                                    onfocus="(this.type='date')" onblur="(this.type='text')" id="date" name="end"> --}}
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Shift (current: <span id="shift_edit_modal"></span>)</label>
+                            <label class="form-label">Shift (sekarang shift: <span id="shift_edit_modal"></span>)</label>
                             <select class="form-select" name="shift" id="shift_edit_modal" required>
                                 <option value="" disabled selected>- pilih shift -</option>
                                 <option value="1">1</option>
@@ -137,12 +123,12 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <div class="btn-group">
-                        <button type="submit" form="form_add_jadwal" class="btn btn-primary">
-                            Create
-                        </button>
+                    <div class="float-end">
                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
                             Cancel
+                        </button>
+                        <button type="submit" form="form_add_jadwal" class="btn btn-primary">
+                            Update
                         </button>
                     </div>
                 </div>
@@ -187,10 +173,14 @@
                                 <option value="" disabled selected>- pilih tahun -</option>
                                 @php
                                     $tahun = \Carbon\Carbon::now()->format('Y');
+                                    $tahun_ini = \Carbon\Carbon::now()->format('Y');
+                                    $bulan = \Carbon\Carbon::now()->format('m');
                                     $tahun = $tahun - 1;
                                 @endphp
                                 @for ($i = 0; $i <= 10; $i++)
-                                    <option value="{{ $tahun }}">{{ $tahun }}</option>
+                                    <option value="{{ $tahun }}" @if ($tahun == $tahun_ini) selected @endif>
+                                        {{ $tahun }}
+                                    </option>
                                     @php
                                         $tahun++;
                                     @endphp
@@ -200,19 +190,20 @@
                         <div class="form-group">
                             <label class="form-label">Bulan</label>
                             <select class="form-select" name="bulan" required>
-                                <option value="" disabled selected>- pilih bulan -</option>
-                                <option value="1">Januari</option>
-                                <option value="2">Februari</option>
-                                <option value="3">Maret</option>
-                                <option value="4">April</option>
-                                <option value="5">Mei</option>
-                                <option value="6">Juni</option>
-                                <option value="7">Juli</option>
-                                <option value="8">Agustus</option>
-                                <option value="9">September</option>
-                                <option value="10">Oktober</option>
-                                <option value="11">November</option>
-                                <option value="12">Desember</option>
+                                <option value="1" @if ($bulan == 1) selected @endif>Januari</option>
+                                <option value="2" @if ($bulan == 2) selected @endif>Februari</option>
+                                <option value="3" @if ($bulan == 3) selected @endif>Maret</option>
+                                <option value="4" @if ($bulan == 4) selected @endif>April</option>
+                                <option value="5" @if ($bulan == 5) selected @endif>Mei</option>
+                                <option value="6" @if ($bulan == 6) selected @endif>Juni</option>
+                                <option value="7" @if ($bulan == 7) selected @endif>Juli</option>
+                                <option value="8" @if ($bulan == 8) selected @endif>Agustus</option>
+                                <option value="9" @if ($bulan == 9) selected @endif>September</option>
+                                <option value="10" @if ($bulan == 10) selected @endif>Oktober</option>
+                                <option value="11" @if ($bulan == 11) selected @endif>November
+                                </option>
+                                <option value="12" @if ($bulan == 12) selected @endif>Desember
+                                </option>
                             </select>
                         </div>
                     </form>
@@ -231,6 +222,7 @@
 @endsection
 
 @section('javascript')
+    <script src="{{ asset('assets/js/jquery.rowspanizer.js') }}"></script>
     <script>
         function toggleModal(id) {
             $('#id').val(id);
@@ -242,5 +234,11 @@
             $('#date').val(date);
             document.getElementById("shift_edit_modal").innerHTML = shift;
         }
+
+        $(document).ready(function() {
+            $("#data-table").rowspanizer({
+                vertical_align: 'middle'
+            });
+        });
     </script>
 @endsection
