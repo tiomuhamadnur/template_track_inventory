@@ -1,7 +1,7 @@
 @extends('mainline.mainline_layout.base')
 
 @section('sub-title')
-    <title>Data History Turn Out Examination | TCSM</title>
+    <title>Data History Turn Out Examination | CPWTM</title>
 @endsection
 
 @section('sub-content')
@@ -15,9 +15,7 @@
                 <div class="col-lg-12 grid-margin stretch-card mt-3">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Data Turn Out Examination ({{ $wesel_name->name ?? '' }} -
-                                {{ $wesel_name->area->code ?? '' }} -
-                                {{ $wesel_name->line->code ?? '' }})</h4>
+                            <h4 class="card-title">Data History Turnout Examination</h4>
                             <div class="btn-group">
                                 <a href="{{ route('wesel.examination.index') }}" class="btn btn-outline-dark btn-lg mx-0"
                                     type="button" title="Kembali">
@@ -29,25 +27,39 @@
                                     data-bs-toggle="modal" data-bs-target="#ModalFilter" title="Filter data">
                                     <i class="ti-filter"></i>
                                 </a>
-                                <input type="text" name="wesel_id" value="{{ $wesel_name->id }}" hidden>
-                                <a href="#" class="btn btn-outline-success btn-lg mx-0" form="form_export_excel"
-                                    title="Export to Excel">
+                                <a href="#" class="btn btn-outline-success btn-lg mx-0" title="Export to Excel"
+                                    data-bs-toggle="modal" data-bs-target="#ModalExportExcel">
                                     <i class="ti-download"></i>
                                 </a>
                             </div>
                             <form action="{{ route('wesel.examination.export') }}" method="GET" id="form_export_excel">
-                                @csrf
-                                @method('get')
                                 <input type="text" name="wesel_id" value="{{ $wesel_name->id ?? '' }}" hidden>
                                 <input type="text" name="tanggal_awal" value="{{ $tanggal_awal ?? '' }}" hidden>
                                 <input type="text" name="tanggal_akhir" value="{{ $tanggal_akhir ?? '' }}" hidden>
                             </form>
+                            <table>
+                                <tr>
+                                    <td>No. Turnout</td>
+                                    <td> : </td>
+                                    <td>{{ $wesel_name->name ?? '-' }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Area</td>
+                                    <td> : </td>
+                                    <td>{{ $wesel_name->area->code ?? '-' }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Line</td>
+                                    <td> : </td>
+                                    <td>{{ $wesel_name->line->code ?? '-' }}</td>
+                                </tr>
+                            </table>
                             <div class="table-responsive pt-3">
                                 <table class="table-bordered" style="text-align:center; font-size:12px;">
                                     <thead>
                                         <tr class="fw-bolder" style="height: 19.6167px;">
-                                            <td rowspan="5">
-                                                Tanggal
+                                            <td rowspan="5" class="text-nowrap">
+                                                Tanggal <br> (Examiner)
                                             </td>
                                             <td style="width: 200px; height: 19.6167px;" colspan="12">
                                                 Track Gauge
@@ -118,10 +130,9 @@
                                     <tbody>
                                         @foreach ($wesel as $item)
                                             <tr style="height: 23px;">
-                                                <td style="height: 46px;">
-                                                    <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                                                        {{ $item->tanggal ?? '' }}
-                                                    </div>
+                                                <td style="height: 46px;" class="text-nowrap">
+                                                    {{ $item->tanggal ?? '' }} <br>
+                                                    ({{ $item->pic ?? '-' }})
                                                 </td>
                                                 <td style="height: 46px;">
                                                     <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
@@ -352,6 +363,7 @@
         </div>
     </div>
 
+    <!-- Modal Dokumentasi-->
     <div class="modal fade" id="ModalDokumentasi" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -379,6 +391,7 @@
             </div>
         </div>
     </div>
+    <!-- End Modal Dokumentasi-->
 
     <!-- Modal Filter-->
     <div class="modal fade" id="ModalFilter" tabindex="-1" aria-hidden="true">
@@ -397,33 +410,70 @@
                         <div class="input-group">
                             <input placeholder="Tanggal Awal" class="form-control me-1" type="text"
                                 onfocus="(this.type='date')" onblur="(this.type='text')" id="date"
-                                name="tanggal_awal">
+                                name="tanggal_awal" required>
                             <input placeholder="Tanggal Akhir" class="form-control ms-1" type="text"
                                 onfocus="(this.type='date')" onblur="(this.type='text')" id="date"
-                                name="tanggal_akhir">
+                                name="tanggal_akhir" required>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" form="form_filter" class="btn btn-primary justify-content-center">
-                        Filter
-                    </button>
-                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
-                        Tutup
-                    </button>
+                    <div class="float-end">
+                        <button type="submit" form="form_filter" class="btn btn-primary justify-content-center">
+                            Filter
+                        </button>
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                            Tutup
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- End Modal Filter-->
+
+    <!-- Modal Export Excel -->
+    <div class="modal fade" id="ModalExportExcel" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAdminTitle">Apakah anda yakin?</h5>
+                </div>
+                <div class="modal-body pt-3 mb-0">
+                    <div class="p-2 text-center">
+                        <h1 class="text-center align-middle text-success mt-2" style="font-size: 100px">
+                            <i class="mdi mdi-file-excel mx-auto"></i>
+                        </h1>
+                        <div class="text-slate-500 mt-2">File excel akan didownload sesuai data yang difilter!</div>
+                    </div>
+                </div>
+
+                <div class="modal-footer mt-2">
+                    <div class="float-end">
+                        <button type="submit" formtarget="_blank" form="form_export_excel" onclick="closeModal()"
+                            class="btn btn-success justify-content-center">
+                            Download Excel
+                        </button>
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                            Tutup
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Export Excel-->
 @endsection
 
 @section('javascript')
-    <script>
-        $(document).ready(function() {
-            $('#ModalDokumentasi').on('show.bs.modal', function(e) {
-                var photo = $(e.relatedTarget).data('photo');
-                document.getElementById("photo_modal").src = photo;
-            });
+    <script type="text/javascript">
+        $('#ModalDokumentasi').on('show.bs.modal', function(e) {
+            var photo = $(e.relatedTarget).data('photo');
+            document.getElementById("photo_modal").src = photo;
         });
+
+        function closeModal() {
+            $("#ModalExportExcel").modal("hide");
+        }
     </script>
 @endsection

@@ -197,28 +197,27 @@
     <div id="import-file-modal" class="modal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-body p-2">
-                    <div class="p-2 text-center">
-                        <form action="{{ route('lengkung.import') }}" method="POST" enctype="multipart/form-data">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="modalAdminTitle">Import File Excel Lengkung</h5>
+                <div class="p-2 text-center">
+                    <form action="{{ route('lengkung.import') }}" method="POST" enctype="multipart/form-data">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalAdminTitle">Import File Excel Lengkung</h5>
+                        </div>
+                        <div class="modal-body">
+                            @csrf
+                            @method('post')
+                            <div class="form-group">
+                                <label class="form-label float-start">File Excel</label>
+                                <input type="file" name="file_excel" class="form-control" required>
                             </div>
-                            <div class="modal-body">
-                                @csrf
-                                @method('post')
-                                <div class="row mb-4">
-                                    <div class="col">
-                                        <input type="file" name="file_excel" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary mx-3">Import</button>
-                                    <button type="button" data-bs-dismiss="modal"
-                                        class="btn btn-outline-danger">Cancel</button>
-                                </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="float-end">
+                                <button type="submit" class="btn btn-primary mx-3">Import</button>
+                                <button type="button" data-bs-dismiss="modal"
+                                    class="btn btn-outline-danger">Cancel</button>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -273,12 +272,14 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" form="form_filter" class="btn btn-primary justify-content-center">
-                        Filter
-                    </button>
-                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
-                        Tutup
-                    </button>
+                    <div class="float-end">
+                        <button type="submit" form="form_filter" class="btn btn-primary justify-content-center">
+                            Filter
+                        </button>
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                            Tutup
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

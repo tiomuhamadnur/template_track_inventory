@@ -35,7 +35,7 @@ class WeselExaminationExport implements FromView
         }
 
         return view('mainline.mainline_wesel_examination.export-excel', [
-            'wesel' => $wesel->orderBy('tanggal', 'asc')->get(),
+            'wesel' => $wesel->orderBy('tanggal', 'ASC')->get(),
         ]);
     }
 }

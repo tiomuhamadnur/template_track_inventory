@@ -103,7 +103,7 @@ class DashboardController extends Controller
             ->whereNot('part_id', 2)
             ->count();
 
-        $pic = PIC::where('tahun', $tahun_ini)->get();
+        $pic = PIC::where('tahun', $tahun_ini)->join('annual_planning', 'annual_planning.id', '=', 'pic_job.job_id')->orderBy('annual_planning.name', 'ASC')->get();
 
         $temuan_LBBS = DB::table('summary_temuan')
             ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')

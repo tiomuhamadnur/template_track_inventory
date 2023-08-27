@@ -28,7 +28,7 @@
                                     <i class="ti-printer"></i></a>
                             </div>
                             <div class="table-responsive pt-2">
-                                <table id="data-tables" class="table table-bordered">
+                                <table id="data-table" class="table table-bordered">
                                     <thead>
                                         <tr>
                                             <th class="text-center">
@@ -67,7 +67,7 @@
                                                     <div class="btn-group">
                                                         <a href="{{ route('wesel.examination.history', Crypt::encryptString($item->id)) }}"
                                                             type="button" title="Show history data pengukuran"
-                                                            class="btn btn-outline-primary mx-0">Show</a>
+                                                            class="btn btn-outline-primary mx-0">Show History</a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -88,15 +88,13 @@
         <div class="modal-dialog modal-dialog modal-md" role="document">
             <div class="modal-content">
                 <form action="{{ route('wesel.examination.report') }}" method="GET">
-                    @csrf
-                    @method('get')
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalAdminTitle">Generate Report Turnout Examination</h5>
+                        <h5 class="modal-title" id="modalAdminTitle">Generate Form Turnout Examination</h5>
                     </div>
                     <div class="modal-body pt-3 mb-0">
                         <div class="form-group align-middle">
                             <label class="form-label">Wesel</label> <br>
-                            <select name="wesel_id" class="form-select wesel_id" required>
+                            <select name="wesel_id" class="form-select" required>
                                 <option value="" disabled selected>- Pilih nama wesel -</option>
                                 @foreach ($wesel as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }} ({{ $item->area->code ?? '' }}
@@ -111,12 +109,15 @@
                     </div>
 
                     <div class="modal-footer mt-2">
-                        <button type="submit" formtarget="_blank" class="btn btn-primary justify-content-center">
-                            Generate
-                        </button>
-                        <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">
-                            Tutup
-                        </button>
+                        <div class="float-end">
+                            <button type="submit" formtarget="_blank" onclick="closeModal()"
+                                class="btn btn-primary justify-content-center">
+                                Generate
+                            </button>
+                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                                Tutup
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -137,5 +138,9 @@
         });
 
         $('.wesel_id').select2();
+
+        function closeModal() {
+            $("#ModalReport").modal("hide");
+        }
     </script>
 @endsection

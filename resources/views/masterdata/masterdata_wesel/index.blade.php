@@ -39,16 +39,16 @@
                                                 No
                                             </th>
                                             <th class="text-center">
-                                                Name
-                                            </th>
-                                            <th class="text-center">
-                                                Tipe
-                                            </th>
-                                            <th class="text-center">
                                                 Area
                                             </th>
                                             <th class="text-center">
                                                 Line
+                                            </th>
+                                            <th class="text-center">
+                                                Name
+                                            </th>
+                                            <th class="text-center">
+                                                Tipe
                                             </th>
                                             <th class="text-center">
                                                 Action
@@ -62,17 +62,17 @@
                                                     {{ $loop->iteration }}
                                                 </td>
                                                 <td class="text-center">
+                                                    {{ $item->area->code ?? '-' }}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ $item->line->code ?? '-' }}
+                                                </td>
+                                                <td class="text-center fw-bolder">
                                                     {{ $item->name }}
                                                 </td>
                                                 <td class="text-center">
                                                     {{ $item->tipe . ' ' ?? '' }}
                                                     {{ $item->direction ?? '' }}
-                                                </td>
-                                                <td class="text-center">
-                                                    {{ $item->area->code ?? '-' }}
-                                                </td>
-                                                <td class="text-center">
-                                                    {{ $item->line->code ?? '-' }}
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">

@@ -1,7 +1,7 @@
 @extends('layout.form.form')
 
 @section('head')
-    <title>Form Data Joint</title>
+    <title>Form Data Joint | CPWTM</title>
 @endsection
 
 @section('body')

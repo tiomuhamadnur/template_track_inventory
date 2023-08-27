@@ -1,7 +1,7 @@
 @extends('masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title> Edit PIC | TCSM</title>
+    <title> Edit PIC | CPWTM</title>
 @endsection
 @section('sub-content')
     <div class="row flex-grow">
@@ -11,7 +11,7 @@
                     <div class="d-sm-flex justify-content-between align-items-start">
                         <div>
                             <h4 class="card-title card-title-dash">Edit Data PIC</h4>
-                            <p class="card-subtitle card-subtitle-dash">Permanent Way RAMS</p>
+                            <p class="card-subtitle card-subtitle-dash">{{ auth()->user()->departement }}</p>
                         </div>
                     </div>
 

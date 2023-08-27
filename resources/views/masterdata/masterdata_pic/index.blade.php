@@ -11,14 +11,22 @@
                     <div class="d-sm-flex justify-content-between align-items-start">
                         <div>
                             <h4 class="card-title card-title-dash">Preventive Work Person In Charge (Periode:
-                                {{ \Carbon\Carbon::now()->format('Y') }})</h4>
-                            <p class="card-subtitle card-subtitle-dash">Permanent Way RAMS</p>
+                                {{ $tahun }})</h4>
+                            <p class="card-subtitle card-subtitle-dash">{{ auth()->user()->departement }}</p>
                         </div>
-                        <div>
-                            <a href="/pic-create"><button class="btn btn-primary btn-sm text-white mb-0 me-0"
+                        <div class="float-right">
+                            <a href="{{ route('pic.create') }}"><button class="btn btn-primary btn-sm text-white mb-0 me-0"
                                     type="button">Add new PIC</button></a>
+                            <a href="#" type="button" data-bs-toggle="modal" data-bs-target="#ModalFilter"
+                                title="Filter data">
+                                <button class="btn btn-warning btn-sm text-white mb-0 me-0" type="button">
+                                    <i class="ti-filter"></i>
+                                    Filter
+                                </button>
+                            </a>
                         </div>
                     </div>
+
                     <div class="table-responsive  mt-1">
                         <table class="table select-table" style="width: 100%">
                             <thead>
@@ -108,4 +116,40 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Filter-->
+    <div class="modal fade" id="ModalFilter" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form id="form_filter" action="{{ route('pic.filter') }}" method="GET">
+                        <div class="form-group">
+                            @php
+                                $tahun_ini = $tahun - 5;
+                            @endphp
+                            <label class="form-label">Tahun</label>
+                            <select class="form-select" name="tahun">
+                                <option disabled selected>- Pilih Tahun -</option>
+                                @for ($i = $tahun_ini; $i <= $tahun + 5; $i++)
+                                    <option value="{{ $i }}" @if ($i == $tahun) selected @endif>
+                                        {{ $i }}</option>
+                                @endfor
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="float-right">
+                        <button type="submit" form="form_filter" class="btn btn-primary justify-content-center">
+                            Filter
+                        </button>
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                            Tutup
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Filter-->
 @endsection

@@ -1,7 +1,7 @@
 @extends('masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title>Edit Data Buffer/Wheel Stop | TCSM</title>
+    <title>Edit Data Buffer/Wheel Stop | CPWTM</title>
 @endsection
 
 @section('sub-content')

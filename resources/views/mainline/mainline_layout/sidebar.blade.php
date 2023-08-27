@@ -21,10 +21,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('accelerometer.index') }}">Accelerometer</a>
                     </li>
-                    {{-- <li class="nav-item"><a class="nav-link" href="{{ route('wesel.examination.index') }}">Turn Out
+                    <li class="nav-item"><a class="nav-link" href="{{ route('wesel.examination.index') }}">Turn Out
                             Irregularity</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('buffer.examination.index') }}">Buffer/Wheel
+                    {{-- <li class="nav-item"><a class="nav-link" href="{{ route('buffer.examination.index') }}">Buffer/Wheel
                             Stop Exam.</a>
                     </li> --}}
                     <li class="nav-item">

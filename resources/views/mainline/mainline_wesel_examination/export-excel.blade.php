@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>{{ $wesel->first()->wesel->name ?? '' }}</title>
 </head>
 
 <body>
@@ -14,6 +14,9 @@
             <tr class="fw-bolder">
                 <td rowspan="3">
                     Tanggal
+                </td>
+                <td rowspan="3">
+                    Examiner
                 </td>
                 <td rowspan="3">
                     No. Turn Out
@@ -32,9 +35,6 @@
                 </td>
                 <td colspan="2">
                     Back Gauge
-                </td>
-                <td rowspan="3">
-                    Dokumentasi
                 </td>
             </tr>
             <tr class="fw-bolder">
@@ -88,9 +88,10 @@
             @foreach ($wesel as $item)
                 <tr>
                     <td>
-                        <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                            {{ $item->tanggal ?? '' }}
-                        </div>
+                        {{ $item->tanggal ?? '' }}
+                    </td>
+                    <td>
+                        {{ $item->pic ?? '' }}
                     </td>
                     <td>
                         <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
@@ -267,49 +268,29 @@
                         </div>
                     </td>
                     <td>
-                        <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                            {{ $item->AL_9 ?? '' }}
-                        </div>
+                        {{ $item->AL_9 ?? '' }}
                     </td>
 
                     {{-- LONGITUDINAL LEVEL --}}
                     <td>
-                        <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                            {{ $item->LL_2 ?? '' }}
-                        </div>
+                        {{ $item->LL_2 ?? '' }}
                     </td>
                     <td>
-                        <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                            {{ $item->LL_5 ?? '' }}
-                        </div>
+                        {{ $item->LL_5 ?? '' }}
                     </td>
                     <td>
-                        <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                            {{ $item->LL_5A ?? '' }}
-                        </div>
+                        {{ $item->LL_5A ?? '' }}
                     </td>
                     <td>
-                        <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                            {{ $item->LL_9 ?? '' }}
-                        </div>
+                        {{ $item->LL_9 ?? '' }}
                     </td>
 
                     {{-- BACK GAUGE --}}
                     <td>
-                        <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                            {{ $item->BG_8 ?? '' }}
-                        </div>
+                        {{ $item->BG_8 ?? '' }}
                     </td>
                     <td>
-                        <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                            {{ $item->BG_8A ?? '' }}
-                        </div>
-                    </td>
-
-                    <td>
-                        <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                            {{ asset('storage/' . $item->photo) }}
-                        </div>
+                        {{ $item->BG_8A ?? '' }}
                     </td>
                 </tr>
             @endforeach

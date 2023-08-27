@@ -29,6 +29,13 @@
             </a>
         </li>
 
+        <li class="nav-item animate__animated animate__fadeInLeft">
+            <a class="nav-link" href="/usermanage" aria-expanded="false" aria-controls="auth">
+                <i class="menu-icon mdi mdi-account-multiple"></i>
+                <span class="menu-title">Management User</span>
+            </a>
+        </li>
+
         <li class="nav-item nav-category">Master Data</li>
         <li class="nav-item animate__animated animate__fadeInLeft">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
@@ -113,12 +120,6 @@
             <a class="nav-link" href="{{ route('profile') }}" aria-expanded="false" aria-controls="auth">
                 <i class="menu-icon mdi mdi-account"></i>
                 <span class="menu-title">My Profile</span>
-            </a>
-        </li>
-        <li class="nav-item animate__animated animate__fadeInLeft">
-            <a class="nav-link" href="/usermanage" aria-expanded="false" aria-controls="auth">
-                <i class="menu-icon mdi mdi-account-multiple"></i>
-                <span class="menu-title">Management User</span>
             </a>
         </li>
         <li class="nav-item animate__animated animate__fadeInLeft">

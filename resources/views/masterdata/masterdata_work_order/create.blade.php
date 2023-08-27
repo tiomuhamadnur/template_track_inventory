@@ -24,7 +24,7 @@
                                 <div class="form-group">
                                     <label for="exampleInputName1">No Work Order</label>
                                     <input type="text" name="nomor" class="form-control" id="exampleInputName1"
-                                        autocomplete="off">
+                                        autocomplete="off" required>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Nama Pekerjaan</label>

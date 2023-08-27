@@ -9,6 +9,7 @@ use App\Models\Line;
 use App\Models\UltrasonicTestExamination;
 use App\Models\Wesel;
 use App\Models\WorkOrder;
+use Carbon\Carbon;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -18,8 +19,16 @@ class UltrasonicTestController extends Controller
 {
     public function index_wo_ut()
     {
-        $wo_ut = WorkOrder::where('job_id', 25)->orderBy('tanggal_start', 'ASC')->get();
-        return view('mainline.mainline_ut_examination.index_wo_ut', compact(['wo_ut']));
+        $tahun = Carbon::now()->format('Y');
+        $wo_ut = WorkOrder::where('job_id', 25)->whereYear('tanggal_start', $tahun)->orderBy('tanggal_start', 'ASC')->get();
+        return view('mainline.mainline_ut_examination.index_wo_ut', compact(['wo_ut', 'tahun']));
+    }
+
+    public function filter_wo_ut(Request $request)
+    {
+        $tahun = $request->tahun;
+        $wo_ut = WorkOrder::where('job_id', 25)->whereYear('tanggal_start', $tahun)->orderBy('tanggal_start', 'ASC')->get();
+        return view('mainline.mainline_ut_examination.index_wo_ut', compact(['wo_ut', 'tahun']));
     }
 
     public function index($id)

@@ -1,7 +1,7 @@
 @extends('layout.form.form')
 
 @section('head')
-    <title>Form Pemeriksaan Wesel {{ $wesel->wesel->name ?? '' }} ({{ $wesel->tanggal ?? '' }})</title>
+    <title>Form Pemeriksaan Wesel ({{ $wesel->wesel->name ?? '' }} - {{ $wesel->tanggal ?? '' }})</title>
 
     <style>
         .rotate {
@@ -157,10 +157,12 @@
                                 <td style="width: 15px; height: 46px;" rowspan="2">2''</td>
                                 <td style="width: 15px; height: 46px;" rowspan="2">3</td>
                                 <td style="width: 15px; height: 46px;" rowspan="2">3'</td>
-                                <td style="width: 15px; height: 46px;" rowspan="2">4'</td>
+                                <td style="width: 15px; height: 46px; padding-left: 7px; padding-right: 7px;"
+                                    rowspan="2">4'</td>
                                 <td style="width: 15px; height: 46px;" rowspan="2">5</td>
                                 <td style="width: 15px; height: 46px;" rowspan="2">5'</td>
-                                <td style="width: 15px; height: 46px;" rowspan="2">6'</td>
+                                <td style="width: 15px; height: 46px; padding-left: 7px; padding-right: 7px;"
+                                    rowspan="2">6'</td>
                                 <td style="width: 15px; height: 46px;" rowspan="2">7</td>
                                 <td style="width: 15px; height: 46px;" rowspan="2">7'</td>
                                 <td style="width: 15px; height: 46px;" rowspan="2">10</td>
@@ -169,8 +171,10 @@
                                 <td style="width: 15px; height: 46px;" rowspan="2">2</td>
                                 <td style="width: 15px; height: 46px;" rowspan="2">3</td>
                                 <td style="width: 15px; height: 46px;" rowspan="2">3'</td>
-                                <td style="width: 15px; height: 46px;" rowspan="2">4</td>
-                                <td style="width: 15px; height: 46px;" rowspan="2">4'</td>
+                                <td style="width: 15px; height: 46px; padding-left: 7px; padding-right: 7px;"
+                                    rowspan="2">4</td>
+                                <td style="width: 15px; height: 46px; padding-left: 7px; padding-right: 7px;"
+                                    rowspan="2">4'</td>
                                 <td style="width: 15px; height: 46px;" rowspan="2">5</td>
                                 <td style="width: 15px; height: 46px;" rowspan="2">5'</td>
                                 <td style="width: 15px; height: 46px;" rowspan="2">7</td>
@@ -860,304 +864,6 @@
                                 <td></td>
                             </tr>
                             {{-- BAGIAN 2 AKHIR --}}
-
-                            {{-- BAGIAN 3 AWAL --}}
-                            <tr style="height: 23px;">
-                                <td>
-                                    <div class="text-danger" style="font-size: 10px">Manual measurement / Apparatus</div>
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr style="height: 23px;">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr style="height: 23px;">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            {{-- BAGIAN 3 AKHIR --}}
-
-                            {{-- BAGIAN 4 AWAL --}}
-                            <tr style="height: 23px;">
-                                <td>
-                                    <div class="text-danger" style="font-size: 10px">Manual measurement / Apparatus</div>
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr style="height: 23px;">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr style="height: 23px;">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            {{-- BAGIAN 4 AKHIR --}}
 
                         </tbody>
                     </table>

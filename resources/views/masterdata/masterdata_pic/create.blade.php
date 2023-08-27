@@ -1,7 +1,7 @@
 @extends('masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title> Add PIC | TCSM</title>
+    <title> Add PIC | CPWTM</title>
 @endsection
 @section('sub-content')
     <div class="row flex-grow">
@@ -11,7 +11,7 @@
                     <div class="d-sm-flex justify-content-between align-items-start">
                         <div>
                             <h4 class="card-title card-title-dash">Management PIC</h4>
-                            <p class="card-subtitle card-subtitle-dash">Permanent Way RAMS</p>
+                            <p class="card-subtitle card-subtitle-dash">{{ auth()->user()->departement }}</p>
                         </div>
                     </div>
 
@@ -25,7 +25,7 @@
                                         <label for="crud-form-1" class="form-label mt-2">Nama PIC</label>
                                         <select data-placeholder="Select line area" class="form-control w-full"
                                             id="crud-form-2" required name="user_id">
-                                            <option value="" disabled selected>- Pilih Tim -</option>
+                                            <option value="" disabled selected>- Pilih Personil -</option>
                                             @foreach ($technician as $item)
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                                             @endforeach
@@ -50,7 +50,8 @@
 
                                     <div>
                                         <label for="crud-form-1" class="form-label mt-2">Progress</label>
-                                        <input type="number" class="form-control" name="progress" min="0">
+                                        <input type="number" class="form-control" value="0" name="progress"
+                                            min="0">
                                     </div>
 
                                     <div class="text-right mt-5">

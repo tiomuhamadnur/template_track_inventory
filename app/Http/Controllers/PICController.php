@@ -16,18 +16,21 @@ class PICController extends Controller
     public function index()
     {
         $tahun = Carbon::now()->format('Y');
-        $pic = PIC::where('tahun', $tahun)->get();
+        $pic = PIC::where('tahun', $tahun)
+            ->join('annual_planning', 'annual_planning.id', '=', 'pic_job.job_id')
+            ->orderBy('annual_planning.name', 'ASC')
+            ->get();
 
-        return view('pic.index', compact(['pic']));
+        return view('masterdata.masterdata_pic.index', compact(['pic', 'tahun']));
     }
 
     public function create()
     {
-        $technician = Pegawai::where('jabatan', 'Technician')->get();
-        $job = PM::all();
+        $technician = Pegawai::where('jabatan', 'Technician')->orderBy('name', 'ASC')->get();
+        $job = PM::orderBy('name', 'ASC')->get();
         $tahun = Carbon::now()->format('Y');
 
-        return view('pic.create', compact(['technician', 'job', 'tahun']));
+        return view('masterdata.masterdata_pic.create', compact(['technician', 'job', 'tahun']));
     }
 
     public function store(Request $request)
@@ -69,6 +72,17 @@ class PICController extends Controller
         }
     }
 
+    public function pic_filter(Request $request)
+    {
+        $tahun = $request->tahun;
+        $pic = PIC::where('tahun', $tahun)
+            ->join('annual_planning', 'annual_planning.id', '=', 'pic_job.job_id')
+            ->orderBy('annual_planning.name', 'ASC')
+            ->get();
+
+        return view('masterdata.masterdata_pic.index', compact(['pic', 'tahun']));
+    }
+
     public function update()
     {
         return view('profile.update');
@@ -88,7 +102,7 @@ class PICController extends Controller
         ]);
         $id = auth()->user()->id;
         if ($request->hasFile('photo') && $request->photo != '') {
-            $photo_profil = $request->file('photo')->store('photo-profil/'.auth()->user()->role);
+            $photo_profil = $request->file('photo')->store('photo-profil/' . auth()->user()->role);
             $user = Pegawai::findOrFail($id);
             $user->update([
                 'photo' => $photo_profil,
@@ -109,7 +123,7 @@ class PICController extends Controller
         ]);
         $id = auth()->user()->id;
         if ($request->hasFile('photo_ttd') && $request->photo_ttd != '') {
-            $photo_ttd = $request->file('photo_ttd')->store('photo-ttd/'.auth()->user()->role);
+            $photo_ttd = $request->file('photo_ttd')->store('photo-ttd/' . auth()->user()->role);
             $user = Pegawai::findOrFail($id);
             $user->update([
                 'ttd' => $photo_ttd,
@@ -145,13 +159,13 @@ class PICController extends Controller
 
     public function edit($id)
     {
-        $technician = Pegawai::where('jabatan', 'Technician')->get();
-        $job = PM::all();
+        $technician = Pegawai::where('jabatan', 'Technician')->orderBy('name', 'ASC')->get();
+        $job = PM::orderBy('name', 'ASC')->get();
         try {
             $secret = Crypt::decryptString($id);
             $pic = PIC::findOrFail($secret);
             if ($pic) {
-                return view('pic.update', compact(['pic', 'technician', 'job']));
+                return view('masterdata.masterdata_pic.update', compact(['pic', 'technician', 'job']));
             } else {
                 return redirect()->back();
             }

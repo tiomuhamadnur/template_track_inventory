@@ -15,7 +15,17 @@
                 <div class="col-lg-12 grid-margin stretch-card mt-3">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Data Ultrasonic Test by Work Order</h4>
+                            <h4 class="card-title">Data Ultrasonic Test by Work Order (Tahun: {{ $tahun ?? '' }})</h4>
+                            <div class="btn-group">
+                                <a href="{{ route('ut.examination.index_wo_ut') }}" class="btn btn-outline-dark btn-lg mx-0"
+                                    type="button" title="Reset Filter">
+                                    <i class="ti-reload"></i>
+                                </a>
+                                <a href="#" class="btn btn-outline-warning btn-lg mx-0" type="button"
+                                    data-bs-toggle="modal" data-bs-target="#ModalFilter" title="Filter data">
+                                    <i class="ti-filter"></i> Filter
+                                </a>
+                            </div>
                             <div class="table-responsive pt-3">
                                 <table class="table table-bordered">
                                     <thead>
@@ -42,7 +52,7 @@
                                             <tr>
                                                 <td colspan="5" class="text-center fw-bolder">
                                                     Belum ada data Work Order untuk pekerjaan Ultrasonic Test, silahkan
-                                                    hubungi PIC terkait.
+                                                    hubungi Admin atau PIC terkait.
                                                 </td>
                                             </tr>
                                         @else
@@ -58,7 +68,7 @@
                                                         {{ $item->job->name }}
                                                     </td>
                                                     <td class="text-center">
-                                                        {{ \Carbon\Carbon::parse($item->tanggal_start)->format('Y') }}
+                                                        {{ \Carbon\Carbon::parse($item->tanggal_start)->format('F Y') }}
                                                     </td>
                                                     <td class="text-center">
                                                         <div class="btn-group">
@@ -80,4 +90,45 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Filter-->
+    <div class="modal fade" id="ModalFilter" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>
+                        Filter Work Order NDT by Year
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form id="form_filter" action="{{ route('ut.examination.filter_wo_ut') }}" method="GET">
+                        <div class="form-group">
+                            @php
+                                $tahun_ini = $tahun - 5;
+                            @endphp
+                            <label class="form-label">Tahun</label>
+                            <select class="form-select" name="tahun">
+                                <option disabled selected>- Pilih Tahun -</option>
+                                @for ($i = $tahun_ini; $i <= $tahun + 5; $i++)
+                                    <option value="{{ $i }}" @if ($i == $tahun) selected @endif>
+                                        {{ $i }}</option>
+                                @endfor
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="float-end">
+                        <button type="submit" form="form_filter" class="btn btn-primary mx-1">
+                            Filter
+                        </button>
+                        <button type="button" class="btn btn-outline-danger mx-1" data-bs-dismiss="modal">
+                            Tutup
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Filter-->
 @endsection

@@ -48,6 +48,15 @@
                                     <input type="text" name="description" value="{{ $work_order->description }}"
                                         class="form-control" id="exampleInputName1" autocomplete="off">
                                 </div>
+                                <div class="form-group">
+                                    <label for="exampleInputName1">Status</label>
+                                    <select class="form-select" name="status" required>
+                                        <option value="open" @if ($work_order->status == 'open') selected @endif>Open
+                                        </option>
+                                        <option value="close" @if ($work_order->status == 'close') selected @endif>Close
+                                        </option>
+                                    </select>
+                                </div>
                                 <button type="submit" class="btn btn-outline-primary me-2">Submit</button>
                                 <a href="{{ route('wo.index') }}" class="btn btn-light">Cancel</a>
                             </form>

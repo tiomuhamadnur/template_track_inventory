@@ -90,6 +90,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/pic-create', 'create')->name('pic.create');
         Route::post('/pic', 'store')->name('pic.store');
         Route::get('/pic/{id}/edit', 'edit')->name('pic.edit');
+        Route::get('/pic-filter', 'pic_filter')->name('pic.filter');
         Route::put('/pic', 'pic_update')->name('pic.update');
 
         Route::get('/profile', 'profile')->name('profile');
@@ -244,6 +245,7 @@ Route::middleware(['auth'])->group(function () {
     // ULTRASONIC TEST EXAMINATION
     Route::controller(UltrasonicTestController::class)->group(function () {
         Route::get('/ultrasonic-test-examination/work-order', 'index_wo_ut')->name('ut.examination.index_wo_ut');
+        Route::get('/ultrasonic-test-examination/work-order-filter', 'filter_wo_ut')->name('ut.examination.filter_wo_ut');
         Route::get('/ultrasonic-test-examination/{id}/detail', 'index')->name('ut.examination.index');
         Route::get('/ultrasonic-test-examination/{id}/history', 'history')->name('ut.examination.history');
         Route::get('/ultrasonic-test-examination/{id}/create', 'create')->name('ut.examination.create');
@@ -460,6 +462,7 @@ Route::middleware(['auth'])->group(function () {
         Route::controller(WorkOrderController::class)->group(function () {
             Route::get('/work-order', 'index')->name('wo.index');
             Route::get('/work-order-create', 'create')->name('wo.create');
+            Route::get('/work-order-filter', 'filter')->name('wo.filter');
             Route::post('/work-order', 'store')->name('wo.store');
             Route::get('/work-order/{id}/edit', 'edit')->name('wo.edit');
             Route::put('/work-order', 'update')->name('wo.update');

@@ -110,8 +110,8 @@ class WeselExaminationController extends Controller
     {
         try {
             $secret = Crypt::decryptString($id);
-            $wesel = WeselExamination::where('wesel_id', $secret)->get();
-            $wesel_name = Wesel::where('id', $secret)->first();
+            $wesel = WeselExamination::where('wesel_id', $secret)->orderBy('tanggal', 'ASC')->get();
+            $wesel_name = Wesel::findOrFail($secret);
             $tanggal_awal = '';
             $tanggal_akhir = '';
 
@@ -133,7 +133,7 @@ class WeselExaminationController extends Controller
         $tanggal_akhir = $request->tanggal_akhir;
 
         $wesel = WeselExamination::query();
-        $wesel_name = Wesel::where('id', $wesel_id)->first();
+        $wesel_name = Wesel::findOrFail($wesel_id);
 
         // Filter by wesel_id
         $wesel->when($wesel_id, function ($query) use ($request) {
@@ -151,7 +151,7 @@ class WeselExaminationController extends Controller
         }
 
         return view('mainline.mainline_wesel_examination.history', [
-            'wesel' => $wesel->orderBy('tanggal', 'asc')->get(),
+            'wesel' => $wesel->orderBy('tanggal', 'ASC')->get(),
             'wesel_name' => $wesel_name,
             'tanggal_awal' => $tanggal_awal,
             'tanggal_akhir' => $tanggal_akhir,
@@ -165,7 +165,7 @@ class WeselExaminationController extends Controller
         $tanggal_awal = $request->tanggal_awal;
         $tanggal_akhir = $request->tanggal_akhir;
 
-        $waktu = Carbon::now();
+        $waktu = Carbon::now()->format('Ymd');
 
         return Excel::download(new WeselExaminationExport($wesel_id, $tanggal_awal, $tanggal_akhir), $waktu.'_data pengukuran_'.$wesel_name.'.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
