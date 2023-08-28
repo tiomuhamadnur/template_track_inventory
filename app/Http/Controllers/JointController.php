@@ -21,9 +21,13 @@ class JointController extends Controller
 {
     public function index()
     {
-        $joint = Joint::query()
-            ->select('joint.*', 'joint.id AS id', 'mainline.kilometer AS mainline_kilometer')
-            ->join('mainline', 'mainline.id', '=', 'joint.mainline_id')
+        $joint = Joint::join('mainline', 'mainline.id', '=', 'joint.mainline_id')
+            ->select(
+                'joint.*',
+                'joint.id as id',
+                'mainline.kilometer as mainline_kilometer',
+                'joint.name as name',
+            )
             ->whereNot('joint.area_id', 1)
             ->where('repaired', null)
             ->orderBy('mainline_kilometer', 'ASC')
@@ -39,7 +43,19 @@ class JointController extends Controller
         $tipe = '';
         $wesel_id = '';
 
-        return view('masterdata.masterdata_joint.index', compact(['joint', 'joint_no_span', 'area', 'line', 'wesel', 'area_id', 'line_id', 'tipe', 'wesel_id']));
+        return view('masterdata.masterdata_joint.index', compact(
+            [
+                'joint',
+                'joint_no_span',
+                'area',
+                'line',
+                'wesel',
+                'area_id',
+                'line_id',
+                'tipe',
+                'wesel_id'
+            ]
+        ));
     }
 
     public function depo()
@@ -119,9 +135,13 @@ class JointController extends Controller
         $line = Line::whereNot('area', 'Depo')->get();
         $wesel = Wesel::whereNot('area_id', 1)->get();
 
-        $joint = Joint::query()
-            ->select('joint.*', 'joint.id AS id', 'mainline.kilometer AS mainline_kilometer')
-            ->join('mainline', 'mainline.id', '=', 'joint.mainline_id')
+        $joint = Joint::join('mainline', 'mainline.id', '=', 'joint.mainline_id')
+            ->select(
+                'joint.*',
+                'joint.id as id',
+                'mainline.kilometer as mainline_kilometer',
+                'joint.name as name',
+            )
             ->whereNot('joint.area_id', 1)
             ->where('repaired', null);
 
@@ -146,13 +166,12 @@ class JointController extends Controller
         });
 
         $joint->orderBy('mainline_kilometer', 'ASC')
-            ->orderBy('name', 'ASC')
-            ->get();
+            ->orderBy('name', 'ASC');
 
         return view(
             'masterdata.masterdata_joint.index',
             [
-                'joint' => $joint,
+                'joint' => $joint->get(),
                 'area' => $area,
                 'line' => $line,
                 'wesel' => $wesel,
