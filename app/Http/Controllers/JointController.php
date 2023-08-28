@@ -26,7 +26,7 @@ class JointController extends Controller
             ->whereNot('joint.area_id', 1)
             ->where('repaired', null)
             ->withCasts([
-                'mainline.kilometer' => 'float'
+                'mainline.kilometer' => 'integer',
             ])
             ->orderBy('mainline.kilometer', 'ASC')
             ->orderBy('name', 'ASC')
@@ -147,7 +147,7 @@ class JointController extends Controller
         });
 
         $joint->withCasts([
-            'mainline.kilometer' => 'float'
+            'mainline.kilometer' => 'integer'
         ])
             ->orderBy('mainline.kilometer', 'ASC')
             ->orderBy('joint.name', 'ASC');
