@@ -21,13 +21,14 @@ class JointController extends Controller
 {
     public function index()
     {
-        $joint = Joint::join('mainline', 'mainline.id', '=', 'joint.mainline_id')
+        $joint = Joint::query()
             ->select(
                 'joint.*',
                 'joint.id as id',
                 'mainline.kilometer as mainline_kilometer',
                 'joint.name as name',
             )
+            ->join('mainline', 'mainline.id', '=', 'joint.mainline_id')
             ->whereNot('joint.area_id', 1)
             ->where('repaired', null)
             ->orderBy('mainline_kilometer', 'ASC')
@@ -135,13 +136,14 @@ class JointController extends Controller
         $line = Line::whereNot('area', 'Depo')->get();
         $wesel = Wesel::whereNot('area_id', 1)->get();
 
-        $joint = Joint::join('mainline', 'mainline.id', '=', 'joint.mainline_id')
+        $joint = Joint::query()
             ->select(
                 'joint.*',
                 'joint.id as id',
                 'mainline.kilometer as mainline_kilometer',
                 'joint.name as name',
             )
+            ->join('mainline', 'mainline.id', '=', 'joint.mainline_id')
             ->whereNot('joint.area_id', 1)
             ->where('repaired', null);
 
