@@ -22,10 +22,10 @@ class JointController extends Controller
     public function index()
     {
         $joint = Joint::join('mainline', 'mainline.id', '=', 'joint.mainline_id')
-            ->select('joint.*', 'joint.id AS id', 'mainline.kilometer AS kilometer')
+            ->select('joint.*', 'joint.id AS id', 'mainline.kilometer AS mainline_kilometer')
             ->whereNot('joint.area_id', 1)
             ->where('repaired', null)
-            ->orderBy('kilometer', 'ASC')
+            ->orderBy('mainline_kilometer', 'ASC')
             ->orderBy('name', 'ASC')
             ->get();
         $area = Area::whereNot('area', 'Depo')->get();
@@ -119,7 +119,7 @@ class JointController extends Controller
         $wesel = Wesel::whereNot('area_id', 1)->get();
 
         $joint = Joint::join('mainline', 'mainline.id', '=', 'joint.mainline_id')
-            ->select('joint.*', 'joint.id AS id', 'mainline.kilometer AS kilometer')
+            ->select('joint.*', 'joint.id AS id', 'mainline.kilometer AS mainline_kilometer')
             ->whereNot('joint.area_id', 1)
             ->where('repaired', null);
 
@@ -143,7 +143,7 @@ class JointController extends Controller
             return $query->where('wesel_id', $request->wesel_id);
         });
 
-        $joint->orderBy('kilometer', 'ASC')
+        $joint->orderBy('mainline_kilometer', 'ASC')
             ->orderBy('name', 'ASC')
             ->get();
 
