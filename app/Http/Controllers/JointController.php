@@ -22,6 +22,7 @@ class JointController extends Controller
     public function index()
     {
         $joint = Joint::join('mainline', 'mainline.id', '=', 'joint.mainline_id')
+            ->select('joint.*', 'joint.id AS id')
             ->whereNot('joint.area_id', 1)
             ->where('repaired', null)
             ->orderBy('mainline.kilometer', 'ASC')
@@ -117,20 +118,19 @@ class JointController extends Controller
         $line = Line::whereNot('area', 'Depo')->get();
         $wesel = Wesel::whereNot('area_id', 1)->get();
 
-        $joint = Joint::query()->select(
-            'joint.*',
-        )
-            ->whereNot('area_id', 1)
+        $joint = Joint::join('mainline', 'mainline.id', '=', 'joint.mainline_id')
+            ->select('joint.*', 'joint.id AS id')
+            ->whereNot('joint.area_id', 1)
             ->where('repaired', null);
 
         // Filter by area_id
         $joint->when($area_id, function ($query) use ($request) {
-            return $query->where('area_id', $request->area_id);
+            return $query->where('joint.area_id', $request->area_id);
         });
 
         // Filter by line_id
         $joint->when($line_id, function ($query) use ($request) {
-            return $query->where('line_id', $request->line_id);
+            return $query->where('joint.line_id', $request->line_id);
         });
 
         // Filter by tipe
@@ -146,7 +146,7 @@ class JointController extends Controller
         return view(
             'masterdata.masterdata_joint.index',
             [
-                'joint' => $joint->get(),
+                'joint' => $joint->orderBy('mainline.kilometer', 'ASC')->orderBy('joint.name', 'ASC')->get(),
                 'area' => $area,
                 'line' => $line,
                 'wesel' => $wesel,
@@ -214,6 +214,7 @@ class JointController extends Controller
     {
         try {
             $secret = Crypt::decryptString($id);
+
             $joint = Joint::findOrFail($secret);
             if ($joint) {
                 $area = Area::all();
