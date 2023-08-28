@@ -26,14 +26,13 @@ class JointController extends Controller
                 'joint.*',
                 'joint.id as id',
                 'mainline.kilometer as mainline_kilometer',
-                'joint.name as name',
             )
             ->join('mainline', 'mainline.id', '=', 'joint.mainline_id')
             ->whereNot('joint.area_id', 1)
             ->where('repaired', null)
             ->orderBy('mainline_kilometer', 'ASC')
-            ->orderBy('name', 'ASC')
             ->get();
+
         $area = Area::whereNot('area', 'Depo')->get();
         $line = Line::whereNot('area', 'Depo')->get();
         $wesel = Wesel::whereNot('area_id', 1)->get();
@@ -141,11 +140,11 @@ class JointController extends Controller
                 'joint.*',
                 'joint.id as id',
                 'mainline.kilometer as mainline_kilometer',
-                'joint.name as name',
             )
             ->join('mainline', 'mainline.id', '=', 'joint.mainline_id')
             ->whereNot('joint.area_id', 1)
-            ->where('repaired', null);
+            ->where('repaired', null)
+            ->orderBy('mainline_kilometer', 'ASC');
 
         // Filter by area_id
         $joint->when($area_id, function ($query) use ($request) {
@@ -166,9 +165,6 @@ class JointController extends Controller
         $joint->when($wesel_id, function ($query) use ($request) {
             return $query->where('wesel_id', $request->wesel_id);
         });
-
-        $joint->orderBy('mainline_kilometer', 'ASC')
-            ->orderBy('name', 'ASC');
 
         return view(
             'masterdata.masterdata_joint.index',
