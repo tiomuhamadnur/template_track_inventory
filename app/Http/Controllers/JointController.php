@@ -25,6 +25,9 @@ class JointController extends Controller
             ->select('joint.*', 'joint.id AS id')
             ->whereNot('joint.area_id', 1)
             ->where('repaired', null)
+            ->withCasts([
+                'mainline.kilometer' => 'float'
+            ])
             ->orderBy('mainline.kilometer', 'ASC')
             ->orderBy('name', 'ASC')
             ->get();
@@ -143,10 +146,16 @@ class JointController extends Controller
             return $query->where('wesel_id', $request->wesel_id);
         });
 
+        $joint->withCasts([
+            'mainline.kilometer' => 'float'
+        ])
+            ->orderBy('mainline.kilometer', 'ASC')
+            ->orderBy('joint.name', 'ASC');
+
         return view(
             'masterdata.masterdata_joint.index',
             [
-                'joint' => $joint->orderBy('mainline.kilometer', 'ASC')->orderBy('joint.name', 'ASC')->get(),
+                'joint' => $joint->get(),
                 'area' => $area,
                 'line' => $line,
                 'wesel' => $wesel,
