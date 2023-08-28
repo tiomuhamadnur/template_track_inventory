@@ -119,11 +119,7 @@
                                                     {{ $item->wesel->name ?? '-' }}
                                                 </td>
                                                 <td class="text-center">
-                                                    @if ($item->mainline_id != null)
-                                                        {{ $item->mainline->kilometer ?? '-' }}
-                                                    @else
-                                                        {{ $item->kilometer ?? '-' }}
-                                                    @endif
+                                                    {{ $item->mainline->kilometer ?? '-' }}
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">
