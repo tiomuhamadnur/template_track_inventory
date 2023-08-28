@@ -21,7 +21,12 @@ class JointController extends Controller
 {
     public function index()
     {
-        $joint = Joint::whereNot('area_id', 1)->where('repaired', null)->get();
+        $joint = Joint::join('mainline', 'mainline.id', '=', 'joint.mainline_id')
+            ->whereNot('joint.area_id', 1)
+            ->where('repaired', null)
+            ->orderBy('mainline.kilometer', 'ASC')
+            ->orderBy('name', 'ASC')
+            ->get();
         $area = Area::whereNot('area', 'Depo')->get();
         $line = Line::whereNot('area', 'Depo')->get();
         $wesel = Wesel::whereNot('area_id', 1)->get();
@@ -37,7 +42,11 @@ class JointController extends Controller
 
     public function depo()
     {
-        $joint = Joint::where('area_id', 1)->where('repaired', null)->orderBy('kilometer', 'asc')->get();
+        $joint = Joint::where('area_id', 1)
+            ->where('repaired', null)
+            ->orderBy('kilometer', 'asc')
+            ->orderBy('name', 'asc')
+            ->get();
         $area = Area::all();
         $line = Line::where('area', 'Depo')->get();
         $wesel = Wesel::where('area_id', 1)->get();
@@ -111,8 +120,8 @@ class JointController extends Controller
         $joint = Joint::query()->select(
             'joint.*',
         )
-        ->whereNot('area_id', 1)
-        ->where('repaired', null);
+            ->whereNot('area_id', 1)
+            ->where('repaired', null);
 
         // Filter by area_id
         $joint->when($area_id, function ($query) use ($request) {
@@ -164,7 +173,7 @@ class JointController extends Controller
         $joint = Joint::query()->select(
             'joint.*',
         )
-        ->where('repaired', null);
+            ->where('repaired', null);
 
         // Filter by area_id
         $joint->when($area_id, function ($query) use ($request) {
@@ -224,7 +233,7 @@ class JointController extends Controller
     {
         $id = $request->id;
         $joint = Joint::findOrFail($id);
-        if(!$joint){
+        if (!$joint) {
             return redirect()->back();
         }
 
@@ -281,7 +290,7 @@ class JointController extends Controller
 
         $waktu = Carbon::now()->format('Ymd');
 
-        return Excel::download(new JointMainlineExport($area_id, $line_id, $tipe, $wesel_id), $waktu.'_data joint mainline.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+        return Excel::download(new JointMainlineExport($area_id, $line_id, $tipe, $wesel_id), $waktu . '_data joint mainline.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 
     public function export_excel_depo(Request $request)
@@ -292,6 +301,6 @@ class JointController extends Controller
 
         $waktu = Carbon::now()->format('Ymd');
 
-        return Excel::download(new JointDepoExport($line_id, $tipe, $wesel_id), $waktu.'_data joint depo.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+        return Excel::download(new JointDepoExport($line_id, $tipe, $wesel_id), $waktu . '_data joint depo.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 }

@@ -77,42 +77,53 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($work_order as $item)
+                                        @if ($work_order->count() == 0)
                                             <tr>
-                                                <td class="text-center">
-                                                    {{ $loop->iteration }}
-                                                </td>
-                                                <td class="text-wrap">
-                                                    {{ $item->nomor }}
-                                                </td>
-                                                <td class="text-wrap">
-                                                    {{ $item->job->name }}
-                                                </td>
-                                                <td class="text-center">
-                                                    {{ $item->tanggal_start }}
-                                                </td>
-                                                <td class="text-center">
-                                                    @if ($item->status == 'close')
-                                                        {{ $item->tanggal_close ?? '-' }}
-                                                    @else
-                                                        -
-                                                    @endif
-                                                </td>
-                                                <td class="text-center">
-                                                    {{ $item->status }}
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="btn-group">
-                                                        <a href="{{ route('wo.edit', Crypt::encryptString($item->id)) }}"
-                                                            type="button" class="btn btn-outline-warning mx-0">Edit</a>
-                                                        <a class="btn btn-outline-danger mx-0" href="javascript:;"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#delete-confirmation-modal"
-                                                            onclick="toggleModal('{{ $item->id }}')">Delete</a>
-                                                    </div>
+                                                <td class="text-center fw-bolder" colspan="7">
+                                                    Tidak ada data Work Order pada <span
+                                                        class="text-danger">{{ date('F', mktime(0, 0, 0, $bulan, 1)) }}
+                                                        {{ $tahun ?? '' }}</span> silahkan hubungi Admin atau PIC terkait.
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        @else
+                                            @foreach ($work_order as $item)
+                                                <tr>
+                                                    <td class="text-center">
+                                                        {{ $loop->iteration }}
+                                                    </td>
+                                                    <td class="text-wrap">
+                                                        {{ $item->nomor }}
+                                                    </td>
+                                                    <td class="text-wrap">
+                                                        {{ $item->job->name }}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{ $item->tanggal_start }}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @if ($item->status == 'close')
+                                                            {{ $item->tanggal_close ?? '-' }}
+                                                        @else
+                                                            -
+                                                        @endif
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{ $item->status }}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <div class="btn-group">
+                                                            <a href="{{ route('wo.edit', Crypt::encryptString($item->id)) }}"
+                                                                type="button" class="btn btn-outline-warning mx-0">Edit</a>
+                                                            <a class="btn btn-outline-danger mx-0" href="javascript:;"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#delete-confirmation-modal"
+                                                                onclick="toggleModal('{{ $item->id }}')">Delete</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
+
                                     </tbody>
                                 </table>
                             </div>
