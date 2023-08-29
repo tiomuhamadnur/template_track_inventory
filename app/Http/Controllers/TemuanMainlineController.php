@@ -136,11 +136,13 @@ class TemuanMainlineController extends Controller
         $tanggal_awal = $request->tanggal_awal;
         $tanggal_akhir = $request->tanggal_akhir;
 
-        $temuan = Temuan::query()->select(
-            'summary_temuan.*',
-            'mainline.area_id as area_id',
-            'mainline.kilometer as kilometer',
-        )->join('mainline', 'mainline.id', '=', 'summary_temuan.mainline_id');
+        $temuan = Temuan::query()
+            ->select(
+                'summary_temuan.*',
+                'mainline.area_id as area_id',
+                'mainline.kilometer as kilometer',
+            )
+            ->join('mainline', 'mainline.id', '=', 'summary_temuan.mainline_id');
 
         // Filter by area_id
         $temuan->when($area_id, function ($query) use ($request) {

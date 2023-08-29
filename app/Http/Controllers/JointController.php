@@ -21,16 +21,17 @@ class JointController extends Controller
 {
     public function index()
     {
-        $joint = Joint::query()
+        $joint = Joint::join('mainline', 'joint.mainline_id', '=', 'mainline.id')
             ->select(
                 'joint.*',
-                'joint.id as id',
-                'mainline.kilometer as mainline_kilometer',
             )
-            ->join('mainline', 'mainline.id', '=', 'joint.mainline_id')
+            ->selectRaw(
+                'CAST(mainline.kilometer AS DECIMAL(10,5)) AS mainline_kilometer'
+            )
             ->whereNot('joint.area_id', 1)
             ->where('repaired', null)
             ->orderBy('mainline_kilometer', 'ASC')
+            ->orderBy('name', 'ASC')
             ->get();
 
         $area = Area::whereNot('area', 'Depo')->get();
@@ -135,16 +136,17 @@ class JointController extends Controller
         $line = Line::whereNot('area', 'Depo')->get();
         $wesel = Wesel::whereNot('area_id', 1)->get();
 
-        $joint = Joint::query()
+        $joint = Joint::join('mainline', 'mainline.id', '=', 'joint.mainline_id')
             ->select(
                 'joint.*',
-                'joint.id as id',
-                'mainline.kilometer as mainline_kilometer',
             )
-            ->join('mainline', 'mainline.id', '=', 'joint.mainline_id')
+            ->selectRaw(
+                'CAST(mainline.kilometer AS DECIMAL(10,5)) AS mainline_kilometer'
+            )
             ->whereNot('joint.area_id', 1)
             ->where('repaired', null)
-            ->orderBy('mainline_kilometer', 'ASC');
+            ->orderBy('mainline_kilometer', 'ASC')
+            ->orderBy('name', 'ASC');
 
         // Filter by area_id
         $joint->when($area_id, function ($query) use ($request) {
