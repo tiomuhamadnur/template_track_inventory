@@ -18,11 +18,15 @@ class JointMainlineExport implements FromView
 
     public function view(): View
     {
-        $joint = Joint::query()->select(
-            'joint.*',
-        )
-        ->whereNot('area_id', 1)
-        ->where('repaired', null);
+        $joint = Joint::join('mainline', 'joint.mainline_id', '=', 'mainline.id')
+            ->select(
+                'joint.*',
+            )
+            ->selectRaw(
+                'CAST(mainline.kilometer AS DECIMAL(10,5)) AS mainline_kilometer'
+            )
+            ->whereNot('area_id', 1)
+            ->where('repaired', null);
 
         // Filter by area_id
         $joint->when($this->area_id, function ($query) {
