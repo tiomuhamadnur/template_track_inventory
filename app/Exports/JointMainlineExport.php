@@ -49,7 +49,7 @@ class JointMainlineExport implements FromView
         });
 
         return view('masterdata.masterdata_joint.export_mainline', [
-            'joint' => $joint->get(),
+            'joint' => $joint->orderBy('mainline_kilometer', 'ASC')->get(),
         ]);
     }
 }
