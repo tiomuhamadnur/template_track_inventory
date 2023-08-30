@@ -25,17 +25,17 @@ class JointMainlineExport implements FromView
             ->selectRaw(
                 'CAST(mainline.kilometer AS DECIMAL(10,5)) AS mainline_kilometer'
             )
-            ->whereNot('area_id', 1)
+            ->whereNot('joint.area_id', 1)
             ->where('repaired', null);
 
         // Filter by area_id
         $joint->when($this->area_id, function ($query) {
-            return $query->where('area_id', $this->area_id);
+            return $query->where('joint.area_id', $this->area_id);
         });
 
         // Filter by line_id
         $joint->when($this->line_id, function ($query) {
-            return $query->where('line_id', $this->line_id);
+            return $query->where('joint.line_id', $this->line_id);
         });
 
         // Filter by tipe
