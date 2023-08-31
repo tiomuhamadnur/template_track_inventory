@@ -59,8 +59,16 @@ class AccelerometerController extends Controller
 
     public function create()
     {
+        $tahun_ini = Carbon::now()->format('Y');
         $bulan_ini = Carbon::now()->format('m');
-        $jadwal = JadwalAccelerometer::whereMonth('tanggal', $bulan_ini)->orderBy('tanggal', 'ASC')->get();
+        $bulan_kemarin = $bulan_ini - 1;
+        $bulan_besok = $bulan_ini + 1;
+        $jadwal = JadwalAccelerometer::whereYear('tanggal', $tahun_ini)
+            ->whereMonth('tanggal', $bulan_ini)
+            ->orWhereMonth('tanggal', $bulan_kemarin)
+            ->orWhereMonth('tanggal', $bulan_besok)
+            ->orderBy('tanggal', 'ASC')
+            ->get();
         $area = Area::where('area', 'Mainline')->where('stasiun', 'false')->get();
 
         return view('mainline.mainline_accelerometer_examination.create', compact(['jadwal', 'area']));
