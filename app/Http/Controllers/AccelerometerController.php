@@ -78,6 +78,12 @@ class AccelerometerController extends Controller
     {
         $jadwal_id = $request->jadwal_id;
 
+        $jadwal = Accelerometer::where('jadwal_id', $jadwal_id)->get();
+        if ($jadwal->count() > 0)
+        {
+            return back()->withNotifyerror('Data Accelerometer pada tanggal yang dipilih sudah diisi, silahkan pilih tanggal yang sesuai!');
+        }
+
         for ($i = 0; $i < count($request->area_id); $i++) {
             Accelerometer::create([
                 'jadwal_id' => $jadwal_id,
