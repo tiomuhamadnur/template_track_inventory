@@ -105,11 +105,11 @@
                                                         <div
                                                             class="d-flex justify-content-between align-items-center mb-2 mb-sm-0">
                                                             <div>
-                                                                <p class="text-small mb-2">Temuan Open</p>
+                                                                <p class="text-small mb-2">Temuan <i>Concerning</i></p>
                                                                 <a href="#"
                                                                     title="Minor: {{ $temuan_minor }} | Moderate: {{ $temuan_moderate }} | Major: {{ $temuan_mayor }}">
                                                                     <h4 class="mb-0 fw-bold text-danger">
-                                                                        {{ $temuan_open->count() }}
+                                                                        {{ $temuan_concern->count() }}
                                                                     </h4>
                                                                 </a>
                                                             </div>

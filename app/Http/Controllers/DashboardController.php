@@ -16,7 +16,8 @@ class DashboardController extends Controller
         $bulan_ini = Carbon::now()->format('m');
         $tahun_ini = Carbon::now()->format('Y');
         $temuan_all = Temuan::all();
-        $temuan_open = Temuan::where('status', 'open')->get();
+        $temuan_monitor = Temuan::where('status', 'open')->get();
+        $temuan_concern = Temuan::where('status', 'open')->where('klasifikasi', 'moderate', 'major')->get();
         $temuan_close = Temuan::where('status', 'close')->get();
         $temuan_baru_bulan_ini = Temuan::whereYear('tanggal', $tahun_ini)->whereMonth('tanggal', $bulan_ini)->get();
         $temuan_close_bulan_ini = Temuan::where('status', 'close')->whereMonth('tanggal_close', $bulan_ini)->get();
@@ -309,7 +310,8 @@ class DashboardController extends Controller
 
         return view('mainline.mainline_dashboard.index', compact([
             'temuan_all',
-            'temuan_open',
+            'temuan_concern',
+            'temuan_monitor',
             'temuan_close',
             'temuan_baru_bulan_ini',
             'temuan_close_bulan_ini',

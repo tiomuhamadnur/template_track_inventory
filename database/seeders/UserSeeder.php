@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
         // Default credentials
         \App\Models\User::insert([
             [
-                'name' => 'Tio Muhamad Nur',
+                'name' => '',
                 'email' => 'tiomuhamadnur@gmail.com',
                 'email_verified_at' => now(),
                 'password' => Hash::make('admin'), // password
