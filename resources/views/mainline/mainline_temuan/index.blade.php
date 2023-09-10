@@ -35,11 +35,11 @@
                                     class="btn btn-outline-success btn-lg mx-0" title="Export to PDF">
                                     <i class="mdi mdi-file-pdf text-danger"></i>
                                 </a>
-                                <a href="#" class="btn btn-outline-danger btn-lg mx-0" type="button"
+                                {{-- <a href="#" class="btn btn-outline-danger btn-lg mx-0" type="button"
                                     data-bs-toggle="modal" data-bs-target="#ModalReport"
                                     title="Generate Report Form Track Patrol on Foot">
                                     <i class="ti-printer"></i>
-                                </a>
+                                </a> --}}
                             </div>
                             <div>
                                 showing: <u class="fw-bolder">{{ $temuan->count() ?? 0 }}</u> data

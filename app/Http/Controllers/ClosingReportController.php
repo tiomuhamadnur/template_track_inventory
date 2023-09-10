@@ -5,15 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\ClosingReport;
 use App\Models\Pegawai;
 use App\Models\PM;
+use App\Models\Temuan;
 use App\Models\ToolsMaterials;
 use App\Models\TransToolsMaterials;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use MathPHP\Statistics\Descriptive;
 
 class ClosingReportController extends Controller
 {
+    public function index()
+    {
+        $kegiatan = PM::orderBy('section', 'ASC')->orderBy('name', 'ASC')->get();
+        return view('mainline.mainline_closing_report.index', compact(['kegiatan']));
+    }
+
     public function create()
     {
         $activity = PM::orderBy('name', 'asc')->get();
@@ -145,9 +153,62 @@ class ClosingReportController extends Controller
         return "Standar deviasi: " . $standarDeviasi;
     }
 
-    public function edit($id)
+    public function generate_form(Request $request)
     {
-        //
+        // dd($request);
+        $kegiatan_id = $request->kegiatan_id;
+        $examiner = $request->examiner;
+        $location = $request->location;
+        $tanggal = $request->tanggal;
+
+        if ($kegiatan_id == 1) {
+            $temuan = Temuan::where('tanggal', $tanggal)->orderBy('mainline_id', 'asc')->get();
+
+            return view(
+                'mainline.mainline_temuan.report.report',
+                compact(
+                    [
+                        'temuan',
+                        'tanggal',
+                        'location',
+                        'examiner'
+                    ]
+                )
+            );
+        } else if ($kegiatan_id == 17) {
+            $temuan = Temuan::where('part_id', 10)->where('tanggal', $tanggal)->orderBy('mainline_id', 'asc')->get();
+            $tanggal = Carbon::parse($tanggal)->format('d / m / Y');
+
+            return view(
+                'mainline.mainline_trackbed_examination.report.report',
+                compact(
+                    [
+                        'temuan',
+                        'tanggal',
+                        'location',
+                        'examiner'
+                    ]
+                )
+            );
+        } else if ($kegiatan_id == 18) {
+            $temuan = Temuan::where('part_id', 9)->where('tanggal', $tanggal)->orderBy('mainline_id', 'asc')->get();
+            $tanggal = Carbon::parse($tanggal)->format('d / m / Y');
+
+            return view(
+                'mainline.mainline_sleeper_examination.report.report',
+                compact(
+                    [
+                        'temuan',
+                        'tanggal',
+                        'location',
+                        'examiner'
+                    ]
+                )
+            );
+        }
+        else {
+            return back()->withNotifyerror('Form pada kegiatan ini tidak/belum ada, silahkan hubungi PIC terkait!');
+        }
     }
 
     public function update(Request $request, $id)

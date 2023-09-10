@@ -1,7 +1,7 @@
 @extends('mainline.mainline_layout.base')
 
 @section('sub-title')
-    <title>Ubah Data Temuan | TCSM</title>
+    <title>Ubah Data Temuan | CPWTM</title>
 @endsection
 
 @section('sub-content')

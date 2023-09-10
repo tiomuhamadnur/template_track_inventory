@@ -43,7 +43,7 @@
                                 <tr>
                                     <td class="align-middle"
                                         style="background-color:rgb(193, 255, 193); padding: 1px; height:13mm">
-                                        Frequancy of regular examination</td>
+                                        Frequency of regular examination</td>
                                     <td></td>
                                 </tr>
                                 <tr>
@@ -53,7 +53,7 @@
 
                                 <tr>
                                     <td style="height: 4mm; padding: 1px" colspan="2">
-                                        {{ $area_rencana_start ?? '' }} - {{ $area_rencana_finish ?? '' }}
+                                        {{ $location ?? '' }}
                                     </td>
                                 </tr>
                                 <tr>

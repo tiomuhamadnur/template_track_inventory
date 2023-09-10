@@ -30,10 +30,12 @@ use App\Http\Controllers\SectionController;
 use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\ShiftController;
 use App\Http\Controllers\ShowPageController;
+use App\Http\Controllers\SleeperExaminationController;
 use App\Http\Controllers\TemuanController;
 use App\Http\Controllers\TemuanDepoController;
 use App\Http\Controllers\TemuanMainlineController;
 use App\Http\Controllers\ToolsMaterialsController;
+use App\Http\Controllers\TrackbedExaminationController;
 use App\Http\Controllers\TransDefectController;
 use App\Http\Controllers\UltrasonicTestController;
 use App\Http\Controllers\UserController;
@@ -163,6 +165,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/closing_report_create', 'create')->name('closing_report.create');
         Route::post('/closing_report', 'store')->name('closing_report.store');
         Route::get('/closing_report_form', 'form')->name('closing_report.form');
+        Route::get('/generate_form', 'generate_form')->name('generate.form');
         Route::get('/closing_report_check', 'destroy')->name('closing_report.check');
     });
 
@@ -240,6 +243,20 @@ Route::middleware(['auth'])->group(function () {
 
         // REPORT
         Route::get('/buffer-examination-report', 'report')->name('buffer.examination.report');
+    });
+
+    // TRACKBED EXAMINATION
+    Route::controller(TrackbedExaminationController::class)->group(function () {
+        Route::get('/trackbed-examination', 'index')->name('trackbed.examination.index');
+        // REPORT
+        Route::get('/trackbed-examination-report', 'report')->name('trackbed.examination.report');
+    });
+
+    // SLEEPER EXAMINATION
+    Route::controller(SleeperExaminationController::class)->group(function () {
+        Route::get('/sleeper-examination', 'index')->name('sleeper.examination.index');
+        // REPORT
+        Route::get('/sleeper-examination-report', 'report')->name('sleeper.examination.report');
     });
 
     // ULTRASONIC TEST EXAMINATION

@@ -40,6 +40,12 @@
                 <span class="menu-title">Request For Inspection</span>
             </a>
         </li>
+        <li class="nav-item animate__animated animate__fadeInLeft">
+            <a class="nav-link" href="{{ route('closing_report.index') }}">
+                <i class="mdi mdi-file-export menu-icon"></i>
+                <span class="menu-title">Form/Report Generator</span>
+            </a>
+        </li>
 
         <li class="nav-item nav-category">Settings</li>
         <li class="nav-item animate__animated animate__fadeInLeft">
