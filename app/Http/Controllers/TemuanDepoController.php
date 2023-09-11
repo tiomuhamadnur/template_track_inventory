@@ -19,7 +19,7 @@ class TemuanDepoController extends Controller
 {
     public function index()
     {
-        $temuan_depo = TemuanDepo::where('status', 'open')->orderBy('tanggal', 'desc')->get();
+        $temuan_depo = TemuanDepo::where('status', 'open')->orWhere('status', 'monitoring')->orderBy('tanggal', 'desc')->get();
         $line = Line::where('area', 'Depo')->get();
         $part = Part::orderBy('name', 'asc')->get();
 
@@ -300,6 +300,7 @@ class TemuanDepoController extends Controller
                 'defect_id' => $request->defect_id,
                 'remark' => $request->remark,
                 'klasifikasi' => $request->klasifikasi,
+                'status' => $request->status,
                 'tanggal' => $request->tanggal,
                 'justifikasi' => $request->justifikasi,
                 'photo' => $photo_temuan,
@@ -313,6 +314,7 @@ class TemuanDepoController extends Controller
                 'defect_id' => $request->defect_id,
                 'remark' => $request->remark,
                 'klasifikasi' => $request->klasifikasi,
+                'status' => $request->status,
                 'tanggal' => $request->tanggal,
                 'justifikasi' => $request->justifikasi,
             ]);

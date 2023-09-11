@@ -101,24 +101,37 @@
                                             <div class="card-body">
                                                 <div class="row">
                                                     <h4 class="text-center fw-bolder">Temuan Total</h4>
-                                                    <div class="col-sm-6">
+                                                    <div class="col-sm-4">
                                                         <div
                                                             class="d-flex justify-content-between align-items-center mb-2 mb-sm-0">
                                                             <div>
-                                                                <p class="text-small mb-2">Temuan <i>Concerning</i></p>
+                                                                <p class="text-small mb-1"><i>Open</i></p>
                                                                 <a href="#"
                                                                     title="Minor: {{ $temuan_minor }} | Moderate: {{ $temuan_moderate }} | Major: {{ $temuan_mayor }}">
                                                                     <h4 class="mb-0 fw-bold text-danger">
-                                                                        {{ $temuan_concern->count() }}
+                                                                        {{ $temuan_open->count() }}
                                                                     </h4>
                                                                 </a>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-6">
+                                                    <div class="col-sm-4">
                                                         <div class="d-flex justify-content-between align-items-center">
                                                             <div>
-                                                                <p class="text-small mb-2">Temuan Closed</p>
+                                                                <p class="text-small mb-1"><i>Monitoring</i></p>
+                                                                <a href="#"
+                                                                    title="Minor: {{ $temuan_monitoring_minor }} | Moderate: {{ $temuan_monitoring_moderate }} | Major: {{ $temuan_monitoring_mayor }}">
+                                                                    <h4 class="mb-0 fw-bold text-warning">
+                                                                        {{ $temuan_monitoring->count() }}
+                                                                    </h4>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <div>
+                                                                <p class="text-small mb-1"><i>Closed</i></p>
                                                                 <a href="#"
                                                                     title="Minor: {{ $temuan_close_minor }} | Moderate: {{ $temuan_close_moderate }} | Major: {{ $temuan_close_mayor }}">
                                                                     <h4 class="mb-0 fw-bold text-success">
@@ -315,6 +328,7 @@
         // {{-- JS TREN TEMUAN --}}
         let temuan = <?php echo json_encode($temuan); ?>;
         let perbaikan_temuan = <?php echo json_encode($perbaikan_temuan); ?>;
+        let monitoring_temuan = <?php echo json_encode($monitoring_temuan); ?>;
         let bulan = <?php echo json_encode($bulan); ?>;
 
         Highcharts.chart('chart-container', {
@@ -341,9 +355,16 @@
                     color: 'red',
                     data: temuan,
                 },
+                // {
+                //     type: 'column',
+                //     name: 'Temuan monitoring',
+                //     showInLegend: true,
+                //     color: 'yellow',
+                //     data: monitoring_temuan,
+                // },
                 {
                     type: 'column',
-                    name: 'Closing temuan',
+                    name: 'Temuan close',
                     showInLegend: true,
                     color: 'green',
                     data: perbaikan_temuan,

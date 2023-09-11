@@ -129,26 +129,42 @@
                         <div class="card-body">
                             <div class="row">
                                 <h4 class="text-center fw-bolder">Temuan Total</h4>
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <div class="d-flex justify-content-between align-items-center mb-2 mb-sm-0">
                                         <div>
-                                            <p class="text-small mb-2">Temuan Open</p>
+                                            <p class="text-small mb-1"><i>Open</i></p>
                                             <a href="#"
                                                 title="Minor: {{ $temuan_minor }} | Moderate: {{ $temuan_moderate }} | Major: {{ $temuan_mayor }}">
-                                                <h4 class="mb-0 fw-bold text-danger">
+                                                <h4 class="mb-0 fw-bolder text-danger">
                                                     {{ $temuan_open->count() }}
                                                 </h4>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-2 mb-sm-0">
+                                        <div>
+                                            <p class="text-small mb-1"><i>Monitoring</i></p>
+                                            <a href="#"
+                                                title="Minor: {{ $temuan_monitoring_minor }} | Moderate: {{ $temuan_monitoring_moderate }} | Major: {{ $temuan_monitoring_mayor }}">
+                                                <h4 class="mb-0 fw-bolder text-warning">
+                                                    {{ $temuan_monitoring->count() }}
+                                                </h4>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div>
-                                            <p class="text-small mb-2">Temuan Closed</p>
-                                            <h4 class="mb-0 fw-bold text-success">
-                                                {{ $temuan_close->count() }}
-                                            </h4>
+                                            <p class="text-small mb-1"><i>Closed</i></p>
+                                            <a href="#"
+                                                title="Minor: {{ $temuan_close_minor }} | Moderate: {{ $temuan_close_moderate }} | Major: {{ $temuan_close_mayor }}">
+                                                <h4 class="mb-0 fw-bolder text-success">
+                                                    {{ $temuan_close->count() }}
+                                                </h4>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

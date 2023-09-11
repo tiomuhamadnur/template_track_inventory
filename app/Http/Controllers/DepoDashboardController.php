@@ -16,6 +16,7 @@ class DepoDashboardController extends Controller
         $tahun_ini = Carbon::now()->format('Y');
         $temuan_all = TemuanDepo::all();
         $temuan_open = TemuanDepo::where('status', 'open')->get();
+        $temuan_monitoring = TemuanDepo::where('status', 'monitoring')->get();
         $temuan_close = TemuanDepo::where('status', 'close')->get();
         $temuan_baru_bulan_ini = TemuanDepo::where('status', 'open')->whereMonth('tanggal', $bulan_ini)->get();
         $temuan_close_bulan_ini = TemuanDepo::where('status', 'close')->whereMonth('updated_at', $bulan_ini)->get();
@@ -23,6 +24,14 @@ class DepoDashboardController extends Controller
         $temuan_minor = TemuanDepo::where('status', 'open')->where('klasifikasi', 'minor')->count();
         $temuan_moderate = TemuanDepo::where('status', 'open')->where('klasifikasi', 'moderate')->count();
         $temuan_mayor = TemuanDepo::where('status', 'open')->where('klasifikasi', 'mayor')->count();
+
+        $temuan_monitoring_minor = TemuanDepo::where('status', 'monitoring')->where('klasifikasi', 'minor')->count();
+        $temuan_monitoring_moderate = TemuanDepo::where('status', 'monitoring')->where('klasifikasi', 'moderate')->count();
+        $temuan_monitoring_mayor = TemuanDepo::where('status', 'monitoring')->where('klasifikasi', 'mayor')->count();
+
+        $temuan_close_minor = TemuanDepo::where('status', 'close')->where('klasifikasi', 'minor')->count();
+        $temuan_close_moderate = TemuanDepo::where('status', 'close')->where('klasifikasi', 'moderate')->count();
+        $temuan_close_mayor = TemuanDepo::where('status', 'close')->where('klasifikasi', 'mayor')->count();
 
         $defect_ballast = TemuanDepo::where('part_id', 14)->where('status', 'open')->count();
         $defect_sleeper = TemuanDepo::where('part_id', 9)->where('status', 'open')->count();
@@ -49,12 +58,19 @@ class DepoDashboardController extends Controller
             compact([
                 'temuan_all',
                 'temuan_open',
+                'temuan_monitoring',
                 'temuan_close',
                 'temuan_baru_bulan_ini',
                 'temuan_close_bulan_ini',
                 'temuan_minor',
                 'temuan_moderate',
                 'temuan_mayor',
+                'temuan_monitoring_minor',
+                'temuan_monitoring_moderate',
+                'temuan_monitoring_mayor',
+                'temuan_close_minor',
+                'temuan_close_moderate',
+                'temuan_close_mayor',
                 'defect_ballast',
                 'defect_sleeper',
                 'defect_rail',

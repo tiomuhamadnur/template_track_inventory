@@ -114,10 +114,11 @@
                                                 <td class="text-center">
                                                     <span
                                                         class="badge @if ($item->status == 'open') bg-success
+                                                        @elseif($item->status == 'monitoring') bg-warning
                                                     @else
                                                     bg-danger @endif">
                                                         {{ $item->mainline->no_span }} <br>
-                                                        ({{ $item->no_sleeper }})
+                                                        ({{ $item->no_sleeper ?? '-' }})
                                                     </span>
                                                 </td>
                                                 <td class="text-center text-wrap">
@@ -346,6 +347,7 @@
                             <select class="form-select" name="status">
                                 <option disabled selected>- Status -</option>
                                 <option value="open">Open</option>
+                                <option value="monitoring">Monitoring</option>
                                 <option value="close">Close</option>
                             </select>
                         </div>

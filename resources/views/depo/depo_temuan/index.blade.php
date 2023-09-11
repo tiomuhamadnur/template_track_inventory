@@ -103,6 +103,7 @@
                                                 <td class="text-center">
                                                     <span
                                                         class="badge @if ($item->status == 'open') bg-success
+                                                        @elseif ($item->status == 'monitoring') bg-warning
                                                     @else
                                                     bg-danger @endif">
                                                         {{ $item->kilometer . ' m' }}
@@ -311,6 +312,7 @@
                                 <select class="form-select" name="status">
                                     <option disabled selected>- Status -</option>
                                     <option value="open">Open</option>
+                                    <option value="monitoring">Monitoring</option>
                                     <option value="close">Close</option>
                                 </select>
                             </div>

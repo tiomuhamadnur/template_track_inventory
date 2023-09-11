@@ -23,7 +23,7 @@ class TemuanMainlineController extends Controller
 {
     public function index()
     {
-        $temuan = Temuan::where('status', 'open')->orderBy('tanggal', 'DESC')->orderBy('mainline_id', 'DESC')->get();
+        $temuan = Temuan::where('status', 'open')->orWhere('status', 'monitoring')->orderBy('tanggal', 'DESC')->orderBy('mainline_id', 'DESC')->get();
         $area = Area::whereNot('area', 'Depo')->get();
         $area_rencana = Area::where('stasiun', 'true')->orWhere('area', 'DAL')->get();
         $line = Line::whereNot('area', 'Depo')->get();
@@ -335,6 +335,7 @@ class TemuanMainlineController extends Controller
                 'defect_id' => $request->defect_id,
                 'remark' => $request->remark,
                 'klasifikasi' => $request->klasifikasi,
+                'status' => $request->status,
                 'tanggal' => $request->tanggal,
                 'justifikasi' => $request->justifikasi,
                 'photo' => $photo_temuan,
@@ -348,6 +349,7 @@ class TemuanMainlineController extends Controller
                 'defect_id' => $request->defect_id,
                 'remark' => $request->remark,
                 'klasifikasi' => $request->klasifikasi,
+                'status' => $request->status,
                 'tanggal' => $request->tanggal,
                 'justifikasi' => $request->justifikasi,
             ]);

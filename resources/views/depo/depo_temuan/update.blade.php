@@ -1,7 +1,7 @@
 @extends('mainline.mainline_layout.base')
 
 @section('sub-title')
-    <title>Ubah Data Temuan | TCSM</title>
+    <title>Ubah Data Temuan | CPWTM</title>
 @endsection
 
 @section('sub-content')
@@ -36,7 +36,12 @@
                                 </div>
                                 <div class="form-group mb-2">
                                     <label class="form-label">Status Temuan</label>
-                                    <input type="text" value="{{ $temuan_depo->status }}" class="form-control" readonly>
+                                    <select name="status" class="form-select">
+                                        <option value="open" @if ($temuan_depo->status == 'open') selected @endif>Open
+                                        </option>
+                                        <option value="monitoring" @if ($temuan_depo->status == 'monitoring') selected @endif>
+                                            Monitoring</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Chainage (m)</label>
@@ -106,7 +111,7 @@
                                     <input type="text" name="justifikasi" value="{{ $temuan_depo->justifikasi ?? '' }}"
                                         class="form-control">
                                 </div>
-                                <button type="submit" class="btn btn-outline-primary me-2">Submit</button>
+                                <button type="submit" class="btn btn-outline-primary me-2">Update</button>
                                 <a href="{{ route('temuan_depo.index') }}" class="btn btn-light">Cancel</a>
                             </form>
                         </div>

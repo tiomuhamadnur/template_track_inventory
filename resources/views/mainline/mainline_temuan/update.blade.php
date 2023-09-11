@@ -42,7 +42,12 @@
                                 </div>
                                 <div class="form-group mb-2">
                                     <label class="form-label">Status Temuan</label>
-                                    <input type="text" value="{{ $temuan->status }}" class="form-control" readonly>
+                                    <select name="status" class="form-select" required>
+                                        <option value="open" @if ($temuan->status == 'open') selected @endif>Open
+                                        </option>
+                                        <option value="monitoring" @if ($temuan->status == 'monitoring') selected @endif>
+                                            Monitoring</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Defect</label>
@@ -59,11 +64,8 @@
                                 <div class="form-group">
                                     <label class="form-label">Direction</label>
                                     <select class="form-select" name="direction" required>
-                                        <option value="{{ $temuan->direction ?? '' }}" selected>
-                                            {{ $temuan->direction ?? '' }}
-                                        </option>
-                                        <option value="L">L</option>
-                                        <option value="R">R</option>
+                                        <option value="L" @if ($temuan->direction == 'L') selected @endif>L</option>
+                                        <option value="R" @if ($temuan->direction == 'R') selected @endif>R</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -93,16 +95,13 @@
                                 <div class="form-group">
                                     <label class="form-label">Klasifikasi</label>
                                     <select class="form-select" name="klasifikasi" required>
-                                        <option value="{{ $temuan->klasifikasi ?? '' }}" selected>
-                                            {{ $temuan->klasifikasi ?? '' }}
-                                        </option>
-                                        <option value="Minor">
+                                        <option value="Minor" @if ($temuan->klasifikasi == 'Minor') selected @endif>
                                             Minor
                                         </option>
-                                        <option value="Moderate">
+                                        <option value="Moderate" @if ($temuan->klasifikasi == 'Moderate') selected @endif>
                                             Moderate
                                         </option>
-                                        <option value="Mayor">
+                                        <option value="Mayor" @if ($temuan->klasifikasi == 'Mayor') selected @endif>
                                             Mayor
                                         </option>
                                     </select>
@@ -112,7 +111,7 @@
                                     <input type="text" name="justifikasi" value="{{ $temuan->justifikasi ?? '' }}"
                                         class="form-control">
                                 </div>
-                                <button type="submit" class="btn btn-outline-primary me-2">Submit</button>
+                                <button type="submit" class="btn btn-outline-primary me-2">Update</button>
                                 <a href="{{ route('temuan_mainline.index') }}" class="btn btn-light">Cancel</a>
                             </form>
                         </div>

@@ -16,21 +16,24 @@ class DashboardController extends Controller
         $bulan_ini = Carbon::now()->format('m');
         $tahun_ini = Carbon::now()->format('Y');
         $temuan_all = Temuan::all();
-        $temuan_monitor = Temuan::where('status', 'open')->get();
-        $temuan_concern = Temuan::where('status', 'open')->where('klasifikasi', 'moderate', 'major')->get();
+        $temuan_open = Temuan::where('status', 'open')->get();
         $temuan_close = Temuan::where('status', 'close')->get();
+        $temuan_monitoring = Temuan::where('status', 'monitoring')->get();
         $temuan_baru_bulan_ini = Temuan::whereYear('tanggal', $tahun_ini)->whereMonth('tanggal', $bulan_ini)->get();
         $temuan_close_bulan_ini = Temuan::where('status', 'close')->whereMonth('tanggal_close', $bulan_ini)->get();
 
         $bulan = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
         $temuan = [];
         $perbaikan_temuan = [];
+        $monitoring_temuan = [];
 
         foreach($bulan as $item) {
             $result_temuan = Temuan::whereYear('tanggal', $tahun_ini)->whereMonth('tanggal', $item)->count();
+            $result_temuan_monitoring = Temuan::whereYear('tanggal', $tahun_ini)->whereMonth('tanggal', $item)->where('status', 'monitoring')->count();
             $result_perbaikan = Temuan::whereYear('tanggal_close', $tahun_ini)->whereMonth('tanggal_close', $item)->where('status', 'close')->count();
             $temuan[] = $result_temuan;
             $perbaikan_temuan[] = $result_perbaikan;
+            $monitoring_temuan[] = $result_temuan_monitoring;
         }
 
         $bulan = [
@@ -55,6 +58,10 @@ class DashboardController extends Controller
         $temuan_close_minor = Temuan::where('status', 'close')->where('klasifikasi', 'minor')->count();
         $temuan_close_moderate = Temuan::where('status', 'close')->where('klasifikasi', 'moderate')->count();
         $temuan_close_mayor = Temuan::where('status', 'close')->where('klasifikasi', 'mayor')->count();
+
+        $temuan_monitoring_minor = Temuan::where('status', 'monitoring')->where('klasifikasi', 'minor')->count();
+        $temuan_monitoring_moderate = Temuan::where('status', 'monitoring')->where('klasifikasi', 'moderate')->count();
+        $temuan_monitoring_mayor = Temuan::where('status', 'monitoring')->where('klasifikasi', 'mayor')->count();
 
         $temuan_UT = DB::table('summary_temuan')
             ->join('mainline', 'summary_temuan.mainline_id', '=', 'mainline.id')
@@ -310,13 +317,14 @@ class DashboardController extends Controller
 
         return view('mainline.mainline_dashboard.index', compact([
             'temuan_all',
-            'temuan_concern',
-            'temuan_monitor',
+            'temuan_open',
+            'temuan_monitoring',
             'temuan_close',
             'temuan_baru_bulan_ini',
             'temuan_close_bulan_ini',
             'temuan',
             'perbaikan_temuan',
+            'monitoring_temuan',
             'bulan',
             'temuan_minor',
             'temuan_moderate',
@@ -324,6 +332,9 @@ class DashboardController extends Controller
             'temuan_close_minor',
             'temuan_close_moderate',
             'temuan_close_mayor',
+            'temuan_monitoring_minor',
+            'temuan_monitoring_moderate',
+            'temuan_monitoring_mayor',
             'temuan_UT',
             'temuan_DT',
             'temuan_MT',
