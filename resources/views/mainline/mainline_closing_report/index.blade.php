@@ -21,7 +21,7 @@
                                     type="button" title="Refresh">
                                     <i class="ti-reload"></i>
                                 </a>
-                                <a href="{{ route('closing_report.create') }}" target="_blank"
+                                <a href="{{ route('closing_report.check') }}" target="_blank"
                                     class="btn btn-outline-success btn-lg mx-0" type="button">Create Closing Report</a>
                             </div>
                             <div class="table-responsive pt-3">
