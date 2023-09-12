@@ -2,6 +2,13 @@
 
 @section('sub-title')
     <title>Data Temuan Depo | CPWTM</title>
+    <style>
+        .float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+    </style>
 @endsection
 
 @section('sub-content')
@@ -102,10 +109,10 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <span
-                                                        class="badge @if ($item->status == 'open') bg-success
+                                                        class="badge @if ($item->status == 'open') bg-danger
                                                         @elseif ($item->status == 'monitoring') bg-warning
                                                     @else
-                                                    bg-danger @endif">
+                                                    bg-success @endif">
                                                         {{ $item->kilometer . ' m' }}
                                                     </span>
                                                 </td>
@@ -153,6 +160,16 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white shadow badge text-black border border-dark border-2 float" style="width:200px;">
+            <div class="row px-auto py-1">
+                <h4 class="fw-bolder mb-2">Keterangan:</h4>
+                <div class="btn-group">
+                    <span class="badge bg-danger">Open</span>
+                    <span class="badge bg-warning">Monitoring</span>
+                    <span class="badge bg-success">Closed</span>
                 </div>
             </div>
         </div>
