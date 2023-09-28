@@ -10,6 +10,7 @@ use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class PICController extends Controller
 {
@@ -102,8 +103,9 @@ class PICController extends Controller
         ]);
         $id = auth()->user()->id;
         if ($request->hasFile('photo') && $request->photo != '') {
-            $photo_profil = $request->file('photo')->store('photo-profil/' . auth()->user()->role);
             $user = Pegawai::findOrFail($id);
+            Storage::delete($user->photo);
+            $photo_profil = $request->file('photo')->store('photo-profil/' . auth()->user()->role);
             $user->update([
                 'photo' => $photo_profil,
             ]);
@@ -123,8 +125,9 @@ class PICController extends Controller
         ]);
         $id = auth()->user()->id;
         if ($request->hasFile('photo_ttd') && $request->photo_ttd != '') {
-            $photo_ttd = $request->file('photo_ttd')->store('photo-ttd/' . auth()->user()->role);
             $user = Pegawai::findOrFail($id);
+            Storage::delete($user->ttd);
+            $photo_ttd = $request->file('photo_ttd')->store('photo-ttd/' . auth()->user()->role);
             $user->update([
                 'ttd' => $photo_ttd,
             ]);

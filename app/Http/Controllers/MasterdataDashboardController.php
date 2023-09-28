@@ -20,8 +20,8 @@ class MasterdataDashboardController extends Controller
         $line_depo = Line::where('area', 'Depo')->count();
         $trackbed = Mainline::count();
         $sleeper_mainline = Mainline::sum('jumlah_sleeper');
-        $turnout_mainline = Wesel::whereNot('area_id', 1)->count();
-        $turnout_depo = Wesel::where('area_id', 1)->count();
+        $turnout_mainline = Wesel::whereNot('area_id', 1)->whereNot('tipe', 'Scissors Crossing')->count();
+        $turnout_depo = Wesel::where('area_id', 1)->whereNot('tipe', 'Scissors Crossing')->count();
         $sc_mainline = Wesel::where('tipe', 'Scissors Crossing')->whereNot('area_id', 1)->count();
         $sc_depo = Wesel::where('tipe', 'Scissors Crossing')->where('area_id', 1)->count();
         $buffer = BufferStop::where('tipe', 'Buffer Stop')->count();
@@ -66,10 +66,6 @@ class MasterdataDashboardController extends Controller
             'gij_depo',
             'ej',
         ]));
-    }
-
-    public function create()
-    {
     }
 
     public function store(Request $request)
