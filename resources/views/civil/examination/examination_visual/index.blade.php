@@ -179,7 +179,7 @@
                                                             data-eksekutor="{{ $item->eksekutor ?? '-' }}"
                                                             data-href="{{ '/temuan-visual' . '/' . Crypt::encryptString($item->id) . '/close_temuan' }}"
                                                             data-href-ubah="{{ '/temuan-visual' . '/' . Crypt::encryptString($item->id) . '/edit' }}"
-                                                            data-href-rfi="{{ '/rfi-temuan-visual' . '/' . Crypt::encryptString($item->id) . '/rfi' }}">
+                                                            data-href-rfi="{{ route('rfi.civil.create', Crypt::encryptString($item->id)) }}">
                                                             Detail
                                                         </button>
                                                     </div>

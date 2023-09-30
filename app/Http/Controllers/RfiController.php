@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Storage;
 
 class RfiController extends Controller
 {
@@ -137,9 +138,10 @@ class RfiController extends Controller
     {
         $id_rfi = $request->id_rfi;
         $data_rfi = TransRFI::findOrFail($id_rfi);
-        $temuan_mainline_id = TransRFI::findOrFail($id_rfi)->temuan_mainline_id;
         if ($data_rfi) {
+            $temuan_mainline_id = $data_rfi->temuan_mainline_id;
             $temuan = Temuan::findOrFail($temuan_mainline_id);
+            Storage::delete($temuan->photo_close);
             $temuan->update([
                 'photo_close' => null,
             ]);

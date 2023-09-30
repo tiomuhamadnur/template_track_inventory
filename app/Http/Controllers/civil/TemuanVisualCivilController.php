@@ -14,6 +14,7 @@ use App\Models\civil\SubArea;
 use App\Models\civil\TemuanVisualCivil;
 use Carbon\Carbon;
 use Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -23,7 +24,8 @@ class TemuanVisualCivilController extends Controller
 {
     public function index()
     {
-        $temuan_visual = TemuanVisualCivil::orderBy('tanggal', 'desc')
+        $temuan_visual = TemuanVisualCivil::where('status', 'open')
+            ->orderBy('tanggal', 'desc')
             ->orderBy('area_id', 'asc')
             ->orderBy('sub_area_id', 'asc')
             ->get();
@@ -41,7 +43,7 @@ class TemuanVisualCivilController extends Controller
         $part_id = '';
         $detail_part_id = '';
         $defect_id = '';
-        $status = '';
+        $status = 'open';
         $klasifikasi = '';
         $tanggal_awal = '';
         $tanggal_akhir = '';
@@ -328,11 +330,108 @@ class TemuanVisualCivilController extends Controller
 
     public function export_pdf(Request $request)
     {
-        return 'Sorry, fitur masih dalam pengembangan.';
+        $area_id = $request->area_id;
+        $sub_area_id = $request->sub_area_id;
+        $detail_area_id = $request->detail_area_id;
+        $part_id = $request->part_id;
+        $detail_part_id = $request->detail_part_id;
+        $defect_id = $request->defect_id;
+        $status = $request->status;
+        $klasifikasi = $request->klasifikasi;
+        $tanggal_awal = $request->tanggal_awal;
+        $tanggal_akhir = $request->tanggal_akhir;
+
+        $waktu = Carbon::now()->format('Ymd');
+
+        if (
+            $area_id == null and
+            $sub_area_id == null and
+            $detail_area_id == null and
+            $part_id == null and
+            $detail_part_id == null and
+            $defect_id == null and
+            $status == null and
+            $klasifikasi == null and
+            $tanggal_awal == null and
+            $tanggal_akhir == null
+        ) {
+            $temuan_visual = TemuanVisualCivil::all();
+            $waktu = Carbon::now();
+            $pdf = Pdf::loadView('civil.examination.examination_visual.export.pdf', ['temuan_visual' => $temuan_visual]);
+
+            return $pdf->stream($waktu . '_list-temuan-visual-(all).pdf');
+        } else {
+            $temuan = TemuanVisualCivil::query();
+
+            // Filter by area_id
+            $temuan->when($area_id, function ($query) use ($request) {
+                return $query->where('area_id', $request->area_id);
+            });
+
+            // Filter by sub_area_id
+            $temuan->when($sub_area_id, function ($query) use ($request) {
+                return $query->where('sub_area_id', $request->sub_area_id);
+            });
+
+            // Filter by detail_area_id
+            $temuan->when($detail_area_id, function ($query) use ($request) {
+                return $query->where('detail_area_id', $request->detail_area_id);
+            });
+
+            // Filter by part_id
+            $temuan->when($part_id, function ($query) use ($request) {
+                return $query->where('part_id', $request->part_id);
+            });
+
+            // Filter by detail_part_id
+            $temuan->when($detail_part_id, function ($query) use ($request) {
+                return $query->where('detail_part_id', $request->detail_part_id);
+            });
+
+            // Filter by defect_id
+            $temuan->when($defect_id, function ($query) use ($request) {
+                return $query->where('defect_id', $request->defect_id);
+            });
+
+            // Filter by status
+            $temuan->when($status, function ($query) use ($request) {
+                return $query->where('status', $request->status);
+            });
+
+            // Filter by klasifikasi
+            $temuan->when($klasifikasi, function ($query) use ($request) {
+                return $query->where('klasifikasi', $request->klasifikasi);
+            });
+
+            // Filter by tanggal
+            if ($tanggal_awal != null and $tanggal_akhir != null) {
+                $temuan->when($tanggal_awal, function ($query) use ($request) {
+                    return $query->whereDate('tanggal', '>=', $request->tanggal_awal);
+                });
+                $temuan->when($tanggal_akhir, function ($query) use ($request) {
+                    return $query->whereDate('tanggal', '<=', $request->tanggal_akhir);
+                });
+            }
+
+            $waktu = Carbon::now()->format('Ymd');
+            $pdf = Pdf::loadView('civil.examination.examination_visual.export.pdf', ['temuan_visual' => $temuan->orderBy('tanggal', 'asc')->get()]);
+
+            return $pdf->stream($waktu . '_list-temuan-visual-(filtered).pdf');
+        }
     }
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->id;
+        $temuan_visual = TemuanVisualCivil::findOrFail($id);
+        if (!$temuan_visual) {
+            return back();
+        }
+        Storage::delete($temuan_visual->photo);
+        if ($temuan_visual->photo_close != '') {
+            Storage::delete($temuan_visual->photo_close);
+        }
+        $temuan_visual->delete();
+        return redirect()->route('temuan-visual.index')->withNotify('Data temuan berhasil dihapus secara permanen!');
     }
 }

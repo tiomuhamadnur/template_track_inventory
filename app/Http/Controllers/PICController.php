@@ -17,17 +17,14 @@ class PICController extends Controller
     public function index()
     {
         $tahun = Carbon::now()->format('Y');
-        $pic = PIC::where('tahun', $tahun)
-            ->join('annual_planning', 'annual_planning.id', '=', 'pic_job.job_id')
-            ->orderBy('annual_planning.name', 'ASC')
-            ->get();
+        $pic = PIC::where('tahun', $tahun)->get();
 
         return view('masterdata.masterdata_pic.index', compact(['pic', 'tahun']));
     }
 
     public function create()
     {
-        $technician = Pegawai::where('jabatan', 'Technician')->orderBy('name', 'ASC')->get();
+        $technician = Pegawai::whereNot('jabatan', 'Section Head')->orderBy('name', 'ASC')->get();
         $job = PM::orderBy('name', 'ASC')->get();
         $tahun = Carbon::now()->format('Y');
 
@@ -76,10 +73,7 @@ class PICController extends Controller
     public function pic_filter(Request $request)
     {
         $tahun = $request->tahun;
-        $pic = PIC::where('tahun', $tahun)
-            ->join('annual_planning', 'annual_planning.id', '=', 'pic_job.job_id')
-            ->orderBy('annual_planning.name', 'ASC')
-            ->get();
+        $pic = PIC::where('tahun', $tahun)->get();
 
         return view('masterdata.masterdata_pic.index', compact(['pic', 'tahun']));
     }
@@ -162,31 +156,26 @@ class PICController extends Controller
 
     public function edit($id)
     {
-        $technician = Pegawai::where('jabatan', 'Technician')->orderBy('name', 'ASC')->get();
-        $job = PM::orderBy('name', 'ASC')->get();
-        try {
-            $secret = Crypt::decryptString($id);
-            $pic = PIC::findOrFail($secret);
-            if ($pic) {
-                return view('masterdata.masterdata_pic.update', compact(['pic', 'technician', 'job']));
-            } else {
-                return redirect()->back();
-            }
-        } catch (DecryptException $e) {
-            return redirect()->back();
+        $pic = PIC::findOrFail($id);
+        if(!$pic) {
+            return back();
         }
+        $technician = Pegawai::whereNot('jabatan', 'Section Head')->orderBy('name', 'ASC')->get();
+        $job = PM::orderBy('name', 'ASC')->get();
+        return view('masterdata.masterdata_pic.update', compact(['pic', 'technician', 'job']));
     }
 
     public function update_progress_pic(Request $request)
     {
         $id = $request->id;
         $pic = PIC::findOrFail($id);
-        if ($pic) {
-            $pic->update([
-                'progress' => $request->progress,
-            ]);
-
-            return redirect()->route('profile')->withNotify('Progress PIC berhasil diperbaharui!');
+        if(!$pic){
+            return back();
         }
+        $pic->update([
+            'progress' => $request->progress,
+        ]);
+
+        return redirect()->route('profile')->withNotify('Progress PIC berhasil diperbaharui!');
     }
 }

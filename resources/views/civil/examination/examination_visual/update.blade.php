@@ -15,6 +15,14 @@
                     <form action="{{ route('temuan-visual.update') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('put')
+                        <div>
+                            <label class="label label--block mb-3">
+                                <a href="#" class="btn-sm btn-danger" data-bs-toggle="modal"
+                                    data-bs-target="#ModalDeleteTemuan" title="Hapus data temuan secara permanen">
+                                    Hapus temuan?
+                                </a>
+                            </label>
+                        </div>
                         <div class="form-row">
                             <input type="text" name="id" value="{{ $temuan_visual->id }}" required hidden>
                             <div class="name">Area</div>
@@ -337,6 +345,41 @@
         </div>
     </div>
     <!-- End Modal Add Justtifikasi -->
+
+    <!-- Modal Delete Temuan -->
+    <div class="modal fade" id="ModalDeleteTemuan" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title fw-bolder" id="modalAdminTitle">Apakah anda yakin?</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="form_delete" action="{{ route('temuan-visual.delete') }}" method="POST">
+                        @csrf
+                        @method('delete')
+                        <div class="text-center mb-2">
+                            <label class="form-label mb-0">Data temuan akan dihapus secara permanen.</label>
+                        </div>
+                        <div class="form-group mb-2">
+                            <input type="text" class="form-control" name="id" required autocomplete="off"
+                                value="{{ $temuan_visual->id }}" hidden>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-right">
+                        <button type="submit" form="form_delete" class="btn btn-danger justify-content-center">
+                            Delete
+                        </button>
+                        <button type="button" class="btn btn-outline-warning text-dark" data-bs-dismiss="modal">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Delete Temuan -->
 @endsection
 
 @section('javascript')

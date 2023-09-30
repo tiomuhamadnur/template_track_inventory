@@ -13,6 +13,7 @@ use App\Http\Controllers\civil\DetailPartCivilController;
 use App\Http\Controllers\civil\PartCivilController;
 use App\Http\Controllers\civil\RelasiAreaCivilController;
 use App\Http\Controllers\civil\RelasiDefectCivilController;
+use App\Http\Controllers\civil\RfiCivilController;
 use App\Http\Controllers\civil\SubAreaController;
 use App\Http\Controllers\civil\TemuanVisualCivilController;
 use App\Http\Controllers\ClosingReportController;
@@ -340,13 +341,20 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/temuan-visual/{id}/edit', 'edit')->name('temuan-visual.edit');
             Route::put('/temuan-visual', 'update')->name('temuan-visual.update');
             Route::delete('/temuan-visual', 'destroy')->name('temuan-visual.delete');
-            Route::get('/rfi-temuan-visual/{id}/rfi', 'rfi')->name('temuan-visual.rfi');
             Route::post('/temuan-visual/justifikasi', 'justifikasi')->name('temuan-visual.justifikasi');
             Route::get('/temuan-visual/filter', 'filter')->name('temuan-visual.filter');
-            // Route::get('/temuan-visual/{id}/close_temuan', 'close_temuan')->name('temuan-visual.close.temuan');
-            // Route::put('/temuan-visual/close_temuan', 'store_temuan')->name('temuan-visual.store.temuan');
             Route::get('/temuan-visual/export-visual-excel', 'export')->name('temuan-visual.export');
             Route::get('/temuan-visual/export-visual-pdf', 'export_pdf')->name('temuan-visual.export.pdf');
+        });
+
+        // RFI
+        Route::controller(RfiCivilController::class)->group(function () {
+            Route::get('/rfi-civil', 'index')->name('rfi.civil.index');
+            Route::get('/rfi-civil/{id}/rfi', 'create')->name('rfi.civil.create');
+            Route::post('/rfi-civil', 'store')->name('rfi.civil.store');
+            Route::put('/rfi-civil', 'approve')->name('rfi.civil.approve');
+            Route::put('/rfi-civil-update', 'update')->name('rfi.civil.update');
+            Route::delete('/rfi-civil', 'destroy')->name('rfi.civil.delete');
         });
     });
     /////////////////////////////   END CIVIL  /////////////////////////////////////

@@ -44,8 +44,14 @@
 
                                     <div>
                                         <label for="crud-form-1" class="form-label mt-2">Tahun</label>
-                                        <input type="text" class="form-control" name="tahun"
-                                            value="{{ $tahun }}" readonly>
+                                        <select data-placeholder="Select year" class="form-control w-full" id="crud-form-2"
+                                            name="tahun" required>
+                                            @for ($i = $tahun - 2; $i <= $tahun + 5; $i++)
+                                                <option value="{{ $i }}"
+                                                    @if ($i == $tahun) selected @endif>
+                                                    {{ $i }}</option>
+                                            @endfor
+                                        </select>
                                     </div>
 
                                     <div>

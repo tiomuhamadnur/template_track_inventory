@@ -26,10 +26,10 @@
                                         <label for="crud-form-1" class="form-label mt-2">Nama PIC</label>
                                         <select data-placeholder="Select line area" class="form-control w-full"
                                             id="crud-form-2" required name="user_id">
-                                            <option value="{{ $pic->user->id }}" selected>{{ $pic->user->name }}
-                                            </option>
                                             @foreach ($technician as $item)
-                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                <option value="{{ $item->id }}"
+                                                    @if ($item->id == $pic->user->id) selected @endif>{{ $item->name }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -37,9 +37,10 @@
                                         <label for="crud-form-1" class="form-label mt-2">Pilih Preventive Work</label>
                                         <select data-placeholder="Select line area" class="form-control w-full"
                                             id="crud-form-2" name="job_id" required>
-                                            <option value="{{ $pic->job->id }}" selected>{{ $pic->job->name }}
-                                                @foreach ($job as $item)
-                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @foreach ($job as $item)
+                                                <option value="{{ $item->id }}"
+                                                    @if ($item->id == $pic->job->id) selected @endif>{{ $item->name }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>

@@ -15,7 +15,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $user = Pegawai::orderBy('name', 'asc')->get();
+        $user = Pegawai::orderBy('section', 'asc')->orderBy('name', 'asc')->get();
 
         return view('user.index', compact(['user']));
     }

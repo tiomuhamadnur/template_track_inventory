@@ -1,4 +1,4 @@
-@extends('mainline.mainline_layout.base')
+@extends('civil.examination.examination_layout.base')
 
 @section('sub-title')
     <title>Request For Inspection | CPWTM</title>
@@ -16,21 +16,25 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Form Request For Inspection</h4>
-                            <form action="{{ route('rfi.mainline.store') }}" method="POST" enctype='multipart/form-data'>
+                            <form action="{{ route('rfi.civil.store') }}" method="POST" enctype='multipart/form-data'>
                                 @csrf
                                 @method('post')
                                 <div class="form-group">
                                     <label class="form-label">Submitter</label>
                                     <input type="text" value="{{ auth()->user()->name }}" class="form-control" readonly>
-                                    <input type="text" name="user_id" value="{{ auth()->user()->id }}" hidden>
+                                    <input type="text" name="user_id" value="{{ auth()->user()->id }}" hidden required>
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">Area (No. Span)</label>
-                                    <input type="text"
-                                        value="{{ $temuan->mainline->area->code }} ({{ $temuan->mainline->no_span }})"
-                                        class="form-control" readonly>
-                                    <input type="text" value="{{ $temuan->id }}" name="temuan_mainline_id" hidden
+                                    <label class="form-label">Area</label>
+                                    <input type="text" value="{{ $temuan->area->code }}" class="form-control" readonly>
+                                    <input type="text" value="{{ $temuan->id }}" name="temuan_visual_id" hidden
                                         required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Sub Area (Detail Area)</label>
+                                    <input type="text"
+                                        value="{{ $temuan->sub_area->name }} ({{ $temuan->detail_area->name }})"
+                                        class="form-control" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Part (Defect)</label>
@@ -40,8 +44,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Tanggal Perbaikan</label>
-                                    <input type="date" class="form-control" name="tanggal"
-                                        value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" required readonly>
+                                    <input type="date" class="form-control"
+                                        value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" name="tanggal" required>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Photo Sebelum Perbaikan</label>
@@ -64,11 +68,11 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">Remark (Optional)</label>
-                                    <input type="text" class="form-control" name="remark">
+                                    <label class="form-label">Remark <span class="text-danger">(Optional)</span></label>
+                                    <input type="text" class="form-control" name="remark" autocomplete="off">
                                 </div>
                                 <button type="submit" class="btn btn-outline-primary me-2">Submit</button>
-                                <a href="{{ route('temuan_mainline.index') }}" class="btn btn-light">Cancel</a>
+                                <a href="{{ url()->previous() }}" class="btn btn-outline-danger">Cancel</a>
                             </form>
                         </div>
                     </div>

@@ -103,7 +103,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('pic.edit', Crypt::encryptString($item->id)) }}"
+                                            <a href="{{ route('pic.edit', $item->id) }}"
                                                 class="btn-sm btn-outline-warning btn-sm" type="button">Edit</a>
                                         </td>
                                     </tr>
