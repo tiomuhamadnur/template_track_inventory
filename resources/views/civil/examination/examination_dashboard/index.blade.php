@@ -1,7 +1,7 @@
 @extends('civil.examination.examination_layout.base')
 
 @section('sub-title')
-    <title>Dashboard | CPWTM</title>
+    <title>Dashboard | Civil</title>
 @endsection
 
 @section('sub-content')

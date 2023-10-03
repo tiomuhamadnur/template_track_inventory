@@ -9,7 +9,7 @@
             <a class="navbar-brand brand-logo text-black fw-bolder" href="{{ route('transisi') }}"
                 style="margin-left: 18px">
                 {{-- <img src="{{ asset('assets/images/mm.png') }}" alt="logo"> TRACK --}}
-                <img src="{{ asset('assets/images/exods.png') }}" alt="logo"> CPWTM
+                <img src="{{ asset('assets/images/exods.png') }}" alt="logo"> TRACK
             </a>
             <a class="navbar-brand brand-logo-mini" href="{{ route('transisi') }}">
                 {{-- <img src="{{ asset('assets/images/mm.png') }}" alt="logo"> --}}
