@@ -8,7 +8,7 @@
       <link rel="stylesheet" href="{{ asset('assets_transisi/css/swiper-bundle.min.css') }}">
       <link rel="stylesheet" href="{{ asset('assets_transisi/css/styles.css') }}">
 
-      <title>Responsive card slider - Bedimcode</title>
+      <title>Dashboard Transition | PW</title>
    </head>
    <body>
         <div class="bg-area"></div>
