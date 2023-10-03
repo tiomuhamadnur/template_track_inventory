@@ -25,22 +25,6 @@
                      </div>
 
                      <div class="card__data">
-                        <h3 class="card__name">Depo</h3>
-                        <p class="card__description">
-                           Dashboard Permanent Way Area Depo
-                        </p>
-
-                        <a href="{{ route('depo.index') }}" class="card__button">Explore</a>
-                     </div>
-                  </article>
-
-                  <article class="card__article swiper-slide">
-                     <div class="card__image">
-                        <img src="{{ asset('assets_transisi//img/depo0.png') }}" alt="image" class="card__img">
-                        <div class="card__shadow"></div>
-                     </div>
-
-                     <div class="card__data">
                         <h3 class="card__name">Mainline</h3>
                         <p class="card__description">
                            Dashboard Permanent Way Area Mainline
@@ -52,17 +36,17 @@
 
                   <article class="card__article swiper-slide">
                      <div class="card__image">
-                        <img src="{{ asset('assets_transisi/img/jadwal0.png') }}" alt="image" class="card__img">
+                        <img src="{{ asset('assets_transisi//img/depo0.png') }}" alt="image" class="card__img">
                         <div class="card__shadow"></div>
                      </div>
 
                      <div class="card__data">
-                        <h3 class="card__name">Jadwal</h3>
+                        <h3 class="card__name">Depo</h3>
                         <p class="card__description">
-                           Jadwal Shift Section Permanent Way
+                           Dashboard Permanent Way Area Depo
                         </p>
 
-                        <a href="{{ route('jadwal.pekerjaan.index') }}" class="card__button">Explore</a>
+                        <a href="{{ route('depo.index') }}" class="card__button">Explore</a>
                      </div>
                   </article>
                </div>

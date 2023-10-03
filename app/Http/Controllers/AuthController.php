@@ -54,6 +54,8 @@ class AuthController extends Controller
         }
         elseif ($section == 3 or $section == 4){
             return view('transisi.transisi_civil.transisi');
+        }elseif($section == 5){
+            return view('transisi.transisi_planning.transisi');
         }
     }
 
@@ -68,5 +70,9 @@ class AuthController extends Controller
         elseif ($section == 3 or $section == 4){
             return view('transisi.transisi_civil.transisi_user');
         }
+        elseif ($section == 5) {
+            return view('transisi.transisi_planning.transisi_user');
+        }
     }
+
 }

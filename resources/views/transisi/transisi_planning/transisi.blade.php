@@ -6,9 +6,9 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
       <link rel="stylesheet" href="{{ asset('assets_transisi/css/swiper-bundle.min.css') }}">
-      <link rel="stylesheet" href="{{ asset('assets_transisi/css/styles_civil.css') }}">
+      <link rel="stylesheet" href="{{ asset('assets_transisi/css/styles_pc.css') }}">
       <link rel="shortcut icon" href="{{ asset('assets/images/mm.png') }}" />
-      <title>Dashboard Transition | Civil</title>
+      <title>Dashboard Transition | P&C</title>
    </head>
    <body>
         <div class="bg-area-civil"></div>
@@ -30,7 +30,7 @@
                            Dashboard Activity Civil
                         </p>
 
-                        <a href="{{ route('dashboard-activity-civil.index') }}" class="card__button">Explore</a>
+                        <a href="{{ route('logout') }}" class="card__button">Explore</a>
                      </div>
                   </article>
 

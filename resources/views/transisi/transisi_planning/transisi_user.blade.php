@@ -6,9 +6,9 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
       <link rel="stylesheet" href="{{ asset('assets_transisi/css/swiper-bundle.min.css') }}">
-      <link rel="stylesheet" href="{{ asset('assets_transisi/css/styles_civil.css') }}">
+      <link rel="stylesheet" href="{{ asset('assets_transisi/css/styles_pc.css') }}">
       <link rel="shortcut icon" href="{{ asset('assets/images/mm.png') }}" />
-      <title>Dashboard Transition | Civil</title>
+      <title>Dashboard Transition | P&C</title>
    </head>
    <body>
         <div class="bg-area-civil"></div>
@@ -30,7 +30,7 @@
                            Dashboard Activity Civil
                         </p>
 
-                        <a href="{{ route('dashboard-activity-civil.index') }}" class="card__button">Explore</a>
+                        <a href="{{ route('logout') }}" class="card__button">Explore</a>
                      </div>
                   </article>
 
@@ -41,16 +41,16 @@
                      </div>
 
                      <div class="card__data">
-                        <h3 class="card__name">Master Data</h3>
+                        <h3 class="card__name">Lorem Ipsum</h3>
                         <p class="card__description">
-                           Dashboard Master Data Civil
+                           Lorem ipsum dolor sit amet.
                         </p>
 
-                        <a href="{{ route('dashboard-masterdata-civil.index') }}" class="card__button">Explore</a>
+                        <a href="#" class="card__button">Explore</a>
                      </div>
                   </article>
 
-                  <article class="card__article swiper-slide">
+                  {{-- <article class="card__article swiper-slide">
                      <div class="card__image">
                         <img src="{{ asset('assets_transisi/img/jadwal0.png') }}" alt="image" class="card__img">
                         <div class="card__shadow"></div>
@@ -64,9 +64,9 @@
 
                         <a href="#" class="card__button">Explore</a>
                      </div>
-                  </article>
+                  </article> --}}
 
-                  <article class="card__article swiper-slide">
+                  {{-- <article class="card__article swiper-slide">
                      <div class="card__image">
                         <img src="{{ asset('assets_transisi/img/masterdata0.png') }}" alt="image" class="card__img">
                         <div class="card__shadow"></div>
@@ -80,7 +80,7 @@
 
                         <a href="#" class="card__button">Explore</a>
                      </div>
-                  </article>
+                  </article> --}}
                </div>
             </div>
 
@@ -102,6 +102,6 @@
       <script src="{{ asset('assets_transisi/js/swiper-bundle.min.js') }}"></script>
 
       <!--=============== MAIN JS ===============-->
-      <script src="{{ asset('assets_transisi/js/main.js') }}"></script>
+      <script src="{{ asset('assets_transisi/js/main_user.js') }}"></script>
    </body>
 </html>
