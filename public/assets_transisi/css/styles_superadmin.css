@@ -99,7 +99,7 @@ img {
 }
 
 .card__image:hover{
-  transform: translateY(-30px);
+  transform: translateY(-25px);
 }
 
 .card__content {
