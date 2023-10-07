@@ -30,7 +30,7 @@
                            Dashboard Activity Civil
                         </p>
 
-                        <a href="{{ route('logout') }}" class="card__button">Explore</a>
+                        <a href="{{ route('dashboard-activity-planning.index') }}" class="card__button">Explore</a>
                      </div>
                   </article>
 

@@ -8,13 +8,12 @@
         <div>
             <a class="navbar-brand brand-logo text-black fw-bolder" href="{{ route('transisi') }}"
                 style="margin-left: 18px">
-                {{-- <img src="{{ asset('assets/images/mm.png') }}" alt="logo" /> TCSM --}}
-                <img src="{{ asset('assets/images/omega.png') }}" alt="logo" /> CIVIL
+                {{-- <img src="{{ asset('assets/images/mm.png') }}" alt="logo"> TRACK --}}
+                <img src="{{ asset('assets_transisi/img/planningg.png') }}" alt="logo"> P & C
             </a>
             <a class="navbar-brand brand-logo-mini" href="{{ route('transisi') }}">
-                {{-- <img src="{{ asset('assets/images/mm.png') }}" alt="logo" /> --}}
-                <img src="{{ asset('assets/images/omega.png') }}" alt="logo" style="height: 38px; width: 38px;"
-                    alt="logo" />
+                {{-- <img src="{{ asset('assets/images/mm.png') }}" alt="logo"> --}}
+                <img src="{{ asset('assets_transisi/img/planningg.png') }}" style="height: 38px; width: 38px;" alt="logo">
             </a>
         </div>
     </div>
@@ -28,9 +27,10 @@
         </ul>
         <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-                <form class="search-form" action="#">
+                <form class="search-form" action="{{ route('temuan_mainline.search') }}" method="GET">
                     <i class="icon-search"></i>
-                    <input type="search" class="form-control" placeholder="Search Here" title="Search here">
+                    <input type="search" class="form-control" name="search" placeholder="Search Here"
+                        title="Search here" autocomplete="off">
                 </form>
             </li>
             <li class="nav-item dropdown d-none d-lg-block user-dropdown">
@@ -51,9 +51,8 @@
                         <p class="fw-light text-muted mb-0">{{ auth()->user()->jabatan ?? '' }}</p>
                         <p class="fw-light text-muted mb-0">{{ auth()->user()->section ?? '' }}</p>
                         <p class="fw-light text-muted mb-0">{{ auth()->user()->email ?? '' }}</p>
-                        <a href="{{ route('profile') }}" title="Profile"><i class="ti-user icon-md"
-                                style="margin: 10px"></i></a>
-                        <a href="{{ route('logout') }}" title="Logout"><i class="ti-power-off icon-md"></i></a>
+                        <a href="{{ route('profile') }}"><i class="ti-user icon-md" style="margin: 10px"></i></a>
+                        <a href="{{ route('logout') }}"><i class="ti-power-off icon-md"></i></a>
                     </div>
                 </div>
             </li>

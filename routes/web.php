@@ -34,6 +34,8 @@ use App\Http\Controllers\ManPowerOnDutyController;
 use App\Http\Controllers\MasterdataDashboardController;
 use App\Http\Controllers\PartController;
 use App\Http\Controllers\PICController;
+use App\Http\Controllers\planning\PlanningDashboard;
+use App\Http\Controllers\planning\PlanningDashboardController;
 use App\Http\Controllers\PMController;
 use App\Http\Controllers\RfiController;
 use App\Http\Controllers\RfiDepoController;
@@ -359,6 +361,18 @@ Route::middleware(['auth'])->group(function () {
     });
     /////////////////////////////   END CIVIL  /////////////////////////////////////
 
+
+
+    /////////////////////////////   START PLANNING  /////////////////////////////////////
+
+
+    Route::middleware(['isPlanning'])->group(function(){
+        Route::controller(PlanningDashboardController::class)->group(function() {
+            Route::get('/activity/planning/dashboard', 'activity')->name('dashboard-activity-planning.index');
+        });
+    });
+
+    /////////////////////////////   END PLANNING  /////////////////////////////////////
 
 
     Route::middleware('isAdmin')->group(function () {

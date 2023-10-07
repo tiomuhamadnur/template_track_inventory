@@ -49,5 +49,6 @@ class Kernel extends HttpKernel
         'isUser' => \App\Http\Middleware\isUser::class,
         'isTrack' => \App\Http\Middleware\isTrack::class,
         'isCivil' => \App\Http\Middleware\isCivil::class,
+        'isPlanning' => \App\Http\Middleware\isPlanning::class,
     ];
 }
