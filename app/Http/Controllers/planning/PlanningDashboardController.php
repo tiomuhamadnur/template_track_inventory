@@ -11,4 +11,9 @@ class PlanningDashboardController extends Controller
     {
         return view('planning.content.content_dashboard.index');
     }
+
+    public function masterdata()
+    {
+        return view('planning.masterdata.masterdata_dashboard.index');
+    }
 }

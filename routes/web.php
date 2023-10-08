@@ -47,6 +47,7 @@ use App\Http\Controllers\SleeperExaminationController;
 use App\Http\Controllers\TemuanController;
 use App\Http\Controllers\TemuanDepoController;
 use App\Http\Controllers\TemuanMainlineController;
+use App\Http\Controllers\ToolsController;
 use App\Http\Controllers\ToolsMaterialsController;
 use App\Http\Controllers\TrackbedExaminationController;
 use App\Http\Controllers\TransDefectController;
@@ -370,6 +371,10 @@ Route::middleware(['auth'])->group(function () {
         Route::controller(PlanningDashboardController::class)->group(function() {
             Route::get('/activity/planning/dashboard', 'activity')->name('dashboard-activity-planning.index');
         });
+
+        Route::controller(ToolsController::class)->group(function(){
+            Route::get('/data-tools', 'user_activity')->name('data-tools');
+        });
     });
 
     /////////////////////////////   END PLANNING  /////////////////////////////////////
@@ -633,7 +638,26 @@ Route::middleware(['auth'])->group(function () {
                 Route::delete('/relasi-defect', 'destroy')->name('relasi-defect.delete');
             });
         });
+
         /////////////////////////////   END CIVIL  /////////////////////////////////////
+
+
+
+        /////////////////////////////   START PLANNING  ////////////////////////////////////
+
+        Route::middleware('isPlanning')->group(function(){
+            Route::controller(PlanningDashboardController::class)->group(function(){
+                Route::get('/master-data/planning', 'masterdata')->name('dashboard-masterdata-planning.index');
+            });
+
+            Route::controller(ToolsController::class)->group(function(){
+                Route::get('/masterdata-tools', 'masterdata')->name('masterdata-tools');
+            });
+        });
+        /////////////////////////////   END PLANNING  /////////////////////////////////////
+
+
+
     });
 });
 

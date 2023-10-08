@@ -73,12 +73,12 @@
                      </div>
 
                      <div class="card__data">
-                        <h3 class="card__name">Lorem Ipsum</h3>
+                        <h3 class="card__name">Master Data</h3>
                         <p class="card__description">
                            Lorem ipsum dolor sit amet.
                         </p>
 
-                        <a href="#" class="card__button">Explore</a>
+                        <a href="{{ route('dashboard-masterdata-planning.index') }}" class="card__button">Explore</a>
                      </div>
                   </article>
                </div>

@@ -28,24 +28,4 @@ class ToolsMaterialsController extends Controller
 
         return redirect()->route('tools.index')->withNotify('Data berhasil ditambahkan!');
     }
-
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit($id)
-    {
-        //
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
-    }
 }

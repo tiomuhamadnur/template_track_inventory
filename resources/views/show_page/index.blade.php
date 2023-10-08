@@ -63,7 +63,7 @@
     <!-- AKHIR HEADER AREA -->
 
     <!-- AWAL CONTAINER KONTEN -->
-    <div class="container-fluid mt--3">
+    <div class="container-fluid ">
         <div class="row">
             <div class="col-lg-9" style="margin: 0 auto;">
                 <div class="page-content">
@@ -184,7 +184,7 @@
                                             <div id="clockdate">
                                                 <div class="clockdate-wrapper">
                                                     <div id="clock"></div>
-                                                    <div id="date"></div>
+                                                    <div id="date" style="color: blueviolet"></div>
                                                 </div>
                                             </div>
                                         </div>

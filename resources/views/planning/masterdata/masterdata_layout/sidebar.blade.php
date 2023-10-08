@@ -2,7 +2,7 @@
     <ul class="nav">
         <li class="nav-item nav-category">Navigasi</li>
         <li class="nav-item animate__animated animate__fadeInLeft">
-            <a class="nav-link" href="{{ route('dashboard-activity-planning.index') }}">
+            <a class="nav-link" href="{{ route('dashboard-masterdata-planning.index') }}">
                 <i class="mdi mdi-view-dashboard menu-icon"></i>
                 <span class="menu-title">Dashboard</span>
             </a>
@@ -16,16 +16,10 @@
             <div class="collapse" id="form-elements">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('data-tools') }}">Data Tools</a>
+                        <a class="nav-link" href="{{ route('masterdata-tools') }}">Data Tools</a>
                     </li>
                 </ul>
             </div>
-        </li>
-        <li class="nav-item animate__animated animate__fadeInLeft">
-            <a class="nav-link" href="#">
-                <i id="notification_rfi" class="mdi mdi-arrange-send-backward menu-icon"></i>
-                <span class="menu-title">Request For Inspection</span>
-            </a>
         </li>
         {{-- <li class="nav-item animate__animated animate__fadeInLeft">
             <a class="nav-link" href="{{ route('closing_report.index') }}">
