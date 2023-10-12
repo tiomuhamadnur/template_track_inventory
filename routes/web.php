@@ -652,6 +652,10 @@ Route::middleware(['auth'])->group(function () {
 
             Route::controller(ToolsController::class)->group(function(){
                 Route::get('/masterdata-tools', 'masterdata')->name('masterdata-tools');
+                Route::get('/masterdata-tools-create', 'create')->name('masterdata-tools.create');
+                Route::post('/masterdata-tools-store','store')->name('masterdata-tools.store');
+                Route::get('/masterdata-tools-edit/{id}/edit', 'edit')->name('masterdata-tools.edit');
+                Route::put('/masterdata-tools-update', 'update')->name('masterdata-tools.update');
             });
         });
         /////////////////////////////   END PLANNING  /////////////////////////////////////

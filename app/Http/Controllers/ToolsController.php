@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\Tools;
+use App\Models\Section;
+use App\Models\Location;
+use App\Models\Departement;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ToolsController extends Controller
 {
 
     public function masterdata()
     {
-        return 'ini Page Admin';
+        $tools = Tools::get();
+        return view('planning.masterdata.masterdata_tools.index', compact(['tools']));
     }
 
     public function user_activity()
@@ -18,59 +23,47 @@ class ToolsController extends Controller
         return 'ini Page User';
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function create()
+    {
+        $section = Section::get();
+        $departement =  Departement::get();
+        $location = Location::get();
+        return view('planning.masterdata.masterdata_tools.create', compact(['section', 'location', 'departement']));
+    }
+
     public function store(Request $request)
     {
-        //
+        Tools::create([
+            'name' => $request->name,
+            'code' => $request->code,
+            'location_id' => $request->location_id,
+            'section_id' => $request->section_id,
+            'departement_id' => $request->departement_id,
+            'stocks' => $request->stocks,
+            'satuan'=> $request->satuan
+        ]);
+
+        return redirect(route('masterdata-tools'))->with('success', 'Data berhasil ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $tools = Tools::findOrFail($id);
+
+        return view('planning.masterdata.masterdata_tools.update', compact(['tools']));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update (Request $request)
     {
-        //
+        $id = $request->id;
+        $tools = Tools::findOrFail($id);
+        if ($tools){
+            $tools->update([
+                'name' => $request->name,
+                'code' => $request->code,
+            ]);
+        }
+        return redirect(route('masterdata-tools'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

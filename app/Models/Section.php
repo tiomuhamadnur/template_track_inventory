@@ -17,4 +17,9 @@ class Section extends Model
     {
         return $this->belongsTo(Departement::class);
     }
+
+    public function tools()
+    {
+        return $this->hasMany(Tools::class);
+    }
 }

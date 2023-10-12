@@ -13,5 +13,10 @@ class Location extends Model
 
     protected $guarded = [];
 
+    public function tools()
+    {
+        return $this->hasMany(Tools::class);
+    }
+
 }
 
