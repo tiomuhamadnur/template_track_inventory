@@ -36,7 +36,7 @@
 
                   <article class="card__article swiper-slide">
                      <div class="card__image">
-                        <img src="{{ asset('assets_transisi/img/depo0.png') }}" alt="image" class="card__img">
+                        <img src="{{ asset('assets_transisi/img/masterdata0.png') }}" alt="image" class="card__img">
                         <div class="card__shadow"></div>
                      </div>
 
@@ -68,7 +68,7 @@
 
                   <article class="card__article swiper-slide">
                      <div class="card__image">
-                        <img src="{{ asset('assets_transisi/img/masterdata0.png') }}" alt="image" class="card__img">
+                        <img src="{{ asset('assets_transisi/img/depo0.png') }}" alt="image" class="card__img">
                         <div class="card__shadow"></div>
                      </div>
 

@@ -51,7 +51,7 @@
             <div class="collapse" id="data-asset">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('mainline.index') }}">Tunnel Mainline</a>
+                        <a class="nav-link" href="#">Coming Soon</a>
                     </li>
                 </ul>
             </div>
