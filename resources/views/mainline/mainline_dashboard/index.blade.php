@@ -16,7 +16,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h4 class="card-title card-title-dash">Mapping Mainline</h4>
+                                <h5>Mapping Mainline</h5>
                             </div>
                             <p class="card-subtitle card-subtitle-dash">Mapping Sebaran Temuan di Area Mainline
                                 @include('mainline.mainline_dashboard.mapping_svg')
