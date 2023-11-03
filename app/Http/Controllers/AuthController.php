@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Request\LoginRequest;
 use App\Models\Ban;
 use App\Models\Section;
+use App\Models\tideup\License;
 use App\Models\User;
+use Carbon\Carbon;
 
 class AuthController extends Controller
 {
@@ -17,6 +19,13 @@ class AuthController extends Controller
     public function loginView()
     {
         return view('login.login');
+    }
+
+    public function expired_page()
+    {
+        $expired_date = License::where('status', 'active')->first()->expired_date;
+        $expired_date = Carbon::parse($expired_date)->format('d F Y');
+        return view('login.expired_license.license', compact('expired_date'));
     }
 
     public function login(LoginRequest $request)

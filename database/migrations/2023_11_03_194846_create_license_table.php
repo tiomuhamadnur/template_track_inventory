@@ -8,16 +8,18 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('location', function (Blueprint $table) {
+        Schema::create('license', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('code')->nullable();
+            $table->string('code')->unique();
+            $table->date('expired_date')->nullable();
+            $table->string('status')->nullable();
+            $table->string('link')->nullable();
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('location');
+        Schema::dropIfExists('license');
     }
 };

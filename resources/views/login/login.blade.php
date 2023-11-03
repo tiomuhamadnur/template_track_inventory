@@ -91,6 +91,12 @@
     <script src="{{ asset('assets/login/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/login/vendor/select2/select2.min.js') }}"></script>
     <script src="{{ asset('assets/login/js/main.js') }}"></script>
+    @if (session('license'))
+        <script>
+            // console.log('expired');
+            window.location.href = "{{ route('expired.page') }}";
+        </script>
+    @endif
 
 </body>
 

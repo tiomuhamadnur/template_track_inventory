@@ -76,6 +76,7 @@ Route::controller(AuthController::class)->middleware('loggedin')->group(function
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('login', 'loginView')->name('login.index');
+    Route::get('expired_page', 'expired_page')->name('expired.page');
 });
 
 Route::controller(ShowPageController::class)->group(function () {
@@ -86,7 +87,7 @@ Route::controller(ShowPageController::class)->group(function () {
     Route::get('/api/activity', 'getActivity')->name('activity.get');
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'license'])->group(function () {
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('transisi', [AuthController::class, 'transisi'])->name('transisi')->middleware('isUser');
     Route::get('transisi-user', [AuthController::class, 'transisi_user'])->name('transisi.user');

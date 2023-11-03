@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Tools extends Model
 {
@@ -14,13 +13,24 @@ class Tools extends Model
 
     protected $guarded = [];
 
-    public function location()
+    public function departement()
     {
-        return $this->belongsTo(Location::class);
+        return $this->belongsTo(Departement::class);
     }
 
     public function section()
     {
         return $this->belongsTo(Section::class);
     }
+
+    public function location()
+    {
+        return $this->belongsTo(Location::class);
+    }
+
+    public function detail_location()
+    {
+        return $this->belongsTo(DetailLocation::class);
+    }
+
 }
