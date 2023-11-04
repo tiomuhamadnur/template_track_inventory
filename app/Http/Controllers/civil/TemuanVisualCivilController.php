@@ -10,6 +10,8 @@ use App\Models\civil\DefectCivil;
 use App\Models\civil\DetailArea;
 use App\Models\civil\DetailPartCivil;
 use App\Models\civil\PartCivil;
+use App\Models\civil\RelasiAreaCivil;
+use App\Models\civil\RelasiDefectCivil;
 use App\Models\civil\SubArea;
 use App\Models\civil\TemuanVisualCivil;
 use Carbon\Carbon;
@@ -72,19 +74,11 @@ class TemuanVisualCivilController extends Controller
     public function create()
     {
         $area = Area::where('stasiun', 'true')->get();
-        $sub_area = SubArea::orderBy('name', 'asc')->get();
-        $detail_area = DetailArea::orderBy('name', 'asc')->get();
         $part = PartCivil::orderBy('name', 'asc')->get();
-        $detail_part = DetailPartCivil::orderBy('name', 'asc')->get();
-        $defect = DefectCivil::orderBy('name', 'asc')->get();
 
         return view('civil.examination.examination_visual.create', compact([
             'area',
-            'sub_area',
-            'detail_area',
             'part',
-            'detail_part',
-            'defect',
         ]));
     }
 
@@ -433,5 +427,69 @@ class TemuanVisualCivilController extends Controller
         }
         $temuan_visual->delete();
         return redirect()->route('temuan-visual.index')->withNotify('Data temuan berhasil dihapus secara permanen!');
+    }
+
+    public function get_sub_area(Request $request)
+    {
+        $area_id = $request->area_id;
+        $sub_area = RelasiAreaCivil::select(
+            'tbl_civil_sub_area.*',
+        )
+        ->join('tbl_civil_sub_area', 'tbl_civil_sub_area.id', '=', 'trans_civil_relasi_area.sub_area_id')
+        ->where('trans_civil_relasi_area.area_id', $area_id)
+        ->distinct()
+        ->get();
+        if (count($sub_area) > 0) {
+            return response()->json($sub_area);
+        }
+    }
+
+    public function get_detail_area(Request $request)
+    {
+        $area_id = $request->area_id;
+        $sub_area_id = $request->sub_area_id;
+        $detail_area = RelasiAreaCivil::select(
+            'tbl_civil_detail_area.*',
+        )
+        ->join('tbl_civil_detail_area', 'tbl_civil_detail_area.id', '=', 'trans_civil_relasi_area.detail_area_id')
+        ->where('trans_civil_relasi_area.area_id', $area_id)
+        ->where('trans_civil_relasi_area.sub_area_id', $sub_area_id)
+        ->distinct()
+        ->get();
+        if (count($detail_area) > 0) {
+            return response()->json($detail_area);
+        }
+    }
+
+    public function get_detail_part(Request $request)
+    {
+        $part_id = $request->part_id;
+        $detail_part = RelasiDefectCivil::select(
+            'tbl_civil_detail_part.*',
+        )
+        ->join('tbl_civil_detail_part', 'tbl_civil_detail_part.id', '=', 'trans_civil_relasi_defect.detail_part_id')
+        ->where('trans_civil_relasi_defect.part_id', $part_id)
+        ->distinct()
+        ->get();
+        if (count($detail_part) > 0) {
+            return response()->json($detail_part);
+        }
+    }
+
+    public function get_defect(Request $request)
+    {
+        $part_id = $request->part_id;
+        $detail_part_id = $request->detail_part_id;
+        $defect = RelasiDefectCivil::select(
+            'tbl_civil_defect.*',
+        )
+        ->join('tbl_civil_defect', 'tbl_civil_defect.id', '=', 'trans_civil_relasi_defect.defect_id')
+        ->where('trans_civil_relasi_defect.part_id', $part_id)
+        ->where('trans_civil_relasi_defect.detail_part_id', $detail_part_id)
+        ->distinct()
+        ->get();
+        if (count($defect) > 0) {
+            return response()->json($defect);
+        }
     }
 }

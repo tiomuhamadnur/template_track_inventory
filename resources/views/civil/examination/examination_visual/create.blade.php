@@ -35,9 +35,6 @@
                                 <div class="input-group">
                                     <select id="sub_area_id" name="sub_area_id" class="form-select" required>
                                         <option value="" selected disabled>- Pilih Sub Area -</option>
-                                        @foreach ($sub_area as $item)
-                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                        @endforeach
                                     </select>
                                     <div class="select-dropdown"></div>
                                 </div>
@@ -50,9 +47,6 @@
                                 <div class="input-group">
                                     <select id="detail_area_id" name="detail_area_id" class="form-select" required>
                                         <option selected disabled value="">- Pilih Detail Area -</option>
-                                        @foreach ($detail_area as $item)
-                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                        @endforeach
                                     </select>
                                     <div class="select-dropdown"></div>
                                 </div>
@@ -82,9 +76,6 @@
                                     <select id="detail_part_id" name="detail_part_id" class="form-select" required>
                                         <option value="" selected disabled>- Pilih Detail Part -
                                         </option>
-                                        @foreach ($detail_part as $item)
-                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                        @endforeach
                                     </select>
                                     <div class="select-dropdown"></div>
                                 </div>
@@ -98,9 +89,6 @@
                                     <select id="defect_id" name="defect_id" class="form-select" required>
                                         <option value="" selected disabled>- Pilih Nama Defect -
                                         </option>
-                                        @foreach ($defect as $item)
-                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                        @endforeach
                                     </select>
                                     <div class="select-dropdown"></div>
                                 </div>
@@ -209,79 +197,84 @@
 @section('javascript')
     <script>
         $(document).ready(function() {
-            // $('#area').on('change', function() {
-            //     var area = this.value;
-            //     $.ajax({
-            //         url: '/getLocation?area=' + area,
-            //         type: 'get',
-            //         success: function(res) {
-            //             $('#location').html(
-            //                 '<option value="" selected disabled>- Pilih Nama Location -</option>'
-            //             );
-            //             $.each(res, function(key, value) {
-            //                 $('#location').append('<option value="' + value
-            //                     .id + '">' + value.code + ' - (' + value.name +
-            //                     ')</option>');
-            //             });
-            //         }
-            //     });
-            // });
+            $('#area_id').on('change', function() {
+                var area_id = this.value;
+                $.ajax({
+                    url: '/civil/get-sub-area?area_id=' + area_id,
+                    type: 'get',
+                    success: function(res) {
+                        $('#sub_area_id').html(
+                            '<option value="" selected disabled>- Pilih Sub Area -</option>'
+                        );
+                        $.each(res, function(key, value) {
+                            $('#sub_area_id').append('<option value="' + value
+                                .id + '">' + value.name + ' - (' +
+                                value.code +
+                                ')</option>');
+                        });
+                    }
+                });
+            });
 
-            // $('#location').on('change', function() {
-            //     var area = document.getElementById("area").value;
-            //     $.ajax({
-            //         url: '/getLine?area=' + area,
-            //         type: 'get',
-            //         success: function(res) {
-            //             $('#line').html(
-            //                 '<option value="" selected disabled>- Pilih Nama Line -</option>'
-            //             );
-            //             $.each(res, function(key, value) {
-            //                 $('#line').append('<option value="' + value
-            //                     .id + '">' + value.code + ' - (' + value.name +
-            //                     ')</option>');
-            //             });
-            //         }
-            //     });
-            // });
+            $('#sub_area_id').on('change', function() {
+                var area_id = document.getElementById('area_id').value;
+                var sub_area_id = this.value;
+                $.ajax({
+                    url: '/civil/get-detail-area?area_id=' + area_id + '&sub_area_id=' +
+                        sub_area_id,
+                    type: 'get',
+                    success: function(res) {
+                        $('#detail_area_id').html(
+                            '<option value="" selected disabled>- Pilih Detail Area -</option>'
+                        );
+                        $.each(res, function(key, value) {
+                            $('#detail_area_id').append('<option value="' + value
+                                .id + '">' + value.name + ' - (' +
+                                value.code +
+                                ')</option>');
+                        });
+                    }
+                });
+            });
 
-            // $('#part_id').on('change', function() {
-            //     var part_id = this.value;
-            //     $.ajax({
-            //         url: '/getDetailPart?part_id=' + part_id,
-            //         type: 'get',
-            //         success: function(res) {
-            //             $('#detail_part_id').html(
-            //                 '<option value="" selected disabled>- Pilih Detail Part -</option>'
-            //             );
-            //             $.each(res, function(key, value) {
-            //                 $('#detail_part_id').append('<option value="' + value
-            //                     .detail_part_id + '">' + value.detail_part_name +
-            //                     '</option>');
-            //             });
-            //         }
-            //     });
-            // });
+            $('#part_id').on('change', function() {
+                var part_id = this.value;
+                $.ajax({
+                    url: '/civil/get-detail-part?part_id=' + part_id,
+                    type: 'get',
+                    success: function(res) {
+                        $('#detail_part_id').html(
+                            '<option value="" selected disabled>- Pilih Detail Part -</option>'
+                        );
+                        $.each(res, function(key, value) {
+                            $('#detail_part_id').append('<option value="' + value
+                                .id + '">' + value.name +
+                                '</option>');
+                        });
+                    }
+                });
+            });
 
-            // $('#detail_part_id').on('change', function() {
-            //     var detail_part_id = this.value;
-            //     var part_id = document.getElementById("part_id").value;
-            //     $.ajax({
-            //         url: '/getDefect?detail_part_id=' + detail_part_id + '&part_id=' + part_id,
-            //         type: 'get',
-            //         success: function(res) {
-            //             $('#defect_id').html(
-            //                 '<option value="" selected disabled>- Pilih Nama Defect -</option>'
-            //             );
-            //             $.each(res, function(key, value) {
-            //                 $('#defect_id').append('<option value="' + value
-            //                     .defect_id + '">' + value.defect_name +
-            //                     '</option>');
-            //             });
-            //             $('#defect_id').append('<option value="">Lainnya</option>')
-            //         }
-            //     });
-            // });
+            $('#detail_part_id').on('change', function() {
+                var detail_part_id = this.value;
+                var part_id = document.getElementById("part_id").value;
+                $.ajax({
+                    url: '/civil/get-defect?detail_part_id=' + detail_part_id + '&part_id=' +
+                        part_id,
+                    type: 'get',
+                    success: function(res) {
+                        $('#defect_id').html(
+                            '<option value="" selected disabled>- Pilih Nama Defect -</option>'
+                        );
+                        $.each(res, function(key, value) {
+                            $('#defect_id').append('<option value="' + value
+                                .id + '">' + value.name +
+                                '</option>');
+                        });
+                        $('#defect_id').append('<option value="">Lainnya</option>')
+                    }
+                });
+            });
 
             $('#klasifikasi').on('change', function() {
                 var klasifikasi = this.value;

@@ -349,6 +349,11 @@ Route::middleware(['auth', 'license'])->group(function () {
             Route::get('/temuan-visual/filter', 'filter')->name('temuan-visual.filter');
             Route::get('/temuan-visual/export-visual-excel', 'export')->name('temuan-visual.export');
             Route::get('/temuan-visual/export-visual-pdf', 'export_pdf')->name('temuan-visual.export.pdf');
+
+            Route::get('/civil/get-sub-area', 'get_sub_area')->name('civil.get.sub_area');
+            Route::get('/civil/get-detail-area', 'get_detail_area')->name('civil.get.detail_area');
+            Route::get('/civil/get-detail-part', 'get_detail_part')->name('civil.get.detail_part');
+            Route::get('/civil/get-defect', 'get_defect')->name('civil.get.defect');
         });
 
         // RFI
