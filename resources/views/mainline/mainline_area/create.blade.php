@@ -1,7 +1,7 @@
 @extends('masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title>Add Data Area | TCSM</title>
+    <title>Add Data Area | CPWTM</title>
 @endsection
 
 @section('sub-content')

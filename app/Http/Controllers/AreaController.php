@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\AreaExport;
 use App\Models\Area;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Excel;
 
 class AreaController extends Controller
 {
@@ -31,9 +34,10 @@ class AreaController extends Controller
         return redirect()->route('area.index');
     }
 
-    public function show($id)
+    public function export_excel()
     {
-        //
+        $waktu = Carbon::now()->format('Ymd');
+        return Excel::download(new AreaExport(), $waktu . '_area.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 
     public function edit($id)

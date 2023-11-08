@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\civil;
 
+use App\Exports\civil\DetailPartExport;
 use App\Http\Controllers\Controller;
 use App\Models\civil\DetailPartCivil;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Excel;
 
 class DetailPartCivilController extends Controller
 {
@@ -29,9 +32,10 @@ class DetailPartCivilController extends Controller
         return redirect()->route('detail-part-civil.index')->withNotify('Data berhasil ditambahkan!');
     }
 
-    public function show($id)
+    public function export_excel()
     {
-        //
+        $waktu = Carbon::now()->format('Ymd');
+        return Excel::download(new DetailPartExport(), $waktu . '_detail_part_civil.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 
     public function edit($id)

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\civil;
 
+use App\Exports\civil\DetailAreaExport;
 use App\Http\Controllers\Controller;
 use App\Models\civil\DetailArea;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Excel;
 
 class DetailAreaController extends Controller
 {
@@ -29,9 +32,10 @@ class DetailAreaController extends Controller
         return redirect()->route('detail-area.index')->withNotify('Data berhasil ditambahkan!');
     }
 
-    public function show($id)
+    public function export_excel()
     {
-        //
+        $waktu = Carbon::now()->format('Ymd');
+        return Excel::download(new DetailAreaExport(), $waktu . '_detail_area.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 
     public function edit($id)

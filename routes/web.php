@@ -412,6 +412,7 @@ Route::middleware(['auth', 'license'])->group(function () {
                 Route::get('/area/{id}/edit', 'edit')->name('area.edit');
                 Route::put('/area', 'update')->name('area.update');
                 Route::get('/area/{id}/delete', 'destroy')->name('area.delete');
+                Route::get('/area/export-excel', 'export_excel')->name('area.export.excel');
             });
 
             Route::controller(LineController::class)->group(function () {
@@ -598,6 +599,7 @@ Route::middleware(['auth', 'license'])->group(function () {
                 Route::post('/sub-area', 'store')->name('sub-area.store');
                 Route::put('/sub-area', 'update')->name('sub-area.update');
                 Route::delete('/sub-area', 'destroy')->name('sub-area.delete');
+                Route::get('/sub-area/export-excel', 'export_excel')->name('sub-area.export.excel');
             });
 
             Route::controller(DetailAreaController::class)->group(function () {
@@ -605,11 +607,13 @@ Route::middleware(['auth', 'license'])->group(function () {
                 Route::post('/detail-area', 'store')->name('detail-area.store');
                 Route::put('/detail-area', 'update')->name('detail-area.update');
                 Route::delete('/detail-area', 'destroy')->name('detail-area.delete');
+                Route::get('/detail-area/export-excel', 'export_excel')->name('detail-area.export.excel');
             });
 
             Route::controller(RelasiAreaCivilController::class)->group(function () {
                 Route::get('/relasi-area', 'index')->name('relasi-area.index');
                 Route::post('/relasi-area', 'store')->name('relasi-area.store');
+                Route::post('/relasi-area/import', 'import')->name('relasi-area.import');
                 Route::get('/relasi-area/{id}/edit', 'edit')->name('relasi-area.edit');
                 Route::put('/relasi-area', 'update')->name('relasi-area.update');
                 Route::delete('/relasi-area', 'destroy')->name('relasi-area.delete');
@@ -620,6 +624,7 @@ Route::middleware(['auth', 'license'])->group(function () {
                 Route::post('/defect-civil', 'store')->name('defect-civil.store');
                 Route::put('/defect-civil', 'update')->name('defect-civil.update');
                 Route::delete('/defect-civil', 'destroy')->name('defect-civil.delete');
+                Route::get('/defect-civil/export-excel', 'export_excel')->name('defect-civil.export.excel');
             });
 
             Route::controller(PartCivilController::class)->group(function () {
@@ -627,6 +632,7 @@ Route::middleware(['auth', 'license'])->group(function () {
                 Route::post('/part-civil', 'store')->name('part-civil.store');
                 Route::put('/part-civil', 'update')->name('part-civil.update');
                 Route::delete('/part-civil', 'destroy')->name('part-civil.delete');
+                Route::get('/part-civil/export-excel', 'export_excel')->name('part-civil.export.excel');
             });
 
             Route::controller(DetailPartCivilController::class)->group(function () {
@@ -634,11 +640,13 @@ Route::middleware(['auth', 'license'])->group(function () {
                 Route::post('/detail-part-civil', 'store')->name('detail-part-civil.store');
                 Route::put('/detail-part-civil', 'update')->name('detail-part-civil.update');
                 Route::delete('/detail-part-civil', 'destroy')->name('detail-part-civil.delete');
+                Route::get('/detail-part-civil/export-excel', 'export_excel')->name('detail-part-civil.export.excel');
             });
 
             Route::controller(RelasiDefectCivilController::class)->group(function () {
                 Route::get('/relasi-defect', 'index')->name('relasi-defect.index');
                 Route::post('/relasi-defect', 'store')->name('relasi-defect.store');
+                Route::post('/relasi-defect/import', 'import')->name('relasi-defect.import');
                 Route::get('/relasi-defect/{id}/edit', 'edit')->name('relasi-defect.edit');
                 Route::put('/relasi-defect', 'update')->name('relasi-defect.update');
                 Route::delete('/relasi-defect', 'destroy')->name('relasi-defect.delete');

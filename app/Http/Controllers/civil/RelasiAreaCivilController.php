@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\civil;
 
 use App\Http\Controllers\Controller;
+use App\Imports\civil\RelasiAreaImport;
 use App\Models\Area;
 use App\Models\civil\DetailArea;
 use App\Models\civil\RelasiAreaCivil;
@@ -10,6 +11,7 @@ use App\Models\civil\SubArea;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Excel;
 
 class RelasiAreaCivilController extends Controller
 {
@@ -57,9 +59,20 @@ class RelasiAreaCivilController extends Controller
         return redirect()->route('relasi-area.index')->withNotify('Data berhasil ditambahkan!');
     }
 
-    public function show($id)
+    public function import(Request $request)
     {
-        //
+        dd($request);
+
+        $this->validate($request, [
+            'file_excel' => 'required|mimes:csv,xls,xlsx',
+        ]);
+
+        if (!$request->hasFile('file_excel')) {
+            return redirect()->route('relasi-area.index');
+        }
+
+        Excel::import(new RelasiAreaImport, request()->file('file_excel'));
+        return redirect()->route('relasi-area.index')->withNotify('Data berhasil diimport!');
     }
 
     public function edit($id)

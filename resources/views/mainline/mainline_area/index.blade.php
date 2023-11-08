@@ -26,7 +26,8 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuIconButton1">
                                 <a class="dropdown-item" href="#">Print</a>
-                                <a class="dropdown-item" href="#">Export to Excel</a>
+                                <a class="dropdown-item" href="{{ route('area.export.excel') }}" target="_blank">Export to
+                                    Excel</a>
                                 <a class="dropdown-item" href="#">Export to PDF</a>
                             </div>
                             <div class="table-responsive pt-3">

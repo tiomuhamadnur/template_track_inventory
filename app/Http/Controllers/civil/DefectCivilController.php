@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\civil;
 
+use App\Exports\civil\DefectExport;
 use App\Http\Controllers\Controller;
 use App\Models\civil\DefectCivil;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Excel;
 
 class DefectCivilController extends Controller
 {
@@ -29,9 +32,10 @@ class DefectCivilController extends Controller
         return redirect()->route('defect-civil.index')->withNotify('Data berhasil ditambahkan!');
     }
 
-    public function show($id)
+    public function export_excel()
     {
-        //
+        $waktu = Carbon::now()->format('Ymd');
+        return Excel::download(new DefectExport(), $waktu . '_defect_civil.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 
     public function edit($id)

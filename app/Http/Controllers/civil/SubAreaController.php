@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\civil;
 
+use App\Exports\civil\SubAreaExport;
 use App\Http\Controllers\Controller;
 use App\Models\civil\SubArea;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Excel;
 
 class SubAreaController extends Controller
 {
@@ -29,9 +32,10 @@ class SubAreaController extends Controller
         return redirect()->route('sub-area.index')->withNotify('Data berhasil ditambahkan!');
     }
 
-    public function show($id)
+    public function export_excel()
     {
-        //
+        $waktu = Carbon::now()->format('Ymd');
+        return Excel::download(new SubAreaExport(), $waktu . '_sub_area.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 
     public function edit($id)
