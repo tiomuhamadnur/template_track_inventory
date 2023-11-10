@@ -16,17 +16,47 @@
             <div class="collapse" id="form-elements">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('masterdata-tools') }}">Data Tools</a>
+                        <a class="nav-link" href="#">Transaksi Tools</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="collapse" id="form-elements">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Transaksi Material</a>
                     </li>
                 </ul>
             </div>
         </li>
-        {{-- <li class="nav-item animate__animated animate__fadeInLeft">
-            <a class="nav-link" href="{{ route('closing_report.index') }}">
-                <i class="mdi mdi-file-export menu-icon"></i>
-                <span class="menu-title">Form/Report Generator</span>
+
+        <li class="nav-item nav-category">Data Assets</li>
+        <li class="nav-item animate__animated animate__fadeInLeft">
+            <a class="nav-link" href="{{ route('masterdata-tools') }}" aria-expanded="false" aria-controls="auth">
+                <i class="menu-icon mdi mdi-toolbox"></i>
+                <span class="menu-title">Data Tools</span>
             </a>
-        </li> --}}
+        </li>
+        <li class="nav-item animate__animated animate__fadeInLeft">
+            <a class="nav-link" href="#" aria-expanded="false" aria-controls="auth">
+                <i class="menu-icon mdi mdi-warehouse"></i>
+                <span class="menu-title">Data Material</span>
+            </a>
+        </li>
+
+        <li class="nav-item nav-category">Data Essentials</li>
+        <li class="nav-item animate__animated animate__fadeInLeft">
+            <a class="nav-link" href="{{ route('masterdata-location.index') }}" aria-expanded="false" aria-controls="auth">
+                <i class="menu-icon mdi mdi-map-marker"></i>
+                <span class="menu-title">Data Lokasi</span>
+            </a>
+        </li>
+        <li class="nav-item animate__animated animate__fadeInLeft">
+            <a class="nav-link" href="{{ route('masterdata-detail-location.index') }}" aria-expanded="false" aria-controls="auth">
+                <i class="menu-icon mdi mdi-map-marker-radius"></i>
+                <span class="menu-title">Data Detail Lokasi</span>
+            </a>
+        </li>
 
         <li class="nav-item nav-category">Settings</li>
         <li class="nav-item animate__animated animate__fadeInLeft">

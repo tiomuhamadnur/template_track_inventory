@@ -22,6 +22,7 @@ use App\Http\Controllers\DefectController;
 use App\Http\Controllers\DepartementController;
 use App\Http\Controllers\DepoDashboardController;
 use App\Http\Controllers\DepoLineController;
+use App\Http\Controllers\DetailLocationController;
 use App\Http\Controllers\DetailPartController;
 use App\Http\Controllers\GetDataController;
 use App\Http\Controllers\IndividualPerformanceController;
@@ -29,6 +30,7 @@ use App\Http\Controllers\JadwalPekerjaanController;
 use App\Http\Controllers\JointController;
 use App\Http\Controllers\LengkungController;
 use App\Http\Controllers\LineController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\MainlineController;
 use App\Http\Controllers\ManPowerOnDutyController;
 use App\Http\Controllers\MasterdataDashboardController;
@@ -671,6 +673,25 @@ Route::middleware(['auth', 'license'])->group(function () {
                 Route::get('/masterdata-tools-edit/{id}/edit', 'edit')->name('masterdata-tools.edit');
                 Route::put('/masterdata-tools-update', 'update')->name('masterdata-tools.update');
             });
+
+            Route::controller(LocationController::class)->group(function(){
+                Route::get('/masterdata-location', 'index')->name('masterdata-location.index');
+                Route::get('/masterdata-location-create', 'create')->name('masterdata-location.create');
+                Route::post('/masterdata-location-store', 'store')->name('masterdata-location.store');
+                Route::get('/masterdata-location-edit/{id}/edit', 'edit')->name('masterdata-location.edit');
+                Route::put('/masterdata-location-update', 'update')->name('masterdata-location.update');
+                Route::delete('/masterdata-location-delete', 'destroy')->name('masterdata-location.delete');
+
+            });
+
+            Route::controller(DetailLocationController::class)->group(function(){
+                Route::get('/masterdata-detail-location', 'index')->name('masterdata-detail-location.index');
+                Route::get('/masterdata-detail-location-create', 'create')->name('masterdata-detail-location.create');
+                Route::post('/masterdata-detail-location-store', 'store')->name('masterdata-detail-location.store');
+                Route::get('/masterdata-detail-location-edit/{id}/edit', 'edit')->name('masterdata-detail-location.edit');
+                Route::put('/masterdata-detail-location-update', 'update')->name('masterdata-detail-location.update');
+                Route::delete('/masterdata-detail-location-delete', 'destroy')->name('masterdata-detail-location.delete');
+            });
         });
         /////////////////////////////   END PLANNING  /////////////////////////////////////
 
@@ -680,5 +701,6 @@ Route::middleware(['auth', 'license'])->group(function () {
 });
 
 Route::controller(SendEmailController::class)->group(function () {
-    Route::get('/send-email-rfi', 'rfi')->name('send-email.rfi');
+
+ Route::get('/send-email-rfi', 'rfi')->name('send-email.rfi');
 });

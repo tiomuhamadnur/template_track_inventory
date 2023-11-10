@@ -25,46 +25,15 @@
                      </div>
 
                      <div class="card__data">
-                        <h3 class="card__name">Mainline</h3>
+                        <h3 class="card__name">Activity</h3>
                         <p class="card__description">
-                           Dashboard Activity Civil
+                           Dashboard Activity Planning
                         </p>
 
                         <a href="{{ route('logout') }}" class="card__button">Explore</a>
                      </div>
                   </article>
 
-                  <article class="card__article swiper-slide">
-                     <div class="card__image">
-                        <img src="{{ asset('assets_transisi/img/depo0.png') }}" alt="image" class="card__img">
-                        <div class="card__shadow"></div>
-                     </div>
-
-                     <div class="card__data">
-                        <h3 class="card__name">Master Data</h3>
-                        <p class="card__description">
-                           Dashboard Master Data Civil
-                        </p>
-
-                        <a href="{{ route('dashboard-masterdata-civil.index') }}" class="card__button">Explore</a>
-                     </div>
-                  </article>
-
-                  <article class="card__article swiper-slide">
-                     <div class="card__image">
-                        <img src="{{ asset('assets_transisi/img/jadwal0.png') }}" alt="image" class="card__img">
-                        <div class="card__shadow"></div>
-                     </div>
-
-                     <div class="card__data">
-                        <h3 class="card__name">Lorem Ipsum</h3>
-                        <p class="card__description">
-                           Lorem ipsum dolor sit amet.
-                        </p>
-
-                        <a href="#" class="card__button">Explore</a>
-                     </div>
-                  </article>
 
                   <article class="card__article swiper-slide">
                      <div class="card__image">
@@ -75,7 +44,7 @@
                      <div class="card__data">
                         <h3 class="card__name">Master Data</h3>
                         <p class="card__description">
-                           Lorem ipsum dolor sit amet.
+                           Master Data Dept. CPWTM
                         </p>
 
                         <a href="{{ route('dashboard-masterdata-planning.index') }}" class="card__button">Explore</a>
