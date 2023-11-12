@@ -37,7 +37,7 @@
                 <th class="p-1">Defect</th>
                 <th class="p-1">Class <br> (Priority)</th>
                 <th class="p-1 text-wrap">Remark</th>
-                <th class="p-1">Examiner</th>
+                <th class="p-1">PIC</th>
                 <th class="p-1">Date</th>
                 <th class="p-1">Status</th>
                 <th class="p-1">Photo <br> Documentation</th>

@@ -375,12 +375,12 @@ Route::middleware(['auth', 'license'])->group(function () {
     /////////////////////////////   START PLANNING  /////////////////////////////////////
 
 
-    Route::middleware(['isPlanning'])->group(function(){
-        Route::controller(PlanningDashboardController::class)->group(function() {
+    Route::middleware(['isPlanning'])->group(function () {
+        Route::controller(PlanningDashboardController::class)->group(function () {
             Route::get('/activity/planning/dashboard', 'activity')->name('dashboard-activity-planning.index');
         });
 
-        Route::controller(ToolsController::class)->group(function(){
+        Route::controller(ToolsController::class)->group(function () {
             Route::get('/data-tools', 'user_activity')->name('data-tools');
         });
     });
@@ -661,30 +661,29 @@ Route::middleware(['auth', 'license'])->group(function () {
 
         /////////////////////////////   START PLANNING  ////////////////////////////////////
 
-        Route::middleware('isPlanning')->group(function(){
-            Route::controller(PlanningDashboardController::class)->group(function(){
+        Route::middleware('isPlanning')->group(function () {
+            Route::controller(PlanningDashboardController::class)->group(function () {
                 Route::get('/master-data/planning', 'masterdata')->name('dashboard-masterdata-planning.index');
             });
 
-            Route::controller(ToolsController::class)->group(function(){
+            Route::controller(ToolsController::class)->group(function () {
                 Route::get('/masterdata-tools', 'masterdata')->name('masterdata-tools');
                 Route::get('/masterdata-tools-create', 'create')->name('masterdata-tools.create');
-                Route::post('/masterdata-tools-store','store')->name('masterdata-tools.store');
+                Route::post('/masterdata-tools-store', 'store')->name('masterdata-tools.store');
                 Route::get('/masterdata-tools-edit/{id}/edit', 'edit')->name('masterdata-tools.edit');
                 Route::put('/masterdata-tools-update', 'update')->name('masterdata-tools.update');
             });
 
-            Route::controller(LocationController::class)->group(function(){
+            Route::controller(LocationController::class)->group(function () {
                 Route::get('/masterdata-location', 'index')->name('masterdata-location.index');
                 Route::get('/masterdata-location-create', 'create')->name('masterdata-location.create');
                 Route::post('/masterdata-location-store', 'store')->name('masterdata-location.store');
                 Route::get('/masterdata-location-edit/{id}/edit', 'edit')->name('masterdata-location.edit');
                 Route::put('/masterdata-location-update', 'update')->name('masterdata-location.update');
                 Route::delete('/masterdata-location-delete', 'destroy')->name('masterdata-location.delete');
-
             });
 
-            Route::controller(DetailLocationController::class)->group(function(){
+            Route::controller(DetailLocationController::class)->group(function () {
                 Route::get('/masterdata-detail-location', 'index')->name('masterdata-detail-location.index');
                 Route::get('/masterdata-detail-location-create', 'create')->name('masterdata-detail-location.create');
                 Route::post('/masterdata-detail-location-store', 'store')->name('masterdata-detail-location.store');
@@ -701,6 +700,5 @@ Route::middleware(['auth', 'license'])->group(function () {
 });
 
 Route::controller(SendEmailController::class)->group(function () {
-
- Route::get('/send-email-rfi', 'rfi')->name('send-email.rfi');
+    Route::get('/send-email-rfi', 'rfi')->name('send-email.rfi');
 });

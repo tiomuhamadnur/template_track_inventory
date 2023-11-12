@@ -330,17 +330,17 @@
             <!-- BEGIN BODY -->
             <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"
                 style="margin: auto;">
-                <tr>
+                {{-- <tr>
                     <td valign="top" class="bg_white" style="padding: 1em 2.5em 0 2.5em;">
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                             <tr>
                                 <td class="logo" style="text-align: left;">
-                                    <h1><a href="#">Request For Inspection (RFI)</a></h1>
+                                    <h3><a href="#">Request For Inspection (RFI)</a></h3>
                                 </td>
                             </tr>
                         </table>
                     </td>
-                </tr><!-- end tr -->
+                </tr><!-- end tr --> --}}
                 <tr>
                     <td valign="middle" class="hero bg_white" style="padding: 2em 0 0 0;">
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -350,7 +350,7 @@
                                         <h4>Dear Bpk/Ibu, <br> <b>{{ $name ?? '' }}</b> <br> <br>
                                             Sebagai informasi, terdapat pengajuan <b>RFI</b> di Exodus yang perlu
                                             di-review.
-                                            Karena telah dilakukan perbaikan temuan defect dengan detail sebagai berikut
+                                            Karena telah dilakukan perbaikan dengan detail sebagai berikut
                                             :
                                         </h4>
                                     </div>
@@ -365,7 +365,7 @@
                         <tr style="border-bottom: 1px solid rgba(0,0,0,.05); border-top: 1px solid rgba(0,0,0,.05);">
                             <td width="40%" style="text-align:left; padding: 0 2.5em;">
                                 <div class="product-entry">
-                                    <span style="color: #000; font-size: 20px;">Jumlah : <b>{{ $jumlah_rfi ?? '' }}
+                                    <span style="color: #000; font-size: 15px;">Jumlah : <b>{{ $jumlah_rfi ?? '' }}
                                             Perbaikan</b></span>
                                 </div>
                             </td>
@@ -373,7 +373,7 @@
                         <tr style="border-bottom: 1px solid rgba(0,0,0,.05);">
                             <td width="40%" style="text-align:left; padding: 0 2.5em;">
                                 <div class="product-entry">
-                                    <span style="color: #000; font-size: 20px;">Tanggal :
+                                    <span style="color: #000; font-size: 15px;">Tanggal :
                                         <b>{{ $tanggal_rfi ?? '' }}</b></span>
                                 </div>
                             </td>
@@ -382,11 +382,7 @@
                         <tr>
                             <td valign="middle" style="text-align:left; padding: 1em 2.5em;">
                                 <p><a href="https://exodus.tideupindustries.com/rfi-mainline" target="_blank"
-                                        class="btn btn-primary">Daftar RFI Mainline</a></p>
-                            </td>
-                            <td valign="middle" style="text-align:left; padding: 1em 2.5em;">
-                                <p><a href="https://exodus.tideupindustries.com/rfi-depo" target="_blank"
-                                        class="btn btn-primary">Daftar RFI Depo</a></p>
+                                        class="btn btn-primary">Lihat Daftar RFI</a></p>
                             </td>
                         </tr>
                         <tr>

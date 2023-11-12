@@ -43,13 +43,37 @@
                     STATUS
                 </th>
                 <th class="text-center">
-                    DATE
+                    TGL. LAPORAN
                 </th>
                 <th class="text-center">
-                    PHOTO OPEN
+                    PIC LAPORAN
                 </th>
                 <th class="text-center">
-                    PHOTO CLOSE
+                    JUSTIFIKASI
+                </th>
+                <th class="text-center">
+                    PIC JUSTIFIKASI
+                </th>
+                <th class="text-center">
+                    EKSEKUTOR
+                </th>
+                <th class="text-center">
+                    DATE RFI
+                </th>
+                <th class="text-center">
+                    RFI BY
+                </th>
+                <th class="text-center">
+                    DATE CLOSE
+                </th>
+                <th class="text-center">
+                    APROVED BY
+                </th>
+                <th class="text-center">
+                    PHOTO BEFORE
+                </th>
+                <th class="text-center">
+                    PHOTO AFTER
                 </th>
             </tr>
         </thead>
@@ -88,6 +112,30 @@
                     </td>
                     <td class="text-center">
                         {{ $item->tanggal }}
+                    </td>
+                    <td class="text-center">
+                        {{ $item->pic }}
+                    </td>
+                    <td class="text-center">
+                        {{ $item->justifikasi ?? '' }}
+                    </td>
+                    <td class="text-center">
+                        {{ $item->pic_justifikasi ?? '' }}
+                    </td>
+                    <td class="text-center">
+                        {{ $item->eksekutor ?? '' }}
+                    </td>
+                    <td class="text-center">
+                        {{ $item->tanggal_rfi ?? '' }}
+                    </td>
+                    <td class="text-center">
+                        {{ $item->pic_rfi ?? '' }}
+                    </td>
+                    <td class="text-center">
+                        {{ $item->tanggal_close ?? '' }}
+                    </td>
+                    <td class="text-center">
+                        {{ $item->pic_close ?? '' }}
                     </td>
                     <td>
                         @if ($item->photo != null)

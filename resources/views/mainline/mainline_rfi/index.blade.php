@@ -15,7 +15,18 @@
                 <div class="col-lg-12 grid-margin stretch-card mt-3">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Request For Inspection</h4>
+                            <div class="d-sm-flex justify-content-between align-items-start">
+                                <div>
+                                    <h4 class="card-title">Request For Inspection</h4>
+                                </div>
+                                <div>
+                                    <a @if ($email_rfi == 0) hidden @endif href="{{ route('send-email.rfi') }}"
+                                        title="Send notification to Section Head"
+                                        class="btn btn-primary btn-sm text-white mb-0 me-0" type="button">
+                                        <i class="ti-email fw-bolder"></i>
+                                        <span>Send Email Notification</span></a>
+                                </div>
+                            </div>
                             <div class="table-responsive pt-3">
                                 <table class="table table-bordered">
                                     <thead>

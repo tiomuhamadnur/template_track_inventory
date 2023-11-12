@@ -12,7 +12,9 @@ class SendEmailController extends Controller
 {
     public function rfi()
     {
-        $section_head = Pegawai::where('jabatan', 'Section Head')->get();
+        $section_head = Pegawai::where('jabatan', 'Section Head')
+            ->whereIn('section', ['Permanent Way RAMS', 'Permanent Way Maintenance'])
+            ->get();
         $jumlah_rfi = TransRFI::where('status', null)->get()->count();
 
         if ($jumlah_rfi > 0) {
@@ -21,9 +23,9 @@ class SendEmailController extends Controller
                 Mail::to($item->email)->send(new SendMailRFI($item->name, $jumlah_rfi, $tanggal_rfi));
             }
             TransRFI::where('status', null)->update(['status' => '1']);
-            return 'RFI terkirim ke email Section Head';
+            return redirect()->back()->withNotify('Data RFI berhasil dikirim via email ke Section Head terkait!');
         } else {
-            return 'tidak ada RFI';
+            return redirect()->back()->withNotifyerror('Tidak ada data RFI!');
         }
     }
 
