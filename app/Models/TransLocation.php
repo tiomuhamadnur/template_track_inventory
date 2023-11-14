@@ -2,17 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\Tools;
-use App\Models\Location;
-use App\Models\DetailLocation;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class TransTools extends Model
+class TransLocation extends Model
 {
     use HasFactory;
 
-    protected $table = 'trans_tools';
+    protected $table = 'trans_location';
 
     protected $guarded = [];
 
@@ -26,8 +23,4 @@ class TransTools extends Model
         return $this->belongsTo(DetailLocation::class);
     }
 
-    public function tools()
-    {
-        return $this->belongsTo(Tools::class);
-    }
 }

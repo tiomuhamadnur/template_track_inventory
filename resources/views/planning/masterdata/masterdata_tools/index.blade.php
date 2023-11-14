@@ -1,7 +1,7 @@
 @extends('planning.masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title>Data Tools | CPWTM</title>
+    <title>Data Tools | P & C</title>
 @endsection
 
 @section('sub-content')
@@ -44,9 +44,9 @@
                                             <th class="text-center">
                                                 No
                                             </th>
-                                            <th class="text-center">
+                                            {{-- <th class="text-center">
                                                 Kode Tools
-                                            </th>
+                                            </th> --}}
                                             <th class="text-center">
                                                 Nama Tools
                                             </th>
@@ -70,9 +70,9 @@
                                                 <td class="text-center">
                                                     {{ $loop->iteration }}
                                                 </td>
-                                                <td class="text-center">
+                                                {{-- <td class="text-center">
                                                     {{ $item->code }}
-                                                </td>
+                                                </td> --}}
                                                 <td class="text-center">
                                                     {{ $item->name }}
                                                 </td>

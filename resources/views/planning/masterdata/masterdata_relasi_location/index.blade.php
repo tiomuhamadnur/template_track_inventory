@@ -1,11 +1,11 @@
 @extends('planning.masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title>Data Relasi Tools | Planning</title>
+    <title>Data Relasi Location | P & C</title>
 @endsection
 
 @section('sub-content')
-    <h4>Master Data > Data Relasi Tools</h4>
+    <h4>Master Data > Data Relasi Location</h4>
     <div class="row">
         <div class="col-sm-12">
             <div class="home-tab">
@@ -16,8 +16,8 @@
                 <div class="col-lg-12 grid-margin stretch-card mt-3">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Data Relasi Tools</h4>
-                            <a href="{{ route('masterdata-relasi-tools.create') }}" class="btn btn-outline-dark btn-lg" type="button">Add
+                            <h4 class="card-title">Data Relasi Location</h4>
+                            <a href="{{ route('masterdata-relasi-location.create') }}" class="btn btn-outline-dark btn-lg" type="button">Add
                                 Data</a>
                             {{-- <button class="btn btn-outline-dark btn-lg dropdown-toggle" type="button"
                                 id="dropdownMenuIconButton1" data-bs-toggle="dropdown" aria-haspopup="true"
@@ -37,9 +37,6 @@
                                                 No
                                             </th>
                                             <th class="text-center">
-                                                Nama Tools
-                                            </th>
-                                            <th class="text-center">
                                                 Lokasi Penyimpanan
                                             </th>
                                             <th class="text-center">
@@ -54,13 +51,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($tools as $item)
+                                        @foreach ($location as $item)
                                             <tr>
                                                 <td class="text-center">
                                                     {{ $loop->iteration  }}
-                                                </td>
-                                                <td class="text-center">
-                                                    {{ $item->tools->name }}
                                                 </td>
                                                 <td class="text-center">
                                                     {{ $item->location->name }}
@@ -70,7 +64,7 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">
-                                                        <a href="{{ route('masterdata-relasi-tools.edit', $item->id) }}" type="button"
+                                                        <a href="{{ route('masterdata-relasi-location.edit', $item->id) }}" type="button"
                                                             class="btn btn-outline-warning mx-0">Edit</a>
                                                         <a class="btn btn-outline-danger mx-0 disabled" href="javascript:;"
                                                             data-bs-toggle="modal"

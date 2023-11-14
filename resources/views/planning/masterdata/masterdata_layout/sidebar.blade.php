@@ -46,7 +46,7 @@
                         <a class="nav-link" href="{{ route('masterdata-detail-location.index') }}">Data Detail Location</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('masterdata-relasi-tools.index') }}">Data Relasi Tools</a>
+                        <a class="nav-link" href="{{ route('masterdata-relasi-location.index') }}">Data Relasi Location</a>
                     </li>
                 </ul>
             </div>
