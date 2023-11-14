@@ -1,4 +1,4 @@
-@extends('masterdata.masterdata_layout.base')
+@extends('planning.masterdata.masterdata_layout.base')
 
 @section('sub-title')
     <title>Edit Data Tools | TCSM</title>

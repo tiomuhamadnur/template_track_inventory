@@ -53,11 +53,13 @@ use App\Http\Controllers\ToolsController;
 use App\Http\Controllers\ToolsMaterialsController;
 use App\Http\Controllers\TrackbedExaminationController;
 use App\Http\Controllers\TransDefectController;
+use App\Http\Controllers\TransToolsController;
 use App\Http\Controllers\UltrasonicTestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WeselController;
 use App\Http\Controllers\WeselExaminationController;
 use App\Http\Controllers\WorkOrderController;
+use App\Models\TransTools;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -690,6 +692,15 @@ Route::middleware(['auth', 'license'])->group(function () {
                 Route::get('/masterdata-detail-location-edit/{id}/edit', 'edit')->name('masterdata-detail-location.edit');
                 Route::put('/masterdata-detail-location-update', 'update')->name('masterdata-detail-location.update');
                 Route::delete('/masterdata-detail-location-delete', 'destroy')->name('masterdata-detail-location.delete');
+            });
+
+            Route::controller(TransToolsController::class)->group(function(){
+                Route::get('/masterdata-relasi-tools', 'index')->name('masterdata-relasi-tools.index');
+                Route::get('/masterdata-relasi-tools-create', 'create')->name('masterdata-relasi-tools.create');
+                Route::post('/masterdata-relasi-tools-store', 'store')->name('masterdata-relasi-tools.store');
+                Route::get('/masterdata-relasi-tools-edit/{id}/edit', 'edit')->name('masterdata-relasi-tools.edit');
+                Route::put('/masterdata-relasi-tools-update', 'update')->name('masterdata-relasi-tools.update');
+                Route::delete('/masterdata-relasi-tools-delete', 'destroy')->name('masterdata-relasi-tools.destroy');
             });
         });
         /////////////////////////////   END PLANNING  /////////////////////////////////////

@@ -21,13 +21,13 @@
                                 @csrf
                                 @method('post')
                                 <div class="form-group">
-                                    <label for="code">Detail Location Code</label>
-                                    <input type="text" class="form-control" name="name" id="name"
+                                    <label for="code"> Location Code</label>
+                                    <input type="text" class="form-control" name="code" id="code"
                                         placeholder="Masukkan Detail Kode Location">
                                 </div>
                                 <div class="form-group">
                                     <label for="cpde">Detail Location Name</label>
-                                    <input type="text" class="form-control" name="code" id="code"
+                                    <input type="text" class="form-control" name="name" id="name"
                                         placeholder="Masukkan Detail Nama Location">
                                 </div>
 

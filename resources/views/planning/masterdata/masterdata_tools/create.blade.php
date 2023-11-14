@@ -32,41 +32,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail3">Tools Stocks</label>
-                                    <input type="number" class="form-control" name="stocks" id="stocks"
+                                    <input type="number" class="form-control" name="stock" id="stock"
                                         placeholder="Masukkan Stocks Tools">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail3">Tools Satuan</label>
-                                    <input type="text" class="form-control" name="satuan" id="satuan"
+                                    <input type="text" class="form-control" name="unit" id="unit"
                                         placeholder="Masukkan Satuan Tools">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail3">Location</label>
-                                    <select class="form-control" name="location_id">
-                                        <option disable selected>-Pilih Location-</option>
-                                        @foreach ($location as $item)
-                                        <option value={{ $item->id }}>{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Section</label>
-                                    <select class="form-control" name="section_id">
-                                        <option disable selected>-Pilih Section-</option>
-                                        @foreach ($section as $item)
-                                        <option value={{ $item->id }}>{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Departement</label>
-                                    <select class="form-control" name="departement_id">
-                                        <option disable selected>-Pilih Departement-</option>
-                                        @foreach ($departement as $item)
-                                        <option value={{ $item->id }}>{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
                                 </div>
                                 <button type="submit" class="btn btn-outline-primary me-2">Submit</button>
                                 <a href="{{ route('masterdata-tools') }}" class="btn btn-light">Cancel</a>

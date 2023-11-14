@@ -43,13 +43,10 @@
                                                 Nama Tools
                                             </th>
                                             <th class="text-center">
-                                                Lokasi Penyimpanan
-                                            </th>
-                                            <th class="text-center">
-                                                Section
-                                            </th>
-                                            <th class="text-center">
                                                 Jumlah
+                                            </th>
+                                            <th class="text-center">
+                                                Satuan
                                             </th>
                                             {{-- <th class="text-center">
                                                 Part Group
@@ -72,13 +69,10 @@
                                                     {{ $item->name }}
                                                 </td>
                                                 <td class="text-center">
-                                                    {{ $item->location->name }}
+                                                    {{ $item->stock }}
                                                 </td>
                                                 <td class="text-center">
-                                                    {{ $item->section->name }}
-                                                </td>
-                                                <td class="text-center">
-                                                    {{ $item->stocks }}
+                                                    {{ $item->unit }}
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">

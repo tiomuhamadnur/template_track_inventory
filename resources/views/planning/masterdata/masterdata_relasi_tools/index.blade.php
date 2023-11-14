@@ -1,11 +1,11 @@
 @extends('planning.masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title>Data Location | Planning</title>
+    <title>Data Relasi Tools | Planning</title>
 @endsection
 
 @section('sub-content')
-    <h4>Master Data > Data Location</h4>
+    <h4>Master Data > Data Relasi Tools</h4>
     <div class="row">
         <div class="col-sm-12">
             <div class="home-tab">
@@ -16,8 +16,8 @@
                 <div class="col-lg-12 grid-margin stretch-card mt-3">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Data Location</h4>
-                            <a href="{{ route('masterdata-location.create') }}" class="btn btn-outline-dark btn-lg" type="button">Add
+                            <h4 class="card-title">Data Relasi Tools</h4>
+                            <a href="{{ route('masterdata-relasi-tools.create') }}" class="btn btn-outline-dark btn-lg" type="button">Add
                                 Data</a>
                             {{-- <button class="btn btn-outline-dark btn-lg dropdown-toggle" type="button"
                                 id="dropdownMenuIconButton1" data-bs-toggle="dropdown" aria-haspopup="true"
@@ -37,37 +37,45 @@
                                                 No
                                             </th>
                                             <th class="text-center">
-                                                Kode Location
+                                                Nama Tools
                                             </th>
                                             <th class="text-center">
-                                                Nama Location
+                                                Lokasi Penyimpanan
                                             </th>
+                                            <th class="text-center">
+                                                Detail Lokasi Penyimpanan
+                                            </th>
+                                            {{-- <th class="text-center">
+                                                Part Group
+                                            </th> --}}
                                             <th class="text-center">
                                                 Action
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($location as $loc)
+                                        @foreach ($tools as $item)
                                             <tr>
                                                 <td class="text-center">
-                                                    {{ $loop->iteration }}
+                                                    {{ $loop->iteration  }}
                                                 </td>
                                                 <td class="text-center">
-                                                    {{ $loc->code }}
+                                                    {{ $item->tools->name }}
                                                 </td>
                                                 <td class="text-center">
-                                                    {{ $loc->name }}
+                                                    {{ $item->location->name }}
                                                 </td>
-
+                                                <td class="text-center">
+                                                    {{ $item->detail_location->name }}
+                                                </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">
-                                                        <a href="{{ route('masterdata-location.edit', $loc->id) }}" type="button"
+                                                        <a href="{{ route('masterdata-relasi-tools.edit', $item->id) }}" type="button"
                                                             class="btn btn-outline-warning mx-0">Edit</a>
                                                         <a class="btn btn-outline-danger mx-0 disabled" href="javascript:;"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#delete-confirmation-modal"
-                                                            onclick="toggleModal('{{ $loc->id }}')">Delete</a>
+                                                            onclick="#">Delete</a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -93,7 +101,7 @@
                         <div class="text-slate-500 mt-2">Data ini akan dihapus secara permanen.</div>
                     </div>
                     <div class="px-5 pb-8 text-center mt-3">
-                        <form action="{{ route('masterdata-location.delete') }}" method="POST">
+                        <form action="#" method="POST">
                             @csrf
                             @method('delete')
                             <input type="text" name="id" id="id" hidden>

@@ -36,11 +36,8 @@ class ToolsController extends Controller
         Tools::create([
             'name' => $request->name,
             'code' => $request->code,
-            'location_id' => $request->location_id,
-            'section_id' => $request->section_id,
-            'departement_id' => $request->departement_id,
-            'stocks' => $request->stocks,
-            'satuan'=> $request->satuan
+            'stock' => $request->stock,
+            'unit'=> $request->unit
         ]);
 
         return redirect(route('masterdata-tools'))->with('success', 'Data berhasil ditambahkan');

@@ -1,7 +1,7 @@
 @extends('planning.masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title>Edit Data Location | TCSM</title>
+    <title>Edit Data Location | Planning</title>
 @endsection
 
 @section('sub-content')
