@@ -64,6 +64,11 @@
                         <a class="nav-link" href="{{ route('masterdata-tools') }}">Data Tools</a>
                     </li>
                 </ul>
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('masterdata-consumable.index') }}">Data Consumable</a>
+                    </li>
+                </ul>
             </div>
         </li>
 

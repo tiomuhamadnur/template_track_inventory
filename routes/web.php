@@ -17,6 +17,7 @@ use App\Http\Controllers\civil\RfiCivilController;
 use App\Http\Controllers\civil\SubAreaController;
 use App\Http\Controllers\civil\TemuanVisualCivilController;
 use App\Http\Controllers\ClosingReportController;
+use App\Http\Controllers\ConsumableController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DefectController;
 use App\Http\Controllers\DepartementController;
@@ -702,6 +703,16 @@ Route::middleware(['auth', 'license'])->group(function () {
                 Route::put('/masterdata-relasi-tools-update', 'update')->name('masterdata-relasi-tools.update');
                 Route::delete('/masterdata-relasi-tools-delete', 'destroy')->name('masterdata-relasi-tools.destroy');
             });
+
+            Route::controller(ConsumableController::class)->group(function(){
+                Route::get('/masterdata-consumable', 'index')->name('masterdata-consumable.index');
+                Route::get('/masterdata-consumable-create', 'create')->name('masterdata-consumable.create');
+                Route::post('/masterdata-consumable-store', 'store')->name('masterdata-consumable.store');
+                Route::get('/masterdata-consumable-edit/{id}/edit', 'edit')->name('masterdata-consumable.edit');
+                Route::put('/masterdata-consumable-update', 'update')->name('masterdata-consumable.update');
+                Route::delete('/masterdata-consumable-delete', 'destroy')->name('masterdata-consumable.destroy');
+            });
+
         });
         /////////////////////////////   END PLANNING  /////////////////////////////////////
 

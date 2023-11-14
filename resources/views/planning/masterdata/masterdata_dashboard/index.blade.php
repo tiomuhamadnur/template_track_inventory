@@ -36,7 +36,7 @@
                                     <div class="card-body">
                                         <div class="d-sm-flex justify-content-between align-items-start">
                                             <div>
-                                                <h4 class="card-title card-title-dash">Sebaran Tools Dept. CPWTM</h4>
+                                                <h4 class="card-title card-title-dash">Sebaran Tools Dept. CPWTM (belom diquery yaa)</h4>
                                                 <h5 class="card-subtitle card-subtitle-dash">
                                                     <span>
                                                         Update
@@ -58,7 +58,7 @@
                                     <div class="card-body">
                                         <div class="d-sm-flex justify-content-between align-items-start">
                                             <div>
-                                                <h4 class="card-title card-title-dash">Penggunaan Consumable Terkini Dept. CPWTM</h4>
+                                                <h4 class="card-title card-title-dash">Penggunaan Consumable Terkini Dept. CPWTM (belom juga )</h4>
                                                 <h5 class="card-subtitle card-subtitle-dash">
                                                     <span>
                                                         Update
@@ -98,11 +98,11 @@
         align: 'left'
     },
     xAxis: {
-        categories: ['D06', 'Gudang Tools B', 'Stasiun', 'Dipinjam'],
+        categories: ['D06', 'Gudang B', 'CPW Room', 'Stasiun', 'Dipinjam'],
         title: {
             text: null
         },
-        gridLineWidth: 1,
+        gridLineWidth: 0.5,
         lineWidth: 0
     },
     yAxis: {
@@ -145,10 +145,10 @@
     },
     series: [{
         name: 'Tools Section Permanent Way',
-        data: [20, 2, 1, 2]
+        data: [20, 2, 4, 1, 2]
     }, {
         name: 'Tools Section Civil',
-        data: [34, 11, 1, 1]
+        data: [34, 11, 5, 1, 1]
     }]
 });
 

@@ -1,11 +1,11 @@
 @extends('planning.masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title>Data Tools | CPWTM</title>
+    <title>Data Consumable | CPWTM</title>
 @endsection
 
 @section('sub-content')
-    <h4>Master Data > Data Tools</h4>
+    <h4>Master Data > Data Consumable</h4>
     <div class="row">
         <div class="col-sm-12">
             <div class="home-tab">
@@ -16,17 +16,17 @@
                 <div class="col-lg-12 grid-margin stretch-card mt-3">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Data Tools</h4>
-                            <a href="{{ route('masterdata-tools.create') }}" class="btn btn-outline-dark btn-lg" type="button">Add
+                            <h4 class="card-title">Data Consumable</h4>
+                            <a href="{{ route('masterdata-consumable.create') }}" class="btn btn-outline-dark btn-lg" type="button">Add
                                 Data</a>
-                                <div >
-                                    <form class="col-sm-4" method="GET" action="{{ route('masterdata-tools') }}">
-                                        <div class="input-group">
-                                            <input type="search" name="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
-                                            <button class="btn btn-primary" type="submit">Search</button>
-                                        </div>
-                                      </form>
-                                   </div>
+                               <div>
+                                <form class="col-sm-4" method="GET" action="{{ route('masterdata-consumable.index') }}">
+                                    <div class="input-group">
+                                        <input type="search" name="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                                        <button class="btn btn-primary" type="submit">Search</button>
+                                    </div>
+                                  </form>
+                               </div>
                             {{-- <button class="btn btn-outline-dark btn-lg dropdown-toggle" type="button"
                                 id="dropdownMenuIconButton1" data-bs-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false" style="margin-left: -10px;">
@@ -45,10 +45,10 @@
                                                 No
                                             </th>
                                             <th class="text-center">
-                                                Kode Tools
+                                                Kode Consumable
                                             </th>
                                             <th class="text-center">
-                                                Nama Tools
+                                                Nama Consumable
                                             </th>
                                             <th class="text-center">
                                                 Jumlah
@@ -65,7 +65,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($tools as $item)
+                                        @foreach ($consumable as $item)
                                             <tr>
                                                 <td class="text-center">
                                                     {{ $loop->iteration }}
@@ -84,10 +84,8 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">
-                                                        <a href="{{ route('masterdata-tools.edit', $item->id) }}" type="button"
+                                                        <a href="{{ route('masterdata-consumable.edit', $item->id) }}" type="button"
                                                             class="btn btn-outline-warning mx-0">Edit</a>
-                                                            <a href="#" type="button"
-                                                            class="btn btn-outline-success mx-0">Detail</a>
                                                         <a class="btn btn-outline-danger mx-0 disabled" href="javascript:;"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#delete-confirmation-modal"

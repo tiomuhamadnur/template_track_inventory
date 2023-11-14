@@ -12,9 +12,14 @@ use App\Http\Controllers\Controller;
 class ToolsController extends Controller
 {
 
-    public function masterdata()
+    public function masterdata(Request $request)
     {
-        $tools = Tools::get();
+        if($request->has('search')){
+            $tools = Tools::where('name', 'LIKE', '%' .$request->search. '%')->get();
+        }else{
+            $tools = Tools::get();
+        }
+
         return view('planning.masterdata.masterdata_tools.index', compact(['tools']));
     }
 
@@ -40,7 +45,7 @@ class ToolsController extends Controller
             'unit'=> $request->unit
         ]);
 
-        return redirect(route('masterdata-tools'))->with('success', 'Data berhasil ditambahkan');
+        return redirect(route('masterdata-tools'))->withNotify('Data berhasil ditambahkan');
     }
 
     public function edit($id)
@@ -58,9 +63,11 @@ class ToolsController extends Controller
             $tools->update([
                 'name' => $request->name,
                 'code' => $request->code,
+                'stock' => $request->stock,
+                'unit' => $request->unit,
             ]);
         }
-        return redirect(route('masterdata-tools'));
+        return redirect(route('masterdata-tools'))->withNotify('Data berhasil diupdate');
     }
 
 }
