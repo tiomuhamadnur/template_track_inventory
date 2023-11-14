@@ -120,7 +120,10 @@ class PICController extends Controller
         $id = auth()->user()->id;
         if ($request->hasFile('photo_ttd') && $request->photo_ttd != '') {
             $user = Pegawai::findOrFail($id);
-            Storage::delete($user->ttd);
+            $ttd = $user->ttd;
+            if ($ttd){
+                Storage::delete($ttd);
+            }
             $photo_ttd = $request->file('photo_ttd')->store('photo-ttd/' . auth()->user()->role);
             $user->update([
                 'ttd' => $photo_ttd,
