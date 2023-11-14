@@ -43,7 +43,7 @@
                                 <div class="name">Area</div>
                                 <div class="value">
                                     <div class="input-group">
-                                        <select id="area" class="form-select" required>
+                                        <select id="area" class="form-select">
                                             <option value="" selected disabled>- Pilih Nama Area -</option>
                                             <option value="Mainline">Mainline</option>
                                             <option value="DAL">DAL</option>
@@ -57,7 +57,7 @@
                                 <div class="name">Location</div>
                                 <div class="value">
                                     <div class="input-group">
-                                        <select id="location" class="form-select" required>
+                                        <select id="location" class="form-select">
                                             <option value="" selected disabled>- Pilih Nama Location -
                                             </option>
                                         </select>
@@ -70,7 +70,7 @@
                                 <div class="name">Line</div>
                                 <div class="value">
                                     <div class="input-group">
-                                        <select id="line" class="form-select" required>
+                                        <select id="line" class="form-select">
                                             <option selected disabled value="">- Pilih Nama Line -</option>
                                         </select>
                                         <div class="select-dropdown"></div>
