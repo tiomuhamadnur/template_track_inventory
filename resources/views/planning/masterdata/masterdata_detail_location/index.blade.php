@@ -17,7 +17,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Data Detail Location</h4>
-                            <a href="{{ route('masterdata-detail-location.create') }}" class="btn btn-outline-dark btn-lg" type="button">Add
+                            <a href="{{ route('masterdata-detail-location.create') }}" class="btn btn-primary btn-lg" type="button">Add
                                 Data</a>
                             {{-- <button class="btn btn-outline-dark btn-lg dropdown-toggle" type="button"
                                 id="dropdownMenuIconButton1" data-bs-toggle="dropdown" aria-haspopup="true"
@@ -43,6 +43,9 @@
                                                 Nama Detail Location
                                             </th>
                                             <th class="text-center">
+                                                Lokasi Penyimpanan
+                                            </th>
+                                            <th class="text-center">
                                                 Action
                                             </th>
                                         </tr>
@@ -58,6 +61,9 @@
                                                 </td>
                                                 <td class="text-center">
                                                     {{ $item->name }}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ $item->location->name }}
                                                 </td>
 
                                                 <td class="text-center">

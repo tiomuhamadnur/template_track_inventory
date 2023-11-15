@@ -17,7 +17,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Data Consumable</h4>
-                            <a href="{{ route('masterdata-consumable.create') }}" class="btn btn-outline-dark btn-lg" type="button">Add
+                            <a href="{{ route('masterdata-consumable.create') }}" class="btn btn-primary btn-lg" type="button">Add
                                 Data</a>
                                <div>
                                 <form class="col-sm-4" method="GET" action="{{ route('masterdata-consumable.index') }}">

@@ -18,5 +18,10 @@ class Location extends Model
         return $this->hasMany(Tools::class);
     }
 
+    public function detail_location()
+    {
+        return $this->hasMany(DetailLocation::class);
+    }
+
 }
 

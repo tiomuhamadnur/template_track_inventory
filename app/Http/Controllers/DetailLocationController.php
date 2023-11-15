@@ -2,22 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\DetailLocation;
+use App\Models\Location;
 use Illuminate\Http\Request;
+use App\Models\DetailLocation;
+use App\Http\Controllers\Controller;
 
 class DetailLocationController extends Controller
 {
     public function index ()
     {
+        $location = Location::all();
         $detail_location = DetailLocation::all();
 
-        return view('planning.masterdata.masterdata_detail_location.index', compact(['detail_location']));
+        return view('planning.masterdata.masterdata_detail_location.index', compact(['detail_location', 'location']));
     }
 
     public function create()
     {
-        return view('planning.masterdata.masterdata_detail_location.create');
+        $location = Location::all();
+
+        return view('planning.masterdata.masterdata_detail_location.create', compact(['location']));
     }
 
     public function store(Request $request)
@@ -25,6 +29,7 @@ class DetailLocationController extends Controller
         DetailLocation::create([
             'code' => $request->code,
             'name' => $request->name,
+            'location_id' => $request->location_id
         ]);
 
         return redirect()->route('masterdata-detail-location.index')->withNotify('Data berhasil ditambahkan');

@@ -17,10 +17,14 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Data Tools</h4>
-                            <a href="{{ route('masterdata-tools.create') }}" class="btn btn-outline-dark btn-lg" type="button">Add
+                            <a href="{{ route('masterdata-tools.create') }}" class="btn btn-primary btn-lg" type="button">Add
                                 Data</a>
+                            <a href="/masterdata-tools/filter?section_id=1" class="btn btn-lg" style="background-color: rgb(26, 143, 123); margin-left: -10px;" type="button">Permanent Way
+                                Section Tools</a>
+                            <a href="{{ route('masterdata-tools.create') }}" class="btn btn-lg" style="background-color: rgb(83, 126, 173); margin-left:-10px;" type="button">Civil
+                                Section Tools</a>
                                 <div >
-                                    <form class="col-sm-4" method="GET" action="{{ route('masterdata-tools') }}">
+                                    <form class="col-sm-5" method="GET" action="{{ route('masterdata-tools') }}">
                                         <div class="input-group">
                                             <input type="search" name="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
                                             <button class="btn btn-primary" type="submit">Search</button>
@@ -51,6 +55,12 @@
                                                 Nama Tools
                                             </th>
                                             <th class="text-center">
+                                                Lokasi Penyimpanan
+                                            </th>
+                                            <th class="text-center">
+                                                Detail Lokasi
+                                            </th>
+                                            <th class="text-center">
                                                 Jumlah
                                             </th>
                                             <th class="text-center">
@@ -75,6 +85,12 @@
                                                 </td> --}}
                                                 <td class="text-center">
                                                     {{ $item->name }}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ $item->location->name }}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ $item->detail_location->name }}
                                                 </td>
                                                 <td class="text-center">
                                                     {{ $item->stock }}

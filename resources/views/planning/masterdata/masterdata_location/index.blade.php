@@ -17,7 +17,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Data Location</h4>
-                            <a href="{{ route('masterdata-location.create') }}" class="btn btn-outline-dark btn-lg" type="button">Add
+                            <a href="{{ route('masterdata-location.create') }}" class="btn btn-primary btn-lg" type="button">Add
                                 Data</a>
                             {{-- <button class="btn btn-outline-dark btn-lg dropdown-toggle" type="button"
                                 id="dropdownMenuIconButton1" data-bs-toggle="dropdown" aria-haspopup="true"

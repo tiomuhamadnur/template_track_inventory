@@ -8,6 +8,7 @@ use App\Models\Location;
 use App\Models\Departement;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\DetailLocation;
 
 class ToolsController extends Controller
 {
@@ -33,6 +34,8 @@ class ToolsController extends Controller
         $section = Section::get();
         $departement =  Departement::get();
         $location = Location::get();
+        $section = Section::get();
+        $departement = Departement::get();
         return view('planning.masterdata.masterdata_tools.create', compact(['section', 'location', 'departement']));
     }
 
@@ -42,7 +45,9 @@ class ToolsController extends Controller
             'name' => $request->name,
             'code' => $request->code,
             'stock' => $request->stock,
-            'unit'=> $request->unit
+            'unit'=> $request->unit,
+            'location_id' => $request->location_id,
+            'detail_location_id' => $request->detail_location_id
         ]);
 
         return redirect(route('masterdata-tools'))->withNotify('Data berhasil ditambahkan');
@@ -51,8 +56,24 @@ class ToolsController extends Controller
     public function edit($id)
     {
         $tools = Tools::findOrFail($id);
+        $location = Location::all();
+        $section = Section::all();
+        $detail_location = DetailLocation::all();
 
-        return view('planning.masterdata.masterdata_tools.update', compact(['tools']));
+        return view('planning.masterdata.masterdata_tools.update', compact(['tools', 'location', 'detail_location' , 'section']));
+    }
+
+    public function filter(Request $request)
+    {
+        $section_id = $request->section_id;
+
+        $tools = Tools::get();
+
+        $tools->when($section_id, function($query) use ($request){
+            return $query->where('section_id', $request->section_id);
+        });
+
+        return view('planning.masterdata.masterdata_tools.index', compact(['tools']));
     }
 
     public function update (Request $request)
@@ -65,6 +86,9 @@ class ToolsController extends Controller
                 'code' => $request->code,
                 'stock' => $request->stock,
                 'unit' => $request->unit,
+                'location_id' => $request->location_id,
+                'detail_location_id' => $request->detail_location_id,
+                'section_id' => $request->section_id,
             ]);
         }
         return redirect(route('masterdata-tools'))->withNotify('Data berhasil diupdate');

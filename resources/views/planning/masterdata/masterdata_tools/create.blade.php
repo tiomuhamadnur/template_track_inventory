@@ -21,24 +21,48 @@
                                 @csrf
                                 @method('post')
                                 <div class="form-group">
-                                    <label for="exampleInputName1">Tools Name</label>
+                                    <label for="exampleInputName1">Nama Tools</label>
                                     <input type="text" class="form-control" name="name" id="name"
                                         placeholder="Masukkan Nama Tools">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail3">Tools Code</label>
+                                    <label for="exampleInputEmail3">Kode Tools</label>
                                     <input type="text" class="form-control" name="code" id="code"
                                         placeholder="Masukkan Kode Tools">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail3">Tools Stocks</label>
+                                    <label for="exampleInputEmail3">Stock Tools</label>
                                     <input type="number" class="form-control" name="stock" id="stock"
                                         placeholder="Masukkan Stocks Tools">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail3">Tools Satuan</label>
+                                    <label for="exampleInputEmail3">Satuan Tools</label>
                                     <input type="text" class="form-control" name="unit" id="unit"
                                         placeholder="Masukkan Satuan Tools">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Lokasi Penyimpanan</label>
+                                    <select class="form-control" id ="location_id" name="location_id">
+                                        <option disabled selected>- Pilih Lokasi Penyimpanan -</option>
+                                        @foreach ($location as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Detail Lokasi Penyimpanan</label>
+                                    <select class="form-control" id="detail_location_id" name="detail_location_id">
+                                        <option disabled selected>- Pilih Detail Lokasi Penyimpanan -</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Section</label>
+                                    <select class="form-control" id ="section_id" name="section_id">
+                                        <option disabled selected>- Pilih Section -</option>
+                                        @foreach ($section as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <button type="submit" class="btn btn-outline-primary me-2">Submit</button>
                                 <a href="{{ route('masterdata-tools') }}" class="btn btn-light">Cancel</a>
@@ -50,4 +74,28 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('javascript')
+    <script>
+        $(document).ready(function(){
+            $('#location_id').on('change', function(){
+                var location_id = this.value;
+                $.ajax({
+                    url: '/getDetailLocation?location_id=' + location_id,
+                    type: 'get',
+                    success: function(res){
+                        $('#detail_location_id').html(
+                            '<option value="" selected disabled>- Pilih Detail Location -</option>'
+                        );
+                        $.each(res, function(key, value){
+                            $('#detail_location_id').append('<option value= "' + value
+                            .id + '">' + value.code + ' - (' + value.name +') </option>');
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
 @endsection

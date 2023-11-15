@@ -45,9 +45,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('masterdata-detail-location.index') }}">Data Detail Location</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('masterdata-relasi-location.index') }}">Data Relasi Location</a>
-                    </li>
                 </ul>
             </div>
         </li>
@@ -63,8 +60,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('masterdata-tools') }}">Data Tools</a>
                     </li>
-                </ul>
-                <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('masterdata-consumable.index') }}">Data Consumable</a>
                     </li>

@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Area;
+use App\Models\DetailLocation;
 use App\Models\Line;
 use App\Models\Mainline;
 use App\Models\Pegawai;
+use App\Models\Departement;
 use App\Models\TransDefect;
+use App\Models\Location;
 use Illuminate\Http\Request;
 
 class GetDataController extends Controller
@@ -90,10 +93,25 @@ class GetDataController extends Controller
         }
     }
 
-    public function index()
+    public function getDetailLocation(Request $request)
     {
-        //
+        $location_id = $request->location_id;
+        $toolsLocation = DetailLocation::where('location_id', $location_id)->get();
+        if (count($toolsLocation) > 0) {
+            return response()->json($toolsLocation);
+        }
     }
+
+    public function getDepartement(Request $request)
+    {
+        $section_id = $request->section_id;
+        $departement = Departement::where('section_id', $section_id)->get();
+        if (count($departement) > 0) {
+            return response()->json($departement);
+        }
+    }
+
+
 
     public function create()
     {

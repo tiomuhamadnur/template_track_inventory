@@ -30,6 +30,15 @@
                                     <input type="text" class="form-control" name="name" id="name"
                                         placeholder="Masukkan Detail Nama Location">
                                 </div>
+                                <div class="form-group">
+                                    <label class="form-label">Location</label>
+                                    <select class="form-control" name="location_id">
+                                        <option disabled selected>- Pilih Lokasi Penyimpanan -</option>
+                                        @foreach ($location as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
 
                                 <button type="submit" class="btn btn-outline-primary me-2">Submit</button>
                                 <a href="#" class="btn btn-light">Cancel</a>

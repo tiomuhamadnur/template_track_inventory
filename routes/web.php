@@ -159,6 +159,7 @@ Route::middleware(['auth', 'license'])->group(function () {
         Route::get('/getDetailPart', 'getDetailPart')->name('getDetailPart');
         Route::get('/getDefect', 'getDefect')->name('getDefect');
         Route::get('/getAvatar', 'getAvatar')->name('getAvatar');
+        Route::get('/getDetailLocation', 'getDetailLocation')->name('getDetailLocation');
     });
 
     /////////////////////////////   START TRACK   /////////////////////////////////////
@@ -677,6 +678,7 @@ Route::middleware(['auth', 'license'])->group(function () {
                 Route::post('/masterdata-tools-store', 'store')->name('masterdata-tools.store');
                 Route::get('/masterdata-tools-edit/{id}/edit', 'edit')->name('masterdata-tools.edit');
                 Route::put('/masterdata-tools-update', 'update')->name('masterdata-tools.update');
+                Route::get('/masterdata-tools/filter', 'filter')->name('masterdata-tools.filter');
             });
 
             Route::controller(LocationController::class)->group(function () {
@@ -695,24 +697,6 @@ Route::middleware(['auth', 'license'])->group(function () {
                 Route::get('/masterdata-detail-location-edit/{id}/edit', 'edit')->name('masterdata-detail-location.edit');
                 Route::put('/masterdata-detail-location-update', 'update')->name('masterdata-detail-location.update');
                 Route::delete('/masterdata-detail-location-delete', 'destroy')->name('masterdata-detail-location.delete');
-            });
-
-            Route::controller(TransToolsController::class)->group(function(){
-                Route::get('/masterdata-relasi-tools', 'index')->name('masterdata-relasi-tools.index');
-                Route::get('/masterdata-relasi-tools-create', 'create')->name('masterdata-relasi-tools.create');
-                Route::post('/masterdata-relasi-tools-store', 'store')->name('masterdata-relasi-tools.store');
-                Route::get('/masterdata-relasi-tools-edit/{id}/edit', 'edit')->name('masterdata-relasi-tools.edit');
-                Route::put('/masterdata-relasi-tools-update', 'update')->name('masterdata-relasi-tools.update');
-                Route::delete('/masterdata-relasi-tools-delete', 'destroy')->name('masterdata-relasi-tools.destroy');
-            });
-
-            Route::controller(TransLocationController::class)->group(function(){
-                Route::get('/masterdata-relasi-location', 'index')->name('masterdata-relasi-location.index');
-                Route::get('/masterdata-relasi-location-create', 'create')->name('masterdata-relasi-location.create');
-                Route::post('/masterdata-relasi-location-store', 'store')->name('masterdata-relasi-location.store');
-                Route::get('/masterdata-relasi-location-edit/{id}/edit', 'edit')->name('masterdata-relasi-location.edit');
-                Route::put('/masterdata-relasi-location-update', 'update')->name('masterdata-relasi-location.update');
-                Route::delete('/masterdata-relasi-location-delete', 'destroy')->name('masterdata-relasi-location.destroy');
             });
 
             Route::controller(ConsumableController::class)->group(function(){
