@@ -19,14 +19,21 @@
                             <h4 class="card-title">Data Tools</h4>
                             <a href="{{ route('masterdata-tools.create') }}" class="btn btn-primary btn-lg" type="button">Add
                                 Data</a>
-                            <a href="/masterdata-tools/filter?section_id=1" class="btn btn-lg" style="background-color: rgb(26, 143, 123); margin-left: -10px;" type="button">Permanent Way
-                                Section Tools</a>
-                            <a href="{{ route('masterdata-tools.create') }}" class="btn btn-lg" style="background-color: rgb(83, 126, 173); margin-left:-10px;" type="button">Civil
-                                Section Tools</a>
+                                 <button class="btn btn-outline-dark btn-lg dropdown-toggle" type="button"
+                                id="dropdownMenuIconButton1" data-bs-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false" >
+                                <i class="ti-filter"></i>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuIconButton1">
+                                <a class="dropdown-item" href="/masterdata-tools/filter?section_id=1">PW RAMS Tools</a>
+                                <a class="dropdown-item" href="/masterdata-tools/filter?section_id=2">PW MAINT Tools</a>
+                                <a class="dropdown-item" href="/masterdata-tools/filter?section_id=3">Civil RAMS Tools</a>
+                                <a class="dropdown-item" href="/masterdata-tools/filter?section_id=4">Civil MAINT Tools</a>
+                            </div>
                                 <div >
-                                    <form class="col-sm-5" method="GET" action="{{ route('masterdata-tools') }}">
+                                    <form class="col-sm-2" method="GET" action="{{ route('masterdata-tools') }}">
                                         <div class="input-group">
-                                            <input type="search" name="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                                            <input type="search" name="search" class="form-control form-control-dark" placeholder="Cari Data..." aria-label="Search">
                                             <button class="btn btn-primary" type="submit">Search</button>
                                         </div>
                                       </form>

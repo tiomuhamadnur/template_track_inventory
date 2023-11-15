@@ -66,14 +66,13 @@ class ToolsController extends Controller
     public function filter(Request $request)
     {
         $section_id = $request->section_id;
-
-        $tools = Tools::get();
+        $tools = Tools::query();
 
         $tools->when($section_id, function($query) use ($request){
             return $query->where('section_id', $request->section_id);
         });
 
-        return view('planning.masterdata.masterdata_tools.index', compact(['tools']));
+        return view('planning.masterdata.masterdata_tools.index', ['tools' => $tools->get()]);
     }
 
     public function update (Request $request)
