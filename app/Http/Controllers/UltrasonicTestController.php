@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\UltrasonicTestExport;
 use App\Imports\UltrasonicExaminationImport;
 use App\Models\Area;
 use App\Models\Joint;
@@ -178,9 +179,10 @@ class UltrasonicTestController extends Controller
         return redirect()->route('ut.examination.index', Crypt::encryptString($wo_id))->withNotify('Data berhasil ditambahkan!');
     }
 
-    public function show($id)
+    public function export_excel($wo_id)
     {
-        //
+        $waktu = Carbon::now()->format('Ymd');
+        return Excel::download(new UltrasonicTestExport($wo_id), $waktu . '_data ultrasonic test.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 
     public function import(Request $request)

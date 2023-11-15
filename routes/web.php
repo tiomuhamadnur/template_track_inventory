@@ -313,6 +313,7 @@ Route::middleware(['auth', 'license'])->group(function () {
             Route::get('/ultrasonic-test-examination/{id}/create', 'create')->name('ut.examination.create');
             Route::get('/ultrasonic-test-examination/filter', 'filter')->name('ut.examination.filter');
             Route::post('/ultrasonic-test-examination/import', 'import')->name('ut.examination.import');
+            Route::get('/ultrasonic-test-examination/{wo_id}/export-excel', 'export_excel')->name('ut.examination.export_excel');
             Route::post('/ultrasonic-test-examination', 'store')->name('ut.examination.store');
             Route::get('/ultrasonic-test-examination/{id}/edit', 'edit')->name('ut.examination.edit');
             Route::put('/ultrasonic-test-examination', 'update')->name('ut.examination.update');

@@ -36,6 +36,10 @@
                                     class="btn btn-outline-primary btn-lg mx-0" title="Import from Excel">
                                     <i class="ti-import"></i>
                                 </a>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#ModalExportExcel" type="button"
+                                    class="btn btn-outline-primary btn-lg mx-0" title="Export to Excel">
+                                    <i class="ti-export"></i>
+                                </a>
                             </div>
                             <div>
                                 showing: <u class="fw-bolder">{{ $ut_examination->count() ?? 0 }}</u> data
@@ -350,6 +354,38 @@
         </div>
     </div>
     <!-- End Modal Import-->
+
+    <!-- Modal Export Excel -->
+    <div class="modal fade" id="ModalExportExcel" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAdminTitle">Apakah anda yakin?</h5>
+                </div>
+                <div class="modal-body pt-3 mb-0">
+                    <div class="p-2 text-center">
+                        <h1 class="text-center align-middle text-success mt-2" style="font-size: 100px">
+                            <i class="mdi mdi-file-excel mx-auto"></i>
+                        </h1>
+                        <div class="text-slate-500 mt-2">File excel akan didownload sesuai data yang difilter!</div>
+                    </div>
+                </div>
+
+                <div class="modal-footer mt-2">
+                    <div class="pull-right">
+                        <a href="{{ route('ut.examination.export_excel', $work_order->id) }}" target="_blank" onclick="closeModal()"
+                            class="btn btn-success justify-content-center">
+                            Download Excel
+                        </a>
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                            Tutup
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Export Excel -->
 @endsection
 
 @section('javascript')
@@ -388,5 +424,9 @@
             $('#operator_modal').val(operator);
             document.getElementById("joint_judul").innerHTML = joint;
         });
+
+        function closeModal() {
+            $("#ModalExportExcel").modal("hide");
+        }
     </script>
 @endsection
