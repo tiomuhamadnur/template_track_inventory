@@ -10,6 +10,7 @@ use App\Models\Pegawai;
 use App\Models\Departement;
 use App\Models\TransDefect;
 use App\Models\Location;
+use App\Models\Section;
 use Illuminate\Http\Request;
 
 class GetDataController extends Controller
@@ -105,8 +106,14 @@ class GetDataController extends Controller
     public function getDepartement(Request $request)
     {
         $section_id = $request->section_id;
-        $departement = Departement::where('section_id', $section_id)->get();
-        if (count($departement) > 0) {
+        $departement = Section::select(
+            'departement.*',
+        )
+            ->join('departement', 'departement.id', '=', 'section.departement_id')
+            ->where('section.id', $section_id)
+            ->get();
+
+        if ($departement) {
             return response()->json($departement);
         }
     }

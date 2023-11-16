@@ -17,16 +17,18 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Data Consumable</h4>
-                            <a href="{{ route('masterdata-consumable.create') }}" class="btn btn-primary btn-lg" type="button">Add
+                            <a href="{{ route('masterdata-consumable.create') }}" class="btn btn-primary btn-lg"
+                                type="button">Add
                                 Data</a>
-                               <div>
+                            <div>
                                 <form class="col-sm-4" method="GET" action="{{ route('masterdata-consumable.index') }}">
                                     <div class="input-group">
-                                        <input type="search" name="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                                        <input type="search" name="search" class="form-control form-control-dark"
+                                            placeholder="Search..." aria-label="Search">
                                         <button class="btn btn-primary" type="submit">Search</button>
                                     </div>
-                                  </form>
-                               </div>
+                                </form>
+                            </div>
                             {{-- <button class="btn btn-outline-dark btn-lg dropdown-toggle" type="button"
                                 id="dropdownMenuIconButton1" data-bs-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false" style="margin-left: -10px;">
@@ -44,21 +46,15 @@
                                             <th class="text-center">
                                                 No
                                             </th>
-                                            <th class="text-center">
-                                                Kode Consumable
+                                            <th class="text-center text-wrap">
+                                                Nama
                                             </th>
                                             <th class="text-center">
-                                                Nama Consumable
+                                                Stock
                                             </th>
-                                            <th class="text-center">
-                                                Jumlah
+                                            <th class="text-center text-wrap">
+                                                Location
                                             </th>
-                                            <th class="text-center">
-                                                Satuan
-                                            </th>
-                                            {{-- <th class="text-center">
-                                                Part Group
-                                            </th> --}}
                                             <th class="text-center">
                                                 Action
                                             </th>
@@ -70,22 +66,21 @@
                                                 <td class="text-center">
                                                     {{ $loop->iteration }}
                                                 </td>
-                                                <td class="text-center">
-                                                    {{ $item->code }}
+                                                <td class="text-center text-wrap">
+                                                    {{ $item->name }} <br>
+                                                    ({{ $item->code ?? '-' }})
                                                 </td>
                                                 <td class="text-center">
-                                                    {{ $item->name }}
+                                                    {{ $item->stock }} {{ $item->unit }}
                                                 </td>
-                                                <td class="text-center">
-                                                    {{ $item->stock }}
-                                                </td>
-                                                <td class="text-center">
-                                                    {{ $item->unit }}
+                                                <td class="text-center text-wrap">
+                                                    {{ $item->location->name ?? '-' }} <br>
+                                                    ({{ $item->detail_location->name ?? '-' }})
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">
-                                                        <a href="{{ route('masterdata-consumable.edit', $item->id) }}" type="button"
-                                                            class="btn btn-outline-warning mx-0">Edit</a>
+                                                        <a href="{{ route('masterdata-consumable.edit', $item->id) }}"
+                                                            type="button" class="btn btn-outline-warning mx-0">Edit</a>
                                                         <a class="btn btn-outline-danger mx-0 disabled" href="javascript:;"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#delete-confirmation-modal"

@@ -21,18 +21,18 @@
                                 @csrf
                                 @method('post')
                                 <div class="form-group">
-                                    <label for="code">Location Code</label>
-                                    <input type="text" class="form-control" name="name" id="name"
+                                    <label for="cpde">Location Code</label>
+                                    <input type="text" class="form-control" name="code" id="code"
                                         placeholder="Masukkan Kode Location">
                                 </div>
                                 <div class="form-group">
-                                    <label for="cpde">Location Name</label>
-                                    <input type="text" class="form-control" name="code" id="code"
+                                    <label for="code">Location Name</label>
+                                    <input type="text" class="form-control" name="name" id="name"
                                         placeholder="Masukkan Nama Location">
                                 </div>
 
                                 <button type="submit" class="btn btn-outline-primary me-2">Submit</button>
-                                <a href="{{{ route('masterdata-location.index') }}}" class="btn btn-light">Cancel</a>
+                                <a href="{{ route('masterdata-location.index') }}" class="btn btn-outline-danger">Cancel</a>
                             </form>
                         </div>
                     </div>

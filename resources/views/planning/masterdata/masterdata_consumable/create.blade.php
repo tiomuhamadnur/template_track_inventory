@@ -1,7 +1,7 @@
 @extends('planning.masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title>Add Data Consumable | TCSM</title>
+    <title>Add Data Consumable | CPWTM</title>
 @endsection
 
 @section('sub-content')
@@ -21,27 +21,49 @@
                                 @csrf
                                 @method('post')
                                 <div class="form-group">
-                                    <label for="exampleInputName1">Consumable Name</label>
+                                    <label for="exampleInputName1">Name</label>
                                     <input type="text" class="form-control" name="name" id="name"
-                                        placeholder="Masukkan Nama Consumable">
+                                        placeholder="Masukkan Nama Consumable" required>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="exampleInputEmail3">Consumable Code</label>
+                                    <label for="exampleInputEmail3">Code</label>
                                     <input type="text" class="form-control" name="code" id="code"
-                                        placeholder="Masukkan Kode Consumable">
+                                        placeholder="Masukkan Kode Consumable" required>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="exampleInputEmail3">Consumable Stocks</label>
+                                    <label for="exampleInputEmail3">Stock</label>
                                     <input type="number" class="form-control" name="stock" id="stock"
-                                        placeholder="Masukkan Stocks Consumable">
+                                        placeholder="Masukkan Stocks Consumable" min="0" required>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="exampleInputEmail3">Satuan</label>
+                                    <label for="exampleInputEmail3">Unit</label>
                                     <input type="text" class="form-control" name="unit" id="unit"
-                                        placeholder="Masukkan Satuan Consumable">
+                                        placeholder="Masukkan Satuan Consumable" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Lokasi Penyimpanan</label>
+                                    <select class="form-control" id ="location_id" name="location_id" required>
+                                        <option value="" disabled selected>- Pilih Lokasi Penyimpanan -</option>
+                                        @foreach ($location as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Detail Lokasi Penyimpanan</label>
+                                    <select class="form-control" id="detail_location_id" name="detail_location_id" required>
+                                        <option value="" disabled selected>- Pilih Detail Lokasi Penyimpanan -
+                                        </option>
+                                    </select>
                                 </div>
                                 <button type="submit" class="btn btn-outline-primary me-2">Submit</button>
-                                <a href="{{ route('masterdata-consumable.index') }}" class="btn btn-light">Cancel</a>
+                                <a href="{{ route('masterdata-consumable.index') }}"
+                                    class="btn btn-outline-danger">Cancel</a>
                             </form>
                         </div>
                     </div>
@@ -50,4 +72,28 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('javascript')
+    <script>
+        $(document).ready(function() {
+            $('#location_id').on('change', function() {
+                var location_id = this.value;
+                $.ajax({
+                    url: '/getDetailLocation?location_id=' + location_id,
+                    type: 'get',
+                    success: function(res) {
+                        $('#detail_location_id').html(
+                            '<option value="" selected disabled>- Pilih Detail Lokasi Penyimpanan -</option>'
+                        );
+                        $.each(res, function(key, value) {
+                            $('#detail_location_id').append('<option value= "' + value
+                                .id + '">' + value.code + ' - (' + value.name +
+                                ') </option>');
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Consumable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\DetailLocation;
+use App\Models\Location;
 
 class ConsumableController extends Controller
 {
@@ -22,7 +24,8 @@ class ConsumableController extends Controller
 
     public function create()
     {
-        return view('planning.masterdata.masterdata_consumable.create');
+        $location = Location::orderBy('name', 'ASC')->get();
+        return view('planning.masterdata.masterdata_consumable.create', compact(['location']));
     }
 
     public function store(Request $request)
@@ -32,6 +35,8 @@ class ConsumableController extends Controller
             'code' => $request->code,
             'stock' => $request->stock,
             'unit' => $request->unit,
+            'location_id' => $request->location_id,
+            'detail_location_id' => $request->detail_location_id,
         ]);
 
         return redirect(route('masterdata-consumable.index'))->withNotify('Data berhasil ditambahkan!');
@@ -45,22 +50,30 @@ class ConsumableController extends Controller
     public function edit($id)
     {
         $consumable = Consumable::findOrFail($id);
+        if(!$consumable){
+            return back();
+        }
+        $location = Location::orderBy('name', 'ASC')->get();
+        $detail_location = DetailLocation::orderBy('name', 'ASC')->get();
 
-        return view('planning.masterdata.masterdata_consumable.update', compact(['consumable']));
+        return view('planning.masterdata.masterdata_consumable.update', compact(['consumable', 'location', 'detail_location']));
     }
 
     public function update(Request $request)
     {
         $id = $request->id;
         $consumable = Consumable::findOrFail($id);
-        if ($consumable){
-            $consumable->update([
-                'name' => $request->name,
-                'code' => $request->code,
-                'stock' => $request->stock,
-                'unit' => $request->unit,
-            ]);
+        if (!$consumable){
+            return back();
         }
+        $consumable->update([
+            'name' => $request->name,
+            'code' => $request->code,
+            'stock' => $request->stock,
+            'unit' => $request->unit,
+            'location_id' => $request->location_id,
+            'detail_location_id' => $request->detail_location_id,
+        ]);
 
         return redirect(route('masterdata-consumable.index'))->withNotify('Data berhasil diupdate!');
     }

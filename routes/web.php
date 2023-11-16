@@ -160,6 +160,7 @@ Route::middleware(['auth', 'license'])->group(function () {
         Route::get('/getDefect', 'getDefect')->name('getDefect');
         Route::get('/getAvatar', 'getAvatar')->name('getAvatar');
         Route::get('/getDetailLocation', 'getDetailLocation')->name('getDetailLocation');
+        Route::get('/getDepartement', 'getDepartement')->name('getDepartement');
     });
 
     /////////////////////////////   START TRACK   /////////////////////////////////////

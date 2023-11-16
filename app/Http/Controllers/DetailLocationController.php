@@ -38,17 +38,22 @@ class DetailLocationController extends Controller
     public function edit($id)
     {
         $detail_location = DetailLocation::findOrFail($id);
+        $location = Location::orderBy('name', 'ASC')->get();
 
-        return view('planning.masterdata.masterdata_detail_location.update', compact(['detail_location']));
+        return view('planning.masterdata.masterdata_detail_location.update', compact(['location', 'detail_location']));
     }
 
     public function update (Request $request)
     {
         $id = $request->id;
         $detail_location = DetailLocation::findOrFail($id);
+        if(!$detail_location){
+            return back();
+        }
         $detail_location->update([
             'code'=>$request->code,
             'name'=>$request->name,
+            'location_id'=>$request->location_id,
         ]);
 
         return redirect()->route('masterdata-detail-location.index')->withNotify('Data berhasil diupdate!');

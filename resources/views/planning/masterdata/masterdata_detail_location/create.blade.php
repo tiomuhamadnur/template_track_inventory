@@ -16,8 +16,9 @@
                 <div class="col-lg-12 grid-margin stretch-card mt-3">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Form Data Location</h4>
-                            <form class="forms-sample" action="{{ route('masterdata-detail-location.store') }}" method="POST">
+                            <h4 class="card-title">Form Data Detail Location</h4>
+                            <form class="forms-sample" action="{{ route('masterdata-detail-location.store') }}"
+                                method="POST">
                                 @csrf
                                 @method('post')
                                 <div class="form-group">
@@ -41,7 +42,7 @@
                                 </div>
 
                                 <button type="submit" class="btn btn-outline-primary me-2">Submit</button>
-                                <a href="#" class="btn btn-light">Cancel</a>
+                                <a href="{{ route('masterdata-detail-location.index') }}" class="btn btn-light">Cancel</a>
                             </form>
                         </div>
                     </div>

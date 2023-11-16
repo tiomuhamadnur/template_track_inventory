@@ -1,7 +1,7 @@
 @extends('planning.masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title>Edit Data Location | TCSM</title>
+    <title>Edit Data Location | CPWTM</title>
 @endsection
 
 @section('sub-content')
@@ -17,23 +17,39 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Form Edit Data Detail Location</h4>
-                            <form class="forms-sample" action="{{ route('masterdata-detail-location.update') }}" method="POST">
+                            <form class="forms-sample" action="{{ route('masterdata-detail-location.update') }}"
+                                method="POST">
                                 @csrf
                                 @method('put')
+                                <input type="text" name="id" value="{{ $detail_location->id }}" hidden>
                                 <div class="form-group">
-                                    <label for="exampleInputName1">Kode Location</label>
-                                    <input type="text" name="id" hidden value="{{ $detail_location->id }} hidden">
-                                    <input type="text" class="form-control" name="code" id="code"
+                                    <label for="exampleInputName1">Kode Detail Location</label>
+                                    <input type="text" class="form-control" name="code"
                                         placeholder="Masukkan Kode Location" value="{{ $detail_location->code }}" required>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="exampleInputEmail3">Nama Location</label>
-                                    <input type="text" name="id" hidden value="{{ $detail_location->id }}">
-                                    <input type="text" class="form-control" name="name" id="bane"
+                                    <label for="exampleInputEmail3">Nama Detail Location</label>
+                                    <input type="text" class="form-control" name="name"
                                         placeholder="Masukkan Nama Location" value="{{ $detail_location->name }}" required>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputEmail3">Location</label>
+                                    <select class="form-control" name="location_id" required>
+                                        <option value="" disabled>- Pilih Lokasi Penyimpanan -</option>
+                                        @foreach ($location as $item)
+                                            <option value="{{ $item->id }}"
+                                                @if ($detail_location->location->id == $item->id) selected @endif>{{ $item->name }}
+                                                ({{ $item->code }})
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
                                 <button type="submit" class="btn btn-outline-primary me-2">Submit</button>
-                                <a href="{{ route('masterdata-detail-location.index') }}" class="btn btn-light">Cancel</a>
+                                <a href="{{ route('masterdata-detail-location.index') }}"
+                                    class="btn btn-outline-danger">Cancel</a>
                             </form>
                         </div>
                     </div>

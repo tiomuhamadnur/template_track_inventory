@@ -17,27 +17,33 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Data Tools</h4>
-                            <a href="{{ route('masterdata-tools.create') }}" class="btn btn-primary btn-lg" type="button">Add
-                                Data</a>
-                                 <button class="btn btn-outline-dark btn-lg dropdown-toggle" type="button"
-                                id="dropdownMenuIconButton1" data-bs-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false" >
-                                <i class="ti-filter"></i>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuIconButton1">
-                                <a class="dropdown-item" href="/masterdata-tools/filter?section_id=1">PW RAMS Tools</a>
-                                <a class="dropdown-item" href="/masterdata-tools/filter?section_id=2">PW MAINT Tools</a>
-                                <a class="dropdown-item" href="/masterdata-tools/filter?section_id=3">Civil RAMS Tools</a>
-                                <a class="dropdown-item" href="/masterdata-tools/filter?section_id=4">Civil MAINT Tools</a>
+                            <div class="btn-group">
+                                <a href="{{ route('masterdata-tools.create') }}" class="btn btn-primary btn-lg me-0"
+                                    type="button">Add
+                                    Data</a>
+                                <button class="btn btn-outline-dark btn-lg dropdown-toggle ms-0" type="button"
+                                    id="dropdownMenuIconButton1" data-bs-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <i class="ti-filter"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuIconButton1">
+                                    <a class="dropdown-item" href="/masterdata-tools/filter?section_id=1">PW RAMS Tools</a>
+                                    <a class="dropdown-item" href="/masterdata-tools/filter?section_id=2">PW MAINT Tools</a>
+                                    <a class="dropdown-item" href="/masterdata-tools/filter?section_id=3">Civil RAMS
+                                        Tools</a>
+                                    <a class="dropdown-item" href="/masterdata-tools/filter?section_id=4">Civil MAINT
+                                        Tools</a>
+                                </div>
                             </div>
-                                <div >
-                                    <form class="col-sm-2" method="GET" action="{{ route('masterdata-tools') }}">
-                                        <div class="input-group">
-                                            <input type="search" name="search" class="form-control form-control-dark" placeholder="Cari Data..." aria-label="Search">
-                                            <button class="btn btn-primary" type="submit">Search</button>
-                                        </div>
-                                      </form>
-                                   </div>
+                            <div>
+                                <form class="col-sm-2" method="GET" action="{{ route('masterdata-tools') }}">
+                                    <div class="input-group">
+                                        <input type="search" name="search" class="form-control form-control-dark"
+                                            placeholder="Cari Data..." aria-label="Search">
+                                        <button class="btn btn-primary" type="submit">Search</button>
+                                    </div>
+                                </form>
+                            </div>
                             {{-- <button class="btn btn-outline-dark btn-lg dropdown-toggle" type="button"
                                 id="dropdownMenuIconButton1" data-bs-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false" style="margin-left: -10px;">
@@ -55,27 +61,18 @@
                                             <th class="text-center">
                                                 No
                                             </th>
-                                            {{-- <th class="text-center">
-                                                Kode Tools
-                                            </th> --}}
-                                            <th class="text-center">
+                                            <th class="text-center text-wrap">
                                                 Nama Tools
                                             </th>
                                             <th class="text-center">
                                                 Lokasi Penyimpanan
                                             </th>
                                             <th class="text-center">
-                                                Detail Lokasi
+                                                Section
                                             </th>
                                             <th class="text-center">
-                                                Jumlah
+                                                Stock
                                             </th>
-                                            <th class="text-center">
-                                                Satuan
-                                            </th>
-                                            {{-- <th class="text-center">
-                                                Part Group
-                                            </th> --}}
                                             <th class="text-center">
                                                 Action
                                             </th>
@@ -87,29 +84,24 @@
                                                 <td class="text-center">
                                                     {{ $loop->iteration }}
                                                 </td>
-                                                {{-- <td class="text-center">
-                                                    {{ $item->code }}
-                                                </td> --}}
-                                                <td class="text-center">
+                                                <td class="text-center fw-bolder text-wrap">
                                                     {{ $item->name }}
                                                 </td>
-                                                <td class="text-center">
-                                                    {{ $item->location->name }}
+                                                <td class="text-center text-wrap">
+                                                    {{ $item->location->name ?? '-' }} <br>
+                                                    ({{ $item->detail_location->name ?? '-' }})
                                                 </td>
                                                 <td class="text-center">
-                                                    {{ $item->detail_location->name }}
+                                                    {{ $item->section->name }}
                                                 </td>
                                                 <td class="text-center">
-                                                    {{ $item->stock }}
-                                                </td>
-                                                <td class="text-center">
-                                                    {{ $item->unit }}
+                                                    {{ $item->stock }} {{ $item->unit }}
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">
-                                                        <a href="{{ route('masterdata-tools.edit', $item->id) }}" type="button"
-                                                            class="btn btn-outline-warning mx-0">Edit</a>
-                                                            <a href="#" type="button"
+                                                        <a href="{{ route('masterdata-tools.edit', $item->id) }}"
+                                                            type="button" class="btn btn-outline-warning mx-0">Edit</a>
+                                                        <a href="#" type="button"
                                                             class="btn btn-outline-success mx-0">Detail</a>
                                                         <a class="btn btn-outline-danger mx-0 disabled" href="javascript:;"
                                                             data-bs-toggle="modal"

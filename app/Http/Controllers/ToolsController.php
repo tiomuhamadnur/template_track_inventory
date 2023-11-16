@@ -34,8 +34,6 @@ class ToolsController extends Controller
         $section = Section::get();
         $departement =  Departement::get();
         $location = Location::get();
-        $section = Section::get();
-        $departement = Departement::get();
         return view('planning.masterdata.masterdata_tools.create', compact(['section', 'location', 'departement']));
     }
 
@@ -47,7 +45,9 @@ class ToolsController extends Controller
             'stock' => $request->stock,
             'unit'=> $request->unit,
             'location_id' => $request->location_id,
-            'detail_location_id' => $request->detail_location_id
+            'detail_location_id' => $request->detail_location_id,
+            'section_id' => $request->section_id,
+            'departement_id' => $request->departement_id,
         ]);
 
         return redirect(route('masterdata-tools'))->withNotify('Data berhasil ditambahkan');
@@ -57,10 +57,11 @@ class ToolsController extends Controller
     {
         $tools = Tools::findOrFail($id);
         $location = Location::all();
-        $section = Section::all();
         $detail_location = DetailLocation::all();
+        $section = Section::all();
+        $departement =  Departement::get();
 
-        return view('planning.masterdata.masterdata_tools.update', compact(['tools', 'location', 'detail_location' , 'section']));
+        return view('planning.masterdata.masterdata_tools.update', compact(['tools', 'location', 'detail_location' , 'section', 'departement']));
     }
 
     public function filter(Request $request)

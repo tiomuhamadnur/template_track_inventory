@@ -1,7 +1,7 @@
 @extends('planning.masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title>Edit Data Consumable | TCSM</title>
+    <title>Edit Data Consumable | CPWTM</title>
 @endsection
 
 @section('sub-content')
@@ -21,30 +21,56 @@
                                 @csrf
                                 @method('put')
                                 <div class="form-group">
-                                    <label for="exampleInputName1">Nama Consumable</label>
+                                    <label for="exampleInputName1">Name</label>
                                     <input type="text" name="id" hidden value="{{ $consumable->id }}">
                                     <input type="text" class="form-control" name="name"
                                         placeholder="Input Nama Consumable" value="{{ $consumable->name }}" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail3">Code Consumable</label>
+                                    <label for="exampleInputEmail3">Code</label>
                                     <input type="text" class="form-control" name="code" id="exampleInputEmail3"
                                         placeholder="Input Code Consumable" value="{{ $consumable->code }}" required>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="exampleInputEmail3">Stock Consumable</label>
+                                    <label for="exampleInputEmail3">Stock</label>
                                     <input type="text" class="form-control" name="stock" id="exampleInputEmail3"
                                         placeholder="Input Stock Consumable" value="{{ $consumable->stock }}" required>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="exampleInputEmail3">Unit Consumable</label>
+                                    <label for="exampleInputEmail3">Unit</label>
                                     <input type="text" class="form-control" name="unit" id="exampleInputEmail3"
                                         placeholder="Input Unit Consumable" value="{{ $consumable->unit }}" required>
                                 </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Lokasi Penyimpanan</label>
+                                    <select class="form-control" id ="location_id" name="location_id" required>
+                                        <option value="" disabled selected>- Pilih Lokasi Penyimpanan -</option>
+                                        @foreach ($location as $item)
+                                            <option value="{{ $item->id }}"
+                                                @if ($item->id == $consumable->location->id) selected @endif>{{ $item->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Detail Lokasi Penyimpanan</label>
+                                    <select class="form-control" id="detail_location_id" name="detail_location_id" required>
+                                        <option value="" disabled selected>- Pilih Detail Lokasi Penyimpanan -
+                                        </option>
+                                        @foreach ($detail_location as $item)
+                                            <option value="{{ $item->id }}"
+                                                @if ($item->id == $consumable->detail_location->id) selected @endif>{{ $item->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <button type="submit" class="btn btn-outline-primary me-2">Submit</button>
-                                <a href="{{ route('masterdata-consumable.index') }}" class="btn btn-light">Cancel</a>
+                                <a href="{{ route('masterdata-consumable.index') }}"
+                                    class="btn btn-outline-danger">Cancel</a>
                             </form>
                         </div>
                     </div>

@@ -22,18 +22,17 @@
                                 @method('put')
                                 <div class="form-group">
                                     <label for="exampleInputName1">Kode Location</label>
-                                    <input type="text" name="id" hidden value="{{ $location->id }} hidden">
-                                    <input type="text" class="form-control" name="code" id="code"
+                                    <input type="text" name="id" value="{{ $location->id }}" hidden>
+                                    <input type="text" class="form-control" name="code"
                                         placeholder="Masukkan Kode Location" value="{{ $location->code }}" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail3">Nama Location</label>
-                                    <input type="text" name="id" hidden value="{{ $location->id }} hidden">
-                                    <input type="text" class="form-control" name="name" id="bane"
-                                        placeholder="Masukkan Nama Location" value="{{ $location->name}}" required>
+                                    <input type="text" class="form-control" name="name"
+                                        placeholder="Masukkan Nama Location" value="{{ $location->name }}" required>
                                 </div>
                                 <button type="submit" class="btn btn-outline-primary me-2">Submit</button>
-                                <a href="{{ route('masterdata-location.index') }}" class="btn btn-light">Cancel</a>
+                                <a href="{{ route('masterdata-location.index') }}" class="btn btn-outline-danger">Cancel</a>
                             </form>
                         </div>
                     </div>
