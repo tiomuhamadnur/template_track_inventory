@@ -715,6 +715,7 @@ Route::middleware(['auth', 'license'])->group(function () {
                 Route::get('/masterdata/transaksi-tools', 'index')->name('masterdata-transaksi-tools.index');
                 Route::get('/masterdata/create-transaksi-tools', 'create')->name('masterdata-transaksi-tools.create');
                 Route::post('/masterdata/transaksi-tools', 'store')->name('masterdata-transaksi-tools.store');
+                Route::put('/masterdata/transaksi-tools', 'return')->name('masterdata-transaksi-tools.return');
             });
 
         });

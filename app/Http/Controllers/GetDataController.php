@@ -123,15 +123,11 @@ class GetDataController extends Controller
 
     public function check_stock_tools(Request $request)
     {
-        // dd($request);
         $tools_id = $request->tools_id;
-        $qty = $request->qty;
 
         $tools = Tools::findOrFail($tools_id);
         if ($tools){
-            if ($qty > $tools->stock){
-                return response()->json($tools);
-            }
+            return response()->json($tools);
         }
     }
 

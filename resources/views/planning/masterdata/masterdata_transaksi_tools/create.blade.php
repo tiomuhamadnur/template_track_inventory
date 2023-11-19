@@ -1,7 +1,7 @@
 @extends('layout.form.form')
 
 @section('head')
-    <title>Form Data Temuan</title>
+    <title>Form Transaksi Tools</title>
 
     <style>
         .delete-button {
@@ -50,6 +50,8 @@
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                                         @endforeach
                                     </select>
+                                    {{-- <input type="text" placeholder="Token User" class="form-control" name="token"
+                                        id="token"> --}}
                                 </div>
                             </div>
                         </div>
@@ -118,6 +120,20 @@
 
 @section('javascript')
     <script>
+        $('#tools_id').on('change', function() {
+            var tools_id = this.value;
+            $.ajax({
+                url: '/check-stock-tools?tools_id=' + tools_id,
+                type: 'get',
+                success: function(res) {
+                    $('#qty').attr({
+                        'max': res.stock,
+                        'placeholder': 'stok: ' + res.stock,
+                    });
+                }
+            });
+        });
+
         function addRow() {
             const tools_id = document.getElementById('tools_id');
             const tools_id_value = tools_id.options[tools_id.selectedIndex].value;
@@ -126,25 +142,19 @@
             const qty_id = document.getElementById('qty');
             const qty = qty_id.value;
 
-            // Check stock tools
-            // if (tools_id_value !== '' && qty !== '') {
-            //     $.ajax({
-            //         url: '/check-stock-tools?tools_id=' + tools_id_value + '&qty=' + qty,
-            //         type: 'get',
-            //         success: function(res) {
-            //             alert('Stock aktual ' + res.name + ' adalah ' + res.stock + ' ' + res
-            //                 .unit + ', permintaan anda melebihi stock yang tersedia.');
-            //         },
-            //         error: function(err) {
-            //             // Jika terjadi kesalahan pada permintaan AJAX
-            //             console.error('Error:', err);
-            //         }
-            //     });
-            // }
-
             // Validasi bahwa kedua input harus diisi
             if (tools_id_value === '' || qty.trim() === '') {
                 alert('Harap isi kedua input, Tools & Qty.');
+                tools_id.selectedIndex = 0;
+                qty_id.value = '';
+                return;
+            }
+
+            // Validasi bahwa input qty harus sesuai min & max
+            const qty_min = qty_id.min;
+            const qty_max = qty_id.max;
+            if (qty < qty_min || qty > qty_max) {
+                alert('Qty melebihi stok yang tersedia.');
                 tools_id.selectedIndex = 0;
                 qty_id.value = '';
                 return;
