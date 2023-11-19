@@ -39,6 +39,7 @@ use App\Http\Controllers\PartController;
 use App\Http\Controllers\PICController;
 use App\Http\Controllers\planning\PlanningDashboard;
 use App\Http\Controllers\planning\PlanningDashboardController;
+use App\Http\Controllers\planning\TransaksiToolsController;
 use App\Http\Controllers\PMController;
 use App\Http\Controllers\RfiController;
 use App\Http\Controllers\RfiDepoController;
@@ -161,6 +162,7 @@ Route::middleware(['auth', 'license'])->group(function () {
         Route::get('/getAvatar', 'getAvatar')->name('getAvatar');
         Route::get('/getDetailLocation', 'getDetailLocation')->name('getDetailLocation');
         Route::get('/getDepartement', 'getDepartement')->name('getDepartement');
+        Route::get('/check-stock-tools', 'check_stock_tools')->name('getCheckStockTools');
     });
 
     /////////////////////////////   START TRACK   /////////////////////////////////////
@@ -707,6 +709,12 @@ Route::middleware(['auth', 'license'])->group(function () {
                 Route::get('/masterdata-consumable-edit/{id}/edit', 'edit')->name('masterdata-consumable.edit');
                 Route::put('/masterdata-consumable-update', 'update')->name('masterdata-consumable.update');
                 Route::delete('/masterdata-consumable-delete', 'destroy')->name('masterdata-consumable.destroy');
+            });
+
+            Route::controller(TransaksiToolsController::class)->group(function(){
+                Route::get('/masterdata/transaksi-tools', 'index')->name('masterdata-transaksi-tools.index');
+                Route::get('/masterdata/create-transaksi-tools', 'create')->name('masterdata-transaksi-tools.create');
+                Route::post('/masterdata/transaksi-tools', 'store')->name('masterdata-transaksi-tools.store');
             });
 
         });

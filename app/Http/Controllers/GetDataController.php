@@ -11,6 +11,7 @@ use App\Models\Departement;
 use App\Models\TransDefect;
 use App\Models\Location;
 use App\Models\Section;
+use App\Models\Tools;
 use Illuminate\Http\Request;
 
 class GetDataController extends Controller
@@ -120,9 +121,18 @@ class GetDataController extends Controller
 
 
 
-    public function create()
+    public function check_stock_tools(Request $request)
     {
-        //
+        // dd($request);
+        $tools_id = $request->tools_id;
+        $qty = $request->qty;
+
+        $tools = Tools::findOrFail($tools_id);
+        if ($tools){
+            if ($qty > $tools->stock){
+                return response()->json($tools);
+            }
+        }
     }
 
     public function store(Request $request)

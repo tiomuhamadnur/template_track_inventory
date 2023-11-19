@@ -10,21 +10,37 @@
         <li class="nav-item animate__animated animate__fadeInLeft">
             <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false"
                 aria-controls="form-elements">
-                <i class="menu-icon mdi mdi-briefcase"></i>
-                <span class="menu-title">Main Activity</span>
+                <i class="menu-icon mdi mdi-cart-outline"></i>
+                <span class="menu-title">Transaction</span>
             </a>
             <div class="collapse" id="form-elements">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Transaksi Tools</a>
+                        <a class="nav-link" href="{{ route('masterdata-transaksi-tools.index') }}">Transaksi Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Transaksi Material</a>
                     </li>
                 </ul>
             </div>
+        </li>
 
-            <div class="collapse" id="form-elements">
+        <li class="nav-item animate__animated animate__fadeInLeft">
+            <a class="nav-link" data-bs-toggle="collapse" href="#budgeting" aria-expanded="false"
+                aria-controls="budgeting">
+                <i class="menu-icon mdi mdi-cash-multiple"></i>
+                <span class="menu-title">Budgeting</span>
+            </a>
+            <div class="collapse" id="budgeting">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Transaksi Material</a>
+                        <a class="nav-link" href="#">Slot</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Project</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Progress Project</a>
                     </li>
                 </ul>
             </div>
@@ -43,7 +59,8 @@
                         <a class="nav-link" href="{{ route('masterdata-location.index') }}">Data Location</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('masterdata-detail-location.index') }}">Data Detail Location</a>
+                        <a class="nav-link" href="{{ route('masterdata-detail-location.index') }}">Data Detail
+                            Location</a>
                     </li>
                 </ul>
             </div>
