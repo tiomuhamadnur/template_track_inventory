@@ -9,6 +9,8 @@ use App\Models\Contract;
 use App\Models\Departement;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\planning\ProgressContract;
+use Carbon\Carbon;
 
 class ContractController extends Controller
 {
@@ -35,8 +37,9 @@ class ContractController extends Controller
             'vendor'=> $request->vendor,
             'fund_id'=> $request->fund_id,
             'contract_value' => $request->contract_value,
+            'paid_value' => 0,
             'remark'=> $request->remark,
-            'status' => $request->status,
+            'status' => 'open',
             'section_id'=> $request->section_id,
             'departement_id'=> $request->departement_id
         ]);
@@ -45,10 +48,11 @@ class ContractController extends Controller
 
     public function edit($id)
     {
+        $tahun_ini = Carbon::now()->format('Y');
         $contract = Contract::findOrFail($id);
         $section = Section::all();
         $departement = Departement::all();
-        $fund = Fund::all();
+        $fund = Fund::whereYear('tahun', $tahun_ini)->get();
 
         return view('planning.masterdata.masterdata_contract.update', compact(['contract', 'section', 'departement', 'fund']));
     }
@@ -75,10 +79,51 @@ class ContractController extends Controller
     public function transaction($id)
     {
         $contract = Contract::findOrFail($id);
-        $section = Section::all();
-        $departement = Departement::all();
-        $fund = Fund::all();
+        if(!$contract){
+            return back();
+        }
 
-        return view('planning.masterdata.masterdata_contract.detail_contract', compact(['contract']));
+        $progress = 0;
+        $progress_contract = ProgressContract::where('contract_id', $id)->get();
+
+        $contract_value = (int) $contract->contract_value;
+        $progress_paid_value = ProgressContract::where('contract_id', $id)->where('status', 'paid')->sum('paid_value');
+        if ($progress_paid_value){
+            $progress = ($progress_paid_value/$contract_value) * 100;
+        }
+        $progress = number_format((double)$progress, 2, '.', '');
+
+        return view('planning.masterdata.masterdata_contract.detail_contract', compact(['contract', 'progress_contract', 'progress_paid_value', 'progress']));
+    }
+
+    public function progress_store(Request $request)
+    {
+        ProgressContract::create([
+            'contract_id' => $request->contract_id,
+            'termin' => $request->termin,
+            'description' => $request->description,
+            'paid_value' => $request->paid_value,
+            'tanggal_paid' => $request->tanggal_paid,
+            'status' => $request->status,
+        ]);
+
+        $progress_paid_value = ProgressContract::where('contract_id', $request->contract_id)->where('status', 'paid')->sum('paid_value');
+        $contract = Contract::findOrFail($request->contract_id);
+        if (!$contract){
+            return back();
+        }
+
+        $contract->update([
+            'paid_value' => $progress_paid_value,
+        ]);
+
+        $progress_contract_paid_value = Contract::where('fund_id', $contract->fund_id)->where('status', 'open')->sum('paid_value');
+        $fund = Fund::findOrFail($contract->fund_id);
+        $fund->update([
+            'current_value' => $progress_contract_paid_value,
+        ]);
+
+
+        return back()->withNotify('Data berhasil ditambahkan!');
     }
 }

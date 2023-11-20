@@ -35,7 +35,8 @@
                                     <select class="form-control" id="fund_id" name="fund_id" required>
                                         <option value="" disabled selected>- Pilih Funding -</option>
                                         @foreach ($fund as $item)
-                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            <option value="{{ $item->id }}">{{ $item->name }} ({{ $item->tahun }})
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -48,11 +49,6 @@
                                     <label for="exampleInputEmail3">Remark</label>
                                     <input type="text" class="form-control" name="remark" id="contract"
                                         placeholder="Masukkan Remark (Optional)">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail3">Status</label>
-                                    <input type="text" class="form-control" name="status" id="contract"
-                                        placeholder="Masukkan Status">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Section</label>

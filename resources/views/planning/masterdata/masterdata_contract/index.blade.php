@@ -5,7 +5,7 @@
 @endsection
 
 @section('sub-content')
-    <h4>Budgeting > Data Fund </h4>
+    <h4>Budgeting > Data </h4>
     <div class="row">
         <div class="col-sm-12">
             <div class="home-tab">
@@ -22,93 +22,90 @@
                                     type="button">Add
                                     Data</a>
                             </div>
-                            <div class="col-lg-12 grid-margin stretch-card">
-                                <div class="card card-rounded shadow">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <h4 class="text-left fw-bolder" style="padding-bottom: 10px;">List Contract</h4>
-                                            <div class="col-sm-12 text-center">
-                                                <div class="table-responsive pt-3">
-                                                    <table class="table table-bordered">
-                                                        <thead>
-                                                            <tr>
-                                                                <th class="text-center">
-                                                                    No
-                                                                </th>
-                                                                <th class="text-center text-wrap">
-                                                                    No. Contract
-                                                                </th>
-                                                                <th class="text-center">
-                                                                    Funding
-                                                                </th>
-                                                                <th class="text-center">
-                                                                    Vendor
-                                                                </th>
-                                                                <th class="text-center">
-                                                                    Contract Value
-                                                                </th>
-                                                                <th class="text-center">
-                                                                    Paid Value
-                                                                </th>
-                                                                <th class="text-center">
-                                                                    Status
-                                                                </th>
-                                                                <th class="text-center">
-                                                                    Action
-                                                                </th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @foreach ($contract as $item)
-                                                            <tr>
-                                                                <td class="text-center">
-                                                                    {{ $loop->iteration }}
-                                                                </td>
-                                                                <td class="text-center fw-bolder text-wrap">
-                                                                    <a href="{{ route('masterdata-contract.transaction', $item->id) }}" style="color: black;"> {{ $item->no_contract }}</a>
-                                                                </td>
-                                                                <td class="text-center text-wrap">
-                                                                    {{ $item->fund->name }}
-                                                                </td>
-                                                                <td class="text-center text-wrap">
-                                                                    {{ $item->vendor }}
-                                                                </td>
-                                                                <td class="text-center fw-bolder">
-                                                                    {{ $item->formatRupiah('contract_value') }}
-                                                                </td>
-                                                                <td class="text-center fw-bolder">
-                                                                    {{ $item->formatRupiah('paid_value') ?? '-' }}
-                                                                </td>
-                                                                <td class="text-center">
-                                                                    <button class="btn btn-danger">{{ $item->status }}</button>
-                                                                </td>
-                                                                <td class="text-center">
-                                                                    <div class="btn-group">
-                                                                        <a href="{{ route('masterdata-contract.edit', $item->id) }}"
-                                                                            type="button" class="btn btn-outline-warning mx-0">Edit</a>
-                                                                        <a href="#" type="button"
-                                                                            class="btn btn-outline-success mx-0">Detail</a>
-                                                                        <a class="btn btn-outline-danger mx-0 disabled" href="javascript:;"
-                                                                            data-bs-toggle="modal"
-                                                                            data-bs-target="#delete-confirmation-modal"
-                                                                            onclick="#">Delete</a>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
+                            <div class="table-responsive pt-3">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">
+                                                No
+                                            </th>
+                                            <th class="text-center text-wrap">
+                                                No. Contract
+                                            </th>
+                                            <th class="text-center">
+                                                Funding
+                                            </th>
+                                            <th class="text-center">
+                                                Vendor
+                                            </th>
+                                            <th class="text-center">
+                                                Contract Value
+                                            </th>
+                                            <th class="text-center">
+                                                Paid Value
+                                            </th>
+                                            <th class="text-center">
+                                                Status
+                                            </th>
+                                            <th class="text-center">
+                                                Action
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($contract as $item)
+                                            <tr>
+                                                <td class="text-center">
+                                                    {{ $loop->iteration }}
+                                                </td>
+                                                <td class="text-center fw-bolder text-wrap">
+                                                    {{ $item->no_contract }}
+                                                </td>
+                                                <td class="text-center text-wrap">
+                                                    {{ $item->fund->name }}
+                                                </td>
+                                                <td class="text-center text-wrap">
+                                                    {{ $item->vendor }}
+                                                </td>
+                                                <td class="text-center fw-bolder">
+                                                    {{ $item->formatRupiah('contract_value') }}
+                                                </td>
+                                                <td class="text-center fw-bolder">
+                                                    {{ $item->formatRupiah('paid_value') ?? '-' }}
+                                                </td>
+                                                <td class="text-center">
+                                                    <span
+                                                        class="badge @if ($item->status == 'open') bg-danger
+                                                                            @elseif($item->status == 'close') bg-success
+                                                                            @else bg-info @endif">
+                                                        {{ $item->status }}
+                                                    </span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="btn-group-vertical">
+                                                        <a href="{{ route('masterdata-contract.edit', $item->id) }}"
+                                                            type="button" class="btn btn-outline-warning my-0">Edit</a>
+                                                        <a href="{{ route('masterdata-contract.transaction', $item->id) }}"
+                                                            type="button" class="btn btn-outline-success my-0">Detail</a>
+                                                        <a class="btn btn-outline-danger my-0 disabled" href="javascript:;"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#delete-confirmation-modal"
+                                                            onclick="#">Delete</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
     </div>
 
     <!-- BEGIN: Delete Confirmation Modal -->

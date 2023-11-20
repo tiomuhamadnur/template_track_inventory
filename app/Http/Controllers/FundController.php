@@ -5,18 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\Fund;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 
 class FundController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $fund = Fund::all();
-        return view('planning.masterdata.masterdata_fund.index', compact(['fund']));
+        $tahun = $request->tahun ?? Carbon::now()->format('Y');
+        $fund = Fund::whereYear('tahun', $tahun)->get();
+        return view('planning.masterdata.masterdata_fund.index', compact(['fund', 'tahun']));
     }
 
     public function create()
     {
-        return view ('planning.masterdata.masterdata_fund.create');
+        $tahun = Carbon::now()->format('Y');
+        return view ('planning.masterdata.masterdata_fund.create', compact(['tahun']));
     }
 
     public function store (Request $request)
@@ -25,6 +28,7 @@ class FundController extends Controller
             'name' => $request->name,
             'kegiatan' => $request->kegiatan,
             'init_value' => $request->init_value,
+            'tahun' => $request->tahun,
         ]);
 
         return redirect()->route('masterdata-fund.index')->withNotify('Data berhasil ditambahkan!');

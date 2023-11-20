@@ -35,6 +35,11 @@
                                     <input type="number" class="form-control" name="init_value" id="stock"
                                         placeholder="Masukkan Value Fund (Rp.)" min="0">
                                 </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail3">Tahun Anggaran</label>
+                                    <input type="number" class="form-control" name="tahun" placeholder="Tahun anggaran"
+                                        min="{{ $tahun - 5 }}" max="{{ $tahun + 100 }}" value="{{ $tahun }}">
+                                </div>
                                 <button type="submit" class="btn btn-outline-primary me-2">Submit</button>
                                 <a href="{{ route('masterdata-fund.index') }}" class="btn btn-outline-danger">Cancel</a>
                             </form>

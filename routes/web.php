@@ -738,6 +738,8 @@ Route::middleware(['auth', 'license'])->group(function () {
                 Route::get('/masterdata/contract-edit/{id}/edit', 'edit')->name('masterdata-contract.edit');
                 Route::put('/masterdata/contract-update', 'update')->name('masterdata-contract.update');
                 Route::delete('/masterdata/contract-delete', 'destroy')->name('masterdata-contract.destroy');
+
+                Route::post('/masterdata/progress-contract/store', 'progress_store')->name('masterdata-contract.progress.store');
             });
 
         });

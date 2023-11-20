@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('fund', function (Blueprint $table) {
@@ -19,15 +14,11 @@ return new class extends Migration
             $table->string('kegiatan')->nullable();
             $table->bigInteger('init_value')->unsigned()->nullable();
             $table->bigInteger('current_value')->unsigned()->nullable();
+            $table->year('tahun')->nullable();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('fund');

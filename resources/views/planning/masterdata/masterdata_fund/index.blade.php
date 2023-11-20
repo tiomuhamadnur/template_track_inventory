@@ -16,11 +16,16 @@
                 <div class="col-lg-12 grid-margin stretch-card mt-3">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Data Fund</h4>
+                            <h4 class="card-title">Data Fund (Tahun {{ $tahun }})</h4>
                             <div class="btn-group">
                                 <a href="{{ route('masterdata-fund.create') }}" class="btn btn-primary btn-lg me-0"
-                                    type="button">Add
-                                    Data</a>
+                                    type="button">
+                                    Add Data
+                                </a>
+                                <button class="btn btn-outline-dark btn-lg ms-0" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#filter-modal">
+                                    Filter <i class="ti-filter"></i>
+                                </button>
                             </div>
                             {{-- <div>
                                 <form class="col-sm-2" method="GET" action="{{ route('masterdata-tools') }}">
@@ -30,16 +35,6 @@
                                         <button class="btn btn-primary" type="submit">Search</button>
                                     </div>
                                 </form>
-                            </div> --}}
-                            {{-- <button class="btn btn-outline-dark btn-lg dropdown-toggle" type="button"
-                                id="dropdownMenuIconButton1" data-bs-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false" style="margin-left: -10px;">
-                                <i class="ti-link"></i>
-                            </button> --}}
-                            {{-- <div class="dropdown-menu" aria-labelledby="dropdownMenuIconButton1">
-                                <a class="dropdown-item" href="#">Print</a>
-                                <a class="dropdown-item" href="#">Export to Excel</a>
-                                <a class="dropdown-item" href="#">Export to PDF</a>
                             </div> --}}
                             <div class="table-responsive pt-3">
                                 <table class="table table-bordered">
@@ -61,42 +56,47 @@
                                                 Current Value
                                             </th>
                                             <th class="text-center">
+                                                Tahun Anggaran
+                                            </th>
+                                            <th class="text-center">
                                                 Action
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($fund as $item)
-                                        <tr>
-                                            <td class="text-center">
-                                                {{ $loop->iteration }}
-                                            </td>
-                                            <td class="text-center fw-bolder text-wrap">
-                                                {{ $item->name }}
-                                            </td>
-                                            <td class="text-center text-wrap">
-                                                {{ $item->kegiatan }}
-                                            </td>
-                                            <td class="text-center fw-bolder">
-                                                {{ $item->formatRupiah('init_value') }}
-                                            </td>
-                                            <td class="text-center fw-bolder">
-                                                {{ $item->current_value ?? '-' }}
-                                            </td>
-                                            <td class="text-center">
-                                                <div class="btn-group">
-                                                    <a href="{{ route('masterdata-fund.edit', $item->id) }}"
-                                                        type="button" class="btn btn-outline-warning mx-0">Edit</a>
-                                                    <a href="#" type="button"
-                                                        class="btn btn-outline-success mx-0">Detail</a>
-                                                    <a class="btn btn-outline-danger mx-0 disabled" href="javascript:;"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#delete-confirmation-modal"
-                                                        onclick="#">Delete</a>
-                                                </div>
-                                            </td>
-                                        </tr>
-
+                                            <tr>
+                                                <td class="text-center">
+                                                    {{ $loop->iteration }}
+                                                </td>
+                                                <td class="text-center fw-bolder text-wrap">
+                                                    {{ $item->name }}
+                                                </td>
+                                                <td class="text-center text-wrap">
+                                                    {{ $item->kegiatan }}
+                                                </td>
+                                                <td class="text-center fw-bolder">
+                                                    {{ $item->formatRupiah('init_value') }}
+                                                </td>
+                                                <td class="text-center fw-bolder">
+                                                    {{ $item->formatRupiah('current_value') }}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ $item->tahun }}
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="btn-group-vertical">
+                                                        <a href="{{ route('masterdata-fund.edit', $item->id) }}"
+                                                            type="button" class="btn btn-outline-warning my-0">Edit</a>
+                                                        <a href="#" type="button"
+                                                            class="btn btn-outline-success my-0">Detail</a>
+                                                        <a class="btn btn-outline-danger my-0 disabled" href="javascript:;"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#delete-confirmation-modal"
+                                                            onclick="#">Delete</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -109,28 +109,31 @@
         </div>
     </div>
 
-    <!-- BEGIN: Delete Confirmation Modal -->
-    <div id="delete-confirmation-modal" class="modal" tabindex="-1" aria-hidden="true">
+    <!-- BEGIN: Filter Modal -->
+    <div id="filter-modal" class="modal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body p-2">
-                    <div class="p-2 text-center">
-                        <div class="text-3xl mt-2">Apakah anda yakin?</div>
-                        <div class="text-slate-500 mt-2">Data ini akan dihapus secara permanen.</div>
-                    </div>
-                    <div class="px-5 pb-8 text-center mt-3">
-                        <form action="#" method="POST">
-                            @csrf
-                            @method('delete')
-                            <input type="text" name="id" id="id" hidden>
-                            <button type="button" data-bs-dismiss="modal"
-                                class="btn btn-outline-warning w-24 mr-1 me-2">Cancel</button>
-                            <button type="submit" class="btn btn-danger w-24">Delete</button>
+                    <div class="px-5 pb-8 mt-3">
+                        <form id="filter_form" action="{{ route('masterdata-fund.index') }}" method="GET">
+                            <div class="form-group">
+                                <label class="form-label">Tahun Anggaran</label>
+                                <input type="number" class="form-control" name="tahun" placeholder="tahun anggaran"
+                                    value="{{ $tahun }}" min="{{ $tahun - 5 }}" max="{{ $tahun + 100 }}"
+                                    required autocomplete="off">
+                            </div>
                         </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-right">
+                        <button type="button" data-bs-dismiss="modal"
+                            class="btn btn-outline-warning w-24 mr-1 me-2">Cancel</button>
+                        <button type="submit" form="filter_form" class="btn btn-success w-24">Filter</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- END: Delete Confirmation Modal -->
+    <!-- END: Filter Modal -->
 @endsection
