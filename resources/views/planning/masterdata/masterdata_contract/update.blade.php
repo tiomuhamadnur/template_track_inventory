@@ -43,9 +43,19 @@
                                         placeholder="Masukkan Nama Vendor" value="{{ $contract->vendor }}" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail3">Value</label>
+                                    <label for="exampleInputEmail3">Contract Value</label>
                                     <input type="number" class="form-control" name="contract_value" id="="
                                         placeholder="Masukkan Nilai Contract" value="{{ $contract->contract_value }}" min="0" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail3">Remark</label>
+                                    <input type="text" class="form-control" name="contract_value" id="="
+                                        placeholder="Masukkan Remark" value="{{ $contract->remark }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail3">Status</label>
+                                    <input type="text" class="form-control" name="status" id="="
+                                        placeholder="Masukkan Status" value="{{ $contract->status }}" required>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Section</label>

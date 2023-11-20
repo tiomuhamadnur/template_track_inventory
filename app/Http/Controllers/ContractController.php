@@ -36,6 +36,7 @@ class ContractController extends Controller
             'fund_id'=> $request->fund_id,
             'contract_value' => $request->contract_value,
             'remark'=> $request->remark,
+            'status' => $request->status,
             'section_id'=> $request->section_id,
             'departement_id'=> $request->departement_id
         ]);
@@ -63,10 +64,21 @@ class ContractController extends Controller
                 'fund_id'=> $request->fund_id,
                 'contract_value' => $request->contract_value,
                 'remark'=> $request->remark,
+                'status'=>$request->status,
                 'section_id'=> $request->section_id,
                 'departement_id'=> $request->departement_id
             ]);
         }
         return redirect()->route(('masterdata-contract.index'))->withNotify('Data berhasil diupdate');
+    }
+
+    public function transaction($id)
+    {
+        $contract = Contract::findOrFail($id);
+        $section = Section::all();
+        $departement = Departement::all();
+        $fund = Fund::all();
+
+        return view('planning.masterdata.masterdata_contract.detail_contract', compact(['contract']));
     }
 }

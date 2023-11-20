@@ -50,6 +50,11 @@
                                         placeholder="Masukkan Remark (Optional)">
                                 </div>
                                 <div class="form-group">
+                                    <label for="exampleInputEmail3">Status</label>
+                                    <input type="text" class="form-control" name="status" id="contract"
+                                        placeholder="Masukkan Status">
+                                </div>
+                                <div class="form-group">
                                     <label class="form-label">Section</label>
                                     <select class="form-control" id="section_id" name="section_id" required>
                                         <option value="" disabled selected>- Pilih Section -</option>

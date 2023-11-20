@@ -732,6 +732,7 @@ Route::middleware(['auth', 'license'])->group(function () {
 
             Route::controller(ContractController::class)->group(function(){
                 Route::get('/masterdata/contract', 'index')->name('masterdata-contract.index');
+                Route::get('/masterdata/contract-transaction/{id}/transaction', 'transaction')->name('masterdata-contract.transaction');
                 Route::get('/masterdata/contract-create', 'create')->name('masterdata-contract.create');
                 Route::post('/masterdata/contract-store', 'store')->name('masterdata-contract.store');
                 Route::get('/masterdata/contract-edit/{id}/edit', 'edit')->name('masterdata-contract.edit');

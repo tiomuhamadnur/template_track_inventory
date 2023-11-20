@@ -48,12 +48,12 @@
 
         <li class="nav-item nav-category">Master Data</li>
         <li class="nav-item animate__animated animate__fadeInLeft">
-            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
+            <a class="nav-link" data-bs-toggle="collapse" href="#data-location" aria-expanded="false"
                 aria-controls="ui-basic">
                 <i class="menu-icon mdi mdi-folder-lock"></i>
                 <span class="menu-title">Data Essentials</span>
             </a>
-            <div class="collapse" id="ui-basic">
+            <div class="collapse" id="data-location">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('masterdata-location.index') }}">Data Location</a>
