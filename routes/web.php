@@ -18,6 +18,7 @@ use App\Http\Controllers\civil\SubAreaController;
 use App\Http\Controllers\civil\TemuanVisualCivilController;
 use App\Http\Controllers\ClosingReportController;
 use App\Http\Controllers\ConsumableController;
+use App\Http\Controllers\ContractController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DefectController;
 use App\Http\Controllers\DepartementController;
@@ -48,6 +49,8 @@ use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\ShiftController;
 use App\Http\Controllers\ShowPageController;
 use App\Http\Controllers\SleeperExaminationController;
+use App\Http\Controllers\fundBudgetController;
+use App\Http\Controllers\FundController;
 use App\Http\Controllers\TemuanController;
 use App\Http\Controllers\TemuanDepoController;
 use App\Http\Controllers\TemuanMainlineController;
@@ -716,6 +719,24 @@ Route::middleware(['auth', 'license'])->group(function () {
                 Route::get('/masterdata/create-transaksi-tools', 'create')->name('masterdata-transaksi-tools.create');
                 Route::post('/masterdata/transaksi-tools', 'store')->name('masterdata-transaksi-tools.store');
                 Route::put('/masterdata/transaksi-tools', 'return')->name('masterdata-transaksi-tools.return');
+            });
+
+            Route::controller(FundController::class)->group(function(){
+                Route::get('/masterdata/fund', 'index')->name('masterdata-fund.index');
+                Route::get('/masterdata/fund-create', 'create')->name('masterdata-fund.create');
+                Route::post('/masterdata/fund-store', 'store')->name('masterdata-fund.store');
+                Route::get('/masterdata/fund-edit/{id}/edit', 'edit')->name('masterdata-fund.edit');
+                Route::put('/masterdata/fund-update', 'update')->name('masterdata-fund.update');
+                Route::delete('/masterdata/fund-delete', 'destroy')->name('masterdata-fund.destroy');
+            });
+
+            Route::controller(ContractController::class)->group(function(){
+                Route::get('/masterdata/contract', 'index')->name('masterdata-contract.index');
+                Route::get('/masterdata/contract-create', 'create')->name('masterdata-contract.create');
+                Route::post('/masterdata/contract-store', 'store')->name('masterdata-contract.store');
+                Route::get('/masterdata/contract-edit/{id}/edit', 'edit')->name('masterdata-contract.edit');
+                Route::put('/masterdata/contract-update', 'update')->name('masterdata-contract.update');
+                Route::delete('/masterdata/contract-delete', 'destroy')->name('masterdata-contract.destroy');
             });
 
         });

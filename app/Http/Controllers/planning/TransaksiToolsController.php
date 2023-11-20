@@ -75,7 +75,7 @@ class TransaksiToolsController extends Controller
 
     public function return(Request $request)
     {
-        dd($request);
+        return redirect()->route('masterdata-transaksi-tools.index')->withNotify('Tools berhasil dikembalikan');
     }
 
     public function edit($id)
