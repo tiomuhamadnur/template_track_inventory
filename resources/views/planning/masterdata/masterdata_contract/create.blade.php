@@ -5,7 +5,7 @@
 @endsection
 
 @section('sub-content')
-    <h5>Master Data > Data Contract > Create Data</h5>
+    <h5>Budgeting > Data Contract > Create Data</h5>
     <div class="row">
         <div class="col-sm-12">
             <div class="home-tab">

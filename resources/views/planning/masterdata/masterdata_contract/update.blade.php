@@ -5,7 +5,7 @@
 @endsection
 
 @section('sub-content')
-    <h5>Master Data > Data Contract > Edit Data</h5>
+    <h5>Budgeting > Data Contract > Edit Data</h5>
     <div class="row">
         <div class="col-sm-12">
             <div class="home-tab">
@@ -49,7 +49,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail3">Remark</label>
-                                    <input type="text" class="form-control" name="contract_value" id="="
+                                    <input type="text" class="form-control" name="remark" id="="
                                         placeholder="Masukkan Remark" value="{{ $contract->remark }}">
                                 </div>
                                 <div class="form-group">

@@ -5,7 +5,7 @@
 @endsection
 
 @section('sub-content')
-    <h4>Transaction > Detail Contract & Transaction </h4>
+    <h4>Budgeting > Detail Contract & Transaction </h4>
     <div class="row">
         <div class="col-sm-12">
             <div class="home-tab">
@@ -63,7 +63,7 @@
                                                                     {{ $contract->formatRupiah('contract_value') }}
                                                                 </td>
                                                                 <td class="text-center">
-                                                                    {{ $contract->status}}
+                                                                    <button class="btn btn-danger">{{ $contract->status}}</button>
                                                                 </td>
                                                             </tr>
                                                         </tbody>

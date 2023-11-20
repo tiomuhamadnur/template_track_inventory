@@ -5,7 +5,7 @@
 @endsection
 
 @section('sub-content')
-    <h4>Master Data > Data Fund </h4>
+    <h4>Budgeting > Data Fund </h4>
     <div class="row">
         <div class="col-sm-12">
             <div class="home-tab">
@@ -80,7 +80,7 @@
                                                                     {{ $item->formatRupiah('paid_value') ?? '-' }}
                                                                 </td>
                                                                 <td class="text-center">
-                                                                    {{ $item->status }}
+                                                                    <button class="btn btn-danger">{{ $item->status }}</button>
                                                                 </td>
                                                                 <td class="text-center">
                                                                     <div class="btn-group">
