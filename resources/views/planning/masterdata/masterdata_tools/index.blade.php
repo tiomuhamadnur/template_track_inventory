@@ -1,7 +1,7 @@
 @extends('planning.masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title>Data Tools | P & C</title>
+    <title>Data Tools | CPWTM</title>
 @endsection
 
 @section('sub-content')

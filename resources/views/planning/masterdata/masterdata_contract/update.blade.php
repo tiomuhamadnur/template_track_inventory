@@ -40,12 +40,12 @@
                                 <div class="form-group">
                                     <label for="exampleInputEmail3">Vendor</label>
                                     <input type="text" class="form-control" name="vendor" id="="
-                                        placeholder="Input Code Tools" value="{{ $contract->vendor }}" required>
+                                        placeholder="Masukkan Nama Vendor" value="{{ $contract->vendor }}" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail3">Value</label>
                                     <input type="number" class="form-control" name="contract_value" id="="
-                                        placeholder="Stock" value="{{ $contract->contract_value }}" min="0" required>
+                                        placeholder="Masukkan Nilai Contract" value="{{ $contract->contract_value }}" min="0" required>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Section</label>

@@ -1,7 +1,7 @@
 @extends('planning.masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title>Edit Data Location | Planning</title>
+    <title>Edit Data Location | CPWTM</title>
 @endsection
 
 @section('sub-content')

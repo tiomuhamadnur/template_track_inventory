@@ -36,7 +36,7 @@
                                         placeholder="Masukkan Value Fund (Rp.)" min="0">
                                 </div>
                                 <button type="submit" class="btn btn-outline-primary me-2">Submit</button>
-                                <a href="{{ route('masterdata-tools') }}" class="btn btn-outline-danger">Cancel</a>
+                                <a href="{{ route('masterdata-fund.index') }}" class="btn btn-outline-danger">Cancel</a>
                             </form>
                         </div>
                     </div>

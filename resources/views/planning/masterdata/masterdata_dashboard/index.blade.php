@@ -1,7 +1,7 @@
 @extends('planning.masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title> Dashboard Admin | Planning</title>
+    <title> Dashboard Admin | P & C</title>
 @endsection
 @section('sub-content')
     <h4>Dashboard Master Data Planning & Control</h4>

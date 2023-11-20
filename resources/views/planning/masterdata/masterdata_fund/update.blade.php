@@ -24,17 +24,17 @@
                                     <label for="exampleInputName1">Nama Fund</label>
                                     <input type="text" name="id" hidden value="{{ $fund->id }}">
                                     <input type="text" class="form-control" name="name" id="exampleInputName1"
-                                        placeholder="Input Nama Tools" value="{{ $fund->name }}" required>
+                                        placeholder="Masukkan Nama Fund" value="{{ $fund->name }}" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail3">Kegiatan</label>
                                     <input type="text" class="form-control" name="kegiatan" id="exampleInputEmail3"
-                                        placeholder="Input Code Tools" value="{{ $fund->kegiatan }}" required>
+                                        placeholder="Masukkan Nama Kegiatan" value="{{ $fund->kegiatan }}" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail3">Value</label>
                                     <input type="number" class="form-control" name="init_value" id="exampleInputEmail3"
-                                        placeholder="Stock" value="{{ $fund->init_value }}" min="0" required>
+                                        placeholder="Masukkan Nilai Funding" value="{{ $fund->init_value }}" min="0" required>
                                 </div>
                                 <button type="submit" class="btn btn-outline-primary me-2">Submit</button>
                                 <a href="{{ route('masterdata-fund.index') }}" class="btn btn-outline-danger">Cancel</a>
