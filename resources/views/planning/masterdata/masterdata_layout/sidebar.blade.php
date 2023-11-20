@@ -39,9 +39,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('masterdata-contract.index') }}">Contract List</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Progress Contract</a>
-                    </li>
                 </ul>
             </div>
         </li>
