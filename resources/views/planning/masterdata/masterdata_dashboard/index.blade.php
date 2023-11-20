@@ -28,7 +28,7 @@
                                 <div class="card-body">
                                     <div class="d-sm-flex justify-content-between align-items-start">
                                         <div>
-                                            <h4 class="card-title card-title-dash">Budget J1933</h4>
+                                            <h4 class="card-title card-title-dash">Budget J1933 (Koordinasi)</h4>
                                         </div>
                                     </div>
                                     <div id="budget-J1933" style="width: 100%; height: 250px;">
@@ -42,10 +42,10 @@
                                 <div class="card-body">
                                     <div class="d-sm-flex justify-content-between align-items-start">
                                         <div>
-                                            <h4 class="card-title card-title-dash">Budget J02</h4>
+                                            <h4 class="card-title card-title-dash">Budget J1715 (Perizinan & Sertifikasi)</h4>
                                         </div>
                                     </div>
-                                    <div id="budget-J02" style="width: 100%; height: 250px;">
+                                    <div id="budget-J1715" style="width: 100%; height: 250px;">
                                         {{-- <canvas id="trenOpen"></canvas> --}}
                                     </div>
                                 </div>
@@ -57,10 +57,10 @@
                                 <div class="card-body">
                                     <div class="d-sm-flex justify-content-between align-items-start">
                                         <div>
-                                            <h4 class="card-title card-title-dash">Budget J03</h4>
+                                            <h4 class="card-title card-title-dash">Budget J1932 (Thirdparty)</h4>
                                         </div>
                                     </div>
-                                    <div id="budget-J03" style="width: 100%; height: 250px;">
+                                    <div id="budget-J1932" style="width: 100%; height: 250px;">
                                         {{-- <canvas id="trenOpen"></canvas> --}}
                                     </div>
                                 </div>
@@ -74,10 +74,10 @@
                                 <div class="card-body">
                                     <div class="d-sm-flex justify-content-between align-items-start">
                                         <div>
-                                            <h4 class="card-title card-title-dash">Budget J04</h4>
+                                            <h4 class="card-title card-title-dash">Budget J1931 (OPEX)</h4>
                                         </div>
                                     </div>
-                                    <div id="budget-J04" style="width: 100%; height: 250px;">
+                                    <div id="budget-J1931" style="width: 100%; height: 250px;">
                                         {{-- <canvas id="trenOpen"></canvas> --}}
                                     </div>
                                 </div>
@@ -88,10 +88,10 @@
                                 <div class="card-body">
                                     <div class="d-sm-flex justify-content-between align-items-start">
                                         <div>
-                                            <h4 class="card-title card-title-dash">Budget J05</h4>
+                                            <h4 class="card-title card-title-dash">Budget J1930 (CAPEX)</h4>
                                         </div>
                                     </div>
-                                    <div id="budget-J05" style="width: 100%; height: 250px;">
+                                    <div id="budget-J1930" style="width: 100%; height: 250px;">
                                         {{-- <canvas id="trenOpen"></canvas> --}}
                                     </div>
                                 </div>
@@ -280,7 +280,7 @@ Highcharts.chart('consumable-usage', {
 });
 
 
-    //////////// BUDGETING J01 ///////////
+    //////////// BUDGETING J1933 ///////////
     Highcharts.chart('budget-J1933', {
     chart: {
         plotBackgroundColor: null,
@@ -329,15 +329,15 @@ Highcharts.chart('consumable-usage', {
     }]
 });
 
-//////////// BUDGETING J02 ///////////
-Highcharts.chart('budget-J02', {
+//////////// BUDGETING J1715 ///////////
+Highcharts.chart('budget-J1715', {
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: 0,
         plotShadow: false
     },
     title: {
-        text: 'J02',
+        text: 'J1715',
         align: 'center',
         verticalAlign: 'middle',
         y: 60
@@ -371,22 +371,22 @@ Highcharts.chart('budget-J02', {
         name: 'Budget',
         innerSize: '50%',
         data: [
-            ['Available', 73.86],
-            ['Paid', 11.97]
+            ['Available', 13.86],
+            ['Paid', 71.97]
 
         ]
     }]
 });
 
-//////////// BUDGETING J03 ///////////
-Highcharts.chart('budget-J03', {
+//////////// BUDGETING J1932 ///////////
+Highcharts.chart('budget-J1932', {
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: 0,
         plotShadow: false
     },
     title: {
-        text: 'J03',
+        text: 'J1932',
         align: 'center',
         verticalAlign: 'middle',
         y: 60
@@ -420,23 +420,23 @@ Highcharts.chart('budget-J03', {
         name: 'Budget',
         innerSize: '50%',
         data: [
-            ['Available', 73.86],
-            ['Paid', 11.97]
+            ['Available', 43.86],
+            ['Paid', 41.97]
 
         ]
     }]
 });
 
 
-//////////// BUDGETING J04 ///////////
-Highcharts.chart('budget-J04', {
+//////////// BUDGETING J1931 ///////////
+Highcharts.chart('budget-J1931', {
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: 0,
         plotShadow: false
     },
     title: {
-        text: 'J04',
+        text: 'J1931',
         align: 'center',
         verticalAlign: 'middle',
         y: 60
@@ -470,22 +470,22 @@ Highcharts.chart('budget-J04', {
         name: 'Budget',
         innerSize: '50%',
         data: [
-            ['Available', 73.86],
-            ['Paid', 11.97]
+            ['Available', 53.86],
+            ['Paid', 31.97]
 
         ]
     }]
 });
 
-//////////// BUDGETING J05 ///////////
-Highcharts.chart('budget-J05', {
+//////////// BUDGETING J1930 ///////////
+Highcharts.chart('budget-J1930', {
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: 0,
         plotShadow: false
     },
     title: {
-        text: 'J05',
+        text: 'J1930',
         align: 'center',
         verticalAlign: 'middle',
         y: 60
@@ -519,8 +519,8 @@ Highcharts.chart('budget-J05', {
         name: 'Budget',
         innerSize: '50%',
         data: [
-            ['Available', 73.86],
-            ['Paid', 11.97]
+            ['Available', 23.86],
+            ['Paid', 61.97]
 
         ]
     }]
