@@ -21,6 +21,11 @@
                                 @csrf
                                 @method('post')
                                 <div class="form-group">
+                                    <label for="exampleInputName1">Nama Contract</label>
+                                    <input type="text" class="form-control" name="name" id="name"
+                                        placeholder="Masukkan Nama Contract" required>
+                                </div>
+                                <div class="form-group">
                                     <label for="exampleInputName1">No. Contract</label>
                                     <input type="text" class="form-control" name="no_contract" id="no_contract"
                                         placeholder="Masukkan No Contract" required>

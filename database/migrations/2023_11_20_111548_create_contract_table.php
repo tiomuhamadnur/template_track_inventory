@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('contract', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->nullable();
             $table->string('no_contract')->nullable();
             $table->string('vendor')->nullable();
             $table->bigInteger('fund_id')->unsigned()->nullable();

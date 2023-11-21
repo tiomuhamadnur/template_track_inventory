@@ -12,8 +12,8 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('kegiatan')->nullable();
-            $table->bigInteger('init_value')->unsigned()->nullable();
-            $table->bigInteger('current_value')->unsigned()->nullable();
+            $table->integer('init_value')->nullable();
+            $table->integer('current_value')->nullable();
             $table->year('tahun')->nullable();
             $table->timestamps();
         });

@@ -32,7 +32,9 @@ class ContractController extends Controller
 
     public function store(Request $request)
     {
+
         Contract::create([
+            'name'=>$request->name,
             'no_contract' => $request->no_contract,
             'vendor'=> $request->vendor,
             'fund_id'=> $request->fund_id,
@@ -63,6 +65,7 @@ class ContractController extends Controller
         $contract = Contract::findOrFail($id);
         if ($contract){
             $contract->update([
+                'name' => $request->name,
                 'no_contract' => $request->no_contract,
                 'vendor'=> $request->vendor,
                 'fund_id'=> $request->fund_id,
@@ -119,8 +122,9 @@ class ContractController extends Controller
 
         $progress_contract_paid_value = Contract::where('fund_id', $contract->fund_id)->where('status', 'open')->sum('paid_value');
         $fund = Fund::findOrFail($contract->fund_id);
+        $current = $fund->init_value;
         $fund->update([
-            'current_value' => $progress_contract_paid_value,
+            'current_value' => $current - $progress_contract_paid_value,
         ]);
 
 

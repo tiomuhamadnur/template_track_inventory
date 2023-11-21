@@ -723,6 +723,7 @@ Route::middleware(['auth', 'license'])->group(function () {
 
             Route::controller(FundController::class)->group(function(){
                 Route::get('/masterdata/fund', 'index')->name('masterdata-fund.index');
+                Route::get('/masterdata/fund-transaction/{id}/transaction', 'transaction')->name('masterdata-fund.transaction');
                 Route::get('/masterdata/fund-create', 'create')->name('masterdata-fund.create');
                 Route::post('/masterdata/fund-store', 'store')->name('masterdata-fund.store');
                 Route::get('/masterdata/fund-edit/{id}/edit', 'edit')->name('masterdata-fund.edit');
@@ -738,7 +739,6 @@ Route::middleware(['auth', 'license'])->group(function () {
                 Route::get('/masterdata/contract-edit/{id}/edit', 'edit')->name('masterdata-contract.edit');
                 Route::put('/masterdata/contract-update', 'update')->name('masterdata-contract.update');
                 Route::delete('/masterdata/contract-delete', 'destroy')->name('masterdata-contract.destroy');
-
                 Route::post('/masterdata/progress-contract/store', 'progress_store')->name('masterdata-contract.progress.store');
             });
 

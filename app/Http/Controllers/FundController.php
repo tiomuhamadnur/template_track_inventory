@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Fund;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Contract;
 use Carbon\Carbon;
 
 class FundController extends Controller
@@ -55,4 +56,13 @@ class FundController extends Controller
         }
         return redirect()->route(('masterdata-fund.index'))->withNotify('Data berhasil diupdate');
     }
+
+    public function transaction($id)
+    {
+        $fund = Fund::findOrFail($id);
+        $contract = Contract::where('fund_id', $id)->get();
+
+        return view('planning.masterdata.masterdata_fund.detail_fund', compact(['fund', 'contract']));
+    }
+
 }

@@ -10,11 +10,159 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-12 grid-margin stretch-card animate__animated animate__zoomIn"">
+        <div class="col-sm-12">
+            <div class="home-tab">
+                <div class="tab-content tab-content-basic">
+                    <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
+                        <div class="row">
+                            <div class="col-lg-6 grid-margin stretch-card animate__animated animate__zoomIn">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <div class="d-sm-flex justify-content-between align-items-start">
+                                            <div>
+                                                <h4 class="card-title card-title-dash">Sebaran Tools Dept. CPWTM (belom diquery yaa)</h4>
+                                                <h5 class="card-subtitle card-subtitle-dash">
+                                                    <span>
+                                                        Update
+                                                        {{ \Carbon\Carbon::now()->format('F Y') }}
+                                                    </span>
+                                                </h5>
+                                            </div>
+                                        </div>
+                                        <div id="sebaran-tools" style="width: 100%; height: 250px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 grid-margin stretch-card animate__animated animate__zoomIn">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <div class="d-sm-flex justify-content-between align-items-start">
+                                            <div>
+                                                <h4 class="card-title card-title-dash">Penggunaan Consumable Terkini Dept. CPWTM (belom juga )</h4>
+                                                <h5 class="card-subtitle card-subtitle-dash">
+                                                    <span>
+                                                        Update
+                                                        {{ \Carbon\Carbon::now()->format('F Y') }}
+                                                    </span>
+                                                </h5>
+                                            </div>
+                                        </div>
+                                        <div id="consumable-usage" style="width: 100%; height: 250px;">
+                                            {{-- <canvas id="trenOpen"></canvas> --}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="home-tab">
+                <div class="tab-content tab-content-basic">
+                    <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
+                        <div class="row">
+                            <div class="col-lg-4 grid-margin stretch-card animate__animated animate__zoomIn" style="margin-top: -30px;">
+                                <div class="card card-rounded shadow">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <h4 class="text-center fw-bolder" style="padding-bottom: 10px;">Contract Status</h4>
+                                            <div class="col-sm-12 text-center">
+                                                <div class="btn-group">
+                                                    <a href="#" title="">
+                                                        <h3 class="mb-0 fw-bold text-primary">
+                                                            23
+                                                            <br>
+                                                            <p class="text-dark">On Going</p>
+                                                        </h3>
+                                                    </a>
+                                                    <div class="mx-5"></div>
+                                                    <a href="#" title="">
+                                                        <h3 class="mb-0 fw-bold text-primary">
+                                                            5
+                                                            <br>
+                                                            <p class="text-dark">Finished</p>
+                                                        </h3>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 grid-margin stretch-card animate__animated animate__zoomIn" style="margin-top: -30px;">
+                                <div class="card card-rounded shadow">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <h4 class="text-center fw-bolder" style="padding-bottom: 10px;">Informasi Penyerapan Anggaran (%)</h4>
+                                            <div class="col-sm-12 text-center">
+                                                <div class="btn-group">
+                                                    <a href="#" title="">
+                                                        <h3 class="mb-0 fw-bold text-primary">
+                                                            70.35
+                                                            <br>
+                                                            <p class="text-dark">Penyerapan (%)</p>
+                                                        </h3>
+                                                    </a>
+                                                    <div class="mx-5"></div>
+                                                    <a href="#" title="">
+                                                        <h3 class="mb-0 fw-bold text-primary">
+                                                            29.65
+                                                            <br>
+                                                            <p class="text-dark">Sisa (%)</p>
+                                                        </h3>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 grid-margin stretch-card animate__animated animate__zoomIn" style="margin-top: -30px;">
+                                <div class="card card-rounded shadow">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <h4 class="text-center fw-bolder" style="padding-bottom: 10px;">Informasi Penyerapan Anggaran (Rp)</h4>
+                                            <div class="col-sm-12 text-center">
+                                                <div class="btn-group">
+                                                    <a href="#" title="">
+                                                        <h3 class="mb-0 fw-bold text-primary" style="font-size: 18px;">
+                                                            5.2039.020.000
+                                                            <br>
+                                                            <p class="text-dark">Penyerapan (Rp)</p>
+                                                        </h3>
+                                                    </a>
+                                                    <div class="mx-5"></div>
+                                                    <a href="#" title="">
+                                                        <h3 class="mb-0 fw-bold text-primary"  style="font-size: 18px;">
+                                                            467.030.330
+                                                            <br>
+                                                            <p class="text-dark">Sisa (Rp)</p>
+                                                        </h3>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 grid-margin stretch-card animate__animated animate__zoomIn">
             <div class="card card-rounded shadow">
                 <div class="card-body">
                     <div>
-                        <h5>Budget</h5>
+                        <h5>Fund Budget Information</h5>
                         <h5 class="card-subtitle card-subtitle-dash">
                             <span>
                                 Update
@@ -102,59 +250,8 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="home-tab">
-                <div class="tab-content tab-content-basic">
-                    <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
-                        <div class="row">
-                            <div class="col-lg-6 grid-margin stretch-card animate__animated animate__zoomIn">
-                                <div class="card shadow">
-                                    <div class="card-body">
-                                        <div class="d-sm-flex justify-content-between align-items-start">
-                                            <div>
-                                                <h4 class="card-title card-title-dash">Sebaran Tools Dept. CPWTM (belom diquery yaa)</h4>
-                                                <h5 class="card-subtitle card-subtitle-dash">
-                                                    <span>
-                                                        Update
-                                                        {{ \Carbon\Carbon::now()->format('F Y') }}
-                                                    </span>
-                                                </h5>
-                                            </div>
-                                        </div>
-                                        <div id="sebaran-tools" style="width: 100%; height: 250px;">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="col-lg-6 grid-margin stretch-card animate__animated animate__zoomIn">
-                                <div class="card shadow">
-                                    <div class="card-body">
-                                        <div class="d-sm-flex justify-content-between align-items-start">
-                                            <div>
-                                                <h4 class="card-title card-title-dash">Penggunaan Consumable Terkini Dept. CPWTM (belom juga )</h4>
-                                                <h5 class="card-subtitle card-subtitle-dash">
-                                                    <span>
-                                                        Update
-                                                        {{ \Carbon\Carbon::now()->format('F Y') }}
-                                                    </span>
-                                                </h5>
-                                            </div>
-                                            <div id="performance-line-legend"></div>
-                                        </div>
-                                        <div id="consumable-usage" style="width: 100%; height: 250px;">
-                                            {{-- <canvas id="trenOpen"></canvas> --}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
 @endsection
 
 

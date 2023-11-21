@@ -21,6 +21,12 @@
                                 @csrf
                                 @method('put')
                                 <div class="form-group">
+                                    <label for="exampleInputName1">Nama Kontrak</label>
+                                    <input type="text" name="id" hidden value="{{ $contract->id }}">
+                                    <input type="text" class="form-control" name="no_contract" id="="
+                                        placeholder="Masukkan Nama Contract" value="{{ $contract->name }}" required>
+                                </div>
+                                <div class="form-group">
                                     <label for="exampleInputName1">No. Contract</label>
                                     <input type="text" name="id" hidden value="{{ $contract->id }}">
                                     <input type="text" class="form-control" name="no_contract" id="="
