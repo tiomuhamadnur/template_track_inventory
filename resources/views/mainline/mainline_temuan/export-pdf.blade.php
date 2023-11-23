@@ -104,6 +104,10 @@
                             <img style="height: 120px" src="{{ public_path('storage/' . $item->photo_close) }}"
                                 alt="tidak ada foto">
                             <p class="text-center mb-0" style="font-size: 10px">(After Repair)</p>
+                        @else
+                            <img style="height: 120px" src="{{ public_path('storage/' . $item->photo) }}"
+                                alt="tidak ada foto">
+                            <p class="text-center mb-0" style="font-size: 10px">(Under Monitor)</p>
                         @endif
 
                     </td>
