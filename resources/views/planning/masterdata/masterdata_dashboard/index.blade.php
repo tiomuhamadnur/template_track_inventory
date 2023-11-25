@@ -67,14 +67,14 @@
                 <div class="tab-content tab-content-basic">
                     <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
                         <div class="row">
-                            <div class="col-lg-4 grid-margin stretch-card animate__animated animate__zoomIn" style="margin-top: -30px;">
+                            <div class="col-lg-4 grid-margin stretch-card animate__animated animate__zoomIn">
                                 <div class="card card-rounded shadow">
                                     <div class="card-body">
                                         <div class="row">
                                             <h4 class="text-center fw-bolder" style="padding-bottom: 10px;">Contract Status</h4>
                                             <div class="col-sm-12 text-center">
                                                 <div class="btn-group">
-                                                    <a href="#" title="">
+                                                    <a href="/masterdata/contract/filter?status=open" title="">
                                                         <h3 class="mb-0 fw-bold text-primary">
                                                             {{ $on_going_contract }}
                                                             <br>
@@ -82,7 +82,7 @@
                                                         </h3>
                                                     </a>
                                                     <div class="mx-5"></div>
-                                                    <a href="#" title="">
+                                                    <a href="/masterdata/contract/filter?status=close" title="">
                                                         <h3 class="mb-0 fw-bold text-primary">
                                                             {{ $finished_contract }}
                                                             <br>
@@ -95,22 +95,22 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 grid-margin stretch-card animate__animated animate__zoomIn" style="margin-top: -30px;">
+                            <div class="col-lg-4 grid-margin stretch-card animate__animated animate__zoomIn" >
                                 <div class="card card-rounded shadow">
                                     <div class="card-body">
                                         <div class="row">
                                             <h4 class="text-center fw-bolder" style="padding-bottom: 10px;">Informasi Penyerapan Anggaran (%)</h4>
                                             <div class="col-sm-12 text-center">
                                                 <div class="btn-group">
-                                                    <a href="#" title="">
+                                                    <a href="{{ route('masterdata-fund.index') }}" title="">
                                                         <h3 class="mb-0 fw-bold text-primary">
-                                                            {{ $persen_penyerapan }}
+                                                            {{ $persen_penyerapan ?? '-'}}
                                                             <br>
                                                             <p class="text-dark">Penyerapan (%)</p>
                                                         </h3>
                                                     </a>
                                                     <div class="mx-5"></div>
-                                                    <a href="#" title="">
+                                                    <a href="{{ route('masterdata-fund.index') }}" title="">
                                                         <h3 class="mb-0 fw-bold text-primary">
                                                             {{ $persen_sisa_anggaran }}
                                                             <br>
@@ -123,7 +123,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 grid-margin stretch-card animate__animated animate__zoomIn" style="margin-top: -30px;">
+                            <div class="col-lg-4 grid-margin stretch-card animate__animated animate__zoomIn">
                                 <div class="card card-rounded shadow">
                                     <div class="card-body">
                                         <div class="row">
@@ -131,16 +131,16 @@
                                             <div class="col-sm-12 text-center">
                                                 <div class="btn-group">
                                                     <a href="#" title="">
-                                                        <h3 class="mb-0 fw-bold text-primary" style="font-size: 18px;">
-                                                            5.2039.020.000
+                                                        <h3 class="mb-0 fw-bold text-primary" style="font-size: 15px;">
+                                                            {{ formatRupiah($nominal_penyerapan_anggaran, true) }}
                                                             <br>
                                                             <p class="text-dark">Penyerapan (Rp)</p>
                                                         </h3>
                                                     </a>
                                                     <div class="mx-5"></div>
                                                     <a href="#" title="">
-                                                        <h3 class="mb-0 fw-bold text-primary"  style="font-size: 18px;">
-                                                            467.030.330
+                                                        <h3 class="mb-0 fw-bold text-primary"  style="font-size: 15px;">
+                                                            {{ formatRupiah ($nominal_sisa_anggaran, true) }}
                                                             <br>
                                                             <p class="text-dark">Sisa (Rp)</p>
                                                         </h3>

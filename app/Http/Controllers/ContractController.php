@@ -130,4 +130,18 @@ class ContractController extends Controller
 
         return back()->withNotify('Data berhasil ditambahkan!');
     }
+
+    public function filter(Request $request)
+    {
+      $status = $request->status;
+      $contract = Contract::query();
+
+      $contract->when($status, function($query) use ($request){
+        return $query->where('status', $request->status);
+      });
+
+      return view('planning.masterdata.masterdata_contract.index', ['contract' => $contract->get()]);
+
+
+    }
 }
