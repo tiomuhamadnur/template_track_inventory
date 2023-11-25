@@ -81,7 +81,8 @@
                                                                             @elseif($item->status == 'close') bg-success
                                                                             @else bg-info @endif">
                                                         {{ $item->status }}
-                                                    </span>
+                                                    </span><br> <br>
+                                                    {{ $item->remark ??'-'}}
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group-vertical">
