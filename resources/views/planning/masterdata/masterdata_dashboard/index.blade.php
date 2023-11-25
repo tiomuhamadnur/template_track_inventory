@@ -76,7 +76,7 @@
                                                 <div class="btn-group">
                                                     <a href="#" title="">
                                                         <h3 class="mb-0 fw-bold text-primary">
-                                                            23
+                                                            {{ $on_going_contract }}
                                                             <br>
                                                             <p class="text-dark">On Going</p>
                                                         </h3>
@@ -84,7 +84,7 @@
                                                     <div class="mx-5"></div>
                                                     <a href="#" title="">
                                                         <h3 class="mb-0 fw-bold text-primary">
-                                                            5
+                                                            {{ $finished_contract }}
                                                             <br>
                                                             <p class="text-dark">Finished</p>
                                                         </h3>
@@ -104,7 +104,7 @@
                                                 <div class="btn-group">
                                                     <a href="#" title="">
                                                         <h3 class="mb-0 fw-bold text-primary">
-                                                            70.35
+                                                            {{ $persen_penyerapan }}
                                                             <br>
                                                             <p class="text-dark">Penyerapan (%)</p>
                                                         </h3>
@@ -112,7 +112,7 @@
                                                     <div class="mx-5"></div>
                                                     <a href="#" title="">
                                                         <h3 class="mb-0 fw-bold text-primary">
-                                                            29.65
+                                                            {{ $persen_sisa_anggaran }}
                                                             <br>
                                                             <p class="text-dark">Sisa (%)</p>
                                                         </h3>

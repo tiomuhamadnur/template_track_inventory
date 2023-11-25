@@ -14,4 +14,9 @@ class Fund extends Model
     protected $table = 'fund';
 
     protected $guarded = [];
+
+    public function contract()
+    {
+        return $this->hasMany(Contract::class);
+    }
 }
