@@ -111,9 +111,6 @@
                                                     {{ $item->formatRupiah('contract_value') }}
                                                 </td>
                                                 <td class="text-center fw-bolder">
-                                                    {{ $item->formatRupiah('paid_value') ?? '-' }}
-                                                </td>
-                                                <td class="text-center fw-bolder">
                                                     <span
                                                         class="badge @if ($item->status == 'open') bg-danger
                                                         @elseif($item->status == 'close') bg-success

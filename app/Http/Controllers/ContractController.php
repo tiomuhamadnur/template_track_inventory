@@ -17,7 +17,9 @@ class ContractController extends Controller
     public function index()
     {
         $contract = Contract::all();
-        return view('planning.masterdata.masterdata_contract.index', compact(['contract']));
+        $progress_contract = ProgressContract::get();
+
+        return view('planning.masterdata.masterdata_contract.index', compact(['contract', 'progress_contract',]));
     }
 
     public function create()
@@ -39,7 +41,6 @@ class ContractController extends Controller
             'vendor'=> $request->vendor,
             'fund_id'=> $request->fund_id,
             'contract_value' => $request->contract_value,
-            'paid_value' => 0,
             'remark'=> $request->remark,
             'status' => 'open',
             'section_id'=> $request->section_id,
@@ -111,22 +112,21 @@ class ContractController extends Controller
         ]);
 
         $progress_paid_value = ProgressContract::where('contract_id', $request->contract_id)->where('status', 'paid')->sum('paid_value');
-        $contract = Contract::findOrFail($request->contract_id);
-        if (!$contract){
+        $progress_contract = ProgressContract::findOrFail($request->contract_id);
+        if (!$progress_contract){
             return back();
         }
 
-        $contract->update([
+        $progress_contract->update([
             'paid_value' => $progress_paid_value,
         ]);
 
-        $progress_contract_paid_value = Contract::where('fund_id', $contract->fund_id)->where('status', 'open')->sum('paid_value');
-        $fund = Fund::findOrFail($contract->fund_id);
-        $current = $fund->init_value;
-        $fund->update([
-            'current_value' => $current - $progress_contract_paid_value,
-        ]);
-
+        // $progress_contract_paid_value = Contract::where('fund_id', $contract->fund_id)->where('status', 'open')->sum('paid_value');
+        // $fund = Fund::findOrFail($contract->fund_id);
+        // $current = $fund->init_value;
+        // $fund->update([
+        //     'current_value' => $current - $progress_contract_paid_value,
+        // ]);
 
         return back()->withNotify('Data berhasil ditambahkan!');
     }

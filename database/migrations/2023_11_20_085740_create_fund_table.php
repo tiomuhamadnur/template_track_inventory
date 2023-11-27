@@ -13,7 +13,6 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('kegiatan')->nullable();
             $table->integer('init_value')->nullable();
-            $table->integer('current_value')->nullable();
             $table->year('tahun')->nullable();
             $table->timestamps();
         });

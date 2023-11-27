@@ -72,16 +72,16 @@
                                                 <td class="text-center fw-bolder text-wrap">
                                                     {{ $item->name }}
                                                 </td>
-                                                <td class="text-center text-wrap">
+                                                <td class="text-center fw-bolder text-wrap">
                                                     {{ $item->kegiatan }}
                                                 </td>
                                                 <td class="text-center fw-bolder">
                                                     {{ $item->formatRupiah('init_value') }}
                                                 </td>
                                                 <td class="text-center fw-bolder">
-                                                    {{ $item->formatRupiah('current_value') }}
+                                                    nanya tio
                                                 </td>
-                                                <td class="text-center">
+                                                <td class="text-center fw-bolder text-wrap">
                                                     {{ $item->tahun }}
                                                 </td>
                                                 <td class="text-center">

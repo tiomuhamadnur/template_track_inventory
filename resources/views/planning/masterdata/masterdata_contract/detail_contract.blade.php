@@ -63,7 +63,7 @@
                                                 <tr>
                                                     <td>Paid Value</td>
                                                     <td> : </td>
-                                                    <td class="fw-bolder">{{ $contract->formatRupiah('paid_value') ?? '-' }}
+                                                    <td class="fw-bolder">{{ formatRupiah($progress_paid_value, true) }}
                                                     </td>
                                                 </tr>
                                                 <tr>

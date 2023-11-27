@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Contract;
 use Carbon\Carbon;
 use App\Models\Fund;
-
+use App\Models\planning\ProgressContract;
 use Illuminate\Http\Request;
 
 class PlanningDashboardController extends Controller
@@ -25,7 +25,7 @@ class PlanningDashboardController extends Controller
         $finished_contract = Contract::where('status', 'close')->count();
         // Total Penyerapan (%)
         $fund = Fund::sum('init_value');
-        $total_penyerapan = Contract::sum('paid_value');
+        $total_penyerapan = ProgressContract::sum('paid_value');
         $persen_penyerapan_anggaran = ($total_penyerapan/$fund) * 100;
         $persen_penyerapan = number_format((double)$persen_penyerapan_anggaran, 2, '.', '');
 

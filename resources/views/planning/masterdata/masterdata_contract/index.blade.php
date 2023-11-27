@@ -66,14 +66,14 @@
                                                 <td class="text-center fw-bolder text-wrap">
                                                     {{ $item->no_contract }}
                                                 </td>
-                                                <td class="text-center text-wrap">
+                                                <td class="text-center fw-bolder text-wrap">
                                                     {{ $item->fund->name }}
                                                 </td>
                                                 <td class="text-center fw-bolder">
                                                     {{ $item->formatRupiah('contract_value') }}
                                                 </td>
                                                 <td class="text-center fw-bolder">
-                                                    {{ $item->formatRupiah('paid_value') ?? '-' }}
+                                                    'nnti tanya tio'
                                                 </td>
                                                 <td class="text-center">
                                                     <span

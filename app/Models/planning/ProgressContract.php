@@ -20,4 +20,5 @@ class ProgressContract extends Model
     {
         return $this->belongsTo(Contract::class);
     }
+
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\planning\ProgressContract;
 use App\Traits\HasFormatRupiah;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,6 +15,11 @@ class Contract extends Model
     protected $table = 'contract';
 
     protected $guarded = [];
+
+    public function progress_contract()
+    {
+        return $this->hasMany(ProgressContract::class);
+    }
 
     public function section()
     {

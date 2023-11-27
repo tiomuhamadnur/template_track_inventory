@@ -19,8 +19,7 @@ return new class extends Migration
             $table->string('no_contract')->nullable();
             $table->string('vendor')->nullable();
             $table->bigInteger('fund_id')->unsigned()->nullable();
-            $table->bigInteger('contract_value')->unsigned()->nullable();
-            $table->bigInteger('paid_value')->unsigned()->nullable();
+            $table->bigInteger('contract_value')->nullable();
             $table->bigInteger('section_id')->unsigned()->nullable();
             $table->bigInteger('departement_id')->unsigned()->nullable();
             $table->string('status')->nullable();
