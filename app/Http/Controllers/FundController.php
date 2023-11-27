@@ -14,25 +14,26 @@ class FundController extends Controller
     public function index(Request $request)
     {
         $tahun = $request->tahun ?? Carbon::now()->format('Y');
-        $funds = Fund::all();
+        $funds = Fund::where('tahun', $tahun)->get();
 
-        foreach ($funds as $fund) {
+        $funds->each(function ($fund) {
+            $contracts = Contract::where('fund_id', $fund->id)->get();
+            $initValue = $fund->init_value;
 
-            $contract = Contract::where('fund_id', $fund->id)->first();
-            $init_value = Fund::where('init_value', $fund->init_value)->first();
+            $totalPaidValue = 0;
 
-            if ($contract) {
-                $totalPaidValue = ProgressContract::where('contract_id', $contract->id)->sum('paid_value');
-                $currentValue = $fund->init_value - $totalPaidValue;
-                $fund->current_value = $currentValue;
+            foreach ($contracts as $contract) {
+                $progressContracts = $contract->progress_contract;
 
-            } elseif ($contract) {
-                $fund->current_value = $fund->init_value;
-
-            } else {
-                $fund->current_value = null;
+                if ($progressContracts) {
+                    $totalPaidValue += $progressContracts->sum('paid_value');
+                }
             }
-        }
+
+            $currentValue = $initValue - $totalPaidValue;
+
+            $fund->current_value = $currentValue;
+        });
 
 
         return view('planning.masterdata.masterdata_fund.index', compact(['funds', 'tahun']));
@@ -41,10 +42,10 @@ class FundController extends Controller
     public function create()
     {
         $tahun = Carbon::now()->format('Y');
-        return view ('planning.masterdata.masterdata_fund.create', compact(['tahun']));
+        return view('planning.masterdata.masterdata_fund.create', compact(['tahun']));
     }
 
-    public function store (Request $request)
+    public function store(Request $request)
     {
         Fund::create([
             'name' => $request->name,
@@ -61,16 +62,15 @@ class FundController extends Controller
         $fund = Fund::findOrFail($id);
 
         return view('planning.masterdata.masterdata_fund.update', compact(['fund']));
-
     }
 
     public function update(Request $request)
     {
         $id = $request->id;
         $fund = Fund::findOrFail($id);
-        if ($fund){
+        if ($fund) {
             $fund->update([
-                'name'=> $request->name,
+                'name' => $request->name,
                 'kegiatan' => $request->kegiatan,
                 'init_value' => $request->init_value,
             ]);
@@ -81,9 +81,22 @@ class FundController extends Controller
     public function transaction($id)
     {
         $fund = Fund::findOrFail($id);
-        $contract = Contract::where('fund_id', $id)->get();
+        $contracts = Contract::where('fund_id', $fund->id)->get();
 
-        return view('planning.masterdata.masterdata_fund.detail_fund', compact(['fund', 'contract']));
+        foreach ($contracts as $contract) {
+            $totalPaidValue = ProgressContract::where('contract_id', $contract->id)->sum('paid_value');
+            $contract->total_paid_value = $totalPaidValue;
+        }
+
+        $penyerapan_anggaran = $contracts->sum('total_paid_value');
+        $persentase_penyerapan_anggaran = ($penyerapan_anggaran / $fund->init_value) * 100;
+        $persentase_penyerapan_anggaran = number_format($persentase_penyerapan_anggaran, 2, '.', '');
+
+        return view('planning.masterdata.masterdata_fund.detail_fund', compact([
+            'fund',
+            'contracts',
+            'penyerapan_anggaran',
+            'persentase_penyerapan_anggaran',
+        ]));
     }
-
 }

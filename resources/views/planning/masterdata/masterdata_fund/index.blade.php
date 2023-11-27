@@ -88,8 +88,8 @@
                                                     <div class="btn-group-vertical">
                                                         <a href="{{ route('masterdata-fund.edit', $item->id) }}"
                                                             type="button" class="btn btn-outline-warning my-0">Edit</a>
-                                                        <a href="{{ route('masterdata-fund.transaction', $item->id) }}" type="button"
-                                                            class="btn btn-outline-success my-0">Detail</a>
+                                                        <a href="{{ route('masterdata-fund.transaction', $item->id) }}"
+                                                            type="button" class="btn btn-outline-success my-0">Detail</a>
                                                         <a class="btn btn-outline-danger my-0 disabled" href="javascript:;"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#delete-confirmation-modal"

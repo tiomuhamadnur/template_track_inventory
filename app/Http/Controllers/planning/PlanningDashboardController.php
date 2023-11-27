@@ -8,7 +8,6 @@ use Carbon\Carbon;
 use App\Models\Fund;
 use App\Models\Tools;
 use App\Models\planning\ProgressContract;
-use App\Models\planning\TransaksiTools;
 use Illuminate\Http\Request;
 
 class PlanningDashboardController extends Controller
@@ -19,23 +18,69 @@ class PlanningDashboardController extends Controller
     }
 
 
-    public function masterdata()
+    public function masterdata(Request $request)
     {
-        $bulan_ini = Carbon::now()->format('m');
-        $tahun_ini = Carbon::now()->format('Y');
+        $bulan = $request->bulan ?? Carbon::now()->format('m');
+        $tahun = $request->tahun ?? Carbon::now()->format('Y');
         $on_going_contract = Contract::where('status', 'open')->count();
         $finished_contract = Contract::where('status', 'close')->count();
-        // Total Penyerapan (%)
-        $fund = Fund::sum('init_value');
-        $total_penyerapan = ProgressContract::sum('paid_value');
-        $persen_penyerapan_anggaran = ($total_penyerapan/$fund) * 100;
-        $persen_penyerapan = number_format((double)$persen_penyerapan_anggaran, 2, '.', '');
-        // Sisa Anggaran (%)
-        $persen_sisa_anggaran = (100-$persen_penyerapan);
-        // Total Penyerapan (Rp)
-        $nominal_penyerapan_anggaran = $total_penyerapan;
-        // Sisa Anggaran (Rp)
-        $nominal_sisa_anggaran = ($fund-$total_penyerapan);
+
+        $data_fund = Fund::where('tahun', $tahun)->get();
+        if ($data_fund->count() == 0) {
+            $persen_penyerapan = 0;
+            $fund = 0;
+            $total_penyerapan = 0;
+            $persen_penyerapan_anggaran = 0;
+            $nominal_sisa_anggaran = 0;
+            $nominal_penyerapan_anggaran = 0;
+            $persen_sisa_anggaran = 0;
+        } else {
+            foreach ($data_fund as $data) {
+                $fund_id[] = $data->id;
+            }
+
+            $data_contract = Contract::where('fund_id', $fund_id)->get();
+            if ($data_contract->count() == 0) {
+                $fund = $data_fund->sum('init_value');
+
+                $persen_penyerapan = 0;
+                $total_penyerapan = 0;
+                $persen_penyerapan_anggaran = 0;
+                $nominal_sisa_anggaran = $fund;
+                $nominal_penyerapan_anggaran = 0;
+                $persen_sisa_anggaran = $fund/$fund * 100;
+            } else {
+                foreach ($data_contract as $data) {
+                    $contract_id[] = $data->id;
+                }
+
+                // Total Penyerapan (%)
+                $fund = $data_fund->sum('init_value');
+                $total_penyerapan = ProgressContract::whereIn('contract_id', $contract_id)->sum('paid_value');
+
+                if ($fund == 0) {
+                    $persen_penyerapan_anggaran = 0;
+                    $nominal_sisa_anggaran = 0;
+                } else {
+                    $persen_penyerapan_anggaran = ($total_penyerapan / $fund) * 100;
+                    // Sisa Anggaran (Rp)
+                    $nominal_sisa_anggaran = ($fund - $total_penyerapan);
+                }
+                $persen_penyerapan = number_format((float)$persen_penyerapan_anggaran, 2, '.', '');
+
+                // Sisa Anggaran (%)
+                $persen_sisa_anggaran = (100 - $persen_penyerapan);
+                $persen_sisa_anggaran = number_format((float)$persen_sisa_anggaran, 2, '.', '');
+
+                // Total Penyerapan (Rp)
+                $nominal_penyerapan_anggaran = $total_penyerapan;
+            }
+        }
+
+
+
+
+
         // Tools Gudang B
         $tools_gudangb_pwr = Tools::where('location_id', 1)->where('section_id', 1)->count();
         $tools_gudangb_pwm = Tools::where('location_id', 1)->where('section_id', 2)->count();
@@ -68,6 +113,7 @@ class PlanningDashboardController extends Controller
             'persen_sisa_anggaran',
             'nominal_penyerapan_anggaran',
             'nominal_sisa_anggaran',
+
             'tools_gudangb_pwr',
             'tools_gudangb_pwm',
             'tools_gudangb_civilr',

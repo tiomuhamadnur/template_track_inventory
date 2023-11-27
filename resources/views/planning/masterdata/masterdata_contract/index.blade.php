@@ -82,7 +82,7 @@
                                                                             @else bg-info @endif">
                                                         {{ $item->status }}
                                                     </span><br> <br>
-                                                    {{ $item->remark ??'-'}}
+                                                    {{ $item->remark ?? '-' }}
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group-vertical">

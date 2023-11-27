@@ -17,7 +17,6 @@ class ContractController extends Controller
 {
     public function index()
     {
-
         $contracts = Contract::all();
 
         foreach ($contracts as $contract){
@@ -104,7 +103,12 @@ class ContractController extends Controller
         }
         $progress = number_format((double)$progress, 2, '.', '');
 
-        return view('planning.masterdata.masterdata_contract.detail_contract', compact(['contract', 'progress_contract', 'progress_paid_value', 'progress']));
+        return view('planning.masterdata.masterdata_contract.detail_contract', compact([
+            'contract',
+            'progress_contract',
+            'progress_paid_value',
+            'progress',
+        ]));
     }
 
     public function progress_store(Request $request)

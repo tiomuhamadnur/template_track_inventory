@@ -18,11 +18,11 @@
                         <div class="card-body">
                             <h4 class="card-title">Detail Fund</h4>
                             <div class="btn-group">
-                                <a href="{{ route('masterdata-contract.index') }}" class="btn btn-outline-dark btn-lg me-0"
+                                <a href="{{ route('masterdata-fund.index') }}" class="btn btn-outline-dark btn-lg me-0"
                                     type="button">
                                     <i class="mdi mdi-arrow-left"></i>
                                     Back
-                            </a>
+                                </a>
                             </div>
                             <div class="row">
                                 <div class="btn-group">
@@ -43,7 +43,7 @@
                                                     <td>Funding Value</td>
                                                     <td> : </td>
                                                     <td class="fw-bolder">{{ $fund->formatRupiah('init_value') }}
-                                                       </td>
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -54,12 +54,13 @@
                                                 <tr>
                                                     <td>Penyerapan Anggaran</td>
                                                     <td> : </td>
-                                                    <td class="fw-bolder">%</td>
+                                                    <td class="fw-bolder">{{ formatRupiah($penyerapan_anggaran, true) }}
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Sisa Anggaran</td>
                                                     <td> : </td>
-                                                    <td class="fw-bolder">%
+                                                    <td class="fw-bolder">{{ $persentase_penyerapan_anggaran ?? 0 }}%
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -96,7 +97,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($contract as $item)
+                                        @foreach ($contracts as $item)
                                             <tr>
                                                 <td class="text-center">
                                                     {{ $loop->iteration }}
@@ -110,13 +111,16 @@
                                                 <td class="text-center text-wrap">
                                                     {{ $item->formatRupiah('contract_value') }}
                                                 </td>
+                                                <td class="text-center">
+                                                    {{ $item->formatRupiah('total_paid_value') }}
+                                                </td>
                                                 <td class="text-center fw-bolder">
                                                     <span
                                                         class="badge @if ($item->status == 'open') bg-danger
                                                         @elseif($item->status == 'close') bg-success
                                                         @else bg-info @endif">
-                                                            {{ $item->status }}
-                                                        </span>
+                                                        {{ $item->status }}
+                                                    </span>
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group-vertical">
@@ -126,7 +130,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                            @endforeach
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -136,5 +140,4 @@
             </div>
         </div>
     </div>
-
 @endsection
