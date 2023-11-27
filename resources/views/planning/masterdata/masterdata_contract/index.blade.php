@@ -54,7 +54,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($contract as $item)
+                                        @foreach ($contracts as $item)
                                             <tr>
                                                 <td class="text-center">
                                                     {{ $loop->iteration }}
@@ -73,7 +73,7 @@
                                                     {{ $item->formatRupiah('contract_value') }}
                                                 </td>
                                                 <td class="text-center fw-bolder">
-                                                    'nnti tanya tio'
+                                                    {{ $item->formatRUpiah('total_paid_value') }}
                                                 </td>
                                                 <td class="text-center">
                                                     <span

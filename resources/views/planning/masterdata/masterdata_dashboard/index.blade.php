@@ -20,7 +20,7 @@
                                     <div class="card-body">
                                         <div class="d-sm-flex justify-content-between align-items-start">
                                             <div>
-                                                <h4 class="card-title card-title-dash">Sebaran Tools Dept. CPWTM (belom diquery yaa)</h4>
+                                                <h4 class="card-title card-title-dash">Grafik Status Tools Dept. CPWTM (belom diquery yaa)</h4>
                                                 <h5 class="card-subtitle card-subtitle-dash">
                                                     <span>
                                                         Update
@@ -260,71 +260,98 @@
     <script>
 
         /////////// SEBARAN TOOLS ///////////
+        // Gudang B
+        let tools_gudangb_pwr = <?php echo json_encode($tools_gudangb_pwr)?>;
+        let tools_gudangb_pwm = <?php echo json_encode($tools_gudangb_pwm)?>;
+        let tools_gudangb_civilr = <?php echo json_encode($tools_gudangb_civilr)?>;
+        let tools_gudangb_civilm = <?php echo json_encode($tools_gudangb_civilm)?>;
+        // D06
+        let tools_d06_pwr = <?php echo json_encode($tools_d06_pwr)?>;
+        let tools_d06_pwm = <?php echo json_encode($tools_d06_pwm)?>;
+        let tools_d06_civilr = <?php echo json_encode($tools_d06_civilr)?>;
+        let tools_d06_civilm = <?php echo json_encode($tools_d06_civilm)?>;
+        // Ruang Track
+        let tools_rtrack_pwr = <?php echo json_encode($tools_rtrack_pwr)?>;
+        let tools_rtrack_pwm = <?php echo json_encode($tools_rtrack_pwm)?>;
+        let tools_rtrack_civilr = <?php echo json_encode($tools_rtrack_civilr)?>;
+        let tools_rtrack_civilm = <?php echo json_encode($tools_rtrack_civilm)?>;
+        // Ruang Track
+        let tools_unknown_pwr = <?php echo json_encode($tools_unknown_pwr)?>;
+        let tools_unknown_pwm = <?php echo json_encode($tools_unknown_pwm)?>;
+        let tools_unknown_civilr = <?php echo json_encode($tools_unknown_civilr)?>;
+        let tools_unknown_civilm = <?php echo json_encode($tools_unknown_civilm)?>;
+
         Highcharts.chart('sebaran-tools', {
     chart: {
-        type: 'bar'
+        type: 'column'
     },
     title: {
         text: '',
         align: 'left'
     },
     subtitle: {
-        text: '',
+        text:
+            '' +
+            '',
         align: 'left'
     },
     xAxis: {
-        categories: ['D06', 'Gudang B', 'CPW Room', 'Stasiun', 'Dipinjam'],
-        title: {
-            text: null
-        },
-        gridLineWidth: 0.5,
-        lineWidth: 0
+        categories: ['Gudang B', 'D06', 'Ruang Track', 'Unknown'],
+        crosshair: true,
+        accessibility: {
+            description: 'Countries'
+        }
     },
     yAxis: {
         min: 0,
         title: {
-            text: 'Jenis (Type)',
-            align: 'high'
-        },
-        labels: {
-            overflow: 'justify'
-        },
-        gridLineWidth: 0
-    },
-    tooltip: {
-        valueSuffix: ''
-    },
-    plotOptions: {
-        bar: {
-            borderRadius: '50%',
-            dataLabels: {
-                enabled: true
-            },
-            groupPadding: 0.1
+            text: 'Jenis'
         }
     },
-    legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'top',
-        x: -40,
-        y: 130,
-        floating: true,
-        borderWidth: 1,
-        backgroundColor:
-            Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
-        shadow: true
+    tooltip: {
+        valueSuffix: ' Jenis'
     },
-    credits: {
-        enabled: false
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
     },
-    series: [{
-        name: 'Tools Section Permanent Way',
-        data: [20, 2, 4, 1, 2]
-    }, {
-        name: 'Tools Section Civil',
-        data: [34, 11, 5, 1, 1]
-    }]
+    series: [
+        {
+            name: 'PW RAMS',
+            data: [
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+        {
+            name: 'PW MAINT',
+            data: [
+                [],
+                [],
+                [],
+                [],]
+        },
+        {
+            name: 'CIVIL RAMS',
+            data: [
+                [],
+                [],
+                [],
+                [],]
+        },
+        {
+            name: 'CIVIL MAINT',
+            data: [
+                [],
+                [],
+                [],
+                [],]
+        },
+    ]
 });
 
 
@@ -366,11 +393,11 @@ Highcharts.chart('consumable-usage', {
     },
     series: [
         {
-            name: 'Section Permanent Way',
+            name: 'PW',
             data: [10, 20, 12, 9, 0, 23]
         },
         {
-            name: 'Section Civil',
+            name: 'CIVIL',
             data: [12, 11, 32, 0, 2, 23]
         }
     ]

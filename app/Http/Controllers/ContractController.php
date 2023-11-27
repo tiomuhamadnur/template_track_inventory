@@ -11,15 +11,22 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\planning\ProgressContract;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class ContractController extends Controller
 {
     public function index()
     {
-        $contract = Contract::all();
-        $progress_contract = ProgressContract::get();
 
-        return view('planning.masterdata.masterdata_contract.index', compact(['contract', 'progress_contract',]));
+        $contracts = Contract::all();
+
+        foreach ($contracts as $contract){
+            $totalPaidValue = ProgressContract::where('contract_id', $contract->id)->sum('paid_value');
+            $contract->total_paid_value = $totalPaidValue;
+
+        }
+
+        return view('planning.masterdata.masterdata_contract.index', compact(['contracts']));
     }
 
     public function create()
@@ -111,15 +118,15 @@ class ContractController extends Controller
             'status' => $request->status,
         ]);
 
-        $progress_paid_value = ProgressContract::where('contract_id', $request->contract_id)->where('status', 'paid')->sum('paid_value');
-        $progress_contract = ProgressContract::findOrFail($request->contract_id);
-        if (!$progress_contract){
-            return back();
-        }
+        // $progress_paid_value = ProgressContract::where('contract_id', $request->contract_id)->where('status', 'paid')->sum('paid_value');
+        // $progress_contract = ProgressContract::findOrFail($request->contract_id);
+        // if (!$progress_contract){
+        //     return back();
+        // }
 
-        $progress_contract->update([
-            'paid_value' => $progress_paid_value,
-        ]);
+        // $progress_contract->update([
+        //     'paid_value' => $progress_paid_value,
+        // ]);
 
         // $progress_contract_paid_value = Contract::where('fund_id', $contract->fund_id)->where('status', 'open')->sum('paid_value');
         // $fund = Fund::findOrFail($contract->fund_id);

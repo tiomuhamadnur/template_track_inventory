@@ -2,19 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Fund;
+use App\Models\Contract;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Contract;
-use Carbon\Carbon;
+use App\Models\planning\ProgressContract;
 
 class FundController extends Controller
 {
     public function index(Request $request)
     {
         $tahun = $request->tahun ?? Carbon::now()->format('Y');
-        $fund = Fund::whereYear('tahun', $tahun)->get();
-        return view('planning.masterdata.masterdata_fund.index', compact(['fund', 'tahun']));
+        $funds = Fund::all();
+
+        foreach ($funds as $fund) {
+
+            $contract = Contract::where('fund_id', $fund->id)->first();
+            $init_value = Fund::where('init_value', $fund->init_value)->first();
+
+            if ($contract) {
+                $totalPaidValue = ProgressContract::where('contract_id', $contract->id)->sum('paid_value');
+                $currentValue = $fund->init_value - $totalPaidValue;
+                $fund->current_value = $currentValue;
+
+            } elseif ($contract) {
+                $fund->current_value = $fund->init_value;
+
+            } else {
+                $fund->current_value = null;
+            }
+        }
+
+
+        return view('planning.masterdata.masterdata_fund.index', compact(['funds', 'tahun']));
     }
 
     public function create()

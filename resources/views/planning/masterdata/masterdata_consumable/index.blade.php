@@ -21,11 +21,11 @@
                                 type="button">Add
                                 Data</a>
                             <div>
-                                <form class="col-sm-4" method="GET" action="{{ route('masterdata-consumable.index') }}">
+                                <form class="col-sm-2" method="GET" action="{{ route('masterdata-consumable.index') }}">
                                     <div class="input-group">
                                         <input type="search" name="search" class="form-control form-control-dark"
-                                            placeholder="Search..." aria-label="Search">
-                                        <button class="btn btn-primary" type="submit">Search</button>
+                                            placeholder="Cari Data..." aria-label="Search">
+                                        <button class="btn btn-primary"  style="padding: 9.4px" type="submit">Search</button>
                                     </div>
                                 </form>
                             </div>

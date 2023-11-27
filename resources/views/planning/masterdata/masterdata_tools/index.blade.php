@@ -40,7 +40,7 @@
                                     <div class="input-group">
                                         <input type="search" name="search" class="form-control form-control-dark"
                                             placeholder="Cari Data..." aria-label="Search">
-                                        <button class="btn btn-primary" type="submit">Search</button>
+                                        <button class="btn btn-primary" style="padding: 9.4px" type="submit">Search</button>
                                     </div>
                                 </form>
                             </div>
@@ -88,7 +88,7 @@
                                                     {{ $item->name }}
                                                 </td>
                                                 <td class="text-center text-wrap">
-                                                    {{ $item->location->name ?? '-' }} <br>
+                                                    {{ $item->location->name ?? '-' }} <br> <br>
                                                     ({{ $item->detail_location->name ?? '-' }})
                                                 </td>
                                                 <td class="text-center">

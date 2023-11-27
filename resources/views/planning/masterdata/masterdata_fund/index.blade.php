@@ -64,7 +64,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($fund as $item)
+                                        @foreach ($funds as $item)
                                             <tr>
                                                 <td class="text-center">
                                                     {{ $loop->iteration }}
@@ -79,7 +79,7 @@
                                                     {{ $item->formatRupiah('init_value') }}
                                                 </td>
                                                 <td class="text-center fw-bolder">
-                                                    nanya tio
+                                                    {{ $item->formatRupiah('current_value') }}
                                                 </td>
                                                 <td class="text-center fw-bolder text-wrap">
                                                     {{ $item->tahun }}
