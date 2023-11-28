@@ -1,7 +1,7 @@
 @extends('layout.form.form')
 
 @section('head')
-    <title>Form Transaksi Tools</title>
+    <title>Form Transaksi Consumable</title>
 
     <style>
         .delete-button {
@@ -23,10 +23,10 @@
         <div class="wrapper wrapper--w790">
             <div class="card card-5 shadow">
                 <div class="card-heading">
-                    <h2 class="title">Form Transaksi Tools</h2>
+                    <h2 class="title">Form Transaksi Consumable</h2>
                 </div>
                 <div class="card-body shadow">
-                    <form action="{{ route('masterdata-transaksi-tools.store') }}" method="POST"
+                    <form action="{{ route('masterdata-transaksi-consumable.store') }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         @method('post')
@@ -61,8 +61,8 @@
                             <div class="value">
                                 <div class="input-group">
                                     <select id="tools_id" class="form-select">
-                                        <option value="" selected disabled>- Tools -</option>
-                                        @foreach ($tools as $item)
+                                        <option value="" selected disabled>- Material -</option>
+                                        @foreach ($consumable as $item)
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                                         @endforeach
                                     </select>
@@ -74,13 +74,13 @@
                         </div>
 
                         <div class="form-row">
-                            <div class="name">List Tools</div>
+                            <div class="name">List Material</div>
                             <div class="value">
                                 <div class="input-group">
                                     <table id="table_show" class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th class="text-center">Tools</th>
+                                                <th class="text-center">Material</th>
                                                 <th class="text-center">Qty.</th>
                                                 <th class="text-center text-wrap">#</th>
                                             </tr>
@@ -104,7 +104,7 @@
 
 
                         <div class="pull-right mt-2">
-                            <a href="{{ route('masterdata-transaksi-tools.index') }}" class="btn btn-danger shadow">
+                            <a href="{{ route('masterdata-transaksi-consumable.index') }}" class="btn btn-danger shadow">
                                 Cancel
                             </a>
                             <button class="btn btn-success ms-2 shadow" type="submit">
@@ -121,9 +121,9 @@
 @section('javascript')
     <script>
         $('#tools_id').on('change', function() {
-            var tools_id = this.value;
+            var consumable_id = this.value;
             $.ajax({
-                url: '/check-stock-tools?tools_id=' + tools_id,
+                url: '/check-stock-consumable?consumable_id=' + consumable_id,
                 type: 'get',
                 success: function(res) {
                     $('#qty').attr({
@@ -144,7 +144,7 @@
 
             // Validasi bahwa kedua input harus diisi
             if (tools_id_value === '' || qty.trim() === '') {
-                alert('Harap isi kedua input, Tools & Qty.');
+                alert('Harap isi kedua input, Material & Qty.');
                 tools_id.selectedIndex = 0;
                 qty_id.value = '';
                 return;
@@ -164,9 +164,9 @@
             const tableRows = document.querySelectorAll('#tableBody tr');
             for (let i = 0; i < tableRows.length; i++) {
                 const cell = tableRows[i].getElementsByTagName('td')[0];
-                const existingValue = cell.querySelector('input[name="tools_id[]"]').value;
+                const existingValue = cell.querySelector('input[name="consumable_id[]"]').value;
                 if (existingValue === tools_id_value) {
-                    alert('Tools ini sudah masuk dalam list peminjaman anda.');
+                    alert('Material ini sudah masuk dalam list order anda.');
                     return;
                 }
             }
@@ -178,7 +178,7 @@
             const cell2 = newRow.insertCell(1);
             const cell3 = newRow.insertCell(2);
 
-            cell1.innerHTML = `<input type="hidden" name="tools_id[]" value="${tools_id_value}">${tools_id_text}`;
+            cell1.innerHTML = `<input type="hidden" name="consumable_id[]" value="${tools_id_value}">${tools_id_text}`;
             cell2.innerHTML = `<input type="hidden" name="qty[]" value="${qty}">${qty}`;
             cell2.classList.add('text-center');
             cell3.classList.add('text-center');

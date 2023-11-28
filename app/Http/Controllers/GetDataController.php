@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Area;
+use App\Models\Consumable;
 use App\Models\DetailLocation;
 use App\Models\Line;
 use App\Models\Mainline;
@@ -128,6 +129,16 @@ class GetDataController extends Controller
         $tools = Tools::findOrFail($tools_id);
         if ($tools){
             return response()->json($tools);
+        }
+    }
+
+    public function check_stock_consumable(Request $request)
+    {
+        $consumable_id = $request->consumable_id;
+
+        $consumable = Consumable::findOrFail($consumable_id);
+        if ($consumable){
+            return response()->json($consumable);
         }
     }
 

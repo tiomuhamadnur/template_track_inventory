@@ -13,8 +13,9 @@ class TransaksiToolsController extends Controller
 {
     public function index()
     {
-        $transaksi_tools = TransaksiTools::all();
-        return view('planning.masterdata.masterdata_transaksi_tools.index', compact(['transaksi_tools']));
+        $transaksi_tools = TransaksiTools::orderBy('status', 'ASC')->orderBy('tanggal_pinjam', 'ASC')->get();
+        $total_pinjam = TransaksiTools::where('status', 'pinjam')->count();
+        return view('planning.masterdata.masterdata_transaksi_tools.index', compact(['transaksi_tools', 'total_pinjam']));
     }
 
     public function create()
@@ -37,9 +38,10 @@ class TransaksiToolsController extends Controller
             $requestedQty = $qtys[$i];
 
             // Ambil stock dari database berdasarkan tools_id
-            $tools_stock = Tools::findOrFail($toolsId)->stock;
-            $tools_name = Tools::findOrFail($toolsId)->name;
-            $tools_unit = Tools::findOrFail($toolsId)->unit;
+            $tools = Tools::findOrFail($toolsId);
+            $tools_stock = $tools->stock;
+            $tools_name = $tools->name;
+            $tools_unit = $tools->unit;
 
             // Validasi jika requestedQty lebih besar dari qty di database
             if ($requestedQty > $tools_stock) {
@@ -75,6 +77,29 @@ class TransaksiToolsController extends Controller
 
     public function return(Request $request)
     {
+        $ids = $request->id;
+
+        if (!$ids){
+            return back();
+        }
+
+        foreach($ids as $id) {
+            $transaksi_tools = TransaksiTools::findOrFail($id);
+            $tools_id = $transaksi_tools->tools_id;
+            $qty = $transaksi_tools->qty;
+            $tools = Tools::findOrFail($tools_id);
+            $stock = $tools->stock;
+
+            $tools->update([
+                'stock' => $stock + $qty,
+            ]);
+
+            $transaksi_tools->update([
+                'status' => 'selesai',
+                'tanggal_kembali' => Carbon::now(),
+            ]);
+        }
+
         return redirect()->route('masterdata-transaksi-tools.index')->withNotify('Tools berhasil dikembalikan');
     }
 

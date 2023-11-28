@@ -19,7 +19,8 @@
                         <a class="nav-link" href="{{ route('masterdata-transaksi-tools.index') }}">Transaksi Tools</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Transaksi Material</a>
+                        <a class="nav-link" href="{{ route('masterdata-transaksi-consumable.index') }}">Transaksi
+                            Material</a>
                     </li>
                 </ul>
             </div>

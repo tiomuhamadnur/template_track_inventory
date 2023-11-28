@@ -51,6 +51,7 @@ use App\Http\Controllers\ShowPageController;
 use App\Http\Controllers\SleeperExaminationController;
 use App\Http\Controllers\fundBudgetController;
 use App\Http\Controllers\FundController;
+use App\Http\Controllers\planning\TransaksiConsumableController;
 use App\Http\Controllers\TemuanController;
 use App\Http\Controllers\TemuanDepoController;
 use App\Http\Controllers\TemuanMainlineController;
@@ -166,6 +167,7 @@ Route::middleware(['auth', 'license'])->group(function () {
         Route::get('/getDetailLocation', 'getDetailLocation')->name('getDetailLocation');
         Route::get('/getDepartement', 'getDepartement')->name('getDepartement');
         Route::get('/check-stock-tools', 'check_stock_tools')->name('getCheckStockTools');
+        Route::get('/check-stock-consumable', 'check_stock_consumable')->name('getCheckStockConsumable');
     });
 
     /////////////////////////////   START TRACK   /////////////////////////////////////
@@ -719,6 +721,13 @@ Route::middleware(['auth', 'license'])->group(function () {
                 Route::get('/masterdata/create-transaksi-tools', 'create')->name('masterdata-transaksi-tools.create');
                 Route::post('/masterdata/transaksi-tools', 'store')->name('masterdata-transaksi-tools.store');
                 Route::put('/masterdata/transaksi-tools', 'return')->name('masterdata-transaksi-tools.return');
+            });
+
+            Route::controller(TransaksiConsumableController::class)->group(function(){
+                Route::get('/masterdata/transaksi-consumable', 'index')->name('masterdata-transaksi-consumable.index');
+                Route::get('/masterdata/create-transaksi-consumable', 'create')->name('masterdata-transaksi-consumable.create');
+                Route::post('/masterdata/transaksi-consumable', 'store')->name('masterdata-transaksi-consumable.store');
+                Route::put('/masterdata/transaksi-consumable', 'return')->name('masterdata-transaksi-consumable.return');
             });
 
             Route::controller(FundController::class)->group(function(){
