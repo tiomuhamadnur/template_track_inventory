@@ -77,10 +77,6 @@ class PlanningDashboardController extends Controller
             }
         }
 
-
-
-
-
         // Tools Gudang B
         $tools_gudangb_pwr = Tools::where('location_id', 1)->where('section_id', 1)->count();
         $tools_gudangb_pwm = Tools::where('location_id', 1)->where('section_id', 2)->count();
@@ -113,7 +109,6 @@ class PlanningDashboardController extends Controller
             'persen_sisa_anggaran',
             'nominal_penyerapan_anggaran',
             'nominal_sisa_anggaran',
-
             'tools_gudangb_pwr',
             'tools_gudangb_pwm',
             'tools_gudangb_civilr',

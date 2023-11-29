@@ -39,7 +39,7 @@
                                 <form class="col-sm-2" method="GET" action="{{ route('masterdata-tools') }}">
                                     <div class="input-group">
                                         <input type="search" name="search" class="form-control form-control-dark"
-                                            placeholder="Cari Data..." aria-label="Search">
+                                            placeholder="Cari" aria-label="Search">
                                         <button class="btn btn-primary" style="padding: 9.4px" type="submit">Search</button>
                                     </div>
                                 </form>
@@ -79,13 +79,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @if(isset($message))
+                                             <p>{{ $message }}</p>
+                                        @else
                                         @foreach ($tools as $item)
                                             <tr>
                                                 <td class="text-center">
                                                     {{ $loop->iteration }}
                                                 </td>
                                                 <td class="text-center fw-bolder text-wrap">
+                                                    <a class="text-dark" href="{{ route('masterdata-spek-tools.index') }}">
                                                     {{ $item->name }}
+                                                    </a>
                                                 </td>
                                                 <td class="text-center text-wrap">
                                                     {{ $item->location->name ?? '-' }} <br> <br>
@@ -111,6 +116,7 @@
                                                 </td>
                                             </tr>
                                         @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>

@@ -52,6 +52,7 @@ use App\Http\Controllers\SleeperExaminationController;
 use App\Http\Controllers\fundBudgetController;
 use App\Http\Controllers\FundController;
 use App\Http\Controllers\planning\TransaksiConsumableController;
+use App\Http\Controllers\SpesifikasiToolsController;
 use App\Http\Controllers\TemuanController;
 use App\Http\Controllers\TemuanDepoController;
 use App\Http\Controllers\TemuanMainlineController;
@@ -66,6 +67,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WeselController;
 use App\Http\Controllers\WeselExaminationController;
 use App\Http\Controllers\WorkOrderController;
+use App\Models\SpesifikasiTools;
 use App\Models\TransTools;
 use Illuminate\Support\Facades\Route;
 
@@ -722,6 +724,13 @@ Route::middleware(['auth', 'license'])->group(function () {
                 Route::post('/masterdata/transaksi-tools', 'store')->name('masterdata-transaksi-tools.store');
                 Route::put('/masterdata/transaksi-tools', 'return')->name('masterdata-transaksi-tools.return');
             });
+
+            Route::controller(SpesifikasiToolsController::class)->group(function(){
+                Route::get('/masterdata/spek-tools-index', 'index')->name('masterdata-spek-tools.index');
+                Route::get('/masterdata/spek-tools-create', 'create')->name('masterdata-spek-tools.create');
+                Route::post('/masterdata/spek-tools-store', 'store')->name('masterdata-spek-tools.store');
+            });
+
 
             Route::controller(TransaksiConsumableController::class)->group(function(){
                 Route::get('/masterdata/transaksi-consumable', 'index')->name('masterdata-transaksi-consumable.index');

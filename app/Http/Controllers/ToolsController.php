@@ -21,7 +21,11 @@ class ToolsController extends Controller
             $tools = Tools::get();
         }
 
-        return view('planning.masterdata.masterdata_tools.index', compact(['tools']));
+        if ($tools->isEmpty()) {
+            return view('planning.masterdata.masterdata_tools.index')->with('message', 'Pencarian tidak ditemukan');
+        } else {
+            return view('planning.masterdata.masterdata_tools.index', compact('tools'));
+        }
     }
 
     public function user_activity()

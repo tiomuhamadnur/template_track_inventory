@@ -20,7 +20,7 @@
                                     <div class="card-body">
                                         <div class="d-sm-flex justify-content-between align-items-start">
                                             <div>
-                                                <h4 class="card-title card-title-dash">Grafik Status Tools Dept. CPWTM
+                                                <h4 class="card-title card-title-dash">Grafik Sebaran Tools Dept. CPWTM
                                                     (belom diquery yaa)</h4>
                                                 <h5 class="card-subtitle card-subtitle-dash">
                                                     <span>
@@ -309,7 +309,7 @@
                     }
                 },
                 tooltip: {
-                    valueSuffix: ' Jenis'
+                    valueSuffix: ' Jenis Tools'
                 },
                 plotOptions: {
                     column: {
@@ -320,37 +320,37 @@
                 series: [{
                         name: 'PW RAMS',
                         data: [
-                            [],
-                            [],
-                            [],
-                            [],
+                            ['Gudang B',tools_gudangb_pwr],
+                            ['D06', tools_d06_pwr],
+                            ['Ruang Track', tools_rtrack_pwr],
+                            ['Unknown',tools_unknown_pwr],
                         ]
                     },
                     {
                         name: 'PW MAINT',
                         data: [
-                            [],
-                            [],
-                            [],
-                            [],
+                            ['Gudang B',tools_gudangb_pwm],
+                            ['D06', tools_d06_pwm],
+                            ['Ruang Track', tools_rtrack_pwm],
+                            ['Unknown',tools_unknown_pwm],
                         ]
                     },
                     {
                         name: 'CIVIL RAMS',
                         data: [
-                            [],
-                            [],
-                            [],
-                            [],
+                            ['Gudang B',tools_gudangb_civilr],
+                            ['D06', tools_d06_civilr],
+                            ['Ruang Track', tools_rtrack_civilr],
+                            ['Unknown',tools_unknown_civilr],
                         ]
                     },
                     {
                         name: 'CIVIL MAINT',
                         data: [
-                            [],
-                            [],
-                            [],
-                            [],
+                            ['Gudang B',tools_gudangb_civilm],
+                            ['D06', tools_d06_civilm],
+                            ['Ruang Track', tools_rtrack_civilm],
+                            ['Unknown',tools_unknown_civilm],
                         ]
                     },
                 ]
