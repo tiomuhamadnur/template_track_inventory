@@ -77,7 +77,7 @@
                                             </h4>
                                             <div class="col-sm-12 text-center">
                                                 <div class="btn-group">
-                                                    <a href="/masterdata/contract/filter?status=open" title="">
+                                                    <a href="#" title="">
                                                         <h3 class="mb-0 fw-bold text-primary">
                                                             {{ $on_going_contract }}
                                                             <br>
@@ -85,7 +85,7 @@
                                                         </h3>
                                                     </a>
                                                     <div class="mx-5"></div>
-                                                    <a href="/masterdata/contract/filter?status=close" title="">
+                                                    <a href="#" title="">
                                                         <h3 class="mb-0 fw-bold text-primary">
                                                             {{ $finished_contract }}
                                                             <br>
