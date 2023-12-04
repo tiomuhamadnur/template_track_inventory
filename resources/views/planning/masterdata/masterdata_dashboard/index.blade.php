@@ -20,8 +20,7 @@
                                     <div class="card-body">
                                         <div class="d-sm-flex justify-content-between align-items-start">
                                             <div>
-                                                <h4 class="card-title card-title-dash">Grafik Sebaran Tools Dept. CPWTM
-                                                    (belom diquery yaa)</h4>
+                                                <h4 class="card-title card-title-dash">Grafik Sebaran Tools Dept. CPWTM</h4>
                                                 <h5 class="card-subtitle card-subtitle-dash">
                                                     <span>
                                                         Update
@@ -77,7 +76,7 @@
                                             </h4>
                                             <div class="col-sm-12 text-center">
                                                 <div class="btn-group">
-                                                    <a href="#" title="">
+                                                    <a href="{{ route('masterdata-contract.filter', ['status' => 'open']) }}" title="">
                                                         <h3 class="mb-0 fw-bold text-primary">
                                                             {{ $on_going_contract }}
                                                             <br>
@@ -85,7 +84,7 @@
                                                         </h3>
                                                     </a>
                                                     <div class="mx-5"></div>
-                                                    <a href="#" title="">
+                                                    <a href="/masterdata/contract/filter?status=close" title="">
                                                         <h3 class="mb-0 fw-bold text-primary">
                                                             {{ $finished_contract }}
                                                             <br>

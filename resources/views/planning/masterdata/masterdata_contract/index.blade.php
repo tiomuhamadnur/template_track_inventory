@@ -73,7 +73,7 @@
                                                     {{ $item->formatRupiah('contract_value') }}
                                                 </td>
                                                 <td class="text-center fw-bolder">
-                                                    {{ $item->formatRUpiah('total_paid_value') }}
+                                                    {{ $item->formatRupiah('total_paid_value') }}
                                                 </td>
                                                 <td class="text-center">
                                                     <span

@@ -145,13 +145,13 @@ class ContractController extends Controller
     public function filter(Request $request)
     {
       $status = $request->status;
-      $contract = Contract::query();
+      $contracts = Contract::query();
 
-      $contract->when($status, function($query) use ($request){
-        return $query->where('status', $request->status);
+      $contracts->when($status, function($query) use ($request){
+        return $query->where('status', $request->status)->get();
       });
 
-      return view('planning.masterdata.masterdata_contract.index', ['contract' => $contract->get()]);
+      return view('planning.masterdata.masterdata_contract.index', compact(['contracts']));
 
 
     }
