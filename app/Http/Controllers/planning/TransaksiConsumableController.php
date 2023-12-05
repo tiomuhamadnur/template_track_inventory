@@ -11,6 +11,18 @@ use Illuminate\Http\Request;
 
 class TransaksiConsumableController extends Controller
 {
+    public function my_index()
+    {
+        $transaksi_consumable = TransaksiConsumable::where('user_id', auth()->user()->id)->orderBy('tanggal_pinjam', 'DESC')->get();
+        foreach ($transaksi_consumable as $consumable){
+            $waktu = $consumable->tanggal_pinjam;
+            $waktu_carbon = Carbon::parse($waktu);
+            $selisihJam = $waktu_carbon->diffInHours(Carbon::now());
+            $consumable->batas_jam = $selisihJam;
+        }
+        return view('transaksi_tools_material.transaksi_consumable.index', compact(['transaksi_consumable']));
+    }
+
     public function index()
     {
         $transaksi_consumable = TransaksiConsumable::orderBy('tanggal_pinjam', 'DESC')->get();
@@ -20,19 +32,22 @@ class TransaksiConsumableController extends Controller
             $selisihJam = $waktu_carbon->diffInHours(Carbon::now());
             $consumable->batas_jam = $selisihJam;
         }
-        return view('planning.masterdata.masterdata_transaksi_consumable.index', compact(['transaksi_consumable']));
+        return view('transaksi_tools_material.transaksi_consumable.index', compact(['transaksi_consumable']));
     }
 
     public function create()
     {
         $penanggung_jawab = Pegawai::orderBy('name', 'ASC')->get();
         $consumable = Consumable::orderBy('name', 'ASC')->get();
-        return view('planning.masterdata.masterdata_transaksi_consumable.create', compact(['penanggung_jawab', 'consumable']));
+        return view('transaksi_tools_material.transaksi_consumable.create', compact(['penanggung_jawab', 'consumable']));
     }
 
     public function store(Request $request)
     {
-        // dd($request);
+        $this->validate($request, [
+            'consumable_id' => ['required'],
+            'qty' => ['required'],
+        ]);
         $consumableIds = $request->consumable_id;
         $qtys = $request->qty;
 
@@ -78,7 +93,7 @@ class TransaksiConsumableController extends Controller
                 'remark' => $request->remark,
             ]);
         }
-        return redirect()->route('masterdata-transaksi-consumable.index')->withNotify('Material consumable berhasil ditransaksikan');
+        return redirect()->route('my-transaksi-consumable.index')->withNotify('Material consumable berhasil ditransaksikan');
     }
 
     public function return(Request $request)
@@ -109,7 +124,7 @@ class TransaksiConsumableController extends Controller
             $update_transaksi_consumable->delete();
         }
 
-        return redirect()->route('masterdata-transaksi-consumable.index')->withNotify('Material consumable berhasil dikembalikan.');
+        return redirect()->route('my-transaksi-consumable.index')->withNotify('Material consumable berhasil dikembalikan.');
     }
 
     public function edit($id)

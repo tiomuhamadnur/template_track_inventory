@@ -38,7 +38,6 @@ use App\Http\Controllers\ManPowerOnDutyController;
 use App\Http\Controllers\MasterdataDashboardController;
 use App\Http\Controllers\PartController;
 use App\Http\Controllers\PICController;
-use App\Http\Controllers\planning\PlanningDashboard;
 use App\Http\Controllers\planning\PlanningDashboardController;
 use App\Http\Controllers\planning\TransaksiToolsController;
 use App\Http\Controllers\PMController;
@@ -49,10 +48,8 @@ use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\ShiftController;
 use App\Http\Controllers\ShowPageController;
 use App\Http\Controllers\SleeperExaminationController;
-use App\Http\Controllers\fundBudgetController;
 use App\Http\Controllers\FundController;
 use App\Http\Controllers\planning\TransaksiConsumableController;
-use App\Http\Controllers\SpesifikasiToolsController;
 use App\Http\Controllers\TemuanController;
 use App\Http\Controllers\TemuanDepoController;
 use App\Http\Controllers\TemuanMainlineController;
@@ -60,15 +57,11 @@ use App\Http\Controllers\ToolsController;
 use App\Http\Controllers\ToolsMaterialsController;
 use App\Http\Controllers\TrackbedExaminationController;
 use App\Http\Controllers\TransDefectController;
-use App\Http\Controllers\TransLocationController;
-use App\Http\Controllers\TransToolsController;
 use App\Http\Controllers\UltrasonicTestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WeselController;
 use App\Http\Controllers\WeselExaminationController;
 use App\Http\Controllers\WorkOrderController;
-use App\Models\SpesifikasiTools;
-use App\Models\TransTools;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -90,6 +83,11 @@ Route::controller(AuthController::class)->middleware('loggedin')->group(function
 Route::controller(AuthController::class)->group(function () {
     Route::get('login', 'loginView')->name('login.index');
     Route::get('expired_page', 'expired_page')->name('expired.page');
+});
+
+Route::controller(SendEmailController::class)->group(function () {
+    Route::post('/send-email-rfi', 'rfi')->name('send-email.rfi');
+    Route::post('/send-wa-rfi', 'whatsapp')->name('send-wa.rfi');
 });
 
 Route::controller(ShowPageController::class)->group(function () {
@@ -170,6 +168,24 @@ Route::middleware(['auth', 'license'])->group(function () {
         Route::get('/getDepartement', 'getDepartement')->name('getDepartement');
         Route::get('/check-stock-tools', 'check_stock_tools')->name('getCheckStockTools');
         Route::get('/check-stock-consumable', 'check_stock_consumable')->name('getCheckStockConsumable');
+    });
+
+    // TRANSAKSI TOOLS
+    Route::controller(TransaksiToolsController::class)->group(function(){
+        Route::get('/my-transaksi-tools', 'my_index')->name('my-transaksi-tools.index');
+        Route::get('/all-transaksi-tools', 'index')->name('masterdata-transaksi-tools.index');
+        Route::get('/masterdata/create-transaksi-tools', 'create')->name('masterdata-transaksi-tools.create');
+        Route::post('/masterdata/transaksi-tools', 'store')->name('masterdata-transaksi-tools.store');
+        Route::put('/masterdata/transaksi-tools', 'return')->name('masterdata-transaksi-tools.return');
+    });
+
+    // TRANSAKSI CONSUMABLE
+    Route::controller(TransaksiConsumableController::class)->group(function(){
+        Route::get('/my-transaksi-consumable', 'my_index')->name('my-transaksi-consumable.index');
+        Route::get('/all-transaksi-consumable', 'index')->name('masterdata-transaksi-consumable.index');
+        Route::get('/masterdata/create-transaksi-consumable', 'create')->name('masterdata-transaksi-consumable.create');
+        Route::post('/masterdata/transaksi-consumable', 'store')->name('masterdata-transaksi-consumable.store');
+        Route::put('/masterdata/transaksi-consumable', 'return')->name('masterdata-transaksi-consumable.return');
     });
 
     /////////////////////////////   START TRACK   /////////////////////////////////////
@@ -718,27 +734,6 @@ Route::middleware(['auth', 'license'])->group(function () {
                 Route::delete('/masterdata-consumable-delete', 'destroy')->name('masterdata-consumable.destroy');
             });
 
-            Route::controller(TransaksiToolsController::class)->group(function(){
-                Route::get('/masterdata/transaksi-tools', 'index')->name('masterdata-transaksi-tools.index');
-                Route::get('/masterdata/create-transaksi-tools', 'create')->name('masterdata-transaksi-tools.create');
-                Route::post('/masterdata/transaksi-tools', 'store')->name('masterdata-transaksi-tools.store');
-                Route::put('/masterdata/transaksi-tools', 'return')->name('masterdata-transaksi-tools.return');
-            });
-
-            Route::controller(SpesifikasiToolsController::class)->group(function(){
-                Route::get('/masterdata/spek-tools-index', 'index')->name('masterdata-spek-tools.index');
-                Route::get('/masterdata/spek-tools-create', 'create')->name('masterdata-spek-tools.create');
-                Route::post('/masterdata/spek-tools-store', 'store')->name('masterdata-spek-tools.store');
-            });
-
-
-            Route::controller(TransaksiConsumableController::class)->group(function(){
-                Route::get('/masterdata/transaksi-consumable', 'index')->name('masterdata-transaksi-consumable.index');
-                Route::get('/masterdata/create-transaksi-consumable', 'create')->name('masterdata-transaksi-consumable.create');
-                Route::post('/masterdata/transaksi-consumable', 'store')->name('masterdata-transaksi-consumable.store');
-                Route::put('/masterdata/transaksi-consumable', 'return')->name('masterdata-transaksi-consumable.return');
-            });
-
             Route::controller(FundController::class)->group(function(){
                 Route::get('/masterdata/fund', 'index')->name('masterdata-fund.index');
                 Route::get('/masterdata/fund-transaction/{id}/transaction', 'transaction')->name('masterdata-fund.transaction');
@@ -767,8 +762,4 @@ Route::middleware(['auth', 'license'])->group(function () {
 
 
     });
-});
-
-Route::controller(SendEmailController::class)->group(function () {
-    Route::get('/send-email-rfi', 'rfi')->name('send-email.rfi');
 });

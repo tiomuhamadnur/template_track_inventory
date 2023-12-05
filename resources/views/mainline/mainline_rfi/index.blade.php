@@ -19,12 +19,19 @@
                                 <div>
                                     <h4 class="card-title">Request For Inspection</h4>
                                 </div>
-                                <div>
-                                    <a @if ($email_rfi == 0) hidden @endif href="{{ route('send-email.rfi') }}"
-                                        title="Send notification to Section Head"
-                                        class="btn btn-primary btn-sm text-white mb-0 me-0" type="button">
+                                <div class="btn-group" @if ($email_rfi == 0) hidden @endif>
+                                    <a href="#" title="Send notification by Email" data-bs-toggle="modal"
+                                        data-bs-target="#send-email-confirmation-modal"
+                                        class="btn btn-warning btn-sm text-white mb-0 me-0" type="button">
                                         <i class="ti-email fw-bolder"></i>
-                                        <span>Send Email Notification</span></a>
+                                        <span>Send Email</span>
+                                    </a>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#send-wa-confirmation-modal"
+                                        title="Send notification by WhatsApp"
+                                        class="btn btn-primary btn-sm text-white mb-0 me-0" type="button">
+                                        <i class="ti-bell fw-bolder"></i>
+                                        <span>Send WhatsApp</span>
+                                    </a>
                                 </div>
                             </div>
                             <div class="table-responsive pt-3">
@@ -252,6 +259,56 @@
         </div>
     </div>
     <!-- END: Edit RFI Modal -->
+
+    <!-- BEGIN: Send WA Confirmation Modal -->
+    <div id="send-wa-confirmation-modal" class="modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body p-2">
+                    <div class="p-2 text-center">
+                        <h3 class="fw-bolder text-5xl mt-2">Apakah anda yakin?</h3>
+                        <div class="text-slate-500 mt-4">Data RFI ini akan dikirimkan ke Section Head terkait via WhatsApp.
+                        </div>
+                    </div>
+                    <div class="px-5 pb-8 text-center mt-3">
+                        <form action="{{ route('send-wa.rfi') }}" method="POST">
+                            @csrf
+                            @method('post')
+                            <button type="button" data-bs-dismiss="modal"
+                                class="btn btn-outline-danger w-24 mr-1 me-2">Cancel</button>
+                            <button type="submit" class="btn btn-success w-24">Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: Send WA Confirmation Modal -->
+
+    <!-- BEGIN: Send Email Confirmation Modal -->
+    <div id="send-email-confirmation-modal" class="modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body p-2">
+                    <div class="p-2 text-center">
+                        <h3 class="fw-bolder text-5xl mt-2">Apakah anda yakin?</h3>
+                        <div class="text-slate-500 mt-4">Data RFI ini akan dikirimkan ke Section Head terkait via Email.
+                        </div>
+                    </div>
+                    <div class="px-5 pb-8 text-center mt-3">
+                        <form action="{{ route('send-email.rfi') }}" method="POST">
+                            @csrf
+                            @method('post')
+                            <button type="button" data-bs-dismiss="modal"
+                                class="btn btn-outline-danger w-24 mr-1 me-2">Cancel</button>
+                            <button type="submit" class="btn btn-success w-24">Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: Send Email Confirmation Modal -->
 @endsection
 
 @section('javascript')

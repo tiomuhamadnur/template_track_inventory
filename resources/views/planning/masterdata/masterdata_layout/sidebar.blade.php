@@ -7,7 +7,7 @@
                 <span class="menu-title">Dashboard</span>
             </a>
         </li>
-        <li class="nav-item animate__animated animate__fadeInLeft">
+        {{-- <li class="nav-item animate__animated animate__fadeInLeft">
             <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false"
                 aria-controls="form-elements">
                 <i class="menu-icon mdi mdi-cart-outline"></i>
@@ -24,7 +24,7 @@
                     </li>
                 </ul>
             </div>
-        </li>
+        </li> --}}
 
         <li class="nav-item animate__animated animate__fadeInLeft">
             <a class="nav-link" data-bs-toggle="collapse" href="#budgeting" aria-expanded="false"

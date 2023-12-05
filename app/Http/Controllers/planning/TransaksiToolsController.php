@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\planning;
 
+use App\Helpers\WhatsAppHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Pegawai;
 use App\Models\planning\TransaksiTools;
@@ -11,22 +12,33 @@ use Illuminate\Http\Request;
 
 class TransaksiToolsController extends Controller
 {
+    public function my_index()
+    {
+        $transaksi_tools = TransaksiTools::where('user_id', auth()->user()->id)->orderBy('status', 'ASC')->orderBy('tanggal_pinjam', 'ASC')->get();
+        $total_pinjam = TransaksiTools::where('status', 'pinjam')->count();
+        return view('transaksi_tools_material.transaksi_tools.index', compact(['transaksi_tools', 'total_pinjam']));
+    }
+
     public function index()
     {
         $transaksi_tools = TransaksiTools::orderBy('status', 'ASC')->orderBy('tanggal_pinjam', 'ASC')->get();
         $total_pinjam = TransaksiTools::where('status', 'pinjam')->count();
-        return view('planning.masterdata.masterdata_transaksi_tools.index', compact(['transaksi_tools', 'total_pinjam']));
+        return view('transaksi_tools_material.transaksi_tools.index', compact(['transaksi_tools', 'total_pinjam']));
     }
 
     public function create()
     {
         $penanggung_jawab = Pegawai::orderBy('name', 'ASC')->get();
         $tools = Tools::orderBy('name', 'ASC')->get();
-        return view('planning.masterdata.masterdata_transaksi_tools.create', compact(['penanggung_jawab', 'tools']));
+        return view('transaksi_tools_material.transaksi_tools.create', compact(['penanggung_jawab', 'tools']));
     }
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'tools_id' => ['required'],
+            'qty' => ['required'],
+        ]);
         $toolsIds = $request->tools_id;
         $qtys = $request->qty;
 
@@ -72,7 +84,7 @@ class TransaksiToolsController extends Controller
                 'remark' => $request->remark,
             ]);
         }
-        return redirect()->route('masterdata-transaksi-tools.index')->withNotify('Tools berhasil dipinjam');
+        return redirect()->route('my-transaksi-tools.index')->withNotify('Tools berhasil dipinjam');
     }
 
     public function return(Request $request)
@@ -100,12 +112,7 @@ class TransaksiToolsController extends Controller
             ]);
         }
 
-        return redirect()->route('masterdata-transaksi-tools.index')->withNotify('Tools berhasil dikembalikan');
-    }
-
-    public function edit($id)
-    {
-        //
+        return redirect()->route('my-transaksi-tools.index')->withNotify('Tools berhasil dikembalikan');
     }
 
     public function update(Request $request, $id)

@@ -17,7 +17,14 @@ return new class extends Migration
             $table->bigInteger('location_id')->unsigned()->nullable();
             $table->bigInteger('detail_location_id')->unsigned()->nullable();
             $table->integer('stock')->nullable();
+            $table->integer('safety_stock')->nullable();
             $table->string('unit')->nullable();
+            $table->string('photo')->nullable();
+            $table->date('tgl_beli')->nullable();
+            $table->date('tgl_sertifikasi')->nullable();
+            $table->date('tgl_expired')->nullable();
+            $table->string('vendor')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
 
             $table->foreign('departement_id')->on('departement')->references('id');
