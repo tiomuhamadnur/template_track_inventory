@@ -88,7 +88,6 @@
                                                     {{ $loop->iteration }}
                                                 </td>
                                                 <td class="text-center fw-bolder text-wrap">
-                                                    <a class="text-dark" href="{{ route('masterdata-spek-tools.index') }}">
                                                     {{ $item->name }}
                                                     </a>
                                                 </td>
