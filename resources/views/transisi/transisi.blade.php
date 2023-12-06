@@ -22,59 +22,46 @@
                     <div class="swiper-wrapper">
                         <article class="card__article swiper-slide">
                             <div class="card__image">
-                                <img src="{{ asset('assets_transisi/img/depo0.png') }}" alt="image"
-                                    class="card__img">
-                                <div class="card__shadow"></div>
+                                <h1 class="transisi-text">DEPO</h1>
                             </div>
 
                             <div class="card__data">
-                                <h3 class="card__name">Depo</h3>
                                 <p class="card__description">
                                     Dashboard Permanent Way Area Depo
                                 </p>
-
                                 <a href="{{ route('depo.index') }}" class="card__button">Explore</a>
                             </div>
                         </article>
 
                         <article class="card__article swiper-slide">
                             <div class="card__image">
-                                <img src="{{ asset('assets_transisi//img/mainline0.png') }}" alt="image"
-                                    class="card__img">
-                                <div class="card__shadow"></div>
+                                <h1 class="transisi-text">MAINLINE</h1>
                             </div>
 
                             <div class="card__data">
-                                <h3 class="card__name">Mainline</h3>
                                 <p class="card__description">
                                     Dashboard Permanent Way Area Mainline
                                 </p>
-
                                 <a href="{{ route('home') }}" class="card__button">Explore</a>
                             </div>
                         </article>
 
                         <article class="card__article swiper-slide">
                             <div class="card__image">
-                                <img src="{{ asset('assets_transisi/img/jadwal0.png') }}" alt="image"
-                                    class="card__img">
-                                <div class="card__shadow"></div>
+                                <h1 class="transisi-text">TRANSACTION</h1>
                             </div>
 
                             <div class="card__data">
-                                <h3 class="card__name">Transactions</h3>
                                 <p class="card__description">
                                     Transaksi Tools & Material
                                 </p>
-
                                 <a href="{{ route('my-transaksi-tools.index') }}" class="card__button">Explore</a>
                             </div>
                         </article>
 
-                        <article class="card__article swiper-slide">
+                        {{-- <article class="card__article swiper-slide">
                             <div class="card__image">
-                                <img src="{{ asset('assets_transisi/img/jadwal0.png') }}" alt="image"
-                                    class="card__img">
+                                <h1 class="transisi-text">JADWAL</h1>
                                 <div class="card__shadow"></div>
                             </div>
 
@@ -86,17 +73,14 @@
 
                                 <a href="{{ route('jadwal.pekerjaan.index') }}" class="card__button">Explore</a>
                             </div>
-                        </article>
+                        </article> --}}
 
                         <article class="card__article swiper-slide">
                             <div class="card__image">
-                                <img src="{{ asset('assets_transisi/img/masterdata0.png') }}" alt="image"
-                                    class="card__img">
-                                <div class="card__shadow"></div>
+                                <h1 class="transisi-text">MASTERDATA</h1>
                             </div>
 
                             <div class="card__data">
-                                <h3 class="card__name">Master Data</h3>
                                 <p class="card__description">
                                     Master Data Section Permanent Way
                                 </p>

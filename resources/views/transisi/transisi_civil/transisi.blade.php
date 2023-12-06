@@ -21,13 +21,10 @@
                     <div class="swiper-wrapper">
                         <article class="card__article swiper-slide">
                             <div class="card__image">
-                                <img src="{{ asset('assets_transisi/img/mainline0.png') }}" alt="image"
-                                    class="card__img">
-                                <div class="card__shadow"></div>
+                                <h1 class="transisi-text">ACTIVITY</h1>
                             </div>
 
                             <div class="card__data">
-                                <h3 class="card__name">Mainline</h3>
                                 <p class="card__description">
                                     Dashboard Activity Civil
                                 </p>
@@ -38,13 +35,10 @@
 
                         <article class="card__article swiper-slide">
                             <div class="card__image">
-                                <img src="{{ asset('assets_transisi/img/jadwal0.png') }}" alt="image"
-                                    class="card__img">
-                                <div class="card__shadow"></div>
+                                <h1 class="transisi-text">TRANSACTION</h1>
                             </div>
 
                             <div class="card__data">
-                                <h3 class="card__name">Transactions</h3>
                                 <p class="card__description">
                                     Transaksi Tools & Material
                                 </p>
@@ -55,53 +49,16 @@
 
                         <article class="card__article swiper-slide">
                             <div class="card__image">
-                                <img src="{{ asset('assets_transisi/img/masterdata0.png') }}" alt="image"
-                                    class="card__img">
-                                <div class="card__shadow"></div>
+                                <h1 class="transisi-text">MASTERDATA</h1>
                             </div>
 
                             <div class="card__data">
-                                <h3 class="card__name">Master Data</h3>
                                 <p class="card__description">
                                     Dashboard Master Data Civil
                                 </p>
 
                                 <a href="{{ route('dashboard-masterdata-civil.index') }}"
                                     class="card__button">Explore</a>
-                            </div>
-                        </article>
-
-                        <article class="card__article swiper-slide">
-                            <div class="card__image">
-                                <img src="{{ asset('assets_transisi/img/jadwal0.png') }}" alt="image"
-                                    class="card__img">
-                                <div class="card__shadow"></div>
-                            </div>
-
-                            <div class="card__data">
-                                <h3 class="card__name">Lorem Ipsum</h3>
-                                <p class="card__description">
-                                    Lorem ipsum dolor sit amet.
-                                </p>
-
-                                <a href="#" class="card__button">Explore</a>
-                            </div>
-                        </article>
-
-                        <article class="card__article swiper-slide">
-                            <div class="card__image">
-                                <img src="{{ asset('assets_transisi/img/depo0.png') }}" alt="image"
-                                    class="card__img">
-                                <div class="card__shadow"></div>
-                            </div>
-
-                            <div class="card__data">
-                                <h3 class="card__name">Lorem Ipsum</h3>
-                                <p class="card__description">
-                                    Lorem ipsum dolor sit amet.
-                                </p>
-
-                                <a href="#" class="card__button">Explore</a>
                             </div>
                         </article>
                     </div>
@@ -125,7 +82,7 @@
         <script src="{{ asset('assets_transisi/js/swiper-bundle.min.js') }}"></script>
 
         <!--=============== MAIN JS ===============-->
-        <script src="{{ asset('assets_transisi/js/main.js') }}"></script>
+        <script src="{{ asset('assets_transisi/js/main_user.js') }}"></script>
     </body>
 
 </html>

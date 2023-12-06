@@ -239,3 +239,14 @@ img {
     right: -1rem;
   }
 }
+
+.transisi-text{
+    color: white;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-self: auto;
+    margin-bottom: 40px;
+    background-color: black;
+    border-radius: 10px;
+}

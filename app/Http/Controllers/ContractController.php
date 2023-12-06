@@ -151,6 +151,9 @@ class ContractController extends Controller
         return $query->where('status', $request->status)->get();
       });
 
+    //   FILTERED CONTRACT
+    // $filteredContract = $contracts->get();
+
       return view('planning.masterdata.masterdata_contract.index', compact(['contracts']));
 
 
