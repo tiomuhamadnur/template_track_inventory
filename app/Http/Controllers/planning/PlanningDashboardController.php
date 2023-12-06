@@ -26,46 +26,41 @@ class PlanningDashboardController extends Controller
         $finished_contract = Contract::where('status', 'close')->count();
 
         $data_fund = Fund::where('tahun', $tahun)->get();
-        if ($data_fund->count() == 0) {
-            $persen_penyerapan = 0;
-            $fund = 0;
-            $total_penyerapan = 0;
-            $persen_penyerapan_anggaran = 0;
-            $nominal_sisa_anggaran = 0;
-            $nominal_penyerapan_anggaran = 0;
-            $persen_sisa_anggaran = 0;
-        } else {
-            foreach ($data_fund as $data) {
-                $fund_id[] = $data->id;
-            }
 
-            $data_contract = Contract::where('fund_id', $fund_id)->get();
-            if ($data_contract->count() == 0) {
-                $fund = $data_fund->sum('init_value');
-
+            if ($data_fund->isEmpty()) {
+                // DEFAULT VALUE
                 $persen_penyerapan = 0;
+                $fund = 0;
                 $total_penyerapan = 0;
                 $persen_penyerapan_anggaran = 0;
-                $nominal_sisa_anggaran = $fund;
+                $nominal_sisa_anggaran = 0;
                 $nominal_penyerapan_anggaran = 0;
-                $persen_sisa_anggaran = $fund/$fund * 100;
+                $persen_sisa_anggaran = 0;
             } else {
-                foreach ($data_contract as $data) {
-                    $contract_id[] = $data->id;
-                }
-
-                // Total Penyerapan (%)
                 $fund = $data_fund->sum('init_value');
-                $total_penyerapan = ProgressContract::whereIn('contract_id', $contract_id)->sum('paid_value');
 
-                if ($fund == 0) {
+                $data_contract = Contract::whereIn('fund_id', $data_fund->pluck('id'))->get();
+
+                if ($data_contract->isEmpty()) {
+                    // DEFAULT VALUE
+                    $persen_penyerapan = 0;
+                    $total_penyerapan = 0;
                     $persen_penyerapan_anggaran = 0;
-                    $nominal_sisa_anggaran = 0;
+                    $nominal_sisa_anggaran = $fund;
+                    $nominal_penyerapan_anggaran = 0;
+                    $persen_sisa_anggaran = ($fund > 0) ? 100 : 0;
                 } else {
-                    $persen_penyerapan_anggaran = ($total_penyerapan / $fund) * 100;
-                    // Sisa Anggaran (Rp)
-                    $nominal_sisa_anggaran = ($fund - $total_penyerapan);
-                }
+                    $contract_ids = $data_contract->pluck('id')->toArray();
+                    // Total Penyerapan (%)
+                    $total_penyerapan = ProgressContract::whereIn('contract_id', $contract_ids)->sum('paid_value');
+
+                    if ($fund == 0) {
+                        $persen_penyerapan_anggaran = 0;
+                        $nominal_sisa_anggaran = 0;
+                    } else {
+                        $persen_penyerapan_anggaran = ($total_penyerapan / $fund) * 100;
+                        $nominal_sisa_anggaran = ($fund - $total_penyerapan);
+                    }
                 $persen_penyerapan = number_format((float)$persen_penyerapan_anggaran, 2, '.', '');
 
                 // Sisa Anggaran (%)
