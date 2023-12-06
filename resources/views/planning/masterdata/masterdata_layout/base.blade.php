@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ asset('assets/js/select.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/vertical-layout-light/style_planning.css') }}">
     {{-- <link rel="shortcut icon" href="{{ asset('assets/images/mm.png') }}" /> --}}
-    <link rel="shortcut icon" href="{{ asset('assets_transisi/img/planningg.png') }}" />
+    <link rel="shortcut icon" href="{{ asset('assets/images/planningg.png') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" />
