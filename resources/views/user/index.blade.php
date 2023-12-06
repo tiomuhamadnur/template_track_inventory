@@ -11,7 +11,7 @@
                     <div class="d-sm-flex justify-content-between align-items-start">
                         <div>
                             <h4 class="card-title card-title-dash">Management User</h4>
-                            <p class="card-subtitle card-subtitle-dash">Civil Permanent Way Technology Maintenance</p>
+                            <p class="card-subtitle card-subtitle-dash">{{ auth()->user()->departement->name ?? '-' }}</p>
                         </div>
                         <div>
                             <a href="{{ route('list.ban.user') }}"><button class="btn btn-warning btn-sm text-white mb-0 me-0"
@@ -59,7 +59,7 @@
                                             {{ $item->email }}
                                         </td>
                                         <td>
-                                            {{ $item->section }}
+                                            {{ $item->section->name ?? '-' }}
                                         </td>
                                         <td>
                                             @if ($item->role == 'Admin')

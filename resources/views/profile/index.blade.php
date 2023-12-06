@@ -12,7 +12,8 @@
                         <div class="d-sm-flex justify-content-between align-items-start">
                             <div>
                                 <h4 class="card-title card-title-dash">Profile User</h4>
-                                <p class="card-subtitle card-subtitle-dash mb-0">{{ auth()->user()->departement }}</p>
+                                <p class="card-subtitle card-subtitle-dash mb-0">
+                                    {{ auth()->user()->departement->name ?? '-' }}</p>
                             </div>
                         </div>
 
@@ -58,7 +59,7 @@
                                             @else
                                                 <button class="btn btn-outline-warning btn-rounded btn-fw btn-sm">
                                                     {{ auth()->user()->jabatan ?? '' }}
-                                                    {{ auth()->user()->section ?? '' }}
+                                                    {{ auth()->user()->section->name ?? '' }}
                                                 </button>
                                             @endif
 
@@ -66,7 +67,8 @@
                                         <div class="row g-2 mt-3">
                                             <div class="col mb-1">
                                                 <label for="nameWithTitle" class="form-label">Section </label>
-                                                <input readonly type="text" value="{{ auth()->user()->section }}"
+                                                <input readonly type="text"
+                                                    value="{{ auth()->user()->section->name ?? '-' }}"
                                                     class="form-control text-center">
                                             </div>
                                             <div class="col mb-1">

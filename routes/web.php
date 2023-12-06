@@ -59,6 +59,7 @@ use App\Http\Controllers\TrackbedExaminationController;
 use App\Http\Controllers\TransDefectController;
 use App\Http\Controllers\UltrasonicTestController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VendorController;
 use App\Http\Controllers\WeselController;
 use App\Http\Controllers\WeselExaminationController;
 use App\Http\Controllers\WorkOrderController;
@@ -505,6 +506,15 @@ Route::middleware(['auth', 'license'])->group(function () {
                 Route::get('/shift/{id}/edit', 'edit')->name('shift.edit');
                 Route::put('/shift', 'update')->name('shift.update');
                 Route::delete('/shift', 'destroy')->name('shift.delete');
+            });
+
+            Route::controller(VendorController::class)->group(function () {
+                Route::get('/vendor-company', 'index')->name('vendor.index');
+                Route::get('/vendor-company-create', 'create')->name('vendor.create');
+                Route::post('/vendor-company', 'store')->name('vendor.store');
+                Route::get('/vendor-company/{id}/edit', 'edit')->name('vendor.edit');
+                Route::put('/vendor-company', 'update')->name('vendor.update');
+                Route::delete('/vendor-company', 'destroy')->name('vendor.delete');
             });
 
             Route::controller(DetailPartController::class)->group(function () {

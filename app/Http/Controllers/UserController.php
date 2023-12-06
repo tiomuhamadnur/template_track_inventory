@@ -6,6 +6,7 @@ use App\Models\Departement;
 use App\Models\Pegawai;
 use App\Models\Section;
 use App\Models\User;
+use App\Models\Vendor;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -15,7 +16,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $user = Pegawai::orderBy('section', 'asc')->orderBy('name', 'asc')->get();
+        $user = Pegawai::orderBy('section_id', 'asc')->orderBy('name', 'asc')->get();
 
         return view('user.index', compact(['user']));
     }
@@ -24,7 +25,8 @@ class UserController extends Controller
     {
         $departement = Departement::all();
         $section = Section::all();
-        return view('user.create', compact(['departement', 'section']));
+        $vendor = Vendor::all();
+        return view('user.create', compact(['departement', 'section', 'vendor']));
     }
 
     public function store(Request $request)
@@ -44,13 +46,17 @@ class UserController extends Controller
                     'email' => $request->email,
                     'password' => Hash::make('user123'),
                     'jabatan' => $request->jabatan,
-                    'section' => $request->section,
-                    'departement' => $request->departement,
+                    'section_id' => $request->section_id,
+                    'departement_id' => $request->departement_id,
+                    'vendor_id' => $request->vendor_id,
+                    'no_hp' => $request->no_hp,
+                    'status_employee' => $request->status_employee,
                     'role' => $request->role,
+                    'gender' => $request->gender,
                     'photo' => $photo_profil,
                 ]);
 
-                return redirect()->route('usermanage.index');
+                return redirect()->route('usermanage.index')->withNotify('Data user baru berhasil ditambahkan');
             } else {
                 return back();
             }
@@ -60,12 +66,16 @@ class UserController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make('user123'),
                 'jabatan' => $request->jabatan,
-                'section' => $request->section,
-                'departement' => $request->departement,
+                'section_id' => $request->section_id,
+                'departement_id' => $request->departement_id,
+                'vendor_id' => $request->vendor_id,
+                'no_hp' => $request->no_hp,
+                'status_employee' => $request->status_employee,
                 'role' => $request->role,
+                'gender' => $request->gender,
             ]);
 
-            return redirect()->route('usermanage.index');
+            return redirect()->route('usermanage.index')->withNotify('Data user baru berhasil ditambahkan');
         }
     }
 
@@ -122,7 +132,8 @@ class UserController extends Controller
             if ($user) {
                 $departement = Departement::all();
                 $section = Section::all();
-                return view('user.update', compact(['user', 'departement', 'section']));
+                $vendor = Vendor::all();
+                return view('user.update', compact(['user', 'departement', 'section', 'vendor']));
             } else {
                 return redirect()->back();
             }
@@ -147,13 +158,17 @@ class UserController extends Controller
                     'name' => $request->name,
                     'email' => $request->email,
                     'jabatan' => $request->jabatan,
-                    'section' => $request->section,
-                    'departement' => $request->departement,
+                    'section_id' => $request->section_id,
+                    'departement_id' => $request->departement_id,
+                    'vendor_id' => $request->vendor_id,
+                    'no_hp' => $request->no_hp,
+                    'status_employee' => $request->status_employee,
                     'role' => $request->role,
+                    'gender' => $request->gender,
                     'photo' => $photo_profil,
                 ]);
 
-                return back();
+                return redirect()->route('usermanage.index')->withNotify('Data berhasil dimutakhirkan!');
             } else {
                 return back();
             }
@@ -164,12 +179,16 @@ class UserController extends Controller
                     'name' => $request->name,
                     'email' => $request->email,
                     'jabatan' => $request->jabatan,
-                    'section' => $request->section,
-                    'departement' => $request->departement,
+                    'section_id' => $request->section_id,
+                    'departement_id' => $request->departement_id,
+                    'vendor_id' => $request->vendor_id,
+                    'no_hp' => $request->no_hp,
+                    'status_employee' => $request->status_employee,
                     'role' => $request->role,
+                    'gender' => $request->gender,
                 ]);
 
-                return back();
+                return redirect()->route('usermanage.index')->withNotify('Data berhasil dimutakhirkan!');
             }
         }
     }

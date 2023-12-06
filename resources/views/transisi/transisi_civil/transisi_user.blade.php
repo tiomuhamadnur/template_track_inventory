@@ -39,7 +39,6 @@
                             </div>
 
                             <div class="card__data">
-                                <h3 class="card__name">Transactions</h3>
                                 <p class="card__description">
                                     Transaksi Tools & Material
                                 </p>

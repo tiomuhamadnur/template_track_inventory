@@ -11,7 +11,7 @@
                     <div class="d-sm-flex justify-content-between align-items-start">
                         <div>
                             <h4 class="card-title card-title-dash">Update Management User</h4>
-                            <p class="card-subtitle card-subtitle-dash">Civil Permanent Way Technology Maintenance</p>
+                            <p class="card-subtitle card-subtitle-dash">{{ auth()->user()->departement->name ?? '-' }}</p>
                         </div>
                     </div>
 
@@ -34,7 +34,17 @@
                                     </div>
                                     <div class="form-label mt-2">
                                         <div class="name">Ubah Foto Profil</div>
-                                        <input class="form-control w-full" type="file" name="photo">
+                                        <input class="form-control w-full" type="file" name="photo" id="imageInput"
+                                            accept="image/*">
+                                        @error('photo')
+                                            <p class="bg-danger rounded-3 text-center text-white mt-1">
+                                                {{ $message }}
+                                            </p>
+                                        @enderror
+                                        <div class="mt-3">
+                                            <img class="img-thumbnail" id="previewImage" src="#" alt="Preview"
+                                                style="max-width: 250px; max-height: 250px; display: none;">
+                                        </div>
                                     </div>
                                     <div>
                                         <label for="crud-form-1" class="form-label mt-2">Nama User</label>
@@ -45,6 +55,41 @@
                                         <label for="crud-form-1" class="form-label mt-2">Email</label>
                                         <input id="crud-form-1" type="email" class="form-control w-full" name="email"
                                             placeholder="Masukkan Email" required value="{{ $user->email }}">
+                                    </div>
+                                    <div>
+                                        <label for="crud-form-1" class="form-label mt-2">Gender</label>
+                                        <select class="form-select w-full" name="gender" required>
+                                            <option disabled selected value="">- Pilih Gender -</option>
+                                            <option @if ($user->gender == 'Bapak') selected @endif value="Bapak">Bapak
+                                            </option>
+                                            <option @if ($user->gender == 'Ibu') selected @endif value="Ibu">Ibu
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="crud-form-1" class="form-label mt-2">No HP</label>
+                                        <input id="crud-form-1" type="text" class="form-control w-full"
+                                            value="{{ $user->no_hp }}" name="no_hp" placeholder="Masukkan No HP"
+                                            required>
+                                    </div>
+                                    <div>
+                                        <label for="crud-form-1" class="form-label mt-2">Status Karyawan</label>
+                                        <select class="form-select w-full" name="status_employee" required>
+                                            <option disabled selected value="">- Pilih Status Karyawan -</option>
+                                            <option @if ($user->status_employee == 'Organik') selected @endif value="Organik">
+                                                Organik</option>
+                                            <option @if ($user->status_employee == 'Vendor') selected @endif value="Vendor">Vendor
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="crud-form-1" class="form-label mt-2">Perusahaan/Vendor</label>
+                                        <select class="form-select w-full" name="vendor_id" required>
+                                            <option disabled selected value="">- Pilih Perusahaan/Vendor -</option>
+                                            @foreach ($vendor as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div>
                                         <label for="crud-form-1" class="form-label mt-2">Jabatan</label>
@@ -61,29 +106,27 @@
                                     </div>
                                     <div>
                                         <label for="crud-form-1" class="form-label mt-2">Section</label>
-                                        <select class="form-select w-full" name="section">
-                                            <option value="{{ $user->section }}" selected>{{ $user->section }}
-                                            </option>
+                                        <select class="form-select w-full" name="section_id" required>
+                                            <option value="{{ $user->section->id ?? '' }}">
+                                                {{ $user->section->name ?? '-' }}</option>
                                             @foreach ($section as $item)
-                                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
                                             @endforeach
-                                            <option value="Guest">Guest</option>
                                         </select>
                                     </div>
                                     <div>
                                         <label for="crud-form-1" class="form-label mt-2">Departement</label>
-                                        <select class="form-select w-full" name="departement">
-                                            <option value="{{ $user->departement }}" selected>{{ $user->departement }}
-                                            </option>
+                                        <select class="form-select w-full" name="departement_id" required>
+                                            <option value="{{ $user->departement->id ?? '' }}">
+                                                {{ $user->departement->name ?? '-' }}</option>
                                             @foreach ($departement as $item)
-                                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
                                             @endforeach
-                                            <option value="Guest">Guest</option>
                                         </select>
                                     </div>
                                     <div>
                                         <label for="crud-form-1" class="form-label mt-2">Role</label>
-                                        <select class="form-select w-full" name="role">
+                                        <select class="form-select w-full" name="role" required>
                                             <option value="{{ $user->role }}" selected>{{ $user->role }}
                                             </option>
                                             <option value="User">User</option>
@@ -104,8 +147,8 @@
                                     <div class="form-label mt-2">
                                         <label for="crud-form-1" class="form-label mt-2">Ban User</label>
                                         <br>
-                                        <a href="{{ route('ban.user', $user->id) }}" class="btn btn-warning btn-sm rounded"
-                                            title="Ban akun ini?">
+                                        <a href="{{ route('ban.user', $user->id) }}"
+                                            class="btn btn-warning btn-sm rounded" title="Ban akun ini?">
                                             <i class="mdi mdi-block-helper mr-1"></i>
                                             Ban Akun Ini
                                         </a>
@@ -166,6 +209,24 @@
                     var id = $(e.relatedTarget).data('id');
                     $('#id_modal').val(id);
                 });
+            });
+
+            const imageInput = document.getElementById('imageInput');
+            const previewImage = document.getElementById('previewImage');
+
+            imageInput.addEventListener('change', function(event) {
+                const selectedFile = event.target.files[0];
+
+                if (selectedFile) {
+                    const reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        previewImage.src = e.target.result;
+                        previewImage.style.display = 'block';
+                    }
+
+                    reader.readAsDataURL(selectedFile);
+                }
             });
         </script>
     @endsection

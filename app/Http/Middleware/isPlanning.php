@@ -11,7 +11,7 @@ class isPlanning
 
     public function handle(Request $request, Closure $next)
     {
-        $section = Section::where('name', auth()->user()->section)->first()->id;
+        $section = auth()->user()->section_id;
         if (($section == 5)){
             return $next($request);
         }

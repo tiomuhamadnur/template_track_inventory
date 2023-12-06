@@ -10,7 +10,7 @@ class isCivil
 {
     public function handle(Request $request, Closure $next)
     {
-        $section = Section::where('name', auth()->user()->section)->first()->id;
+        $section = auth()->user()->section_id;
         if (($section == 3) or ($section == 4)){
             return $next($request);
         }

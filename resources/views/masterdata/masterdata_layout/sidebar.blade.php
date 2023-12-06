@@ -81,6 +81,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('tools.index') }}">Tools & Materials</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('vendor.index') }}">Vendor</a>
+                    </li>
                 </ul>
             </div>
         </li>

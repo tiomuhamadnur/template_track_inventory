@@ -11,8 +11,9 @@
                     <div class="d-sm-flex justify-content-between align-items-start">
                         <div>
                             <h4 class="card-title card-title-dash">Update Profile User</h4>
-                            <p class="card-subtitle card-subtitle-dash mb-0">{{ auth()->user()->departement }}</p>
-                            <p class="card-subtitle card-subtitle-dash mt-1">{{ auth()->user()->section }}</p>
+                            <p class="card-subtitle card-subtitle-dash mb-0">{{ auth()->user()->departement->name ?? '-' }}
+                            </p>
+                            <p class="card-subtitle card-subtitle-dash mt-1">{{ auth()->user()->section->name ?? '-' }}</p>
                         </div>
                     </div>
 

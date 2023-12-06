@@ -55,9 +55,8 @@ class AuthController extends Controller
 
     public function transisi()
     {
-        // return view('transisi.transisi');
 
-        $section = Section::where('name', auth()->user()->section)->first()->id;
+        $section = auth()->user()->section->id;
         if ($section == 1 or $section == 2){
             return view('transisi.transisi');
         }
@@ -72,7 +71,7 @@ class AuthController extends Controller
     {
         // return view('transisi.transisi_user');
 
-        $section = Section::where('name', auth()->user()->section)->first()->id;
+        $section = auth()->user()->section->id;
         if ($section == 1 or $section == 2){
             return view('transisi.transisi_user');
         }

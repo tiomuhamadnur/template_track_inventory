@@ -10,7 +10,7 @@ class isTrack
 {
     public function handle(Request $request, Closure $next)
     {
-        $section = Section::where('name', auth()->user()->section)->first()->id;
+        $section = auth()->user()->section_id;
         if (($section == 1) or ($section == 2)){
             return $next($request);
         }

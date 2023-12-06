@@ -37,4 +37,19 @@ class User extends Authenticatable
             return url('media-example/no-image.png');
         }
     }
+
+    public function section()
+    {
+        return $this->belongsTo(Section::class);
+    }
+
+    public function departement()
+    {
+        return $this->belongsTo(Departement::class);
+    }
+
+    public function vendor()
+    {
+        return $this->belongsTo(Vendor::class);
+    }
 }

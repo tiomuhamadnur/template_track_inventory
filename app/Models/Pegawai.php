@@ -13,4 +13,19 @@ class Pegawai extends Model
     protected $table = 'users';
 
     protected $guarded = [];
+
+    public function section()
+    {
+        return $this->belongsTo(Section::class);
+    }
+
+    public function departement()
+    {
+        return $this->belongsTo(Departement::class);
+    }
+
+    public function vendor()
+    {
+        return $this->belongsTo(Vendor::class);
+    }
 }
