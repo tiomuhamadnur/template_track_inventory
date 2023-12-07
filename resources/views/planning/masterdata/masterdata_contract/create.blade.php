@@ -32,8 +32,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail3">Vendor</label>
-                                    <input type="text" class="form-control" name="vendor" id="vendor"
-                                        placeholder="Masukkan Nama Perusahaan" required>
+                                    <select class="form-control" id="vendor" name="vendor" required>
+                                        <option value="" disabled selected>- Pilih Vendor -</option>
+                                        @foreach ($vendor as $item)
+                                            <option>{{ $item->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Fund</label>

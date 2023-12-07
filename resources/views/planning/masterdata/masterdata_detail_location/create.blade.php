@@ -27,7 +27,7 @@
                                         placeholder="Masukkan Detail Kode Location">
                                 </div>
                                 <div class="form-group">
-                                    <label for="cpde">Detail Location Name</label>
+                                    <label for="code">Detail Location Name</label>
                                     <input type="text" class="form-control" name="name" id="name"
                                         placeholder="Masukkan Detail Nama Location">
                                 </div>

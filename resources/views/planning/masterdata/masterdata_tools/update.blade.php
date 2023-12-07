@@ -21,24 +21,24 @@
                                 @csrf
                                 @method('put')
                                 <div class="form-group">
-                                    <label for="exampleInputName1">Nama Tools</label>
+                                    <label for="name">Nama Tools</label>
                                     <input type="text" name="id" hidden value="{{ $tools->id }}">
-                                    <input type="text" class="form-control" name="name" id="exampleInputName1"
+                                    <input type="text" class="form-control" name="name" id="name"
                                         placeholder="Input Nama Tools" value="{{ $tools->name }}" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail3">Kode Tools</label>
-                                    <input type="text" class="form-control" name="code" id="exampleInputEmail3"
+                                    <label for="code">Kode Tools</label>
+                                    <input type="text" class="form-control" name="code" id="code"
                                         placeholder="Input Code Tools" value="{{ $tools->code }}" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail3">Stock</label>
-                                    <input type="number" class="form-control" name="stock" id="exampleInputEmail3"
+                                    <label for="stock">Stock</label>
+                                    <input type="number" class="form-control" name="stock" id="stock"
                                         placeholder="Stock" value="{{ $tools->stock }}" min="0" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail3">Unit</label>
-                                    <input type="text" class="form-control" name="unit" id="exampleInputEmail3"
+                                    <label for="unit">Unit</label>
+                                    <input type="text" class="form-control" name="unit" id="unit"
                                         placeholder="unit" value="{{ $tools->unit }}" required>
                                 </div>
                                 <div class="form-group">

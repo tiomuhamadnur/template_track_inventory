@@ -21,13 +21,13 @@
                                 @csrf
                                 @method('put')
                                 <div class="form-group">
-                                    <label for="exampleInputName1">Kode Location</label>
+                                    <label for="code">Kode Location</label>
                                     <input type="text" name="id" value="{{ $location->id }}" hidden>
                                     <input type="text" class="form-control" name="code"
                                         placeholder="Masukkan Kode Location" value="{{ $location->code }}" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail3">Nama Location</label>
+                                    <label for="name">Nama Location</label>
                                     <input type="text" class="form-control" name="name"
                                         placeholder="Masukkan Nama Location" value="{{ $location->name }}" required>
                                 </div>

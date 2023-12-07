@@ -21,22 +21,22 @@
                                 @csrf
                                 @method('post')
                                 <div class="form-group">
-                                    <label for="exampleInputName1">Nama Fund</label>
+                                    <label for="name">Nama Fund</label>
                                     <input type="text" class="form-control" name="name" id="name"
                                         placeholder="Masukkan Nama Fund" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail3">Kegiatan</label>
-                                    <input type="text" class="form-control" name="kegiatan" id="code"
+                                    <label for="kegiatan">Kegiatan</label>
+                                    <input type="text" class="form-control" name="kegiatan" id="kegiatan"
                                         placeholder="Masukkan Detail Kegiatan Fund" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail3">Intial Value</label>
+                                    <label for="init_value">Intial Value</label>
                                     <input type="number" class="form-control" name="init_value" id="stock"
                                         placeholder="Masukkan Value Fund (Rp.)" min="0">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail3">Tahun Anggaran</label>
+                                    <label for="tahun">Tahun Anggaran</label>
                                     <input type="number" class="form-control" name="tahun" placeholder="Tahun anggaran"
                                         min="{{ $tahun - 5 }}" max="{{ $tahun + 100 }}" value="{{ $tahun }}">
                                 </div>

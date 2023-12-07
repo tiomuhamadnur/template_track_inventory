@@ -21,19 +21,19 @@
                                 @csrf
                                 @method('put')
                                 <div class="form-group">
-                                    <label for="exampleInputName1">Nama Fund</label>
+                                    <label for="name">Nama Fund</label>
                                     <input type="text" name="id" hidden value="{{ $fund->id }}">
-                                    <input type="text" class="form-control" name="name" id="exampleInputName1"
+                                    <input type="text" class="form-control" name="name" id="name"
                                         placeholder="Masukkan Nama Fund" value="{{ $fund->name }}" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail3">Kegiatan</label>
-                                    <input type="text" class="form-control" name="kegiatan" id="exampleInputEmail3"
+                                    <label for="kegiatan">Kegiatan</label>
+                                    <input type="text" class="form-control" name="kegiatan" id="kegiatan"
                                         placeholder="Masukkan Nama Kegiatan" value="{{ $fund->kegiatan }}" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail3">Value</label>
-                                    <input type="number" class="form-control" name="init_value" id="exampleInputEmail3"
+                                    <label for="init_value">Value</label>
+                                    <input type="number" class="form-control" name="init_value" id="init_value"
                                         placeholder="Masukkan Nilai Funding" value="{{ $fund->init_value }}" min="0" required>
                                 </div>
                                 <button type="submit" class="btn btn-outline-primary me-2">Submit</button>

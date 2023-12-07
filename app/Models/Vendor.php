@@ -12,4 +12,9 @@ class Vendor extends Model
     protected $table = 'vendor';
 
     protected $guarded = [];
+
+    public function contract()
+    {
+        return $this->hasMany(Contract::class);
+    }
 }

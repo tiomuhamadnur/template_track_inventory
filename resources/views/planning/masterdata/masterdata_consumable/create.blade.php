@@ -21,25 +21,25 @@
                                 @csrf
                                 @method('post')
                                 <div class="form-group">
-                                    <label for="exampleInputName1">Name</label>
+                                    <label for="nam">Name</label>
                                     <input type="text" class="form-control" name="name" id="name"
                                         placeholder="Masukkan Nama Consumable" required>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="exampleInputEmail3">Code</label>
+                                    <label for="code">Code</label>
                                     <input type="text" class="form-control" name="code" id="code"
                                         placeholder="Masukkan Kode Consumable" required>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="exampleInputEmail3">Stock</label>
+                                    <label for="stock">Stock</label>
                                     <input type="number" class="form-control" name="stock" id="stock"
                                         placeholder="Masukkan Stocks Consumable" min="0" required>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="exampleInputEmail3">Unit</label>
+                                    <label for="unit">Unit</label>
                                     <input type="text" class="form-control" name="unit" id="unit"
                                         placeholder="Masukkan Satuan Consumable" required>
                                 </div>

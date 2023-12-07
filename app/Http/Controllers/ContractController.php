@@ -10,6 +10,7 @@ use App\Models\Departement;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\planning\ProgressContract;
+use App\Models\Vendor;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -34,8 +35,9 @@ class ContractController extends Controller
         $section = Section::all();
         $user = User::all();
         $departement = Departement::all();
+        $vendor = Vendor::all();
 
-        return view('planning.masterdata.masterdata_contract.create', compact(['section', 'fund', 'departement', 'user']));
+        return view('planning.masterdata.masterdata_contract.create', compact(['section', 'fund', 'departement', 'user', 'vendor']));
     }
 
     public function store(Request $request)
@@ -62,8 +64,9 @@ class ContractController extends Controller
         $section = Section::all();
         $departement = Departement::all();
         $fund = Fund::whereYear('tahun', $tahun_ini)->get();
+        $vendor = Vendor::all();
 
-        return view('planning.masterdata.masterdata_contract.update', compact(['contract', 'section', 'departement', 'fund']));
+        return view('planning.masterdata.masterdata_contract.update', compact(['contract', 'section', 'departement', 'fund', 'vendor']));
     }
 
     public function update(Request $request)

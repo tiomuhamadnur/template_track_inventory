@@ -21,26 +21,26 @@
                                 @csrf
                                 @method('put')
                                 <div class="form-group">
-                                    <label for="exampleInputName1">Name</label>
+                                    <label for="name">Name</label>
                                     <input type="text" name="id" hidden value="{{ $consumable->id }}">
                                     <input type="text" class="form-control" name="name"
                                         placeholder="Input Nama Consumable" value="{{ $consumable->name }}" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail3">Code</label>
-                                    <input type="text" class="form-control" name="code" id="exampleInputEmail3"
+                                    <label for="code">Code</label>
+                                    <input type="text" class="form-control" name="code" id="code"
                                         placeholder="Input Code Consumable" value="{{ $consumable->code }}" required>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="exampleInputEmail3">Stock</label>
-                                    <input type="text" class="form-control" name="stock" id="exampleInputEmail3"
+                                    <label for="stock">Stock</label>
+                                    <input type="text" class="form-control" name="stock" id="stock"
                                         placeholder="Input Stock Consumable" value="{{ $consumable->stock }}" required>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="exampleInputEmail3">Unit</label>
-                                    <input type="text" class="form-control" name="unit" id="exampleInputEmail3"
+                                    <label for="unit">Unit</label>
+                                    <input type="text" class="form-control" name="unit" id="unit"
                                         placeholder="Input Unit Consumable" value="{{ $consumable->unit }}" required>
                                 </div>
 

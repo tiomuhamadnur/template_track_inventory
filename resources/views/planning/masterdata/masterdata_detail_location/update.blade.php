@@ -23,19 +23,19 @@
                                 @method('put')
                                 <input type="text" name="id" value="{{ $detail_location->id }}" hidden>
                                 <div class="form-group">
-                                    <label for="exampleInputName1">Kode Detail Location</label>
+                                    <label for="code">Kode Detail Location</label>
                                     <input type="text" class="form-control" name="code"
                                         placeholder="Masukkan Kode Location" value="{{ $detail_location->code }}" required>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="exampleInputEmail3">Nama Detail Location</label>
+                                    <label for="name">Nama Detail Location</label>
                                     <input type="text" class="form-control" name="name"
                                         placeholder="Masukkan Nama Location" value="{{ $detail_location->name }}" required>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="exampleInputEmail3">Location</label>
+                                    <label for="location_id">Location</label>
                                     <select class="form-control" name="location_id" required>
                                         <option value="" disabled>- Pilih Lokasi Penyimpanan -</option>
                                         @foreach ($location as $item)
