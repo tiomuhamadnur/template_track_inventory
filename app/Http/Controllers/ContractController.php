@@ -148,14 +148,12 @@ class ContractController extends Controller
     public function filter(Request $request)
     {
       $status = $request->status;
-      $contracts = Contract::query();
+      $contracts = Contract::where('status', $status)->get();
 
-      $contracts->when($status, function($query) use ($request){
-        return $query->where('status', $request->status)->get();
-      });
-
-    //   FILTERED CONTRACT
-    // $filteredContract = $contracts->get();
+      foreach ($contracts as $contract){
+        $totalPaidValue = ProgressContract::where('contract_id', $contract->id)->sum('paid_value');
+        $contract->total_paid_value = $totalPaidValue;
+    }
 
       return view('planning.masterdata.masterdata_contract.index', compact(['contracts']));
 

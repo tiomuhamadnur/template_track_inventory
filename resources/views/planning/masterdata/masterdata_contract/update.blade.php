@@ -48,8 +48,7 @@
                                     <select class="form-control" id="vendor" name="vendor">
                                         <option disabled selected>- Pilih Vendor -</option>
                                         @foreach ($vendor as $item)
-                                            <option
-                                                @if ($contract->vendor == $item->name) selected @endif>{{ $item->name }}
+                                            <option @if ($contract->vendor == $item->name) selected @endif>{{ $item->name }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -57,7 +56,8 @@
                                 <div class="form-group">
                                     <label for="contract_value">Contract Value</label>
                                     <input type="number" class="form-control" name="contract_value" id="="
-                                        placeholder="Masukkan Nilai Contract" value="{{ $contract->contract_value }}" min="0" required>
+                                        placeholder="Masukkan Nilai Contract" value="{{ $contract->contract_value }}"
+                                        min="0" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="remark">Remark</label>
@@ -93,7 +93,8 @@
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-outline-primary me-2">Submit</button>
-                                <a href="{{ route('masterdata-contract.index') }}" class="btn btn-outline-danger">Cancel</a>
+                                <a href="{{ route('masterdata-contract.index') }}"
+                                    class="btn btn-outline-danger">Cancel</a>
                             </form>
                         </div>
                     </div>

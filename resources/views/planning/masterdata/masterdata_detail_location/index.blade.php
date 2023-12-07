@@ -17,7 +17,8 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Data Detail Location</h4>
-                            <a href="{{ route('masterdata-detail-location.create') }}" class="btn btn-primary btn-lg" type="button">Add
+                            <a href="{{ route('masterdata-detail-location.create') }}" class="btn btn-primary btn-lg"
+                                type="button">Add
                                 Data</a>
                             {{-- <button class="btn btn-outline-dark btn-lg dropdown-toggle" type="button"
                                 id="dropdownMenuIconButton1" data-bs-toggle="dropdown" aria-haspopup="true"
@@ -68,8 +69,8 @@
 
                                                 <td class="text-center">
                                                     <div class="btn-group">
-                                                        <a href="{{ route('masterdata-detail-location.edit', $item->id) }}" type="button"
-                                                            class="btn btn-outline-warning mx-0">Edit</a>
+                                                        <a href="{{ route('masterdata-detail-location.edit', $item->id) }}"
+                                                            type="button" class="btn btn-outline-warning mx-0">Edit</a>
                                                         <a class="btn btn-outline-danger mx-0 disabled" href="javascript:;"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#delete-confirmation-modal"

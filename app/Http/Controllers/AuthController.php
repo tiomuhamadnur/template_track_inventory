@@ -56,7 +56,8 @@ class AuthController extends Controller
     public function transisi()
     {
 
-        $section = auth()->user()->section->id;
+        $section = auth()->user()->section_id;
+
         if ($section == 1 or $section == 2){
             return view('transisi.transisi');
         }
@@ -71,7 +72,7 @@ class AuthController extends Controller
     {
         // return view('transisi.transisi_user');
 
-        $section = auth()->user()->section->id;
+        $section = auth()->user()->section_id;
         if ($section == 1 or $section == 2){
             return view('transisi.transisi_user');
         }

@@ -76,7 +76,8 @@
                                             </h4>
                                             <div class="col-sm-12 text-center">
                                                 <div class="btn-group">
-                                                    <a href="{{ route('masterdata-contract.filter', ['status' => 'open']) }}" title="">
+                                                    <a href="{{ route('masterdata-contract.filter', ['status' => 'open']) }}"
+                                                        title="">
                                                         <h3 class="mb-0 fw-bold text-primary">
                                                             {{ $on_going_contract }}
                                                             <br>
@@ -319,37 +320,37 @@
                 series: [{
                         name: 'PW RAMS',
                         data: [
-                            ['Gudang B',tools_gudangb_pwr],
+                            ['Gudang B', tools_gudangb_pwr],
                             ['D06', tools_d06_pwr],
                             ['Ruang Track', tools_rtrack_pwr],
-                            ['Unknown',tools_unknown_pwr],
+                            ['Unknown', tools_unknown_pwr],
                         ]
                     },
                     {
                         name: 'PW MAINT',
                         data: [
-                            ['Gudang B',tools_gudangb_pwm],
+                            ['Gudang B', tools_gudangb_pwm],
                             ['D06', tools_d06_pwm],
                             ['Ruang Track', tools_rtrack_pwm],
-                            ['Unknown',tools_unknown_pwm],
+                            ['Unknown', tools_unknown_pwm],
                         ]
                     },
                     {
                         name: 'CIVIL RAMS',
                         data: [
-                            ['Gudang B',tools_gudangb_civilr],
+                            ['Gudang B', tools_gudangb_civilr],
                             ['D06', tools_d06_civilr],
                             ['Ruang Track', tools_rtrack_civilr],
-                            ['Unknown',tools_unknown_civilr],
+                            ['Unknown', tools_unknown_civilr],
                         ]
                     },
                     {
                         name: 'CIVIL MAINT',
                         data: [
-                            ['Gudang B',tools_gudangb_civilm],
+                            ['Gudang B', tools_gudangb_civilm],
                             ['D06', tools_d06_civilm],
                             ['Ruang Track', tools_rtrack_civilm],
-                            ['Unknown',tools_unknown_civilm],
+                            ['Unknown', tools_unknown_civilm],
                         ]
                     },
                 ]

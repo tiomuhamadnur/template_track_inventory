@@ -34,7 +34,8 @@
                                 <div class="form-group">
                                     <label for="init_value">Value</label>
                                     <input type="number" class="form-control" name="init_value" id="init_value"
-                                        placeholder="Masukkan Nilai Funding" value="{{ $fund->init_value }}" min="0" required>
+                                        placeholder="Masukkan Nilai Funding" value="{{ $fund->init_value }}" min="0"
+                                        required>
                                 </div>
                                 <button type="submit" class="btn btn-outline-primary me-2">Submit</button>
                                 <a href="{{ route('masterdata-fund.index') }}" class="btn btn-outline-danger">Cancel</a>

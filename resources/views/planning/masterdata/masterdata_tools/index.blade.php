@@ -40,7 +40,8 @@
                                     <div class="input-group">
                                         <input type="search" name="search" class="form-control form-control-dark"
                                             placeholder="Cari" aria-label="Search">
-                                        <button class="btn btn-primary" style="padding: 9.4px" type="submit">Search</button>
+                                        <button class="btn btn-primary" style="padding: 9.4px"
+                                            type="submit">Search</button>
                                     </div>
                                 </form>
                             </div>
@@ -79,42 +80,42 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if(isset($message))
-                                             <p>{{ $message }}</p>
+                                        @if (isset($message))
+                                            <p>{{ $message }}</p>
                                         @else
-                                        @foreach ($tools as $item)
-                                            <tr>
-                                                <td class="text-center">
-                                                    {{ $loop->iteration }}
-                                                </td>
-                                                <td class="text-center fw-bolder text-wrap">
-                                                    {{ $item->name }}
-                                                    </a>
-                                                </td>
-                                                <td class="text-center text-wrap">
-                                                    {{ $item->location->name ?? '-' }} <br> <br>
-                                                    ({{ $item->detail_location->name ?? '-' }})
-                                                </td>
-                                                <td class="text-center">
-                                                    {{ $item->section->name }}
-                                                </td>
-                                                <td class="text-center">
-                                                    {{ $item->stock }} {{ $item->unit }}
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="btn-group">
-                                                        <a href="{{ route('masterdata-tools.edit', $item->id) }}"
-                                                            type="button" class="btn btn-outline-warning mx-0">Edit</a>
-                                                        <a href="#" type="button"
-                                                            class="btn btn-outline-success mx-0">Detail</a>
-                                                        <a class="btn btn-outline-danger mx-0 disabled" href="javascript:;"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#delete-confirmation-modal"
-                                                            onclick="#">Delete</a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforeach
+                                            @foreach ($tools as $item)
+                                                <tr>
+                                                    <td class="text-center">
+                                                        {{ $loop->iteration }}
+                                                    </td>
+                                                    <td class="text-center fw-bolder text-wrap">
+                                                        {{ $item->name }}
+                                                        </a>
+                                                    </td>
+                                                    <td class="text-center text-wrap">
+                                                        {{ $item->location->name ?? '-' }} <br> <br>
+                                                        ({{ $item->detail_location->name ?? '-' }})
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{ $item->section->name }}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{ $item->stock }} {{ $item->unit }}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <div class="btn-group">
+                                                            <a href="{{ route('masterdata-tools.edit', $item->id) }}"
+                                                                type="button" class="btn btn-outline-warning mx-0">Edit</a>
+                                                            <a href="#" type="button"
+                                                                class="btn btn-outline-success mx-0">Detail</a>
+                                                            <a class="btn btn-outline-danger mx-0 disabled"
+                                                                href="javascript:;" data-bs-toggle="modal"
+                                                                data-bs-target="#delete-confirmation-modal"
+                                                                onclick="#">Delete</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         @endif
                                     </tbody>
                                 </table>
