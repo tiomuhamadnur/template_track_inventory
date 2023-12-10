@@ -20,7 +20,7 @@ class TransaksiConsumableController extends Controller
             $selisihJam = $waktu_carbon->diffInHours(Carbon::now());
             $consumable->batas_jam = $selisihJam;
         }
-        return view('transaksi_tools_material.transaksi_consumable.index', compact(['transaksi_consumable']));
+        return view('transaksi_tools_material.transaksi_consumable.my_index', compact(['transaksi_consumable']));
     }
 
     public function index()

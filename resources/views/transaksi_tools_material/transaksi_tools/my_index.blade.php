@@ -18,9 +18,9 @@
                         <div class="card-body">
                             <h4 class="card-title">Data Transaksi Tools</h4>
                             <div class="btn-group">
-                                {{-- <a href="{{ route('masterdata-transaksi-tools.create') }}"
+                                <a href="{{ route('masterdata-transaksi-tools.create') }}"
                                     class="btn btn-primary btn-lg me-0" type="button">Add Data
-                                </a> --}}
+                                </a>
                                 <button class="btn btn-outline-dark btn-lg dropdown-toggle ms-0" type="button"
                                     id="dropdownMenuIconButton1" data-bs-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false" style="margin-left: -10px;">
@@ -30,6 +30,14 @@
                                     <a class="dropdown-item" href="#">Print</a>
                                     <a class="dropdown-item" href="#">Export to Excel</a>
                                     <a class="dropdown-item" href="#">Export to PDF</a>
+                                </div>
+                                <div>
+                                    <button class="btn btn-outline-info btn-lg ms-0" type="button" id="deleteSubmit"
+                                        style="display:none;" data-bs-toggle="modal"
+                                        data-bs-target="#return-confirmation-modal">
+                                        <i class="ti-back-right"></i>
+                                        Return Tools
+                                    </button>
                                 </div>
                             </div>
                             <div class="table-responsive pt-3">
@@ -41,6 +49,13 @@
                                         <thead>
                                             <tr>
                                                 <th rowspan="2" class="text-center">No</th>
+                                                <th rowspan="2" class="text-center">
+                                                    All <br>
+                                                    <input type="checkbox"
+                                                        @if ($transaksi_tools->count() == 0) hidden @elseif ($total_pinjam == 0) hidden @endif
+                                                        class="mt-2" aria-label="Checkbox for following text input"
+                                                        title="select all" id="selectAll">
+                                                </th>
                                                 <th rowspan="2" class="text-center text-wrap">Peminjam</th>
                                                 <th rowspan="2" class="text-center">Tools</th>
                                                 <th rowspan="2" class="text-center">Qty.</th>
@@ -58,6 +73,14 @@
                                                 <tr>
                                                     <td class="text-center">
                                                         {{ $loop->iteration }}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @if ($item->status == 'pinjam')
+                                                            <input @if ($item->user->id != auth()->user()->id) hidden @endif
+                                                                type="checkbox" class="checkbox" name="id[]"
+                                                                value="{{ $item->id }}"
+                                                                aria-label="Checkbox for following text input">
+                                                        @endif
                                                     </td>
                                                     <td class="text-center fw-bolder text-wrap">
                                                         {{ $item->user->name }}
@@ -92,6 +115,15 @@
                                                                 data-responsible="{{ $item->responsible->name ?? '-' }}"
                                                                 data-remark="{{ $item->remark ?? '-' }}">
                                                                 Detail
+                                                            </a>
+                                                            <a href="#" type="button"
+                                                                @if ($item->user->id != auth()->user()->id) hidden @endif
+                                                                class="btn btn-outline-warning my-0" data-bs-toggle="modal"
+                                                                data-bs-target="#return-one-confirmation-modal"
+                                                                data-id="{{ $item->id }}"
+                                                                @if ($item->status == 'selesai') hidden @endif>
+                                                                <i class="ti-back-right"></i>
+                                                                Return
                                                             </a>
                                                         </div>
                                                     </td>
@@ -149,6 +181,55 @@
         </div>
     </div>
     <!-- End Modal Detail -->
+
+    <!-- BEGIN: Return Confirmation Modal -->
+    <div id="return-confirmation-modal" class="modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body p-2">
+                    <div class="p-2 text-center">
+                        <div class="text-3xl mt-2 fw-bolder">Apakah anda yakin?</div>
+                        <div class="text-slate-500 mt-2 text-wrap">Semua data tools yang dipilih akan dikembalikan,
+                            pastikan anda menyimpannya di tempat yang sesuai.
+                        </div>
+                    </div>
+                    <div class="px-5 pb-8 text-center mt-3">
+                        <button type="button" data-bs-dismiss="modal"
+                            class="btn btn-outline-warning w-24 mr-1 me-2">Cancel</button>
+                        <button type="submit" id="return_submit" class="btn btn-success w-24">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: Return Confirmation Modal -->
+
+    <!-- BEGIN: Return satu-satu Confirmation Modal -->
+    <div id="return-one-confirmation-modal" class="modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body p-2">
+                    <div class="p-2 text-center">
+                        <div class="text-3xl mt-2 fw-bolder">Apakah anda yakin?</div>
+                        <div class="text-slate-500 mt-2 text-wrap">Data tools ini akan dikembalikan,
+                            pastikan anda menyimpannya di tempat yang sesuai.
+                        </div>
+                    </div>
+                    <div class="px-5 pb-8 text-center mt-3">
+                        <form method="post" action="{{ route('masterdata-transaksi-tools.return') }}">
+                            @csrf
+                            @method('put')
+                            <input type="text" name="id[]" id="id_modal" hidden>
+                            <button type="button" data-bs-dismiss="modal"
+                                class="btn btn-outline-warning w-24 mr-1 me-2">Cancel</button>
+                            <button type="submit" class="btn btn-success w-24">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: Return satu-satu Confirmation Modal -->
 @endsection
 
 @section('javascript')
@@ -163,6 +244,47 @@
                 $('#responsible_modal').val(responsible);
                 $('#remark_modal').val(remark);
             });
+
+            $('#return-one-confirmation-modal').on('show.bs.modal', function(e) {
+                var id = $(e.relatedTarget).data('id');
+                $('#id_modal').val(id);
+            });
+        });
+
+        const checkboxes = document.querySelectorAll('.checkbox');
+        const selectAll = document.getElementById('selectAll');
+        const deleteSubmitBtn = document.getElementById('deleteSubmit');
+
+        selectAll.addEventListener('change', () => {
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = selectAll.checked;
+            });
+
+            if (selectAll.checked) {
+                deleteSubmitBtn.style.display = 'block';
+            } else {
+                deleteSubmitBtn.style.display = 'none';
+            }
+        });
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                const checked = document.querySelectorAll('.checkbox:checked');
+                if (checked.length > 0) {
+                    deleteSubmitBtn.style.display = 'block';
+                } else {
+                    deleteSubmitBtn.style.display = 'none';
+                }
+
+                const allChecked = document.querySelectorAll('.checkbox:checked').length === checkboxes
+                    .length;
+                selectAll.checked = allChecked;
+            });
+        });
+
+        const returnSubmit = document.getElementById('return_submit');
+        returnSubmit.addEventListener('click', () => {
+            document.getElementById('return_form').submit();
         });
     </script>
 @endsection

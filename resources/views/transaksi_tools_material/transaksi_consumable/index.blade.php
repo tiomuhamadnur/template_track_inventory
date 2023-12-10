@@ -18,9 +18,9 @@
                         <div class="card-body">
                             <h4 class="card-title">Data Transaksi Consumable</h4>
                             <div class="btn-group">
-                                <a href="{{ route('masterdata-transaksi-consumable.create') }}"
+                                {{-- <a href="{{ route('masterdata-transaksi-consumable.create') }}"
                                     class="btn btn-primary btn-lg me-0" type="button">Add Data
-                                </a>
+                                </a> --}}
                                 <button class="btn btn-outline-dark btn-lg dropdown-toggle ms-0" type="button"
                                     id="dropdownMenuIconButton1" data-bs-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false" style="margin-left: -10px;">
@@ -86,16 +86,6 @@
                                                                 data-remark="{{ $item->remark ?? '-' }}">
                                                                 Detail
                                                             </a>
-                                                            <a href="#" type="button"
-                                                                class="btn btn-outline-warning my-0" data-bs-toggle="modal"
-                                                                data-bs-target="#return-one-confirmation-modal"
-                                                                data-id="{{ $item->id }}"
-                                                                data-qty="{{ $item->qty }}"
-                                                                data-unit="{{ $item->consumable->unit }}"
-                                                                @if ($item->batas_jam > 12) hidden @endif>
-                                                                <i class="ti-back-right"></i>
-                                                                Return
-                                                            </a>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -152,63 +142,6 @@
         </div>
     </div>
     <!-- End Modal Detail -->
-
-    <!-- BEGIN: Return Confirmation Modal -->
-    <div id="return-confirmation-modal" class="modal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body p-2">
-                    <div class="p-2 text-center">
-                        <div class="text-3xl mt-2 fw-bolder">Apakah anda yakin?</div>
-                        <div class="text-slate-500 mt-2 text-wrap">Semua data tools yang dipilih akan dikembalikan,
-                            pastikan anda menyimpannya di tempat yang sesuai.
-                        </div>
-                    </div>
-                    <div class="px-5 pb-8 text-center mt-3">
-                        <button type="button" data-bs-dismiss="modal"
-                            class="btn btn-outline-warning w-24 mr-1 me-2">Cancel</button>
-                        <button type="submit" id="return_submit" class="btn btn-success w-24">Submit</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- END: Return Confirmation Modal -->
-
-    <!-- BEGIN: Return satu-satu Confirmation Modal -->
-    <div id="return-one-confirmation-modal" class="modal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body p-2">
-                    <div class="p-2 text-center">
-                        <div class="text-3xl mt-2 fw-bolder">Apakah anda yakin?</div>
-                        <div class="text-slate-500 mt-2 text-wrap">Silahkan isi Qty material yang akan dikembalikan.
-                        </div>
-                    </div>
-                    <div class="px-5 pb-8 mt-3">
-                        <form method="post" action="{{ route('masterdata-transaksi-consumable.return') }}">
-                            @csrf
-                            @method('put')
-                            <input type="text" name="id" id="id_modal" hidden>
-                            <div class="row g-2 mb-5">
-                                <div class="col mb-1">
-                                    <label for="emailWithTitle" class="form-label mb-0">Qty:</label>
-                                    <input type="number" id="qty_modal" name="qty" class="form-control"
-                                        placeholder="Qty material yang dikembalikan" min="1" required>
-                                </div>
-                            </div>
-                            <div class="float-end">
-                                <button type="button" data-bs-dismiss="modal"
-                                    class="btn btn-outline-warning w-24 mr-1 me-2">Cancel</button>
-                                <button type="submit" class="btn btn-success w-24">Submit</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- END: Return satu-satu Confirmation Modal -->
 @endsection
 
 @section('javascript')
@@ -222,17 +155,6 @@
                 $('#status_modal').val(status);
                 $('#responsible_modal').val(responsible);
                 $('#remark_modal').val(remark);
-            });
-
-            $('#return-one-confirmation-modal').on('show.bs.modal', function(e) {
-                var id = $(e.relatedTarget).data('id');
-                var qty = $(e.relatedTarget).data('qty');
-                var unit = $(e.relatedTarget).data('unit');
-                $('#id_modal').val(id);
-                $('#qty_modal').attr({
-                    'max': qty,
-                    'placeholder': 'max: ' + qty + unit,
-                });
             });
         });
     </script>

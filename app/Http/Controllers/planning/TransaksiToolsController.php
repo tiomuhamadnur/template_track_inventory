@@ -15,8 +15,8 @@ class TransaksiToolsController extends Controller
     public function my_index()
     {
         $transaksi_tools = TransaksiTools::where('user_id', auth()->user()->id)->orderBy('status', 'ASC')->orderBy('tanggal_pinjam', 'ASC')->get();
-        $total_pinjam = TransaksiTools::where('status', 'pinjam')->count();
-        return view('transaksi_tools_material.transaksi_tools.index', compact(['transaksi_tools', 'total_pinjam']));
+        $total_pinjam = TransaksiTools::where('user_id', auth()->user()->id)->where('status', 'pinjam')->count();
+        return view('transaksi_tools_material.transaksi_tools.my_index', compact(['transaksi_tools', 'total_pinjam']));
     }
 
     public function index()
