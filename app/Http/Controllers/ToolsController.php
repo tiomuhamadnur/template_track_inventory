@@ -8,7 +8,9 @@ use App\Models\Location;
 use App\Models\Departement;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Imports\planning\ToolsImport;
 use App\Models\DetailLocation;
+use Excel;
 
 class ToolsController extends Controller
 {
@@ -43,18 +45,33 @@ class ToolsController extends Controller
 
     public function store(Request $request)
     {
-        Tools::create([
-            'name' => $request->name,
-            'code' => $request->code,
-            'stock' => $request->stock,
-            'unit'=> $request->unit,
-            'location_id' => $request->location_id,
-            'detail_location_id' => $request->detail_location_id,
-            'section_id' => $request->section_id,
-            'departement_id' => $request->departement_id,
+        $this->validate($request, [
+            'photo' => ['file', 'image', 'required'],
+        ], [
+            'photo.image' => 'File harus dalam format gambar/photo!',
         ]);
 
-        return redirect(route('masterdata-tools'))->withNotify('Data berhasil ditambahkan');
+        if ($request->hasFile('photo') && $request->photo != '') {
+            $photo = $request->file('photo')->store('masterdata/tools');
+            Tools::create([
+                'name' => $request->name,
+                'code' => $request->code,
+                'stock' => $request->stock,
+                'unit'=> $request->unit,
+                'location_id' => $request->location_id,
+                'detail_location_id' => $request->detail_location_id,
+                'section_id' => $request->section_id,
+                'departement_id' => $request->departement_id,
+                'description' => $request->description,
+                'vendor' => $request->vendor,
+                'tgl_beli' => $request->tgl_beli,
+                'tgl_sertifikasi' => $request->tgl_sertifikasi,
+                'tgl_expired' => $request->tgl_expired,
+                'photo' => $photo,
+            ]);
+        }
+
+        return redirect()->route('masterdata-tools')->withNotify('Data berhasil ditambahkan');
     }
 
     public function edit($id)
@@ -96,6 +113,21 @@ class ToolsController extends Controller
             ]);
         }
         return redirect(route('masterdata-tools'))->withNotify('Data berhasil diupdate');
+    }
+
+    public function import(Request $request)
+    {
+        dd($request);
+        $this->validate($request, [
+            'file_excel' => 'required|mimes:csv,xls,xlsx',
+        ]);
+
+        if (!$request->hasFile('file_excel')) {
+            return redirect()->route('masterdata-tools');
+        }
+
+        Excel::import(new ToolsImport, request()->file('file_excel'));
+        return redirect()->route('masterdata-tools')->withNotify('Data berhasil diimport!');
     }
 
 }

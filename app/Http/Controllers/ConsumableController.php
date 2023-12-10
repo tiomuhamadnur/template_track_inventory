@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Consumable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Imports\planning\ConsumableImport;
 use App\Models\DetailLocation;
 use App\Models\Location;
+use Excel;
 
 class ConsumableController extends Controller
 {
@@ -30,14 +32,30 @@ class ConsumableController extends Controller
 
     public function store(Request $request)
     {
-        Consumable::create([
-            'name' => $request->name,
-            'code' => $request->code,
-            'stock' => $request->stock,
-            'unit' => $request->unit,
-            'location_id' => $request->location_id,
-            'detail_location_id' => $request->detail_location_id,
+        $this->validate($request, [
+            'photo' => ['file', 'image', 'required'],
+        ], [
+            'photo.image' => 'File harus dalam format gambar/photo!',
         ]);
+
+        if ($request->hasFile('photo') && $request->photo != '') {
+            $photo = $request->file('photo')->store('masterdata/consumable');
+            Consumable::create([
+                'name' => $request->name,
+                'code' => $request->code,
+                'stock' => $request->stock,
+                'safety_stock' => $request->safety_stock,
+                'unit'=> $request->unit,
+                'location_id' => $request->location_id,
+                'detail_location_id' => $request->detail_location_id,
+                'description' => $request->description,
+                'vendor' => $request->vendor,
+                'tgl_beli' => $request->tgl_beli,
+                'tgl_sertifikasi' => $request->tgl_sertifikasi,
+                'tgl_expired' => $request->tgl_expired,
+                'photo' => $photo,
+            ]);
+        }
 
         return redirect(route('masterdata-consumable.index'))->withNotify('Data berhasil ditambahkan!');
     }
@@ -81,5 +99,20 @@ class ConsumableController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function import(Request $request)
+    {
+        dd($request);
+        $this->validate($request, [
+            'file_excel' => 'required|mimes:csv,xls,xlsx',
+        ]);
+
+        if (!$request->hasFile('file_excel')) {
+            return redirect()->route('masterdata-consumable.index');
+        }
+
+        Excel::import(new ConsumableImport, request()->file('file_excel'));
+        return redirect()->route('masterdata-consumable.index')->withNotify('Data berhasil diimport!');
     }
 }

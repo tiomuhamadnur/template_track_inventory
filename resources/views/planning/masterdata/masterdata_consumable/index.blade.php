@@ -17,9 +17,23 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Data Consumable</h4>
-                            <a href="{{ route('masterdata-consumable.create') }}" class="btn btn-primary btn-lg"
-                                type="button">Add
-                                Data</a>
+                            <div class="btn-group">
+                                <a href="{{ route('masterdata-consumable.create') }}" class="btn btn-primary btn-lg me-0"
+                                    type="button">Add
+                                    Data</a>
+                                <button class="btn btn-outline-dark btn-lg dropdown-toggle ms-0" type="button"
+                                    id="dropdownMenuIconButton2" data-bs-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <i class="ti-link"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuIconButton2">
+                                    <a class="dropdown-item" href="#">Print</a>
+                                    <a class="dropdown-item" href="#">Export to Excel</a>
+                                    <a class="dropdown-item" href="#">Export to PDF</a>
+                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                        data-bs-target="#import-file-modal">Import Excel File</a>
+                                </div>
+                            </div>
                             <div>
                                 <form class="col-sm-2" method="GET" action="{{ route('masterdata-consumable.index') }}">
                                     <div class="input-group">
@@ -30,16 +44,6 @@
                                     </div>
                                 </form>
                             </div>
-                            {{-- <button class="btn btn-outline-dark btn-lg dropdown-toggle" type="button"
-                                id="dropdownMenuIconButton1" data-bs-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false" style="margin-left: -10px;">
-                                <i class="ti-link"></i>
-                            </button> --}}
-                            {{-- <div class="dropdown-menu" aria-labelledby="dropdownMenuIconButton1">
-                                <a class="dropdown-item" href="#">Print</a>
-                                <a class="dropdown-item" href="#">Export to Excel</a>
-                                <a class="dropdown-item" href="#">Export to PDF</a>
-                            </div> --}}
                             <div class="table-responsive pt-3">
                                 <table class="table table-bordered">
                                     <thead>
@@ -67,9 +71,8 @@
                                                 <td class="text-center">
                                                     {{ $loop->iteration }}
                                                 </td>
-                                                <td class="text-center text-wrap">
-                                                    {{ $item->name }} <br>
-                                                    ({{ $item->code ?? '-' }})
+                                                <td class="text-center text-wrap fw-bolder">
+                                                    {{ $item->name }}
                                                 </td>
                                                 <td class="text-center">
                                                     {{ $item->stock }} {{ $item->unit }}
@@ -79,13 +82,31 @@
                                                     ({{ $item->detail_location->name ?? '-' }})
                                                 </td>
                                                 <td class="text-center">
-                                                    <div class="btn-group">
+                                                    <div class="btn-group-vertical">
                                                         <a href="{{ route('masterdata-consumable.edit', $item->id) }}"
-                                                            type="button" class="btn btn-outline-warning mx-0">Edit</a>
-                                                        <a class="btn btn-outline-danger mx-0 disabled" href="javascript:;"
+                                                            type="button" class="btn btn-outline-warning my-0">
+                                                            Edit
+                                                        </a>
+                                                        <a href="javascript:;" type="button"
+                                                            class="btn btn-outline-success my-0" data-bs-toggle="modal"
+                                                            data-bs-target="#ModalDetail" data-name="{{ $item->name }}"
+                                                            data-code="{{ $item->code }}"
+                                                            data-location="{{ $item->location->name ?? '-' }}"
+                                                            data-detail_location="{{ $item->detail_location->name ?? '-' }}"
+                                                            data-stock="{{ $item->stock }} {{ $item->unit }}"
+                                                            data-safety_stock="{{ $item->safety_stock }} {{ $item->unit }}"
+                                                            data-photo="{{ asset('storage/' . $item->photo) }}"
+                                                            data-tgl_beli="{{ $item->tgl_beli ?? '-' }}"
+                                                            data-tgl_expired="{{ $item->tgl_expired }}"
+                                                            data-vendor="{{ $item->vendor ?? '-' }}"
+                                                            data-description="{{ $item->description ?? '-' }}">
+                                                            Detail
+                                                        </a>
+                                                        <a class="btn btn-outline-danger my-0 disabled" href="javascript:;"
                                                             data-bs-toggle="modal"
-                                                            data-bs-target="#delete-confirmation-modal"
-                                                            onclick="#">Delete</a>
+                                                            data-bs-target="#delete-confirmation-modal" onclick="#">
+                                                            Delete
+                                                        </a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -100,6 +121,84 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Detail -->
+    <div class="modal fade" id="ModalDetail" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modalAdminTitle">Detail Consumable</h3>
+                </div>
+                <form action="" method="POST">
+                    <div class="modal-body">
+                        <div class="mb-4 text-center align-middle">
+                            {{-- KONTEN PHOTO DOKUMENTASI TEMUAN --}}
+                            <div class="border mx-auto" style="width: 70%">
+                                <p class="fw-bolder mb-0">Photo Consumable</p>
+                                <img id="photo_modal" class="img-thumbnail lazyload" alt="Tidak ada photo tools">
+                            </div>
+                        </div>
+                        <div class="row g-2">
+                            <div class="col mb-1">
+                                <label for="nameWithTitle" class="form-label">Name</label>
+                                <input readonly type="text" id="name_modal" class="form-control">
+                            </div>
+                            <div class="col mb-1">
+                                <label for="" class="form-label">Code</label>
+                                <input readonly type="text" id="code_modal" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row g-2">
+                            <div class="col mb-1">
+                                <label for="emailWithTitle" class="form-label">Location</label>
+                                <input readonly type="text" id="location_modal" class="form-control">
+                            </div>
+                            <div class="col mb-1">
+                                <label for="dobWithTitle" class="form-label">Detail Location</label>
+                                <input readonly type="text" id="detail_location_modal" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row g-2">
+                            <div class="col mb-1">
+                                <label for="emailWithTitle" class="form-label">Stock</label>
+                                <input readonly type="text" id="stock_modal" class="form-control">
+                            </div>
+                            <div class="col mb-1">
+                                <label for="emailWithTitle" class="form-label">Safety Stock</label>
+                                <input readonly type="text" id="safety_stock_modal" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row g-2">
+                            <div class="col mb-1">
+                                <label for="emailWithTitle" class="form-label">Description</label>
+                                <input readonly type="text" id="description_modal" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row g-2">
+                            <div class="col mb-1">
+                                <label for="emailWithTitle" class="form-label">Tanggal Beli</label>
+                                <input readonly type="text" id="tgl_beli_modal" class="form-control">
+                            </div>
+                            <div class="col mb-1">
+                                <label for="emailWithTitle" class="form-label">Tanggal Expired</label>
+                                <input readonly type="text" id="tgl_expired_modal" class="form-control">
+                            </div>
+                            <div class="col mb-1">
+                                <label for="emailWithTitle" class="form-label">Vendor</label>
+                                <input readonly type="text" id="vendor_modal" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                            Tutup
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Detail -->
 
     <!-- BEGIN: Delete Confirmation Modal -->
     <div id="delete-confirmation-modal" class="modal" tabindex="-1" aria-hidden="true">
@@ -125,4 +224,66 @@
         </div>
     </div>
     <!-- END: Delete Confirmation Modal -->
+
+    <!-- BEGIN: Import Modal -->
+    <div id="import-file-modal" class="modal fade" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="{{ route('masterdata-consumable.import') }}" method="POST" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalAdminTitle">Import File Excel Data Consumable</h5>
+                    </div>
+                    <div class="modal-body">
+                        @csrf
+                        @method('post')
+                        <div class="row mb-4">
+                            <div class="col">
+                                <input type="file" name="file_excel" accept=".xls, .xlsx, .csv" class="form-control"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="float-end mb-3">
+                            <button type="submit" class="btn btn-primary me-3">Import</button>
+                            <button type="button" data-bs-dismiss="modal" class="btn btn-outline-danger">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <!-- END: Import Modal -->
+@endsection
+
+@section('javascript')
+    <script>
+        $(document).ready(function() {
+            $('#ModalDetail').on('show.bs.modal', function(e) {
+                var name = $(e.relatedTarget).data('name');
+                var code = $(e.relatedTarget).data('code');
+                var location = $(e.relatedTarget).data('location');
+                var detail_location = $(e.relatedTarget).data('detail_location');
+                var stock = $(e.relatedTarget).data('stock');
+                var safety_stock = $(e.relatedTarget).data('safety_stock');
+                var tgl_beli = $(e.relatedTarget).data('tgl_beli');
+                var tgl_expired = $(e.relatedTarget).data('tgl_expired');
+                var vendor = $(e.relatedTarget).data('vendor');
+                var description = $(e.relatedTarget).data('description');
+                var photo = $(e.relatedTarget).data('photo');
+
+
+                $('#name_modal').val(name);
+                $('#code_modal').val(code);
+                $('#location_modal').val(location);
+                $('#detail_location_modal').val(detail_location);
+                $('#stock_modal').val(stock);
+                $('#safety_stock_modal').val(safety_stock);
+                $('#tgl_beli_modal').val(tgl_beli);
+                $('#tgl_expired_modal').val(tgl_expired);
+                $('#vendor_modal').val(vendor);
+                $('#description_modal').val(description);
+                document.getElementById("photo_modal").src = photo;
+            });
+        });
+    </script>
 @endsection

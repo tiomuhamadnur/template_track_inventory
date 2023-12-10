@@ -712,6 +712,7 @@ Route::middleware(['auth', 'license'])->group(function () {
                 Route::get('/masterdata-tools', 'masterdata')->name('masterdata-tools');
                 Route::get('/masterdata-tools-create', 'create')->name('masterdata-tools.create');
                 Route::post('/masterdata-tools-store', 'store')->name('masterdata-tools.store');
+                Route::post('/masterdata-tools-import', 'import')->name('masterdata-tools.import');
                 Route::get('/masterdata-tools-edit/{id}/edit', 'edit')->name('masterdata-tools.edit');
                 Route::put('/masterdata-tools-update', 'update')->name('masterdata-tools.update');
                 Route::get('/masterdata-tools/filter', 'filter')->name('masterdata-tools.filter');
@@ -739,6 +740,7 @@ Route::middleware(['auth', 'license'])->group(function () {
                 Route::get('/masterdata-consumable', 'index')->name('masterdata-consumable.index');
                 Route::get('/masterdata-consumable-create', 'create')->name('masterdata-consumable.create');
                 Route::post('/masterdata-consumable-store', 'store')->name('masterdata-consumable.store');
+                Route::post('/masterdata-consumable-import', 'import')->name('masterdata-consumable.import');
                 Route::get('/masterdata-consumable-edit/{id}/edit', 'edit')->name('masterdata-consumable.edit');
                 Route::put('/masterdata-consumable-update', 'update')->name('masterdata-consumable.update');
                 Route::delete('/masterdata-consumable-delete', 'destroy')->name('masterdata-consumable.destroy');
