@@ -87,7 +87,9 @@
                                         <select class="form-select w-full" name="vendor_id" required>
                                             <option disabled selected value="">- Pilih Perusahaan/Vendor -</option>
                                             @foreach ($vendor as $item)
-                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                <option value="{{ $item->id }}"
+                                                    @if ($user->vendor->id == $item->id) selected @endif>{{ $item->name }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -107,31 +109,32 @@
                                     <div>
                                         <label for="crud-form-1" class="form-label mt-2">Section</label>
                                         <select class="form-select w-full" name="section_id" required>
-                                            <option value="{{ $user->section->id ?? '' }}">
-                                                {{ $user->section->name ?? '-' }}</option>
                                             @foreach ($section as $item)
-                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                <option value="{{ $item->id }}"
+                                                    @if ($user->section->id == $item->id) selected @endif>{{ $item->name }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div>
                                         <label for="crud-form-1" class="form-label mt-2">Departement</label>
                                         <select class="form-select w-full" name="departement_id" required>
-                                            <option value="{{ $user->departement->id ?? '' }}">
-                                                {{ $user->departement->name ?? '-' }}</option>
                                             @foreach ($departement as $item)
-                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                <option value="{{ $item->id }}"
+                                                    @if ($user->departement->id == $item->id) selected @endif>{{ $item->name }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div>
                                         <label for="crud-form-1" class="form-label mt-2">Role</label>
                                         <select class="form-select w-full" name="role" required>
-                                            <option value="{{ $user->role }}" selected>{{ $user->role }}
+                                            <option value="User" @if ($user->role == 'User') selected @endif>User
                                             </option>
-                                            <option value="User">User</option>
-                                            <option value="Admin">Admin</option>
-                                            <option value="Guest">Guest</option>
+                                            <option value="Admin" @if ($user->role == 'Admin') selected @endif>Admin
+                                            </option>
+                                            <option value="Guest" @if ($user->role == 'Guest') selected @endif>Guest
+                                            </option>
                                         </select>
                                     </div>
                                     <div class="form-label mt-2">

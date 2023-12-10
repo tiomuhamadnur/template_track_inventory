@@ -44,14 +44,21 @@
                             <div class="name">Penanggung jawab</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <select name="responsible_id" class="form-select" required>
-                                        <option value="" selected disabled>- Pilih Penanggung Jawab -</option>
-                                        @foreach ($penanggung_jawab as $item)
-                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    {{-- <input type="text" placeholder="Token User" class="form-control" name="token"
-                                        id="token"> --}}
+                                    @if (auth()->user()->status_employee == 'Organik')
+                                        <select name="responsible_id" class="form-select" required>
+                                            <option value="{{ auth()->user()->id }}" selected disabled>
+                                                {{ auth()->user()->name }}</option>
+                                        </select>
+                                    @else
+                                        <select name="responsible_id" class="form-select" required>
+                                            <option value="" selected disabled>- Pilih Penanggung Jawab -</option>
+                                            @foreach ($penanggung_jawab as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}
+                                                    ({{ $item->jabatan ?? '-' }})
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -104,7 +111,7 @@
 
 
                         <div class="pull-right mt-2">
-                            <a href="{{ route('masterdata-transaksi-tools.index') }}" class="btn btn-danger shadow">
+                            <a href="{{ route('my-transaksi-tools.index') }}" class="btn btn-danger shadow">
                                 Cancel
                             </a>
                             <button class="btn btn-success ms-2 shadow" type="submit">

@@ -37,7 +37,7 @@ class TransaksiConsumableController extends Controller
 
     public function create()
     {
-        $penanggung_jawab = Pegawai::orderBy('name', 'ASC')->get();
+        $penanggung_jawab = Pegawai::where('status_employee', 'Organik')->where('section_id', auth()->user()->section->id)->orderBy('name', 'ASC')->get();
         $consumable = Consumable::orderBy('name', 'ASC')->get();
         return view('transaksi_tools_material.transaksi_consumable.create', compact(['penanggung_jawab', 'consumable']));
     }

@@ -28,7 +28,7 @@ class TransaksiToolsController extends Controller
 
     public function create()
     {
-        $penanggung_jawab = Pegawai::orderBy('name', 'ASC')->get();
+        $penanggung_jawab = Pegawai::where('status_employee', 'Organik')->where('section_id', auth()->user()->section->id)->orderBy('name', 'ASC')->get();
         $tools = Tools::orderBy('name', 'ASC')->get();
         return view('transaksi_tools_material.transaksi_tools.create', compact(['penanggung_jawab', 'tools']));
     }

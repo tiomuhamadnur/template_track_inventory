@@ -16,8 +16,8 @@ class IndividualPerformanceController extends Controller
         $bulan_ini = Carbon::now()->format('m');
         $tahun_ini = Carbon::now()->format('Y');
 
-        $rams_team = Pegawai::where('section', 'Permanent Way RAMS')->where('jabatan', 'Technician')->orderBy('name', 'ASC')->pluck('name')->toArray();
-        $maintenance_team = Pegawai::where('section', 'Permanent Way Maintenance')->where('jabatan', 'Technician')->orderBy('name', 'ASC')->pluck('name')->toArray();
+        $rams_team = Pegawai::where('section_id', 1)->where('jabatan', 'Technician')->orderBy('name', 'ASC')->pluck('name')->toArray();
+        $maintenance_team = Pegawai::where('section_id', 2)->where('jabatan', 'Technician')->orderBy('name', 'ASC')->pluck('name')->toArray();
 
         $temuan_rams = [];
         $rfi_maintenance = [];
