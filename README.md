@@ -23,6 +23,7 @@ Exodus makes simpler life.
 ### Awesome Developer
 
 - **[Tio Muhamad Nur](https://www.linkedin.com/in/tiomuhamadnur/)**
+- **[Dede Irfan](https://id.linkedin.com/in/deirfed/)**
 
 ## License & Copyrights
 

@@ -61,8 +61,6 @@ class RelasiAreaCivilController extends Controller
 
     public function import(Request $request)
     {
-        dd($request);
-
         $this->validate($request, [
             'file_excel' => 'required|mimes:csv,xls,xlsx',
         ]);
