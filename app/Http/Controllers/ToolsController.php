@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Imports\planning\ToolsImport;
 use App\Models\DetailLocation;
 use Excel;
+use Illuminate\Support\Facades\Storage;
 
 class ToolsController extends Controller
 {
@@ -101,18 +102,47 @@ class ToolsController extends Controller
     {
         $id = $request->id;
         $tools = Tools::findOrFail($id);
-        if ($tools){
+        if (!$tools){
+            return back();
+        }
+
+        if ($request->hasFile('photo') && $request->photo != '') {
+            $photo = $request->file('photo')->store('masterdata/tools');
+            Storage::delete($tools->photo);
             $tools->update([
                 'name' => $request->name,
                 'code' => $request->code,
                 'stock' => $request->stock,
-                'unit' => $request->unit,
+                'unit'=> $request->unit,
                 'location_id' => $request->location_id,
                 'detail_location_id' => $request->detail_location_id,
                 'section_id' => $request->section_id,
+                'departement_id' => $request->departement_id,
+                'description' => $request->description,
+                'vendor' => $request->vendor,
+                'tgl_beli' => $request->tgl_beli,
+                'tgl_sertifikasi' => $request->tgl_sertifikasi,
+                'tgl_expired' => $request->tgl_expired,
+                'photo' => $photo,
+            ]);
+        } else {
+            $tools->update([
+                'name' => $request->name,
+                'code' => $request->code,
+                'stock' => $request->stock,
+                'unit'=> $request->unit,
+                'location_id' => $request->location_id,
+                'detail_location_id' => $request->detail_location_id,
+                'section_id' => $request->section_id,
+                'departement_id' => $request->departement_id,
+                'description' => $request->description,
+                'vendor' => $request->vendor,
+                'tgl_beli' => $request->tgl_beli,
+                'tgl_sertifikasi' => $request->tgl_sertifikasi,
+                'tgl_expired' => $request->tgl_expired,
             ]);
         }
-        return redirect(route('masterdata-tools'))->withNotify('Data berhasil diupdate');
+        return redirect()->route('masterdata-tools')->withNotify('Data berhasil diupdate');
     }
 
     public function import(Request $request)

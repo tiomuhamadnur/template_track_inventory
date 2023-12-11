@@ -9,6 +9,7 @@ use App\Imports\planning\ConsumableImport;
 use App\Models\DetailLocation;
 use App\Models\Location;
 use Excel;
+use Illuminate\Support\Facades\Storage;
 
 class ConsumableController extends Controller
 {
@@ -84,14 +85,40 @@ class ConsumableController extends Controller
         if (!$consumable){
             return back();
         }
-        $consumable->update([
-            'name' => $request->name,
-            'code' => $request->code,
-            'stock' => $request->stock,
-            'unit' => $request->unit,
-            'location_id' => $request->location_id,
-            'detail_location_id' => $request->detail_location_id,
-        ]);
+        if ($request->hasFile('photo') && $request->photo != '') {
+            $photo = $request->file('photo')->store('masterdata/tools');
+            Storage::delete($consumable->photo);
+            $consumable->update([
+                'name' => $request->name,
+                'code' => $request->code,
+                'stock' => $request->stock,
+                'safety_stock' => $request->safety_stock,
+                'unit'=> $request->unit,
+                'location_id' => $request->location_id,
+                'detail_location_id' => $request->detail_location_id,
+                'description' => $request->description,
+                'vendor' => $request->vendor,
+                'tgl_beli' => $request->tgl_beli,
+                'tgl_sertifikasi' => $request->tgl_sertifikasi,
+                'tgl_expired' => $request->tgl_expired,
+                'photo' => $photo,
+            ]);
+        } else {
+            $consumable->update([
+                'name' => $request->name,
+                'code' => $request->code,
+                'stock' => $request->stock,
+                'safety_stock' => $request->safety_stock,
+                'unit'=> $request->unit,
+                'location_id' => $request->location_id,
+                'detail_location_id' => $request->detail_location_id,
+                'description' => $request->description,
+                'vendor' => $request->vendor,
+                'tgl_beli' => $request->tgl_beli,
+                'tgl_sertifikasi' => $request->tgl_sertifikasi,
+                'tgl_expired' => $request->tgl_expired,
+            ]);
+        }
 
         return redirect(route('masterdata-consumable.index'))->withNotify('Data berhasil diupdate!');
     }

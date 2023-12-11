@@ -99,9 +99,11 @@
                                         <input class="form-control" type="file" name="photo" id="imageInput"
                                             accept="image/*" required>
                                         @error('photo')
-                                            <p class="bg-danger rounded-3 text-center text-white mt-1">
-                                                {{ $message }}
-                                            </p>
+                                            <div>
+                                                <p class="bg-danger rounded-3 text-center text-white mt-1">
+                                                    {{ $message }}
+                                                </p>
+                                            </div>
                                         @enderror
                                     </div>
                                 </div>
