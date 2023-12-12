@@ -361,7 +361,7 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Status</label>
-                            <select class="form-select" name="status">
+                            <select class="form-select" multiple name="status[]">
                                 <option disabled selected>- Status -</option>
                                 <option value="open">Open</option>
                                 <option value="monitoring">Monitoring</option>

@@ -87,7 +87,9 @@ class ConsumableController extends Controller
         }
         if ($request->hasFile('photo') && $request->photo != '') {
             $photo = $request->file('photo')->store('masterdata/tools');
-            Storage::delete($consumable->photo);
+            if ($consumable->photo != null){
+                Storage::delete($consumable->photo);
+            }
             $consumable->update([
                 'name' => $request->name,
                 'code' => $request->code,

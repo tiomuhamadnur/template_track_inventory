@@ -18,13 +18,13 @@ class ClosingReportController extends Controller
 {
     public function index()
     {
-        $kegiatan = PM::orderBy('section', 'ASC')->orderBy('name', 'ASC')->get();
+        $kegiatan = PM::where('section', auth()->user()->section->code)->orderBy('section', 'ASC')->orderBy('name', 'ASC')->get();
         return view('mainline.mainline_closing_report.index', compact(['kegiatan']));
     }
 
     public function create()
     {
-        $activity = PM::orderBy('name', 'asc')->get();
+        $activity = PM::where('section', auth()->user()->section->code)->orderBy('name', 'asc')->get();
         $section_head = Pegawai::where('jabatan', 'Section Head')->get();
         $personel = Pegawai::where('jabatan', 'Technician')->orderBy('name', 'asc')->get();
         $tools = ToolsMaterials::orderBy('name', 'asc')->get();

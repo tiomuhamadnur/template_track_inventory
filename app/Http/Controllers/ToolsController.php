@@ -108,7 +108,9 @@ class ToolsController extends Controller
 
         if ($request->hasFile('photo') && $request->photo != '') {
             $photo = $request->file('photo')->store('masterdata/tools');
-            Storage::delete($tools->photo);
+            if($tools->photo != null){
+                Storage::delete($tools->photo);
+            }
             $tools->update([
                 'name' => $request->name,
                 'code' => $request->code,

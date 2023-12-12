@@ -34,8 +34,7 @@
                                             required>
                                             <option value="">- pilih nama kegiatan -</option>
                                             @foreach ($kegiatan as $item)
-                                                <option value="{{ $item->id }}">({{ $item->section }})
-                                                    {{ $item->name }}</option>
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>

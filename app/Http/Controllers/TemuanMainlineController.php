@@ -128,6 +128,7 @@ class TemuanMainlineController extends Controller
 
     public function filter(Request $request)
     {
+        dd($request);
         $area_id = $request->area_id;
         $line_id = $request->line_id;
         $part_id = $request->part_id;
