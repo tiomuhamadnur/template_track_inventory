@@ -179,7 +179,7 @@ class TemuanMainlineController extends Controller
             });
         }
 
-        $temuan->orderBy('area_id', 'asc')->orderBy('kilometer', 'asc');
+        $temuan->orderByRaw('CAST(kilometer AS DECIMAL) ASC');
 
         $area = Area::all();
         $area_rencana = Area::where('stasiun', 'true')->orWhere('area', 'DAL')->get();
