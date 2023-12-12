@@ -179,13 +179,15 @@ class TemuanMainlineController extends Controller
             });
         }
 
+        $temuan->orderBy('area_id', 'asc')->orderBy('kilometer', 'asc');
+
         $area = Area::all();
         $area_rencana = Area::where('stasiun', 'true')->orWhere('area', 'DAL')->get();
         $line = Line::whereNot('area', 'Depo')->get();
         $part = Part::orderBy('name', 'asc')->get();
 
         return view('mainline.mainline_temuan.index', [
-            'temuan' => $temuan->orderBy('kilometer', 'asc')->get(),
+            'temuan' => $temuan->get(),
             'area_rencana' => $area_rencana,
             'area' => $area,
             'line' => $line,
