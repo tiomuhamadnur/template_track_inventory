@@ -65,7 +65,7 @@ class SendEmailController extends Controller
     public function message_format ($nama_sh, $gender_sh, $jumlah_rfi, $tanggal_rfi, $pic_rfi, $lokasi)
     {
         $enter = "\n";
-        $div = '================================';
+        $div = '=============================';
         $url_rfi = 'https://exodus.tideupindustries.com/rfi-mainline';
 
         $message = '🟡 *EXODUS NOTIFICATION: REQUEST FOR INSPECTION (RFI)*' . $enter . $enter . $enter .
