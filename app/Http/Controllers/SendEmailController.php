@@ -46,14 +46,15 @@ class SendEmailController extends Controller
         $pic_rfi = $rfi->user->name;
         $lokasi = $rfi->temuan_mainline->mainline->area->code;
         $section_head = Pegawai::where('jabatan', 'Section Head')
-            ->whereIn('section', ['Permanent Way RAMS', 'Permanent Way Maintenance'])
+            ->whereIn('section_id', [1, 2])
             ->get();
 
         foreach ($section_head as $item) {
             $nama_sh = $item->name;
+            $gender_sh = $item->gender;
             $phoneNumber = $item->no_hp;
 
-            $message = $this->message_format($nama_sh, $jumlah_rfi, $tanggal_rfi, $pic_rfi, $lokasi);
+            $message = $this->message_format($nama_sh, $gender_sh, $jumlah_rfi, $tanggal_rfi, $pic_rfi, $lokasi);
             WhatsAppHelper::sendNotification($phoneNumber, $message);
         }
 
@@ -61,14 +62,14 @@ class SendEmailController extends Controller
         return redirect()->back()->withNotify('Data RFI berhasil dikirim via WhatsApp ke Section Head terkait!');
     }
 
-    public function message_format ($nama_sh, $jumlah_rfi, $tanggal_rfi, $pic_rfi, $lokasi)
+    public function message_format ($nama_sh, $gender_sh, $jumlah_rfi, $tanggal_rfi, $pic_rfi, $lokasi)
     {
         $enter = "\n";
         $div = '================================';
         $url_rfi = 'https://exodus.tideupindustries.com/rfi-mainline';
 
         $message = '🟡 *EXODUS NOTIFICATION: REQUEST FOR INSPECTION (RFI)*' . $enter . $enter . $enter .
-        'Dear Bpk/Ibu *' . $nama_sh . '*,' . $enter . $enter.
+        'Dear ' . $gender_sh .' *' . $nama_sh . '*,' . $enter . $enter.
         'Sebagai informasi, terdapat pengajuan *RFI* di *Exodus* yang perlu di _review_ dengan detail informasi sebagai berikut:' . $enter . $enter .
 
         $div . $enter . $enter .
