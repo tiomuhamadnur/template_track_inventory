@@ -57,7 +57,15 @@
                                 <input type="text" name="area_id" value="{{ $area_id ?? '' }}" hidden>
                                 <input type="text" name="line_id" value="{{ $line_id ?? '' }}" hidden>
                                 <input type="text" name="part_id" value="{{ $part_id ?? '' }}" hidden>
-                                <input type="text" name="status" value="{{ $status ?? '' }}" hidden>
+                                <select name="status[]" multiple hidden>
+                                    @if ($status)
+                                        {
+                                        @foreach ($status as $item)
+                                            <option value="{{ $item }}" selected>{{ $item }}</option>
+                                        @endforeach
+                                        }
+                                    @endif
+                                </select>
                                 <input type="text" name="klasifikasi" value="{{ $klasifikasi ?? '' }}" hidden>
                                 <input type="text" name="tanggal_awal" value="{{ $tanggal_awal ?? '' }}" hidden>
                                 <input type="text" name="tanggal_akhir" value="{{ $tanggal_akhir ?? '' }}" hidden>
@@ -69,7 +77,15 @@
                                 <input type="text" name="area_id" value="{{ $area_id ?? '' }}" hidden>
                                 <input type="text" name="line_id" value="{{ $line_id ?? '' }}" hidden>
                                 <input type="text" name="part_id" value="{{ $part_id ?? '' }}" hidden>
-                                <input type="text" name="status" value="{{ $status ?? '' }}" hidden>
+                                <select name="status[]" multiple hidden>
+                                    @if ($status)
+                                        {
+                                        @foreach ($status as $item)
+                                            <option value="{{ $item }}" selected>{{ $item }}</option>
+                                        @endforeach
+                                        }
+                                    @endif
+                                </select>
                                 <input type="text" name="klasifikasi" value="{{ $klasifikasi ?? '' }}" hidden>
                                 <input type="text" name="tanggal_awal" value="{{ $tanggal_awal ?? '' }}" hidden>
                                 <input type="text" name="tanggal_akhir" value="{{ $tanggal_akhir ?? '' }}" hidden>
@@ -337,7 +353,7 @@
                             <select class="form-select" name="area_id">
                                 <option disabled selected>- Pilih Area -</option>
                                 @foreach ($area as $item)
-                                    <option value="{{ $item->id }}">{{ $item->code }}</option>
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -362,7 +378,7 @@
                         <div class="form-group">
                             <label class="form-label">Status</label>
                             <select class="form-select" multiple name="status[]">
-                                <option disabled selected>- Status -</option>
+                                <option disabled>- Status -</option>
                                 <option value="open">Open</option>
                                 <option value="monitoring">Monitoring</option>
                                 <option value="close">Close</option>

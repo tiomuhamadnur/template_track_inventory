@@ -8,7 +8,7 @@ use Maatwebsite\Excel\Concerns\FromView;
 
 class TemuanMainlineFilterExport implements FromView
 {
-    public function __construct(?int $area_id = null, ?int $line_id = null, ?int $part_id = null, ?string $status = null, ?string $klasifikasi = null, ?string $tanggal_awal = null, ?string $tanggal_akhir = null)
+    public function __construct(?int $area_id = null, ?int $line_id = null, ?int $part_id = null, ?array $status = null, ?string $klasifikasi = null, ?string $tanggal_awal = null, ?string $tanggal_akhir = null)
     {
         $this->area_id = $area_id;
         $this->line_id = $line_id;
@@ -45,7 +45,7 @@ class TemuanMainlineFilterExport implements FromView
 
         // Filter by status
         $temuan->when($this->status, function ($query) {
-            return $query->where('status', $this->status);
+            return $query->whereIn('status', $this->status);
         });
 
         // Filter by klasifikasi

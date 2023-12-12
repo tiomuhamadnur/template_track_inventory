@@ -100,7 +100,7 @@ class TemuanMainlineController extends Controller
 
             // Filter by status
             $temuan_filter->when($status, function ($query) use ($request) {
-                return $query->where('status', $request->status);
+                return $query->whereIn('status', $request->status);
             });
 
             // Filter by klasifikasi
@@ -128,7 +128,6 @@ class TemuanMainlineController extends Controller
 
     public function filter(Request $request)
     {
-        dd($request);
         $area_id = $request->area_id;
         $line_id = $request->line_id;
         $part_id = $request->part_id;
@@ -162,7 +161,7 @@ class TemuanMainlineController extends Controller
 
         // Filter by status
         $temuan->when($status, function ($query) use ($request) {
-            return $query->where('status', $request->status);
+            return $query->whereIn('status', $request->status);
         });
 
         // Filter by klasifikasi
