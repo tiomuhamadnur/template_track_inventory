@@ -12,7 +12,7 @@
                         <div>
                             <h4 class="card-title card-title-dash">Preventive Work Person In Charge (Periode:
                                 {{ $tahun }})</h4>
-                            <p class="card-subtitle card-subtitle-dash">{{ auth()->user()->departement }}</p>
+                            <p class="card-subtitle card-subtitle-dash">{{ auth()->user()->section->name }}</p>
                         </div>
                         <div class="float-right">
                             <a href="{{ route('pic.create') }}"><button class="btn btn-primary btn-sm text-white mb-0 me-0"

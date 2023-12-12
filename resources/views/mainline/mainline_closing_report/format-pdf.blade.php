@@ -124,10 +124,10 @@
                 </td>
                 <td class="p-1">
                     <p class="text-report mb-0">
-                        <b>Section Head of {{ $section_head->section ?? '?' }}:</b> <br>
+                        <b>Section Head of {{ $section_head->section->name ?? '?' }}:</b> <br>
                         1. {{ $closing_report->section_head ?? '?' }} <br> <br>
 
-                        <b>Staff of {{ $section_head->section ?? '?' }}:</b> <br>
+                        <b>Staff of {{ $section_head->section->name ?? '?' }}:</b> <br>
                         1. {{ $closing_report->personel_1 ?? '?' }} <br>
                         2. {{ $closing_report->personel_2 ?? '' }} <br>
                         3. {{ $closing_report->personel_3 ?? '' }} <br>
@@ -188,13 +188,13 @@
             <tr>
                 <td class="p-1">
                     <p class="text-report mb-0 fw-bolder">
-                        {{ auth()->user()->jabatan . ' ' . auth()->user()->section }}
+                        {{ auth()->user()->jabatan . ' ' . auth()->user()->section->name }}
                     </p>
                 </td>
                 <td class="p-1"></td>
                 <td class="p-1">
                     <p class="text-report mb-0 fw-bolder">
-                        {{ $section_head->jabatan . ' ' . $section_head->section }}
+                        {{ $section_head->jabatan . ' ' . $section_head->section->name }}
                     </p>
                 </td>
             </tr>

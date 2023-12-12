@@ -11,7 +11,7 @@
                     <div class="d-sm-flex justify-content-between align-items-start">
                         <div>
                             <h4 class="card-title card-title-dash">Edit Data PIC</h4>
-                            <p class="card-subtitle card-subtitle-dash">{{ auth()->user()->departement }}</p>
+                            <p class="card-subtitle card-subtitle-dash">{{ auth()->user()->section->name }}</p>
                         </div>
                     </div>
 
