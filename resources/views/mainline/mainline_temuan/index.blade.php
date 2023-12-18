@@ -42,15 +42,10 @@
                                     class="btn btn-outline-success btn-lg mx-0" title="Export to PDF">
                                     <i class="mdi mdi-file-pdf text-danger"></i>
                                 </a>
-                                {{-- <a href="#" class="btn btn-outline-danger btn-lg mx-0" type="button"
-                                    data-bs-toggle="modal" data-bs-target="#ModalReport"
-                                    title="Generate Report Form Track Patrol on Foot">
-                                    <i class="ti-printer"></i>
-                                </a> --}}
                             </div>
-                            <div>
+                            {{-- <div>
                                 showing: <u class="fw-bolder">{{ $temuan->count() ?? 0 }}</u> data
-                            </div>
+                            </div> --}}
                             <form action="{{ route('temuan_mainline.export') }}" method="GET" id="form_export_excel">
                                 @csrf
                                 @method('get')
@@ -90,7 +85,8 @@
                                 <input type="text" name="tanggal_awal" value="{{ $tanggal_awal ?? '' }}" hidden>
                                 <input type="text" name="tanggal_akhir" value="{{ $tanggal_akhir ?? '' }}" hidden>
                             </form>
-                            <div class="table-responsive pt-3">
+                            {{ $temuan->links('vendor.pagination.bootstrap-5') }}
+                            <div class="table-responsive pt-1">
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
@@ -126,7 +122,7 @@
                                         @foreach ($temuan as $item)
                                             <tr>
                                                 <td class="text-center">
-                                                    {{ $loop->iteration }}
+                                                    {{ ($temuan->currentPage() - 1) * $temuan->perPage() + $loop->index + 1 }}
                                                 </td>
                                                 <td class="text-center">
                                                     {{ $item->mainline->area->code }}

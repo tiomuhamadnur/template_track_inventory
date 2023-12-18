@@ -34,8 +34,7 @@
                             <div class="name">Peminjam</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="form-control" type="text" value="{{ auth()->user()->name }}" readonly
-                                        required>
+                                    <input class="form-control" type="text" value="{{ auth()->user()->name }}" readonly>
                                 </div>
                             </div>
                         </div>
@@ -45,10 +44,9 @@
                             <div class="value">
                                 <div class="input-group">
                                     @if (auth()->user()->status_employee == 'Organik')
-                                        <select name="responsible_id" class="form-select" required>
-                                            <option value="{{ auth()->user()->id }}" selected disabled>
-                                                {{ auth()->user()->name }}</option>
-                                        </select>
+                                        <input class="form-control" type="text" value="{{ auth()->user()->name }}"
+                                            readonly>
+                                        <input type="hidden" value="{{ auth()->user()->id }}" name="responsible_id">
                                     @else
                                         <select name="responsible_id" class="form-select" required>
                                             <option value="" selected disabled>- Pilih Penanggung Jawab -</option>

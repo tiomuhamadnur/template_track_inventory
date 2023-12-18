@@ -1,11 +1,11 @@
 @extends('transaksi_tools_material.transaksi_layout.base')
 
 @section('sub-title')
-    <title>Data Transaksi Tools | CPWTM</title>
+    <title>Data My Transaction Tools | CPWTM</title>
 @endsection
 
 @section('sub-content')
-    <h4>Transaksi > Tools</h4>
+    <h4>My Transaction > Tools</h4>
     <div class="row">
         <div class="col-sm-12">
             <div class="home-tab">
@@ -16,29 +16,31 @@
                 <div class="col-lg-12 grid-margin stretch-card mt-3">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Data Transaksi Tools</h4>
+                            <h4 class="card-title">Data My Transaction Tools</h4>
                             <div class="btn-group">
+                                <a href="{{ route('my-transaksi-tools.index') }}" class="btn btn-outline-dark btn-lg mx-0"
+                                    type="button" title="Reset Filter">
+                                    <i class="ti-reload"></i>
+                                </a>
                                 <a href="{{ route('masterdata-transaksi-tools.create') }}"
                                     class="btn btn-primary btn-lg me-0" type="button">Add Data
                                 </a>
-                                <button class="btn btn-outline-dark btn-lg dropdown-toggle ms-0" type="button"
-                                    id="dropdownMenuIconButton1" data-bs-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false" style="margin-left: -10px;">
-                                    <i class="ti-link"></i>
+                                <a href="#" class="btn btn-outline-warning btn-lg mx-0" type="button"
+                                    data-bs-toggle="modal" data-bs-target="#ModalFilter" title="Filter data">
+                                    <i class="ti-filter"></i>
+                                </a>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#ModalExportExcel" type="button"
+                                    class="btn btn-outline-success btn-lg mx-0" title="Export to Excel">
+                                    <i class="mdi mdi-file-excel text-success"></i>
+                                </a>
+                            </div>
+                            <div>
+                                <button class="btn btn-outline-info btn-lg ms-0" type="button" id="deleteSubmit"
+                                    style="display:none;" data-bs-toggle="modal"
+                                    data-bs-target="#return-confirmation-modal">
+                                    <i class="ti-back-right"></i>
+                                    Return Tools
                                 </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuIconButton1">
-                                    <a class="dropdown-item" href="#">Print</a>
-                                    <a class="dropdown-item" href="#">Export to Excel</a>
-                                    <a class="dropdown-item" href="#">Export to PDF</a>
-                                </div>
-                                <div>
-                                    <button class="btn btn-outline-info btn-lg ms-0" type="button" id="deleteSubmit"
-                                        style="display:none;" data-bs-toggle="modal"
-                                        data-bs-target="#return-confirmation-modal">
-                                        <i class="ti-back-right"></i>
-                                        Return Tools
-                                    </button>
-                                </div>
                             </div>
                             <div class="table-responsive pt-3">
                                 <form id="return_form" method="post"
@@ -72,7 +74,7 @@
                                             @foreach ($transaksi_tools as $item)
                                                 <tr>
                                                     <td class="text-center">
-                                                        {{ $loop->iteration }}
+                                                        {{ ($transaksi_tools->currentPage() - 1) * $transaksi_tools->perPage() + $loop->index + 1 }}
                                                     </td>
                                                     <td class="text-center">
                                                         @if ($item->status == 'pinjam')

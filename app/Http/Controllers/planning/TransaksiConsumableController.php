@@ -13,7 +13,7 @@ class TransaksiConsumableController extends Controller
 {
     public function my_index()
     {
-        $transaksi_consumable = TransaksiConsumable::where('user_id', auth()->user()->id)->orderBy('tanggal_pinjam', 'DESC')->get();
+        $transaksi_consumable = TransaksiConsumable::where('user_id', auth()->user()->id)->orderBy('tanggal_pinjam', 'DESC')->paginate(100);
         foreach ($transaksi_consumable as $consumable){
             $waktu = $consumable->tanggal_pinjam;
             $waktu_carbon = Carbon::parse($waktu);
@@ -23,7 +23,7 @@ class TransaksiConsumableController extends Controller
         return view('transaksi_tools_material.transaksi_consumable.my_index', compact(['transaksi_consumable']));
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $transaksi_consumable = TransaksiConsumable::orderBy('tanggal_pinjam', 'DESC')->get();
         foreach ($transaksi_consumable as $consumable){

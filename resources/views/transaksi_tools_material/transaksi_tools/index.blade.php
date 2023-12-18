@@ -18,21 +18,21 @@
                         <div class="card-body">
                             <h4 class="card-title">Data Transaksi Tools</h4>
                             <div class="btn-group">
-                                {{-- <a href="{{ route('masterdata-transaksi-tools.create') }}"
-                                    class="btn btn-primary btn-lg me-0" type="button">Add Data
-                                </a> --}}
-                                <button class="btn btn-outline-dark btn-lg dropdown-toggle ms-0" type="button"
-                                    id="dropdownMenuIconButton1" data-bs-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false" style="margin-left: -10px;">
-                                    <i class="ti-link"></i>
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuIconButton1">
-                                    <a class="dropdown-item" href="#">Print</a>
-                                    <a class="dropdown-item" href="#">Export to Excel</a>
-                                    <a class="dropdown-item" href="#">Export to PDF</a>
-                                </div>
+                                <a href="{{ route('masterdata-transaksi-tools.index') }}"
+                                    class="btn btn-outline-dark btn-lg mx-0" type="button" title="Reset Filter">
+                                    <i class="ti-reload"></i>
+                                </a>
+                                <a href="#" class="btn btn-outline-warning btn-lg mx-0" type="button"
+                                    data-bs-toggle="modal" data-bs-target="#ModalFilter" title="Filter data">
+                                    <i class="ti-filter"></i>
+                                </a>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#ModalExportExcel" type="button"
+                                    class="btn btn-outline-success btn-lg mx-0" title="Export to Excel">
+                                    <i class="mdi mdi-file-excel text-success"></i>
+                                </a>
                             </div>
-                            <div class="table-responsive pt-3">
+                            {{ $transaksi_tools->links('vendor.pagination.bootstrap-5') }}
+                            <div class="table-responsive pt-1">
                                 <form id="return_form" method="post"
                                     action="{{ route('masterdata-transaksi-tools.return') }}">
                                     @csrf
@@ -109,6 +109,15 @@
         </div>
     </div>
 
+    <form action="{{ route('masterdata-transaksi-tools.export_excel') }}" id="form_export_excel" method="GET" hidden>
+        @csrf
+        @method('get')
+        <input type="hidden" name="user_id" value="{{ $user_id ?? '' }}">
+        <input type="hidden" name="status" value="{{ $status ?? '' }}">
+        <input type="hidden" name="tanggal_awal" value="{{ $tanggal_awal ?? '' }}">
+        <input type="hidden" name="tanggal_akhir" value="{{ $tanggal_akhir ?? '' }}">
+    </form>
+
     <!-- Modal Detail -->
     <div class="modal fade" id="ModalDetail" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -149,6 +158,93 @@
         </div>
     </div>
     <!-- End Modal Detail -->
+
+    <!-- Modal Filter-->
+    <div class="modal fade" id="ModalFilter" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form id="form_filter" action="{{ route('masterdata-transaksi-tools.filter') }}" method="GET">
+                        @csrf
+                        @method('get')
+                        <div class="form-group">
+                            <label class="form-label">Peminjam</label>
+                            <select class="form-select" name="user_id">
+                                <option disabled selected>- pilih nama peminjam -</option>
+                                @foreach ($peminjam as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }} -
+                                        ({{ $item->section->code }})
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Status</label>
+                            <select class="form-select" name="status">
+                                <option disabled selected>- pilih status -</option>
+                                <option value="pinjam">Pinjam</option>
+                                <option value="selesai">Selesai</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Tanggal Pinjam</label>
+                            <div class="input-group">
+                                <input placeholder="tanggal awal" class="form-control me-1" type="text"
+                                    onfocus="(this.type='date')" onblur="(this.type='text')" id="date"
+                                    name="tanggal_awal">
+                                <input placeholder="tanggal akhir" class="form-control ms-1" type="text"
+                                    onfocus="(this.type='date')" onblur="(this.type='text')" id="date"
+                                    name="tanggal_akhir">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-right">
+                        <button type="submit" form="form_filter" class="btn btn-primary justify-content-center">
+                            Filter
+                        </button>
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                            Tutup
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Filter-->
+
+    <!-- Modal Export Excel -->
+    <div class="modal fade" id="ModalExportExcel" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAdminTitle">Apakah anda yakin?</h5>
+                </div>
+                <div class="modal-body pt-3 mb-0">
+                    <div class="p-2 text-center">
+                        <h1 class="text-center align-middle text-success mt-2" style="font-size: 100px">
+                            <i class="mdi mdi-file-excel mx-auto"></i>
+                        </h1>
+                        <div class="text-slate-500 mt-2">File excel akan didownload sesuai data yang difilter!</div>
+                    </div>
+                </div>
+
+                <div class="modal-footer mt-2">
+                    <div class="pull-right">
+                        <button type="submit" formtarget="_blank" form="form_export_excel" onclick="closeModal()"
+                            class="btn btn-success justify-content-center">
+                            Download Excel
+                        </button>
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                            Tutup
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Export Excel -->
 @endsection
 
 @section('javascript')

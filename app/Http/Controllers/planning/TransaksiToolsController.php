@@ -14,16 +14,17 @@ class TransaksiToolsController extends Controller
 {
     public function my_index()
     {
-        $transaksi_tools = TransaksiTools::where('user_id', auth()->user()->id)->orderBy('status', 'ASC')->orderBy('tanggal_pinjam', 'ASC')->get();
+        $transaksi_tools = TransaksiTools::where('user_id', auth()->user()->id)->orderBy('status', 'ASC')->orderBy('tanggal_pinjam', 'ASC')->paginate(100);
         $total_pinjam = TransaksiTools::where('user_id', auth()->user()->id)->where('status', 'pinjam')->count();
         return view('transaksi_tools_material.transaksi_tools.my_index', compact(['transaksi_tools', 'total_pinjam']));
     }
 
     public function index()
     {
-        $transaksi_tools = TransaksiTools::orderBy('status', 'ASC')->orderBy('tanggal_pinjam', 'ASC')->get();
+        $transaksi_tools = TransaksiTools::orderBy('status', 'ASC')->orderBy('tanggal_pinjam', 'ASC')->paginate(100);
+        $peminjam = Pegawai::orderBy('section_id', 'ASC')->orderBy('name', 'ASC')->get();
         $total_pinjam = TransaksiTools::where('status', 'pinjam')->count();
-        return view('transaksi_tools_material.transaksi_tools.index', compact(['transaksi_tools', 'total_pinjam']));
+        return view('transaksi_tools_material.transaksi_tools.index', compact(['transaksi_tools', 'total_pinjam', 'peminjam']));
     }
 
     public function create()
@@ -120,8 +121,52 @@ class TransaksiToolsController extends Controller
         //
     }
 
-    public function destroy($id)
+    public function filter(Request $request)
     {
-        //
+        $user_id = $request->user_id;
+        $status = $request->status;
+        $tanggal_awal = $request->tanggal_awal;
+        $tanggal_akhir = $request->tanggal_akhir;
+
+        $transaksi_tools = TransaksiTools::query()
+            ->select(
+                'trans_tools.*',
+            );
+
+        // Filter by user_id
+        $transaksi_tools->when($user_id, function ($query) use ($request) {
+            return $query->where('user_id', $request->user_id);
+        });
+
+        // Filter by status
+        $transaksi_tools->when($status, function ($query) use ($request) {
+            return $query->where('status', $request->status);
+        });
+
+        // Filter by tanggal
+        if ($tanggal_awal != null and $tanggal_akhir != null) {
+            $transaksi_tools->when($tanggal_awal, function ($query) use ($request) {
+                return $query->where('tanggal_pinjam', '>=', Carbon::parse($request->tanggal_awal)->startOfDay());
+            });
+            $transaksi_tools->when($tanggal_akhir, function ($query) use ($request) {
+                return $query->where('tanggal_pinjam', '<=', Carbon::parse($request->tanggal_akhir)->endOfDay());
+            });
+        }
+
+        $peminjam = Pegawai::orderBy('section_id', 'ASC')->orderBy('name', 'ASC')->get();
+
+        return view('transaksi_tools_material.transaksi_tools.index', [
+            'transaksi_tools' => $transaksi_tools->paginate(100),
+            'user_id' => $user_id,
+            'status' => $status,
+            'tanggal_awal' => $tanggal_awal,
+            'tanggal_akhir' => $tanggal_akhir,
+            'peminjam' => $peminjam,
+        ]);
+    }
+
+    public function export_excel(Request $request)
+    {
+        dd($request);
     }
 }

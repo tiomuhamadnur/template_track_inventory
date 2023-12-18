@@ -175,6 +175,8 @@ Route::middleware(['auth', 'license'])->group(function () {
     Route::controller(TransaksiToolsController::class)->group(function(){
         Route::get('/my-transaksi-tools', 'my_index')->name('my-transaksi-tools.index');
         Route::get('/all-transaksi-tools', 'index')->name('masterdata-transaksi-tools.index');
+        Route::get('/all-transaksi-tools/filter', 'filter')->name('masterdata-transaksi-tools.filter');
+        Route::get('/all-transaksi-tools/export-excel', 'export_excel')->name('masterdata-transaksi-tools.export_excel');
         Route::get('/masterdata/create-transaksi-tools', 'create')->name('masterdata-transaksi-tools.create');
         Route::post('/masterdata/transaksi-tools', 'store')->name('masterdata-transaksi-tools.store');
         Route::put('/masterdata/transaksi-tools', 'return')->name('masterdata-transaksi-tools.return');

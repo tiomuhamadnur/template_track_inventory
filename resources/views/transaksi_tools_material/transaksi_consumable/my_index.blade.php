@@ -1,11 +1,11 @@
 @extends('transaksi_tools_material.transaksi_layout.base')
 
 @section('sub-title')
-    <title>Data Transaksi Consumable | CPWTM</title>
+    <title>Data My Transaction Material | CPWTM</title>
 @endsection
 
 @section('sub-content')
-    <h4>Transaksi > Consumable</h4>
+    <h4>My Transaction > Material</h4>
     <div class="row">
         <div class="col-sm-12">
             <div class="home-tab">
@@ -16,23 +16,30 @@
                 <div class="col-lg-12 grid-margin stretch-card mt-3">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Data Transaksi Consumable</h4>
+                            <h4 class="card-title">Data My Transaction Material</h4>
                             <div class="btn-group">
+                                <a href="{{ route('my-transaksi-consumable.index') }}"
+                                    class="btn btn-outline-dark btn-lg mx-0" type="button" title="Reset Filter">
+                                    <i class="ti-reload"></i>
+                                </a>
                                 <a href="{{ route('masterdata-transaksi-consumable.create') }}"
                                     class="btn btn-primary btn-lg me-0" type="button">Add Data
                                 </a>
-                                <button class="btn btn-outline-dark btn-lg dropdown-toggle ms-0" type="button"
-                                    id="dropdownMenuIconButton1" data-bs-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false" style="margin-left: -10px;">
-                                    <i class="ti-link"></i>
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuIconButton1">
-                                    <a class="dropdown-item" href="#">Print</a>
-                                    <a class="dropdown-item" href="#">Export to Excel</a>
-                                    <a class="dropdown-item" href="#">Export to PDF</a>
-                                </div>
+                                <a href="#" class="btn btn-outline-warning btn-lg mx-0" type="button"
+                                    data-bs-toggle="modal" data-bs-target="#ModalFilter" title="Filter data">
+                                    <i class="ti-filter"></i>
+                                </a>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#ModalExportExcel" type="button"
+                                    class="btn btn-outline-success btn-lg mx-0" title="Export to Excel">
+                                    <i class="mdi mdi-file-excel text-success"></i>
+                                </a>
+                                <a href="#" type="button" data-bs-toggle="modal" data-bs-target="#ModalExportPdf"
+                                    class="btn btn-outline-success btn-lg mx-0" title="Export to PDF">
+                                    <i class="mdi mdi-file-pdf text-danger"></i>
+                                </a>
                             </div>
-                            <div class="table-responsive pt-3">
+                            {{ $transaksi_consumable->links('vendor.pagination.bootstrap-5') }}
+                            <div class="table-responsive pt-1">
                                 <form id="return_form" method="post"
                                     action="{{ route('masterdata-transaksi-consumable.return') }}">
                                     @csrf
@@ -53,7 +60,7 @@
                                             @foreach ($transaksi_consumable as $item)
                                                 <tr>
                                                     <td class="text-center">
-                                                        {{ $loop->iteration }}
+                                                        {{ ($transaksi_consumable->currentPage() - 1) * $transaksi_consumable->perPage() + $loop->index + 1 }}
                                                     </td>
                                                     <td class="text-center fw-bolder text-wrap">
                                                         {{ $item->user->name }}
