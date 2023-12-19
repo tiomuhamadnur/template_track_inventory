@@ -84,6 +84,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('vendor.index') }}">Vendor</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('alarms.index') }}">Alarms API</a>
+                    </li>
                 </ul>
             </div>
         </li>

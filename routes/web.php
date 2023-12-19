@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccelerometerController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\AreaController;
+use App\Http\Controllers\AlarmsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BufferController;
 use App\Http\Controllers\BufferExaminationController;
@@ -517,6 +518,15 @@ Route::middleware(['auth', 'license'])->group(function () {
                 Route::get('/vendor-company/{id}/edit', 'edit')->name('vendor.edit');
                 Route::put('/vendor-company', 'update')->name('vendor.update');
                 Route::delete('/vendor-company', 'destroy')->name('vendor.delete');
+            });
+
+            Route::controller(AlarmsController::class)->group(function () {
+                Route::get('/alarms', 'index')->name('alarms.index');
+                Route::get('/alarms-create', 'create')->name('alarms.create');
+                Route::post('/alarms', 'store')->name('alarms.store');
+                Route::get('/alarms/{id}/edit', 'edit')->name('alarms.edit');
+                Route::put('/alarms', 'update')->name('alarms.update');
+                Route::delete('/alarms', 'destroy')->name('alarms.delete');
             });
 
             Route::controller(DetailPartController::class)->group(function () {
