@@ -17,6 +17,9 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Data Alarms</h4>
+                            <h3 class="float-end badge" id="statusBadge">
+                                Status Server: <span id="statusText">OK</span>
+                            </h3>
                             <a href="{{ route('alarms.create') }}" class="btn btn-outline-dark btn-lg" type="button">Add
                                 Data</a>
                             <button class="btn btn-outline-dark btn-lg dropdown-toggle" type="button"
@@ -132,5 +135,38 @@
         function toggleModal(id) {
             $('#id').val(id);
         }
+
+        // Fungsi untuk melakukan AJAX request setiap 10 detik
+        function fetchData() {
+            $.ajax({
+                url: 'http://alarms.tideupindustries.com',
+                type: 'get',
+                dataType: 'json',
+                success: function(res) {
+                    // Mengakses status dan message dari respons
+                    var status = res.status;
+                    var message = res.message;
+
+                    // Mengubah elemen HTML berdasarkan respons
+                    if (status === 'OK') {
+                        $('#statusBadge').removeClass('bg-danger').addClass('bg-success');
+                        $('#statusText').text(message);
+                    } else {
+                        $('#statusBadge').removeClass('bg-success').addClass('bg-danger');
+                        $('#statusText').text('Down');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // console.error('Kesalahan dalam permintaan ke server:', status, error);
+
+                    // Jika terjadi kesalahan, mengubah status menjadi 'Down' dan warna menjadi merah
+                    $('#statusBadge').removeClass('bg-success').addClass('bg-danger');
+                    $('#statusText').text('Down');
+                }
+            });
+        }
+
+        // Jalankan fungsi fetchData setiap 10 detik
+        setInterval(fetchData, 30000);
     </script>
 @endsection
