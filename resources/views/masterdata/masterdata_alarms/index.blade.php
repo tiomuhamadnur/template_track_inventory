@@ -139,7 +139,7 @@
         // Fungsi untuk melakukan AJAX request setiap 10 detik
         function fetchData() {
             $.ajax({
-                url: 'http://alarms.tideupindustries.com',
+                url: 'https://alarms.tideupindustries.com',
                 type: 'get',
                 dataType: 'json',
                 success: function(res) {
