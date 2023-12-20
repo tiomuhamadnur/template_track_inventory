@@ -24,7 +24,7 @@ class TemuanMainlineController extends Controller
     public function index()
     {
         $temuan = Temuan::where('status', 'open')->orWhere('status', 'monitoring')->orderBy('tanggal', 'DESC')->orderBy('mainline_id', 'DESC')->paginate(100);
-        $area = Area::whereNot('area', 'Depo')->get();
+        $area = Area::whereNot('area', 'Depo')->whereNot('area', 'Other')->get();
         $area_rencana = Area::where('stasiun', 'true')->orWhere('area', 'DAL')->get();
         $line = Line::whereNot('area', 'Depo')->get();
         $part = Part::orderBy('name', 'asc')->get();
@@ -181,7 +181,7 @@ class TemuanMainlineController extends Controller
 
         $temuan->orderByRaw('CAST(kilometer AS DECIMAL) ASC');
 
-        $area = Area::all();
+        $area = Area::whereNot('area', 'Depo')->whereNot('area', 'Other')->get();
         $area_rencana = Area::where('stasiun', 'true')->orWhere('area', 'DAL')->get();
         $line = Line::whereNot('area', 'Depo')->get();
         $part = Part::orderBy('name', 'asc')->get();

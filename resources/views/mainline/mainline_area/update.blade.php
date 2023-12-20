@@ -35,11 +35,14 @@
                                 <div class="form-group">
                                     <label class="form-label">Location</label>
                                     <select class="form-control" name="area" required>
+                                        <option value="" selected>- pilih location -</option>
                                         <option @if ($area->area == 'Mainline') selected @endif value="Mainline">Mainline
                                         </option>
                                         <option @if ($area->area == 'Depo') selected @endif value="Depo">Depo
                                         </option>
                                         <option @if ($area->area == 'DAL') selected @endif value="DAL">DAL
+                                        </option>
+                                        <option @if ($area->area == 'Other') selected @endif value="Other">Other
                                         </option>
                                     </select>
                                 </div>

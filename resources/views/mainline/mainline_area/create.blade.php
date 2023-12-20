@@ -23,12 +23,12 @@
                                 <div class="form-group">
                                     <label for="exampleInputName1">Area Name</label>
                                     <input type="text" name="name" class="form-control" id="exampleInputName1"
-                                        placeholder="Input Area Name" required>
+                                        placeholder="Input Area Name" required autocomplete="off">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail3">Area Code</label>
                                     <input type="text" class="form-control" name="code" id="exampleInputEmail3"
-                                        placeholder="Input Area Code" required>
+                                        placeholder="Input Area Code" required autocomplete="off">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Location</label>
