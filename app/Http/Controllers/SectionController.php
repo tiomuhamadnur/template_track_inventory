@@ -6,7 +6,7 @@ use App\Models\Departement;
 use App\Models\Section;
 use Illuminate\Http\Request;
 
-class SectionController extends Controllerju
+class SectionController extends Controller
 {
     public function index()
     {

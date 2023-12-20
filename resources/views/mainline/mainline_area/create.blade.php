@@ -37,6 +37,7 @@
                                         <option value="Mainline">Mainline</option>
                                         <option value="Depo">Depo</option>
                                         <option value="DAL">DAL</option>
+                                        <option value="Other">Other</option>
                                     </select>
                                 </div>
                                 <div class="form-group">

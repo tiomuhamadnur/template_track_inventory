@@ -279,7 +279,7 @@
                             <div class="value">
                                 <div class="input-group">
                                     <select name="eksekutor" class="form-select" required>
-                                        <option value="" disabled>
+                                        <option value="" disabled selected>
                                             - Pilih Eksekutor Perbaikan -
                                         </option>
                                         <option value="In House" @if ($temuan_visual->eksekutor == 'In House') selected @endif>

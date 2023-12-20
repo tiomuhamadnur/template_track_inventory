@@ -49,7 +49,7 @@
                             alt="Profile image">
                         <h5 class="mb-1 mt-3 font-weight-bold">{{ auth()->user()->name ?? '' }}</h5>
                         <p class="fw-light text-muted mb-0">{{ auth()->user()->jabatan ?? '' }}</p>
-                        <p class="fw-light text-muted mb-0">{{ auth()->user()->section ?? '' }}</p>
+                        <p class="fw-light text-muted mb-0">{{ auth()->user()->section->name ?? '' }}</p>
                         <p class="fw-light text-muted mb-0">{{ auth()->user()->email ?? '' }}</p>
                         <a href="{{ route('profile') }}"><i class="ti-user icon-md" style="margin: 10px"></i></a>
                         <a href="{{ route('logout') }}"><i class="ti-power-off icon-md"></i></a>

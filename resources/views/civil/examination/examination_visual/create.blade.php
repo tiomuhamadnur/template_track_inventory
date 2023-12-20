@@ -16,14 +16,29 @@
                         @csrf
                         @method('post')
                         <div class="form-row">
+                            <div class="name">Location</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <select id="location" class="form-select" required>
+                                        <option value="" selected disabled>- Pilih Location -</option>
+                                        <option value="Mainline">Stasiun/Mainline</option>
+                                        <option value="Depo">Depo</option>
+                                        <option value="DAL">DAL</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
                             <div class="name">Area</div>
                             <div class="value">
                                 <div class="input-group">
                                     <select id="area_id" name="area_id" class="form-select" required>
                                         <option value="" selected disabled>- Pilih Area -</option>
-                                        @foreach ($area as $item)
+                                        {{-- @foreach ($area as $item)
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                        @endforeach
+                                        @endforeach --}}
                                     </select>
                                 </div>
                             </div>
@@ -103,9 +118,6 @@
                                         <option value="" disabled selected>- Pilih
                                             Klasifikasi -
                                         </option>
-                                        {{-- <option value="Minor">Minor</option>
-                                        <option value="Moderate">Moderate</option>
-                                        <option value="Major">Major</option> --}}
                                         <option value="AA">AA</option>
                                         <option value="A1">A1</option>
                                         <option value="A2">A2</option>
@@ -197,6 +209,24 @@
 @section('javascript')
     <script>
         $(document).ready(function() {
+            $('#location').on('change', function() {
+                var location = this.value;
+                $.ajax({
+                    url: '/getLocation?area=' + location,
+                    type: 'get',
+                    success: function(res) {
+                        $('#area_id').html(
+                            '<option value="" selected disabled>- Pilih Area -</option>'
+                        );
+                        $.each(res, function(key, value) {
+                            $('#area_id').append('<option value="' + value
+                                .id + '">' + value.name + ' - (' + value.code +
+                                ')</option>');
+                        });
+                    }
+                });
+            });
+
             $('#area_id').on('change', function() {
                 var area_id = this.value;
                 $.ajax({

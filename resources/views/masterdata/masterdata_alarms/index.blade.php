@@ -1,11 +1,11 @@
 @extends('masterdata.masterdata_layout.base')
 
 @section('sub-title')
-    <title>Data Alarms | CPWTM</title>
+    <title>Data Alarms API | CPWTM</title>
 @endsection
 
 @section('sub-content')
-    <h4>Master Data > Alarms</h4>
+    <h4>Master Data > Alarms API</h4>
     <div class="row">
         <div class="col-sm-12">
             <div class="home-tab">
@@ -16,7 +16,7 @@
                 <div class="col-lg-12 grid-margin stretch-card mt-3">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Data Alarms</h4>
+                            <h4 class="card-title">Data Alarms API</h4>
                             <h3 class="float-end badge" id="statusBadge">
                                 Status Server: <span id="statusText">OK</span>
                             </h3>
