@@ -343,12 +343,16 @@
                                                     </div>
                                                 </td>
 
-                                                <td style="height: 23px;">
-                                                    <a href="#" class="btn-sm btn-outline-primary p-1"
-                                                        data-bs-toggle="modal" data-bs-target="#ModalDokumentasi"
-                                                        data-photo="{{ asset('storage/' . $item->photo) }}">
-                                                        Show
-                                                    </a>
+                                                <td style="height: 23px;" class="text-center">
+                                                    <div class="btn-group-vertical">
+                                                        <a href="#" class="btn btn-primary my-0"
+                                                            data-bs-toggle="modal" data-bs-target="#ModalDokumentasi"
+                                                            data-photo="{{ asset('storage/' . $item->photo) }}">
+                                                            Show
+                                                        </a>
+                                                        <a href="{{ route('wesel.examination.edit', Crypt::encryptString($item->id)) }}"
+                                                            class="btn btn-warning my-0">Edit</a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach

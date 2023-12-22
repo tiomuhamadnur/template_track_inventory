@@ -33,7 +33,7 @@
                                 <div class="form-group">
                                     <label class="form-label">Location</label>
                                     <select class="form-control" name="area" required>
-                                        <option disable value="" selected>-Pilih Area-</option>
+                                        <option disable value="" selected>-Pilih Location-</option>
                                         <option value="Mainline">Mainline</option>
                                         <option value="Depo">Depo</option>
                                         <option value="DAL">DAL</option>
