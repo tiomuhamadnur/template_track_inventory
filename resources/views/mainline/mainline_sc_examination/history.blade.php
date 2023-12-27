@@ -1,7 +1,7 @@
 @extends('mainline.mainline_layout.base')
 
 @section('sub-title')
-    <title>Data History Turn Out Examination | CPWTM</title>
+    <title>Data History SC Examination | CPWTM</title>
 @endsection
 
 @section('sub-content')
@@ -15,14 +15,14 @@
                 <div class="col-lg-12 grid-margin stretch-card mt-3">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Data History Turnout Examination</h4>
+                            <h4 class="card-title">Data History Scissors Crossing Examination</h4>
                             <div class="btn-group">
-                                <a href="{{ route('wesel.examination.index') }}" class="btn btn-outline-dark btn-lg mx-0"
+                                <a href="{{ route('sc.examination.index') }}" class="btn btn-outline-dark btn-lg mx-0"
                                     type="button" title="Kembali">
                                     <i class="ti-arrow-left"></i>
                                 </a>
-                                <a href="{{ route('wesel.examination.create') }}"
-                                    class="btn btn-outline-success btn-lg mx-0" type="button">Add Data</a>
+                                <a href="{{ route('sc.examination.create') }}" class="btn btn-outline-success btn-lg mx-0"
+                                    type="button">Add Data</a>
                                 <a href="#" class="btn btn-outline-warning btn-lg mx-0" type="button"
                                     data-bs-toggle="modal" data-bs-target="#ModalFilter" title="Filter data">
                                     <i class="ti-filter"></i>
@@ -39,7 +39,7 @@
                             </form>
                             <table>
                                 <tr>
-                                    <td>No. Turnout</td>
+                                    <td>No. SC</td>
                                     <td> : </td>
                                     <td>{{ $wesel_name->name ?? '-' }}</td>
                                 </tr>
@@ -61,19 +61,19 @@
                                             <td rowspan="5" class="text-nowrap">
                                                 Tanggal <br> (Examiner)
                                             </td>
-                                            <td style="width: 200px; height: 19.6167px;" colspan="13">
+                                            <td style="width: 200px; height: 19.6167px;" colspan="12">
                                                 Track Gauge
                                             </td>
-                                            <td style="width: 200px; height: 19.6167px;" colspan="14">
+                                            <td style="width: 200px; height: 19.6167px;" colspan="12">
                                                 Cross level
                                             </td>
-                                            <td style="width: 90px; height: 19.6167px;" colspan="6">
+                                            <td style="width: 90px; height: 19.6167px;" colspan="8">
                                                 Alignment
                                             </td>
-                                            <td style="width: 60px; height: 19.6167px;" colspan="4">
+                                            <td style="width: 60px; height: 19.6167px;" colspan="8">
                                                 Longitudinal level
                                             </td>
-                                            <td style="width: 30px; height: 19.6167px;" colspan="2">
+                                            <td style="width: 30px; height: 19.6167px;" colspan="8">
                                                 Back Gauge
                                             </td>
                                             <td style="width: 70px; height: 65.6167px;" rowspan="3">
@@ -82,48 +82,57 @@
                                         </tr>
                                         <tr class="fw-bolder" style="height: 23px;">
                                             <td style="width: 15px; height: 46px;" rowspan="2">1</td>
-                                            <td style="width: 15px; height: 46px;" rowspan="2">2</td>
-                                            <td style="width: 15px; height: 46px;" rowspan="2">2'</td>
-                                            <td style="width: 15px; height: 46px;" rowspan="2">2''</td>
-                                            <td style="width: 15px; height: 46px;" rowspan="2">3</td>
-                                            <td style="width: 15px; height: 46px;" rowspan="2">3'</td>
-                                            <td style="width: 15px; height: 46px;" rowspan="2">4'</td>
-                                            <td style="width: 15px; height: 46px;" rowspan="2">5</td>
-                                            <td style="width: 15px; height: 46px;" rowspan="2">5'</td>
-                                            {{-- <td style="width: 15px; height: 46px;" rowspan="2">6'</td> --}}
-                                            <td style="width: 15px; height: 46px;" rowspan="2">7</td>
-                                            <td style="width: 15px; height: 46px;" rowspan="2">7'</td>
-                                            <td style="width: 15px; height: 46px;" rowspan="2">10</td>
-                                            <td style="width: 15px; height: 46px;" rowspan="2">10'</td>
-                                            <td style="width: 15px; height: 46px;" rowspan="2">1</td>
-                                            <td style="width: 15px; height: 46px;" rowspan="2">2</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">1'</td>
                                             <td style="width: 15px; height: 46px;" rowspan="2">3</td>
                                             <td style="width: 15px; height: 46px;" rowspan="2">3'</td>
                                             <td style="width: 15px; height: 46px;" rowspan="2">4</td>
                                             <td style="width: 15px; height: 46px;" rowspan="2">4'</td>
-                                            <td style="width: 15px; height: 46px;" rowspan="2">5</td>
-                                            <td style="width: 15px; height: 46px;" rowspan="2">5'</td>
                                             <td style="width: 15px; height: 46px;" rowspan="2">7</td>
                                             <td style="width: 15px; height: 46px;" rowspan="2">7'</td>
                                             <td style="width: 15px; height: 46px;" rowspan="2">8</td>
                                             <td style="width: 15px; height: 46px;" rowspan="2">8'</td>
                                             <td style="width: 15px; height: 46px;" rowspan="2">10</td>
                                             <td style="width: 15px; height: 46px;" rowspan="2">10'</td>
-                                            <td style="width: 15px; height: 46px;" rowspan="2">2</td>
-                                            <td style="width: 15px; height: 46px;" rowspan="2">5</td>
-                                            <td style="width: 45px; height: 23px;" colspan="3">5'</td>
-                                            <td style="width: 15px; height: 46px;" rowspan="2">9</td>
-                                            <td style="width: 15px; height: 46px;" rowspan="2">2</td>
-                                            <td style="width: 15px; height: 46px;" rowspan="2">5</td>
-                                            <td style="width: 15px; height: 46px;" rowspan="2">5'</td>
-                                            <td style="width: 15px; height: 46px;" rowspan="2">9</td>
+
+                                            <td style="width: 15px; height: 46px;" rowspan="2">1</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">1'</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">3</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">3'</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">4</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">4'</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">7</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">7'</td>
                                             <td style="width: 15px; height: 46px;" rowspan="2">8</td>
                                             <td style="width: 15px; height: 46px;" rowspan="2">8'</td>
-                                        </tr>
-                                        <tr class="fw-bolder" style="height: 23px;">
-                                            <td style="font-size:10px; width: 15px; height: 23px;">1/4</td>
-                                            <td style="font-size:10px; width: 15px; height: 23px;">1/2</td>
-                                            <td style="font-size:10px; width: 15px; height: 23px;">3/4</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">10</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">10'</td>
+
+                                            <td style="width: 15px; height: 46px;" rowspan="2">1</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">1'</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">3</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">3'</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">8</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">8'</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">10</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">10'</td>
+
+                                            <td style="width: 15px; height: 46px;" rowspan="2">1</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">1'</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">3</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">3'</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">8</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">8'</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">10</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">10'</td>
+
+                                            <td style="width: 15px; height: 46px;" rowspan="2">2</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">2'</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">5</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">5'</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">6</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">6'</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">9</td>
+                                            <td style="width: 15px; height: 46px;" rowspan="2">9'</td>
                                         </tr>
                                     </thead>
 
@@ -141,17 +150,7 @@
                                                 </td>
                                                 <td style="height: 46px;">
                                                     <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                                                        {{ $item->TG_2 ?? '' }}
-                                                    </div>
-                                                </td>
-                                                <td style="height: 46px;">
-                                                    <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                                                        {{ $item->TG_2A ?? '' }}
-                                                    </div>
-                                                </td>
-                                                <td style="height: 46px;">
-                                                    <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                                                        {{ $item->TG_2AA ?? '' }}
+                                                        {{ $item->TG_1A ?? '' }}
                                                     </div>
                                                 </td>
                                                 <td style="height: 46px;">
@@ -166,24 +165,14 @@
                                                 </td>
                                                 <td style="height: 46px;">
                                                     <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
+                                                        {{ $item->TG_4 ?? '' }}
+                                                    </div>
+                                                </td>
+                                                <td style="height: 46px;">
+                                                    <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
                                                         {{ $item->TG_4A ?? '' }}
                                                     </div>
                                                 </td>
-                                                <td style="height: 46px;">
-                                                    <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                                                        {{ $item->TG_5 ?? '' }}
-                                                    </div>
-                                                </td>
-                                                <td style="height: 46px;">
-                                                    <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                                                        {{ $item->TG_5A ?? '' }}
-                                                    </div>
-                                                </td>
-                                                {{-- <td style="height: 46px;">
-                                                        <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                                                            {{ $item->TG_6A ?? '' }}
-                                                        </div>
-                                                    </td> --}}
                                                 <td style="height: 46px;">
                                                     <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
                                                         {{ $item->TG_7 ?? '' }}
@@ -192,6 +181,16 @@
                                                 <td style="height: 46px;">
                                                     <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
                                                         {{ $item->TG_7A ?? '' }}
+                                                    </div>
+                                                </td>
+                                                <td style="height: 46px;">
+                                                    <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
+                                                        {{ $item->TG_8 ?? '' }}
+                                                    </div>
+                                                </td>
+                                                <td style="height: 46px;">
+                                                    <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
+                                                        {{ $item->TG_8A ?? '' }}
                                                     </div>
                                                 </td>
                                                 <td style="height: 46px;">
@@ -213,7 +212,7 @@
                                                 </td>
                                                 <td style="height: 46px;">
                                                     <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                                                        {{ $item->CL_2 ?? '' }}
+                                                        {{ $item->CL_1A ?? '' }}
                                                     </div>
                                                 </td>
                                                 <td style="height: 46px;">
@@ -234,16 +233,6 @@
                                                 <td style="height: 46px;">
                                                     <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
                                                         {{ $item->CL_4A ?? '' }}
-                                                    </div>
-                                                </td>
-                                                <td style="height: 46px;">
-                                                    <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                                                        {{ $item->CL_5 ?? '' }}
-                                                    </div>
-                                                </td>
-                                                <td style="height: 46px;">
-                                                    <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                                                        {{ $item->CL_5A ?? '' }}
                                                     </div>
                                                 </td>
                                                 <td style="height: 46px;">
@@ -280,66 +269,126 @@
                                                 {{-- ALIGNMENT --}}
                                                 <td style="height: 46px;">
                                                     <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                                                        {{ $item->AL_2 ?? '' }}
+                                                        {{ $item->AL_1 ?? '' }}
                                                     </div>
                                                 </td>
                                                 <td style="height: 46px;">
                                                     <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                                                        {{ $item->AL_5 ?? '' }}
+                                                        {{ $item->AL_1A ?? '' }}
                                                     </div>
                                                 </td>
                                                 <td style="height: 46px;">
                                                     <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                                                        {{ $item->AL_5A_1per4 ?? '' }}
+                                                        {{ $item->AL_3 ?? '' }}
                                                     </div>
                                                 </td>
                                                 <td style="height: 46px;">
                                                     <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                                                        {{ $item->AL_5A_1per2 ?? '' }}
+                                                        {{ $item->AL_3A ?? '' }}
                                                     </div>
                                                 </td>
                                                 <td style="height: 46px;">
                                                     <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                                                        {{ $item->AL_5A_3per4 ?? '' }}
+                                                        {{ $item->AL_8 ?? '' }}
                                                     </div>
                                                 </td>
                                                 <td style="height: 46px;">
                                                     <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                                                        {{ $item->AL_9 ?? '' }}
+                                                        {{ $item->AL_8A ?? '' }}
+                                                    </div>
+                                                </td>
+                                                <td style="height: 46px;">
+                                                    <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
+                                                        {{ $item->AL_10 ?? '' }}
+                                                    </div>
+                                                </td>
+                                                <td style="height: 46px;">
+                                                    <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
+                                                        {{ $item->AL_10A ?? '' }}
                                                     </div>
                                                 </td>
 
                                                 {{-- LONGITUDINAL LEVEL --}}
                                                 <td style="height: 46px;">
                                                     <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                                                        {{ $item->LL_2 ?? '' }}
+                                                        {{ $item->LL_1 ?? '' }}
                                                     </div>
                                                 </td>
                                                 <td style="height: 46px;">
                                                     <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                                                        {{ $item->LL_5 ?? '' }}
+                                                        {{ $item->LL_1A ?? '' }}
                                                     </div>
                                                 </td>
                                                 <td style="height: 46px;">
                                                     <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                                                        {{ $item->LL_5A ?? '' }}
+                                                        {{ $item->LL_3 ?? '' }}
                                                     </div>
                                                 </td>
                                                 <td style="height: 46px;">
                                                     <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                                                        {{ $item->LL_9 ?? '' }}
+                                                        {{ $item->LL_3A ?? '' }}
+                                                    </div>
+                                                </td>
+                                                <td style="height: 46px;">
+                                                    <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
+                                                        {{ $item->LL_8 ?? '' }}
+                                                    </div>
+                                                </td>
+                                                <td style="height: 46px;">
+                                                    <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
+                                                        {{ $item->LL_8A ?? '' }}
+                                                    </div>
+                                                </td>
+                                                <td style="height: 46px;">
+                                                    <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
+                                                        {{ $item->LL_10 ?? '' }}
+                                                    </div>
+                                                </td>
+                                                <td style="height: 46px;">
+                                                    <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
+                                                        {{ $item->LL_10A ?? '' }}
                                                     </div>
                                                 </td>
 
                                                 {{-- BACK GAUGE --}}
                                                 <td style="height: 46px;">
                                                     <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                                                        {{ $item->BG_8 ?? '' }}
+                                                        {{ $item->BG_2 ?? '' }}
                                                     </div>
                                                 </td>
                                                 <td style="height: 46px;">
                                                     <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
-                                                        {{ $item->BG_8A ?? '' }}
+                                                        {{ $item->BG_2A ?? '' }}
+                                                    </div>
+                                                </td>
+                                                <td style="height: 46px;">
+                                                    <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
+                                                        {{ $item->BG_5 ?? '' }}
+                                                    </div>
+                                                </td>
+                                                <td style="height: 46px;">
+                                                    <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
+                                                        {{ $item->BG_5A ?? '' }}
+                                                    </div>
+                                                </td>
+                                                <td style="height: 46px;">
+                                                    <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
+                                                        {{ $item->BG_6 ?? '' }}
+                                                    </div>
+                                                </td>
+                                                <td style="height: 46px;">
+                                                    <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
+                                                        {{ $item->BG_6A ?? '' }}
+                                                    </div>
+                                                </td>
+                                                <td style="height: 46px;">
+                                                    <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
+                                                        {{ $item->BG_9 ?? '' }}
+                                                    </div>
+                                                </td>
+                                                <td style="height: 46px;">
+                                                    <div class="mt-0 mb-0 mx-0 rotate font-weight-bold ms-0 p-0">
+                                                        {{ $item->BG_9A ?? '' }}
                                                     </div>
                                                 </td>
 
@@ -350,7 +399,7 @@
                                                             data-photo="{{ asset('storage/' . $item->photo) }}">
                                                             Show
                                                         </a>
-                                                        <a href="{{ route('wesel.examination.edit', Crypt::encryptString($item->id)) }}"
+                                                        <a href="{{ route('sc.examination.edit', Crypt::encryptString($item->id)) }}"
                                                             class="btn btn-warning my-0">Edit</a>
                                                     </div>
                                                 </td>

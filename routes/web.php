@@ -308,6 +308,12 @@ Route::middleware(['auth', 'license'])->group(function () {
             Route::put('/wesel-examination', 'update')->name('wesel.examination.update');
             Route::delete('/wesel-examination', 'destroy')->name('wesel.examination.delete');
 
+            Route::get('/sc-examination', 'sc_index')->name('sc.examination.index');
+            Route::get('/sc-examination/{id}/history', 'sc_history')->name('sc.examination.history');
+            Route::get('/sc-examination-create', 'sc_create')->name('sc.examination.create');
+            Route::post('/sc-examination', 'sc_store')->name('sc.examination.store');
+            Route::get('/sc-examination/{id}/edit', 'sc_edit')->name('sc.examination.edit');
+
             // REPORT
             Route::get('/wesel-examination-report', 'report')->name('wesel.examination.report');
         });

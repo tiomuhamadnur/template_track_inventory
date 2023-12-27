@@ -1,0 +1,146 @@
+@extends('mainline.mainline_layout.base')
+
+@section('sub-title')
+    <title>Data SC Examination | CPWTM</title>
+@endsection
+
+@section('sub-content')
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="home-tab">
+                <div class="d-sm-flex align-items-center justify-content-between border-bottom">
+                    <div>
+                    </div>
+                </div>
+                <div class="col-lg-12 grid-margin stretch-card mt-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Data Scissors Crossing Examination</h4>
+                            <div class="btn-group">
+                                <a href="{{ route('sc.examination.index') }}" class="btn btn-outline-dark btn-lg mx-0"
+                                    type="button" title="Refresh">
+                                    <i class="ti-reload"></i>
+                                </a>
+                                <a href="{{ route('sc.examination.create') }}" class="btn btn-outline-success btn-lg mx-0"
+                                    type="button">Add Data</a>
+                                <a href="#" class="btn btn-outline-danger btn-lg mx-0" type="button"
+                                    data-bs-toggle="modal" data-bs-target="#ModalReport" title="Generate Report">
+                                    <i class="ti-printer"></i></a>
+                            </div>
+                            <div class="table-responsive pt-2">
+                                <table id="data-table" class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">
+                                                No
+                                            </th>
+                                            <th class="text-center">
+                                                Name
+                                            </th>
+                                            <th class="text-center">
+                                                Area
+                                            </th>
+                                            <th class="text-center">
+                                                Line
+                                            </th>
+                                            <th class="text-center text-wrap">
+                                                History <br> Data Record
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($sc as $item)
+                                            <tr>
+                                                <td class="text-center">
+                                                    {{ $loop->iteration }}
+                                                </td>
+                                                <td class="text-center fw-bolder">
+                                                    {{ $item->name }}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ $item->area->code }}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ $item->line->code }}
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="btn-group">
+                                                        <a href="{{ route('sc.examination.history', Crypt::encryptString($item->id)) }}"
+                                                            type="button" title="Show history data pengukuran"
+                                                            class="btn btn-outline-primary mx-0">Show History</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Report -->
+    <div class="modal fade" id="ModalReport" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <form action="{{ route('wesel.examination.report') }}" method="GET">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalAdminTitle">Generate Form Turnout Examination</h5>
+                    </div>
+                    <div class="modal-body pt-3 mb-0">
+                        <div class="form-group align-middle">
+                            <label class="form-label">Wesel</label> <br>
+                            <select name="wesel_id" class="form-select" required>
+                                <option value="" disabled selected>- Pilih nama wesel -</option>
+                                @foreach ($sc as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }} ({{ $item->area->code ?? '' }}
+                                        - {{ $item->line->code ?? '' }})</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group align-middle">
+                            <label class="form-label">Pilih Tanggal Kegiatan</label>
+                            <input class="form-control p-1" type="date" name="tanggal" required>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer mt-2">
+                        <div class="float-end">
+                            <button type="submit" formtarget="_blank" onclick="closeModal()"
+                                class="btn btn-primary justify-content-center">
+                                Generate
+                            </button>
+                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                                Tutup
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('javascript')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $('#data-tables').dataTable({
+            dom: 'ft',
+            paging: false,
+            "columnDefs": [{
+                "searchable": true,
+                "targets": [1]
+            }]
+        });
+
+        $('.wesel_id').select2();
+
+        function closeModal() {
+            $("#ModalReport").modal("hide");
+        }
+    </script>
+@endsection

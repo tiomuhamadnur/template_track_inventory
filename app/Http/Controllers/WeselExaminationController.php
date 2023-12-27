@@ -37,6 +37,8 @@ class WeselExaminationController extends Controller
             'photo.image' => 'File harus dalam format gambar/photo!',
         ]);
 
+        $tipe = Wesel::findOrFail($request->wesel_id)->tipe;
+
         if ($request->hasFile('photo') && $request->photo != '') {
             $photo_kegiatan = $request->file('photo')->store('photo_kegiatan/turnout_examination');
             WeselExamination::create([
@@ -86,9 +88,48 @@ class WeselExaminationController extends Controller
                 'LL_9' => $request->LL_9,
                 'AL_9' => $request->AL_9,
                 'photo' => $photo_kegiatan,
+
+                'TG_1A' => $request->TG_1A,
+                'TG_4' => $request->TG_4,
+                'TG_8' => $request->TG_8,
+                'TG_8A' => $request->TG_8A,
+
+                'CL_1A' => $request->CL_1A,
+
+                'AL_1' => $request->AL_1,
+                'AL_1A' => $request->AL_1A,
+                'AL_3' => $request->AL_3,
+                'AL_3A' => $request->AL_3A,
+                'AL_8' => $request->AL_8,
+                'AL_8A' => $request->AL_8A,
+                'AL_10' => $request->AL_10,
+                'AL_10A' => $request->AL_10A,
+
+                'LL_1' => $request->LL_1,
+                'LL_1A' => $request->LL_1A,
+                'LL_3' => $request->LL_3,
+                'LL_3A' => $request->LL_3A,
+                'LL_8' => $request->LL_8,
+                'LL_8A' => $request->LL_8A,
+                'LL_10' => $request->LL_10,
+                'LL_10A' => $request->LL_10A,
+
+                'BG_2' => $request->BG_2,
+                'BG_2A' => $request->BG_2A,
+                'BG_5' => $request->BG_5,
+                'BG_5A' => $request->BG_5A,
+                'BG_6' => $request->BG_6,
+                'BG_6A' => $request->BG_6A,
+                'BG_9' => $request->BG_9,
+                'BG_9A' => $request->BG_9A,
             ]);
 
-            return redirect()->route('wesel.examination.index')->withNotify('Data Pengukuran Wesel berhasil ditambahkan!');
+            if($tipe != 'Scissors Crossing'){
+                return redirect()->route('wesel.examination.index')->withNotify('Data Pengukuran TO berhasil ditambahkan!');
+            } else {
+                return redirect()->route('sc.examination.index')->withNotify('Data Pengukuran SC berhasil ditambahkan!');
+            }
+
         } else {
             return redirect()->back();
         }
@@ -182,6 +223,7 @@ class WeselExaminationController extends Controller
     {
         $id = $request->id;
         $wesel = WeselExamination::findOrFail($id);
+        $tipe = Wesel::findOrFail($request->wesel_id)->tipe;
         if (!$wesel){
             return back();
         }
@@ -237,8 +279,47 @@ class WeselExaminationController extends Controller
                 'LL_9' => $request->LL_9,
                 'AL_9' => $request->AL_9,
                 'photo' => $photo_kegiatan,
+
+                'TG_1A' => $request->TG_1A,
+                'TG_4' => $request->TG_4,
+                'TG_8' => $request->TG_8,
+                'TG_8A' => $request->TG_8A,
+
+                'CL_1A' => $request->CL_1A,
+
+                'AL_1' => $request->AL_1,
+                'AL_1A' => $request->AL_1A,
+                'AL_3' => $request->AL_3,
+                'AL_3A' => $request->AL_3A,
+                'AL_8' => $request->AL_8,
+                'AL_8A' => $request->AL_8A,
+                'AL_10' => $request->AL_10,
+                'AL_10A' => $request->AL_10A,
+
+                'LL_1' => $request->LL_1,
+                'LL_1A' => $request->LL_1A,
+                'LL_3' => $request->LL_3,
+                'LL_3A' => $request->LL_3A,
+                'LL_8' => $request->LL_8,
+                'LL_8A' => $request->LL_8A,
+                'LL_10' => $request->LL_10,
+                'LL_10A' => $request->LL_10A,
+
+                'BG_2' => $request->BG_2,
+                'BG_2A' => $request->BG_2A,
+                'BG_5' => $request->BG_5,
+                'BG_5A' => $request->BG_5A,
+                'BG_6' => $request->BG_6,
+                'BG_6A' => $request->BG_6A,
+                'BG_9' => $request->BG_9,
+                'BG_9A' => $request->BG_9A,
             ]);
-            return redirect()->route('wesel.examination.index')->withNotify('Data Pengukuran Wesel berhasil dimutakhirkan!');
+
+            if($tipe != 'Scissors Crossing'){
+                return redirect()->route('wesel.examination.index')->withNotify('Data Pengukuran TO berhasil dimutakhirkan!');
+            } else {
+                return redirect()->route('sc.examination.index')->withNotify('Data Pengukuran SC berhasil dimutakhirkan!');
+            }
 
         } else {
             $wesel->update([
@@ -287,13 +368,95 @@ class WeselExaminationController extends Controller
                 'AL_5A_3per4' => $request->AL_5A_3per4,
                 'LL_9' => $request->LL_9,
                 'AL_9' => $request->AL_9,
+
+
+                'TG_1A' => $request->TG_1A,
+                'TG_4' => $request->TG_4,
+                'TG_8' => $request->TG_8,
+                'TG_8A' => $request->TG_8A,
+
+                'CL_1A' => $request->CL_1A,
+
+                'AL_1' => $request->AL_1,
+                'AL_1A' => $request->AL_1A,
+                'AL_3' => $request->AL_3,
+                'AL_3A' => $request->AL_3A,
+                'AL_8' => $request->AL_8,
+                'AL_8A' => $request->AL_8A,
+                'AL_10' => $request->AL_10,
+                'AL_10A' => $request->AL_10A,
+
+                'LL_1' => $request->LL_1,
+                'LL_1A' => $request->LL_1A,
+                'LL_3' => $request->LL_3,
+                'LL_3A' => $request->LL_3A,
+                'LL_8' => $request->LL_8,
+                'LL_8A' => $request->LL_8A,
+                'LL_10' => $request->LL_10,
+                'LL_10A' => $request->LL_10A,
+
+                'BG_2' => $request->BG_2,
+                'BG_2A' => $request->BG_2A,
+                'BG_5' => $request->BG_5,
+                'BG_5A' => $request->BG_5A,
+                'BG_6' => $request->BG_6,
+                'BG_6A' => $request->BG_6A,
+                'BG_9' => $request->BG_9,
+                'BG_9A' => $request->BG_9A,
             ]);
-            return redirect()->route('wesel.examination.index')->withNotify('Data Pengukuran Wesel berhasil dimutakhirkan!');
+
+            if($tipe != 'Scissors Crossing'){
+                return redirect()->route('wesel.examination.index')->withNotify('Data Pengukuran TO berhasil dimutakhirkan!');
+            } else {
+                return redirect()->route('sc.examination.index')->withNotify('Data Pengukuran SC berhasil dimutakhirkan!');
+            }
         }
     }
 
     public function destroy($id)
     {
         //
+    }
+
+    public function sc_index()
+    {
+        $sc = Wesel::where('tipe', 'scissors crossing')->get();
+        // $wesel_examination = WeselExamination::all();
+
+        return view('mainline.mainline_sc_examination.index', compact(['sc']));
+    }
+
+    public function sc_history($id)
+    {
+        try {
+            $secret = Crypt::decryptString($id);
+            $wesel = WeselExamination::where('wesel_id', $secret)->orderBy('tanggal', 'ASC')->get();
+            $wesel_name = Wesel::findOrFail($secret);
+            $tanggal_awal = '';
+            $tanggal_akhir = '';
+
+            return view('mainline.mainline_sc_examination.history', compact(['wesel', 'wesel_name', 'tanggal_awal', 'tanggal_akhir']));
+        } catch (DecryptException $e) {
+            return redirect()->back();
+        }
+    }
+
+    public function sc_create()
+    {
+        $wesel = Wesel::where('tipe', 'scissors crossing')->get();
+
+        return view('mainline.mainline_sc_examination.create', compact(['wesel']));
+    }
+
+    public function sc_edit($id)
+    {
+        try {
+            $secret = Crypt::decryptString($id);
+            $wesel = WeselExamination::findOrFail($secret);
+
+            return view('mainline.mainline_sc_examination.update', compact(['wesel']));
+        } catch (DecryptException $e) {
+            return redirect()->back();
+        }
     }
 }

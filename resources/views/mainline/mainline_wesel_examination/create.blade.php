@@ -137,24 +137,24 @@
                         </div>
                         <br>
 
-                        {{-- <div class="input-group mb-2">
+                        <div class="input-group mb-2">
                             <span class="input-group-text bg-success font-weight-bold"><b>4</b></span>
-                            <input type="number" class="form-control" step=".1" placeholder="  Cross Level (OPTIONAL)"
-                                name="CL_4">
+                            <input type="number" class="form-control" step=".1" placeholder="  Cross Level"
+                                name="CL_4" required>
                         </div>
                         <br>
 
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-warning font-weight-bold"><b>4'</b></span>
-                            <input type="number" class="form-control" step=".1" placeholder="  Track Gauge (OPTIONAL)"
-                                name="TG_4A">
+                            <input type="number" class="form-control" step=".1" placeholder="  Track Gauge"
+                                name="TG_4A" required>
                         </div>
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-success font-weight-bold"><b>4'</b></span>
-                            <input type="number" class="form-control" step=".1" placeholder="  Cross Level (OPTIONAL)"
-                                name="CL_4A">
+                            <input type="number" class="form-control" step=".1" placeholder="  Cross Level"
+                                name="CL_4A" required>
                         </div>
-                        <br> --}}
+                        <br>
 
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-warning font-weight-bold"><b>5</b></span>

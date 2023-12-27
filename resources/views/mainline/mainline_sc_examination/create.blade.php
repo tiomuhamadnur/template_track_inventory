@@ -1,7 +1,7 @@
 @extends('layout.form.form')
 
 @section('head')
-    <title>Form Edit Data Turn Out Examination</title>
+    <title>Form Data SC Examination</title>
     <style>
         .float {
             position: fixed;
@@ -17,20 +17,25 @@
         <div class="wrapper wrapper--w790">
             <div class="card card-5">
                 <div class="card-heading">
-                    <h2 class="title">Form Edit Data Turn Out Examination</h2>
+                    <h2 class="title">Form Data SC Examination</h2>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('wesel.examination.update') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('wesel.examination.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        @method('put')
-                        <input type="hidden" name="id" value="{{ $wesel->id }}" hidden>
-                        <input type="hidden" name="wesel_id" value="{{ $wesel->wesel->id }}" hidden>
+                        @method('post')
                         <div class="form-row">
-                            <div class="name">Nama Wesel</div>
+                            <div class="name">Nama SC</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="form-control" type="text" value="{{ $wesel->wesel->name }}" readonly
-                                        required>
+                                    <select name="wesel_id" class="form-select wesel_id" required autofocus>
+                                        <option value="" selected disabled>- Pilih Nama Scissors Crossing -</option>
+                                        @foreach ($wesel as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name ?? '' }}
+                                                ({{ $item->area->code ?? '' }} -
+                                                {{ $item->line->code ?? '' }})
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -39,8 +44,8 @@
                             <div class="name">PIC</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="form-control" type="text" name="pic" value="{{ $wesel->pic }}"
-                                        readonly required>
+                                    <input class="form-control" type="text" name="pic"
+                                        value="{{ auth()->user()->name }}" readonly required>
                                 </div>
                             </div>
                         </div>
@@ -49,8 +54,7 @@
                             <div class="name">Tanggal</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="form-control" type="date" name="tanggal" value="{{ $wesel->tanggal }}"
-                                        required readonly>
+                                    <input class="form-control" type="date" name="tanggal" required>
                                 </div>
                             </div>
                         </div>
@@ -64,244 +68,296 @@
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-warning font-weight-bold"><b>1</b></span>
                             <input type="number" class="form-control" step=".1" placeholder="  Track Gauge"
-                                name="TG_1" required value="{{ $wesel->TG_1 }}">
+                                name="TG_1" required>
                         </div>
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-success font-weight-bold"><b>1</b></span>
                             <input type="number" class="form-control" step=".1" placeholder="  Cross Level"
-                                name="CL_1" required value="{{ $wesel->CL_1 }}">
+                                name="CL_1" required>
                         </div>
                         <br>
 
                         <div class="input-group mb-2">
-                            <span class="input-group-text bg-warning font-weight-bold"><b>2</b></span>
+                            <span class="input-group-text bg-warning font-weight-bold"><b>1'</b></span>
                             <input type="number" class="form-control" step=".1" placeholder="  Track Gauge"
-                                name="TG_2" required value="{{ $wesel->TG_2 }}">
+                                name="TG_1A" required>
                         </div>
                         <div class="input-group mb-2">
-                            <span class="input-group-text bg-success font-weight-bold"><b>2</b></span>
+                            <span class="input-group-text bg-success font-weight-bold"><b>1'</b></span>
                             <input type="number" class="form-control" step=".1" placeholder="  Cross Level"
-                                name="CL_2" required value="{{ $wesel->CL_2 }}">
+                                name="CL_1A" required>
                         </div>
                         <br>
 
                         <div class="input-group mb-2">
-                            <span class="input-group-text bg-warning font-weight-bold"><b>2'</b></span>
-                            <input type="number" class="form-control" step=".1" placeholder="  Track Gauge"
-                                name="TG_2A" required value="{{ $wesel->TG_2A }}">
+                            <span class="input-group-text bg-danger font-weight-bold" style="color: white"><b>2</b></span>
+                            <input type="number" class="form-control" step=".1" placeholder="  Back Gauge"
+                                name="BG_2" required>
                         </div>
-                        <br>
-
                         <div class="input-group mb-2">
-                            <span class="input-group-text bg-warning font-weight-bold"><b>2''</b></span>
-                            <input type="number" class="form-control" step=".1" placeholder="  Track Gauge"
-                                name="TG_2AA" required value="{{ $wesel->TG_2AA }}">
+                            <span class="input-group-text bg-danger font-weight-bold" style="color: white"><b>2'</b></span>
+                            <input type="number" class="form-control" step=".1" placeholder="  Back Gauge"
+                                name="BG_2A" required>
                         </div>
                         <br>
 
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-warning font-weight-bold"><b>3</b></span>
                             <input type="number" class="form-control" step=".1" placeholder="  Track Gauge"
-                                name="TG_3" required value="{{ $wesel->TG_3 }}">
+                                name="TG_3" required>
                         </div>
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-success font-weight-bold"><b>3</b></span>
                             <input type="number" class="form-control" step=".1" placeholder="  Cross Level"
-                                name="CL_3" required value="{{ $wesel->CL_3 }}">
+                                name="CL_3" required>
                         </div>
                         <br>
 
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-warning font-weight-bold"><b>3'</b></span>
                             <input type="number" class="form-control" step=".1" placeholder="  Track Gauge"
-                                name="TG_3A" required value="{{ $wesel->TG_3A }}">
+                                name="TG_3A" required>
                         </div>
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-success font-weight-bold"><b>3'</b></span>
                             <input type="number" class="form-control" step=".1" placeholder="  Cross Level"
-                                name="CL_3A" required value="{{ $wesel->CL_3A }}">
+                                name="CL_3A" required>
                         </div>
                         <br>
 
                         <div class="input-group mb-2">
+                            <span class="input-group-text bg-warning font-weight-bold"><b>4</b></span>
+                            <input type="number" class="form-control" step=".1" placeholder="  Track Gauge"
+                                name="TG_4" required>
+                        </div>
+                        <div class="input-group mb-2">
                             <span class="input-group-text bg-success font-weight-bold"><b>4</b></span>
                             <input type="number" class="form-control" step=".1" placeholder="  Cross Level"
-                                name="CL_4" required value="{{ $wesel->CL_4 }}">
+                                name="CL_4" required>
                         </div>
                         <br>
 
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-warning font-weight-bold"><b>4'</b></span>
                             <input type="number" class="form-control" step=".1" placeholder="  Track Gauge"
-                                name="TG_4A" required value="{{ $wesel->TG_4A }}">
+                                name="TG_4A" required>
                         </div>
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-success font-weight-bold"><b>4'</b></span>
                             <input type="number" class="form-control" step=".1" placeholder="  Cross Level"
-                                name="CL_4A" required value="{{ $wesel->CL_4A }}">
+                                name="CL_4A" required>
                         </div>
                         <br>
 
                         <div class="input-group mb-2">
-                            <span class="input-group-text bg-warning font-weight-bold"><b>5</b></span>
-                            <input type="number" class="form-control" step=".1" placeholder="  Track Gauge"
-                                name="TG_5" required value="{{ $wesel->TG_5 }}">
+                            <span class="input-group-text bg-danger font-weight-bold" style="color: white"><b>5</b></span>
+                            <input type="number" class="form-control" step=".1" placeholder="  Back Gauge"
+                                name="BG_5" required>
                         </div>
                         <div class="input-group mb-2">
-                            <span class="input-group-text bg-success font-weight-bold"><b>5</b></span>
-                            <input type="number" class="form-control" placeholder="  Cross Level" name="CL_5"
-                                required value="{{ $wesel->CL_5 }}">
+                            <span class="input-group-text bg-danger font-weight-bold"
+                                style="color: white"><b>5'</b></span>
+                            <input type="number" class="form-control" step=".1" placeholder="  Back Gauge"
+                                name="BG_5A" required>
                         </div>
                         <br>
 
                         <div class="input-group mb-2">
-                            <span class="input-group-text bg-warning font-weight-bold"><b>5'</b></span>
-                            <input type="number" class="form-control" step=".1" placeholder="  Track Gauge"
-                                name="TG_5A" required value="{{ $wesel->TG_5A }}">
+                            <span class="input-group-text bg-danger font-weight-bold" style="color: white"><b>6</b></span>
+                            <input type="number" class="form-control" step=".1" placeholder="  Back Gauge"
+                                name="BG_6" required>
                         </div>
                         <div class="input-group mb-2">
-                            <span class="input-group-text bg-success font-weight-bold"><b>5'</b></span>
-                            <input type="number" class="form-control" step=".1" placeholder="  Cross Level"
-                                name="CL_5A" required value="{{ $wesel->CL_5A }}">
+                            <span class="input-group-text bg-danger font-weight-bold"
+                                style="color: white"><b>6'</b></span>
+                            <input type="number" class="form-control" step=".1" placeholder="  Back Gauge"
+                                name="BG_6A" required>
                         </div>
                         <br>
 
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-warning font-weight-bold"><b>7</b></span>
                             <input type="number" class="form-control" step=".1" placeholder="  Track Gauge"
-                                name="TG_7" required value="{{ $wesel->TG_7 }}">
+                                name="TG_7" required>
                         </div>
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-success font-weight-bold"><b>7</b></span>
-                            <input type="number" class="form-control" step=".1" placeholder="  Cross Level"
-                                name="CL_7" required value="{{ $wesel->CL_7 }}">
+                            <input type="number" class="form-control" placeholder="  Cross Level" name="CL_7"
+                                required>
                         </div>
                         <br>
 
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-warning font-weight-bold"><b>7'</b></span>
                             <input type="number" class="form-control" step=".1" placeholder="  Track Gauge"
-                                name="TG_7A" required value="{{ $wesel->TG_7A }}">
+                                name="TG_7A" required>
                         </div>
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-success font-weight-bold"><b>7'</b></span>
                             <input type="number" class="form-control" step=".1" placeholder="  Cross Level"
-                                name="CL_7A" required value="{{ $wesel->CL_7A }}">
+                                name="CL_7A" required>
                         </div>
                         <br>
 
                         <div class="input-group mb-2">
-                            <span class="input-group-text bg-danger font-weight-bold" style="color: white"><b>8</b></span>
-                            <input type="number" class="form-control" step=".1" placeholder="  Back Gauge"
-                                name="BG_8" required value="{{ $wesel->BG_8 }}">
+                            <span class="input-group-text bg-warning font-weight-bold"><b>8</b></span>
+                            <input type="number" class="form-control" step=".1" placeholder="  Track Gauge"
+                                name="TG_8" required>
                         </div>
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-success font-weight-bold"><b>8</b></span>
                             <input type="number" class="form-control" step=".1" placeholder="  Cross Level"
-                                name="CL_8" required value="{{ $wesel->CL_8 }}">
+                                name="CL_8" required>
                         </div>
                         <br>
 
                         <div class="input-group mb-2">
-                            <span class="input-group-text bg-danger font-weight-bold"
-                                style="color: white"><b>8'</b></span>
-                            <input type="number" class="form-control" step=".1" placeholder="  Back Gauge"
-                                name="BG_8A" required value="{{ $wesel->BG_8A }}">
+                            <span class="input-group-text bg-warning font-weight-bold"><b>8'</b></span>
+                            <input type="number" class="form-control" step=".1" placeholder="  Track Gauge"
+                                name="TG_8A" required>
                         </div>
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-success font-weight-bold"><b>8'</b></span>
                             <input type="number" class="form-control" step=".1" placeholder="  Cross Level"
-                                name="CL_8A" required value="{{ $wesel->CL_8A }}">
+                                name="CL_8A" required>
+                        </div>
+                        <br>
+
+                        <div class="input-group mb-2">
+                            <span class="input-group-text bg-danger font-weight-bold" style="color: white"><b>9</b></span>
+                            <input type="number" class="form-control" step=".1" placeholder="  Back Gauge"
+                                name="BG_9" required>
+                        </div>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text bg-danger font-weight-bold"
+                                style="color: white"><b>9'</b></span>
+                            <input type="number" class="form-control" step=".1" placeholder="  Back Gauge"
+                                name="BG_9A" required>
                         </div>
                         <br>
 
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-warning font-weight-bold"><b>10</b></span>
                             <input type="number" class="form-control" step=".1" placeholder="  Track Gauge"
-                                name="TG_10" required value="{{ $wesel->TG_10 }}">
+                                name="TG_10" required>
                         </div>
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-success font-weight-bold"><b>10</b></span>
                             <input type="number" class="form-control" step=".1" placeholder="  Cross Level"
-                                name="CL_10" required value="{{ $wesel->CL_10 }}">
+                                name="CL_10" required>
                         </div>
                         <br>
 
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-warning font-weight-bold"><b>10'</b></span>
                             <input type="number" class="form-control" step=".1" placeholder="  Track Gauge"
-                                name="TG_10A" required value="{{ $wesel->TG_10A }}">
+                                name="TG_10A" required>
                         </div>
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-success font-weight-bold"><b>10'</b></span>
                             <input type="number" class="form-control" step=".1" placeholder="  Cross Level"
-                                name="CL_10A" required value="{{ $wesel->CL_10A }}">
+                                name="CL_10A" required>
                         </div>
+                        <br>
 
                         <hr class="mt-5 mb-0">
                         <h3 class="mt-0 mb-0 fw-bolder text-center">STRING</h3>
                         <hr class="mt-0 mb-3">
                         <div class="input-group mb-2">
-                            <span class="input-group-text bg-dark font-weight-bold" style="color: white"><b>2</b></span>
+                            <span class="input-group-text bg-dark font-weight-bold" style="color: white"><b>1</b></span>
                             <input type="number" class="form-control" step=".1" placeholder="  Longitudinal Level"
-                                name="LL_2" required value="{{ $wesel->LL_2 }}">
+                                name="LL_1" required>
                         </div>
                         <div class="input-group mb-2">
-                            <span class="input-group-text bg-info font-weight-bold"><b>2</b></span>
+                            <span class="input-group-text bg-info font-weight-bold"><b>1</b></span>
                             <input type="number" class="form-control" step=".1" placeholder="  Alignment"
-                                name="AL_2" required value="{{ $wesel->AL_2 }}">
+                                name="AL_1" required>
                         </div>
                         <br>
 
                         <div class="input-group mb-2">
-                            <span class="input-group-text bg-dark font-weight-bold" style="color: white"><b>5</b></span>
+                            <span class="input-group-text bg-dark font-weight-bold" style="color: white"><b>1'</b></span>
                             <input type="number" class="form-control" step=".1" placeholder="  Longitudinal Level"
-                                name="LL_5" required value="{{ $wesel->LL_5 }}">
+                                name="LL_1A" required>
                         </div>
                         <div class="input-group mb-2">
-                            <span class="input-group-text bg-info font-weight-bold"><b>5</b></span>
+                            <span class="input-group-text bg-info font-weight-bold"><b>1'</b></span>
                             <input type="number" class="form-control" step=".1" placeholder="  Alignment"
-                                name="AL_5" required value="{{ $wesel->AL_5 }}">
+                                name="AL_1A" required>
                         </div>
                         <br>
 
                         <div class="input-group mb-2">
-                            <span class="input-group-text bg-dark font-weight-bold" style="color: white"><b>5'</b></span>
+                            <span class="input-group-text bg-dark font-weight-bold" style="color: white"><b>3</b></span>
                             <input type="number" class="form-control" step=".1" placeholder="  Longitudinal Level"
-                                name="LL_5A" required value="{{ $wesel->LL_5A }}">
+                                name="LL_3" required>
                         </div>
-                        <div class="input-group mb-0">
-                            <span class="input-group-text bg-info font-weight-bold"><b>5'</b></span>
-                            <span class="input-group-text bg-secondary font-weight-bold"><b>1/2</b></span>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text bg-info font-weight-bold"><b>3</b></span>
                             <input type="number" class="form-control" step=".1" placeholder="  Alignment"
-                                name="AL_5A_1per2" required value="{{ $wesel->AL_5A_1per2 }}">
-                        </div>
-                        <div class="input-group mb-0">
-                            <span class="input-group-text bg-info font-weight-bold"><b>5'</b></span>
-                            <span class="input-group-text bg-secondary font-weight-bold"><b>1/4</b></span>
-                            <input type="number" class="form-control" step=".1" placeholder="  Alignment"
-                                name="AL_5A_1per4" required value="{{ $wesel->AL_5A_1per4 }}">
-                        </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text bg-info font-weight-bold"><b>5'</b></span>
-                            <span class="input-group-text bg-secondary font-weight-bold"><b>3/4</b></span>
-                            <input type="number" class="form-control" step=".1" placeholder="  Alignment"
-                                name="AL_5A_3per4" required value="{{ $wesel->AL_5A_3per4 }}">
+                                name="AL_3" required>
                         </div>
                         <br>
 
                         <div class="input-group mb-2">
-                            <span class="input-group-text bg-dark font-weight-bold" style="color: white"><b>9</b></span>
+                            <span class="input-group-text bg-dark font-weight-bold" style="color: white"><b>3'</b></span>
                             <input type="number" class="form-control" step=".1" placeholder="  Longitudinal Level"
-                                name="LL_9" required value="{{ $wesel->LL_9 }}">
+                                name="LL_3A" required>
                         </div>
                         <div class="input-group mb-2">
-                            <span class="input-group-text bg-info font-weight-bold"><b>9</b></span>
+                            <span class="input-group-text bg-info font-weight-bold"><b>3'</b></span>
                             <input type="number" class="form-control" step=".1" placeholder="  Alignment"
-                                name="AL_9" required value="{{ $wesel->AL_9 }}">
+                                name="AL_3A" required>
                         </div>
+                        <br>
 
+                        <div class="input-group mb-2">
+                            <span class="input-group-text bg-dark font-weight-bold" style="color: white"><b>8</b></span>
+                            <input type="number" class="form-control" step=".1" placeholder="  Longitudinal Level"
+                                name="LL_8" required>
+                        </div>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text bg-info font-weight-bold"><b>8</b></span>
+                            <input type="number" class="form-control" step=".1" placeholder="  Alignment"
+                                name="AL_8" required>
+                        </div>
+                        <br>
 
+                        <div class="input-group mb-2">
+                            <span class="input-group-text bg-dark font-weight-bold" style="color: white"><b>8'</b></span>
+                            <input type="number" class="form-control" step=".1" placeholder="  Longitudinal Level"
+                                name="LL_8A" required>
+                        </div>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text bg-info font-weight-bold"><b>8'</b></span>
+                            <input type="number" class="form-control" step=".1" placeholder="  Alignment"
+                                name="AL_8A" required>
+                        </div>
+                        <br>
+
+                        <div class="input-group mb-2">
+                            <span class="input-group-text bg-dark font-weight-bold" style="color: white"><b>10</b></span>
+                            <input type="number" class="form-control" step=".1" placeholder="  Longitudinal Level"
+                                name="LL_10" required>
+                        </div>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text bg-info font-weight-bold"><b>10</b></span>
+                            <input type="number" class="form-control" step=".1" placeholder="  Alignment"
+                                name="AL_10" required>
+                        </div>
+                        <br>
+
+                        <div class="input-group mb-2">
+                            <span class="input-group-text bg-dark font-weight-bold" style="color: white"><b>10'</b></span>
+                            <input type="number" class="form-control" step=".1" placeholder="  Longitudinal Level"
+                                name="LL_10A" required>
+                        </div>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text bg-info font-weight-bold"><b>10'</b></span>
+                            <input type="number" class="form-control" step=".1" placeholder="  Alignment"
+                                name="AL_10A" required>
+                        </div>
+                        <br>
 
 
                         {{-- ================================================================================ --}}
@@ -309,16 +365,12 @@
                             <div class="name">Foto Dokumentasi</div>
                             <div class="value">
                                 <div class="mb-3">
-                                    <img class="img-thumbnail" src="{{ asset('storage/' . $wesel->photo) }}"
-                                        alt="dokumentasi" style="max-width: 250px; max-height: 250px">
-                                </div>
-                                <div class="mb-3">
                                     <img class="img-thumbnail" id="previewImage" src="#" alt="Preview"
                                         style="max-width: 250px; max-height: 250px; display: none;">
                                 </div>
                                 <div class="input-group">
                                     <input class="form-control" type="file" id="imageInput" name="photo"
-                                        accept="image/*">
+                                        accept="image/*" required>
                                     @error('photo')
                                         <p class="bg-danger rounded-3 text-center text-white mt-1">
                                             {{ $message }}
@@ -329,7 +381,7 @@
                         </div>
 
                         <div class="pull-right mt-4">
-                            <a href="{{ route('wesel.examination.index') }}" class="btn btn-danger rounded">Cancel</a>
+                            <a href="{{ route('sc.examination.index') }}" class="btn btn-danger rounded">Cancel</a>
                             <button class="btn btn-success ms-2" type="submit">Submit</button>
                         </div>
                     </form>

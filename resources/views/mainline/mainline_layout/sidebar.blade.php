@@ -24,6 +24,9 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('wesel.examination.index') }}">Turn Out
                             Irregularity</a>
                     </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('sc.examination.index') }}">Scissors
+                            Irregularity</a>
+                    </li>
                     {{-- <li class="nav-item"><a class="nav-link" href="{{ route('buffer.examination.index') }}">Buffer/Wheel
                             Stop Exam.</a>
                     </li> --}}
