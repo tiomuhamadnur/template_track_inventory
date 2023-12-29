@@ -15,7 +15,7 @@ class RfiController extends Controller
     public function index()
     {
         $data_rfi = TransRFI::where('temuan_mainline_id', '!=', null)->get();
-        $email_rfi = TransRFI::where('status', null)->count();
+        $email_rfi = TransRFI::whereNot('temuan_mainline_id', null)->where('status', null)->count();
         return view('mainline.mainline_rfi.index', compact(['data_rfi', 'email_rfi']));
     }
 

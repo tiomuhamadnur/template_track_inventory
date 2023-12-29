@@ -41,7 +41,7 @@ class SendEmailController extends Controller
         if ($jumlah_rfi == 0) {
             return back();
         }
-        $rfi = TransRFI::where('status', null)->orderBy('tanggal', 'desc')->first();
+        $rfi = TransRFI::whereNot('temuan_mainline_id', null)->where('status', null)->orderBy('tanggal', 'desc')->first();
         $tanggal_rfi = $rfi->tanggal;
         $pic_rfi = $rfi->user->name;
         $lokasi = $rfi->temuan_mainline->mainline->area->code;
