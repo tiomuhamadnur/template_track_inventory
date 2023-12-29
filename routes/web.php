@@ -90,6 +90,7 @@ Route::controller(AuthController::class)->group(function () {
 Route::controller(SendEmailController::class)->group(function () {
     Route::post('/send-email-rfi', 'rfi')->name('send-email.rfi');
     Route::post('/send-wa-rfi', 'whatsapp')->name('send-wa.rfi');
+    Route::post('/send-wa-rfi-depo', 'whatsapp_depo')->name('send-wa.rfi-depo');
 });
 
 Route::controller(ShowPageController::class)->group(function () {

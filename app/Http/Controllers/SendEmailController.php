@@ -14,16 +14,16 @@ class SendEmailController extends Controller
     public function rfi()
     {
         $section_head = Pegawai::where('jabatan', 'Section Head')
-            ->whereIn('section', ['Permanent Way RAMS', 'Permanent Way Maintenance'])
+            ->whereIn('section_id', [1, 2])
             ->get();
-        $jumlah_rfi = TransRFI::where('status', null)->get()->count();
+        $jumlah_rfi = TransRFI::whereNot('temuan_mainline_id', null)->where('status', null)->get()->count();
 
         if ($jumlah_rfi > 0) {
             $tanggal_rfi = TransRFI::where('status', null)->orderBy('tanggal', 'desc')->first()->value('tanggal');
             foreach ($section_head as $item) {
                 Mail::to($item->email)->send(new SendMailRFI($item->name, $jumlah_rfi, $tanggal_rfi));
             }
-            TransRFI::where('status', null)->update(['status' => '1']);
+            TransRFI::whereNot('temuan_mainline_id', null)->where('status', null)->update(['status' => '1']);
             return redirect()->back()->withNotify('Data RFI berhasil dikirim via email ke Section Head terkait!');
         } else {
             return redirect()->back()->withNotifyerror('Tidak ada data RFI!');
@@ -37,7 +37,7 @@ class SendEmailController extends Controller
 
     public function whatsapp()
     {
-        $jumlah_rfi = TransRFI::where('status', null)->get()->count();
+        $jumlah_rfi = TransRFI::whereNot('temuan_mainline_id', null)->where('status', null)->get()->count();
         if ($jumlah_rfi == 0) {
             return back();
         }
