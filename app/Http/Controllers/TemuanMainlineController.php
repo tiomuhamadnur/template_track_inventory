@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\TemuanMainlineExport;
 use App\Exports\TemuanMainlineFilterExport;
+use App\Helpers\WhatsAppHelper;
 use App\Models\Area;
 use App\Models\Defect;
 use App\Models\Line;
@@ -217,6 +218,8 @@ class TemuanMainlineController extends Controller
             'photo.image' => 'File harus dalam format gambar/photo!',
         ]);
 
+        $klasifikasi = $request->klasifikasi;
+
         if ($request->hasFile('photo') && $request->photo != '') {
             $photo_temuan = $request->file('photo')->store('temuan/mainline');
             Temuan::create([
@@ -227,29 +230,103 @@ class TemuanMainlineController extends Controller
                 'direction' => $request->direction,
                 'defect_id' => $request->defect_id,
                 'remark' => $request->remark,
-                'klasifikasi' => $request->klasifikasi,
+                'klasifikasi' => $klasifikasi,
                 'pic' => $request->pic,
                 'tanggal' => $request->tanggal,
                 'photo' => $photo_temuan,
             ]);
 
-            return redirect()->route('temuan_mainline.index')->withNotify('Data temuan baru mainline berhasil ditambahkan!');
-        } else {
-            Temuan::create([
-                'mainline_id' => $request->mainline_id,
-                'no_sleeper' => $request->no_sleeper,
-                'part_id' => $request->part_id,
-                'detail_part_id' => $request->detail_part_id,
-                'direction' => $request->direction,
-                'defect_id' => $request->defect_id,
-                'remark' => $request->remark,
-                'klasifikasi' => $request->klasifikasi,
-                'pic' => $request->pic,
-                'tanggal' => $request->tanggal,
-            ]);
+            if($klasifikasi == 'Mayor'){
+                $temuan = Temuan::whereDate('tanggal', $request->tanggal)->where('mainline_id', $request->mainline_id)->where('part_id', $request->part_id)->where('detail_part_id', $request->detail_part_id)->first();
+                if($temuan){
+                    $examiner = $temuan->pic;
+                    $tanggal = $temuan->tanggal ?? '-';
+                    $part = $temuan->part->name ?? '-';
+                    $detail_part = $temuan->detail_part->name ?? '-';
+                    $lokasi = $temuan->mainline->area->code ?? '-';
+                    $line = $temuan->mainline->line->code ?? '-';
+                    $track_bed = $temuan->mainline->no_span ?? '-';
+                    $no_sleeper = $temuan->no_sleeper ?? '-';
+                    $direction = $temuan->direction ?? '-';
+                    $defect = $temuan->defect->name ?? 'lainnya';
+                    $link_photo_temuan = asset('storage/' . $temuan->photo);
+                    $remark = $temuan->remark ?? '-';
+
+                    $section_head = Pegawai::where('jabatan', 'Section Head')
+                        ->whereIn('section_id', [1, 2])
+                        ->get();
+
+                    foreach ($section_head as $item) {
+                        $nama_sh = $item->name;
+                        $gender_sh = $item->gender ?? '';
+                        $phoneNumber = $item->no_hp;
+
+                        $message = $this->message_format($nama_sh, $gender_sh, $tanggal, $part, $detail_part, $defect, $examiner, $lokasi, $line, $track_bed, $no_sleeper, $direction, $link_photo_temuan, $remark);
+                        WhatsAppHelper::sendNotification($phoneNumber, $message);
+                    }
+                }
+            }
 
             return redirect()->route('temuan_mainline.index')->withNotify('Data temuan baru mainline berhasil ditambahkan!');
         }
+    }
+
+    public function message_format ($nama_sh, $gender_sh, $tanggal, $part, $detail_part, $defect, $examiner, $lokasi, $line, $track_bed, $no_sleeper, $direction, $link_photo_temuan, $remark)
+    {
+        $enter = "\n";
+        $div = '=============================';
+        $url = 'https://exodus.tideupindustries.com/temuan-mainline/filter?status%5B%5D=open&status%5B%5D=monitoring&klasifikasi=Mayor&tanggal_awal=' . $tanggal . '&tanggal_akhir=' . $tanggal;
+
+        $message = '🔴 *EXODUS NOTIFICATION: MAJOR FINDINGS*' . $enter . $enter . $enter .
+        'Dear ' . $gender_sh .' *' . $nama_sh . '*,' . $enter . $enter.
+        'Sebagai informasi, terdapat *Temuan Major* di *Exodus* yang perlu di _review_ dengan detail informasi sebagai berikut:' . $enter . $enter .
+
+        $div . $enter . $enter .
+        '*Examiner :*' . $enter.
+        $examiner . $enter . $enter .
+
+        '*Tanggal :*' . $enter .
+        $tanggal . $enter . $enter .
+
+        '*Part :*' . $enter .
+        $part . $enter . $enter .
+
+        '*Detail Part :*' . $enter .
+        $detail_part . $enter . $enter .
+
+        '*Defect :*' . $enter .
+        $defect . $enter . $enter .
+
+        '*Lokasi :*' . $enter .
+        $lokasi . $enter . $enter .
+
+        '*Line :*' . $enter .
+        $line . $enter . $enter .
+
+        '*No Track Bed :*' . $enter .
+        $track_bed . $enter . $enter .
+
+        '*No Sleeper :*' . $enter .
+        $no_sleeper . $enter . $enter .
+
+        '*Direction :*' . $enter .
+        $direction . $enter . $enter .
+
+        '*Remark :*' . $enter .
+        $remark . $enter . $enter .
+
+        '*Photo Temuan :*' . $enter .
+        $link_photo_temuan . $enter . $enter .
+
+        '*Link URL :*' . $enter .
+        $url . $enter . $enter .
+        $div . $enter . $enter .
+
+        '_Regards,_' . $enter . $enter .
+        '*ExoBOT*' .
+        $enter . $enter . $enter . $enter;
+
+        return $message;
     }
 
     public function report(Request $request)
