@@ -19,6 +19,7 @@ use Excel;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Storage;
 
 class TemuanMainlineController extends Controller
 {
@@ -441,12 +442,18 @@ class TemuanMainlineController extends Controller
     {
         $id = $request->id;
         $temuan = Temuan::findOrFail($id);
-        if ($temuan) {
-            $temuan->delete();
-
-            return redirect()->route('temuan_mainline.index')->withNotify('Data temuan mainline berhasil dihapus!');
-        } else {
+        if (!$temuan) {
             return redirect()->back();
         }
+        if($temuan->photo){
+            Storage::delete($temuan->photo);
+        }
+        if ($temuan->photo_close != '') {
+            Storage::delete($temuan->photo_close);
+        }
+        $temuan->delete();
+
+        return redirect()->route('temuan_mainline.index')->withNotify('Data temuan mainline berhasil dihapus!');
+
     }
 }
