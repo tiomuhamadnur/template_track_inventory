@@ -30,7 +30,7 @@ class TemuanVisualCivilController extends Controller
             ->orderBy('tanggal', 'desc')
             ->orderBy('area_id', 'asc')
             ->orderBy('sub_area_id', 'asc')
-            ->get();
+            ->paginate(100);
 
         $area = Area::where('stasiun', 'true')->get();
         $sub_area = SubArea::orderBy('name', 'asc')->get();
@@ -280,7 +280,7 @@ class TemuanVisualCivilController extends Controller
         $defect = DefectCivil::orderBy('name', 'asc')->get();
 
         return view('civil.examination.examination_visual.index', [
-            'temuan_visual' => $temuan->orderBy('tanggal', 'asc')->get(),
+            'temuan_visual' => $temuan->orderBy('tanggal', 'asc')->paginate(100),
             'area' => $area,
             'sub_area' => $sub_area,
             'detail_area' => $detail_area,

@@ -45,9 +45,9 @@
                                     <i class="mdi mdi-file-pdf text-danger"></i>
                                 </a>
                             </div>
-                            <div>
+                            {{-- <div>
                                 showing: <u class="fw-bolder">{{ $temuan_visual->count() ?? 0 }}</u> data
-                            </div>
+                            </div> --}}
                             <form action="{{ route('temuan-visual.export') }}" hidden method="GET" id="form_export_excel">
                                 @csrf
                                 @method('get')
@@ -77,6 +77,7 @@
                                 <input type="text" name="tanggal_awal" value="{{ $tanggal_awal ?? '' }}" hidden>
                                 <input type="text" name="tanggal_akhir" value="{{ $tanggal_akhir ?? '' }}" hidden>
                             </form>
+                            {{ $temuan_visual->links('vendor.pagination.bootstrap-5') }}
                             <div class="table-responsive pt-3">
                                 <table class="table table-bordered">
                                     <thead>
@@ -117,7 +118,7 @@
                                         @foreach ($temuan_visual as $item)
                                             <tr>
                                                 <td class="text-center">
-                                                    {{ $loop->iteration }}
+                                                    {{ ($temuan_visual->currentPage() - 1) * $temuan_visual->perPage() + $loop->index + 1 }}
                                                 </td>
                                                 <td class="text-center">
                                                     {{ $item->area->code }}
