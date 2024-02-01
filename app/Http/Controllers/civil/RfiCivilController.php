@@ -67,6 +67,7 @@ class RfiCivilController extends Controller
                 $temuan = TemuanVisualCivil::findOrFail($temuan_visual_id);
                 $temuan->update([
                     'photo_close' => $photo_close,
+                    'status'=> 'rfi',
                 ]);
 
                 return redirect()->route('rfi.civil.index')->withNotify('Data RFI berhasil disumbit!');
@@ -146,9 +147,13 @@ class RfiCivilController extends Controller
         }
         $temuan_visual_id = $data_rfi->temuan_visual_id;
         $temuan = TemuanVisualCivil::findOrFail($temuan_visual_id);
-        Storage::delete($temuan->photo_close);
+        if($temuan->photo_close != '')
+        {
+            Storage::delete($temuan->photo_close);
+        }
         $temuan->update([
             'photo_close' => null,
+            'status' => 'open',
         ]);
         $data_rfi->delete();
 

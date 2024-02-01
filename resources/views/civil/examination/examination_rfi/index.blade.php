@@ -26,6 +26,9 @@
                                             <th class="text-center text-wrap">
                                                 Nama Submitter
                                             </th>
+                                            <th class="text-center text-wrap">
+                                                No Ticket
+                                            </th>
                                             <th class="text-center">
                                                 Area <br>
                                                 (Sub Area) <br>
@@ -66,6 +69,9 @@
                                                     </td>
                                                     <td class="text-center text-wrap">
                                                         {{ $item->user->name ?? '-' }}
+                                                    </td>
+                                                    <td class="text-center text-wrap fw-bolder">
+                                                        {{ $item->temuan_visual->ticket_number ?? '-' }}
                                                     </td>
                                                     <td class="text-center text-wrap">
                                                         {{ $item->temuan_visual->area->code ?? '-' }} <br>

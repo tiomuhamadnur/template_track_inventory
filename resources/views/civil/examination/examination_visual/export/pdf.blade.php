@@ -29,6 +29,7 @@
         <thead>
             <tr>
                 <th class="p-1">No</th>
+                <th class="p-1">No Ticket</th>
                 <th class="p-1">Area</th>
                 <th class="p-1">Sub <br> Area</th>
                 <th class="p-1">Detail <br> Area</th>
@@ -48,6 +49,9 @@
                 <tr>
                     <td>
                         {{ $loop->iteration }}
+                    </td>
+                    <td>
+                        {{ $item->ticket_number }}
                     </td>
                     <td>
                         {{ $item->area->code }}

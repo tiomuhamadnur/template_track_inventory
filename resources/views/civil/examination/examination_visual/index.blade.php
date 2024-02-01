@@ -415,6 +415,7 @@
                                 <option disabled selected>- Status -</option>
                                 <option value="open" @if ($status == 'open') selected @endif>Open</option>
                                 <option value="close" @if ($status == 'close') selected @endif>Close</option>
+                                <option value="rfi" @if ($status == 'rfi') selected @endif>RFI</option>
                             </select>
                         </div>
                         <div class="form-group">
