@@ -90,9 +90,14 @@ class TemuanVisualCivilController extends Controller
             'photo.image' => 'File harus dalam format gambar/photo!',
         ]);
 
+        $timestamp = now()->timestamp;
+        $randomNumber = rand(1000, 9999);
+        $ticketNumber = $timestamp . $randomNumber;
+
         if ($request->hasFile('photo') && $request->photo != '') {
             $photo_temuan = $request->file('photo')->store('civil/temuan');
             TemuanVisualCivil::create([
+                'ticket_number' => $ticketNumber,
                 'area_id' => $request->area_id,
                 'sub_area_id' => $request->sub_area_id,
                 'detail_area_id' => $request->detail_area_id,
@@ -491,5 +496,76 @@ class TemuanVisualCivilController extends Controller
         if (count($defect) > 0) {
             return response()->json($defect);
         }
+    }
+
+    public function ticket_number()
+    {
+        $data = TemuanVisualCivil::all();
+
+        foreach ($data as $item) {
+            $timestamp = now()->timestamp;
+            $randomNumber = rand(1000, 9999);
+            $ticketNumber = $timestamp . $randomNumber;
+
+            while (TemuanVisualCivil::where('ticket_number', $ticketNumber)->exists()) {
+                $timestamp = now()->timestamp;
+                $randomNumber = rand(1000, 9999);
+                $ticketNumber = $timestamp . $randomNumber;
+            }
+
+            $item->ticket_number = $ticketNumber;
+            $item->save();
+        }
+
+        return redirect()->route('temuan-visual.index')->withNotify('Data ticket number has generated!');
+    }
+
+    public function search(Request $request)
+    {
+        $ticketNumber = $request->ticket_number;
+        $temuan_visual = TemuanVisualCivil::where('ticket_number', $ticketNumber)->paginate();
+
+        if($temuan_visual->count() == 0)
+        {
+            return back()->withNotifyerror('Data tidak ditemukan!');
+        }
+
+        $area = Area::where('stasiun', 'true')->get();
+        $sub_area = SubArea::orderBy('name', 'asc')->get();
+        $detail_area = DetailArea::orderBy('name', 'asc')->get();
+        $part = PartCivil::orderBy('name', 'asc')->get();
+        $detail_part = DetailPartCivil::orderBy('name', 'asc')->get();
+        $defect = DefectCivil::orderBy('name', 'asc')->get();
+
+        $area_id = '';
+        $sub_area_id = '';
+        $detail_area_id = '';
+        $part_id = '';
+        $detail_part_id = '';
+        $defect_id = '';
+        $status = 'open';
+        $klasifikasi = '';
+        $tanggal_awal = '';
+        $tanggal_akhir = '';
+
+        return view('civil.examination.examination_visual.index', compact([
+            'temuan_visual',
+            'area',
+            'sub_area',
+            'detail_area',
+            'part',
+            'detail_part',
+            'defect',
+            'area_id',
+            'sub_area_id',
+            'detail_area_id',
+            'part_id',
+            'detail_part_id',
+            'defect_id',
+            'status',
+            'klasifikasi',
+            'tanggal_awal',
+            'tanggal_akhir',
+        ]));
     }
 }

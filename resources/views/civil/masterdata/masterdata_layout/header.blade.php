@@ -28,9 +28,11 @@
         </ul>
         <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-                <form class="search-form" action="#">
+                <form class="search-form" action="#" method="POST">
                     <i class="icon-search"></i>
-                    <input type="search" class="form-control" placeholder="Search Here" title="Search here">
+                    @csrf
+                    @method('POST')
+                    <input type="text" class="form-control" placeholder="Search here" title="Search here">
                 </form>
             </li>
             <li class="nav-item dropdown d-none d-lg-block user-dropdown">

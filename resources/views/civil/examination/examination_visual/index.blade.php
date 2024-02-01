@@ -85,6 +85,9 @@
                                             <th class="text-center">
                                                 No
                                             </th>
+                                            <th class="text-center text-wrap">
+                                                No Ticket
+                                            </th>
                                             <th class="text-center">
                                                 Area
                                             </th>
@@ -119,6 +122,9 @@
                                             <tr>
                                                 <td class="text-center">
                                                     {{ ($temuan_visual->currentPage() - 1) * $temuan_visual->perPage() + $loop->index + 1 }}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ $item->ticket_number ?? '-' }}
                                                 </td>
                                                 <td class="text-center">
                                                     {{ $item->area->code }}

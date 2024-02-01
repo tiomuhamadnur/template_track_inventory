@@ -27,10 +27,12 @@
         </ul>
         <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-                <form class="search-form" action="{{ route('temuan_mainline.search') }}" method="GET">
+                <form class="search-form" action="{{ route('temuan-visual.search') }}" method="POST">
                     <i class="icon-search"></i>
-                    <input type="search" class="form-control" name="search" placeholder="Search Here"
-                        title="Search here" autocomplete="off">
+                    @csrf
+                    @method('POST')
+                    <input type="search" class="form-control" name="ticket_number" placeholder="Search Ticket"
+                        title="Search Ticket" autocomplete="off">
                 </form>
             </li>
             <li class="nav-item dropdown d-none d-lg-block user-dropdown">
