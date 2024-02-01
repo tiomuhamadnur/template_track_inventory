@@ -498,28 +498,6 @@ class TemuanVisualCivilController extends Controller
         }
     }
 
-    public function ticket_number()
-    {
-        $data = TemuanVisualCivil::all();
-
-        foreach ($data as $item) {
-            $timestamp = now()->timestamp;
-            $randomNumber = rand(1000, 9999);
-            $ticketNumber = $timestamp . $randomNumber;
-
-            while (TemuanVisualCivil::where('ticket_number', $ticketNumber)->exists()) {
-                $timestamp = now()->timestamp;
-                $randomNumber = rand(1000, 9999);
-                $ticketNumber = $timestamp . $randomNumber;
-            }
-
-            $item->ticket_number = $ticketNumber;
-            $item->save();
-        }
-
-        return redirect()->route('temuan-visual.index')->withNotify('Data ticket number has generated!');
-    }
-
     public function search(Request $request)
     {
         $ticketNumber = $request->ticket_number;

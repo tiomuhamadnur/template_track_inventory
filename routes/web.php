@@ -394,7 +394,6 @@ Route::middleware(['auth', 'license'])->group(function () {
             Route::get('/temuan-visual/filter', 'filter')->name('temuan-visual.filter');
             Route::get('/temuan-visual/export-visual-excel', 'export')->name('temuan-visual.export');
             Route::get('/temuan-visual/export-visual-pdf', 'export_pdf')->name('temuan-visual.export.pdf');
-            Route::get('/temuan-visual/update-ticket-number', 'ticket_number')->name('temuan-visual.update.ticket_number');
             Route::post('/temuan-visual/search', 'search')->name('temuan-visual.search');
 
             Route::get('/civil/get-sub-area', 'get_sub_area')->name('civil.get.sub_area');
