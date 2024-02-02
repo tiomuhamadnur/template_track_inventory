@@ -20,6 +20,6 @@ class PIC extends Model
 
     public function job()
     {
-        return $this->belongsTo(PM::class);
+        return $this->belongsTo(PM::class, 'job_id', 'id');
     }
 }

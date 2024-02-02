@@ -33,7 +33,7 @@
                             </div>
                         </article>
 
-                        <article class="card__article swiper-slide">
+                        {{-- <article class="card__article swiper-slide">
                             <div class="card__image">
                                 <h1 class="transisi-text">TRANSACTION</h1>
                             </div>
@@ -44,7 +44,7 @@
                                 </p>
                                 <a href="{{ route('my-transaksi-tools.index') }}" class="card__button">Explore</a>
                             </div>
-                        </article>
+                        </article> --}}
 
                         {{-- <article class="card__article swiper-slide">
                      <div class="card__image">

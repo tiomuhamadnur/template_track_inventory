@@ -32,7 +32,7 @@ class TemuanVisualCivilController extends Controller
             ->orderBy('sub_area_id', 'asc')
             ->paginate(100);
 
-        $area = Area::where('stasiun', 'true')->get();
+        $area = Area::all();
         $sub_area = SubArea::orderBy('name', 'asc')->get();
         $detail_area = DetailArea::orderBy('name', 'asc')->get();
         $part = PartCivil::orderBy('name', 'asc')->get();
@@ -277,7 +277,7 @@ class TemuanVisualCivilController extends Controller
             });
         }
 
-        $area = Area::where('stasiun', 'true')->get();
+        $area = Area::all();
         $sub_area = SubArea::orderBy('name', 'asc')->get();
         $detail_area = DetailArea::orderBy('name', 'asc')->get();
         $part = PartCivil::orderBy('name', 'asc')->get();
