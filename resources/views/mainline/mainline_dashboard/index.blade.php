@@ -78,12 +78,12 @@
                                                     <div class="col-sm-5">
                                                         <p class="status-summary-ight-white mb-1">
                                                             <span class="text-white">
-                                                                Closing Temuan
+                                                                Total Record Temuan
                                                             </span>
                                                         </p>
                                                         <a href="#">
                                                             <h2 class="text-white fw-bolder">
-                                                                {{ $temuan_close_bulan_ini->count() }}
+                                                                {{ $total_record_temuan->count() }}
                                                             </h2>
                                                         </a>
                                                     </div>

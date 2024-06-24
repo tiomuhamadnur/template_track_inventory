@@ -20,7 +20,10 @@ class DashboardController extends Controller
         $temuan_close = Temuan::where('status', 'close')->get();
         $temuan_monitoring = Temuan::where('status', 'monitoring')->get();
         $temuan_baru_bulan_ini = Temuan::whereYear('tanggal', $tahun_ini)->whereMonth('tanggal', $bulan_ini)->get();
-        $temuan_close_bulan_ini = Temuan::where('status', 'close')->whereMonth('tanggal_close', $bulan_ini)->get();
+        $total_record_temuan = Temuan::where('status', 'close')
+                                ->orWhere('status', 'monitoring')
+                                ->orWHere('status', 'open')->get();
+        // dd($temuan_close_bulan_ini);
 
         $bulan = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
         $temuan = [];
@@ -322,7 +325,7 @@ class DashboardController extends Controller
             'temuan_monitoring',
             'temuan_close',
             'temuan_baru_bulan_ini',
-            'temuan_close_bulan_ini',
+            'total_record_temuan',
             'temuan',
             'perbaikan_temuan',
             'monitoring_temuan',
