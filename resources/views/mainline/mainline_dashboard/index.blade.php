@@ -18,8 +18,8 @@
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <h5>Mapping Mainline</h5>
                             </div>
-                            <p class="card-subtitle card-subtitle-dash">Mapping Sebaran Temuan di Area Mainline
-                                @include('mainline.mainline_dashboard.mapping_svg')
+                            <p class="card-subtitle card-subtitle-dash">Mapping Sebaran Temuan di Area Mainline</p>
+                            @include('mainline.mainline_dashboard.mapping_svg')
                         </div>
                     </div>
                 </div>
@@ -42,11 +42,73 @@
                                                 <h5 class="card-subtitle card-subtitle-dash">
                                                     <span>
                                                         Update
-                                                        {{ \Carbon\Carbon::now()->format('F Y') }}
+                                                        {{ $nama_bulan_ini ?? '-' }} {{ $tahun_ini ?? '-' }}
                                                     </span>
                                                 </h5>
                                             </div>
-                                            <div id="performance-line-legend"></div>
+                                            <div>
+                                                <div class="dropdown">
+                                                    <form action="{{ route('home') }}">
+                                                        @csrf
+                                                        @method('GET')
+                                                        <div class="btn-group">
+                                                            <select class="btn btn-secondary btn-lg me-0" name="bulan">
+                                                                <option value="1"
+                                                                    @if ($bulan_ini == 1) selected @endif>
+                                                                    Januari</option>
+                                                                <option value="2"
+                                                                    @if ($bulan_ini == 2) selected @endif>
+                                                                    Februari</option>
+                                                                <option value="3"
+                                                                    @if ($bulan_ini == 3) selected @endif>Maret
+                                                                </option>
+                                                                <option value="4"
+                                                                    @if ($bulan_ini == 4) selected @endif>April
+                                                                </option>
+                                                                <option value="5"
+                                                                    @if ($bulan_ini == 5) selected @endif>Mei
+                                                                </option>
+                                                                <option value="6"
+                                                                    @if ($bulan_ini == 6) selected @endif>Juni
+                                                                </option>
+                                                                <option value="7"
+                                                                    @if ($bulan_ini == 7) selected @endif>Juli
+                                                                </option>
+                                                                <option value="8"
+                                                                    @if ($bulan_ini == 8) selected @endif>
+                                                                    Agustus</option>
+                                                                <option value="9"
+                                                                    @if ($bulan_ini == 9) selected @endif>
+                                                                    September</option>
+                                                                <option value="10"
+                                                                    @if ($bulan_ini == 10) selected @endif>
+                                                                    Oktober</option>
+                                                                <option value="11"
+                                                                    @if ($bulan_ini == 11) selected @endif>
+                                                                    November</option>
+                                                                <option value="12"
+                                                                    @if ($bulan_ini == 12) selected @endif>
+                                                                    Desember</option>
+                                                            </select>
+                                                            <select class="btn btn-secondary btn-lg ms-0 me-0"
+                                                                name="tahun" required>
+                                                                <option value="{{ $tahun_ini }}">{{ $tahun_ini }}
+                                                                </option>
+                                                                <option value="{{ $tahun_ini - 1 }}">{{ $tahun_ini - 1 }}
+                                                                </option>
+                                                                <option value="{{ $tahun_ini - 2 }}">{{ $tahun_ini - 2 }}
+                                                                </option>
+                                                                <option value="{{ $tahun_ini - 3 }}">{{ $tahun_ini - 3 }}
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                        <button class="btn btn-warning btn-lg ms-0" type="submit">
+                                                            <i class="mdi mdi-eye"></i>
+                                                            Show
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div id="chart-container" style="width: 100%; height: 250px;">
                                             {{-- <canvas id="trenOpen"></canvas> --}}
@@ -60,7 +122,7 @@
                                         <div class="card shadow bg-primary card-rounded">
                                             <div class="card-body pb-0">
                                                 <h4 class="card-title card-title-dash text-white mb-4">
-                                                    Temuan {{ \Carbon\Carbon::now()->format('F Y') }}
+                                                    Temuan {{ $nama_bulan_ini ?? '-' }} {{ $tahun_ini ?? '-' }}
                                                 </h4>
                                                 <div class="row">
                                                     <div class="col-sm-5">
@@ -153,7 +215,7 @@
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                                    <h4 class="card-title card-title-dash">Klasifikasi Temuan
+                                                    <h4 class="card-title card-title-dash">Klasifikasi Temuan Total
                                                     </h4>
                                                 </div>
                                                 <p class="card-subtitle card-subtitle-dash">Klasifikasi temuan
@@ -221,7 +283,7 @@
                                                                 type="button" id="dropdownMenuButton2"
                                                                 data-bs-toggle="dropdown" aria-haspopup="true"
                                                                 aria-expanded="false">
-                                                                Tahun {{ \Carbon\Carbon::now()->format('Y') }}
+                                                                Tahun {{ $tahun_ini ?? '-' }}
                                                             </button>
                                                         </div>
                                                     </div>
@@ -263,7 +325,11 @@
                                                                                             @endphp
                                                                                         @else
                                                                                             @php
-                                                                                                $persentase = ($item->progress / $item->job->frekuensi) * 100;
+                                                                                                $persentase =
+                                                                                                    ($item->progress /
+                                                                                                        $item->job
+                                                                                                            ->frekuensi) *
+                                                                                                    100;
                                                                                             @endphp
                                                                                         @endif
                                                                                         {{ number_format($persentase, 1, '.', ',') }}%

@@ -11,10 +11,10 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $bulan_ini = Carbon::now()->format('m');
-        $tahun_ini = Carbon::now()->format('Y');
+        $bulan_ini = $request->bulan ?? Carbon::now()->format('m');
+        $tahun_ini = $request->tahun ?? Carbon::now()->format('Y');
         $temuan_all = Temuan::all();
         $temuan_open = Temuan::where('status', 'open')->get();
         $temuan_close = Temuan::where('status', 'close')->get();
@@ -318,8 +318,12 @@ class DashboardController extends Controller
             ->count();
 
         $data_rfi = TransRFI::where('temuan_mainline_id', '!=', null)->get()->count();
+        $nama_bulan_ini = Carbon::create()->month($bulan_ini)->translatedFormat('F');
 
         return view('mainline.mainline_dashboard.index', compact([
+            'bulan_ini',
+            'nama_bulan_ini',
+            'tahun_ini',
             'temuan_all',
             'temuan_open',
             'temuan_monitoring',
