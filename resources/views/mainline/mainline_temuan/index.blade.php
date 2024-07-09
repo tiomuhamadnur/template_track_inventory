@@ -198,9 +198,18 @@
             <div class="row px-auto py-1">
                 <h4 class="fw-bolder mb-2">Keterangan:</h4>
                 <div class="btn-group">
-                    <span class="badge bg-danger">Open</span>
-                    <span class="badge bg-warning">Monitoring</span>
-                    <span class="badge bg-success">Closed</span>
+                    <a href="{{ route('temuan_mainline.filter', ['status' => ['open']]) }}"
+                        title="Tampilkan Temuan Status Open">
+                        <span class="badge bg-danger">Open</span>
+                    </a>
+                    <a href="{{ route('temuan_mainline.filter', ['status' => ['monitoring']]) }}"
+                        title="Tampilkan Temuan Status Monitoring">
+                        <span class="badge bg-warning">Monitoring</span>
+                    </a>
+                    <a href="{{ route('temuan_mainline.filter', ['status' => ['close']]) }}"
+                        title="Tampilkan Temuan Status Closed">
+                        <span class="badge bg-success">Closed</span>
+                    </a>
                 </div>
             </div>
         </div>
