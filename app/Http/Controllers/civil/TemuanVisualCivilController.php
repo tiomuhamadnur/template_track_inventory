@@ -284,8 +284,11 @@ class TemuanVisualCivilController extends Controller
         $detail_part = DetailPartCivil::orderBy('name', 'asc')->get();
         $defect = DefectCivil::orderBy('name', 'asc')->get();
 
+        $temuan = $temuan->orderBy('tanggal', 'asc')->paginate(100);
+        $temuan->appends($request->except('page'));
+
         return view('civil.examination.examination_visual.index', [
-            'temuan_visual' => $temuan->orderBy('tanggal', 'asc')->paginate(100),
+            'temuan_visual' => $temuan,
             'area' => $area,
             'sub_area' => $sub_area,
             'detail_area' => $detail_area,

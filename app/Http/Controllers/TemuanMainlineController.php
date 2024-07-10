@@ -181,7 +181,8 @@ class TemuanMainlineController extends Controller
             });
         }
 
-        $temuan->orderByRaw('CAST(kilometer AS DECIMAL) ASC');
+        $temuan = $temuan->orderByRaw('CAST(kilometer AS DECIMAL) ASC')->paginate(100);
+        $temuan->appends($request->except('page'));
 
         $area = Area::whereNot('area', 'Depo')->whereNot('area', 'Other')->get();
         $area_rencana = Area::where('stasiun', 'true')->orWhere('area', 'DAL')->get();
@@ -189,7 +190,7 @@ class TemuanMainlineController extends Controller
         $part = Part::orderBy('name', 'asc')->get();
 
         return view('mainline.mainline_temuan.index', [
-            'temuan' => $temuan->paginate(100),
+            'temuan' => $temuan,
             'area_rencana' => $area_rencana,
             'area' => $area,
             'line' => $line,
