@@ -64,7 +64,6 @@
     <script src="https://code.highcharts.com/highcharts-more.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-    <script src="https://code.highcharts.com/modules/variwide.js"></script>
     <script src="{{ asset('assets/js/datatables.js') }}"></script>
     @include('masterdata.masterdata_layout.modal_notification')
     @yield('javascript')
