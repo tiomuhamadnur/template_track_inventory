@@ -365,7 +365,6 @@ Route::middleware(['auth', 'license'])->group(function () {
 
         Route::controller(ClosingReportController::class)->group(function () {
             Route::get('/closing_report', 'index')->name('closing_report.index');
-            Route::get('/setdev', 'setdev');
             Route::get('/closing_report_create', 'create')->name('closing_report.create');
             Route::post('/closing_report', 'store')->name('closing_report.store');
             Route::get('/closing_report_form', 'form')->name('closing_report.form');
@@ -421,7 +420,7 @@ Route::middleware(['auth', 'license'])->group(function () {
 
     Route::middleware(['isPlanning'])->group(function () {
         Route::controller(PlanningDashboardController::class)->group(function () {
-            Route::get('/activity/planning/dashboard', 'activity')->name('dashboard-activity-planning.index');
+            Route::get('/activity/planning/dashboard', 'masterdata')->name('dashboard-activity-planning.index');
         });
 
         Route::controller(ToolsController::class)->group(function () {
